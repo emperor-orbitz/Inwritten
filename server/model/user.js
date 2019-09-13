@@ -7,11 +7,8 @@ var SCHEME =require('./scheme');
 
 var userSchema = SCHEME.profile;
  
-/*
-*
-*           PRE SAVE HOOK
-*
-*/
+// PRE SAVE HOOK
+
 
 
 
@@ -111,6 +108,7 @@ return mongoose.model('User', userSchema)
 
 
 userSchema.methods.syncPass = function(pass, ret_pass){
+    console.log(pass+", "+ret_pass);
     return bcrypt.compareSync(pass, ret_pass);
 }
 

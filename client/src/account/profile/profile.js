@@ -47,9 +47,9 @@ class Profile extends React.Component {
             buttonDisabled: false,
             dimmerLoad: false,
             validationClass: '',
-           //passwordDisabled: true,
-            dispPass:"none",
-            dispProf:"block"
+            //passwordDisabled: true,
+            dispPass: "none",
+            dispProf: "block"
 
 
 
@@ -192,7 +192,7 @@ class Profile extends React.Component {
 
             return false;
         }
-       
+
         else {
             return true;
         }
@@ -204,14 +204,11 @@ class Profile extends React.Component {
     //update profile
     updateProfileButton(e) {
         e.preventDefault();
-       // console.log(this.state);
 
         this.setState({ dimmerLoad: true, buttonDisabled: true });
 
 
         var update_profile = new ProfileUpdate();
-        //var form_number =  document.getElementById('number');
-       // var form = document.getElementById('formUpdate');
 
 
         if (this.state.username == '') {
@@ -226,7 +223,7 @@ class Profile extends React.Component {
             this.state.validationClass = this.state.validationMessage = '';
         }
 
-       else if (this.state.mobile_number.length > 0 && this.check_number(this.state.mobile_number) === false) {
+        else if (this.state.mobile_number.length > 0 && this.check_number(this.state.mobile_number) === false) {
             //form.number.setCustomValidity('The Mobile Number is invalid');
             this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: 'Please enter a valid mobile number', validationClass: 'error-bar' });
             this.state.validationClass = this.state.validationMessage = '';
@@ -249,13 +246,13 @@ class Profile extends React.Component {
                 username: this.state.username,
                 old_password: this.state.old_password,
                 new_password: this.state.new_password,
-                confirm_password:this.state.confirm_password
+                confirm_password: this.state.confirm_password
             }
-            
+
 
             update_profile.updateProfile(updateItems)
                 .then((success) => {
-                    this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: success.message , validationClass: 'success-bar' });
+                    this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: success.message, validationClass: 'success-bar' });
                 })
                 .catch((err) => {
                     if (err.status == "false") {
@@ -278,48 +275,48 @@ class Profile extends React.Component {
 
 
 
-//update password 
+    //update password 
     updatePasswordButton(e) {
         e.preventDefault();
-       // console.log(this.state);
+        // console.log(this.state);
 
         this.setState({ dimmerLoad: true, buttonDisabled: true });
 
 
         var controller = new ProfileUpdate();
-  
 
-if(this.state.new_password.length ==0 || this.state.old_password.length ==0 || this.state.confirm_password.length ==0 ){
-    this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: 'None of the password field should be left empty', validationClass: 'error-bar' });
 
-    this.state.validationClass = this.state.validationMessage = '';
-}
-            else if ((this.state.new_password.length < 6) || (this.state.old_password.length < 6)) {
-                this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: 'Password length is too short minimum of 6 characters', validationClass: 'error-bar' });
+        if (this.state.new_password.length == 0 || this.state.old_password.length == 0 || this.state.confirm_password.length == 0) {
+            this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: 'None of the password field should be left empty', validationClass: 'error-bar' });
 
-                this.state.validationClass = this.state.validationMessage = '';
-            }
-            else if (this.state.new_password !== this.state.confirm_password) {
-                this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: 'Sorry, you have a password mismatch', validationClass: 'error-bar' });
+            this.state.validationClass = this.state.validationMessage = '';
+        }
+        else if ((this.state.new_password.length < 6) || (this.state.old_password.length < 6)) {
+            this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: 'Password length is too short minimum of 6 characters', validationClass: 'error-bar' });
 
-                this.state.validationClass = this.state.validationMessage = '';
-            }
-     
+            this.state.validationClass = this.state.validationMessage = '';
+        }
+        else if (this.state.new_password !== this.state.confirm_password) {
+            this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: 'Sorry, you have a password mismatch', validationClass: 'error-bar' });
+
+            this.state.validationClass = this.state.validationMessage = '';
+        }
+
         else {
 
             this.state.validationClass = this.state.validationMessage = '';
             var updateItems = {
-               
+
                 username: this.state.username,
                 old_password: this.state.old_password,
                 new_password: this.state.new_password,
-                confirm_password:this.state.confirm_password
+                confirm_password: this.state.confirm_password
             }
-            
+
 
             controller.update_password(updateItems)
                 .then((success) => {
-                    this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: success.message , validationClass: 'success-bar' });
+                    this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: success.message, validationClass: 'success-bar' });
                 })
                 .catch((err) => {
                     if (err.status == "false") {
@@ -339,27 +336,27 @@ if(this.state.new_password.length ==0 || this.state.old_password.length ==0 || t
 
 
     }
- swapSettings(e){
-   //console.log(document.getElementsByClassName("data-info-password")[0].style.display) 
-if( e.target.id == "password"){
-if(this.state.dispPass =="block");
-else if(this.state.dispPass =="none"){ this.setState({dispPass:"block", dispProf:"none"})}
+    swapSettings(e) {
+        //console.log(document.getElementsByClassName("data-info-password")[0].style.display) 
+        if (e.target.id == "password") {
+            if (this.state.dispPass == "block");
+            else if (this.state.dispPass == "none") { this.setState({ dispPass: "block", dispProf: "none" }) }
 
-}
-else if (e.target.id == "profile" ){
-if(this.state.dispProf =="block");
-else if(this.state.dispProf =="none"){ this.setState({dispProf:"block", dispPass:"none"})}
-
-    
-}
+        }
+        else if (e.target.id == "profile") {
+            if (this.state.dispProf == "block");
+            else if (this.state.dispProf == "none") { this.setState({ dispProf: "block", dispPass: "none" }) }
 
 
-}
+        }
+
+
+    }
 
 
 
 
-    
+
 
     render() {
         console.log(this.props.ProfileReducer);
@@ -390,74 +387,84 @@ else if(this.state.dispProf =="none"){ this.setState({dispProf:"block", dispPass
 
 
 
-<div >
-<p style={{marginRight:"10%", float:"right" }}>
-    <ButtonGroup size="small">
-    <Button id="profile" onClick={ (e)=> this.swapSettings(e) } >Profile </Button>
-     <Button id="password" onClick={ (e)=> this.swapSettings(e) } >Password</Button>
-    </ButtonGroup>
-    
- </p>
-    
-                <div className="data-info-profile" style={{display: this.state.dispProf}}>
-                    <h3 style={{ padding: '5px' }}> Account Info</h3>
-                    <div className={this.state.validationClass} style={{marginBottom:'5px'}} > {this.state.validationMessage}
-                    </div>
+                <div >
+                    
 
+                    <div className="data-info-profile" style={{ display: this.state.dispProf }}>
+                        <h3 style={{ padding: '5px' }}> Account Info</h3>
+                        <p>
+                        <ButtonGroup size="small" secondary >
+                            <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false}>Profile </Button>
+                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} >Password</Button>
+                        </ButtonGroup>
+
+
+                    </p>
+                        <div className={this.state.validationClass} style={{ marginBottom: '5px' }} > {this.state.validationMessage}
+                        </div>
+
+
+                        <Form size="small" style={{ width: '70%' }} id='formUpdate'>
                         <Divider />
 
-                    <Form size="small" style={{ width: '70%' }} id='formUpdate'>
-                        <Form.Group widths='equal'>
-                            <Form.Field label='Email' value={this.state.email} control='input' placeholder='Email' onChange={this.handle_email} disabled required type='email' pattern={/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/} />
-                            <Form.Field label='Username' control='input' placeholder='Username' value={this.state.username} onChange={this.handle_username} name='username' id='username' type='text' required />
-                        </Form.Group>
+                            <Form.Group widths='equal'>
+                                <Form.Field label='Email' value={this.state.email} control='input' placeholder='Email' onChange={this.handle_email} disabled required type='email' pattern={/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/} />
+                                <Form.Field label='Username' control='input' placeholder='Username' value={this.state.username} onChange={this.handle_username} name='username' id='username' type='text' required />
+                            </Form.Group>
 
-                        <Form.Group widths='equal'>
-                            <Form.Field label='Firstname' value={this.state.first_name} control='input' placeholder='Firstname' onChange={this.handle_first_name} />
-                            <Form.Field label='Lastname' control='input' placeholder='Lastname' value={this.state.last_name} onChange={this.handle_last_name} />
-                        </Form.Group>
-                        <Form.Field id='bio' label='Bio (Write something...)' control='textarea' value={this.state.bio} onChange={this.handle_bio} minlength='20' maxlength='150' name='bio' />
+                            <Form.Group widths='equal'>
+                                <Form.Field label='Firstname' value={this.state.first_name} control='input' placeholder='Firstname' onChange={this.handle_first_name} />
+                                <Form.Field label='Lastname' control='input' placeholder='Lastname' value={this.state.last_name} onChange={this.handle_last_name} />
+                            </Form.Group>
+                            <Form.Field id='bio' label='Bio (Write something...)' control='textarea' value={this.state.bio} onChange={this.handle_bio} minlength='20' maxlength='150' name='bio' />
 
-                        <Form.Field id='number' label='Mobile Number' control='input' type='text' value={this.state.mobile_number} onChange={this.handle_mobile_number} minlength='11' maxlength='14' name='number' />
+                            <Form.Field id='number' label='Mobile Number' control='input' type='text' value={this.state.mobile_number} onChange={this.handle_mobile_number} minlength='11' maxlength='14' name='number' />
 
-                        <Button type='submit' secondary color='teal' icon='check' disabled={this.state.buttonDisabled} size='small' floated='right' onClick={this.updateProfileButton.bind(this)}>
-                            Update Profile <DimmerLoad size="small" active={this.state.dimmerLoad} />
-                        </Button>
-                    </Form>
-
+                            <Button type='submit' secondary color='teal' icon='check' disabled={this.state.buttonDisabled} size='small' floated='right' onClick={this.updateProfileButton.bind(this)}>
+                                Update Profile <DimmerLoad size="small" active={this.state.dimmerLoad} />
+                            </Button>
+                        </Form>
 
 
 
 
-                </div>
 
-                    <div className="data-info-password" style={{display: this.state.dispPass}} >
-                    <h3 style={{ padding: '5px' }}> Account Info</h3>
-                    <div className={this.state.validationClass} style={{marginBottom:'5px'}} > {this.state.validationMessage}
                     </div>
 
+                    <div className="data-info-password" style={{ display: this.state.dispPass }} >
+                        <h3 style={{ padding: '5px' }}> Account Info</h3>
+                        <p>
+                        <ButtonGroup size="small" secondary >
+                            <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false}>Profile </Button>
+                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} >Password</Button>
+                        </ButtonGroup>
 
-                    <Form size="small" style={{ width: '70%' }} id='formUpdate'>
-                   
-                        <Divider />
-                        <Form.Field label='Old Password '  control='input' type='password' placeholder='Old password' minlength='6' value={this.state.old_password} onChange={this.handle_old_password} />
-
-                        <Form.Field label='New Password' control='input' type='password' placeholder='New password' minlength='6' value={this.state.new_password} onChange={this.handle_new_password} />
-                        <Form.Field label='Confirm New Password' control='input' type='password' placeholder='Confirm New password' value={this.state.confirm_password} onChange={this.handle_confirm_password} />
-
-
-                        <Button type='submit' secondary color='teal' icon='check' disabled={this.state.buttonDisabled} size='small' floated='right' onClick={this.updatePasswordButton.bind(this)}>
-                            Update Password <DimmerLoad size="small" active={this.state.dimmerLoad} />
-                        </Button>
-                    </Form>
+                    </p>
+                        <div className={this.state.validationClass} style={{ marginBottom: '5px' }} > {this.state.validationMessage}
+                        </div>
 
 
+                        <Form size="small" style={{ width: '70%' }} id='formUpdate'>
+
+                            <Divider />
+                            <Form.Field label='Old Password ' control='input' type='password' placeholder='Old password' minlength='6' value={this.state.old_password} onChange={this.handle_old_password} />
+
+                            <Form.Field label='New Password' control='input' type='password' placeholder='New password' minlength='6' value={this.state.new_password} onChange={this.handle_new_password} />
+                            <Form.Field label='Confirm New Password' control='input' type='password' placeholder='Confirm New password' value={this.state.confirm_password} onChange={this.handle_confirm_password} />
 
 
+                            <Button type='submit' secondary color='teal' icon='check' disabled={this.state.buttonDisabled} size='small' floated='right' onClick={this.updatePasswordButton.bind(this)}>
+                                Update Password <DimmerLoad size="small" active={this.state.dimmerLoad} />
+                            </Button>
+                        </Form>
+
+
+
+
+
+                    </div>
 
                 </div>
-
-</div>
 
 
 

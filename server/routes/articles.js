@@ -23,7 +23,7 @@ cloudinary.config({
     api_key: '811369211532916',
     api_secret: 'uK3gacxJoPCpL_dnEp3RFo2ClTU'
 });
-
+//REMEMBER TO USE .ENV
 
 
 function isAuth(req, res, next) {
