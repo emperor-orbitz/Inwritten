@@ -1,14 +1,9 @@
 
 //server.js
 // Abdulmalik 02-12-18
-'use strict'
-
-
-
 
 var process = require('process');
 var express = require('express')
-  //,router =express.Router()
   , app = express()
   , mongoose = require('mongoose')
   , bodyParser = require('body-parser')
@@ -40,15 +35,12 @@ app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
   res.header('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Access-Control-Allow-Credentials, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Options');
-  //and remove cacheing so we get the most recent comments
   res.setHeader('Cache-Control', 'no-cache');
-  next();//cause trouble
+  next();
 });
 
 
 
-//now we should configure the API to use bodyParser and look for 
-//JSON data in the request body
 
 var conn = mongoose.connect('mongodb://localhost:27017/penbox', { useNewUrlParser: true });
 conn.then((suc) => {
