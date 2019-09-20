@@ -12,7 +12,7 @@ import {  withRouter } from 'react-router';
 
 import { connect } from 'react-redux';
 import FetchArticles from '../../../controllers/articleController'
-import EditorPanel from './editor-panel';
+import EditorPanel from '../NewPost/editor-panel';
 
 
 

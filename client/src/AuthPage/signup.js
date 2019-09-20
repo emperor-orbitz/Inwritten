@@ -4,8 +4,8 @@ import {Button, Form, Checkbox, Grid, Segment, Icon, Dimmer,Loader} from 'semant
 import {  withRouter} from 'react-router';
 
 import {Provider, connect} from 'react-redux';
-import Header from './header';
-import Validator from '../validators/signup_validator';
+import Header from '../header';
+import Validator from '../../validators/signup_validator';
 
 function DimmerLoad(props){
   return  <Loader active ={props.active} size={props.size} inline />

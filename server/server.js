@@ -21,7 +21,7 @@ var express = require('express')
 
 var handleB = require('consolidate').handlebars;
 var port = process.env.API_PORT || 5000;
-require('../passport');
+require('./passport');
 var route_config = require('./');
 
 

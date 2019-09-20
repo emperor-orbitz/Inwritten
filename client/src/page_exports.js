@@ -3,17 +3,16 @@
 *           ALL PAGES STAY RIGHT HERE
 *
 */
-import Signup from './signup';
+import Signup from './Signup/signup';
 //import Documentation from './documentation';
 import Account from './account/account';
 //import Blog from './blog';
 import Home from './home'
-import Login from './login';
+import Login from './Login/login';
 import Profile from './account/profile/profile';
 // ARTICLES CATEGORY
 import Articles from './account/articles/articles';// MAIN PAGE
 import AddPost from './account/articles/addpost';
-import EditPost from './account/articles/editpost';
 import EditPost1 from './account/articles/editpost_1';
 
 import PostArchive from './account/articles/postarchive';

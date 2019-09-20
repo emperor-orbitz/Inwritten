@@ -23,7 +23,7 @@ class SideBar {
 
         articleSubmenu: (
             <Menu secondary vertical >
-                <Menu.Item as={Link} to='/add-post'  ><Icon name="add" />Create new</Menu.Item>
+                <Menu.Item as={Link} to='/add-post'><Icon name="add" />Create new</Menu.Item>
                 <Menu.Item as={Link} to='/articles'><Icon name="folder outline" />Published Items</Menu.Item>
                 <Menu.Item as={Link} to='/drafts'><Icon name="box" />Draft Items</Menu.Item>
 

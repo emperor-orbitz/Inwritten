@@ -1,10 +1,10 @@
-import React, {} from 'react';
+import React, { } from 'react';
 import ReactDOM from 'react-dom';
 import { Signup, Account, Login, ArticlesCategory, Profile, ImagesCategory } from './page_exports';
 
 import '../src/css/style.scss';
 
-import {  withRouter, Switch, Route } from 'react-router';
+import { withRouter, Switch, Route } from 'react-router';
 
 
 import HeaderAccount from '../src/account/header_account';
@@ -13,56 +13,54 @@ import HeaderAccount from '../src/account/header_account';
 
 
 
-function App(){
-return (
-  <div>
+function App() {
+  return (
+    <div>
 
-<Switch>
+      <Switch>
 
-    <Route exact path ='/login' component={Login } /> 
-    <Route exact path ='/signup' component={Signup } /> 
-
-
-
-<HeaderAccount>
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/signup' component={Signup} />
 
 
-<Switch>
-<Route path='/add-image' component= {ImagesCategory.AddImage } />
-<Route path='/gallery' component= {ImagesCategory.Gallery} />
-<Route path='/edit-post/:postID' component= {ArticlesCategory.EditPost1} />
-<Route path='/dashboard' component= {Account} />
-<Route path='/profile' component ={Profile} />
+        <HeaderAccount>
 
-<Route path='/articles' component= {ArticlesCategory.Articles} />
-<Route path='/drafts' component= {ArticlesCategory.Drafts} />
-<Route path='/add-post' component= {ArticlesCategory.AddPost} />
 
-<Route render={()=><h2> Oops, it's a 404  </h2>} />
+          <Switch>
+            <Route path='/add-image' component={ImagesCategory.AddImage} />
+            <Route path='/gallery' component={ImagesCategory.Gallery} />
+            <Route path='/edit-post/:postID' component={ArticlesCategory.EditPost1} />
+            <Route path='/dashboard' component={Account} />
+            <Route path='/profile' component={Profile} />
+            <Route path='/articles' component={ArticlesCategory.Articles} />
+            <Route path='/drafts' component={ArticlesCategory.Drafts} />
+            <Route path='/add-post' component={ArticlesCategory.AddPost} />
+
+            <Route render={() => <h2> Oops, it's a 404  </h2>} />
 
 
 
-</Switch>
+          </Switch>
 
 
 
-</HeaderAccount>
+        </HeaderAccount>
 
-</Switch>
+      </Switch>
 
 
 
 
 
 
-  
-
-    
-
-</div>
 
 
-)
+
+
+    </div>
+
+
+  )
 
 }
 
