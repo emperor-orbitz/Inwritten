@@ -1,3 +1,4 @@
+
 var mongoose =require('mongoose');
 var bcrypt =require('bcryptjs');
 
@@ -8,9 +9,6 @@ var SCHEME =require('./scheme');
 var userSchema = SCHEME.profile;
  
 // PRE SAVE HOOK
-
-
-
 
 
 userSchema.pre('save', function(next){
@@ -60,7 +58,7 @@ return next();
 userSchema.methods.createUser = function(username, email, password){
     //console.log("fuck yu....")
     var sav =  mongoose.model('User', userSchema);
-   var ss =  new sav({
+   var doc = {
         username:username,
         email:email, 
         password:password,
@@ -68,12 +66,9 @@ userSchema.methods.createUser = function(username, email, password){
         firstName: '',
         telephone: '',
         bio:  ''
-    })
-    
-  var xxx = ss.save();
-    //console.log(xxx)
-    return xxx;
-    
+    };
+
+    return sav.create({...docs}) //console.log(xxx)    
     
     
 
@@ -91,12 +86,12 @@ userSchema.methods.createUser = function(username, email, password){
 
 userSchema.methods.findByEmail = function(email, cb){
 return mongoose.model('User', userSchema)
-.find({email:email}, cb);
+.findOne({email:email}, cb);
 }
 
 userSchema.methods.signIn = function(email, cb){
 return mongoose.model('User', userSchema)
-.find({ email:email }, cb);
+.findOne({ email:email }, cb);
 };
 
 /*
@@ -140,6 +135,9 @@ return mongoose.model('User',userSchema).updateMany({_id: id},
 }}, cb)
 
 }
+
+
+
 
 userSchema.methods.verifyUser = function(id, cb){
     return mongoose.model('User',userSchema).update({_id: id},

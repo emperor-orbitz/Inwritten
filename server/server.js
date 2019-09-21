@@ -4,28 +4,21 @@
 
 var process = require('process');
 var express = require('express')
-  , app = express()
-  , mongoose = require('mongoose')
-  , bodyParser = require('body-parser')
+var app = express()
+var bodyParser = require('body-parser')
+var handleBar = require('consolidate').handlebars;
 
-  //and create our instances
+require("dotenv").config({path:__dirname +"/.env"});
+require("./Database/db");
+require('./Utils/passport');
+var port = process.env.API_PORT;
 
-  , passport = require('passport')
-
-  , session = require('express-session')
-
-  , MongoStore = require('connect-mongo')(session)
-
-  // show that it  is a configuration file for passport
-  , cookieparser = require('cookie-parser');
-
-var handleB = require('consolidate').handlebars;
-var port = process.env.API_PORT || 5000;
-require('./passport');
-var route_config = require('./');
+var route_config = require('./Utils/route_config');
 
 
-//APP.USE
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(bodyParser.json())
 
 
 
@@ -41,17 +34,8 @@ app.use(function (req, res, next) {
 
 
 
-
-var conn = mongoose.connect('mongodb://localhost:27017/penbox', { useNewUrlParser: true });
-conn.then((suc) => {
-
-  console.log('successful database connection!!');
-}).catch((err) => {
-
-  console.log('An error in connecting with the database', err);
-})
 //app.use(express.static('../public'));
-app.engine('hbs', handleB);
+app.engine('hbs', handleBar);
 app.set('view engine', 'hbs');
 
 
@@ -62,7 +46,7 @@ app.set('view engine', 'hbs');
 
 
 
-app.use('/', require('./controllers/controller'));
+app.use('/', route_config);
 
 
 //         LISTEN TO SERVER

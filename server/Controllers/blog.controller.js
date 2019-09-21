@@ -1,4 +1,4 @@
-var blogModel = require('../model/blog');
+var blogModel = require('../Models/blog.model');
 var Router =require('express').Router();
 
 

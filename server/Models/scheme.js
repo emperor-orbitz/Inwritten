@@ -2,13 +2,15 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 var Schema = mongoose.Schema;
 
-
 const SCHEME = {
     /*
 *
 *          BLOG POST SCHEMA
 *
 */
+
+
+
 blog_post:new Schema({
 content: {type:String, required:true},
 date:{ type:Date, required: true},
@@ -27,6 +29,9 @@ title: {required:true, type: String}
 
 
 
+
+
+
     profile: new Schema({
         username: { type: String, lowercase: true,trim:true, required:true },
         email: { type: String, lowercase: true, required: true, trim:true },
@@ -39,6 +44,10 @@ title: {required:true, type: String}
         verified:{type:Boolean, required:true, default: false },
         lastVerified:{type: Date, default:Date.now()}
     }),
+
+
+
+
 
 
 /*
