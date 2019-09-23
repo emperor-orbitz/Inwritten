@@ -3,17 +3,14 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var UserModel = require('../Models/user.model');
-var bcrypt = require('bcrypt');
 var passportJWT = require("passport-jwt");
-var sgMail = require('@sendgrid/mail');
 var JWTStrategy = passportJWT.Strategy;
 var ExtractJWT = passportJWT.ExtractJwt;
-require("dotenv").config();
+var emailUtil =require("../Utils/email");
+
 /*
  LOGIN, SIGNUP AND JSONWEBTOKEN RULES EXIST HERE
-
 */
-
 
 
 
@@ -32,19 +29,15 @@ passport.use('login', new LocalStrategy(
     login.signIn(email, function (err, user) {
       if (user) {
 
-        if (user.length >= 1) {
+        if (user != null) {
 
           var compare = login.syncPass(password, user.password);
           if (compare) {
-
-            req.login(user, function (err) {
-              if (err) return done(err);
-              return done(null, user);
-            })
-
+            return done(null, user);
 
           }
-          if (!compare) return done(null, false);
+          else
+            return done(null, false);
 
 
         }
@@ -85,8 +78,8 @@ passport.use('signup', new LocalStrategy(
         if (err)
           return done(err);
 
-        else if (success!= null) {
-        return done(null, false ); 
+        else if (success != null) {
+          return done(null, false);
           //res.json({ message: 'Account already exists' });
 
         }
@@ -96,19 +89,11 @@ passport.use('signup', new LocalStrategy(
 
           if (createUser != null) {
 
-            sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-            const msg = {
-              to: result.email,
-              from: 'contact@penbox.com',
+            
+            var email = new emailUtil
+            ({email:createUser.email,id:createUser._id})
 
-              templateId: 'd-c0dbe040a46b4cc0b2131cb82c58d1ce',
-              dynamic_template_data: {
-                name: result.username,
-                confirm_link: `api/mailconfirm/${result._id}`
-              }
-            };
-
-            let sendMail = await sgMail.send(msg);
+            await email.VERIFICATION_EMAIL();
             res.json({ message: "Account successfully created" });
 
             return done(null, createUser)
@@ -138,32 +123,40 @@ passport.use('signup', new LocalStrategy(
 
 //JWT STRATEGY
 const JWT_options = {
-  jwtFromRequest: ExtractJWT.fromAuthHeaderWithScheme('JWT'),
-  secretOrKey: 'malikisgood'//process.env.JWT_SECRET
+  jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.JWT_SECRET,
+  passReqToCallback: true
 }
-passport.use('jwt', new JWTStrategy(JWT_options, async (jwt_payload, done) => {
 
-  try {
 
-    let user = await UserModel.findOne({ _id: jwt_payload.id });
-    if (user != null) {
-      done(null, user);
+passport.use('jwt', new JWTStrategy(JWT_options,
+  async (req, jwt_payload, done) => {
+
+    req.login(jwt_payload.user, { session: false }, async (err) => {
+      try {
+
+        let user = await UserModel.findOne({ _id: jwt_payload.user._id });
+        if (user != null)
+          return done(null, user);
+
+        else
+          return done(null, false, { message: "Unauthorized access" });
+
+
+      }
+      catch (err) {
+
+        done(new Error('Something terrible went wrong' + err));
+
+      }
     }
-    else done(null, false);
-
-
-  }
-  catch (err) {
-
-    done(new Error('Something terrible went wrong'));
-
-  }
+    )
 
 
 
 
-}))
 
+  }))
 
 
 

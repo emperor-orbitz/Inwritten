@@ -1,95 +1,72 @@
-
-var signup = require('../Models/user.model');
 var posts = require('../Models/post.model');
 var cloudinary = require('cloudinary');
 var http_status = require("../Utils/http_status");
 
 
 
-
-
-
 cloudinary.config({
     cloud_name: 'hashstackio',
-    api_key: '811369211532916',
-    api_secret: 'uK3gacxJoPCpL_dnEp3RFo2ClTU'
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
 });
-//REMEMBER TO USE .ENV
 
 
 
 
 
 
-/*
-*
-*           LOAD ALL ARTICLES
-*
-*/
+//*           LOAD ALL ARTICLES
 
 var loadAllList = (req, res, next) => {
 
     var post = new posts();
 
-    post.loadAllPost(req.users.username, function (err, results) {
-        if (err){
-            res.send({
-                message: http_status.INTERNAL_SERVER_ERROR.message,
-                code:http_status.INTERNAL_SERVER_ERROR.code, 
-                data:[]
-            })
-        } 
-        
-        else 
-            res.send({ message: http_status.OK.message, code: http_status.OK.code, data: results });
-        
+    post.loadAllPost(req.user.username, function (err, results) {
+        if (err) {
+            res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                .send({ data: [] })
+        }
+
+        else
+            res.status(http_status.OK.code)
+                .send({ data: results });
+
 
     })
 
 
 }
 
-/*
-*
-*           LOAD FEW ARTICLES WITH LIMIT 
-*
-*/
 
-var loadList = (req, res, next)=> {
+
+
+
+//*           LOAD FEW ARTICLES WITH LIMIT 
+
+var loadList = (req, res, next) => {
 
     var limit = parseInt(req.query.limit);
     var post = new posts();
 
-    post.loadUserPost(req.users.username, limit, (err, results) => {
-        if (err) {
-            res.send({
-                message: http_status.INTERNAL_SERVER_ERROR.message,
-                code:http_status.INTERNAL_SERVER_ERROR.code, 
-                data:[]
-            })
-        }
-           
-        
-        else 
-            res.send({
-                message: http_status.OK.message,
-                code:http_status.OK.code, 
-                data:results
-            })
-        
+    post.loadUserPost(req.user
+        .username, limit, (err, results) => {
+            if (err) {
+                res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                    .send({ data: [] })
+            }
 
-    })
 
+            else
+                res.status(http_status.OK.code)
+                    .send({ data: results })
+
+
+        })
 }
 
 
 
-/*
-*
-*           LOAD SINGLE ARTICLE
-*
-*/
-
+//*           LOAD SINGLE ARTICLE
 
 var article = (req, res) => {
 
@@ -98,61 +75,57 @@ var article = (req, res) => {
 
     post.find_article(post_id, function (err, doc) {
         if (err) {
-            res.send({
-                message: http_status.INTERNAL_SERVER_ERROR.message,
-                code:http_status.INTERNAL_SERVER_ERROR.code, 
-                data:[]
-            })
-        } 
-        else 
-            res.send({
-                message: http_status.OK.message,
-                code:http_status.OK.code, 
-                data:doc
-            });      
+            res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                .send({ data: [] })
+        }
+        else
+            res.status(200)
+                .send({ data: doc })
     })
 }
 
 
 
-/*
-*
-*           CREATE ARTICLE
-*
-*/
+//*   CREATE ARTICLE
+
+var create = (req, res) => {
+    let { title,
+        body,
+        category,
+        description,
+        createdAt,
+        comments_enabled,
+        time_to_read,
+        public,
+        featured_image
+    } = req.body;
 
 
-
-
-
-var create = (req, res)=> {
-    let { title, body, category, 
-          description, createdAt, comments_enabled,
-         time_to_read, public, featured_image 
-        } = req.body;
-    //console.log(req);
     var postDoc = {
         title: title,
         body: body,
         createdAt: createdAt,
-        author: req.users.username,
+        author: req.user.username,
         category: category,
         description: description,
         time_to_read: time_to_read,
         comments_enabled: comments_enabled,
         public: public,
-        authorId: req.users._id
+        authorId: req.user._id
 
     }
-    if (featured_image != '') {
+
+
+    if (featured_image != undefined) {
         cloudinary.v2.uploader.upload(featured_image, {
             resource_type: "image",
-            public_id: `featured_image/${req.users._id}-${createdAt}`,
+            public_id: `featured_image/${req.user._id}-${createdAt}`,
             overwrite: true
         },
-            function (error, result) {
+            (error, result) => {
                 if (error) {
-                    res.send({ STATUS: 'false' });
+                    res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                        .send({ status: 'false' + error })
                 }
 
                 else {
@@ -160,72 +133,48 @@ var create = (req, res)=> {
                     let final = Object.assign({}, postDoc, { featured_image: result.url });
                     post.insertPost(final, (err, success) => {
                         if (success) {
-                            res.send({
-                                MESSAGE: ERROR_MESSAGE.ARTICLE_ACTION_SUCCESS.MESSAGE,
-                                CODE: ERROR_MESSAGE.ARTICLE_ACTION_SUCCESS.CODE,
-                                RETURN: success._id
-                            });
+                            res.status(http_status.OK.code)
+                                .send({ data: success._id });
                         }
 
                         else {
-                            console.log('I\'M A MESS')
-
-                            res.send({
-                                MESSAGE: ERROR_MESSAGE.ARTICLE_ACTION_FAILURE.MESSAGE,
-                                CODE: ERROR_MESSAGE.ARTICLE_ACTION_FAILURE.CODE
-                            });
+                            res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                                .send({ data: [] })
                         }
 
                     })
 
 
-
-
                 }
-            }
-
-        )
-
-
-
+            })
     }
     else {
         var post = new posts();
-        //    let final= Object.assign( {}, postDoc, { featured_image:result.url });
+
         post.insertPost(postDoc, (err, success) => {
             if (success) {
-                res.send({
-                    message: http_status.OK.message,
-                    code:http_status.OK.code, 
-                    data:[]
-                });
+                res.status(200)
+                    .send({ data: [success] })
             }
 
-            else 
-                //console.log('I\'M A MESS')
-                res.send({
-                    message: http_status.INTERNAL_SERVER_ERROR.message,
-                    code:http_status.INTERNAL_SERVER_ERROR.code, 
-                    data:[]
-                });
-            
+            else
+                res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                    .send({ data: [] });
+
 
         })
 
-
-
     }
-
-
 
 }
 
 
-/*
-*
-*           DELETE ARTICLE WITH SPEDIAL _ID
-*
-*/
+
+
+
+
+
+//*   DELETE ARTICLE WITH SPECIAL _ID
 
 var deletePost = (req, res) => {
     let { id } = req.body;
@@ -234,19 +183,14 @@ var deletePost = (req, res) => {
     var post = new posts();
 
     post.delete_article(postId, (err, success) => {
-        if (err) 
-            res.send({
-                message: http_status.INTERNAL_SERVER_ERROR.message,
-                code:http_status.INTERNAL_SERVER_ERROR.code, 
-                data:[]
-            });
-        
+        if (err)
+            res.status(http_status.INTERNAL_SERVER_ERROR.code)
+               .send({ data: [] });
+
 
         else {
-            res.send({
-                MESSAGE: ERROR_MESSAGE.ARTICLE_ACTION_SUCCESS.MESSAGE,
-                CODE: ERROR_MESSAGE.ARTICLE_ACTION_SUCCESS.CODE
-            });
+            res.status(http_status.INTERNAL_SERVER_ERROR.code)
+               .send({data: []})
 
         }
 
@@ -254,39 +198,30 @@ var deletePost = (req, res) => {
 
 }
 
-/**
- * UPDATE ARTICLE
- * 
- */
 
-var update = (req, res) =>{
+//*  UPDATE ARTICLE
 
+var update = (req, res) => {
 
     var post = new posts();
-    //console.log(req.body)
     post.update_article(req.body.id, req.body, (err, success) => {
         if (err) {
-            res.send({
-                message: http_status.INTERNAL_SERVER_ERROR.message,
-                code:http_status.INTERNAL_SERVER_ERROR.code, 
-                data:[]
-            })
+            res.status(http_status.INTERNAL_SERVER_ERROR.code)
+               .send({ data: [] })
         }
-            
-        
-        else 
-         res.send({
-            message: http_status.OK.message,
-            code:http_status.OK.code, 
-            data:[]
-         });
 
-        
+        else
+            res.status(http_status.OK.code)
+            .send({ data: [] });
 
     })
 
-
 }
+
+
+
+
+
 
 
 module.exports = {

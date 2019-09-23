@@ -1,15 +1,9 @@
 
-
-
 var signup = require('../Models/user.model');
 var passport = require('passport');
 var sgMail = require('@sendgrid/mail');
 var http_status = require("../Utils/http_status");
-
-
-
-
-
+var jwt = require("jsonwebtoken");
 
 
 
@@ -19,6 +13,7 @@ var http_status = require("../Utils/http_status");
 *
 *           SEND VERIFICATION EMAIL
 *              send_mail
+#           NOT YET TESTED 
 */
 
 
@@ -49,19 +44,16 @@ var send_mail = async (req, res, next) => {
                 };
                 finduser.updatelastVerified(res._id, async (not_updated, updated) => {
                     if (not_updated) {
-                        res.send({
-                            code: http_status.INTERNAL_SERVER_ERROR.code,
-                            message: http_status.INTERNAL_SERVER_ERROR.message
-                        })
-                        console.log('UNABLE TO PROCESS THIS VERIFICATION SENDING')
+                        res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                           .send({ data: [] });
+
                     }
                     else {
                         console.log('SEND THE MESSAGE');
                         var send = await sgMail.send(msg);
-                        res.send({
-                            code: http_status.OK.code,
-                            message: http_status.OK.message
-                        })
+
+                        res.status(http_status.OK.code)
+                           .send({ data: [] });
                     }
 
 
@@ -75,17 +67,9 @@ var send_mail = async (req, res, next) => {
 
     }
     catch (error) {
-        res.send({
-            code: http_status.INTERNAL_SERVER_ERROR.code,
-            message: http_status.INTERNAL_SERVER_ERROR.message
-        })
+        res.status(http_status.INTERNAL_SERVER_ERROR.code)
+           .send({ data: [] });
     }
-
-
-
-
-
-
 
 
 
@@ -94,15 +78,11 @@ var send_mail = async (req, res, next) => {
 
 
 
-
-
-
-
-
 /*
-*
-*           SEND VERIFICATION EMAIL
-*              verify_mail
+
+           SEND VERIFICATION EMAIL
+              verify_mail
+            #NOT YET TESTED
 */
 
 
@@ -139,7 +119,6 @@ var verify_mail = async (req, res, next) => {
                     }
                     else {
                         res.render('confirm_email')
-                        //console.log('VERIFY USER SUVCESSFULL')
                     }
 
                 })
@@ -162,12 +141,6 @@ var verify_mail = async (req, res, next) => {
 
 
 
-//USER NOT FOUND / LINK BROKEN
-//console.log('broken link')
-//res.render('broken_email');
-
-
-
 
 
 
@@ -180,53 +153,46 @@ var verify_mail = async (req, res, next) => {
 */
 
 
-var signup = (req, res, next) => {
-
+var register = (req, res, next) => {
     const { username, email, password } = req.body;
 
     var saves = new signup();
-    saves.findByEmail(email, (err, success) => {
-
+    saves.findByEmail(email, async(err, success) => {
         if (err) 
-            console.log('errror');
+           res.json({ message: 'Error already occured' });
         
-        else if (success.length >= 1) {
+        else if (success != null ) {
                 console.log(success);
                 res.json({ message: 'Account already exists' });
 
             }
             else {
 
-                saves.createUser(username, email, password).then((result, fail) => {
-                    if (result) {
-                        sgMail.setApiKey('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');
-                        const msg = {
-                            to: result.email,
-                            from: 'contact@penbox.com',
+                try{
+                    var result = await saves.createUser(username, email, password);
 
-                            templateId: 'd-c0dbe040a46b4cc0b2131cb82c58d1ce',
-                            dynamic_template_data: {
-                                name: result.username,
-                                confirm_link: `api/mailconfirm/${result._id}`
+                    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+                            const msg = {
+                                to: result.email,
+                                from: 'contact@penbox.com',
+    
+                                templateId: 'd-c0dbe040a46b4cc0b2131cb82c58d1ce',
+                                dynamic_template_data: {
+                                    name: result.username,
+                                    confirm_link: `api/mailconfirm/${result._id}`
+                                }
                             }
-                        };
-                        sgMail.send(msg).then(function (succ) {
-                            //console.log('SENT', succ)
-                            res.json({ message: "Account successfully created" });
-                        },
-                            function (err) {
-                                res.json({ message: 'Failed' });
+                        await sgMail.send(msg);
+                        res.json({ message: "Account successfully created"+ succ });
 
-                                console.log('FAILEDDD', err)
-                            });
+   
+                            } 
 
-
-                    }
-                    else {
-                        console.log("Failed", fail)
-
-                    }
-                });
+                catch(error){
+                    res.json({ message: 'Failed! An error is here'+error });
+                    //console.log("error"+error);
+                }
+               
 
       
 
@@ -257,18 +223,23 @@ var login = (req, res, next) => {
     passport.authenticate('login', function (err, user) {
 
         if (err) {
-            return res.send({ message: `Sorry Something went wrong! we would fix it`, ID: null })
+           res.send({ message: `Sorry Something went wrong! we would fix it`, ID: null })
 
         }
 
         if (!user) {
-            return res.send({ message: `Invalid username or password`, ID: null });
+         res.send({ message: `Invalid username or password`, ID: null });
 
         }
 
         else {
+            
+            var signature = jwt.sign({user:user}, process.env.JWT_SECRET,
+                {
+                    expiresIn:"7d"
+                });
 
-            return res.send({ ID: req.users });
+            res.send({ token: `bearer ${signature}`, user: user});
 
 
         }
@@ -281,10 +252,25 @@ var login = (req, res, next) => {
 
 
 
+
 /*
-*
+         CHECK ISLOGGEDIN
+*/
+var isloggedin = (req, res, next) => {
+    
+res.send({message:"OK",
+         status: 200,
+          info:"User is loggedin"
+        });
+}
+
+
+
+
+
+
+/*
 *          API TESTING
-*
 */
 
 
@@ -296,25 +282,12 @@ var api = (req, res, next) => {
 }
 
 
-/*
-*
-*          CHECK ISLOGGEDIN
-*
-*/
-
-
-
-
-
-
-
-
-
 module.exports = {
    login: login,
-   signup:signup,
+   register:register,
    verify_mail:verify_mail,
    send_mail:send_mail,
-   api:api
+   api:api,
+   isloggedin:isloggedin
 
 };

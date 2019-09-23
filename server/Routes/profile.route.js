@@ -1,18 +1,16 @@
 var express = require('express');
 var controller = require("../Controllers/profile.controller");
 var router = express.Router();
-var http_status = require("../Utils/http_status");
+var passport = require("passport");
 
 
 //REMEMBER TO USE .ENV
 
 
-function isAuth(req, res, next) {
-    if (req.isAuthenticated()) next();
-    
-    else  return res.send({ ...http_status.UNAUTHORIZED, data:[] }).status(404);
-    
-}
+var isAuth = (req, res, next)=> {
+    passport.authenticate("jwt", {session:false})
+    (req, res, next);
+    }
 
 
 /*         UPDATE PROFILE

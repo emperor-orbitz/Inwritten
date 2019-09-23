@@ -4,27 +4,28 @@
 
 var process = require('process');
 var express = require('express')
-var app = express()
+var app = express();
 var bodyParser = require('body-parser')
 var handleBar = require('consolidate').handlebars;
+var passport = require("passport");
 
 require("dotenv").config({path:__dirname +"/.env"});
-require("./Database/db");
 require('./Utils/passport');
+require("./Database/db");
+
 var port = process.env.API_PORT;
 
 var route_config = require('./Utils/route_config');
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(bodyParser.json())
 
 
 
 app.use(function (req, res, next) {
 
-  res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
   res.header('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Access-Control-Allow-Credentials, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Options');
@@ -32,6 +33,7 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(passport.initialize());
 
 
 //app.use(express.static('../public'));

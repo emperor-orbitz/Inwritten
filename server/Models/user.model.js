@@ -56,9 +56,9 @@ return next();
 
 
 userSchema.methods.createUser = function(username, email, password){
-    //console.log("fuck yu....")
+
     var sav =  mongoose.model('User', userSchema);
-   var doc = {
+   var docs = {
         username:username,
         email:email, 
         password:password,

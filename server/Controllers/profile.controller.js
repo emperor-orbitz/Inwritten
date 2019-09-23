@@ -4,27 +4,19 @@ var cloudinary = require('cloudinary');
 var posts = require('../Models/post.model');
 
 
-/*
-*
-*           CLOUDINARY CREDENTIALS
-*
+/*           CLOUDINARY CREDENTIALS
 */
 
 cloudinary.config({
     cloud_name: 'hashstackio',
-    api_key: '811369211532916',
-    api_secret: 'uK3gacxJoPCpL_dnEp3RFo2ClTU'
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_KEY
 });
-//REMEMBER
 
 
 
 
-
-
-/*
-*
-*           UPDATE PROFILE
+/*           UPDATE PROFILE
 */
 
 var update_profile = (req, res, next) => {
@@ -59,17 +51,17 @@ var update_profile = (req, res, next) => {
 
                         var updateAuthor = post.updateAuthor(req.body.username, req.users._id);
                         if (updateAuthor == false)
-                        res.send({
-                            code: http_status.INTERNAL_SERVER_ERROR.code,
-                            message: http_status.INTERNAL_SERVER_ERROR.message,
-                            data: []
-                        })
+                            res.send({
+                                code: http_status.INTERNAL_SERVER_ERROR.code,
+                                message: http_status.INTERNAL_SERVER_ERROR.message,
+                                data: []
+                            })
                         else
-                        res.send({
-                            code: http_status.OK.code,
-                            message: http_status.OK.message,
-                            data: []
-                        })
+                            res.send({
+                                code: http_status.OK.code,
+                                message: http_status.OK.message,
+                                data: []
+                            })
 
                     }
 
@@ -91,33 +83,22 @@ var update_password = (req, res, next) => {
     var body = { ...req.body };
     var users = new signup();
 
-    users.findByEmail(req.users.email, function (err, succ) {
+    users.findByEmail(req.user.email, (err, succ)=> {
 
         if (err) 
-
-            res.send({
-                code: http_status.INTERNAL_SERVER_ERROR.code,
-                message: http_status.INTERNAL_SERVER_ERROR.message,
-                data: []
-            });
+        res.status(http_status.INTERNAL_SERVER_ERROR.code)
+        .send({ data: [] });
         
         else if (users.syncPass(body.old_password, succ[0].password)) {
 
             users.updateProfile_password(req.users._id, body, function (err, success) {
                 if (err) 
-                res.send({
-                    code: http_status.INTERNAL_SERVER_ERROR.code,
-                    message: http_status.INTERNAL_SERVER_ERROR.message,
-                    data: []
-                });
+                res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                .send({ data: [] });
                 
                 else {
-
-                    res.send({
-                        code: http_status.OK.code,
-                        message: http_status.OK.message,
-                        data: []
-                    })
+                    res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                    .send({ data: [] });
                 }
 
 
@@ -137,5 +118,5 @@ var update_password = (req, res, next) => {
 
 module.exports = {
     update_profile: update_profile,
-    update_password:update_password,
+    update_password: update_password,
 };
