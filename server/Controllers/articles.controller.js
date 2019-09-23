@@ -41,7 +41,7 @@ var loadAllList = (req, res, next) => {
 
 
 
-//*           LOAD FEW ARTICLES WITH LIMIT 
+//*           LOAD FEW ARTICLES WITH LIMIT e.g. ?limit=2
 
 var loadList = (req, res, next) => {
 
@@ -70,10 +70,10 @@ var loadList = (req, res, next) => {
 
 var article = (req, res) => {
 
-    var { post_id } = req.body;
+    var { id } = req.body;
     var post = new posts();
 
-    post.find_article(post_id, function (err, doc) {
+    post.find_article( id, function (err, doc) {
         if (err) {
             res.status(http_status.INTERNAL_SERVER_ERROR.code)
                 .send({ data: [] })
@@ -179,18 +179,17 @@ var create = (req, res) => {
 var deletePost = (req, res) => {
     let { id } = req.body;
 
-    var postId = id;
     var post = new posts();
 
-    post.delete_article(postId, (err, success) => {
+    post.delete_article(id, (err, success) => {
         if (err)
             res.status(http_status.INTERNAL_SERVER_ERROR.code)
                .send({ data: [] });
 
 
         else {
-            res.status(http_status.INTERNAL_SERVER_ERROR.code)
-               .send({data: []})
+            res.status(http_status.OK.code)
+               .send({data: success})
 
         }
 
@@ -212,7 +211,7 @@ var update = (req, res) => {
 
         else
             res.status(http_status.OK.code)
-            .send({ data: [] });
+               .send({ data: success });
 
     })
 
