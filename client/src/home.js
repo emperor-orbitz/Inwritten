@@ -1,13 +1,12 @@
-import React, { } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
+
 import { Signup, Account, Login, ArticlesCategory, Profile, ImagesCategory } from './page_exports';
 
-import '../src/css/style.scss';
+import '../Resources/styles/style.scss';
 
-import { withRouter, Switch, Route } from 'react-router';
+import { Switch, Route } from 'react-router';
 
-
-import HeaderAccount from '../src/account/header_account';
+import HeaderAccount from './header_account';
 
 
 

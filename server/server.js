@@ -5,8 +5,8 @@
 var process = require('process');
 var express = require('express')
 var app = express();
-var bodyParser = require('body-parser')
-var handleBar = require('consolidate').handlebars;
+var bodyParser = require('body-parser');
+var handleBar = require('consolidate').ejs;
 var passport = require("passport");
 
 require("dotenv").config({path:__dirname +"/.env"});
@@ -36,10 +36,10 @@ app.use(function (req, res, next) {
 app.use(passport.initialize());
 
 
-//app.use(express.static('../public'));
-app.engine('hbs', handleBar);
-app.set('view engine', 'hbs');
-
+app.use(express.static('./public'));
+app.engine('handlebars', handleBar);
+app.set('view engine', 'handlebars');
+app.set("views", __dirname+"/public/views");
 
 
 

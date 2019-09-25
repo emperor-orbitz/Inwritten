@@ -5,14 +5,14 @@
 *
 */
 
-import React, { /*Component*/ } from 'react';
-import { Button,  Form, Checkbox, Header, Loader, Dropdown, Icon, Select, Grid } from 'semantic-ui-react';
-import './article.scss';
+import React from 'react';
+import { Button,  Form, Checkbox, Header, Loader, Icon, Select, Grid } from 'semantic-ui-react';
+import '../../Resources/styles/article.scss';
 import {  withRouter } from 'react-router';
 
 import { connect } from 'react-redux';
-import FetchArticles from '../../../controllers/articleController'
-import EditorPanel from '../NewPost/editor-panel';
+import FetchArticles from '../../Controllers/article.controller'
+import EditorPanel from '../NewPost/Components/editor-panel';
 
 
 

@@ -1,41 +1,16 @@
 
-/*
-*
-*           IMPORTS
-*
-*/
 
-import React, { /*Component*/ } from 'react';
-import {Button, Divider, Input,  Loader,   Icon, Grid } from 'semantic-ui-react';
+import React from 'react';
+import {Button, Divider, Icon, Grid } from 'semantic-ui-react';
 import './images.scss';
 import { withRouter } from 'react-router';
-import Connection from '../../../controllers/auth';
+import Connection from '../../Controllers/auth.controller';
 
 import { connect } from 'react-redux';
-import HeaderAccount from '../header_account';
-import FetchArticles from '../../../controllers/articleController' 
+import HeaderAccount from '../../src/Dashboard/header_account';
+import FetchArticles from '../../Controllers/article.controller' 
 
-/*
-function DimmerLoad(props){
-  return  <Loader active ={props.active} size={props.size} inline />
-  
-}
 
-function HoverableDiv (props){
-  return (
-  <div className='image-thumbnail-template-cover'>
-
- {props.children}
-
- <div className='template-thumbnail-hover'> <h5>{props.name} </h5>
- <h6>{props.type}</h6>
- </div>
-  
-  </div>
-  ) 
-}
-
-*/
 
 class AddImage extends React.Component {
 

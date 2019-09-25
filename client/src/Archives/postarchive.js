@@ -5,18 +5,13 @@
 */
 
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-//import '../../css/style.scss';
 import './article.scss';
-import { Button, Icon, Form, Checkbox, Modal, Message, Grid, Segment, Dimmer, Loader, Dropdown, Select } from 'semantic-ui-react';
-import Connection from '../../../controllers/auth';
+import { Button, Icon, Form, Modal, Grid,  Select } from 'semantic-ui-react';
+import Connection from '../../Controllers/auth.controller';
 
 import { withRouter } from 'react-router';
 import { BrowserRouter as Router, Link, Redirect } from 'react-router-dom';
-import { propTypes as T } from 'prop-types';
 import { connect } from 'react-redux';
-//import {createStore} from 'redux';
-import HeaderAccount from '../header_account';
 import FetchArticles from '../../../controllers/articleController';
 
 
@@ -101,14 +96,14 @@ class PostArchive extends React.Component {
         }
         this.search_with_criteria = this.search_with_criteria.bind(this);
 
-        //this.handleArrangeCriteria = this.handleArrangeCriteria.bind(this);
         this.onChangeSearch = this.onChangeSearch.bind(this);
         this.handleSearchCriteria = this.handleSearchCriteria.bind(this);
-        //this.showModal =this.showModal.bind(this);
         this.showModal = this.showModal.bind(this);
         this.deletePost = this.deletePost.bind(this);
         this.handleMessageDismiss = this.handleMessageDismiss.bind(this);
     }
+
+
     showModal = (e, p) => {
         var { title, id } = p;
         this.setState(
@@ -208,9 +203,6 @@ class PostArchive extends React.Component {
  FUTURE UPDATES
         */
         return true;
-
-
-
 
 
         //return true;

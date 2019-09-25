@@ -4,45 +4,17 @@
 *
 */
 
-import React, { Component } from 'react';
-
-//import '../../css/style.scss';
+import React from 'react';
 import './article.scss';
-import { Button, Icon, Form, Checkbox, Modal, Message, Grid,  Select } from 'semantic-ui-react';
-import Connection from '../../../controllers/auth';
+import { Button, Icon, Form, Modal, Grid,  Select } from 'semantic-ui-react';
+import Connection from '../../../Controllers/auth.controller';
 
 import { withRouter } from 'react-router';
 import { BrowserRouter as Router, Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import FetchArticles from '../../../controllers/articleController';
+import FetchArticles from '../../../Controllers/article.controller';
 
 
-/*
-function HoverableDiv(props) {
-
-    return (
-        <div className='image-thumbnail-template-cover-big'>
-
-            {props.children}
-
-            <div className='template-thumbnail-hover-big'>
-                <h2 style={{ marginTop: '0px', padding: '0px' }}>{props.type}</h2>
-
-                <div size='large' style={{ marginTop: '100px', float: 'right' }}>
-                    <Button.Group size='small' color='teal' secondary >
-                        <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post', state: { editState: props.id } }} />
-                        <Button icon='external alternate' as={Link} to={`http://localhost:5000/${props.username}/${props.name}`} />
-                        <Button icon='trash alternate outline' />
-                        <Button icon='info' />
-
-                    </Button.Group>
-                </div>
-            </div>
-
-        </div>
-    )
-}
-*/
 
 
 

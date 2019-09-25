@@ -4,13 +4,12 @@
  */
 
 import React, { Component } from 'react';
-import { Modal, Input, Icon, Button, Form, Grid, Image, Sticky } from 'semantic-ui-react';
-import './editor.scss';
+import { Modal, Input, Icon, Button, Form, Grid } from 'semantic-ui-react';
+import '../../../Resources/styles/editor.scss';
 
-import sample_image from '../../../resources/img/n2.png';
+import sample_image from '../../../Resources/images/n2.png';
 import { Editor } from 'slate-react';
-import { Value, Block, Inline, Document } from 'slate';
-//import EditList from 'slate-edit-list';
+import { Value, Block } from 'slate';
 import Html from 'slate-html-serializer';
 
 

@@ -1,15 +1,15 @@
 import React, { } from 'react';
-import '../css/style.scss';
+import '../../Resources/styles/style.scss';
 import { Menu, Icon,  Sidebar, Modal, Button, Responsive, Accordion, Dropdown } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import Footer from '../footer';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import FetchArticles from '../../controllers/articleController';
-import Connection from '../../controllers/auth';
-//import Sales from '../src/sales';
-import SideBar from './sidebar';
-import splash from '../../resources/img/splash.png';
+import FetchArticles from '../../Controllers/article.controller';
+import Connection from '../../Controllers/auth.controller';
+
+import SideBar from '../../src/Dashboard/sidebar';
+import splash from '../../Resources/images/splash.png';
 
 
 
@@ -51,8 +51,6 @@ componentWillReceiveProps(){
 
 
     if (Object.keys(this.props.ProfileReducer).length == 0) {
-
-
 
       this.connect.isLoggedin()
         .then(((success) => {

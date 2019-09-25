@@ -89,7 +89,6 @@ passport.use('signup', new LocalStrategy(
 
           if (createUser != null) {
 
-            
             var email = new emailUtil
             ({email:createUser.email,id:createUser._id})
 

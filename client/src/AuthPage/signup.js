@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
-import './css/style.scss';
-import {Button, Form, Checkbox, Grid, Segment, Icon, Dimmer,Loader} from 'semantic-ui-react';
+import React from 'react';
+import '../../Resources/styles/style.scss';
+import {Button, Form, Checkbox, Grid, Icon,Loader} from 'semantic-ui-react';
 import {  withRouter} from 'react-router';
 
 import {Provider, connect} from 'react-redux';
-import Header from '../header';
-import Validator from '../../validators/signup_validator';
+import Header from '../../src/AuthPage/header';
+import Validator from '../../Controllers/validators/signup.validator';
 
 function DimmerLoad(props){
   return  <Loader active ={props.active} size={props.size} inline />

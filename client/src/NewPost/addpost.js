@@ -7,13 +7,13 @@
 
 
 import React, { Component } from 'react';
-import { Button, Form, Checkbox, Input,Header, Loader, Sticky, Icon, Message, Select, Grid } from 'semantic-ui-react';
-import './article.scss';
+import { Button, Form, Checkbox ,Header, Loader, Icon, Select, Grid } from 'semantic-ui-react';
+import '../../Resources/styles/article.scss';
 import { withRouter } from 'react-router';
 
 import { connect } from 'react-redux';
-import FetchArticles from '../../../controllers/articleController'
-import EditorPanel from './editor-panel';
+import FetchArticles from '../../Controllers/article.controller'
+import EditorPanel from '../../src/NewPost/Components/editor-panel';
 
 function DimmerLoad(props) {
   return <Loader active={props.active} size={props.size} inline />

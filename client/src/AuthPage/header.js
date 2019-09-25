@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import './css/style.scss';
-import { Input, Menu, Icon, Segment, Sidebar, Button, Responsive } from 'semantic-ui-react';
+import '../../Resources/styles/style.scss';
+import {  Menu, Icon, Sidebar, Button, Responsive } from 'semantic-ui-react';
 
 import {  withRouter } from 'react-router';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 
 var qs = require('query-string');
-//import Sales from '../src/sales';
 
-//import profileReducer from '../reducers/reducers';
 
 class Header extends React.Component {
 

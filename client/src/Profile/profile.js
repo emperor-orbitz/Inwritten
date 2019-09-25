@@ -1,17 +1,14 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import './profile.scss';
-import { Icon, Form, Tab, Divider, Button, Responsive, Loader, Checkbox, ButtonGroup } from 'semantic-ui-react';
-//import HeaderAccount from '../header_account';
-import { Route, IndexRoute, Switch, withRouter } from 'react-router';
-//import { BrowserRouter as Router, Link } from 'react-router-dom';
-import Connection from '../../../controllers/auth';
-//import Footer from '../../footer';
+import React from 'react';
+import '../../Resources/styles/profile.scss';
+import { Icon, Form, Divider, Button, Loader, ButtonGroup } from 'semantic-ui-react';
+
+import { withRouter } from 'react-router';
+import Connection from '../../Controllers/auth.controller';
 
 
 import { connect } from 'react-redux';
 
-import ProfileUpdate from '../../../controllers/profileController';
+import ProfileUpdate from '../../Controllers/profile.controller';
 
 
 

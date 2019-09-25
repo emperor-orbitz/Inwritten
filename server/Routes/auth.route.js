@@ -16,6 +16,10 @@ passport.authenticate("jwt", {session:false}),
     
 })
 
+
+
+
+
 router.post('/auth/login',  (req, res, next) => {   
 controller.login(req, res, next);
 
@@ -26,13 +30,13 @@ router.post('/auth/register',  (req, res, next) => {
 controller.register(req, res);
 })
 
-router.post('/auth/verify_mail', (req, res, next) => {
+router.get('/auth/verify_mail/:userid', (req, res, next) => {
 
 controller.verify_mail(req, res, next);
 })
 
 
-router.post('/auth/send_mail', (req, res, next) => {
+router.post('/auth/send_mail/:userid', (req, res, next) => {
 controller.send_mail(req, res, next);
 
 })

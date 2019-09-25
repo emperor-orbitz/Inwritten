@@ -1,20 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import '../css/account.scss';
+import '../../Resources/styles/account.scss';
 import { Button,  Grid, Dimmer, Card, Image, Header, Label, Item, Loader } from 'semantic-ui-react';
 import {  Icon,  Progress } from 'semantic-ui-react';
-import Connection from '../../controllers/auth';
+import Connection from '../../Controllers/auth.controller';
 
 import {  withRouter } from 'react-router';
 
 import { connect } from 'react-redux';
-import FetchArticles from '../../controllers/articleController';
-import ArticlePreview from './articles/article_preview';
-
-
-function DimmerLoad(props) {
-  return <Loader active={props.active} size={props.size} inline />
-}
+import FetchArticles from '../../Controllers/article.controller';
+import ArticlePreview from '../Articles/article_preview';
 
 
 

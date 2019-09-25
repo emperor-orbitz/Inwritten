@@ -70,9 +70,6 @@ userSchema.methods.createUser = function(username, email, password){
 
     return sav.create({...docs}) //console.log(xxx)    
     
-    
-
-
 }
 
 
@@ -150,7 +147,7 @@ userSchema.methods.verifyUser = function(id, cb){
 
 
     userSchema.methods.updatelastVerified = function(id, cb){
-        return mongoose.model('User',userSchema).update({_id: id},
+        return mongoose.model('User',userSchema).updateOne({_id: id},
         { $set:{ 
           lastVerified:Date.now()
         }}, cb

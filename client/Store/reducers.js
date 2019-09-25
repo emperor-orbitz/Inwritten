@@ -3,7 +3,6 @@
 var profileState = {
     
     //initialValue:'HASHSTACK.IO'
-
 };
 var dataState = [];
 

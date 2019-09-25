@@ -2,7 +2,7 @@ var express = require('express');
 var controller = require("../Controllers/articles.controller");
 var router = express.Router();
 var passport = require("passport");
-                                                                         
+var valid = require("../Utils/validation");                                                                       
 
 
 var isAuth = (req, res, next)=> {

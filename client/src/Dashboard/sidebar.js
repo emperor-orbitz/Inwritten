@@ -1,15 +1,9 @@
-/*
-*
-*           IMPORTS
-*
-*/
 
 
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Input, Menu, Icon, Segment, Sidebar, Button, Responsive, Accordion } from 'semantic-ui-react';
+import React from 'react';
+import {  Menu, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import '../css/style.scss';
+import '../../Resources/styles/style.scss';
 
 
 

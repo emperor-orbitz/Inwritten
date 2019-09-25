@@ -5,7 +5,7 @@ import {  BrowserRouter as Router } from 'react-router-dom';
 import App from  './home';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
-import { ProfileReducer, ArticleReducer } from '../reducers/reducers';
+import { ProfileReducer, ArticleReducer } from '../Store/reducers';
 
 const app = document.getElementById('app');
 const AllReducers = combineReducers({ ProfileReducer, ArticleReducer });

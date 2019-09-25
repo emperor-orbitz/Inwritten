@@ -1,6 +1,6 @@
 
-import './css/style.scss';
-import React, {Component} from 'react';
+import '../../Resources/styles/style.scss';
+import React from 'react';
 
 
 export default function Footer(){

@@ -5,16 +5,16 @@
 *
 */
 
-import React, { /*Component*/ } from 'react';
+import React from 'react';
 import {Button,  Form, Checkbox,  Header, Loader, Dropdown,  Icon,  Select, Grid } from 'semantic-ui-react';
 import './images.scss';
 import {  withRouter } from 'react-router';
-//import { BrowserRouter as Router, Link, Redirect } from 'react-router-dom';
-import Connection from '../../../controllers/auth';
+
+import Connection from '../../Controllers/auth.controller';
 
 import { connect } from 'react-redux';
-import HeaderAccount from '../header_account';
-import FetchArticles from '../../../controllers/articleController' 
+import HeaderAccount from '../../src/Dashboard/header_account';
+import FetchArticles from '../../Controllers/auth.controller' 
 
 
 function DimmerLoad(props){

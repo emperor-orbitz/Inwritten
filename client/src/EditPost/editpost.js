@@ -6,17 +6,14 @@
 */
 
 import React, { /*Component*/ } from 'react';
-import { Button, Divider, Form, Checkbox, Header, Loader, Dropdown, Icon, Select, Grid } from 'semantic-ui-react';
 import './article.scss';
-import { Route,  Switch, withRouter, IndexRoute } from 'react-router';
-import { BrowserRouter as Router, Redirect , browserHistory} from 'react-router-dom';
+import {  withRouter } from 'react-router';
 import Connection from '../../../controllers/auth';
 
 import { connect } from 'react-redux';
-import HeaderAccount from '../header_account';
-import FetchArticles from '../../../controllers/articleController'
-import EditorPanel from './editor-panel';
-import EditPost1 from './editpost_1';
+import FetchArticles from '../../Controllers/article.controller'
+import EditorPanel from '../NewPost/Components/editor-panel';
+import EditPost1 from '../EditPost/editpost_1';
 
 /*
 

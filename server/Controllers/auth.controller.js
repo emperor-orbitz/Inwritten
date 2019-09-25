@@ -4,25 +4,23 @@ var passport = require('passport');
 var sgMail = require('@sendgrid/mail');
 var http_status = require("../Utils/http_status");
 var jwt = require("jsonwebtoken");
-
+var validate = require("../Utils/validation");
 
 
 
 
 /*
-*
 *           SEND VERIFICATION EMAIL
 *              send_mail
 #           NOT YET TESTED 
 */
 
 
-var send_mail = async (req, res, next) => {
+var send_mail = async (req, res) => {
 
     let userid = req.params.userid;
     var finduser = new signup;
     try {
-
 
         var user = await finduser.findUserById(userid);
 
@@ -30,16 +28,17 @@ var send_mail = async (req, res, next) => {
         else if (user !== null) {
             if (user.verified === true) console.log('LINK IS BROKEN -1');
 
-            else if (res.verified != true) {
+            else if (user.verified != true) {
 
-                sgMail.setApiKey('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');
+                sgMail.setApiKey(process.env.SENDGRID_API_KEY);
                 const msg = {
-                    to: res.email,
+                    to: "malorbit360@gmail.com",
+                    //cc:"malorbit365@yahoo.com",
                     from: 'contact@penbox.com',
                     templateId: 'd-c0dbe040a46b4cc0b2131cb82c58d1ce',
                     dynamic_template_data: {
-                        name: res.username,
-                        confirm_link: `api/mailconfirm/${res._id}`
+                        name: user.username,
+                        confirm_link: `api/mailconfirm/${user._id}`
                     }
                 };
                 finduser.updatelastVerified(res._id, async (not_updated, updated) => {
@@ -49,18 +48,20 @@ var send_mail = async (req, res, next) => {
 
                     }
                     else {
-                        console.log('SEND THE MESSAGE');
-                        var send = await sgMail.send(msg);
+                        try{
+                            var send = await sgMail.send(msg);
+                            console.log('SENT THE MESSAGE');
+                            res.status(http_status.OK.code)
+                            .send({ data: send });
+                        }
+                        catch(err){
+                            console.log(err)
+                        }
 
-                        res.status(http_status.OK.code)
-                           .send({ data: [] });
+                       
                     }
 
-
-
                 })
-
-
             }
         }
 
@@ -88,7 +89,7 @@ var send_mail = async (req, res, next) => {
 
 
 
-var verify_mail = async (req, res, next) => {
+var verify_mail = async (req, res) => {
     //check if user with ID
 
     let userid = req.params.userid;
@@ -146,64 +147,65 @@ var verify_mail = async (req, res, next) => {
 
 
 
-/*
-*
-*           SIGNUP ACTION
+/*           SIGNUP ACTION
 *           Signup user /PASSPORT
 */
 
 
-var register = (req, res, next) => {
+var register = (req, res) => {
     const { username, email, password } = req.body;
-
-    var saves = new signup();
-    saves.findByEmail(email, async(err, success) => {
-        if (err) 
-           res.json({ message: 'Error already occured' });
-        
-        else if (success != null ) {
-                console.log(success);
-                res.json({ message: 'Account already exists' });
-
-            }
-            else {
-
-                try{
-                    var result = await saves.createUser(username, email, password);
-
-                    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-                            const msg = {
-                                to: result.email,
-                                from: 'contact@penbox.com',
-    
-                                templateId: 'd-c0dbe040a46b4cc0b2131cb82c58d1ce',
-                                dynamic_template_data: {
-                                    name: result.username,
-                                    confirm_link: `api/mailconfirm/${result._id}`
-                                }
-                            }
-                        await sgMail.send(msg);
-                        res.json({ message: "Account successfully created"+ succ });
-
    
-                            } 
+    var valid = new validate();
 
-                catch(error){
-                    res.json({ message: 'Failed! An error is here'+error });
-                    //console.log("error"+error);
+    valid.validate(req.body).then( good =>{
+        var saves = new signup();
+
+        saves.findByEmail(email, async (err, success) => {
+            if (err) 
+               res.json({ message: 'Error already occured' });
+            
+            else if (success != null ) {
+                    console.log(success);
+                    res.json({ message: 'Account already exists' });
+    
                 }
-               
-
-      
-
-
-
-
-
-            }
-
+                else {
+    
+                    try{
+                        var result = await saves.createUser(username, email, password);
+    
+                        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+                                const msg = {
+                                    to: result.email,
+                                    from: 'contact@penbox.com',
         
+                                    templateId: 'd-c0dbe040a46b4cc0b2131cb82c58d1ce',
+                                    dynamic_template_data: {
+                                        name: result.username,
+                                        confirm_link: `api/mailconfirm/${result._id}`
+                                    }
+                                }
+                            await sgMail.send(msg);
+                            res.json({ message: "Account successfully created"+ succ });
+    
+                                } 
+    
+                    catch(error){
+                        res.json({ message: 'Failed! An error is here'+error });
+                        //console.log("error"+error);
+                    }
+
+                }
+    
+            
+        })
+
+
     })
+    .catch(err=> res.status(400)
+                    .send({message:"Invalid Parameters",
+       }))
+   
 
 }
 

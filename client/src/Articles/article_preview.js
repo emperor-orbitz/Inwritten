@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Link from 'react-router-dom/Link';
-import './article.scss';
+import '../../Resources/styles/article.scss';
 
 
 /*

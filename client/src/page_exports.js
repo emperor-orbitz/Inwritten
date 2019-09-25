@@ -5,20 +5,21 @@
 */
 import Signup from './Signup/signup';
 //import Documentation from './documentation';
-import Account from './account/account';
+import Account from './Dashboard/account';
 //import Blog from './blog';
 import Home from './home'
-import Login from './Login/login';
-import Profile from './account/profile/profile';
+import Login from './AuthPage/login';
+import Profile from './Profile/profile';
 // ARTICLES CATEGORY
-import Articles from './account/articles/articles';// MAIN PAGE
-import AddPost from './account/articles/addpost';
-import EditPost1 from './account/articles/editpost_1';
 
-import PostArchive from './account/articles/postarchive';
 
-import AddImage from './account/images/addimage';
-import Gallery from './account/images/gallery';
+import Articles from './Articles/Components/articles';// MAIN PAGE
+import AddPost from './NewPost/addpost';
+import EditPost1 from '../src/EditPost/editpost_1';
+import PostArchive from '../src/Archives/postarchive';
+
+import AddImage from '../src/NewImage/addimage';
+import Gallery from '../src/NewImage/addimage';
 
 
 var ArticlesCategory ={
