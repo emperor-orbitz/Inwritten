@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import {  Menu, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
@@ -20,7 +18,6 @@ class SideBar {
                 <Menu.Item as={Link} to='/add-post'><Icon name="add" />Create new</Menu.Item>
                 <Menu.Item as={Link} to='/articles'><Icon name="folder outline" />Published Items</Menu.Item>
                 <Menu.Item as={Link} to='/drafts'><Icon name="box" />Draft Items</Menu.Item>
-
             </Menu>
         ),
 
@@ -36,18 +33,17 @@ class SideBar {
                 <Menu.Item as={Link} to="/gallery"  ><Icon name="images" />Gallery</Menu.Item>
             </Menu>
         ),
+
         categorySubmenu: (
             <Menu secondary vertical  >
-                <Menu.Item><Icon name="paint brush"   />Art</Menu.Item>
+                <Menu.Item><Icon name="paint brush"/>Art</Menu.Item>
                 <Menu.Item><Icon name="windows" />Operating systems</Menu.Item>
-                <Menu.Item><Icon name="code"   />Javascript</Menu.Item>
-                <Menu.Item><Icon name="book"  />Education</Menu.Item>
-                <Menu.Item><Icon name="microchip"  />Tech and Hardwares</Menu.Item>
-                <Menu.Item><Icon name="flask" />Science</Menu.Item>
-                <Menu.Item><Icon name="ambulance" />Health</Menu.Item>
-                <Menu.Item><Icon name="heart" />Romance</Menu.Item>
-
-
+                <Menu.Item><Icon name="code"/>Javascript</Menu.Item>
+                <Menu.Item><Icon name="book"/>Education</Menu.Item>
+                <Menu.Item><Icon name="microchip"/>Tech and Hardwares</Menu.Item>
+                <Menu.Item><Icon name="flask"/>Science</Menu.Item>
+                <Menu.Item><Icon name="ambulance"/>Health</Menu.Item>
+                <Menu.Item><Icon name="heart"/>Romance</Menu.Item>
             </Menu>
         )
 
@@ -55,9 +51,6 @@ class SideBar {
 
     }
 
-    malik() {
-        console.log('dfdfdfd');
-    }
-
+  
 }
 export default SideBar;

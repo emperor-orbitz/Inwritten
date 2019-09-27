@@ -30,7 +30,7 @@ passport.use('login', new LocalStrategy(
       if (user) {
 
         if (user != null) {
-
+         //console.log(password)
           var compare = login.syncPass(password, user.password);
           if (compare) {
             return done(null, user);

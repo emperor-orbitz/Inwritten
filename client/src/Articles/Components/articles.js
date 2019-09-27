@@ -5,7 +5,7 @@ import { Button, Icon, Form, Modal, Grid,  Select } from 'semantic-ui-react';
 import Connection from '../../../Controllers/auth.controller';
 
 import { withRouter } from 'react-router';
-import { BrowserRouter as Router, Link, Redirect } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import FetchArticles from '../../../Controllers/article.controller';
 
@@ -24,11 +24,10 @@ function date_to_string(date) {
 }
 
 
-/*
-*
-*                             GET MONTH NAME
-*
+/*       GET MONTH NAME
 */
+
+
 function getmonthName(number) {
     var months = [
         '01', '02', '03', '04', '05', '06',
@@ -39,6 +38,8 @@ function getmonthName(number) {
     return months[number];
 
 }
+
+
 
 class Articles extends React.Component {
 
@@ -63,16 +64,10 @@ class Articles extends React.Component {
             filter_privacy_const: [],
             not_found: false
         }
-        this.search_with_criteria = this.search_with_criteria.bind(this);
+      
 
-       // this.handleArrangeCriteria = this.handleArrangeCriteria.bind(this);
-        this.onChangeSearch = this.onChangeSearch.bind(this);
-        this.handleSearchCriteria = this.handleSearchCriteria.bind(this);
-        //this.showModal =this.showModal.bind(this);
-        this.showModal = this.showModal.bind(this);
-        this.deletePost = this.deletePost.bind(this);
-        this.handleMessageDismiss = this.handleMessageDismiss.bind(this);
     }
+
     showModal = (e, p) => {
         var { title, id } = p;
         this.setState(
@@ -87,7 +82,7 @@ class Articles extends React.Component {
 
 
     }
-    handleSearchCriteria(e, p) {
+    handleSearchCriteria = (e, p) => {
 
         this.setState({ not_found:false, search_criteria: p.value })
     }
@@ -117,7 +112,7 @@ class Articles extends React.Component {
             })
 
     }
-    focusOnId(elem){
+    focusOnId =(elem)=>{
         document.getElementById(elem).focus();
 
     }
@@ -138,7 +133,8 @@ class Articles extends React.Component {
         this.setState({ search:search, not_found:false })
     }
 
-    search_with_criteria = (/*scope*/ ) => {
+
+    search_with_criteria = ( ) => {
 
         var SC=this.state.search_criteria;
         this.setState({ not_found: false });
@@ -161,7 +157,7 @@ class Articles extends React.Component {
 
     }
 
-  hideSideSearch(e){
+  hideSideSearch = (e)=>{
       alert('fuckn uu');
   }
 
@@ -389,16 +385,9 @@ class Articles extends React.Component {
 
         )
 
-
-
     }
 
     }
-
-
-
-
-
 
 
 }

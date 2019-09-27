@@ -1,5 +1,3 @@
-//first we import our dependencies…
-
 var express = require('express'), router = express.Router();
 var authenticate = require('../Routes/auth.route');
 var articles = require('../Routes/articles.route');

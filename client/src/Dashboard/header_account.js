@@ -48,11 +48,11 @@ componentWillReceiveProps(){
 
 
   componentDidMount() {
-
+    let token = localStorage.getItem("hs_token");
 
     if (Object.keys(this.props.ProfileReducer).length == 0) {
 
-      this.connect.isLoggedin()
+      this.connect.isLoggedin(token)
         .then(((success) => {
 
           this.props.dispatch({
@@ -62,10 +62,10 @@ componentWillReceiveProps(){
             }
               , {
               key: "username",
-              value: success.ID.username
+              value: success.data.username
             }, {
               key: "email",
-              value: success.ID.email
+              value: success.data.email
             }
 
             ]

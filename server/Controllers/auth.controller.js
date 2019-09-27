@@ -166,7 +166,8 @@ var register = (req, res) => {
             
             else if (success != null ) {
                     console.log(success);
-                    res.json({ message: 'Account already exists' });
+                    res.status(400)
+                       .json({ message: 'Account already exists' });
     
                 }
                 else {
@@ -186,13 +187,14 @@ var register = (req, res) => {
                                     }
                                 }
                             await sgMail.send(msg);
-                            res.json({ message: "Account successfully created"+ succ });
+                            res.status(200)
+                                .json({ message: "Account successfully created" });
     
                                 } 
     
                     catch(error){
-                        res.json({ message: 'Failed! An error is here'+error });
-                        //console.log("error"+error);
+                        res.status(500)
+                            .json({ message: 'Failed! An error is here'+error });
                     }
 
                 }
@@ -202,7 +204,7 @@ var register = (req, res) => {
 
 
     })
-    .catch(err=> res.status(400)
+    .catch(err=> res.status(401)
                     .send({message:"Invalid Parameters",
        }))
    
@@ -211,10 +213,7 @@ var register = (req, res) => {
 
 
 
-/*
-*
-*           LOCAL LOGIN ACTION
-*
+/*          LOCAL LOGIN ACTION
 */
 
 
@@ -225,12 +224,14 @@ var login = (req, res, next) => {
     passport.authenticate('login', function (err, user) {
 
         if (err) {
-           res.send({ message: `Sorry Something went wrong! we would fix it`, ID: null })
+           res.status(500)
+              .send({ message: `Sorry Something went wrong! we would fix it`, user:null })
 
         }
 
         if (!user) {
-         res.send({ message: `Invalid username or password`, ID: null });
+         res.status(401)
+             .send({ message: `Invalid username or password`, user:null });
 
         }
 
@@ -241,17 +242,13 @@ var login = (req, res, next) => {
                     expiresIn:"7d"
                 });
 
-            res.send({ token: `bearer ${signature}`, user: user});
-
+            res.status(200)
+                .send({ token: `bearer ${signature}`, user: user});
 
         }
-
     })(req, res, next);
 
-
-
 }
-
 
 
 
@@ -260,10 +257,8 @@ var login = (req, res, next) => {
 */
 var isloggedin = (req, res, next) => {
     
-res.send({message:"OK",
-         status: 200,
-          info:"User is loggedin"
-        });
+res.status(200)
+   .send({ data: req.user });
 }
 
 

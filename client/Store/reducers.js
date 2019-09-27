@@ -1,29 +1,18 @@
-
-//REDUCERS
-var profileState = {
-    
-    //initialValue:'HASHSTACK.IO'
-};
+var profileState = {}
 var dataState = [];
 
 
-/*
-*
-*           PROFILE ACTIONS
-*
+/*          PROFILE ACTIONS
 */
 
 
 var ProfileReducer = (state = profileState, data) => {
 
+    console.log(data.payload, "payload data")
     switch (data.type) {
         case 'INJECT_PROFILE':
-            data.payload.forEach(elem => {
-                state[elem.key] = elem.value;
-            })
-            console.log('see the two both of dem sha', data.payload, state);
+            state = data.payload;
             return state;
-
 
         default:
             return state;
@@ -31,10 +20,8 @@ var ProfileReducer = (state = profileState, data) => {
     }
 };
 
-/*
-*
-*           ARTICLE ACTIONS
-*
+
+/*          ARTICLE ACTIONS
 */
 
 
@@ -59,22 +46,19 @@ var ArticleReducer = (state = dataState, action) => {
         case 'DELETE':
 
             var state = state.filter((e) => e._id !== action.payload._id);
-
             return state;
 
         case 'INSERT_ARTICLE':
-
             state.push(action.payload);
 
-
             return state;
-
-
+            
 
         default:
             return state;
 
     }
 };
+
 
 module.exports = { ProfileReducer, ArticleReducer };

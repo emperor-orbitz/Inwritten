@@ -1,11 +1,7 @@
 import React from 'react';
-
 import { Signup, Account, Login, ArticlesCategory, Profile, ImagesCategory } from './page_exports';
-
 import '../Resources/styles/style.scss';
-
 import { Switch, Route } from 'react-router';
-
 import HeaderAccount from './header_account';
 
 
@@ -13,6 +9,7 @@ import HeaderAccount from './header_account';
 
 
 function App() {
+  
   return (
     <div>
 
@@ -24,7 +21,6 @@ function App() {
 
         <HeaderAccount>
 
-
           <Switch>
             <Route path='/add-image' component={ImagesCategory.AddImage} />
             <Route path='/gallery' component={ImagesCategory.Gallery} />
@@ -34,30 +30,14 @@ function App() {
             <Route path='/articles' component={ArticlesCategory.Articles} />
             <Route path='/drafts' component={ArticlesCategory.Drafts} />
             <Route path='/add-post' component={ArticlesCategory.AddPost} />
-
             <Route render={() => <h2> Oops, it's a 404  </h2>} />
-
-
-
           </Switch>
 
-
-
         </HeaderAccount>
-
       </Switch>
 
 
-
-
-
-
-
-
-
-
     </div>
-
 
   )
 

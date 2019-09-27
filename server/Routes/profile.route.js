@@ -10,14 +10,13 @@ var passport = require("passport");
 var isAuth = (req, res, next)=> {
     passport.authenticate("jwt", {session:false})
     (req, res, next);
-    }
+
+}
 
 
 /*         UPDATE PROFILE
         Update proile Details
-
 */
-
 
 
 router.post('/profile/update_profile', isAuth, (req, res, next) => {   

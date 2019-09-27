@@ -18,8 +18,6 @@ passport.authenticate("jwt", {session:false}),
 
 
 
-
-
 router.post('/auth/login',  (req, res, next) => {   
 controller.login(req, res, next);
 
