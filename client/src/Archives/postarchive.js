@@ -1,18 +1,13 @@
-/*
-*
-*                              IMPORTS
-*
-*/
 
 import React, { Component } from 'react';
-import './article.scss';
+import '../../Resources/styles/article.scss';
 import { Button, Icon, Form, Modal, Grid,  Select } from 'semantic-ui-react';
 import Connection from '../../Controllers/auth.controller';
 
 import { withRouter } from 'react-router';
 import { BrowserRouter as Router, Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import FetchArticles from '../../../controllers/articleController';
+import FetchArticles from '../../Controllers/article.controller';
 
 
 

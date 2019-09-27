@@ -1,5 +1,5 @@
 
-import './css/style.scss';
+import '../Resources/styles/style.scss';
 import React from 'react';
 
 

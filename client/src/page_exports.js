@@ -3,7 +3,7 @@
 *           ALL PAGES STAY RIGHT HERE
 *
 */
-import Signup from './Signup/signup';
+import Signup from '../src/AuthPage/signup';
 //import Documentation from './documentation';
 import Account from './Dashboard/account';
 //import Blog from './blog';

@@ -1,11 +1,6 @@
-/*
-*
-*                              IMPORTS
-*
-*/
 
 import React from 'react';
-import './article.scss';
+import '../../../Resources/styles/article.scss';
 import { Button, Icon, Form, Modal, Grid,  Select } from 'semantic-ui-react';
 import Connection from '../../../Controllers/auth.controller';
 

@@ -1,6 +1,5 @@
 var webpack= require('webpack');
 var path= require('path');
-var parentDir =path.join(__dirname ,'./src/');
 var HTMLWebpackPlugin =require('html-webpack-plugin');
 
 console.log(path.resolve(__dirname, './src'))
