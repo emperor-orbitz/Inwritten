@@ -25,19 +25,19 @@ controller.loadList(req, res, next);
 });
 
 
-router.post('/articles/delete', isAuth, (req, res, next) => {
+router.delete('/articles/delete', isAuth, (req, res, next) => {
 
 controller.deletePost(req, res);
 });
 
 
-router.post('/articles/loadAllList', isAuth, (req, res, next) => {
+router.get('/articles/loadAllList', isAuth, (req, res, next) => {
 
 controller.loadAllList(req, res, next);
 });
 
 
-router.post('/articles/update', isAuth, (req, res, next) => {
+router.patch('/articles/update', isAuth, (req, res, next) => {
 controller.update(req, res, next);
 
 });

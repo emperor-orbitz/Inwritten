@@ -1,18 +1,19 @@
 
 class FetchArticles {
-constructor(){
 
-}
+    constructor(){}
 
-/*
-*
-*           CONSTANTSs
-*
+
+/*               CONSTANTSs
 */
-CONSTURL= 'http://localhost:5000/articles';
-CONSTOPTIONS ={
+
+
+const_url= 'http://localhost:5000/articles';
+const_options ={
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json',
+                           'Authorization': localStorage.getItem("hs_token")  
+                         },
                 //body:JSON.stringify(DATA),
                 credentials: 'include',
                 withCredentials: true,
@@ -22,24 +23,23 @@ CONSTOPTIONS ={
 }
 
 
-/*
-*
-*           UPDATE ARTICLE
-*
-*/
 
+
+/*
+*           UPDATE ARTICLE
+*/
 
  update_article (post) {
 
-        var GET_OPTIONS = {
-            URL:  this.CONSTURL +'/update',
-            OPTIONS: this.CONSTOPTIONS
+        var get_options = {
+            url:  this.const_url +'/update',
+            options: this.const_options
         }
 
-    let SEND = Object.assign ({ } ,GET_OPTIONS.OPTIONS, {body: JSON.stringify(post)} );
-console.log(SEND);
-        return new Promise((resolve, reject) => {
-            fetch(GET_OPTIONS.URL, SEND)
+    let send = Object.assign ({ } ,get_options.OPTIONS, {body: JSON.stringify(post)} );
+
+    return new Promise((resolve, reject) => {
+            fetch(get_options.url, send)
                 .then((user) => user.json())
                 .then((result) => {
                     if (result.MESSAGE === "OK") {
@@ -57,32 +57,32 @@ console.log(SEND);
 
 
 
-/*
-*
-*           FETCH ALL POSTS
-*
+/*          FETCH ALL POSTS
 */
 
  fetch_articles_list() {
-          var GET_OPTIONS = {
-            URL:  this.CONSTURL +'/loadAllList',
-            OPTIONS: this.CONSTOPTIONS
+
+          var get_options = {
+            url:  this.const_url +'/loadAllList',
+            options: Object.assign( {}, this.const_options, { method:'GET' }),
+            
         }
 
         return new Promise((resolve, reject) => {
-            fetch(GET_OPTIONS.URL, GET_OPTIONS.OPTIONS)
+            fetch(get_options.url, get_options.options)
                 .then((user) => user.json())
                 .then((success) => {
-                    if ((success.CODE === 102)  && (success.MESSAGE ==='UNABLE TO FETCH ARTICLES'  )) {
-                        console.log('Success A is the success',success)
-                        //alert( success.CODE);
-                        reject(success);
-                    }
-                    else {
-                        console.log('Success B is the success',success)
 
-                        //alert(success.CODE)
-                        resolve(success);
+                   // console.log(success.data[4].title +"success at fetch erticles")
+                    if (success.data.length != 0){
+                        console.log(success.data.length+"is success.data")
+                        resolve(success.data)
+                
+
+                    }
+                    
+                    else {
+                        reject(success.data);
                     }
                 })
         })
@@ -93,23 +93,20 @@ console.log(SEND);
 
 
 /*
-*
 *           DELETE SELECTED POST
-*
 */
 
-
-
     delete_article(id) {
-        var CONSTOPTIONS =Object.assign(this.CONSTOPTIONS, { body:JSON.stringify({ id:id } ) })
-        var GET_OPTIONS = {
-            URL:  this.CONSTURL +'/delete',
-            OPTIONS: this.CONSTOPTIONS
+        var const_options = Object.assign(this.const_options, { body:JSON.stringify({ id:id } ) })
+        var get_options = {
+            url:  this.const_url +'/delete',
+            options: this.const_options
         }
 
 
         return new Promise((resolve, reject) => {
-            fetch(GET_OPTIONS.URL, GET_OPTIONS.OPTIONS)
+
+            fetch(get_options.url, get_options.options)
                 .then((user) => user.json())
                 .then((result) => {
                     if ( result.CODE == 104 ) {
@@ -124,22 +121,21 @@ console.log(SEND);
     }
     
 
+
   create_article(data) {
 
-    var CONSTOPTIONS = Object.assign(this.CONSTOPTIONS, { body: JSON.stringify(data) } )
-    console.log(CONSTOPTIONS);
-        var GET_OPTIONS = {
-            URL:  this.CONSTURL +'/create',
-            OPTIONS: CONSTOPTIONS
+    var const_options = Object.assign(this.const_options, { body: JSON.stringify(data) } )
+    var get_options = {
+            url:  this.const_url +'/create',
+            options: const_options
             
         }
 
-
         return new Promise((resolve, reject) => {
-            fetch(GET_OPTIONS.URL, GET_OPTIONS.OPTIONS)
+            fetch(get_options.url, get_options.options)
                 .then((user) => user.json())
                 .then((result) => {
-                    if (result.CODE == 104 ) {
+                    if (result.code == 104 ) {
                         reject(result);
                     }
                     else {

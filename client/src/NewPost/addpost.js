@@ -1,9 +1,5 @@
 
-/*
-*
-*           IMPORTS
-*
-*/
+//          IMPORTS
 
 
 import React, { Component } from 'react';
@@ -51,18 +47,16 @@ class AddPost extends React.Component {
   }
 
   /*
-  *
   *           HANDLE CHANGE EVENTS ON INPUTS
-  *
   */
 handleTags(e){
-//alert(e.target.value);
 this.setState({tag_value:e.target.value});
 
-
-
-
 }
+
+
+
+
 
   handleInputs(e, prop = prop || '') {
     e.preventDefault();

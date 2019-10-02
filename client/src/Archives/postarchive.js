@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import '../../Resources/styles/article.scss';
 import { Button, Icon, Form, Modal, Grid,  Select } from 'semantic-ui-react';
 import Connection from '../../Controllers/auth.controller';

@@ -1,12 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../../Resources/styles/style.scss';
 import {  Menu, Icon, Sidebar, Button, Responsive } from 'semantic-ui-react';
-
 import {  withRouter } from 'react-router';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
-
-var qs = require('query-string');
 
 
 class Header extends React.Component {

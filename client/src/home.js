@@ -2,7 +2,7 @@ import React from 'react';
 import { Signup, Account, Login, ArticlesCategory, Profile, ImagesCategory } from './page_exports';
 import '../Resources/styles/style.scss';
 import { Switch, Route } from 'react-router';
-import HeaderAccount from './header_account';
+import HeaderAccount from '../src/Dashboard/header_account';
 
 
 

@@ -63,21 +63,20 @@ class Login extends React.Component {
 
 
 
-
-  componentWillMount() {
+  componentDidMount() {
     let hs_token = localStorage.getItem("hs_token");
-
     var connect = new Connection();
-    console.log(this.props);
+
     connect.isLoggedin(hs_token)
-      .then(_ => {
-        this.props.dispatch({ type: 'INJECT_PROFILE', payload: _.data })
+      .then( _ => {
+
+        this.props.dispatch({ type: 'INJECT_PROFILE', payload: _ })
         this.props.history.replace('/dashboard');
 
       })
       .catch(_ => {
 
-        console.log(_);
+        console.log( _ + "I GOT THIS IN THIS PLACE");
 
       })
 
@@ -122,7 +121,7 @@ class Login extends React.Component {
         })
 
     })
-      .catch( _=> {
+      .catch(_=> {
 
         var { loginError } = this.state;
         button.dimmerLoad = button.disabled = false;

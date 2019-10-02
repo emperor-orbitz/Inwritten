@@ -4,11 +4,7 @@ import Link from 'react-router-dom/Link';
 import '../../Resources/styles/article.scss';
 
 
-/*
-*
-*           DATE CONVSERSION
-*
-*/
+//   DATE CONVSERSION
 
 function date_to_string(date) {
     var fulldate = new Date(date);
@@ -19,11 +15,8 @@ function date_to_string(date) {
     return convert;
 }
 
-/*
-*
-*          MONTH DEDUCER FUNCTION
-*
-*/
+//   MONTH DEDUCER FUNCTION
+
 
 function getmonthName(number) {
     var months = [

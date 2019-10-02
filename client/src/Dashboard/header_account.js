@@ -26,95 +26,61 @@ class HeaderAccount extends React.Component {
       open: false,
       pageTitle: '',
       email_variable: '',
-      loadFinish: false
-
+      loadFinish: false,
 
     }
+    if(this.state.visible== true)  this.setState({visible:false});
+    else ;
+
+
     this.handleClick = this.handleClick.bind(this);
     this.showModal = this.showModal.bind(this);
     this.logout = this.logout.bind(this);
   }
 
-componentWillReceiveProps(){
+/*
+UNSAFE_componentWillReceiveProps(){
   if(this.state.visible== true)  this.setState({visible:false});
   else ;
 
+}*/
 
-}
 
   connect = new Connection();
   fetchArticle = new FetchArticles();
 
 
-
   componentDidMount() {
+
     let token = localStorage.getItem("hs_token");
 
     if (Object.keys(this.props.ProfileReducer).length == 0) {
 
       this.connect.isLoggedin(token)
-        .then(((success) => {
+        .then(_ => {
 
-          this.props.dispatch({
-            type: 'INJECT_PROFILE', payload: [{
-              key: "isLoggedin",
-              value: true
-            }
-              , {
-              key: "username",
-              value: success.data.username
-            }, {
-              key: "email",
-              value: success.data.email
-            }
+          this.props.dispatch({ type: 'INJECT_PROFILE', payload: _ })
 
-            ]
-          })
-
-          this.fetchArticle.fetch_articles_list().then((articles, none) => {
+          this.fetchArticle.fetch_articles_list().then( articles => {
             if (articles) {
-              this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: articles.RESULT });
-
-              //console.log(this.props.ArticleReducer);
-
-              //check if its in the array
+              this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: articles });
               this.setState({ loadFinish: true });
 
             }
-            else {
-            /*DO NOTHING HERE....
+            else { }
 
-
-
-            */
-
-            }
           })
 
-
-        }))
-        .catch((err) => {
-          this.props.history.replace('/login');
-
         })
-      //ALSO FETCH ARTICLES
+        .catch( err =>  this.props.history.replace('/login') )
 
-
-
-
-
-
-
-
-    }
+      }
 
 
     else {
       /*
-      *
       *JUST RENDER
       *Remove the loader
-      *
       */
       this.setState({ loadFinish: true });
 

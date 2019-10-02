@@ -6,9 +6,7 @@ import '../../Resources/styles/style.scss';
 
 
 class SideBar {
-    constructor() {
-
-    }
+  
 
 
     subMenu = {

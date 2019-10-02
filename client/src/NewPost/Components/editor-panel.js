@@ -1,12 +1,11 @@
 
-/**
+/*        
  * IMPORTS
  */
 
 import React, { Component } from 'react';
 import { Modal, Input, Icon, Button, Form, Grid } from 'semantic-ui-react';
 import '../../../Resources/styles/editor.scss';
-
 import sample_image from '../../../Resources/images/n2.png';
 import { Editor } from 'slate-react';
 import { Value, Block } from 'slate';
@@ -378,12 +377,14 @@ export default class EditorPanel extends Component {
 
         }
 
+      
         this.link_insert_display = this.link_insert_display.bind(this);
 
     }
 
 
-    componentWillReceiveProps(nextProps) {
+    
+   UNSAFE_componentWillReceiveProps(nextProps) {
         console.log(Object.keys( nextProps).length , 'i will soon receive')
         var rawValue = html.deserialize(nextProps.initialValue);
 
@@ -398,6 +399,10 @@ export default class EditorPanel extends Component {
 
         }
     }
+
+
+
+
 
     componentDidMount() {
   //      var rawValue = html.deserialize(this.props.initialValue);
@@ -437,7 +442,7 @@ export default class EditorPanel extends Component {
      * 
      */
 
-    onChange = (change) => {
+    onChange = (change, editor) => {
         //this.state.value = change.value;
         //console.log(change.value);
         this.setState({ value: change.value })
@@ -458,12 +463,20 @@ export default class EditorPanel extends Component {
         return value.activeMarks.some(mark => mark.type == type)
     }
 
+
     /**
      * 
      * INLINE ELEM CONTROLLER
      * Render Inline Elements
      *
      */
+
+
+
+    ref = editor => {
+        window.editor = editor
+    }
+
 
     Inline(mark) {
         var val;
@@ -474,8 +487,6 @@ export default class EditorPanel extends Component {
             val = status;
 
         }
-
-
         else {
             const status = this.state.value.change()
                 .toggleMark(mark[0]).focus()
@@ -569,40 +580,40 @@ export default class EditorPanel extends Component {
     */
 
     renderMark = (props) => {
-        var { mark, attributes } = props;
+        var { mark, attributes, children } = props;
         switch (mark.type) {
             case 'bold':
 
-                return <strong>{props.children}</strong>
+                return <strong>{children}</strong>
                 break;
 
             case 'italic':
-                return <em {...attributes}>{props.children}</em>
+                return <em {...attributes}>{children}</em>
                 break;
 
             case 'strikethrough':
-                return <del>{props.children}</del>
+                return <del>{children}</del>
                 break;
 
             case 'underline':
-                return <u>{props.children}</u>
+                return <u>{children}</u>
                 break;
 
             case 'code':
-                return (<code className="editor-code">{props.children}</code>)
+                return (<code className="editor-code">{children}</code>)
 
 
 
             case 'text':
-                return (<p>{props.children}</p>)
+                return (<p>{children}</p>)
                 break;
 
             case 'linkify':
-                return (<a {...attributes} >{props.children}</a>)
+                return (<a {...attributes} >{children}</a>)
                 break;
 
             case 'h':
-                return (<h2 {...attributes} >{props.children}</h2>)
+                return (<h2 {...attributes} >{children}</h2>)
                 break;
             /*case 'align-right':
                 return (<p className='editor-alignright'>{props.children}</p>)
@@ -622,12 +633,13 @@ export default class EditorPanel extends Component {
      *  RENDER NODE BLOCK
      * 
      */
-    renderNode(props) {
+    renderAnode(props) {
 
         var src = props.node.data.get('src');
         var style = props.node.data.get('style');
         var { node, attributes } = props;
         //var RenderImage = this.RenderImage;
+
         switch (node.type) {
             case 'image':
                 return (< RenderImage {...props} />)
@@ -751,6 +763,7 @@ export default class EditorPanel extends Component {
         console.log(ev.target.className, ev.target.src);
         if (ev.target.type == 'file') {
             var { name } = ev.target.files[0];
+           
             console.log(ev.target);
             if (img_regexp.test(name)) {
                 this.readFile(ev.target.files[0]).then((result) => {
@@ -760,7 +773,6 @@ export default class EditorPanel extends Component {
 
 
                 })
-
 
             }
             else {
@@ -953,9 +965,6 @@ export default class EditorPanel extends Component {
             { name: 'terminal', action: 'code', key: 'code' },
             { name: 'linkify', action: 'linkify', key: 'linkify' },
 
-
-
-
         ]
         //MEDIA ITEMS
 
@@ -1128,17 +1137,18 @@ export default class EditorPanel extends Component {
 
                     <div className='editor'>
                         <Editor
-                    
                             value={this.state.value}
                             onChange={this.onChange}
                             plugins={this.plugins}
-                            placeholder='Start writing'
-                            renderMark={this.renderMark}
-                            renderNode={this.renderNode.bind(this)}
+                            placeholder='Let\s write something great'
+                            renderMark={this.renderMark }
+                            rendernode={this.renderAnode.bind(this)}
                             schema={schema}
                             className='editor-mainpart'
                             onKeyDown={this.onKeyDown}
                             autoFocus
+                            ref={this.ref}
+                            
 
 
                         />

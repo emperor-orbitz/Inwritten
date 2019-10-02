@@ -168,7 +168,7 @@ class Articles extends React.Component {
 
             this.fetchArticle.fetch_articles_list().then((articles, none) => {
                 if (articles) {
-                    this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: articles.RESULT });
+                    this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: articles });
 
                     var filter_privacy = this.props.ArticleReducer.filter( nor => nor.public == true)
                     this.setState({ filter_privacy });

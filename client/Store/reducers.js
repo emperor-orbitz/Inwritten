@@ -29,9 +29,11 @@ var ProfileReducer = (state = profileState, data) => {
 var ArticleReducer = (state = dataState, action) => {
     switch (action.type) {
 
+        
 
         case 'OVERWRITE_ARTICLE':
-            state = action.payload;
+        console.log("this is right from the store"+ action.payload)
+        state = action.payload;
             return state;
 
         case 'UPDATE_ARTICLE':

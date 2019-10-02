@@ -41,7 +41,7 @@ var loadAllList = (req, res, next) => {
 
 
 
-//*           LOAD FEW ARTICLES WITH LIMIT e.g. ?limit=2
+//          LOAD FEW ARTICLES WITH LIMIT e.g. ?limit=2
 
 var loadList = (req, res, next) => {
 

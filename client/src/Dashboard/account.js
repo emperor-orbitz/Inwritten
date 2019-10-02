@@ -6,7 +6,6 @@ import {  Icon,  Progress } from 'semantic-ui-react';
 import Connection from '../../Controllers/auth.controller';
 
 import {  withRouter } from 'react-router';
-
 import { connect } from 'react-redux';
 import FetchArticles from '../../Controllers/article.controller';
 import ArticlePreview from '../Articles/article_preview';
@@ -20,12 +19,11 @@ class Account extends React.Component {
   constructor(props) {
 
     super(props)
-    //this.date_to_string =this.date_to_string.bind(this);
     this.state = {
 
         dimmerLoad: true,
         disabled: true
-   
+
       
     }
 
@@ -46,36 +44,26 @@ class Account extends React.Component {
 
 componentDidMount() {
 
-  console.log(this.props);
         if (Object.keys(this.props.ArticleReducer).length == 0) {
-
                 
                     this.fetchArticle.fetch_articles_list().then((articles, none) => {
                         if (articles) {
-                            this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: articles.RESULT });
+
+                          this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: articles});
                             this.setState({dimmerLoad:false})
                         }
                         else {
                             //error
-                            this.props.history.replace('/login');
+                            //this.props.history.replace('/login');
 
                         }
                     })
-
-
 
         }
 
         else {
           this.setState({dimmerLoad:false})
-
-            console.log('full', this.props.ArticleReducer);
-
         }
-
-
-
- 
 
         this.setState({dimmerLoad:false})
 
@@ -100,6 +88,8 @@ componentDidMount() {
 var credentials={
   username:this.props.ProfileReducer.username
 }
+
+
     return (
 
       <div >
@@ -127,13 +117,6 @@ var credentials={
 
 
           </div>
-
-
-
-
-
-
-
 
       </div>
 

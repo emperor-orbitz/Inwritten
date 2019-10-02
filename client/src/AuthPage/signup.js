@@ -12,6 +12,7 @@ function DimmerLoad(props){
 }
 
 function Error(props){
+  
 var {loginError} = props;
 
 if((loginError.length <= 0)){
@@ -25,8 +26,7 @@ return <div style={{}}>
  {val.message} 
  </div>
 }) }
-</div>//single line would not need parenthesis 
-//closing
+</div>
 
 }
 }

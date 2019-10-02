@@ -245,7 +245,7 @@ arrs.push(x);
   *
   */
  
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
 
    
 
