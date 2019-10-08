@@ -71,7 +71,7 @@
     "redux": "^4.0.4",
     "sass-loader": "^7.3.1",
     "semantic-ui-react": "^0.88.1",
-    "slate": "^0.41.3",
+    "slate": "^0.47.8",
     "slate-html-serializer": "^0.8.10",
     "slate-react": "^0.22.9",
     "url-loader": "^2.1.0"

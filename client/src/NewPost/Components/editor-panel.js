@@ -376,15 +376,16 @@ export default class EditorPanel extends Component {
             //closeMedia: !openMedia, 
 
         }
+        //const editor = new Editor({plugins, value, onChange})
 
-      
         this.link_insert_display = this.link_insert_display.bind(this);
 
     }
 
-
+   editor = new Editor({plugins:null, o})
     
    UNSAFE_componentWillReceiveProps(nextProps) {
+       
         console.log(Object.keys( nextProps).length , 'i will soon receive')
         var rawValue = html.deserialize(nextProps.initialValue);
 
@@ -442,14 +443,19 @@ export default class EditorPanel extends Component {
      * 
      */
 
-    onChange = (change, editor) => {
+    onChange = (change) => {
         //this.state.value = change.value;
         //console.log(change.value);
+
         this.setState({ value: change.value })
         window.editor = html.serialize(change.value);
-        //var raws= html.deserialize(window.editor);
+
         console.log(window.editor);
     }
+
+
+
+
 
 
     /**
@@ -474,7 +480,7 @@ export default class EditorPanel extends Component {
 
 
     ref = editor => {
-        window.editor = editor
+        this.editor = editor
     }
 
 
@@ -488,7 +494,7 @@ export default class EditorPanel extends Component {
 
         }
         else {
-            const status = this.state.value.change()
+            const status = this.editor.value.change()
                 .toggleMark(mark[0]).focus()
             val = status
         }
@@ -1069,9 +1075,6 @@ export default class EditorPanel extends Component {
                                 </Input>
 
 
-
-
-
                             </Modal.Content>
 
 
@@ -1139,8 +1142,8 @@ export default class EditorPanel extends Component {
                         <Editor
                             value={this.state.value}
                             onChange={this.onChange}
-                            plugins={this.plugins}
-                            placeholder='Let\s write something great'
+                            //plugins={this.plugins}
+                            placeholder="let'\s write something great"
                             renderMark={this.renderMark }
                             rendernode={this.renderAnode.bind(this)}
                             schema={schema}
@@ -1148,6 +1151,7 @@ export default class EditorPanel extends Component {
                             onKeyDown={this.onKeyDown}
                             autoFocus
                             ref={this.ref}
+                            
                             
 
 
