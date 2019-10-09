@@ -36,13 +36,43 @@ return next();
 })
 }, function(err){
     return next(err)
+});
+
+
+/*
+userSchema.pre("updateOne", (next)=>{
+
+var user = this;
+if(!user.isModified('password')){
+    return next("path has been modified");
 }
 
+bcrypt.genSalt(SALT_FACTOR, function(err, salt){
 
-);
+if(err){
+
+    return next(err);
+} 
+
+
+bcrypt.hash(user.password, salt,  function(err, hash){
+if(err){
+    return next(err);
+} 
+user.password = hash;
+return next();
+})
+})
+}, function(err){
+    return next(err)
+}   
 
 
 
+)
+
+
+*/
 
 
 
@@ -155,20 +185,35 @@ userSchema.methods.verifyUser = function(id, cb){
         
         }
 
+
 /*
-*
 *           UPDATE PROFILE /--> INCLUDING PASSWORDS
-*
 */
 
-
 userSchema.methods.updateProfile_password = function(id, update, cb){
-    return mongoose.model('User',userSchema).update({_id: id},
-    { $set:{ 
-        password: update.password
-    
-    }}, cb
+  try{
+    bcrypt.genSalt(SALT_FACTOR)
+    .then(salt => bcrypt.hash(update.new_password, salt ))
+    .then( pass=>{
+        console.log("new pass"+pass)
+        return mongoose.model('User',userSchema).updateOne({_id: id},
+            { $set:{ 
+                password:
+                            pass            
+            }}, cb
+            )
+    }
+     
     )
+
+}
+catch( err ){
+    console.log("error in transformaton"+err)
+
+}
+  
+
+ 
 
     
     }

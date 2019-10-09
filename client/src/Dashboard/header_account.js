@@ -38,12 +38,13 @@ class HeaderAccount extends React.Component {
     this.logout = this.logout.bind(this);
   }
 
-/*
+
 UNSAFE_componentWillReceiveProps(){
+  //push sideBAR back IN TWEAK
   if(this.state.visible== true)  this.setState({visible:false});
   else ;
 
-}*/
+}
 
 
   connect = new Connection();
@@ -62,17 +63,21 @@ UNSAFE_componentWillReceiveProps(){
           this.props.dispatch({ type: 'INJECT_PROFILE', payload: _ })
 
           this.fetchArticle.fetch_articles_list().then( articles => {
-            if (articles) {
-              this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: articles });
-              this.setState({ loadFinish: true });
+
+            if (articles.length >0 ) {
+              this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: articles })
+              this.setState({ loadFinish: true })
 
             }
-            else { }
+            else 
+               this.setState({ loadFinish: true });
 
-          })
+            
+
+          }).catch( e => this.setState({ loadFinish: true }) )
 
         })
-        .catch( err =>  this.props.history.replace('/login') )
+        .catch( err => this.props.history.replace('/login') ) 
 
       }
 
@@ -82,8 +87,15 @@ UNSAFE_componentWillReceiveProps(){
       *JUST RENDER
       *Remove the loader
       */
-      this.setState({ loadFinish: true });
+    // this.setState({ loadFinish: true });
 
+     this.connect.isLoggedin(token)
+        .then(_ => {
+         this.setState({ loadFinish: true }) 
+
+
+        })
+        .catch( err => this.props.history.replace('/login') ) 
 
 
     }
@@ -118,20 +130,11 @@ UNSAFE_componentWillReceiveProps(){
 
 
   logout() {
-    var conn = new Connection;
+ 
 
-    conn.logout().then((logout, refuse) => {
-      if (logout) {
-
-        return this.props.history.replace('/login');
-
-      } else {
-        alert('Sorry, you need to get back online!');
-
-      }
-
-
-    })
+  localStorage.removeItem("hs_token");
+   // console.log(this.props.history);
+ this.props.history.replace('/login');
 
 
   }
@@ -153,7 +156,7 @@ var xx_page = ( xx===0 ) ? this.props.location.pathname.slice(1) : this.props.lo
     var { open } = this.state;
 
 
-    if (this.state.loadFinish) {
+    if (this.state.loadFinish == true) {
       return (
 
         <div className="head">
@@ -199,10 +202,6 @@ var xx_page = ( xx===0 ) ? this.props.location.pathname.slice(1) : this.props.lo
                 </Modal.Actions>
               </Modal>
             </div>
-
-
-
-
 
 
 
@@ -292,7 +291,7 @@ var xx_page = ( xx===0 ) ? this.props.location.pathname.slice(1) : this.props.lo
       return (<div className='splashscreen'>
 
         <img src={splash} className='splash' />
-    <p>PENBOX</p>
+    <p>HASHSTACK</p>
         <h5>Loading your contents a bit... </h5>
       </div>)
     }

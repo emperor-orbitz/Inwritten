@@ -10,6 +10,7 @@ class Connection{
 
 login = function (data){
 
+var a_token = localStorage.getItem("hs_token");
 
  var GET_OPTIONS={
         URL:'http://localhost:5000/auth/login',
@@ -17,7 +18,8 @@ login = function (data){
         method:'POST',
          headers:{
              'Content-Type':'application/json',
-             'Accept':'application/json'
+             'Accept':'application/json',
+             'Authorization': a_token
         },
          body:JSON.stringify(data),
          credentials:'include',
@@ -32,6 +34,8 @@ return new Promise((resolve, reject)=>{
  .then( _ => _.json())
  .then((success)=>{
      if(success.user == null){
+        console.log(success +"from thr jfdfsdf")
+
          reject(success);
      }
      else{
@@ -76,20 +80,20 @@ return new Promise((resolve, reject)=>{
 
  fetch(GET_OPTIONS.URL, GET_OPTIONS.OPTIONS)
       .then(user =>user.json())
-      .then((server)=>{
+      .then( server =>{
 
-    if(server.status == 401){
+        if( Object.keys(server.data).length == 0 ){
 
         reject("Sorry, you are not logged in");
         
     }
     else 
-        resolve(server.data)  
+        resolve(server.data) ; 
     
  })
-     .catch((err)=>{
-
-    reject('Oops, Something just happened. I\'ll fix soon'+err);
+     .catch( _ =>{
+         
+     reject("Oops, You are not logged in");
 
  })
 })

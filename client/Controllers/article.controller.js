@@ -75,16 +75,16 @@ const_options ={
 
                    // console.log(success.data[4].title +"success at fetch erticles")
                     if (success.data.length != 0){
-                        console.log(success.data.length+"is success.data")
+
                         resolve(success.data)
                 
 
                     }
-                    
                     else {
-                        reject(success.data);
+                        resolve(success.data);
                     }
                 })
+                .catch( e=> reject(success))
         })
 
     }

@@ -24,8 +24,9 @@ controller.update_profile(req, res, next)
 
 })
 
-router.post('/profile/update_password', isAuth, (req, res, next) => {
 
+
+router.post('/profile/update_password', isAuth, (req, res, next) => {
 controller.update_password(req, res);
 });
 

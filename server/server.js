@@ -18,8 +18,8 @@ var port = process.env.API_PORT;
 var route_config = require('./Utils/route_config');
 
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false, limit: '20mb'}));
+app.use(bodyParser.json({limit:'50mb'}))
 
 
 

@@ -101,9 +101,9 @@ class Login extends React.Component {
 
     validate.emailPromise().then(_ => {
 
-      connect.LOGIN(data)
-        .then(_ => {
-
+      connect.login(data)
+        .then( _ => {
+          
           button.dimmerLoad = button.disabled = true
 
           this.setState({ button })
@@ -115,18 +115,18 @@ class Login extends React.Component {
 
           button.disabled = button.dimmerLoad = false;
 
-          loginError.push(err);
+          loginError.push(_);
           this.setState({ loginError, button });
 
         })
 
     })
-      .catch(_=> {
+      .catch( err => {
 
         var { loginError } = this.state;
         button.dimmerLoad = button.disabled = false;
-
-        this.state.loginError = err.forEach((line) => {
+          console.log(err);
+        this.state.loginError = err.foreach((line) => {
         this.state.loginError.push(line);
         })
 

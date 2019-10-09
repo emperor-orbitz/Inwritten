@@ -10,11 +10,13 @@ export default class ProfileUpdate {
 
 
     update_password = function (updateDetails) {
-        const GET_OPTIONS = {
-            URL: 'http://localhost:5000',
-            OPTIONS: {
+        const get_options = {
+            url: 'http://localhost:5000/profile',
+            options: {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json',
+                           'Authorization': localStorage.getItem("hs_token")
+                         },
                 body: JSON.stringify(updateDetails),
                 credentials: 'include',
                 withCredentials: true,
@@ -23,19 +25,20 @@ export default class ProfileUpdate {
             }
         }
         alert("swdsdsdsdsdsd");
+
         return new Promise((resolved, rejected) => {
-            fetch(`${GET_OPTIONS.URL}/update_password`,
-                GET_OPTIONS.OPTIONS)
+            fetch(`${get_options.url}/update_password`,
+                get_options.options)
                 .then((res) => res.json())
                 .then((updated) => {
-                    if (updated.status == 'SUCCESS') {
+                    if (updated.code == 200) {
                         console.log(updated);
-                        resolved(updated.status)
+                        resolved({ message:"Nice, you have successfully updated your account password", code:200 })
                     }
-                    else if (updated.status == "false") {
+                    else if (updated.code == 500) {
                         console.log(updated);
 
-                        rejected(updated);
+                        rejected({ message:"Please correct your details to the acceptable format", code: 500 });
                     }
                     else {
                         console.log(updated);
@@ -47,21 +50,20 @@ export default class ProfileUpdate {
 
         })
 
-
-
-
-
     }
 
 
 
 
+
     updateProfile = (updateDetails) => {
-        const GET_OPTIONS = {
-            URL: 'http://localhost:5000',
-            OPTIONS: {
+        const get_options = {
+            url: 'http://localhost:5000/profile',
+            options: {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json',
+                           'Authorization': localStorage.getItem("hs_token")       
+                         },
                 body: JSON.stringify(updateDetails),
                 credentials: 'include',
                 withCredentials: true,
@@ -70,23 +72,26 @@ export default class ProfileUpdate {
             }
         }
 
-
         return new Promise((resolved, rejected) => {
-            fetch(`${GET_OPTIONS.URL}/update_profile`,
-                GET_OPTIONS.OPTIONS)
+            fetch(`${get_options.url}/update_profile`,
+                get_options.options)
                 .then((res) => res.json())
-                .then((updated) => {
-                    if (updated.status == 'success') {
-                        resolved(updated)
-                    }
-                    else if (updated.status == "false") {
+                .then( updated => {
+                    if (updated.code == 200) {
 
-                        rejected(updated);
+                        resolved({ message:"Nice, you have successfully updated your profile", code:200 })
+                    }
+                    else if (updated.code == 400||500 ) {
+
+                        rejected({ message:"Please correct your details to the acceptable format", code: updated.code });
                     }
                     else {
-                        rejected(updated);
+                        //rejected(updated);
                     }
                 })
+                .catch( e =>{
+                    rejected({message:"Something just happened. We'll fix it soon", code:500 })
+                } )
 
 
         })
@@ -97,14 +102,6 @@ export default class ProfileUpdate {
 
 
     }
-
-
-
-
-
-
-
-
 
 
 

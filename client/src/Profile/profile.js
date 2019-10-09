@@ -32,7 +32,7 @@ class Profile extends React.Component {
             first_name: '',
             last_name: '',
             profile_photo: "src\img\background.jpg",
-            update_success: null,
+            update_success: '',
             update_header: '',
             update_content: '',
             update_color: '',
@@ -51,7 +51,7 @@ class Profile extends React.Component {
 
 
         }
-        this.handle_email = this.handle_email.bind(this);
+       /* this.handle_email = this.handle_email.bind(this);
         this.handle_first_name = this.handle_first_name.bind(this);
         this.handle_last_name = this.handle_last_name.bind(this);
         this.handle_username = this.handle_username.bind(this);
@@ -61,66 +61,48 @@ class Profile extends React.Component {
         this.handle_new_password = this.handle_new_password.bind(this);
         this.handle_confirm_password = this.handle_confirm_password.bind(this);
         this.handle_bio = this.handle_bio.bind(this);
-
-
+*/
     }
+
 
 
     connect = new Connection();
+    componentDidMount() {
 
+        let auth_token = localStorage.getItem("hs_token");
 
-
-    componentWillMount() {
-        //this._isMounted = false;
-        this.connect.isLoggedin()
-            .then(((success) => {
-
+        this.connect.isLoggedin(auth_token)
+            .then( user => {
                 this.setState({
                     isLoggedin: true,
-                    username: success.ID.username,
-                    email: success.ID.email,
-                    profile_photo: success.ID.display_picture,
-                    mobile_number: success.ID.telephone,
-                    first_name: success.ID.firstName,
-                    last_name: success.ID.lastName,
-                    bio: success.ID.bio
+                    username: user.username,
+                    email: user.email,
+                    profile_photo: user.display_picture,
+                    mobile_number: user.telephone == null? " ": user.telephone,
+                    first_name: user.firstName,
+                    last_name: user.lastName,
+                    bio: user.bio
                 })
-
-                console.log(this.state);
 
                 //this.setState({...this.props.ProfileReducer});
 
-            }))
-            .catch((err) => {
-                this.props.history.replace('/login');
-
             })
+            .catch( _ => this.props.history.replace('/login'))
 
 
     }
 
 
 
-    handle_bio(ev) {
-        this.setState({ bio: ev.target.value });
-        console.log(ev);
+    handle_bio = (ev) => this.setState({ bio: ev.target.value }) 
 
-    }
-    handle_old_password(ev) {
-        this.setState({ old_password: ev.target.value });
-        console.log(ev);
+    handle_old_password= (ev) => this.setState({ old_password: ev.target.value });
 
-    }
-    handle_new_password(ev) {
-        this.setState({ new_password: ev.target.value });
-        console.log(ev);
+    handle_new_password= (ev) => this.setState({ new_password: ev.target.value });
 
-    }
-    handle_confirm_password(ev) {
-        this.setState({ confirm_password: ev.target.value });
-        console.log(ev);
+    handle_confirm_password = (ev) => this.setState({ confirm_password: ev.target.value });
 
-    }
+    
     readFile(doc) {
         return new Promise((resolve, reject) => {
             var reader = new FileReader();
@@ -136,7 +118,7 @@ class Profile extends React.Component {
     }
 
 
-    handle_profile_photo(ev) {
+    handle_profile_photo =(ev) => {
         var src;
         var file = document.getElementById('photo');
         this.readFile(ev.target.files[0]).then((result) => {
@@ -155,26 +137,18 @@ class Profile extends React.Component {
         console.log(ev);
     }
 
-    handle_first_name(ev) {
+    handle_first_name= (ev)=> this.setState({ first_name: ev.target.value });
+    
 
-        this.setState({ first_name: ev.target.value });
-    }
-
-    handle_last_name(ev) {
-
-        this.setState({ last_name: ev.target.value });
-    }
+    handle_last_name= (ev) => this.setState({ last_name: ev.target.value });
+    
 
 
-    handle_username(ev) {
+    handle_username = (ev) => this.setState({ username: ev.target.value });
+    
 
-        this.setState({ username: ev.target.value });
-    }
-
-    handle_mobile_number(ev) {
-
-        this.setState({ mobile_number: ev.target.value });
-    }
+    handle_mobile_number=(ev) => this.setState({ mobile_number: ev.target.value });
+    
 
 
     toggleDialog() {
@@ -225,6 +199,7 @@ class Profile extends React.Component {
             this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: 'Please enter a valid mobile number', validationClass: 'error-bar' });
             this.state.validationClass = this.state.validationMessage = '';
         }
+       
         else if (this.state.bio.length > 0 && this.state.bio.length < 20) {
             this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: 'Please make bio lenghtier', validationClass: 'error-bar' });
             this.state.validationClass = this.state.validationMessage = '';
@@ -241,24 +216,36 @@ class Profile extends React.Component {
                 bio: this.state.bio,
                 profile_photo: this.state.profile_photo,
                 username: this.state.username,
-                old_password: this.state.old_password,
-                new_password: this.state.new_password,
-                confirm_password: this.state.confirm_password
+               // old_password: this.state.old_password,
+               // new_password: this.state.new_password,
+               // confirm_password: this.state.confirm_password
             }
 
 
             update_profile.updateProfile(updateItems)
-                .then((success) => {
-                    this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: success.message, validationClass: 'success-bar' });
+                .then( data => {
+                    //update store also
+
+                    this.props.dispatch({ type: 'INJECT_PROFILE', payload:{
+                        username: this.state.username,
+                        email: this.state.email,
+                        display_picture : this.state.profile_photo,
+                        telephone: this.state.mobile_number,
+                        first_name: this.state.firstName,
+                        last_name: this.state.lastName,
+                        bio: this.state.bio
+
+                    }  })
+
+                    this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage:  data.message, validationClass: 'success-bar' });
                 })
-                .catch((err) => {
-                    if (err.status == "false") {
+                .catch( err => {
+
+                    if (err.code == 400 ||500) {
                         this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: err.message, validationClass: 'error-bar' });
 
                     }
-                    else {
-                        this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: err.message, validationClass: 'error-bar' });
-                    }
+                 
 
                 });
 
@@ -312,10 +299,10 @@ class Profile extends React.Component {
 
 
             controller.update_password(updateItems)
-                .then((success) => {
+                .then( success=> {
                     this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: success.message, validationClass: 'success-bar' });
                 })
-                .catch((err) => {
+                .catch( err => {
                     if (err.status == "false") {
                         this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: err.message, validationClass: 'error-bar' });
 
@@ -334,7 +321,7 @@ class Profile extends React.Component {
 
     }
     swapSettings(e) {
-        //console.log(document.getElementsByClassName("data-info-password")[0].style.display) 
+
         if (e.target.id == "password") {
             if (this.state.dispPass == "block");
             else if (this.state.dispPass == "none") { this.setState({ dispPass: "block", dispProf: "none" }) }
@@ -389,14 +376,15 @@ class Profile extends React.Component {
 
                     <div className="data-info-profile" style={{ display: this.state.dispProf }}>
                         <h3 style={{ padding: '5px' }}> Account Info</h3>
-                        <p>
+                    
+                
                         <ButtonGroup size="small" secondary >
                             <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false}>Profile </Button>
-                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} >Password</Button>
+                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} >Advance</Button>
                         </ButtonGroup>
 
 
-                    </p>
+                    
                         <div className={this.state.validationClass} style={{ marginBottom: '5px' }} > {this.state.validationMessage}
                         </div>
 
@@ -413,11 +401,11 @@ class Profile extends React.Component {
                                 <Form.Field label='Firstname' value={this.state.first_name} control='input' placeholder='Firstname' onChange={this.handle_first_name} />
                                 <Form.Field label='Lastname' control='input' placeholder='Lastname' value={this.state.last_name} onChange={this.handle_last_name} />
                             </Form.Group>
-                            <Form.Field id='bio' label='Bio (Write something...)' control='textarea' value={this.state.bio} onChange={this.handle_bio} minlength='20' maxlength='150' name='bio' />
+                            <Form.Field id='bio' label='Bio (Write something...)' control='textarea' value={this.state.bio} onChange={this.handle_bio} minLength='20' maxLength='150' name='bio' />
 
-                            <Form.Field id='number' label='Mobile Number' control='input' type='text' value={this.state.mobile_number} onChange={this.handle_mobile_number} minlength='11' maxlength='14' name='number' />
+                            <Form.Field id='number' label='Mobile Number' control='input' type='tel' value={this.state.mobile_number} onChange={this.handle_mobile_number} minLength='11' maxLength='14' name='number' />
 
-                            <Button type='submit' secondary color='teal' icon='check' disabled={this.state.buttonDisabled} size='small' floated='right' onClick={this.updateProfileButton.bind(this)}>
+                            <Button type='submit' secondary color='teal' disabled={this.state.buttonDisabled} size='small' floated='right' onClick={this.updateProfileButton.bind(this)}>
                                 Update Profile <DimmerLoad size="small" active={this.state.dimmerLoad} />
                             </Button>
                         </Form>
@@ -430,13 +418,12 @@ class Profile extends React.Component {
 
                     <div className="data-info-password" style={{ display: this.state.dispPass }} >
                         <h3 style={{ padding: '5px' }}> Account Info</h3>
-                        <p>
+
                         <ButtonGroup size="small" secondary >
                             <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false}>Profile </Button>
-                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} >Password</Button>
+                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} >Advance</Button>
                         </ButtonGroup>
 
-                    </p>
                         <div className={this.state.validationClass} style={{ marginBottom: '5px' }} > {this.state.validationMessage}
                         </div>
 
@@ -444,13 +431,13 @@ class Profile extends React.Component {
                         <Form size="small" style={{ width: '70%' }} id='formUpdate'>
 
                             <Divider />
-                            <Form.Field label='Old Password ' control='input' type='password' placeholder='Old password' minlength='6' value={this.state.old_password} onChange={this.handle_old_password} />
+                            <Form.Field label='Old Password ' control='input' type='password' placeholder='Old password' minLength='6' value={this.state.old_password} onChange={this.handle_old_password} />
 
-                            <Form.Field label='New Password' control='input' type='password' placeholder='New password' minlength='6' value={this.state.new_password} onChange={this.handle_new_password} />
+                            <Form.Field label='New Password' control='input' type='password' placeholder='New password' minLength='6' value={this.state.new_password} onChange={this.handle_new_password} />
                             <Form.Field label='Confirm New Password' control='input' type='password' placeholder='Confirm New password' value={this.state.confirm_password} onChange={this.handle_confirm_password} />
 
 
-                            <Button type='submit' secondary color='teal' icon='check' disabled={this.state.buttonDisabled} size='small' floated='right' onClick={this.updatePasswordButton.bind(this)}>
+                            <Button type='submit' secondary color='teal'  disabled={this.state.buttonDisabled} size='small' floated='right' onClick={this.updatePasswordButton.bind(this)}>
                                 Update Password <DimmerLoad size="small" active={this.state.dimmerLoad} />
                             </Button>
                         </Form>

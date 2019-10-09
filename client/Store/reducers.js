@@ -32,7 +32,7 @@ var ArticleReducer = (state = dataState, action) => {
         
 
         case 'OVERWRITE_ARTICLE':
-        console.log("this is right from the store"+ action.payload)
+        console.log("this is right from the store"+ action.type)
         state = action.payload;
             return state;
 

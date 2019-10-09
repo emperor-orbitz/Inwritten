@@ -1,10 +1,5 @@
-
-/*        
- * IMPORTS
- */
-
 import React, { Component } from 'react';
-import { Modal, Input, Icon, Button, Form, Grid } from 'semantic-ui-react';
+import { Modal, Input, Icon, Button, Grid } from 'semantic-ui-react';
 import '../../../Resources/styles/editor.scss';
 import sample_image from '../../../Resources/images/n2.png';
 import { Editor } from 'slate-react';
@@ -382,7 +377,7 @@ export default class EditorPanel extends Component {
 
     }
 
-   editor = new Editor({plugins:null, o})
+   editor = new Editor({plugins:null})
     
    UNSAFE_componentWillReceiveProps(nextProps) {
        
@@ -1142,9 +1137,9 @@ export default class EditorPanel extends Component {
                         <Editor
                             value={this.state.value}
                             onChange={this.onChange}
-                            //plugins={this.plugins}
-                            placeholder="let'\s write something great"
-                            renderMark={this.renderMark }
+                            plugins={this.plugins}
+                            placeholder="let'\s write something good"
+                            renderMark={this.renderMark}
                             rendernode={this.renderAnode.bind(this)}
                             schema={schema}
                             className='editor-mainpart'

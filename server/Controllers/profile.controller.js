@@ -10,7 +10,7 @@ var posts = require('../Models/post.model');
 cloudinary.config({
     cloud_name: 'hashstackio',
     api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_KEY
+    api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
 
@@ -25,13 +25,25 @@ var update_profile = (req, res, next) => {
     var post = new posts();
     var update = req.body;
 
+    
+    cloudinary.v2.uploader.upload( 
+        req.body.profile_photo, {
+            resource_type: "image",
+            folder:"profile",
+            public_id: `${req.user._id}-${req.body.username}-${Date.now()}`,
+            overwrite: true,
+            transformation: [
+                {width: 600, crop: "scale"},
+                {quality: "auto"}
+                ]
+        },
 
-    cloudinary.v2.uploader.upload(req.body.profile_photo, { public_id: req.users.username + '-profile' },
         function (error, result) {
             if (error) {
+                //Bad formats
                 res.send({
-                    code: http_status.INTERNAL_SERVER_ERROR.code,
-                    message: http_status.INTERNAL_SERVER_ERROR.message,
+                    code: http_status.BAD_REQUEST.code,
+                    message: http_status.BAD_REQUEST.message,
                     data: []
                 });
             }
@@ -39,23 +51,25 @@ var update_profile = (req, res, next) => {
             else {
 
                 update.profile_photo = result.url;
-                profile.updateProfile(req.users._id, update, (err, success) => {
+                profile.updateProfile(req.user._id, update, (err, success) => {
                     if (err) {
                         res.send({
-                            code: http_status.INTERNAL_SERVER_ERROR.code,
-                            message: http_status.INTERNAL_SERVER_ERROR.message,
+                            code: http_status.BAD_REQUEST.code,
+                            message: http_status.BAD_REQUEST.message,
                             data: []
                         })
                     }
                     else {
 
-                        var updateAuthor = post.updateAuthor(req.body.username, req.users._id);
+                        var updateAuthor = post.updateAuthor(req.body.username, req.user._id);
                         if (updateAuthor == false)
                             res.send({
                                 code: http_status.INTERNAL_SERVER_ERROR.code,
                                 message: http_status.INTERNAL_SERVER_ERROR.message,
                                 data: []
-                            })
+                            });
+                        
+                           
                         else
                             res.send({
                                 code: http_status.OK.code,
@@ -69,6 +83,9 @@ var update_profile = (req, res, next) => {
 
 
             }
+        }).catch((err)=>{
+           //SERVER ERROR
+            console.log(err)
         })
 
 }
@@ -83,28 +100,40 @@ var update_password = (req, res, next) => {
     var body = { ...req.body };
     var users = new signup();
 
-    users.findByEmail(req.user.email, (err, succ)=> {
+    users.findByEmail(req.user.email, (err, user)=> {
 
         if (err) 
         res.status(http_status.INTERNAL_SERVER_ERROR.code)
-        .send({ data: [] });
+        .send({  code: http_status.INTERNAL_SERVER_ERROR.code,
+                 message: http_status.INTERNAL_SERVER_ERROR.message });
         
-        else if (users.syncPass(body.old_password, succ[0].password)) {
+        else if (users.syncPass(body.old_password, user.password)==true ) {
 
-            users.updateProfile_password(req.users._id, body, function (err, success) {
+            users.updateProfile_password(req.user._id, body, function (err, success) {
                 if (err) 
                 res.status(http_status.INTERNAL_SERVER_ERROR.code)
-                .send({ data: [] });
+                .send({  code: http_status.INTERNAL_SERVER_ERROR.code,
+                         message: http_status.INTERNAL_SERVER_ERROR.message });
                 
                 else {
-                    res.status(http_status.INTERNAL_SERVER_ERROR.code)
-                    .send({ data: [] });
+                    res.status(http_status.OK.code)
+                    .send({ code: http_status.OK.code,
+                            message: http_status.OK.message
+                 });
                 }
 
 
             })
 
         }
+        else {
+                res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                .send({  code: http_status.INTERNAL_SERVER_ERROR.code,
+                         message: http_status.INTERNAL_SERVER_ERROR.message })
+
+
+        }
+
 
     })
 
