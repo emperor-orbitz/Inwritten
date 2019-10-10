@@ -3,8 +3,7 @@ import { Signup, Account, Login, ArticlesCategory, Profile, ImagesCategory } fro
 import '../Resources/styles/style.scss';
 import { Switch, Route } from 'react-router';
 import HeaderAccount from '../src/Dashboard/header_account';
-
-
+import RichTextExample from '../src/Dashboard/test-editor';
 
 
 
@@ -14,7 +13,7 @@ function App() {
     <div>
 
       <Switch>
-
+        <Route exact path='/test'  component={RichTextExample} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
 
