@@ -4,7 +4,7 @@ class FetchArticles {
     constructor(){}
 
 
-/*               CONSTANTSs
+/*               CONSTANTS
 */
 
 
@@ -127,28 +127,16 @@ const_options ={
     var const_options = Object.assign(this.const_options, { body: JSON.stringify(data) } )
     var get_options = {
             url:  this.const_url +'/create',
-            options: const_options
-            
-        }
+            options: const_options     
+    }
 
         return new Promise((resolve, reject) => {
             fetch(get_options.url, get_options.options)
-                .then((user) => user.json())
-                .then((result) => {
-                    if (result.code == 104 ) {
-                        reject(result);
-                    }
-                    else {
-                        resolve(result);
-
-                    }
-                }).catch(function(err){
-// NETWORK ERROR CANNOT FETCH
-let result ={
-CODE:104,
-MESSAGE:'ERROR'
-}
-reject(result)
+                .then( user => user.json())
+                .then( result => { resolve(result) })
+                .catch( _ => {
+                   
+                    reject(result)
 
                 })
         }) 

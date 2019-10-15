@@ -97,8 +97,9 @@ var create = (req, res) => {
         comments_enabled,
         time_to_read,
         public,
-        featured_image
+        featured_image 
     } = req.body;
+featured_image=undefined;
 
 
     var postDoc = {
@@ -117,49 +118,70 @@ var create = (req, res) => {
 
 
     if (featured_image != undefined) {
+
         cloudinary.v2.uploader.upload(featured_image, {
             resource_type: "image",
             public_id: `featured_image/${req.user._id}-${createdAt}`,
             overwrite: true
         },
-            (error, result) => {
-                if (error) {
-                    res.status(http_status.INTERNAL_SERVER_ERROR.code)
-                        .send({ status: 'false' + error })
-                }
+       (err, result) => {
 
-                else {
+              if(err){
+
+                res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                   .send({ data: [],
+                         status: http_status.INTERNAL_SERVER_ERROR.code 
+                      })
+                    
+                    }
+                  else{ 
                     var post = new posts();
                     let final = Object.assign({}, postDoc, { featured_image: result.url });
                     post.insertPost(final, (err, success) => {
-                        if (success) {
-                            res.status(http_status.OK.code)
-                                .send({ data: success._id });
+                        if (err) {
+
+                            res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                               .send({ data: [],
+                                        status: http_status.INTERNAL_SERVER_ERROR.code 
+                                     })
+                
                         }
 
                         else {
-                            res.status(http_status.INTERNAL_SERVER_ERROR.code)
-                                .send({ data: [] })
+                            res.send({ data: success._id,
+                                status: http_status.OK.code
+                              })       
                         }
 
                     })
 
-
                 }
+
             })
+
+
     }
+
+
     else {
         var post = new posts();
 
         post.insertPost(postDoc, (err, success) => {
             if (success) {
                 res.status(200)
-                    .send({ data: [success] })
+                    .send({
+                          status:200,
+                          data: [success] 
+                          })
             }
 
-            else
+            else{
                 res.status(http_status.INTERNAL_SERVER_ERROR.code)
-                    .send({ data: [] });
+                .send({ 
+                    status:500,
+                    data: [] });
+            }
+                
 
 
         })

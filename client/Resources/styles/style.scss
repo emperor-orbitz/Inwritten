@@ -6,7 +6,7 @@
 }
 *{
   font-family: 'Noto Sans', sans-serif;
-font-size: 12px;
+//font-size: 12px;
 }
 
 .headerDiv{
@@ -50,10 +50,10 @@ height:70px;
 
 .nav{
  margin-bottom:0px;
-  height:100%;
-  //background-image: linear-gradient(to right, white, silver, rgb(4,68,84) ) !important;
-border-bottom:3px solid rgb(3, 68 ,94) !important;
-//color:white !important;
+  height:95%;
+ //background: linear-gradient(to left, white, silver, rgb(4,68,8) ) !important;
+   box-shadow:2px 2px 2px 1px silver !important;
+   color:white !important;
   
  
 }
@@ -77,15 +77,27 @@ a .active .item {
   
   height:100%;
   position: absolute;
-  width:100%;
+  width:90%;
 //color:white;
+
+}
+
+
+
+
+.accordion.ui.ui.overlay.left.visible.sidebar.sidebar{
+//width:20%;
+
 }
 
 //both sidebars are different one is a container of the other
 .sidebar{
-  background-color: #fff;
+  background-color: white;
+  position: absolute;
+  width:70%;
  
 }
+
 
 .no-radius{
   border-radius: 0px;

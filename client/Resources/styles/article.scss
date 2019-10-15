@@ -1,10 +1,9 @@
 
 //@import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css';
 
+
 *{
 font-family: 'Noto Sans', sans-serif;
-font-size:12px;
-
 }
 
 .pushable{
@@ -25,7 +24,7 @@ color: rgb(3, 68, 94);
 }
 
 
-.editor{
+.editor-x{
 //box-shadow: 2px 2px 3px 1px rgb(226, 226, 226);
 z-index:1;
 min-height:500px;
@@ -118,7 +117,7 @@ font-weight:bold;
 }
 
 .notification-background{
-    background:url('../images/ideas.png') center left no-repeat ;
+   // background:url('../images/ideas.png') center left no-repeat ;
     padding:0px;
     margin-bottom:5px;
 
@@ -268,8 +267,8 @@ float:left;
 
 
             .featured-image{
-                width: 250px !important;
-                height: 250px !important;
+                width: 150px !important;
+                height: 100px !important;
                 float:left;
                 position: relative; 
             
@@ -277,7 +276,7 @@ float:left;
 .reverse-anime{
 
 animation: reverse-anime 0.3s ease-in-out forwards;
- 
+ display: none;
 }
 
 
@@ -323,7 +322,6 @@ width:200px;
 .add-post{
 height:100%;
 margin:20px auto auto auto !important;
-
 width:90%;
 //overflow:scroll;
 //height:100%;
@@ -384,6 +382,15 @@ position: relative;
 background:rgb(0,0,7);
 
 }
+.featured-pix-block{
+    //border-radius: $profile-width;
+    width: 120px;
+    height: 100px;
+    float:left;
+    position: relative; 
+    background:rgb(0,0,7);
+    
+    }
 
 .featured-image{
     width: $profile-width;
@@ -401,6 +408,13 @@ animation: profileroll 0.2s ease-in-out forwards;
 
 } 
 
+.featured-pix-block:hover >.featured-pix-cover{
+    display:block;
+    animation: profileroll 0.2s ease-in-out forwards;
+    
+    
+    } 
+
 .profile-pix-cover{
 position: absolute;
 display:none;
@@ -415,6 +429,24 @@ color:white;
 border:none;
 top:0px;
 }
+
+
+.featured-pix-cover{
+    position: absolute;
+    display:none;
+    background: rgba(0,0,0,0.5);
+    //border-radius: $profile-width;
+    width: 120px;
+    height: 100px;
+    left:-120px;
+    padding:36%;
+    cursor: pointer;
+    color:white;
+    border:none;
+    top:0px;
+    }
+    
+    
 
 
 @keyframes profileroll{
@@ -559,11 +591,11 @@ min-height:50px;
 //off all overflows, none must be hidden!
 
     .editor-buttons{
-        width:40px;
+        width:20px;
         position:sticky;
         top:20px;
         float:left;
-        padding:10px 2px;
+        padding:10px 0px;
         
        // box-shadow:3px 2px 5px 1px rgba(3, 68, 94, 0.2);
         
@@ -576,6 +608,7 @@ min-height:50px;
 
 button,select, input{
     border-radius:0px !important;
+    //height: 15px;
 }
 label{
     font-size:12px !important;
@@ -591,6 +624,8 @@ line-height: 50px;
 //height: 50px;
 padding: 15px 20px;
 position:relative;
+margin:0px 3px;
+float: left;
 
 
 }

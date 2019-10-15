@@ -1000,8 +1000,6 @@ export default class EditorPanel extends Component {
         var arrIconsMedia = [
             { name: 'image', action: 'image', key: 'image' },
 
-
-
         ]
         //QUOTES AND LISTS
 
@@ -1031,8 +1029,6 @@ export default class EditorPanel extends Component {
 
 
             <div style={{ padding: '0px', height: '100%' }}>
-
-
 
 
                 <div>

@@ -1,11 +1,52 @@
  /* *{
     font-size:200px !important;
 }*/
-div.editor-mainpart{
-font-size:400px !important;
 
+
+
+.editor-alignright{
+    text-align: right;
 }
 
-div.editor{
-    font-size:500px !important;
+.editor-buttons{
+    width:35px;
+    position:sticky;
+    top:10px;
+    float:left;
+    padding:10px 2px;
+    
+    color:black;
+    //top:1000px;
+    
 }
+
+.right-details{
+    height:90%;
+    background: silver;
+}
+
+.submit-post-button{
+    bottom: 15%;
+    position: sticky;
+}
+
+.editor{
+padding: 5px 30px;
+//border:3px solid black;
+float:left;
+width:90%;
+
+ blockquote{
+    border-left: 5px solid silver;
+    padding-left: 10px;
+    color:silver
+ }    
+
+
+ .editor-image{
+     width:90%;
+     height:90%;
+ }
+}
+
+

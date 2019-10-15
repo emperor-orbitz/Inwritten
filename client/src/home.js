@@ -3,7 +3,7 @@ import { Signup, Account, Login, ArticlesCategory, Profile, ImagesCategory } fro
 import '../Resources/styles/style.scss';
 import { Switch, Route } from 'react-router';
 import HeaderAccount from '../src/Dashboard/header_account';
-import RichTextExample from '../src/Dashboard/test-editor';
+import RichTextExample from '../src/NewPost/Components/test-editor';
 
 
 

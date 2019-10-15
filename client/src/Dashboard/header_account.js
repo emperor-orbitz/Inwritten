@@ -162,7 +162,7 @@ var xx_page = ( xx===0 ) ? this.props.location.pathname.slice(1) : this.props.lo
         <div className="head">
           <Responsive as={Menu} minWidth={300}  className="nav"  secondary  >
             <Menu.Item icon="bars" onClick={this.toggleSide} size="big" as={Icon} />
-            <Menu.Item style={{ 'width': '20%' }} header as="h3">Penbox.io <span>&nbsp; {xx_page}</span></Menu.Item>
+            <Menu.Item style={{ 'width': '20%' }} header as="h5">Hashstack.io <span>&nbsp; {xx_page}</span></Menu.Item>
 
 
             <Menu.Menu pointing='true' position="right">
@@ -197,22 +197,23 @@ var xx_page = ( xx===0 ) ? this.props.location.pathname.slice(1) : this.props.lo
                 <Modal.Actions>
                   <Button onClick={() => {
                     this.setState({ open: false })
-                  }} color="teal">No</Button>
+                  }} color="teal">Nope</Button>
                   <Button onClick={this.logout} negative icon='checkmark' labelPosition='right' content='Yes' />
                 </Modal.Actions>
               </Modal>
             </div>
-
+{/*push, overlay, slide out uncover */}
 
 
 
             <Responsive as={Sidebar.Pushable}>
               <Sidebar as={Accordion}
-                animation='overlay'
+                animation="push"
                 onHide={this.toggle}
                 visible={visible}
                 vertical='true'
                 className='sidebar'
+                
               >
                 <div style={{ textAlign: 'center', padding: '20px 2px', paddingBottom: '10px', background: 'rgb(3, 68, 94)', color: 'white' }} >
                   <h5>DASHBOARD MENU</h5>

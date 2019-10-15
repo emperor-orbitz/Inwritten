@@ -3,7 +3,7 @@
 
 
 import React, { Component } from 'react';
-import { Button, Form, Checkbox ,Header, Loader, Icon, Select, Grid } from 'semantic-ui-react';
+import { Button, Form, Checkbox ,Header, Loader, Icon, Select, Grid, IconGroup } from 'semantic-ui-react';
 import '../../Resources/styles/article.scss';
 import { withRouter } from 'react-router';
 
@@ -26,8 +26,8 @@ class AddPost extends React.Component {
     this.state = {
       buttonDisabled: false,
       dimmerLoad: false,
-      ERROR_MESSAGE: '',
-      SUCCESS_MESSAGE: '',
+      error_message: '',
+      success_message: '',
       privacy_value: false,
       enable_comments: true,
       post_title: '',
@@ -145,7 +145,7 @@ this.setState({tag_value:e.target.value});
 
 
 
-  addPost() {
+  addPost =() => {
     var add = new FetchArticles()
     var panel = new EditorPanel();
     var body = panel.exposedEditorValue;
@@ -174,14 +174,14 @@ this.setState({tag_value:e.target.value});
       add.create_article(post).then(
         (okay) => {
           //return _ID
-
+       console.log(okay+" this is the result okay")
           let with_id = Object.assign({}, post, { _id: okay.RETURN });
 
           this.props.dispatch({ type: 'INSERT_ARTICLE', payload: with_id });
 
           this.setState({
-            SUCCESS_MESSAGE: 'YOUR ARTICLE HAS BEEN CREATED',
-            ERROR_MESSAGE: '',
+            success_message: 'Yippee, Check out your story ',
+            error_message: '',
             buttonDisabled: false, dimmerLoad: false
           });
 
@@ -203,7 +203,7 @@ this.setState({tag_value:e.target.value});
     else if (val !== true) {
       this.setState({ buttonDisabled: false, dimmerLoad: false });
    
-      this.setState({ ERROR_MESSAGE: val });
+      this.setState({ error_message: val });
 
     }
 
@@ -329,7 +329,6 @@ this.setState({tag_value:e.target.value});
 
 
     function changeOptions(side) {
-      console.log(side.target.classList[0]);
       let className = side.target.classList[0];
 
       if (className == 'configure') {
@@ -338,7 +337,6 @@ this.setState({tag_value:e.target.value});
         
         else {
           document.getElementById('editor-side2').style.display = 'none';
-
           document.getElementById('editor-side1').style.display = 'block'
         }
 
@@ -347,7 +345,6 @@ this.setState({tag_value:e.target.value});
       else if (className === 'ellipsis') {
 
         if (document.getElementById('editor-side2').style.display == 'block') ; //do nothing
-        
 
         else {
           document.getElementById('editor-side2').style.display = 'block';
@@ -364,48 +361,30 @@ this.setState({tag_value:e.target.value});
 
 
 
-      <div className='add-post'   >
+      <div className='add-post'>
 
         <Grid stackable>
-          <Grid.Row   >
+          <Grid.Row>
           
-            <Grid.Column mobile={16} tablet={8} computer={12} style={{ padding: '0px 10px' }}  >
-              <Header textAlign='left'> <h3>Start from scratch!</h3></Header>
-              <div className='notification-background'>
-                <div style={{ width: '60%', background: 'rgba(3, 68, 94,0.8)', color: 'white', padding: '10px 5%' }} >
+            <Grid.Column mobile={16} tablet={12} computer={12} style={{ padding: '0px 5px' }}  >             
 
+                  { this.state.success_message === '' ?
+               ""
 
-
-                  { this.state.SUCCESS_MESSAGE === '' ?
-                    <div>
-                      <span style={{ float: 'right', cursor: 'pointer' }} onClick={function () {
-                        var note = document.getElementsByClassName('notification-background');
-                        note[0].classList.add('reverse-anime');
-
-                      }}> <Icon name='close' /> </span>
-                      <h3><Icon name='calendar check outline' />SOME HELPFUL TIPS</h3>
-                      <ul style={{ listStyleType: 'square' }} >
-                        <li>Try keeping your descriptions Simple and short. Maximum 57 characters</li>
-                        <li>Make every article relevant. Relevancy helps!</li>
-                        <li>You can also keep them short. Dont bore your readers</li>
-                      </ul>
-
-                    </div>
-
-                    : <div>
+                    : 
+                    <div className='notification-background'>
+                    <div style={{ width: '60%', color: 'green', background: '', padding: '10px 5%' }} ><div>
                       <span style={{ float: 'right', cursor: 'pointer' }} onClick={function () {
                         var note = document.getElementsByClassName('notification-background');
                         note[0].style.display = 'none';
-                      }} ><Icon name='close' /> </span>
-                      <Icon name='check circle outline' color='white' size='big' />
-                      {this.state.SUCCESS_MESSAGE}. YOU CAN CHECK THE ARTICLE <a href={'http://localhost:5000/' + this.state.post_title} target='_blank' style={{ color: 'black' }} ><u>HERE</u> </a>
+                      }} ><Icon name='close' onClick={()=>{ this.state.success_message=""}} /> </span>
+                      <Icon name='check circle outline' color="green" size='big' />
+                      {this.state.success_message} <a href={'http://localhost:5000/' + this.state.post_title} target='_blank' style={{ color: 'black' }} ><u>here</u> </a>
                     </div>
-
-                  }
 
                 </div>
               </div>
-
+                  }
 
               {
                 this.state.NETWORK_ERROR !== '' ?
@@ -413,66 +392,56 @@ this.setState({tag_value:e.target.value});
                   : ''
               }
               {
-                this.state.ERROR_MESSAGE == 'editor-error' ?
+                this.state.error_message == 'editor-error' ?
                   <p style={{ padding: '5px', color: 'red', width: '90%', borderRadius: '0px' }}>  You've not written anything yet! </p>
                   : ''
               }
-
 
               
                 <EditorPanel />
               
          
-
-
-
-
-
-
             </Grid.Column>
             
 
-            <Grid.Column mobile={16} tablet={8} computer={4}  >
+            <Grid.Column mobile={16} tablet={4} computer={4}  >
             &nbsp;&nbsp; &nbsp;
-              <Button.Group size='tiny'  >
-                <Button icon='configure' onClick={changeOptions} id='side1' title='Settings' />
-                <Button icon='ellipsis horizontal' onClick={changeOptions} id='side2' title='More options' />
-                <Button disabled={this.state.buttonDisabled} type='submit' size='tiny' color="blue" title='save' onClick={this.addPost.bind(this)} >
-                  <DimmerLoad size='tiny' active={this.state.dimmerLoad} />
-                  SAVE &nbsp; &nbsp; &nbsp;  <Icon name='save' />
+
+                <Icon name='configure' onClick={changeOptions} id='side1' title='Settings' bordered  />
+                <Icon name='ellipsis horizontal' onClick={changeOptions} id='side2' title='More options' bordered size="micro" />
+                <Button disabled= {this.state.buttonDisabled} type='submit' size='mini' color="green" title='save' onClick={this.addPost} >
+                  <DimmerLoad size='mini' active={this.state.dimmerLoad} />
+                   SAVE  
                 </Button>
 
-              </Button.Group>
+
               <div className='editor-side1' id='editor-side1'>
                 <h5>POST SETTINGS</h5>
-                <Form size="big">
-                  <b > WHAT DESCRIBES YOUR ARTICLE? </b><span style={{ float: 'right' }} ></span>
-                  <p> </p>
-
+                <Form size="mini">
 
                 <Form.Field name='title' maxLength='50' label='Title' value={this.state.post_title} onChange={this.handleInputs.bind(this)} control='input' placeholder='Title'  required />
                   {
-                    this.state.ERROR_MESSAGE == 'title-error' ?
+                    this.state.error_message == 'title-error' ?
                       <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}> Title is required</p>
                       : ''
                   }
        
                   <Form.Field name='time' maxLength='2' min='0' type="number" value={this.state.time_to_read} control='input' placeholder="How many minutes read?"   onChange={this.handleInputs.bind(this)} />
                   {
-                    this.state.ERROR_MESSAGE == 'time-error' ?
+                    this.state.error_message == 'time-error' ?
                       <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}> The duration should not be less than 0 and not greater than 30 </p>
                       : ''
                   }
                   <Form.Field name='description' maxLength={70}  control='textarea' placeholder='Post Slug' value={this.state.post_description} onChange={this.handleInputs.bind(this)} />
 
                   {
-                    this.state.ERROR_MESSAGE == 'description-error' ?
+                    this.state.error_message == 'description-error' ?
                       <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}>  Description length is small</p>
                       : ''
                   }
                   <Form.Field name='tags' maxLength={this.state.tagMax} label='Tags (good to have!)' value={this.state.tag_value} onChange={this.handleTags} control='input' placeholder='e.g sport, gym, race. Separate with( , )' />
 {
-  this.state.ERROR_MESSAGE == 'tag-error' ?
+  this.state.error_message == 'tag-error' ?
     <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}>  Sorry, u've got max of 5 tags</p>
     : ''
 }
@@ -483,7 +452,7 @@ this.setState({tag_value:e.target.value});
               <div className='editor-side2' id='editor-side2'>
                 <b ><Icon name='options' /> Additionals</b><span style={{ float: 'right' }} ></span>
                 <p>  </p>
-                <Form>
+                <Form size="mini">
 
 
                   <Select name='category' className='custom-label' value={this.state.post_category} onChange={this.handleInputs.bind(this)} options={categoryOptions} />
@@ -519,18 +488,15 @@ this.setState({tag_value:e.target.value});
 
 
 
-
-
-
                 </Form>
                 <h5> Featured Image</h5>
-                  <div className="profile-pix-block">
+                  <div className="featured-pix-block">
                     <img src={this.state.featured_image} className="featured-image"/>
-                    <input className="profile-pix-cover" onChange={this.handle_profile_photo.bind(this)}
-                      type='file' placeholder='Mobile Number' id='photo' style={{visibility:'hidden'}} />
+                    <input className="featured-pix-cover" onChange={this.handle_profile_photo.bind(this)}
+                      type='file' id='photo' style={{visibility:'hidden'}} />
   
-                    <div className="profile-pix-cover" onClick={this.toggleDialogFeatured.bind(this) }>
-                    <Icon color="teal" size="big" name='image' /> Upload Featured Image </div>
+                    <div className="featured-pix-cover" onClick={this.toggleDialogFeatured.bind(this) }>
+                    <Icon color="teal" size="small" name='image' /> Upload Featured Image </div>
                     </div>
 
 
@@ -539,9 +505,6 @@ this.setState({tag_value:e.target.value});
 
 
               </div>
-
-
-
 
 
 

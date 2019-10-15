@@ -7,13 +7,12 @@ import { Button, Icon, Modal, Input, Grid } from 'semantic-ui-react'
 import Html from "slate-html-serializer"
 import { DEFAULT_NODE, schema, rules, renderMark, renderBlock, onKeyDown } from "./editor-rules";
 import "../../../Resources/styles/editor.scss";
-//import EditorPanel from '../../../backup-editor';
 
 
 
 
 
-class EditorPanel extends React.Component {
+class RichTextExample extends React.Component {
 
 
   state = {
@@ -81,10 +80,9 @@ onClickBlock = (event, type) => {
         .unwrapBlock('bulleted-list')
         .unwrapBlock('numbered-list')
     }
-
     else {
       editor.setBlocks(isActive ? DEFAULT_NODE : type)
-        .unwrapBlock(type)
+            .unwrapBlock(type)
     }
   }
 
@@ -120,13 +118,9 @@ onClickBlock = (event, type) => {
   const isActive = this.hasMark(type)
 
   return (
-    <Button name={icon}
-    color="black"
-    size="mini"
-    icon={icon}
-    secondary
-    onMouseDown={event => this.onClickMark(event, type)}
-    className='editor-editorButtons' active={isActive} />
+    <Button size='small' name={type} icon={icon}
+      onMouseDown={event => this.onClickMark(event, type)}
+      className='editor-editorButtons' active={isActive} />
   )
 }
 
@@ -148,23 +142,16 @@ renderBlockButton = (type, icon) => {
     }
 
     return (
-        <Button name={icon}
-        color="black"
-        size="mini"
-        icon={icon}
-        secondary
-         onMouseDown={event => this.onClickBlock(event, type)}
+        <Button size='small' name={type} icon={icon}
+        onMouseDown={event => this.onClickBlock(event, type)}
         className='editor-editorButtons' active={isActive} />
     )
   }
 
   else
     return (
-      <Button name={icon}
-      color="black"
-      size="mini"
-      icon={icon}
-      secondary
+      <Button size='small' name={type} icon={icon}
+        onMouseDown={event => this.onClickBlock(event, type)}
         className='editor-editorButtons'
         onClick={this.showMedia.bind(this, ['image'])}
       />
@@ -264,7 +251,7 @@ renderBlockButton = (type, icon) => {
 
 
 
-        <div className='editor-buttons' >
+        <div className='editor-buttons' id='editor-buttons' >
 
           {this.renderMarkButton('bold', 'bold')}
           {this.renderMarkButton('italic', 'italic')}
@@ -283,7 +270,7 @@ renderBlockButton = (type, icon) => {
         </div>
 
 
-        <div style={{padding:"5px 10px", margin:"5px 10px"}}>
+        
           <Editor
             spellCheck
             autoFocus
@@ -299,7 +286,7 @@ renderBlockButton = (type, icon) => {
             className="editor"
 
           />
-        </div>
+        
       </div>
     )
   }
@@ -462,4 +449,4 @@ renderBlockButton = (type, icon) => {
  * Export.
  */
 
-export default EditorPanel
+export default RichTextExample
