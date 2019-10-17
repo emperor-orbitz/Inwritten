@@ -1,0 +1,144 @@
+
+
+.profile-header{
+
+  
+    padding:2% 5%;
+    border:none;
+    top:0px;
+    //border:2px solid rgb(3, 68, 94); 
+    height:200px;
+    width:80%;
+    margin:0%;
+    margin-left:10%;
+    position: relative;
+    box-shadow:2px 3px 8px 0.5px rgba(158, 157, 157, 0.5);
+    background:url('../images/images.png') center right no-repeat ;
+    $profile-width:150px;
+    $profile-height:80px;
+    color:black;
+
+h2{
+    margin-bottom:2px;
+}
+
+
+.profile-pix{
+border-radius: 0px ;
+width: $profile-width;
+height: $profile-width;
+float:left;
+//border:2px groove black;
+//box-shadow: 2px 1px 3px 1px rgb(224, 230, 227)
+}
+
+.profile-primary-info{
+    width:50%;
+    padding:1% 50px;
+   // margin-left:200px;
+    float:left;
+   }
+
+.profile-pix-block{
+    border-radius: 0px;
+    width: $profile-width;
+    height: $profile-width;
+    float:left;
+    position: relative; 
+    border:1px solid black;
+
+}
+
+
+
+
+.profile-pix-block:hover >.profile-pix-cover{
+display:block;
+animation: profileroll 0.2s ease-in-out forwards;
+
+
+  } 
+
+ .profile-pix-cover{
+position: absolute;
+display:none;
+background: rgba(0,0,0,0.5);
+border-radius: 0px;
+width: $profile-width;
+height: $profile-width;
+left:-150px;
+padding:36%;
+cursor: pointer;
+color:white;
+border:none;
+
+} 
+}
+
+
+
+
+@keyframes profileroll{
+
+0%{
+transform: translateX(10px);
+}
+30%{
+    transform: translateX(50px);
+}
+45%{
+    transform: translateX(80px);
+}
+60%{
+    transform: translateX(100px);
+}
+80%{
+    transform: translateX(120px);
+}
+100%{
+    transform: translateX(150px);
+}
+}
+
+
+.data-info-password{
+    width:100%;
+    //border:1px solid black;
+   margin: auto 20%;
+   margin-left: 10%;
+
+    padding:2% 5%;
+    padding-bottom:20%;
+}
+.data-info-profile{
+    width:100%;
+    //border:1px solid black;
+   margin: auto 20%;
+   margin-left: 10%;
+
+    padding:2% 5%;
+    padding-bottom:20%;
+}
+
+.success-bar{
+width:70%;
+color:green;
+border: 2px solid lime;
+border-radius:3px;
+padding:10px;
+margin:10px 0px;
+}
+
+.error-bar{
+width:70%;
+color:red;
+border: 2px solid pink;
+border-radius: 3px;
+padding: 10px;
+margin:10px 0px;
+}
+.span-details{
+    font-weight: bold;
+    padding:5px 0px;
+    font-size: 15px;
+}

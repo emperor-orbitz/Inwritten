@@ -1,0 +1,57 @@
+
+<title> Login</title> 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
+<link href="/css/main.css" rel="stylesheet" type="text/css"/>    
+
+
+
+
+<div class="title">
+    <img src="/img/aipt.png" class="logo" />
+    <h1>  {{title}} </h1>
+</div>
+  {{#if success }}
+  <h2> Successful Validation</h2>
+    
+  {{else}}
+
+       <div class="error-message">
+  {{# if errors}}
+ <h3>Invalid..</h3>
+  <ul style="list-style:none;">
+      {{# each errors}}
+      <li>{{msg}}</li>
+      {{/ each}}
+  </ul>
+   
+  {{/ if}}
+ </div>
+ <div class="contain">
+     <div class="back"></div>
+<div class="form1">
+    <span class="fa fa-close"></span>
+<form action ="/login" method="post">
+    <div>
+<label>Email: *</label>  <input type="text" name="email" />
+    </div>
+    <div>
+<label>Password:*</label> <input type="password" name="password"  minlength="3" maxlength="20" />
+    </div>
+       <div>
+
+    <div>
+<input type="submit" value="Signup"/>
+    </div>
+
+<input type="checkbox" id="agree"/><label for="agree"> Subscribe for Monthly Mails</label>
+</form>
+</div>
+ </div>
+  
+{{/ if}}
+<!--
+<div class="footer">
+ &copy Copyright Emperor360
+</div>
+-->
+
