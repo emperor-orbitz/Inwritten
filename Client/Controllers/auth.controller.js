@@ -12,9 +12,9 @@ login = function (data){
 
 var a_token = localStorage.getItem("hs_token");
 
- var GET_OPTIONS={
-        URL:'http://localhost:5000/auth/login',
-         OPTIONS:{
+ var get_options={
+        url:'/auth/login',
+         options:{
         method:'POST',
          headers:{
              'Content-Type':'application/json',
@@ -24,13 +24,13 @@ var a_token = localStorage.getItem("hs_token");
          body:JSON.stringify(data),
          credentials:'include',
          withCredentials: true,
-         mode:'cors'
+         //mode:'cors'
          }
        }
        
 
 return new Promise((resolve, reject)=>{
- fetch(GET_OPTIONS.URL, GET_OPTIONS.OPTIONS)
+ fetch(get_options.url, get_options.options)
  .then( _ => _.json())
  .then((success)=>{
      if(success.user == null){
@@ -61,9 +61,9 @@ isLoggedin = function (auth_token){
 
     var a_token = auth_token || localStorage.getItem("hs_token");
 
-    var GET_OPTIONS={
-        URL:'http://localhost:5000/auth/isloggedin',
-        OPTIONS:{
+    var get_options={
+        url:'/auth/isloggedin',
+        options:{
         method:'POST',
          headers:{'Content-Type':'application/json',
                   'Accept':'application/json',
@@ -71,14 +71,14 @@ isLoggedin = function (auth_token){
                  },
          credentials:'include',
          withCredentials: true,
-         mode:'cors'
+         //mode:'cors'
      
          }
        }
 
 return new Promise((resolve, reject)=>{
 
- fetch(GET_OPTIONS.URL, GET_OPTIONS.OPTIONS)
+ fetch(get_options.url, get_options.options)
       .then(user =>user.json())
       .then( server =>{
 
@@ -115,21 +115,21 @@ logout= function(auth_token){
 
     var a_token = auth_token || localStorage.getItem("hs_token");
   
-    var GET_OPTIONS = {
-        URL:'http://localhost:5000/auth/logout',
-        OPTIONS:{
+    var get_options = {
+        url:'/auth/logout',
+        options:{
         method:'POST',
         headers:{'Content-Type':'application/json',
         'Authorization':a_token
        },
         withCredentials:true,
-        mode:'cors',
+        //mode:'cors',
         credentials:'include'
      
          }
        }
 return new Promise((resolve, reject)=>{
- fetch(GET_OPTIONS.URL, GET_OPTIONS.OPTIONS)
+ fetch(get_options.url, get_options.options)
  .then((user)=> user.json())
  .then((success)=>{
      if(success.status == 'LOGOUT'){

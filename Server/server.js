@@ -25,7 +25,7 @@ app.use(bodyParser.json({limit:'50mb'}))
 
 app.use(function (req, res, next) {
 
-  res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
   res.header('Access-Control-Allow-Headers', 'Authorization, Access-Control-Allow-Headers, Access-Control-Allow-Credentials, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Options');
@@ -40,21 +40,22 @@ app.use(express.static('./public'));
 app.engine('handlebars', handleBar);
 app.set('view engine', 'handlebars');
 app.set("views", __dirname+"/public/views");
-
+console.log(__dirname+"/public/views")
 app.use(express.static(path.resolve(__dirname, "../Client/src/")))
 
-//ROUTE CONFIGURATION
+//ROUTE CONFIGURATION IN PRODUCTION
 
 if(process.env.NODE_ENV =="production"){
-  console.log(process.env.NODE_ENV)
+
+  app.use('/', route_config);
+
   app.get('*', (req, res) => {
-    // console.log( )
+
     res.sendFile( path.resolve(__dirname, "../Client/src/index.html") );
   });
 }
 
 
-app.use('/', route_config);
 
 
 //         LISTEN TO SERVER

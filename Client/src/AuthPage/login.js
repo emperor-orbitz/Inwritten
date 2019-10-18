@@ -13,11 +13,11 @@ function DimmerLoad(props) {
 }
 
 function Error(props) {
-
   var { loginError } = props;
   if (loginError.length <= 0) return (<div></div>)
   
   else 
+  console.log(props.loginError+"jkjj")
     return (
     <div>
       {
@@ -105,7 +105,6 @@ class Login extends React.Component {
         .then( _ => {
           
           button.dimmerLoad = button.disabled = true
-
           this.setState({ button })
           this.props.history.replace('/dashboard')
 
@@ -125,13 +124,10 @@ class Login extends React.Component {
 
         var { loginError } = this.state;
         button.dimmerLoad = button.disabled = false;
-          console.log(err);
-        this.state.loginError = err.foreach((line) => {
-        this.state.loginError.push(line);
+
+        this.setState({ loginError:err,
+          button: button
         })
-
-
-        this.setState({ loginError, button });
         this.state.loginError = [];
 
       })

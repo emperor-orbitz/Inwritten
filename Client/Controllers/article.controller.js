@@ -8,7 +8,7 @@ class FetchArticles {
 */
 
 
-const_url= 'http://localhost:5000/articles';
+const_url= '/articles';
 const_options ={
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ const_options ={
                 //body:JSON.stringify(DATA),
                 credentials: 'include',
                 withCredentials: true,
-                mode: 'cors'
+               // mode: 'cors'
 
 
 }
@@ -36,7 +36,7 @@ const_options ={
             options: this.const_options
         }
 
-    let send = Object.assign ({ } ,get_options.OPTIONS, {body: JSON.stringify(post)} );
+    let send = Object.assign({ } ,get_options.OPTIONS, {body: JSON.stringify(post)} );
 
     return new Promise((resolve, reject) => {
             fetch(get_options.url, send)
@@ -72,19 +72,15 @@ const_options ={
             fetch(get_options.url, get_options.options)
                 .then((user) => user.json())
                 .then((success) => {
-
-                   // console.log(success.data[4].title +"success at fetch erticles")
                     if (success.data.length != 0){
 
                         resolve(success.data)
-                
-
                     }
                     else {
                         resolve(success.data);
                     }
                 })
-                .catch( e=> reject(success))
+                .catch( e=> reject(e))
         })
 
     }

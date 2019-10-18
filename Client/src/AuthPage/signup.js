@@ -70,7 +70,7 @@ var DATA ={
   password:this.state.passwordValue,
 
 }
-var URL='http://localhost:5000/signup';
+var URL='http://localhost:5000/auth/register';
 
 var GET_OPTIONS={
   method:'POST',
@@ -109,7 +109,7 @@ else if(message.message== 'Account successfully created'){
 //redirect(account just created);
 console.log(this.props)
 //this.props.history.replace('/profile');
-alert('account created successfully. You can now login with credentials')
+alert('account created successfully. You can now login with Username')
 this.props.history.replace('/login');
 
 }

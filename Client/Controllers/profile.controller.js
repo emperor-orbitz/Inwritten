@@ -11,7 +11,7 @@ export default class ProfileUpdate {
 
     update_password = function (updateDetails) {
         const get_options = {
-            url: 'http://localhost:5000/profile',
+            url: '/profile',
             options: {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ export default class ProfileUpdate {
                 body: JSON.stringify(updateDetails),
                 credentials: 'include',
                 withCredentials: true,
-                mode: 'cors'
+                //mode: 'cors'
 
             }
         }
@@ -58,7 +58,7 @@ export default class ProfileUpdate {
 
     updateProfile = (updateDetails) => {
         const get_options = {
-            url: 'http://localhost:5000/profile',
+            url: '/profile',
             options: {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ export default class ProfileUpdate {
                 body: JSON.stringify(updateDetails),
                 credentials: 'include',
                 withCredentials: true,
-                mode: 'cors'
+                //mode: 'cors'
 
             }
         }

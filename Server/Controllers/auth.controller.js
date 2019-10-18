@@ -5,7 +5,7 @@ var sgMail = require('@sendgrid/mail');
 var http_status = require("../Utils/http_status");
 var jwt = require("jsonwebtoken");
 var validate = require("../Utils/validation");
-
+var mail= require("../Utils/email");
 
 
 
@@ -154,8 +154,8 @@ var verify_mail = async (req, res) => {
 
 var register = (req, res) => {
     const { username, email, password } = req.body;
-   
     var valid = new validate();
+    console.log(email+"this is req.body @ try block")
 
     valid.validate(req.body).then( good =>{
         var saves = new signup();
@@ -173,9 +173,11 @@ var register = (req, res) => {
                 else {
     
                     try{
+                        const { username, email, password } = req.body;
                         var result = await saves.createUser(username, email, password);
-    
-                        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+     var send = new mail(result.email);
+     send.sendVerifyMail({username:result.username, _id:result._id});
+                        /*sgMail.setApiKey(process.env.SENDGRID_API_KEY);
                                 const msg = {
                                     to: result.email,
                                     from: 'contact@penbox.com',
@@ -187,12 +189,15 @@ var register = (req, res) => {
                                     }
                                 }
                             await sgMail.send(msg);
+                            */
+                           //RELEASED UNTILL RECTIFY WITH SENDGRID
                             res.status(200)
                                 .json({ message: "Account successfully created" });
     
                                 } 
     
                     catch(error){
+                        console.log("error"+error)
                         res.status(500)
                             .json({ message: 'Failed! An error is here'+error });
                     }
