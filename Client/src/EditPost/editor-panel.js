@@ -6,8 +6,7 @@ import initialValue from './value'
 import { Button, Icon, Modal, Input, Grid } from 'semantic-ui-react'
 import Html from "slate-html-serializer"
 import { DEFAULT_NODE, schema, rules, renderMark, renderBlock, onKeyDown } from "./editor-rules";
-import "../../../Resources/styles/editor.scss";
-//import EditorPanel from '../../../backup-editor';
+import "../../Resources/styles/editor.scss";
 
 
 
@@ -15,8 +14,10 @@ import "../../../Resources/styles/editor.scss";
 
 class EditorPanel extends React.Component {
 
+constructor(props){
+    super(props)
 
-  state = {
+  this.state = {
     value: Value.fromJSON(initialValue),
     keys: '',
     h: '',
@@ -33,7 +34,14 @@ class EditorPanel extends React.Component {
     activeBlock: ""
 
   }
+}
 
+componentWillReceiveProps(props){
+if(this.props.initialValue == props.initialValue ){
+    //DO NOTHING
+}
+else this.setState({value: Value.fromJSON(props.initialValue)}); 
+}
 
 
 get exposeEditorValue(){
@@ -50,9 +58,11 @@ get exposeHTMLEditorValue(){
 
 
  onChange = ({ value }) => {
-
   this.setState({ value })
   window.editor = value
+  console.log(this.exposeEditorValue,
+    
+    this.exposeHTMLEditorValue)
 
 }
 
@@ -72,7 +82,6 @@ onClickBlock = (event, type) => {
   const { editor } = this
   const { value } = editor
   const { document } = value
-  console.log(value, editor, document)
 
   // Handle everything but list buttons.
   if (type !== 'bulleted-list' && type !== 'numbered-list') {
@@ -130,7 +139,8 @@ onClickBlock = (event, type) => {
     icon={icon}
     secondary
     onMouseDown={event => this.onClickMark(event, type)}
-    className='editor-editorButtons' active={isActive} />
+    className='editor-editorButtons' active={isActive} 
+    />
   )
 }
 

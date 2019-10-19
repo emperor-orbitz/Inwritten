@@ -90,7 +90,8 @@ var article = (req, res) => {
 
 var create = (req, res) => {
     let { title,
-        body,
+        body_html,
+        body_schema,
         category,
         description,
         createdAt,
@@ -104,7 +105,8 @@ featured_image=undefined;
 
     var postDoc = {
         title: title,
-        body: body,
+        body_schema: body_schema,
+        body_html:body_html,
         createdAt: createdAt,
         author: req.user.username,
         category: category,
@@ -168,10 +170,11 @@ featured_image=undefined;
 
         post.insertPost(postDoc, (err, success) => {
             if (success) {
+                console.log(success)
                 res.status(200)
                     .send({
                           status:200,
-                          data: [success] 
+                          data:success 
                           })
             }
 
@@ -225,15 +228,16 @@ var deletePost = (req, res) => {
 var update = (req, res) => {
 
     var post = new posts();
-    post.update_article(req.body.id, req.body, (err, success) => {
+    post.update_article(req.body._id, req.body, (err, success) => {
         if (err) {
             res.status(http_status.INTERNAL_SERVER_ERROR.code)
-               .send({ data: [] })
+               .send({ status:500, data: [] })
+               console.log(err+"errr")
         }
 
         else
             res.status(http_status.OK.code)
-               .send({ data: success });
+               .send({ status:200, data: success });
 
     })
 

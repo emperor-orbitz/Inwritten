@@ -1,27 +1,20 @@
 
-/*
-*
-*           IMPORTS
-*
-*/
-
-import React, { /*Component*/ } from 'react';
-import './article.scss';
+import React from 'react';
+import { Button,  Form, Checkbox, Header, Loader, Icon, Select, Grid } from 'semantic-ui-react';
+import '../../Resources/styles/article.scss';
 import {  withRouter } from 'react-router';
-import Connection from '../../../controllers/auth';
 
 import { connect } from 'react-redux';
 import FetchArticles from '../../Controllers/article.controller'
-import EditorPanel from '../NewPost/Components/editor-panel';
-import EditPost1 from '../EditPost/editpost_1';
+import EditorPanel from './editor-panel';
 
-/*
+
 
 function DimmerLoad(props) {
   return <Loader active={props.active} size={props.size} inline />
 
 }
-
+/*
 function HoverableDiv(props) {
   return (
     <div className='image-thumbnail-template-cover'>
@@ -46,8 +39,8 @@ class EditPost extends React.Component {
     this.state = {
       buttonDisabled: false,
       dimmerLoad: false,
-      ERROR_MESSAGE: '',
-      SUCCESS_MESSAGE: '',
+      error_message: '',
+      success_message: '',
       privacy_value: false,
       enable_comments: true,
       post_title: '',
@@ -57,7 +50,7 @@ class EditPost extends React.Component {
       post_category: 'all',
       post_description: '',
       time_to_read: 5,
-      body: ''
+      body_schema: ''
 
     }
 
@@ -99,6 +92,7 @@ class EditPost extends React.Component {
       switch (prop.name) {
 
         case 'category':
+         console.log("category", prop)
           let category = prop.value;
 
           this.setState({ post_category: category });
@@ -144,13 +138,13 @@ class EditPost extends React.Component {
 
 
 
-  updatePost() {
+  updatePost = ()=> {
     var add = new FetchArticles()
     var panel = new EditorPanel();
-    var body = panel.exposedEditorValue;
     this.setState({ buttonDisabled: true, dimmerLoad: true });
 
     var post = {
+      _id:this.state.post_id,
       title: this.state.post_title.trim(),
       createdAt: Date.now(),
       category: this.state.post_category,
@@ -158,7 +152,9 @@ class EditPost extends React.Component {
       time_to_read: this.state.time_to_read,
       comments_enabled: this.state.enable_comments,
       public: this.state.privacy_value,
-      body: body
+      body_html: panel.exposeHTMLEditorValue,
+      body_schema: panel.exposeEditorValue,
+      featured_image:this.state.featured_image
 
     }
 
@@ -171,8 +167,8 @@ class EditPost extends React.Component {
           this.props.dispatch({ type: 'UPDATE_ARTICLE', payload: post });
 
           this.setState({
-            SUCCESS_MESSAGE: 'Successfully Updated!',
-            ERROR_MESSAGE: '',
+            success_message: 'Great! That\'s a little better. Click ',
+            error_message: '',
             buttonDisabled: false, dimmerLoad: false
           });
 
@@ -186,14 +182,14 @@ class EditPost extends React.Component {
       ).catch(
         (err) => {
           this.setState({ buttonDisabled: false, dimmerLoad: false });
-          this.setState({ NETWORK_ERROR: `Sorry, there was an error with your article! We would fix this soon` });
+          this.setState({ network_error: `Sorry, there was an error with your article! We would fix this soon ${err}` });
         }
       );
     }
     else if (val !== true) {
       this.setState({ buttonDisabled: false, dimmerLoad: false });
 
-      this.setState({ ERROR_MESSAGE: val });
+      this.setState({ error_message: val });
 
     }
 
@@ -201,74 +197,70 @@ class EditPost extends React.Component {
   }
 
 
+/*
+
+  componentWillReceiveProps(nextProps, nextState){
+
+    //INCASE OF RELOAD. props Is LOST
+    console.log('component will receivveprops', nextProps, nextState)
+    var arrs=[];
+    for (var x of nextProps.ArticleReducer) {
+      if (x._id == this.props.match.params.postID) {
+    
+
+   arrs.push(x);
 
 
+      }
+     
+    }
+    
+    if(arrs.length ==0 ) nextProps.history.replace('/dashboard');
+    else{
+    let x =arrs[0];
+      this.setState({
+        post_title: x.title, post_description: x.description,
+        post_category: x.category,
+        privacy_value: x.public,
+        enable_comments: x.comments_enabled,
+        time_to_read: x.time_to_read,
+        body: x.body
+      });
+    }
+    
+    }
 
-
+*/
 
 
 
   /*
-  *
   *           REACTJS LIFECYCLE HOOKS
-  *
   */
-  connect = new Connection();
-  fetchArticle = new FetchArticles();
-
+ 
   componentDidMount() {
 
-    if (Object.keys(this.props.ProfileReducer).length == 0) {
-      console.log('empty', this.props.ArticleReducer);
+   
 
-      this.connect.isLoggedin()
-        .then(((success) => {
+      for (var x of this.props.ArticleReducer) {
+        if (x._id == this.props.match.params.postID) {
+          console.log(x._id,this.props.match.params.postID, x.body_schema,'X.BODY IS HERE')
 
-          this.props.dispatch({
-            type: 'INJECT_PROFILE', payload: [{
-              key: "isLoggedin",
-              value: true
-            }
-              , {
-              key: "username",
-              value: success.ID.username
-            }, {
-              key: "email",
-              value: success.ID.email
-            }
-
-            ]
-          })
-
-          this.fetchArticle.fetch_articles_list().then((articles, none) => {
-            if (articles) {
-              console.log(articles);
-              this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: articles.RESULT });
+          this.setState({
+            post_id:x._id,
+            post_title: x.title, 
+            post_description: x.description,
+            post_category: x.category,
+            privacy_value: x.public,
+            enable_comments: x.comments_enabled,
+            time_to_read: x.time_to_read,
+            body_schema: x.body_schema,
+            featured_image: x.featured_image
+          });
 
 
-              //check if its in the array
-
-           
-            }
-            else {
-              //error
-              this.props.history.replace('/login');
-
-            }
-          })
-
-
-        }))
-        .catch((err) => {
-          this.props.history.replace('/login');
-
-        })
-
-
-    }
-
-    else {
-    
+        
+      }
 
     }
 
@@ -298,8 +290,7 @@ class EditPost extends React.Component {
   }
 
   handle_profile_photo(ev) {
-    var src;
-    var file = document.getElementById('photo');
+  
     this.readFile(ev.target.files[0]).then((result) => {
 
       //LOL
@@ -313,7 +304,6 @@ class EditPost extends React.Component {
   */
 
   render() {
-    var panel = new EditorPanel();
     //INITIAL ARRAY VALUE ==>0 [EMPTY] , THEN LATER POPULATED 
 
 
@@ -394,37 +384,225 @@ class EditPost extends React.Component {
 
 
 
-console.log(this.props.match.url, this.props);
 
-
-if(Object.keys(this.props.match.params ).length ==0 ){
+function changeOptions(side){
+  let id =side.target.id;
   
-return(
-
-<div> BAD URL MAYBE </div>
-
-)
-}
-else{
-
-  return (
-
-
+    if(id=='side1'){
+  if(  document.getElementById('editor-side1').style.display =='block' ){
   
-    <div>
-    
-    <EditPost1/> 
-    
-    
-     </div>
-  )
+    document.getElementById('editor-side2').style.display ='none' ;
+      document.getElementById('editor-side1').style.display ='block' ;
+  
+  
+  
+  //do nothing
+  
+  }
+  else{
+    document.getElementById('editor-side2').style.display ='none' ;
+  
+    document.getElementById('editor-side1').style.display ='block' 
+  }
+  
+  
+    }
+  else if( id=== 'side2') {
+  
+  if(     document.getElementById('editor-side2').style.display == 'block') { 
+  
+        document.getElementById('editor-side2').style.display ='block' ;
+  
+        document.getElementById('editor-side1').style.display ='none'
+  
+  }
+  //do nothing;
+  else{
+        document.getElementById('editor-side2').style.display ='block';
+        document.getElementById('editor-side1').style.display ='none' ;
+  
+  
+  }
+  } 
+  
+  
+  
+  }
 
 
 
+
+
+
+
+
+
+    return (
+
+
+
+      <div className='add-post'>
+
+        <Grid stackable>
+          <Grid.Row>
+          
+            <Grid.Column mobile={16} tablet={12} computer={12} style={{ padding: '0px 5px' }}  >             
+
+                  { this.state.success_message === '' ?
+               ""
+
+                    : 
+                    <div className='notification-background'>
+                    <div style={{ width: '60%', color: 'green', background: '', padding: '10px 5%' }} ><div>
+                      <span style={{ float: 'right', cursor: 'pointer' }} onClick={function () {
+                        var note = document.getElementsByClassName('notification-background');
+                        note[0].style.display = 'none';
+                      }} ><Icon name='close' onClick={()=>{ this.state.success_message=""}} /> </span>
+                      <Icon name='check circle outline' color="green" size='big' />
+                      {this.state.success_message} <a href={'http://localhost:5000/' + this.state.post_title} target='_blank' style={{ color: 'black' }} ><u>here</u> </a>
+                    </div>
+
+                </div>
+              </div>
+                  }
+
+              {
+                this.state.network_error !== '' ?
+                  <p style={{ padding: '5px', color: 'red', width: '90%', borderRadius: '0px' }}>  {this.state.network_error} </p>
+                  : ''
+              }
+              {
+                this.state.error_message == 'editor-error' ?
+                  <p style={{ padding: '5px', color: 'red', width: '90%', borderRadius: '0px' }}>  You've not written anything yet! </p>
+                  : ''
+              }
+
+              
+                <EditorPanel initialValue={this.state.body_schema} />
+              
+         
+            </Grid.Column>
+            
+            <Grid.Column mobile={16} tablet={4} computer={4}>
+            &nbsp;&nbsp; &nbsp;
+
+                <Icon name='configure' onClick={changeOptions} id='side1' title='Settings' bordered color='black' />
+                <Icon name='ellipsis horizontal' onClick={changeOptions} id='side2' title='More options' bordered color='black' />
+                <Button disabled= {this.state.buttonDisabled} type='submit' size='mini' color="green" title='save' onClick={this.updatePost} >
+                  <DimmerLoad size='mini' active={this.state.dimmerLoad} />
+                   UPDATE  
+                </Button>
+
+
+              <div className='editor-side1' id='editor-side1'>
+                <h5>POST SETTINGS</h5>
+                <Form size="mini">
+
+                <Form.Field name='title' maxLength='50' label='Title' value={this.state.post_title} onChange={this.handleInputs.bind(this)} control='input' placeholder='Title'  required />
+                  {
+                    this.state.error_message == 'title-error' ?
+                      <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}> Title is required</p>
+                      : ''
+                  }
+       
+                  <Form.Field name='time' maxLength='2' min='0' type="number" value={this.state.time_to_read} control='input' placeholder="How many minutes read?"   onChange={this.handleInputs.bind(this)} />
+                  {
+                    this.state.error_message == 'time-error' ?
+                      <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}> The duration should not be less than 0 and not greater than 30 </p>
+                      : ''
+                  }
+                  <Form.Field name='description' maxLength={70}  control='textarea' placeholder='Post Slug' value={this.state.post_description} onChange={this.handleInputs.bind(this)} />
+
+                  {
+                    this.state.error_message == 'description-error' ?
+                      <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}>  Description length is small</p>
+                      : ''
+                  }
+                  <Form.Field name='tags' maxLength={this.state.tagMax} label='Tags (good to have!)' value={this.state.tag_value} onChange={this.handleTags} control='input' placeholder='e.g sport, gym, race. Separate with( , )' />
+{
+  this.state.error_message == 'tag-error' ?
+    <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}>  Sorry, u've got max of 5 tags</p>
+    : ''
 }
+                </Form>
+                <br />
+              </div>
+
+              <div className='editor-side2' id='editor-side2'>
+                <b ><Icon name='options' /> Additionals</b><span style={{ float: 'right' }} ></span>
+                <p>  </p>
+                <Form size="mini">
+
+                  <Select name='category' className="custom-label" value={this.state.post_category} onChange={this.handleInputs.bind(this)} options={categoryOptions} />
+                  <br /><br /><br />
+
+                  <Form.Field>
+
+
+                    <Checkbox
+                  toggle
+                      slider
+                      name='radioGroup1'
+                      checked={this.state.privacy_value === true}
+                      onChange={this.handlePostprivacy}
+                      label={privacy_value}
+                      className='small-fonts'
+                    />
+                  </Form.Field>
+
+
+                  <Form.Field>
+
+                    <Checkbox
+                      toggle
+                      name='radioGroup2'
+                      checked={this.state.enable_comments === true}
+                      onChange={this.handleEnableComments}
+                      //label ={ comment_value}
+                      label={comment_value}
+
+                    />
+                  </Form.Field>
 
 
 
+
+                </Form>
+                <h5> Featured Image</h5>
+                  <div className="featured-pix-block">
+                    <img src={this.state.featured_image} className="featured-image"/>
+                    <input className="featured-pix-cover" onChange={this.handle_profile_photo.bind(this)}
+                      type='file' id='photo' style={{visibility:'hidden'}} />
+  
+                    <div className="featured-pix-cover" onClick={this.toggleDialogFeatured.bind(this) }>
+                    <Icon color="teal" size="small" name='image' /> Upload Featured Image </div>
+                    </div>
+
+              </div>
+
+
+
+
+
+
+
+            </Grid.Column>
+
+          </Grid.Row>
+
+
+
+        </Grid>
+
+        { /*EDITOR PANEL INITIAL */}
+
+
+      </div>
+
+
+
+
+    )
 
 
 

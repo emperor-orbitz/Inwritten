@@ -32,18 +32,20 @@ var ArticleReducer = (state = dataState, action) => {
         
 
         case 'OVERWRITE_ARTICLE':
-        console.log("this is right from the store"+ action.type)
         state = action.payload;
             return state;
 
-        case 'UPDATE_ARTICLE':
-            for (var x in state) {
-                if (x._id === payload._id) {
-                    Object.assign(x, payload);
-                }
-            }
 
-            return state;
+        case 'UPDATE_ARTICLE':
+        var payload = action.payload;
+        state.forEach((x, i) =>{
+          if(x._id == payload._id){
+              return state[i] = payload;
+          }
+          })
+    
+        console.log(state, "FROMMMM", payload)
+        return state;
 
         case 'DELETE':
 

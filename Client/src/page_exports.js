@@ -15,7 +15,7 @@ import Profile from './Profile/profile';
 
 import Articles from './Articles/Components/articles';// MAIN PAGE
 import AddPost from './NewPost/addpost';
-import EditPost1 from '../src/EditPost/editpost_1';
+import EditPost from './EditPost/editpost';
 import PostArchive from '../src/Archives/postarchive';
 
 import AddImage from '../src/NewImage/addimage';
@@ -25,7 +25,7 @@ import Gallery from '../src/NewImage/addimage';
 var ArticlesCategory ={
     Articles:Articles,
     Drafts: PostArchive,
-    EditPost1:EditPost1,
+    EditPost:EditPost,
     AddPost:AddPost
 }
 

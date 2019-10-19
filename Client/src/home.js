@@ -23,7 +23,7 @@ function App() {
           <Switch>
             <Route path='/add-image' component={ImagesCategory.AddImage} />
             <Route path='/gallery' component={ImagesCategory.Gallery} />
-            <Route path='/edit-post/:postID' component={ArticlesCategory.EditPost1} />
+            <Route path='/edit-post/:postID' component={ArticlesCategory.EditPost} />
             <Route path='/dashboard' component={Account} />
             <Route path='/profile' component={Profile} />
             <Route path='/articles' component={ArticlesCategory.Articles} />

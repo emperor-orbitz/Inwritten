@@ -51,13 +51,18 @@ color:black;
 .editor-side2 {
     animation:0.8s modalanime ease-in-out forwards;
     padding: 3% 10%;
-  
+    color:black;
     position: absolute;
    min-height:400px;
     border-radius: 3px;
     top:40px;
 display:none;    
-}    
+}   
+
+.custom-label{
+    color:white;
+}
+
 .editor-side1 {
     animation:0.8s modalanime ease-in-out forwards;
 padding:8% ;

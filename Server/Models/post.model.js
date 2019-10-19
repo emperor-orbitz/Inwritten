@@ -110,6 +110,7 @@ postSchema.methods.delete_article = function (post_id, callback_func) {
   UPDATE ARTICLE
 */
 
+
 postSchema.methods.update_article = function (id, body, callback_func) {
 
     var data = {
@@ -121,11 +122,14 @@ postSchema.methods.update_article = function (id, body, callback_func) {
         time_to_read: body.time_to_read,
         comments_enabled: body.comments_enabled,
         public: body.public,
-        body: body.body,
+        body_html: body.body_html,
+        body_schema: body.body_schema,
+
         featured_image: body.featured_image || ""
 
     }
-    return mongoose.model('Post', postSchema).findByIdAndUpdate(id, data, callback_func);
+    return mongoose.model('Post', postSchema)
+                   .findOneAndUpdate({_id:id}, data,{useFindAndModify:false}, callback_func);
 
 }
 

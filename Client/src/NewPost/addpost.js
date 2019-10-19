@@ -38,7 +38,6 @@ class AddPost extends React.Component {
       post_description: '',
       time_to_read: 5,
       tagMax:''
-      //body: this.state.editorState
     }
 
   this.handleTags =this.handleTags.bind(this);
@@ -146,8 +145,7 @@ this.setState({tag_value:e.target.value});
   addPost = () => {
     var add = new FetchArticles()
     var panel = new EditorPanel();
-    var body = panel.exposeEditorValue;
-
+    
     this.setState({ buttonDisabled: true, dimmerLoad: true });
 
     this.setState({ NETWORK_ERROR: `` });
@@ -160,20 +158,20 @@ this.setState({tag_value:e.target.value});
       time_to_read: this.state.time_to_read,
       comments_enabled: this.state.enable_comments,
       public: this.state.privacy_value,
-      body: body,
+      body_html: panel.exposeHTMLEditorValue,
+      body_schema: panel.exposeEditorValue,
       featured_image:this.state.featured_image
 
 
     }
 
     let val = this.postValidation();
-    //alert val
     if (val === true) {
 
       add.create_article(post).then(
         (okay) => {
           //return _ID
-          let with_id = Object.assign({}, post, { _id: okay.RETURN });
+          let with_id = Object.assign({}, post, { _id: okay._id });
 
           this.props.dispatch({ type: 'INSERT_ARTICLE', payload: with_id });
 
@@ -211,23 +209,7 @@ this.setState({tag_value:e.target.value});
 
 
 
-
-
-
-
-
-  /*
-  *
-  *           REACTJS LIFECYCLE HOOKS
-  *
-  */
-
-  componentDidMount() {
-
-
-    
-  }
-
+ 
 
   toggleDialogFeatured() {
     var photo = document.getElementById('photo');
@@ -260,11 +242,7 @@ this.setState({tag_value:e.target.value});
 
 
 
-
-  /*
-  *
-  *          RENDER FILE
-  *
+  /*          RENDER FILE
   */
 
   render() {

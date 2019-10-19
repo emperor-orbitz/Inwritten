@@ -30,27 +30,30 @@ const_options ={
 */
 
  update_article (post) {
-
+        this.const_options.method = "PATCH";
         var get_options = {
             url:  this.const_url +'/update',
             options: this.const_options
         }
 
-    let send = Object.assign({ } ,get_options.OPTIONS, {body: JSON.stringify(post)} );
+    let send = Object.assign({ } ,get_options.options, {body: JSON.stringify(post)} );
 
     return new Promise((resolve, reject) => {
             fetch(get_options.url, send)
                 .then((user) => user.json())
                 .then((result) => {
-                    if (result.MESSAGE === "OK") {
+                    if (result.status == 200) {
                         resolve(result);
                     }
                     else {
-                        reject("An error!")
+                        console.log(result +"UNCATWSA")
+                        reject(result)
                      }
 
                 })
-                .catch((err) => { reject(err) });
+                .catch(err => { 
+                    console.log(err +"UNCATWSA")
+                    reject(err) });
         })
 
     }
@@ -129,10 +132,10 @@ const_options ={
         return new Promise((resolve, reject) => {
             fetch(get_options.url, get_options.options)
                 .then( user => user.json())
-                .then( result => { resolve(result) })
+                .then( result => { resolve(result.data) })
                 .catch( _ => {
                    
-                    reject(result)
+                    reject(_)
 
                 })
         }) 
