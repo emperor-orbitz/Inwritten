@@ -89,7 +89,6 @@ this.setState({tag_value:e.target.value});
 
         case 'category':
           let category = prop.value;
-
           this.setState({ post_category: category });
           break;
 
@@ -111,7 +110,6 @@ this.setState({tag_value:e.target.value});
 
 
   postValidation(title = this.state.post_title, duration = this.state.time_to_read, tags= this.state.tag_value) {
-    //console.log(tags.length);
 
     if (window.editor.length < 8) {return 'editor-error'; }
 
@@ -150,7 +148,6 @@ this.setState({tag_value:e.target.value});
     var panel = new EditorPanel();
     var body = panel.exposeEditorValue;
 
-    console.log('exposed yhh'+body)
     this.setState({ buttonDisabled: true, dimmerLoad: true });
 
     this.setState({ NETWORK_ERROR: `` });
@@ -176,7 +173,6 @@ this.setState({tag_value:e.target.value});
       add.create_article(post).then(
         (okay) => {
           //return _ID
-       console.log(okay+" this is the result okay")
           let with_id = Object.assign({}, post, { _id: okay.RETURN });
 
           this.props.dispatch({ type: 'INSERT_ARTICLE', payload: with_id });
@@ -273,8 +269,6 @@ this.setState({tag_value:e.target.value});
 
   render() {
 
-
-    //console.log('From addpost page', this.props.ProfileReducer);
     var privacy_value = (this.state.privacy_value == true) ? 'Publish to the World' : ' Save to draft';
     var comment_value = (this.state.enable_comments == true) ? 'Commenting is enabled' : 'Commenting is disabled';
 
@@ -330,34 +324,53 @@ this.setState({tag_value:e.target.value});
     ]
 
 
-    function changeOptions(side) {
-      let className = side.target.classList[0];
+   
 
-      if (className == 'configure') {
-        if (document.getElementById('editor-side1').style.display == 'block')  ;
+function changeOptions(side){
 
-        
-        else {
-          document.getElementById('editor-side2').style.display = 'none';
-          document.getElementById('editor-side1').style.display = 'block'
-        }
-
-
-      }
-      else if (className === 'ellipsis') {
-
-        if (document.getElementById('editor-side2').style.display == 'block') ; //do nothing
-
-        else {
-          document.getElementById('editor-side2').style.display = 'block';
-          document.getElementById('editor-side1').style.display = 'none';
-
-        }
-      }
-
-
-
+  let id =side.target.id;
+  
+    if(id=='side1'){
+  if(  document.getElementById('editor-side1').style.display =='block' ){
+  
+    document.getElementById('editor-side2').style.display ='none' ;
+      document.getElementById('editor-side1').style.display ='block' ;
+  
+  
+  
+  //do nothing
+  
+  }
+  else{
+    document.getElementById('editor-side2').style.display ='none' ;
+  
+    document.getElementById('editor-side1').style.display ='block' 
+  }
+  
+  
     }
+  else if(  id=== 'side2') {
+  
+  if(     document.getElementById('editor-side2').style.display == 'block') { 
+  
+        document.getElementById('editor-side2').style.display ='block' ;
+  
+        document.getElementById('editor-side1').style.display ='none'
+  
+  }
+  //do nothing;
+  else{
+        document.getElementById('editor-side2').style.display ='block';
+        document.getElementById('editor-side1').style.display ='none' ;
+  
+  
+  }
+  } 
+  
+  
+  
+  }
+
 
     return (
 
@@ -405,8 +418,7 @@ this.setState({tag_value:e.target.value});
          
             </Grid.Column>
             
-
-            <Grid.Column mobile={16} tablet={4} computer={4}   >
+            <Grid.Column mobile={16} tablet={4} computer={4}>
             &nbsp;&nbsp; &nbsp;
 
                 <Icon name='configure' onClick={changeOptions} id='side1' title='Settings' bordered color='black' />
@@ -500,11 +512,6 @@ this.setState({tag_value:e.target.value});
                     <div className="featured-pix-cover" onClick={this.toggleDialogFeatured.bind(this) }>
                     <Icon color="teal" size="small" name='image' /> Upload Featured Image </div>
                     </div>
-
-
-
-
-
 
               </div>
 

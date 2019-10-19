@@ -30,7 +30,7 @@ module.exports = class email{
     transporter.sendMail(mailOptions, function(err, info){
   if(err){
     console.log("THERE WAS AN ERROR IN THE EMAIL"+err);
-    throw new Error(err)
+
   } 
 
   else console.log("THE EMAIL WAS SUCCESSFUL"+ info)
