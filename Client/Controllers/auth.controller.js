@@ -5,8 +5,6 @@
 
 class Connection{
     
-//  LOGIN  API
-
 
 login = function (data){
 
@@ -34,7 +32,6 @@ return new Promise((resolve, reject)=>{
  .then( _ => _.json())
  .then((success)=>{
      if(success.user == null){
-        console.log(success +"from thr jfdfsdf")
 
          reject(success);
      }
