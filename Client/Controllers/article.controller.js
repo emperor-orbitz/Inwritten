@@ -96,25 +96,28 @@ const_options ={
 */
 
     delete_article(id) {
-        var const_options = Object.assign(this.const_options, { body:JSON.stringify({ id:id } ) })
+
+        this.const_options.method = "DELETE";
         var get_options = {
             url:  this.const_url +'/delete',
             options: this.const_options
         }
+        var send = Object.assign({}, get_options.options, { body:JSON.stringify({ id:id } ) })
 
 
         return new Promise((resolve, reject) => {
 
-            fetch(get_options.url, get_options.options)
+            fetch(get_options.url, send)
                 .then((user) => user.json())
                 .then((result) => {
-                    if ( result.CODE == 104 ) {
-                        reject(result);
-                    }
-                    else {
+                    if ( result.status == 200 && result.data.deletedCount == 1 ) {
                         resolve(result);
                     }
+                    else {
+                        reject(result);
+                    }
                 })
+                .catch(err =>{ reject(err) })
         })
 
     }

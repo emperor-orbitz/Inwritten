@@ -117,7 +117,7 @@ postSchema.methods.update_article = function (id, body, callback_func) {
         // id:this.state.post_id,
         title: body.title.trim(),
         createdAt: body.createdAt,
-        category: body.post_category,
+        category: body.category,
         description: body.description.trim(),
         time_to_read: body.time_to_read,
         comments_enabled: body.comments_enabled,

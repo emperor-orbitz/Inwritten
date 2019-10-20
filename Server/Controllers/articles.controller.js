@@ -79,7 +79,7 @@ var article = (req, res) => {
                 .send({ data: [] })
         }
         else
-            res.status(200)
+             res.status(200)
                 .send({ data: doc })
     })
 }
@@ -170,14 +170,12 @@ featured_image=undefined;
 
         post.insertPost(postDoc, (err, success) => {
             if (success) {
-                console.log(success)
                 res.status(200)
                     .send({
                           status:200,
                           data:success 
                           })
             }
-
             else{
                 res.status(http_status.INTERNAL_SERVER_ERROR.code)
                 .send({ 
@@ -209,12 +207,12 @@ var deletePost = (req, res) => {
     post.delete_article(id, (err, success) => {
         if (err)
             res.status(http_status.INTERNAL_SERVER_ERROR.code)
-               .send({ data: [] });
+               .send({ status:500, data: [] });
 
 
         else {
             res.status(http_status.OK.code)
-               .send({data: success})
+               .send({ status:200, data: success})
 
         }
 
@@ -226,7 +224,7 @@ var deletePost = (req, res) => {
 //*  UPDATE ARTICLE
 
 var update = (req, res) => {
-
+console.log(req.body, "this is req, body")
     var post = new posts();
     post.update_article(req.body._id, req.body, (err, success) => {
         if (err) {

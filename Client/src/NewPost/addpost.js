@@ -3,7 +3,7 @@
 
 
 import React, { Component } from 'react';
-import { Button, Form, Checkbox ,Header, Loader, Icon, Select, Grid, IconGroup } from 'semantic-ui-react';
+import { Button, Form, Checkbox, Header, Loader, Icon, Select, Grid, IconGroup } from 'semantic-ui-react';
 import '../../Resources/styles/article.scss';
 import { withRouter } from 'react-router';
 
@@ -33,14 +33,14 @@ class AddPost extends React.Component {
       post_title: '',
       featured_image: '',
       createdAt: Date.now(),
-      tag_value:'',
+      tag_value: '',
       post_category: 'all',
       post_description: '',
       time_to_read: 5,
-      tagMax:''
+      tagMax: ''
     }
 
-  this.handleTags =this.handleTags.bind(this);
+    this.handleTags = this.handleTags.bind(this);
     this.handlePostprivacy = this.handlePostprivacy.bind(this);
 
   }
@@ -48,10 +48,10 @@ class AddPost extends React.Component {
   /*
   *           HANDLE CHANGE EVENTS ON INPUTS
   */
-handleTags(e){
-this.setState({tag_value:e.target.value});
+  handleTags(e) {
+    this.setState({ tag_value: e.target.value });
 
-}
+  }
 
 
 
@@ -76,9 +76,9 @@ this.setState({tag_value:e.target.value});
           this.setState({ post_description: value });
           break;
         case 'tags':
-        this.handleTags();
-        //this.setState({post_tags:value})
-        alert('fu');
+          this.handleTags();
+          //this.setState({post_tags:value})
+          alert('fu');
 
       }
     }
@@ -108,9 +108,9 @@ this.setState({tag_value:e.target.value});
 
 
 
-  postValidation(title = this.state.post_title, duration = this.state.time_to_read, tags= this.state.tag_value) {
+  postValidation(title = this.state.post_title, duration = this.state.time_to_read, tags = this.state.tag_value) {
 
-    if (window.editor.length < 8) {return 'editor-error'; }
+    if (window.editor.length < 8) { return 'editor-error'; }
 
     if (title.length == 0) {
       document.getElementById('editor-side2').style.display = 'none';
@@ -118,16 +118,16 @@ this.setState({tag_value:e.target.value});
       return 'title-error';
     }
 
-   if (duration.length != 0) {
-      if (duration > 30){ return "time-error" } 
-      else if (duration < 1){ return "time-error"}
+    if (duration.length != 0) {
+      if (duration > 30) { return "time-error" }
+      else if (duration < 1) { return "time-error" }
     }
 
 
-    if( tags.split(',').length > 5 ){
-  return "tag-error";
+    if (tags.split(',').length > 5) {
+      return "tag-error";
 
-}
+    }
 
     else {
 
@@ -145,10 +145,10 @@ this.setState({tag_value:e.target.value});
   addPost = () => {
     var add = new FetchArticles()
     var panel = new EditorPanel();
-    
+
     this.setState({ buttonDisabled: true, dimmerLoad: true });
 
-    this.setState({ NETWORK_ERROR: `` });
+    this.setState({ network_error: `` });
 
     var post = {
       title: this.state.post_title.trim(),
@@ -160,7 +160,7 @@ this.setState({tag_value:e.target.value});
       public: this.state.privacy_value,
       body_html: panel.exposeHTMLEditorValue,
       body_schema: panel.exposeEditorValue,
-      featured_image:this.state.featured_image
+      featured_image: this.state.featured_image
 
 
     }
@@ -170,7 +170,7 @@ this.setState({tag_value:e.target.value});
 
       add.create_article(post).then(
         (okay) => {
-          //return _ID
+
           let with_id = Object.assign({}, post, { _id: okay._id });
 
           this.props.dispatch({ type: 'INSERT_ARTICLE', payload: with_id });
@@ -180,7 +180,6 @@ this.setState({tag_value:e.target.value});
             error_message: '',
             buttonDisabled: false, dimmerLoad: false
           });
-
 
           var note = document.getElementsByClassName('notification-background');
           note[0].classList.remove('reverse-anime');
@@ -192,13 +191,13 @@ this.setState({tag_value:e.target.value});
         (err) => {
           this.setState({ buttonDisabled: false, dimmerLoad: false });
 
-          this.setState({ NETWORK_ERROR: `Hey, It seems you are offline. Check your internet connection` });
+          this.setState({ network_error: `Hey, It seems you are offline. Check your internet connection` });
         }
       );
     }
     else if (val !== true) {
       this.setState({ buttonDisabled: false, dimmerLoad: false });
-   
+
       this.setState({ error_message: val });
 
     }
@@ -209,7 +208,7 @@ this.setState({tag_value:e.target.value});
 
 
 
- 
+
 
   toggleDialogFeatured() {
     var photo = document.getElementById('photo');
@@ -231,7 +230,7 @@ this.setState({tag_value:e.target.value});
   }
 
   handle_profile_photo(ev) {
-    
+
     this.readFile(ev.target.files[0]).then((result) => {
 
       //LOL
@@ -302,52 +301,52 @@ this.setState({tag_value:e.target.value});
     ]
 
 
-   
 
-function changeOptions(side){
 
-  let id =side.target.id;
-  
-    if(id=='side1'){
-  if(  document.getElementById('editor-side1').style.display =='block' ){
-  
-    document.getElementById('editor-side2').style.display ='none' ;
-      document.getElementById('editor-side1').style.display ='block' ;
-  
-  
-  
-  //do nothing
-  
-  }
-  else{
-    document.getElementById('editor-side2').style.display ='none' ;
-  
-    document.getElementById('editor-side1').style.display ='block' 
-  }
-  
-  
+    function changeOptions(side) {
+
+      let id = side.target.id;
+
+      if (id == 'side1') {
+        if (document.getElementById('editor-side1').style.display == 'block') {
+
+          document.getElementById('editor-side2').style.display = 'none';
+          document.getElementById('editor-side1').style.display = 'block';
+
+
+
+          //do nothing
+
+        }
+        else {
+          document.getElementById('editor-side2').style.display = 'none';
+
+          document.getElementById('editor-side1').style.display = 'block'
+        }
+
+
+      }
+      else if (id === 'side2') {
+
+        if (document.getElementById('editor-side2').style.display == 'block') {
+
+          document.getElementById('editor-side2').style.display = 'block';
+
+          document.getElementById('editor-side1').style.display = 'none'
+
+        }
+        //do nothing;
+        else {
+          document.getElementById('editor-side2').style.display = 'block';
+          document.getElementById('editor-side1').style.display = 'none';
+
+
+        }
+      }
+
+
+
     }
-  else if(  id=== 'side2') {
-  
-  if(     document.getElementById('editor-side2').style.display == 'block') { 
-  
-        document.getElementById('editor-side2').style.display ='block' ;
-  
-        document.getElementById('editor-side1').style.display ='none'
-  
-  }
-  //do nothing;
-  else{
-        document.getElementById('editor-side2').style.display ='block';
-        document.getElementById('editor-side1').style.display ='none' ;
-  
-  
-  }
-  } 
-  
-  
-  
-  }
 
 
     return (
@@ -358,30 +357,30 @@ function changeOptions(side){
 
         <Grid stackable>
           <Grid.Row>
-          
-            <Grid.Column mobile={16} tablet={12} computer={12} style={{ padding: '0px 5px' }}  >             
 
-                  { this.state.success_message === '' ?
-               ""
+            <Grid.Column mobile={16} tablet={12} computer={12} style={{ padding: '0px 5px' }}  >
 
-                    : 
-                    <div className='notification-background'>
-                    <div style={{ width: '60%', color: 'green', background: '', padding: '10px 5%' }} ><div>
-                      <span style={{ float: 'right', cursor: 'pointer' }} onClick={function () {
-                        var note = document.getElementsByClassName('notification-background');
-                        note[0].style.display = 'none';
-                      }} ><Icon name='close' onClick={()=>{ this.state.success_message=""}} /> </span>
-                      <Icon name='check circle outline' color="green" size='big' />
-                      {this.state.success_message} <a href={'http://localhost:5000/' + this.state.post_title} target='_blank' style={{ color: 'black' }} ><u>here</u> </a>
-                    </div>
+              {this.state.success_message === '' ?
+                ""
 
+                :
+                <div className='notification-background'>
+                  <div style={{ width: '90%', color: 'green', background: '', padding: '3px 5%' }} ><div>
+                    <span style={{ float: 'right', cursor: 'pointer' }} onClick={function () {
+                      var note = document.getElementsByClassName('notification-background');
+                      note[0].style.display = 'none';
+                    }} ><Icon name='close' onClick={() => { this.state.success_message = "" }} /> </span>
+                    <Icon name='check circle outline' color="green" size='big' />
+                    {this.state.success_message} <a href={'http://localhost:5000/' + this.state.post_title} target='_blank' style={{ color: 'black' }} ><u>here</u> </a>
+                  </div>
+
+                  </div>
                 </div>
-              </div>
-                  }
+              }
 
               {
-                this.state.NETWORK_ERROR !== '' ?
-                  <p style={{ padding: '5px', color: 'red', width: '90%', borderRadius: '0px' }}>  {this.state.NETWORK_ERROR} </p>
+                this.state.network_error !== '' ?
+                  <p style={{ padding: '5px', color: 'red', width: '90%', borderRadius: '0px' }}>  {this.state.network_error} </p>
                   : ''
               }
               {
@@ -390,20 +389,20 @@ function changeOptions(side){
                   : ''
               }
 
-              
-                <EditorPanel />
-              
-         
-            </Grid.Column>
-            
-            <Grid.Column mobile={16} tablet={4} computer={4}>
-            &nbsp;&nbsp; &nbsp;
 
+              <EditorPanel />
+
+
+            </Grid.Column>
+
+            <Grid.Column mobile={16} tablet={4} computer={4}>
+              &nbsp;&nbsp; &nbsp;
+  
                 <Icon name='configure' onClick={changeOptions} id='side1' title='Settings' bordered color='black' />
-                <Icon name='ellipsis horizontal' onClick={changeOptions} id='side2' title='More options' bordered color='black' />
-                <Button disabled= {this.state.buttonDisabled} type='submit' size='mini' color="green" title='save' onClick={this.addPost} >
-                  <DimmerLoad size='mini' active={this.state.dimmerLoad} />
-                   SAVE  
+              <Icon name='ellipsis horizontal' onClick={changeOptions} id='side2' title='More options' bordered color='black' />
+              <Button disabled={this.state.buttonDisabled} type='submit' size='mini' color="green" title='save' onClick={this.addPost} >
+                <DimmerLoad size='mini' active={this.state.dimmerLoad} />
+                SAVE
                 </Button>
 
 
@@ -411,20 +410,20 @@ function changeOptions(side){
                 <h5>POST SETTINGS</h5>
                 <Form size="mini">
 
-                <Form.Field name='title' maxLength='50' label='Title' value={this.state.post_title} onChange={this.handleInputs.bind(this)} control='input' placeholder='Title'  required />
+                  <Form.Field name='title' maxLength='50' label='Title' value={this.state.post_title} onChange={this.handleInputs.bind(this)} control='input' placeholder='Title' required />
                   {
                     this.state.error_message == 'title-error' ?
                       <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}> Title is required</p>
                       : ''
                   }
-       
-                  <Form.Field name='time' maxLength='2' min='0' type="number" value={this.state.time_to_read} control='input' placeholder="How many minutes read?"   onChange={this.handleInputs.bind(this)} />
+
+                  <Form.Field name='time' maxLength='2' min='0' type="number" value={this.state.time_to_read} control='input' placeholder="How many minutes read?" onChange={this.handleInputs.bind(this)} />
                   {
                     this.state.error_message == 'time-error' ?
                       <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}> The duration should not be less than 0 and not greater than 30 </p>
                       : ''
                   }
-                  <Form.Field name='description' maxLength={70}  control='textarea' placeholder='Post Slug' value={this.state.post_description} onChange={this.handleInputs.bind(this)} />
+                  <Form.Field name='description' maxLength={70} control='textarea' placeholder='Post Slug' value={this.state.post_description} onChange={this.handleInputs.bind(this)} />
 
                   {
                     this.state.error_message == 'description-error' ?
@@ -432,11 +431,11 @@ function changeOptions(side){
                       : ''
                   }
                   <Form.Field name='tags' maxLength={this.state.tagMax} label='Tags (good to have!)' value={this.state.tag_value} onChange={this.handleTags} control='input' placeholder='e.g sport, gym, race. Separate with( , )' />
-{
-  this.state.error_message == 'tag-error' ?
-    <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}>  Sorry, u've got max of 5 tags</p>
-    : ''
-}
+                  {
+                    this.state.error_message == 'tag-error' ?
+                      <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}>  Sorry, u've got max of 5 tags</p>
+                      : ''
+                  }
                 </Form>
                 <br />
               </div>
@@ -446,15 +445,16 @@ function changeOptions(side){
                 <p>  </p>
                 <Form size="mini">
 
-
-                  <Select name='category' className='custom-label' value={this.state.post_category} onChange={this.handleInputs.bind(this)} options={categoryOptions} />
+                  <Select name='category' className='custom-label' 
+                  value={this.state.post_category} onChange={this.handleInputs.bind(this)}
+                   options={categoryOptions} />
                   <br /><br /><br />
 
                   <Form.Field>
 
 
                     <Checkbox
-                      slider
+                      toggle
                       name='radioGroup1'
                       checked={this.state.privacy_value === true}
                       onChange={this.handlePostprivacy}
@@ -467,7 +467,7 @@ function changeOptions(side){
                   <Form.Field>
 
                     <Checkbox
-                      slider
+                      toggle
                       name='radioGroup2'
                       checked={this.state.enable_comments === true}
                       onChange={this.handleEnableComments}
@@ -482,21 +482,16 @@ function changeOptions(side){
 
                 </Form>
                 <h5> Featured Image</h5>
-                  <div className="featured-pix-block">
-                    <img src={this.state.featured_image} className="featured-image"/>
-                    <input className="featured-pix-cover" onChange={this.handle_profile_photo.bind(this)}
-                      type='file' id='photo' style={{visibility:'hidden'}} />
-  
-                    <div className="featured-pix-cover" onClick={this.toggleDialogFeatured.bind(this) }>
+                <div className="featured-pix-block">
+                  <img src={this.state.featured_image} className="featured-image" />
+                  <input className="featured-pix-cover" onChange={this.handle_profile_photo.bind(this)}
+                    type='file' id='photo' style={{ visibility: 'hidden' }} />
+
+                  <div className="featured-pix-cover" onClick={this.toggleDialogFeatured.bind(this)}>
                     <Icon color="teal" size="small" name='image' /> Upload Featured Image </div>
-                    </div>
+                </div>
 
               </div>
-
-
-
-
-
 
 
             </Grid.Column>

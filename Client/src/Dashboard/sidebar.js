@@ -42,6 +42,8 @@ class SideBar {
                 <Menu.Item><Icon name="flask"/>Science</Menu.Item>
                 <Menu.Item><Icon name="ambulance"/>Health</Menu.Item>
                 <Menu.Item><Icon name="heart"/>Romance</Menu.Item>
+                <Menu.Item><Icon name="building"/>Real Estate</Menu.Item>
+
             </Menu>
         ),
         settingsSubmenu: (

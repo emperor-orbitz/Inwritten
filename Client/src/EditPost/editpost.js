@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { Button,  Form, Checkbox, Header, Loader, Icon, Select, Grid } from 'semantic-ui-react';
+import { Button, Form, Checkbox, Header, Loader, Icon, Select, Grid } from 'semantic-ui-react';
 import '../../Resources/styles/article.scss';
-import {  withRouter } from 'react-router';
+import { withRouter } from 'react-router';
 
 import { connect } from 'react-redux';
 import FetchArticles from '../../Controllers/article.controller'
@@ -37,6 +37,9 @@ class EditPost extends React.Component {
     super(props)
 
     this.state = {
+      tag_value: '',
+      tagMax: '',
+
       buttonDisabled: false,
       dimmerLoad: false,
       error_message: '',
@@ -60,11 +63,18 @@ class EditPost extends React.Component {
     //this.postValidation =this.postValidation.bind(this);
   }
 
-  /*
-  *
-  *           HANDLE CHANGE EVENTS ON INPUTS
-  *
+
+
+
+  handleTags = (e) => {
+    this.setState({ tag_value: e.target.value });
+
+  }
+
+
+  /*          HANDLE CHANGE EVENTS ON INPUT
   */
+
   handleInputs(e, prop = prop || '') {
     e.preventDefault();
     var { name, value } = e.target;
@@ -83,7 +93,10 @@ class EditPost extends React.Component {
         case 'description':
           this.setState({ post_description: value });
           break;
-
+        case 'tags':
+          this.handleTags();
+          //this.setState({post_tags:value})
+          alert('fu');
 
       }
     }
@@ -92,9 +105,7 @@ class EditPost extends React.Component {
       switch (prop.name) {
 
         case 'category':
-         console.log("category", prop)
           let category = prop.value;
-
           this.setState({ post_category: category });
           break;
 
@@ -106,6 +117,7 @@ class EditPost extends React.Component {
 
 
   }
+
 
 
 
@@ -138,13 +150,13 @@ class EditPost extends React.Component {
 
 
 
-  updatePost = ()=> {
+  updatePost = () => {
     var add = new FetchArticles()
     var panel = new EditorPanel();
     this.setState({ buttonDisabled: true, dimmerLoad: true });
 
-    var post = {
-      _id:this.state.post_id,
+    const post = {
+      _id: this.state.post_id,
       title: this.state.post_title.trim(),
       createdAt: Date.now(),
       category: this.state.post_category,
@@ -154,12 +166,12 @@ class EditPost extends React.Component {
       public: this.state.privacy_value,
       body_html: panel.exposeHTMLEditorValue,
       body_schema: panel.exposeEditorValue,
-      featured_image:this.state.featured_image
+      featured_image: this.state.featured_image
 
     }
+    console.log(post.category, post.createdAt, "this is null")
 
-    let val = this.postValidation(this.state.post_title, this.state.post_decription);
-    //alert val
+    let val = this.postValidation();
     if (val === true) {
 
       add.update_article(post).then(
@@ -197,69 +209,69 @@ class EditPost extends React.Component {
   }
 
 
-/*
-
-  componentWillReceiveProps(nextProps, nextState){
-
-    //INCASE OF RELOAD. props Is LOST
-    console.log('component will receivveprops', nextProps, nextState)
-    var arrs=[];
-    for (var x of nextProps.ArticleReducer) {
-      if (x._id == this.props.match.params.postID) {
-    
-
-   arrs.push(x);
-
-
+  /*
+  
+    componentWillReceiveProps(nextProps, nextState){
+  
+      //INCASE OF RELOAD. props Is LOST
+      console.log('component will receivveprops', nextProps, nextState)
+      var arrs=[];
+      for (var x of nextProps.ArticleReducer) {
+        if (x._id == this.props.match.params.postID) {
+      
+  
+     arrs.push(x);
+  
+  
+        }
+       
       }
-     
-    }
-    
-    if(arrs.length ==0 ) nextProps.history.replace('/dashboard');
-    else{
-    let x =arrs[0];
-      this.setState({
-        post_title: x.title, post_description: x.description,
-        post_category: x.category,
-        privacy_value: x.public,
-        enable_comments: x.comments_enabled,
-        time_to_read: x.time_to_read,
-        body: x.body
-      });
-    }
-    
-    }
-
-*/
+      
+      if(arrs.length ==0 ) nextProps.history.replace('/dashboard');
+      else{
+      let x =arrs[0];
+        this.setState({
+          post_title: x.title, post_description: x.description,
+          post_category: x.category,
+          privacy_value: x.public,
+          enable_comments: x.comments_enabled,
+          time_to_read: x.time_to_read,
+          body: x.body
+        });
+      }
+      
+      }
+  
+  */
 
 
 
   /*
   *           REACTJS LIFECYCLE HOOKS
   */
- 
+
   componentDidMount() {
 
-   
-
-      for (var x of this.props.ArticleReducer) {
-        if (x._id == this.props.match.params.postID) {
-          console.log(x._id,this.props.match.params.postID, x.body_schema,'X.BODY IS HERE')
-
-          this.setState({
-            post_id:x._id,
-            post_title: x.title, 
-            post_description: x.description,
-            post_category: x.category,
-            privacy_value: x.public,
-            enable_comments: x.comments_enabled,
-            time_to_read: x.time_to_read,
-            body_schema: x.body_schema,
-            featured_image: x.featured_image
-          });
 
 
-        
+    for (var x of this.props.ArticleReducer) {
+      if (x._id == this.props.match.params.postID) {
+        console.log(x._id, this.props.match.params.postID, x.body_schema, 'X.BODY IS HERE')
+
+        this.setState({
+          post_id: x._id,
+          post_title: x.title,
+          post_description: x.description,
+          post_category: x.category,
+          privacy_value: x.public,
+          enable_comments: x.comments_enabled,
+          time_to_read: x.time_to_read,
+          body_schema: x.body_schema,
+          featured_image: x.featured_image
+        });
+
+
+
       }
 
     }
@@ -290,7 +302,7 @@ class EditPost extends React.Component {
   }
 
   handle_profile_photo(ev) {
-  
+
     this.readFile(ev.target.files[0]).then((result) => {
 
       //LOL
@@ -304,11 +316,7 @@ class EditPost extends React.Component {
   */
 
   render() {
-    //INITIAL ARRAY VALUE ==>0 [EMPTY] , THEN LATER POPULATED 
 
-
-
-    //console.log('From addpost page', this.props.ProfileReducer);
     var privacy_value = (this.state.privacy_value == true) ? 'Publish to the World' : 'Save Save to draft';
     var comment_value = (this.state.enable_comments == true) ? 'Commenting is enabled' : 'Commenting is disabled';
     var template_sample = [
@@ -385,49 +393,49 @@ class EditPost extends React.Component {
 
 
 
-function changeOptions(side){
-  let id =side.target.id;
-  
-    if(id=='side1'){
-  if(  document.getElementById('editor-side1').style.display =='block' ){
-  
-    document.getElementById('editor-side2').style.display ='none' ;
-      document.getElementById('editor-side1').style.display ='block' ;
-  
-  
-  
-  //do nothing
-  
-  }
-  else{
-    document.getElementById('editor-side2').style.display ='none' ;
-  
-    document.getElementById('editor-side1').style.display ='block' 
-  }
-  
-  
+    function changeOptions(side) {
+      let id = side.target.id;
+
+      if (id == 'side1') {
+        if (document.getElementById('editor-side1').style.display == 'block') {
+
+          document.getElementById('editor-side2').style.display = 'none';
+          document.getElementById('editor-side1').style.display = 'block';
+
+
+
+          //do nothing
+
+        }
+        else {
+          document.getElementById('editor-side2').style.display = 'none';
+
+          document.getElementById('editor-side1').style.display = 'block'
+        }
+
+
+      }
+      else if (id === 'side2') {
+
+        if (document.getElementById('editor-side2').style.display == 'block') {
+
+          document.getElementById('editor-side2').style.display = 'block';
+
+          document.getElementById('editor-side1').style.display = 'none'
+
+        }
+        //do nothing;
+        else {
+          document.getElementById('editor-side2').style.display = 'block';
+          document.getElementById('editor-side1').style.display = 'none';
+
+
+        }
+      }
+
+
+
     }
-  else if( id=== 'side2') {
-  
-  if(     document.getElementById('editor-side2').style.display == 'block') { 
-  
-        document.getElementById('editor-side2').style.display ='block' ;
-  
-        document.getElementById('editor-side1').style.display ='none'
-  
-  }
-  //do nothing;
-  else{
-        document.getElementById('editor-side2').style.display ='block';
-        document.getElementById('editor-side1').style.display ='none' ;
-  
-  
-  }
-  } 
-  
-  
-  
-  }
 
 
 
@@ -445,26 +453,26 @@ function changeOptions(side){
 
         <Grid stackable>
           <Grid.Row>
-          
-            <Grid.Column mobile={16} tablet={12} computer={12} style={{ padding: '0px 5px' }}  >             
 
-                  { this.state.success_message === '' ?
-               ""
+            <Grid.Column mobile={16} tablet={12} computer={12} style={{ padding: '0px 5px' }}  >
 
-                    : 
-                    <div className='notification-background'>
-                    <div style={{ width: '60%', color: 'green', background: '', padding: '10px 5%' }} ><div>
-                      <span style={{ float: 'right', cursor: 'pointer' }} onClick={function () {
-                        var note = document.getElementsByClassName('notification-background');
-                        note[0].style.display = 'none';
-                      }} ><Icon name='close' onClick={()=>{ this.state.success_message=""}} /> </span>
-                      <Icon name='check circle outline' color="green" size='big' />
-                      {this.state.success_message} <a href={'http://localhost:5000/' + this.state.post_title} target='_blank' style={{ color: 'black' }} ><u>here</u> </a>
-                    </div>
+              {this.state.success_message === '' ?
+                ""
 
+                :
+                <div className='notification-background'>
+                  <div style={{ width: '90%', color: 'green', background: '', padding: '1px 5%' }} ><div>
+                    <span style={{ float: 'right', cursor: 'pointer' }} onClick={function () {
+                      var note = document.getElementsByClassName('notification-background');
+                      note[0].style.display = 'none';
+                    }} ><Icon name='close' onClick={() => { this.state.success_message = "" }} /> </span>
+                    <Icon name='check circle outline' color="green" size='big' />
+                    {this.state.success_message} <a href={'http://localhost:5000/' + this.state.post_title} target='_blank' style={{ color: 'black' }} ><u>here</u> </a>
+                  </div>
+
+                  </div>
                 </div>
-              </div>
-                  }
+              }
 
               {
                 this.state.network_error !== '' ?
@@ -477,20 +485,20 @@ function changeOptions(side){
                   : ''
               }
 
-              
-                <EditorPanel initialValue={this.state.body_schema} />
-              
-         
-            </Grid.Column>
-            
-            <Grid.Column mobile={16} tablet={4} computer={4}>
-            &nbsp;&nbsp; &nbsp;
 
+              <EditorPanel initialValue={this.state.body_schema} />
+
+
+            </Grid.Column>
+
+            <Grid.Column mobile={16} tablet={4} computer={4}>
+              &nbsp;&nbsp; &nbsp;
+  
                 <Icon name='configure' onClick={changeOptions} id='side1' title='Settings' bordered color='black' />
-                <Icon name='ellipsis horizontal' onClick={changeOptions} id='side2' title='More options' bordered color='black' />
-                <Button disabled= {this.state.buttonDisabled} type='submit' size='mini' color="green" title='save' onClick={this.updatePost} >
-                  <DimmerLoad size='mini' active={this.state.dimmerLoad} />
-                   UPDATE  
+              <Icon name='ellipsis horizontal' onClick={changeOptions} id='side2' title='More options' bordered color='black' />
+              <Button disabled={this.state.buttonDisabled} type='submit' size='mini' color="green" title='save' onClick={this.updatePost} >
+                <DimmerLoad size='mini' active={this.state.dimmerLoad} />
+                UPDATE
                 </Button>
 
 
@@ -498,20 +506,20 @@ function changeOptions(side){
                 <h5>POST SETTINGS</h5>
                 <Form size="mini">
 
-                <Form.Field name='title' maxLength='50' label='Title' value={this.state.post_title} onChange={this.handleInputs.bind(this)} control='input' placeholder='Title'  required />
+                  <Form.Field name='title' maxLength='50' label='Title' value={this.state.post_title} onChange={this.handleInputs.bind(this)} control='input' placeholder='Title' required />
                   {
                     this.state.error_message == 'title-error' ?
                       <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}> Title is required</p>
                       : ''
                   }
-       
-                  <Form.Field name='time' maxLength='2' min='0' type="number" value={this.state.time_to_read} control='input' placeholder="How many minutes read?"   onChange={this.handleInputs.bind(this)} />
+
+                  <Form.Field name='time' maxLength='2' min='0' type="number" value={this.state.time_to_read} control='input' placeholder="How many minutes read?" onChange={this.handleInputs.bind(this)} />
                   {
                     this.state.error_message == 'time-error' ?
                       <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}> The duration should not be less than 0 and not greater than 30 </p>
                       : ''
                   }
-                  <Form.Field name='description' maxLength={70}  control='textarea' placeholder='Post Slug' value={this.state.post_description} onChange={this.handleInputs.bind(this)} />
+                  <Form.Field name='description' maxLength={70} control='textarea' placeholder='Post Slug' value={this.state.post_description} onChange={this.handleInputs.bind(this)} />
 
                   {
                     this.state.error_message == 'description-error' ?
@@ -519,11 +527,11 @@ function changeOptions(side){
                       : ''
                   }
                   <Form.Field name='tags' maxLength={this.state.tagMax} label='Tags (good to have!)' value={this.state.tag_value} onChange={this.handleTags} control='input' placeholder='e.g sport, gym, race. Separate with( , )' />
-{
-  this.state.error_message == 'tag-error' ?
-    <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}>  Sorry, u've got max of 5 tags</p>
-    : ''
-}
+                  {
+                    this.state.error_message == 'tag-error' ?
+                      <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}>  Sorry, u've got max of 5 tags</p>
+                      : ''
+                  }
                 </Form>
                 <br />
               </div>
@@ -533,14 +541,16 @@ function changeOptions(side){
                 <p>  </p>
                 <Form size="mini">
 
-                  <Select name='category' className="custom-label" value={this.state.post_category} onChange={this.handleInputs.bind(this)} options={categoryOptions} />
+                  <Select name='category' className="custom-label"
+                    value={this.state.post_category} onChange={this.handleInputs.bind(this)}
+                    options={categoryOptions} />
                   <br /><br /><br />
 
                   <Form.Field>
 
 
                     <Checkbox
-                  toggle
+                      toggle
                       slider
                       name='radioGroup1'
                       checked={this.state.privacy_value === true}
@@ -569,14 +579,14 @@ function changeOptions(side){
 
                 </Form>
                 <h5> Featured Image</h5>
-                  <div className="featured-pix-block">
-                    <img src={this.state.featured_image} className="featured-image"/>
-                    <input className="featured-pix-cover" onChange={this.handle_profile_photo.bind(this)}
-                      type='file' id='photo' style={{visibility:'hidden'}} />
-  
-                    <div className="featured-pix-cover" onClick={this.toggleDialogFeatured.bind(this) }>
+                <div className="featured-pix-block">
+                  <img src={this.state.featured_image} className="featured-image" />
+                  <input className="featured-pix-cover" onChange={this.handle_profile_photo.bind(this)}
+                    type='file' id='photo' style={{ visibility: 'hidden' }} />
+
+                  <div className="featured-pix-cover" onClick={this.toggleDialogFeatured.bind(this)}>
                     <Icon color="teal" size="small" name='image' /> Upload Featured Image </div>
-                    </div>
+                </div>
 
               </div>
 
