@@ -71,7 +71,7 @@ export default function ArticlePreview(props) {
         return (
             <div className='bodyArticle'>
                 Oops, It seems you have no Article written
-You can start from <a href='/add-post'>HERE  </a>
+You can start from <Link to="/add-post" >HERE</Link>
                 <br /> OR Click the pencil
                 
 </div>

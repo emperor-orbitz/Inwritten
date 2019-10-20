@@ -1,31 +1,48 @@
-var sgMail = require('@sendgrid/mail');
+var nodeMail = require('nodemailer');
 
 module.exports = class email{
 
- constructor(fields){
-  this.options =options;
-  this.fields = fields,
-  this.from = 'contact@penbox.com',
-  this.EMAIL_TYPE =EMAIL_TYPE
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY); //SET API KEY
+ constructor(to){
+
+  this.to =to;
+
+
+ }
+  //SET API KEY
+ sendVerifyMail(data){
+
+  const mailOptions= {
+    from:"malorbit360@gmail.com",
+    to:this.to,
+    subject:"One last step to greatness",
+    html:`<p>Hi ${data.username}, Click the link below to verify your account </p><br/>
+    <a href="http://localhost:5000/auth/verify_mail/${data._id}>VERIFY YOUR ACCOUNT </a>`
+        
+     }
+     var transporter = nodeMail.createTransport({
+      service:"gmail",
+      auth:{
+        user:process.env.SMTP_USER,
+        pass:process.env.SMTP_PASS
+      }
+    })
+
+    transporter.sendMail(mailOptions, function(err, info){
+  if(err){
+    console.log("THERE WAS AN ERROR IN THE EMAIL"+err);
+
+  } 
+
+  else console.log("THE EMAIL WAS SUCCESSFUL"+ info)
+})
+
+
+}
+
 
  }
 
-  VERIFICATION_EMAIL(){
-
-  var message = {
-  to: this.fields.email,
-  from: this.from,
-  templateId: 'd-c0dbe040a46b4cc0b2131cb82c58d1ce',
-  dynamic_template_data: {
-    name: this.fields.username,
-    confirm_link: `api/mailconfirm/${this.fields.confirm_link}`
-  }
-}
-
-return sgMail.send(message);
-}
-
+ 
 
  
 
@@ -34,6 +51,6 @@ return sgMail.send(message);
 
 
 
-}
+
 
 

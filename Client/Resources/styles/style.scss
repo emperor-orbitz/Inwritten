@@ -15,7 +15,7 @@ background-color:silver;
 position:fixed;
 }
 .white{
-  color:white;
+  color:white;resize: none;
 }
 .red{
 background-color: red;
@@ -30,10 +30,11 @@ ul{
 .bodyLogin{
 
   width:100%;
-  height:100%;
+  height:100% !important;
+  
   //box-sizing: border-box;
-  background:url('../images/background22.jpg');
- //margin:2% 5%;
+  //background:url('../images/background22.jpg');
+  //margin:2% 5%;
   
 
 input{
@@ -51,9 +52,9 @@ height:70px;
 
 .nav{
  margin-bottom:0px;
-  height:95%;
+  height:100%;
  //background: linear-gradient(to left, white, silver, rgb(4,68,8) ) !important;
-   box-shadow:2px 2px 2px 1px silver !important;
+  // box-shadow:2px 2px 2px 1px silver !important;
   
  
 }
@@ -136,8 +137,8 @@ margin: 10%;
   min-height:200px;
   padding:4%;
   border-radius: 2px;
- 
-  }
+  color: rgb(3, 68, 94);
+}
   
 
   .accordion-icon{

@@ -40,7 +40,7 @@ controller.send_mail(req, res, next);
 })
 
 
-router.post('/auth/api', (req, res, next) => {
+router.get('/auth/api', (req, res, next) => {
 controller.api(req, res, next);
 
 })

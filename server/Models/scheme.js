@@ -52,7 +52,8 @@ const SCHEME = {
     posts: new Schema({
 
         title: { type: String },
-        body: { type: mongoose.Schema.Types.Mixed },
+        body_html: { type: mongoose.Schema.Types.Mixed },
+        body_schema:{type: mongoose.Schema.Types.Mixed},
         featured_image: { type: String },
         category: { type: String, lowercase: true },
         createdAt: { type: Date },
@@ -63,13 +64,13 @@ const SCHEME = {
         author: String,
         description: { type: String },
         template_id: { type: String },
-        comments: {
+        comments: [{
             seen: Boolean,
             time: Date,
             name: String,
             email: String,
             body: String
-        },
+        }],
         authorId: { type: mongoose.Schema.Types.ObjectId }
     },
         {

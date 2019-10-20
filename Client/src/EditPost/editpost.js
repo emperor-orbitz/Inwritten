@@ -6,7 +6,7 @@ import { withRouter } from 'react-router';
 
 import { connect } from 'react-redux';
 import FetchArticles from '../../Controllers/article.controller'
-import EditorPanel from './editor-panel';
+import EditorPanel from './Components/editor-panel';
 
 
 

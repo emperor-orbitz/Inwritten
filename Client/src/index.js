@@ -5,13 +5,11 @@ import App from  './home';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { ProfileReducer, ArticleReducer } from '../Store/reducers';
-var path = require("path")
 
 const app = document.getElementById('app');
 const AllReducers = combineReducers({ ProfileReducer, ArticleReducer });
 const store = createStore(AllReducers);
 
-console.log(path.resolve(__dirname,'./Client/src'))
 
 class Index extends React.Component {
   constructor(props) {

@@ -10,7 +10,7 @@ import RichTextExample from '../src/NewPost/Components/test-editor';
 function App() {
   
   return (
-    <div>
+    
 
       <Switch>
         <Route exact path='/test'  component={RichTextExample} />
@@ -36,7 +36,7 @@ function App() {
       </Switch>
 
 
-    </div>
+    
 
   )
 

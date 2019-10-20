@@ -42,12 +42,12 @@ class Header extends React.Component {
 
       <div className="head">
         <Responsive as={Menu} style={{color:'white'}} minWidth={60} className="nav" secondary >
-          <Menu.Item style={{ 'width': '20%' , color:'white'}} header as="h3">Penbox.io</Menu.Item>
+          <Menu.Item style={{ 'width': '20%' , color:'black'}} header as="h2">Hashstack.io</Menu.Item>
 
 
           <Menu.Menu  position="right">
-            <Menu.Item name="login" style={{color:'white'}}  as={Link} to="/login" active={activeBar === 'login'} />
-            <Menu.Item name="Signup" style={{color:'white'}}  as={Link} to="/signup" active={activeBar === 'signup'} />
+            <Menu.Item name="login" style={{color:'black'}}  as={Link} to="/login" active={activeBar === 'login'} />
+            <Menu.Item name="Signup" style={{color:'black'}}  as={Link} to="/signup" active={activeBar === 'signup'} />
           </Menu.Menu>
         </Responsive>
 

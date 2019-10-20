@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import Header from '../AuthPage/header';
 import Validator from '../../Controllers/validators/login.validator';
 
+
 function DimmerLoad(props) {
   return <Loader active={props.active} size={props.size} inline />
 
@@ -56,11 +57,9 @@ class Login extends React.Component {
       loginError: [],
       isLoggedin: false
 
+    
     }
-
-
   }
-
 
 
   componentDidMount() {
@@ -162,13 +161,15 @@ class Login extends React.Component {
           <Grid columns={2} divided stackable>
             <Grid.Column>
               <div className="note">
-                <h2>CREATE RICH ARTICLES</h2>
-                <p>Create contents that matter to what you do. Let the world know your true potentials
+                <h1>TELL A STORY</h1>
+                <p>Create contents that matter to what you do. Intrigue the world from different perspectives
 </p>
-                <Icon name="js" color="teal" size="big" />
+                {/*<Icon name="js" color="teal" size="big" />
                 <Icon name="edit outline" size="big" />
                 <Icon name="database" color="teal" size="big" />
                 <Icon name="html5" size="big" />
+
+    */}
               </div>
 
 
@@ -180,16 +181,16 @@ class Login extends React.Component {
               <Form >
 
                 <Form.Field width={8}>
-                  <label style={{ 'color': 'white' }} color="white">Email</label>
+                  <label style={{ 'color': 'rgb(3, 68, 94)' }}>Email</label>
                   <input placeholder='Email' type="text" value={this.state.emailValue} onChange={this.eChange} />
                 </Form.Field>
                 <Form.Field width={8}>
-                  <label style={{ 'color': 'white' }}>Password</label>
+                  <label style={{'color': 'rgb(3, 68, 94)'}}>Password</label>
                   <input placeholder='Password' type="password" value={this.state.passwordValue} onChange={this.pChange} />
                 </Form.Field>
 
 
-                <Button size="large" color="teal" disabled={this.state.button.disabled} type='submit' onClick={this.submit}>Submit<DimmerLoad size="small" active={this.state.button.dimmerLoad} /></Button>
+                <Button size="large" color="teal" disabled={this.state.button.disabled} type='submit' onClick={this.submit}>LOGIN<DimmerLoad size="small" active={this.state.button.dimmerLoad} /></Button>
               </Form>
             </Grid.Column>
 

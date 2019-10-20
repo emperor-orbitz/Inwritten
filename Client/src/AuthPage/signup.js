@@ -166,13 +166,10 @@ return (
 <Grid columns={2} divided stackable>
 <Grid.Column>
 <div className="note">
-<h2>CREATE RICH ARTICLES</h2>
-<p>Create contents that matter to what you do. Let the world know your true potentials
+<h2>CREATE RICH PERSPECTIVES</h2>
+<p>Create an account let's knows what you do. Let the world know your true potentials
 </p>
-<Icon name="js" color="teal" size="big"/>
-<Icon name="edit outline" size="big"/>
-<Icon name="database" color="teal" size="big"/>
-<Icon name="html5" size="big"/>
+
 </div>
 
 
@@ -183,22 +180,22 @@ return (
 
 <Form >
 <Form.Field width={8}>
-      <label style={{'color':'white'}} color="white" htmlFor="username">Username</label>
+      <label style={{'color': 'rgb(3, 68, 94)'}} color="white" htmlFor="username">Username</label>
       <input placeholder='Username' type="text"  value={this.state.usernameValue} onChange={this.uChange} id="username"/>
     </Form.Field>
     <Form.Field width={8}>
-      <label style={{'color':'white'}} color="white">Email</label>
+      <label style={{'color': 'rgb(3, 68, 94)'}}>Email</label>
       <input placeholder='Email' type="text"  value={this.state.emailValue} onChange={this.eChange} />
     </Form.Field>
     <Form.Field width={8}>
-      <label style={{'color':'white'}} >Password</label>
+      <label style={{'color': 'rgb(3, 68, 94)'}} >Password</label>
       <input placeholder='Password' type="password" value={this.state.passwordValue} onChange={this.pChange} />
     </Form.Field>
-    <Form.Field>
-      <Checkbox  style={{'color':'white'}} label='I agree to the Terms and Conditions' />
-    </Form.Field>
-    
-    <Button size="large" color="teal" disabled ={this.state.button.disabled} type='submit' onClick={this.submit}>Submit<DimmerLoad size="small" active= {this.state.button.dimmerLoad}/></Button>
+
+     <span style ={{'color': 'black'}}> By Creating an account you have agreed to the <br/><a href="/terms-and-conditions">terms and conditions</a> 
+     </span>
+    <br/><br/>
+    <Button size="large" color="teal" disabled ={this.state.button.disabled} type='submit' onClick={this.submit}>CREATE AN ACCOUNT<DimmerLoad size="small" active= {this.state.button.dimmerLoad}/></Button>
   </Form>
   </Grid.Column>
 

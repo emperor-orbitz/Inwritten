@@ -2,9 +2,8 @@ import React, { } from 'react';
 import '../../Resources/styles/style.scss';
 import { Menu, Icon,  Sidebar, Modal, Button, Responsive, Accordion, Dropdown } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import Footer from '../footer';
 import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
+import Link from 'react-router-dom/Link';
 import FetchArticles from '../../Controllers/article.controller';
 import Connection from '../../Controllers/auth.controller';
 
@@ -160,9 +159,9 @@ var xx_page = ( xx===0 ) ? this.props.location.pathname.slice(1) : this.props.lo
       return (
 
         <div className="head">
-          <Responsive as={Menu} minWidth={300}  className="nav"  secondary  >
-            <Menu.Item icon="bars" onClick={this.toggleSide} size="big" as={Icon} />
-            <Menu.Item style={{ 'width': '20%' }} header as="h5">Hashstack.io <span>&nbsp; {xx_page}</span></Menu.Item>
+          <Responsive as={Menu} minWidth={300} className="nav"  secondary  >
+            <Menu.Item icon="bars" onClick={this.toggleSide} size="big" />
+            <Menu.Item style={{ 'width': '20%' }} header ><h3>Hashstack.io</h3> </Menu.Item>
 
 
             <Menu.Menu pointing='true' position="right">
@@ -202,7 +201,6 @@ var xx_page = ( xx===0 ) ? this.props.location.pathname.slice(1) : this.props.lo
                 </Modal.Actions>
               </Modal>
             </div>
-{/*push, overlay, slide out uncover */}
 
 
 
@@ -216,7 +214,7 @@ var xx_page = ( xx===0 ) ? this.props.location.pathname.slice(1) : this.props.lo
                 
               >
                 <div style={{ textAlign: 'center', padding: '20px 2px', paddingBottom: '10px', color: 'rgb(3, 68, 94)', background: 'white' }} >
-                 <a href="/dashboard" style={{color:"black"}}> <h3>DASHBOARD</h3></a>
+                 <Link to="/dashboard" style={{color:"black"}}> <h3>DASHBOARD</h3></Link>
                 </div>
      
 

@@ -79,7 +79,7 @@ var article = (req, res) => {
                 .send({ data: [] })
         }
         else
-            res.status(200)
+             res.status(200)
                 .send({ data: doc })
     })
 }
@@ -90,7 +90,8 @@ var article = (req, res) => {
 
 var create = (req, res) => {
     let { title,
-        body,
+        body_html,
+        body_schema,
         category,
         description,
         createdAt,
@@ -104,7 +105,8 @@ featured_image=undefined;
 
     var postDoc = {
         title: title,
-        body: body,
+        body_schema: body_schema,
+        body_html:body_html,
         createdAt: createdAt,
         author: req.user.username,
         category: category,
@@ -171,10 +173,9 @@ featured_image=undefined;
                 res.status(200)
                     .send({
                           status:200,
-                          data: [success] 
+                          data:success 
                           })
             }
-
             else{
                 res.status(http_status.INTERNAL_SERVER_ERROR.code)
                 .send({ 
@@ -206,12 +207,12 @@ var deletePost = (req, res) => {
     post.delete_article(id, (err, success) => {
         if (err)
             res.status(http_status.INTERNAL_SERVER_ERROR.code)
-               .send({ data: [] });
+               .send({ status:500, data: [] });
 
 
         else {
             res.status(http_status.OK.code)
-               .send({data: success})
+               .send({ status:200, data: success})
 
         }
 
@@ -223,17 +224,18 @@ var deletePost = (req, res) => {
 //*  UPDATE ARTICLE
 
 var update = (req, res) => {
-
+console.log(req.body, "this is req, body")
     var post = new posts();
-    post.update_article(req.body.id, req.body, (err, success) => {
+    post.update_article(req.body._id, req.body, (err, success) => {
         if (err) {
             res.status(http_status.INTERNAL_SERVER_ERROR.code)
-               .send({ data: [] })
+               .send({ status:500, data: [] })
+               console.log(err+"errr")
         }
 
         else
             res.status(http_status.OK.code)
-               .send({ data: success });
+               .send({ status:200, data: success });
 
     })
 

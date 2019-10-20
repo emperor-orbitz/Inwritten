@@ -1,7 +1,5 @@
 
 //          IMPORTS
-
-
 import React, { Component } from 'react';
 import { Button, Form, Checkbox, Header, Loader, Icon, Select, Grid, IconGroup } from 'semantic-ui-react';
 import '../../Resources/styles/article.scss';
@@ -356,13 +354,12 @@ class AddPost extends React.Component {
       <div className='add-post'>
 
         <Grid stackable>
-          <Grid.Row>
+          <Grid.Row reversed="mobile" >
 
-            <Grid.Column mobile={16} tablet={12} computer={12} style={{ padding: '0px 5px' }}  >
+            <Grid.Column mobile={16} tablet={12} computer={13} style={{ padding: '0px 5px' }}  >
 
               {this.state.success_message === '' ?
                 ""
-
                 :
                 <div className='notification-background'>
                   <div style={{ width: '90%', color: 'green', background: '', padding: '3px 5%' }} ><div>
@@ -395,9 +392,9 @@ class AddPost extends React.Component {
 
             </Grid.Column>
 
-            <Grid.Column mobile={16} tablet={4} computer={4}>
+            <Grid.Column mobile={16} tablet={4} computer={3}>
               &nbsp;&nbsp; &nbsp;
-  
+
                 <Icon name='configure' onClick={changeOptions} id='side1' title='Settings' bordered color='black' />
               <Icon name='ellipsis horizontal' onClick={changeOptions} id='side2' title='More options' bordered color='black' />
               <Button disabled={this.state.buttonDisabled} type='submit' size='mini' color="green" title='save' onClick={this.addPost} >
@@ -445,9 +442,9 @@ class AddPost extends React.Component {
                 <p>  </p>
                 <Form size="mini">
 
-                  <Select name='category' className='custom-label' 
-                  value={this.state.post_category} onChange={this.handleInputs.bind(this)}
-                   options={categoryOptions} />
+                  <Select name='category' className='custom-label'
+                    value={this.state.post_category} onChange={this.handleInputs.bind(this)}
+                    options={categoryOptions} />
                   <br /><br /><br />
 
                   <Form.Field>
