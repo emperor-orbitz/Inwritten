@@ -197,9 +197,9 @@ var register = (req, res) => {
 
     })
         .catch(err => res.status(401)
-            .send({
-                message: "Invalid Parameters",
-            }))
+                        .send({
+                            message: "Invalid Parameters",
+                        }))
 
 
 }

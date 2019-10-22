@@ -339,7 +339,7 @@ class Profile extends React.Component {
 
         return (
 
-            <div >
+            <div style={{marginTop:"0px !important"}}>
 
                 <div className='profile-header'>
                     <div className="profile-pix-block">
@@ -351,7 +351,7 @@ class Profile extends React.Component {
                     </div>
 
                     <div className="profile-primary-info">
-                        <h4 style={{ color: 'teal' }}> PROFILE SETTINGS</h4>
+                        <h2 style={{ color: 'white' }}> Profile Settings</h2>
                         <div className='span-details'>Username</div> <span> @{username} </span><br />
                         <div className='span-details'>Email</div><span> {email}</span>
                     </div>
@@ -361,7 +361,7 @@ class Profile extends React.Component {
 
 
 
-                <div >
+                <div>
                     
 
                     <div className="data-info-profile" style={{ display: this.state.dispProf }}>

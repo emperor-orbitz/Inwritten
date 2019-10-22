@@ -64,14 +64,25 @@ const SCHEME = {
         author: String,
         description: { type: String },
         template_id: { type: String },
-        comments: [{
-            seen: Boolean,
-            time: Date,
-            name: String,
-            email: String,
-            body: String
-        }],
+        likes:{ Type:Number, default:0 },
+        comments: [{type: mongoose.Schema.Types.ObjectId, ref:"Comment"}],
         authorId: { type: mongoose.Schema.Types.ObjectId }
+    },
+        {
+            timestamps: true,
+            versionKey: false,
+            strict: false
+        }
+    ),
+
+    comments: new Schema({
+        seen: {type:Boolean, default:false},
+        author_id: { type: mongoose.Schema.Types.ObjectId },
+        commenter_id:{type:mongoose.Schema.Types.ObjectId},
+        likes:{type:Number, default:0 },
+        post_id: { type: mongoose.Schema.Types.ObjectId },
+        public: { type: Boolean },
+        comment: {type: String, default:""}
     },
         {
             timestamps: true,

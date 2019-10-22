@@ -1,6 +1,6 @@
 import React, { } from 'react';
 import '../../Resources/styles/style.scss';
-import { Menu, Icon,  Sidebar, Modal, Button, Responsive, Accordion, Dropdown } from 'semantic-ui-react';
+import { Menu, Icon, Sidebar, Modal, Button, Responsive, Accordion, Dropdown, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Link from 'react-router-dom/Link';
@@ -28,8 +28,8 @@ class HeaderAccount extends React.Component {
       loadFinish: false,
 
     }
-    if(this.state.visible== true)  this.setState({visible:false});
-    else ;
+    if (this.state.visible == true) this.setState({ visible: false });
+    else;
 
 
     this.handleClick = this.handleClick.bind(this);
@@ -38,12 +38,12 @@ class HeaderAccount extends React.Component {
   }
 
 
-UNSAFE_componentWillReceiveProps(){
-  //push sideBAR back IN TWEAK
-  if(this.state.visible== true)  this.setState({visible:false});
-  else ;
+  UNSAFE_componentWillReceiveProps() {
+    //push sideBAR back IN TWEAK
+    if (this.state.visible == true) this.setState({ visible: false });
+    else;
 
-}
+  }
 
 
   connect = new Connection();
@@ -61,24 +61,24 @@ UNSAFE_componentWillReceiveProps(){
 
           this.props.dispatch({ type: 'INJECT_PROFILE', payload: _ })
 
-          this.fetchArticle.fetch_articles_list().then( articles => {
+          this.fetchArticle.fetch_articles_list().then(articles => {
 
-            if (articles.length >0 ) {
+            if (articles.length > 0) {
               this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: articles })
               this.setState({ loadFinish: true })
 
             }
-            else 
-               this.setState({ loadFinish: true });
+            else
+              this.setState({ loadFinish: true });
 
-            
 
-          }).catch( e => this.setState({ loadFinish: true }) )
+
+          }).catch(e => this.setState({ loadFinish: true }))
 
         })
-        .catch( err => this.props.history.replace('/login') ) 
+        .catch(err => this.props.history.replace('/login'))
 
-      }
+    }
 
 
     else {
@@ -86,15 +86,15 @@ UNSAFE_componentWillReceiveProps(){
       *JUST RENDER
       *Remove the loader
       */
-    // this.setState({ loadFinish: true });
+      // this.setState({ loadFinish: true });
 
-     this.connect.isLoggedin(token)
+      this.connect.isLoggedin(token)
         .then(_ => {
-         this.setState({ loadFinish: true }) 
+          this.setState({ loadFinish: true })
 
 
         })
-        .catch( err => this.props.history.replace('/login') ) 
+        .catch(err => this.props.history.replace('/login'))
 
 
     }
@@ -129,11 +129,10 @@ UNSAFE_componentWillReceiveProps(){
 
 
   logout() {
- 
 
-  localStorage.removeItem("hs_token");
-   // console.log(this.props.history);
- this.props.history.replace('/login');
+
+    localStorage.removeItem("hs_token");
+    this.props.history.replace('/login');
 
 
   }
@@ -142,13 +141,13 @@ UNSAFE_componentWillReceiveProps(){
 
   render() {
     var side = new SideBar();
-    var { articleSubmenu,  categorySubmenu, imageSubmenu, settingsSubmenu } = side.subMenu;
+    var { articleSubmenu, categorySubmenu, imageSubmenu, settingsSubmenu } = side.subMenu;
     const { visible } = this.state;
     var { activeAccordion } = this.state;
 
-//PAGE NAME    
-var xx= this.props.location.pathname.lastIndexOf('/');
-var xx_page = ( xx===0 ) ? this.props.location.pathname.slice(1) : this.props.location.pathname.slice(1, xx);
+    //PAGE NAME    
+    var xx = this.props.location.pathname.lastIndexOf('/');
+    var xx_page = (xx === 0) ? this.props.location.pathname.slice(1) : this.props.location.pathname.slice(1, xx);
 
 
 
@@ -159,7 +158,7 @@ var xx_page = ( xx===0 ) ? this.props.location.pathname.slice(1) : this.props.lo
       return (
 
         <div className="head">
-          <Responsive as={Menu} minWidth={300} className="nav"  secondary  >
+          <Responsive as={Menu} minWidth={300} className="nav" secondary  >
             <Menu.Item icon="bars" onClick={this.toggleSide} size="big" />
             <Menu.Item style={{ 'width': '20%' }} header ><h3>Hashstack.io</h3> </Menu.Item>
 
@@ -186,12 +185,10 @@ var xx_page = ( xx===0 ) ? this.props.location.pathname.slice(1) : this.props.lo
           <div className="sideBar">
 
 
-            <div>
-
               <Modal size="mini" open={open} onClose={this.close}>
                 <Modal.Header>LOGOUT</Modal.Header>
                 <Modal.Content>
-                  <p style={{ color:'black'}}>Are you sure you want to log out?<br /> There's still a lot to write about!</p>
+                  <p style={{ color: 'black' }}>Are you sure you want to log out?<br /> There's still a lot to write about!</p>
                 </Modal.Content>
                 <Modal.Actions>
                   <Button onClick={() => {
@@ -200,7 +197,7 @@ var xx_page = ( xx===0 ) ? this.props.location.pathname.slice(1) : this.props.lo
                   <Button onClick={this.logout} negative icon='checkmark' labelPosition='right' content='Yes' />
                 </Modal.Actions>
               </Modal>
-            </div>
+            
 
 
 
@@ -211,56 +208,64 @@ var xx_page = ( xx===0 ) ? this.props.location.pathname.slice(1) : this.props.lo
                 visible={visible}
                 vertical='true'
                 className='sidebar'
-                
+
               >
                 <div style={{ textAlign: 'center', padding: '20px 2px', paddingBottom: '10px', color: 'rgb(3, 68, 94)', background: 'white' }} >
-                 <Link to="/dashboard" style={{color:"black"}}> <h3>DASHBOARD</h3></Link>
-                </div>
-     
-
-                <div className="accordion-item">
-                  <Accordion.Title active={this.state.activeAccordion === 1} style={{ padding: '5px 20px' }} index={1} onClick={this.handleClick}  >
-                    <Icon name="file alternate" className="accordion-icon" size="large" /> <b style={{ fontSize: '12px' }}>MY ARTICLES</b> 
-                  </Accordion.Title>
-                  <Accordion.Content style={{ padding: '5px 20px' }} active={activeAccordion === 1} content={articleSubmenu} />
-
-                </div>
-
-                <div className="accordion-item">
-                  <Accordion.Title active={this.state.activeAccordion === 2} style={{ padding: '5px 20px' }} index={2} onClick={this.handleClick}  >
-                  <Icon name="file image outline" className="accordion-icon" size="large" />  <b style={{ fontSize: '12px' }}>BOOKMARK</b>
-                  </Accordion.Title>
-                  <Accordion.Content style={{ padding: '5px 20px' }} active={activeAccordion === 2} content={imageSubmenu} />
-
+                  <Link to="/dashboard" style={{ color: "black" }}> <h3>DASHBOARD</h3></Link>
                 </div>
 
 
                 <div className="accordion-item">
-                  <Accordion.Title active={this.state.activeAccordion === 3} style={{ padding: '5px 20px' }} index={3} onClick={this.handleClick}>
-                  <Icon name="hashtag" className="accordion-icon" size="large" />  <b style={{ fontSize: '12px' }}>INTERESTS</b> 
+                  <Accordion.Title icon="file alternate" active={this.state.activeAccordion === 1} style={{ padding: '1px 20px' }} index={1} onClick={this.handleClick}  >
+                    <Icon name="file alternate" className="accordion-icon" size="large" /> <b style={{ fontSize: '12px' }}>MY ARTICLES</b>
                   </Accordion.Title>
-                  <Accordion.Content style={{ padding: '5px 20px' }} active={activeAccordion === 3} content={categorySubmenu} />
+                  <Accordion.Content style={{ padding: '1px 20px' }} active={activeAccordion === 1} content={articleSubmenu} />
+                  <Divider />
+
+                </div>
+                <div className="accordion-item">
+                  <Accordion.Title active={this.state.activeAccordion === 2} style={{ padding: '1px 20px' }} index={2} onClick={this.handleClick}  >
+                    <Icon name="file image outline" className="accordion-icon" size="large" />  <b style={{ fontSize: '12px' }}>BOOKMARK</b>
+                  </Accordion.Title>
+                  <Accordion.Content style={{ padding: '1px 20px' }} active={activeAccordion === 2} content={imageSubmenu} />
+                  <Divider />
+                </div>
+
+
+                <div className="accordion-item">
+                  <Accordion.Title active={this.state.activeAccordion === 3} style={{ padding: '1px 20px' }} index={3} onClick={this.handleClick}>
+                    <Icon name="hashtag" className="accordion-icon" size="large" />  <b style={{ fontSize: '12px' }}>INTERESTS</b>
+                  </Accordion.Title>
+                  <Accordion.Content style={{ padding: '1px 20px' }} active={activeAccordion === 3} content={categorySubmenu} />
+                  <Divider />
+
                 </div>
 
                 <div className="accordion-item">
-                  <Accordion.Title active={this.state.activeAccordion === 4} style={{ padding: '5px 20px' }} index={4} onClick={this.handleClick}>
-                  <Icon name="sliders horizontal" className="accordion-icon" size="large" />  <b style={{ fontSize: '12px' }}>SETTINGS</b> 
+                  <Accordion.Title active={this.state.activeAccordion === 4} style={{ padding: '1px 20px' }} index={4} onClick={this.handleClick}>
+                    <Icon name="sliders horizontal" className="accordion-icon" size="large" />  <b style={{ fontSize: '12px' }}>SETTINGS</b>
                   </Accordion.Title>
-                  <Accordion.Content style={{ padding: '5px 20px' }} active={activeAccordion === 4} content={settingsSubmenu} />
+                  <Accordion.Content style={{ padding: '1px 20px' }} active={activeAccordion === 4} content={settingsSubmenu} />
+                  <Divider />
+                </div>
 
-
+                <div className="accordion-item">
+                  <Accordion.Title active={this.state.activeAccordion === 4} style={{ padding: '1px 20px' }} index={4} onClick={this.handleClick}>
+                    <Icon name="comments" className="accordion-icon" size="large" />  <b style={{ fontSize: '12px' }}>COMMENTS</b>
+                  </Accordion.Title>
+                  <Divider />
                 </div>
 
                 <div className="accordion-item">
                   <Button as={Link} to="/about_us" fluid style={{ color: 'rgb(3, 68, 94)' }}>
                     <Icon name="info" />
-THE APP
-</Button>
+                    THE APP
+                  </Button>
 
                 </div>
 
               </Sidebar>
-              <Sidebar.Pusher  >
+              <Sidebar.Pusher>
 
 
 
@@ -288,7 +293,7 @@ THE APP
       return (<div className='splashscreen'>
 
         <img src={splash} className='splash' />
-    <p>HASHSTACK</p>
+        <p>HASHSTACK</p>
         <h5>Loading your contents a bit... </h5>
       </div>)
     }

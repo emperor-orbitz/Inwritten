@@ -1,0 +1,33 @@
+var express = require('express');
+var controller = require("../Controllers/comments.controller");
+var router = express.Router();
+var passport = require("passport");
+
+
+/*
+*          AUTH ROUTES
+*/
+
+
+router.post('/auth/isloggedin',
+passport.authenticate("jwt", {session:false}),
+ (req, res, next) => {   
+    controller.isloggedin(req, res, next);
+    
+})
+
+
+
+router.post('/comment/create',  (req, res, next) => {   
+controller.create(req, res, next);
+
+})
+
+router.patch('/comment/update',  (req, res, next) => {   
+    controller.update(req, res, next);
+    
+    })
+
+
+
+module.exports = router;

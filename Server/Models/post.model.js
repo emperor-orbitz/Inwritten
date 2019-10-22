@@ -1,15 +1,14 @@
 
 var mongoose = require('mongoose');
-var SCHEME = require('./scheme');
-var postSchema = SCHEME.posts;
+var scheme = require('./scheme');
+var postSchema = scheme.posts;
 
 
 
 /*
         LOAD LIMITED POSTS
 */
-
-postSchema.methods.loadUserPost = function (username, limit, callback) {
+postSchema.methods.loadUserPost = (username, limit, callback) => {
 
     return mongoose.model('Post', postSchema)
         .find({ author: username }, {
@@ -22,7 +21,6 @@ postSchema.methods.loadUserPost = function (username, limit, callback) {
 /*
           INSERT NEW POSTS
 */
-
 postSchema.methods.insertPost = function (post, callback) {
 
     return mongoose.model('Post', postSchema)
@@ -35,9 +33,7 @@ postSchema.methods.insertPost = function (post, callback) {
 /*
           FIND ARTICLES BY _ID
 */
-
-
-postSchema.methods.find_article = function (post_id, callback_func) {
+postSchema.methods.find_article = (post_id, callback_func) => {
 
     var objId = mongoose.Types.ObjectId(post_id);
     return mongoose.model('Post', postSchema).findById(objId, callback_func);
@@ -48,9 +44,7 @@ postSchema.methods.find_article = function (post_id, callback_func) {
 /*
         UPDATE AUTHOR
 */
-
-
-postSchema.methods.updateAuthor = function (new_author, authorId) {
+postSchema.methods.updateAuthor =  (new_author, authorId)=>{
 
     mongoose.model('Post', postSchema).find({ authorId: authorId }, (err, doc) => {
         if (err) return err;
@@ -81,9 +75,7 @@ postSchema.methods.updateAuthor = function (new_author, authorId) {
 /*
            LOAD ALL POSTS (AUTHOR:USER )
 */
-
-
-postSchema.methods.loadAllPost = function (username, callback) {
+postSchema.methods.loadAllPost = (username, callback) => {
     //no limit
     return mongoose.model('Post', postSchema)
         .find({ author: username }, callback);
@@ -96,8 +88,7 @@ postSchema.methods.loadAllPost = function (username, callback) {
 
 /*           DELETE A POST
 */
-
-postSchema.methods.delete_article = function (post_id, callback_func) {
+postSchema.methods.delete_article = (post_id, callback_func) => {
 
     return mongoose.model('Post', postSchema).deleteOne({ _id: post_id }, callback_func);
 
@@ -109,9 +100,7 @@ postSchema.methods.delete_article = function (post_id, callback_func) {
 /*
   UPDATE ARTICLE
 */
-
-
-postSchema.methods.update_article = function (id, body, callback_func) {
+postSchema.methods.update_article = (id, body, callback_func)  =>{
 
     var data = {
         // id:this.state.post_id,
