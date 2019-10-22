@@ -48,8 +48,7 @@ var loadList = (req, res, next) => {
     var limit = parseInt(req.query.limit);
     var post = new posts();
 
-    post.loadUserPost(req.user
-        .username, limit, (err, results) => {
+    post.loadUserPost(req.user._id, limit, (err, results) => {
             if (err) {
                 res.status(http_status.INTERNAL_SERVER_ERROR.code)
                     .send({ data: [] })
@@ -82,6 +81,8 @@ var article = (req, res) => {
              res.status(200)
                 .send({ data: doc })
     })
+
+
 }
 
 
@@ -241,7 +242,20 @@ console.log(req.body, "this is req, body")
 
 }
 
+var like =(req, res) =>{
 
+    posts.updateOne({_id:req.body.id}, {$inc:{likes: req.body.like}},
+      (err, resolve)=>{
+          if (err) 
+              res.send({message:`An error Occured ${err}`})
+          else
+              res.send({data:resolve, status:200})
+      }
+      
+      
+      )
+      
+  }
 
 
 
@@ -253,5 +267,6 @@ module.exports = {
     create: create,
     update: update,
     deletePost: deletePost,
-    article: article
+    article: article,
+    like:like
 };

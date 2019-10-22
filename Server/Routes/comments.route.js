@@ -26,8 +26,17 @@ controller.create(req, res, next);
 router.patch('/comment/update',  (req, res, next) => {   
     controller.update(req, res, next);
     
-    })
+})
 
+router.get('/comment/list',  (req, res, next) => {   
+    controller.list(req, res, next);
+    
+})
+
+router.delete('/comment/delete',  (req, res, next) => {   
+    controller.delete(req, res, next);
+    
+})
 
 
 module.exports = router;

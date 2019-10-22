@@ -38,7 +38,7 @@ controller.loadAllList(req, res, next);
 
 
 router.patch('/articles/update', isAuth, (req, res, next) => {
-controller.update(req, res, next);
+roller.update(req, res, next);
 
 });
 
@@ -53,7 +53,11 @@ router.post('/articles/article', isAuth, (req, res, next) => {
 controller.article(req,res);
 });
 
-
+router.patch('/articles/like', isAuth, (req, res, next) => {
+    controller.like(req, res, next);
+    
+});
+    
 
 
 

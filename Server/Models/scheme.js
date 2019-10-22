@@ -77,12 +77,12 @@ const SCHEME = {
 
     comments: new Schema({
         seen: {type:Boolean, default:false},
-        author_id: { type: mongoose.Schema.Types.ObjectId },
+        author_id: { type: mongoose.Schema.Types.ObjectId, required:true },
         commenter_id:{type:mongoose.Schema.Types.ObjectId},
         likes:{type:Number, default:0 },
-        post_id: { type: mongoose.Schema.Types.ObjectId },
-        public: { type: Boolean },
-        comment: {type: String, default:""}
+        post_id: { type: mongoose.Schema.Types.ObjectId, required:true },
+        public: { type: Boolean, default:false },
+        comment: {type: String}
     },
         {
             timestamps: true,

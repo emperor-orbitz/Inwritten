@@ -8,11 +8,12 @@ var postSchema = scheme.posts;
 /*
         LOAD LIMITED POSTS
 */
-postSchema.methods.loadUserPost = (username, limit, callback) => {
+postSchema.methods.loadUserPost = (_id, limit, callback) => {
 
     return mongoose.model('Post', postSchema)
-        .find({ author: username }, {
-        }, { limit: limit }, callback);
+        .find({ authorId: _id }, {
+        }, { limit: limit }, callback)
+        .populate('comments');
 };
 
 
@@ -24,8 +25,7 @@ postSchema.methods.loadUserPost = (username, limit, callback) => {
 postSchema.methods.insertPost = function (post, callback) {
 
     return mongoose.model('Post', postSchema)
-        .create({ ...post },
-            callback);
+        .create({ ...post }, callback);
 }
 
 
@@ -36,7 +36,9 @@ postSchema.methods.insertPost = function (post, callback) {
 postSchema.methods.find_article = (post_id, callback_func) => {
 
     var objId = mongoose.Types.ObjectId(post_id);
-    return mongoose.model('Post', postSchema).findById(objId, callback_func);
+    return mongoose.model('Post', postSchema)
+    .findById(objId, callback_func)
+    .populate('comments');
 }
 
 
@@ -78,7 +80,8 @@ postSchema.methods.updateAuthor =  (new_author, authorId)=>{
 postSchema.methods.loadAllPost = (username, callback) => {
     //no limit
     return mongoose.model('Post', postSchema)
-        .find({ author: username }, callback);
+        .find({ author: username }, callback)
+        .populate('comments');
 
 };
 
@@ -90,7 +93,8 @@ postSchema.methods.loadAllPost = (username, callback) => {
 */
 postSchema.methods.delete_article = (post_id, callback_func) => {
 
-    return mongoose.model('Post', postSchema).deleteOne({ _id: post_id }, callback_func);
+    return mongoose.model('Post', postSchema)
+                   .deleteOne({ _id: post_id }, callback_func);
 
 }
 
@@ -113,7 +117,6 @@ postSchema.methods.update_article = (id, body, callback_func)  =>{
         public: body.public,
         body_html: body.body_html,
         body_schema: body.body_schema,
-
         featured_image: body.featured_image || ""
 
     }
