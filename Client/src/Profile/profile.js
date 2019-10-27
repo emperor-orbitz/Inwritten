@@ -329,9 +329,6 @@ class Profile extends React.Component {
 
 
 
-
-
-
     render() {
         console.log(this.props.ProfileReducer);
         var { email, username, bio } = this.state;
@@ -339,7 +336,7 @@ class Profile extends React.Component {
 
         return (
 
-            <div style={{marginTop:"0px !important"}}>
+            <div className="profile-div" style={{marginTop:"0px !important"}}>
 
                 <div className='profile-header'>
                     <div className="profile-pix-block">
@@ -351,7 +348,7 @@ class Profile extends React.Component {
                     </div>
 
                     <div className="profile-primary-info">
-                        <h2 style={{ color: 'white' }}> Profile Settings</h2>
+                        <h2 style={{ color: 'black' }}> Profile Settings</h2>
                         <div className='span-details'>Username</div> <span> @{username} </span><br />
                         <div className='span-details'>Email</div><span> {email}</span>
                     </div>
@@ -361,7 +358,7 @@ class Profile extends React.Component {
 
 
 
-                <div>
+                <div className="profile-body">
                     
 
                     <div className="data-info-profile" style={{ display: this.state.dispProf }}>
@@ -436,7 +433,7 @@ class Profile extends React.Component {
 
 
 
-                    </div>
+                    </div> 
 
                 </div>
 

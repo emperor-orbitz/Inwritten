@@ -33,7 +33,7 @@ const SCHEME = {
         telephone: { type: Number },
         lastName: { type: String, trim: true },
         firstName: { type: String, trim: true },
-        display_picture: { type: String, default: "http://res.cloudinary.com/hashstackio/image/upload/v1566411930/ABCD-profile.png" },
+        display_picture: { type: String, default: "https://images.app.goo.gl/FasJx4k9JKgCmP3t7" },
         bio: { type: String },
         verified: { type: Boolean, required: true, default: false },
         lastVerified: { type: Date, default: Date.now() }

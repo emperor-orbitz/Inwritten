@@ -1,4 +1,15 @@
 
+.profile-div{
+height:auto;
+width:100%;
+
+
+
+}
+.profile-body{
+//float:left;
+
+}
 
 .profile-header{
 
@@ -13,11 +24,12 @@
     position: relative;
     //border:1px solid yellow;
     box-shadow:2px 3px 8px 0.5px rgba(158, 157, 157, 0.5);
-     background-image: linear-gradient(-90deg,black,green);
-     color:white !important;
+     background:white;
+     color:teal !important;
     $profile-width:150px;
     $profile-height:80px;
     color:black;
+    
 
 h2{
     margin-bottom:2px;

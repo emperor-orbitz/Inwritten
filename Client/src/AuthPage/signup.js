@@ -61,6 +61,7 @@ loginError:[]
 
 
 submit =(e)=>{
+  
 let button= Object.assign({}, this.state.button);
 var validate= new Validator({username:this.state.usernameValue, email:this.state.emailValue, password:this.state.passwordValue});
 

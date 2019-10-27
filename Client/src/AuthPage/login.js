@@ -95,16 +95,17 @@ class Login extends React.Component {
 
     let button = Object.assign({}, this.state.button);
     var validate = new Validator({ email: this.state.emailValue, password: this.state.passwordValue });
+    button.dimmerLoad = button.disabled = true
 
 
-
+    this.setState({ button })
     validate.emailPromise().then(_ => {
 
       connect.login(data)
         .then( _ => {
           
-          button.dimmerLoad = button.disabled = true
-          this.setState({ button })
+          button.dimmerLoad = button.disabled = false
+          //this.setState({ button })
           this.props.history.replace('/dashboard')
 
         }).catch(_ => {

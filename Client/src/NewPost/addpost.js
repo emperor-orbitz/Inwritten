@@ -302,48 +302,20 @@ class AddPost extends React.Component {
 
 
     function changeOptions(side) {
-
       let id = side.target.id;
-
-      if (id == 'side1') {
-        if (document.getElementById('editor-side1').style.display == 'block') {
-
+      
+      if (id == 'side1' && document.getElementById('editor-side1').style.display != 'block' ) {
+       
           document.getElementById('editor-side2').style.display = 'none';
-          document.getElementById('editor-side1').style.display = 'block';
-
-
-
-          //do nothing
-
-        }
-        else {
-          document.getElementById('editor-side2').style.display = 'none';
-
           document.getElementById('editor-side1').style.display = 'block'
         }
 
-
-      }
-      else if (id === 'side2') {
-
-        if (document.getElementById('editor-side2').style.display == 'block') {
-
-          document.getElementById('editor-side2').style.display = 'block';
-
-          document.getElementById('editor-side1').style.display = 'none'
-
-        }
-        //do nothing;
-        else {
+      else if (id === 'side2' && document.getElementById('editor-side2').style.display != 'block') {
+    
           document.getElementById('editor-side2').style.display = 'block';
           document.getElementById('editor-side1').style.display = 'none';
 
-
-        }
       }
-
-
-
     }
 
 

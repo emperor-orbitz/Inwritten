@@ -38,7 +38,7 @@ controller.loadAllList(req, res, next);
 
 
 router.patch('/articles/update', isAuth, (req, res, next) => {
-roller.update(req, res, next);
+controller.update(req, res, next);
 
 });
 
