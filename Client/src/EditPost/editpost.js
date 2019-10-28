@@ -1,9 +1,9 @@
 
 import React, { useState } from 'react';
-import { Button, Form, Checkbox, Header, Loader, Icon, Select, Grid, Image, Modal } from 'semantic-ui-react';
+import { Button, Form, Checkbox, Loader, Icon, Select, Grid, Image, Modal } from 'semantic-ui-react';
 import '../../Resources/styles/article.scss';
 import { withRouter } from 'react-router';
-
+import {Link} from "react-router-dom"
 import { connect } from 'react-redux';
 import FetchArticles from '../../Controllers/article.controller'
 import EditorPanel from './Components/editor-panel';
@@ -506,10 +506,11 @@ class EditPost extends React.Component {
             </Grid.Column>
 
             <Grid.Column mobile={16} tablet={4} computer={3}>
-              &nbsp;&nbsp; &nbsp;
+              <br></br>
+              <br></br>
               <Button primary onClick={() => { this.setState({ open_options: true }) }}> Ready to re-publish</Button>
-            
-
+              <br/> 
+              <p><Link to ='/comments/abc'>View Responses</Link></p>
 
 
               <Modal size="small" open={this.state.open_options} onClose={this.close} closeOnDimmerClick >
@@ -616,7 +617,7 @@ class EditPost extends React.Component {
                 <Modal.Actions>
                   <Button disabled={this.state.buttonDisabled} type='submit' size='mini' color="green" title='save'
                     onClick={this.updatePost} >
-                    FINISH
+                    Finish
                 </Button>
                 </Modal.Actions>
               </Modal>

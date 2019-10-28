@@ -202,7 +202,6 @@ class AddPost extends React.Component {
       this.setState({ buttonDisabled: false,
                       dimmerLoad: false,
                       error_message: val,
-                      open_options:false,
 
                     });
 

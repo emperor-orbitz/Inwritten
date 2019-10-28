@@ -1,13 +1,9 @@
 import React from 'react';
 import '../../Resources/styles/profile.scss';
 import { Icon, Form, Divider, Button, Loader, ButtonGroup } from 'semantic-ui-react';
-
 import { withRouter } from 'react-router';
 import Connection from '../../Controllers/auth.controller';
-
-
 import { connect } from 'react-redux';
-
 import ProfileUpdate from '../../Controllers/profile.controller';
 
 
@@ -109,34 +105,23 @@ class Profile extends React.Component {
 
 
     handle_profile_photo =(ev) => {
-        var src;
-        var file = document.getElementById('photo');
-        this.readFile(ev.target.files[0]).then((result) => {
-
-            //LOL
-            this.setState({ profile_photo: result });
+        this.readFile(ev.target.files[0]).then( result => {
+            this.setState({ profile_photo: result })
         })
 
 
 
     }
 
-    handle_email(ev) {
-
-        this.setState({ email: ev.target.value });
-        console.log(ev);
-    }
+    handle_email = (ev)=> this.setState({ email: ev.target.value })
 
     handle_first_name= (ev)=> this.setState({ first_name: ev.target.value });
     
 
     handle_last_name= (ev) => this.setState({ last_name: ev.target.value });
-    
-
 
     handle_username = (ev) => this.setState({ username: ev.target.value });
     
-
     handle_mobile_number=(ev) => this.setState({ mobile_number: ev.target.value });
     
 
@@ -144,7 +129,6 @@ class Profile extends React.Component {
     toggleDialog() {
         var photo = document.getElementById('photo');
         photo.click();
-        console.log(photo);
     }
 
     check_number(form_no) {
@@ -166,10 +150,9 @@ class Profile extends React.Component {
     updateProfileButton(e) {
         e.preventDefault();
 
-        this.setState({ dimmerLoad: true, buttonDisabled: true });
+        this.setState({ dimmerLoad: true, buttonDisabled: true })
 
-
-        var update_profile = new ProfileUpdate();
+        var update_profile = new ProfileUpdate()
 
 
         if (this.state.username == '') {
@@ -303,8 +286,6 @@ class Profile extends React.Component {
 
                 });
 
-
-
         }
 
 
@@ -326,14 +307,16 @@ class Profile extends React.Component {
 
 
     }
-
+   
 
 
     render() {
         console.log(this.props.ProfileReducer);
-        var { email, username, bio } = this.state;
-
-
+        var { email, username, bio, mobile_number, first_name, last_name } = this.state;
+        let fullname = first_name !="" ? `${first_name} ${last_name}`: "Update your Names"
+        var bio = bio !="" ? bio :` - `
+        var username = username !="" ? username :` - `
+        var mobile_number = mobile_number !="" ? mobile_number :` - `
         return (
 
             <div className="profile-div" style={{marginTop:"0px !important"}}>
@@ -341,43 +324,36 @@ class Profile extends React.Component {
                 <div className='profile-header'>
                     <div className="profile-pix-block">
                         <img src={this.state.profile_photo} className="profile-pix" id='profile_photo' />
-                        <input className="profile-pix-cover" onChange={this.handle_profile_photo}
-                            type='file' placeholder='Mobile Number' id='photo' style={{ visibility: 'hidden' }} />
-
-                        <div className="profile-pix-cover" onClick={this.toggleDialog.bind(this)}><Icon color="teal" size="big" name='image' /> Upload Image</div>
+                        <input className="profile-pix-cover" onChange={this.handle_profile_photo} type='file' placeholder='Mobile Number' id='photo' style={{ visibility: 'hidden' }} />
+                        <div className="profile-pix-cover" onClick={this.toggleDialog.bind(this)}><Icon color="white" size="massive" name='image' /></div>
                     </div>
 
                     <div className="profile-primary-info">
-                        <h2 style={{ color: 'black' }}> Profile Settings</h2>
-                        <div className='span-details'>Username</div> <span> @{username} </span><br />
-                        <div className='span-details'>Email</div><span> {email}</span>
+                        <h2 style={{ color: 'black' }}> {fullname} </h2>
+                        <div className='span-details'>Username</div> <span> @{username} </span><br></br>
+                        <div className='span-details'>Email</div><span> {email}</span><br></br>
+                        <div className='span-details'>Bio</div><span> {bio}</span><br></br>
+                        <div className='span-details'>Telephone</div><span> {mobile_number}</span><br></br>
+
                     </div>
                 </div>
 
 
 
-
-
                 <div className="profile-body">
-                    
-
                     <div className="data-info-profile" style={{ display: this.state.dispProf }}>
-                        <h3 style={{ padding: '5px' }}> Account Info</h3>
+                        <h3 style={{ padding: '5px', color:"black" }}> Account Info</h3>
                     
-                
                         <ButtonGroup size="small" secondary >
                             <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false}>Profile </Button>
                             <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} >Advance</Button>
                         </ButtonGroup>
+                        <Divider />
 
 
-                    
-                        <div className={this.state.validationClass} style={{ marginBottom: '5px' }} > {this.state.validationMessage}
-                        </div>
-
+                        <div className={this.state.validationClass} style={{ marginBottom: '5px' }} > {this.state.validationMessage}</div>
 
                         <Form size="small" style={{ width: '70%' }} id='formUpdate'>
-                        <Divider />
 
                             <Form.Group widths='equal'>
                                 <Form.Field label='Email' value={this.state.email} control='input' placeholder='Email' onChange={this.handle_email} disabled required type='email' pattern={/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/} />
@@ -388,6 +364,7 @@ class Profile extends React.Component {
                                 <Form.Field label='Firstname' value={this.state.first_name} control='input' placeholder='Firstname' onChange={this.handle_first_name} />
                                 <Form.Field label='Lastname' control='input' placeholder='Lastname' value={this.state.last_name} onChange={this.handle_last_name} />
                             </Form.Group>
+
                             <Form.Field id='bio' label='Bio (Write something...)' control='textarea' value={this.state.bio} onChange={this.handle_bio} minLength='20' maxLength='150' name='bio' />
 
                             <Form.Field id='number' label='Mobile Number' control='input' type='tel' value={this.state.mobile_number} onChange={this.handle_mobile_number} minLength='11' maxLength='14' name='number' />
