@@ -111,7 +111,7 @@ class EditPost extends React.Component {
       post_title: '',
       featured_image: '',
       createdAt: Date.now(),
-
+      comments:[],
       post_category: 'all',
       post_description: '',
       time_to_read: 5,
@@ -211,7 +211,9 @@ class EditPost extends React.Component {
 
 
 
-
+  close = () => {
+    this.setState({ open_options: false })
+  }
 
   updatePost = () => {
     var add = new FetchArticles()
@@ -244,7 +246,9 @@ class EditPost extends React.Component {
           this.setState({
             success_message: 'Great! That\'s a little better. Click ',
             error_message: '',
-            buttonDisabled: false, dimmerLoad: false
+            buttonDisabled: false,
+            dimmerLoad: false,
+            open_options: false
           });
 
 
@@ -256,15 +260,22 @@ class EditPost extends React.Component {
 
       ).catch(
         (err) => {
-          this.setState({ buttonDisabled: false, dimmerLoad: false });
-          this.setState({ network_error: `Sorry, there was an error with your article! We would fix this soon ${err}` });
+          this.setState({
+            buttonDisabled: false,
+            dimmerLoad: false,
+            open_options: false,
+            network_error: `Sorry, there was an error with your article! We would fix this soon ${err}`
+          });
         }
       );
     }
     else if (val !== true) {
-      this.setState({ buttonDisabled: false, dimmerLoad: false });
+      this.setState({
+        buttonDisabled: false,
+        dimmerLoad: false,
+        error_message: val
+      });
 
-      this.setState({ error_message: val });
 
     }
 
@@ -272,40 +283,6 @@ class EditPost extends React.Component {
   }
 
 
-  /*
-  
-    componentWillReceiveProps(nextProps, nextState){
-  
-      //INCASE OF RELOAD. props Is LOST
-      console.log('component will receivveprops', nextProps, nextState)
-      var arrs=[];
-      for (var x of nextProps.ArticleReducer) {
-        if (x._id == this.props.match.params.postID) {
-      
-  
-     arrs.push(x);
-  
-  
-        }
-       
-      }
-      
-      if(arrs.length ==0 ) nextProps.history.replace('/dashboard');
-      else{
-      let x =arrs[0];
-        this.setState({
-          post_title: x.title, post_description: x.description,
-          post_category: x.category,
-          privacy_value: x.public,
-          enable_comments: x.comments_enabled,
-          time_to_read: x.time_to_read,
-          body: x.body
-        });
-      }
-      
-      }
-  
-  */
 
 
 
@@ -330,7 +307,8 @@ class EditPost extends React.Component {
           enable_comments: x.comments_enabled,
           time_to_read: x.time_to_read,
           body_schema: x.body_schema,
-          featured_image: x.featured_image
+          featured_image: x.featured_image,
+          comments: x.comments
         });
 
 
@@ -458,17 +436,17 @@ class EditPost extends React.Component {
 
     function changeOptions(side) {
       let id = side.target.id;
-      
-      if (id == 'side1' && document.getElementById('editor-side1').style.display != 'block' ) {
-       
-          document.getElementById('editor-side2').style.display = 'none';
-          document.getElementById('editor-side1').style.display = 'block'
-        }
+
+      if (id == 'side1' && document.getElementById('editor-side1').style.display != 'block') {
+
+        document.getElementById('editor-side2').style.display = 'none';
+        document.getElementById('editor-side1').style.display = 'block'
+      }
 
       else if (id === 'side2' && document.getElementById('editor-side2').style.display != 'block') {
-    
-          document.getElementById('editor-side2').style.display = 'block';
-          document.getElementById('editor-side1').style.display = 'none';
+
+        document.getElementById('editor-side2').style.display = 'block';
+        document.getElementById('editor-side1').style.display = 'none';
 
       }
 
@@ -485,14 +463,12 @@ class EditPost extends React.Component {
 
     return (
 
-
-
       <div className='add-post'>
 
         <Grid stackable>
           <Grid.Row>
 
-            <Grid.Column mobile={16} tablet={13} computer={13} style={{ padding: '0px 5px' }}  >
+            <Grid.Column mobile={16} tablet={12} computer={13} style={{ padding: '0px 5px' }}  >
 
               {this.state.success_message === '' ?
                 ""
@@ -529,30 +505,35 @@ class EditPost extends React.Component {
 
             </Grid.Column>
 
-            <Grid.Column mobile={16} tablet={3} computer={3}>
+            <Grid.Column mobile={16} tablet={4} computer={3}>
               &nbsp;&nbsp; &nbsp;
-              <Modal size="small" trigger={<Button>Scrolling Content Modal</Button>}>
+              <Button primary onClick={() => { this.setState({ open_options: true }) }}> Ready to re-publish</Button>
+            
+
+
+
+              <Modal size="small" open={this.state.open_options} onClose={this.close} closeOnDimmerClick >
                 <Modal.Header> Settings &nbsp;&nbsp;&nbsp;&nbsp;
                 <Button.Group>
-                <Button name='configure' onClick={changeOptions} id='side1' title='Settings' bordered color='black'>STEP 1</Button>
-                <Button name='ellipsis horizontal' onClick={changeOptions} id='side2' title='More options' bordered color='black'>STEP2</Button>
-                </Button.Group>
-                 
+                    <Button name='configure' onClick={changeOptions} id='side1' title='Settings' bordered basic >Basic</Button>
+                    <Button name='ellipsis horizontal' onClick={changeOptions} id='side2' title='More options' bordered basic>Advanced</Button>
+                  </Button.Group>
+
                 </Modal.Header>
 
-                
-                <Modal.Content image scrolling>
-                      <div className="featured-pix-block">
-                        <img src={this.state.featured_image} className="featured-image" />
-                        <input className="featured-pix-cover" onChange={this.handle_profile_photo.bind(this)}
-                          type='file' id='photo' style={{ visibility: 'hidden' }} />
 
-                        <div className="featured-pix-cover" onClick={this.toggleDialogFeatured.bind(this)}>
-                          <Icon color="teal" size="small" name='image' /> Upload Featured Image </div>
-                      </div>
+                <Modal.Content image scrolling>
+                  <div className="featured-pix-block">
+                    <img src={this.state.featured_image} className="featured-image" />
+                    <input className="featured-pix-cover" onChange={this.handle_profile_photo.bind(this)}
+                      type='file' id='photo' style={{ visibility: 'hidden' }} />
+
+                    <div className="featured-pix-cover" onClick={this.toggleDialogFeatured.bind(this)}>
+                      <Icon color="teal" size="small" name='image' /> Upload Featured Image </div>
+                  </div>
 
                   <Modal.Description>
-                    
+
                     <div className='editor-side1' id='editor-side1'>
                       <Form size="small">
 
@@ -625,26 +606,20 @@ class EditPost extends React.Component {
 
 
                       </Form>
-                    
+
 
                     </div>
-
-
 
 
                   </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
-                <Button disabled={this.state.buttonDisabled} type='submit' size='mini' color="green" title='save' onClick={this.updatePost} >
-                <DimmerLoad size='mini' active={this.state.dimmerLoad} />
-                UPDATE
+                  <Button disabled={this.state.buttonDisabled} type='submit' size='mini' color="green" title='save'
+                    onClick={this.updatePost} >
+                    FINISH
                 </Button>
                 </Modal.Actions>
               </Modal>
-
-              
-
-
 
             </Grid.Column>
 

@@ -1,7 +1,8 @@
 
 //@import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css';
 
-
+$profile-width:250px;
+$profile-height:200px;
 
 *{
 font-family: 'Noto Sans', sans-serif;
@@ -270,8 +271,8 @@ float:left;
 
 
             .featured-image{
-                width: 150px !important;
-                height: 100px !important;
+                width: $profile-width;
+                height: $profile-width;
                 float:left;
                 position: relative; 
             
@@ -357,8 +358,7 @@ text-align: center;
 //text-decoration:underline;
 }
 
-$profile-width:250px;
-$profile-height:200px;
+
 
 @media(max-width:992px){
 
@@ -387,17 +387,18 @@ background:rgb(0,0,7);
 }
 .featured-pix-block{
     //border-radius: $profile-width;
-    width: 120px;
-    height: 100px;
+    width: $profile-width;
+    height: $profile-width;
     float:left;
     position: relative; 
+    margin:5px 10px;
     background:rgb(0,0,7);
     
     }
 
 .featured-image{
     width: $profile-width;
-    height: 50px;
+    height: $profile-width;
     float:left;
     position: relative; 
 
@@ -425,8 +426,8 @@ background: rgba(0,0,0,0.5);
 //border-radius: $profile-width;
 width: $profile-width;
 height: $profile-width;
-left:-150px;
-padding:36%;
+left:-$profile-width;
+//padding:36%;
 cursor: pointer;
 color:white;
 border:none;
@@ -439,9 +440,9 @@ top:0px;
     display:none;
     background: rgba(0,0,0,0.5);
     //border-radius: $profile-width;
-    width: 120px;
-    height: 100px;
-    left:-120px;
+    width: $profile-width;
+    height: $profile-width;
+    left:-$profile-width;
     padding:36%;
     cursor: pointer;
     color:white;

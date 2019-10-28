@@ -225,7 +225,6 @@ var deletePost = (req, res) => {
 //*  UPDATE ARTICLE
 
 var update = (req, res) => {
-console.log(req.body, "this is req, body")
     var post = new posts();
     post.update_article(req.body._id, req.body, (err, success) => {
         if (err) {

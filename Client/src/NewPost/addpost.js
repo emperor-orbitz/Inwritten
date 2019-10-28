@@ -1,7 +1,7 @@
 
 //          IMPORTS
 import React, { Component } from 'react';
-import { Button, Form, Checkbox, Header, Loader, Icon, Select, Grid, IconGroup } from 'semantic-ui-react';
+import { Button, Form, Checkbox, Loader, Icon, Select, Grid, Modal } from 'semantic-ui-react';
 import '../../Resources/styles/article.scss';
 import { withRouter } from 'react-router';
 
@@ -35,7 +35,8 @@ class AddPost extends React.Component {
       post_category: 'all',
       post_description: '',
       time_to_read: 5,
-      tagMax: ''
+      tagMax: '',
+      open_options: false
     }
 
     this.handleTags = this.handleTags.bind(this);
@@ -176,7 +177,9 @@ class AddPost extends React.Component {
           this.setState({
             success_message: 'Yippee, Check out your story ',
             error_message: '',
-            buttonDisabled: false, dimmerLoad: false
+            buttonDisabled: false, 
+            dimmerLoad: false,
+            open_options:false
           });
 
           var note = document.getElementsByClassName('notification-background');
@@ -187,16 +190,22 @@ class AddPost extends React.Component {
 
       ).catch(
         (err) => {
-          this.setState({ buttonDisabled: false, dimmerLoad: false });
-
-          this.setState({ network_error: `Hey, It seems you are offline. Check your internet connection` });
+          this.setState({ buttonDisabled: false,
+                          dimmerLoad: false,
+                          open_options:false,
+                          network_error: `Hey, It seems you are offline. Check your internet connection`
+                        });
         }
       );
     }
     else if (val !== true) {
-      this.setState({ buttonDisabled: false, dimmerLoad: false });
+      this.setState({ buttonDisabled: false,
+                      dimmerLoad: false,
+                      error_message: val,
+                      open_options:false,
 
-      this.setState({ error_message: val });
+                    });
+
 
     }
 
@@ -205,8 +214,9 @@ class AddPost extends React.Component {
 
 
 
-
-
+  close = () => {
+    this.setState({ open_options: false })
+  }
 
   toggleDialogFeatured() {
     var photo = document.getElementById('photo');
@@ -300,6 +310,9 @@ class AddPost extends React.Component {
 
 
 
+    close =() =>{
+      this.setState({open_options:false})
+    }
 
     function changeOptions(side) {
       let id = side.target.id;
@@ -364,104 +377,114 @@ class AddPost extends React.Component {
 
             </Grid.Column>
 
-            <Grid.Column mobile={16} tablet={4} computer={3}>
+            <Grid.Column mobile={16} tablet={3} computer={3}>
               &nbsp;&nbsp; &nbsp;
+              <Button primary onClick= {()=>{ this.setState({open_options:true})}}> Ready to Publish </Button>
 
-                <Icon name='configure' onClick={changeOptions} id='side1' title='Settings' bordered color='black' />
-              <Icon name='ellipsis horizontal' onClick={changeOptions} id='side2' title='More options' bordered color='black' />
-              <Button disabled={this.state.buttonDisabled} type='submit' size='mini' color="green" title='save' onClick={this.addPost} >
-                <DimmerLoad size='mini' active={this.state.dimmerLoad} />
-                SAVE
+              
+              <Modal size="small" open={this.state.open_options} onClose={this.close} closeOnDimmerClick >
+                <Modal.Header> Settings &nbsp;&nbsp;&nbsp;&nbsp;
+                <Button.Group>
+                    <Button name='configure' onClick={changeOptions} id='side1' title='Settings' bordered basic >Basic</Button>
+                    <Button name='ellipsis horizontal' onClick={changeOptions} id='side2' title='More options' bordered basic>Advanced</Button>
+                  </Button.Group>
+
+                </Modal.Header>
+
+
+                <Modal.Content image scrolling>
+                  <div className="featured-pix-block">
+                    <img src={this.state.featured_image} className="featured-image" />
+                    <input className="featured-pix-cover" onChange={this.handle_profile_photo.bind(this)}
+                      type='file' id='photo' style={{ visibility: 'hidden' }} />
+
+                    <div className="featured-pix-cover" onClick={this.toggleDialogFeatured.bind(this)}>
+                      <Icon color="teal" size="small" name='image' /> Upload Featured Image </div>
+                  </div>
+
+                  <Modal.Description>
+
+                    <div className='editor-side1' id='editor-side1'>
+                      <Form size="small">
+
+                        <Form.Field name='title' maxLength='50' label='Title' value={this.state.post_title} onChange={this.handleInputs.bind(this)} control='input' placeholder='Title' required />
+                        {
+                          this.state.error_message == 'title-error' ?
+                            <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}> Title is required</p>
+                            : ''
+                        }
+
+                        <Form.Field name='time' maxLength='2' min='0' type="number" value={this.state.time_to_read} control='input' placeholder="How many minutes read?" onChange={this.handleInputs.bind(this)} />
+                        {
+                          this.state.error_message == 'time-error' ?
+                            <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}> The duration should not be less than 0 and not greater than 30 </p>
+                            : ''
+                        }
+                        <Form.Field name='description' maxLength={70} control='textarea' placeholder='Post Slug' value={this.state.post_description} onChange={this.handleInputs.bind(this)} />
+
+                        {
+                          this.state.error_message == 'description-error' ?
+                            <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}>  Description length is small</p>
+                            : ''
+                        }
+                        <Form.Field name='tags' maxLength={this.state.tagMax} label='Tags (good to have!)' value={this.state.tag_value} onChange={this.handleTags} control='input' placeholder='e.g sport, gym, race. Separate with( , )' />
+                        {
+                          this.state.error_message == 'tag-error' ?
+                            <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}>  Sorry, u've got max of 5 tags</p>
+                            : ''
+                        }
+                      </Form>
+                      <br />
+                    </div>
+
+                    <div className='editor-side2' id='editor-side2'>
+                      <p>  </p>
+                      <Form size="small">
+
+                        <Select name='category' className="custom-label"
+                          value={this.state.post_category} onChange={this.handleInputs.bind(this)}
+                          options={categoryOptions} />
+                        <br /><br /><br />
+
+                        <Form.Field>
+
+                          <Checkbox
+                            toggle
+                            slider
+                            name='radioGroup1'
+                            checked={this.state.privacy_value === true}
+                            onChange={this.handlePostprivacy}
+                            label={privacy_value}
+                            className='small-fonts'
+                          />
+                        </Form.Field>
+
+
+                        <Form.Field>
+
+                          <Checkbox
+                            toggle
+                            name='radioGroup2'
+                            checked={this.state.enable_comments === true}
+                            onChange={this.handleEnableComments}
+                            label={comment_value}
+                          />
+                        </Form.Field>
+                      </Form>
+
+                    </div>
+
+
+                  </Modal.Description>
+                </Modal.Content>
+                <Modal.Actions>
+                <Button disabled={this.state.buttonDisabled} type='submit' size='mini' color="green" title='save'
+                    onClick={this.addPost} >
+                    Publish
                 </Button>
-
-
-              <div className='editor-side1' id='editor-side1'>
-                <h5>POST SETTINGS</h5>
-                <Form size="mini">
-
-                  <Form.Field name='title' maxLength='50' label='Title' value={this.state.post_title} onChange={this.handleInputs.bind(this)} control='input' placeholder='Title' required />
-                  {
-                    this.state.error_message == 'title-error' ?
-                      <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}> Title is required</p>
-                      : ''
-                  }
-
-                  <Form.Field name='time' maxLength='2' min='0' type="number" value={this.state.time_to_read} control='input' placeholder="How many minutes read?" onChange={this.handleInputs.bind(this)} />
-                  {
-                    this.state.error_message == 'time-error' ?
-                      <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}> The duration should not be less than 0 and not greater than 30 </p>
-                      : ''
-                  }
-                  <Form.Field name='description' maxLength={70} control='textarea' placeholder='Post Slug' value={this.state.post_description} onChange={this.handleInputs.bind(this)} />
-
-                  {
-                    this.state.error_message == 'description-error' ?
-                      <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}>  Description length is small</p>
-                      : ''
-                  }
-                  <Form.Field name='tags' maxLength={this.state.tagMax} label='Tags (good to have!)' value={this.state.tag_value} onChange={this.handleTags} control='input' placeholder='e.g sport, gym, race. Separate with( , )' />
-                  {
-                    this.state.error_message == 'tag-error' ?
-                      <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}>  Sorry, u've got max of 5 tags</p>
-                      : ''
-                  }
-                </Form>
-                <br />
-              </div>
-
-              <div className='editor-side2' id='editor-side2'>
-                <b ><Icon name='options' /> Additionals</b><span style={{ float: 'right' }} ></span>
-                <p>  </p>
-                <Form size="mini">
-
-                  <Select name='category' className='custom-label'
-                    value={this.state.post_category} onChange={this.handleInputs.bind(this)}
-                    options={categoryOptions} />
-                  <br /><br /><br />
-
-                  <Form.Field>
-
-
-                    <Checkbox
-                      toggle
-                      name='radioGroup1'
-                      checked={this.state.privacy_value === true}
-                      onChange={this.handlePostprivacy}
-                      label={privacy_value}
-                      className='small-fonts'
-                    />
-                  </Form.Field>
-
-
-                  <Form.Field>
-
-                    <Checkbox
-                      toggle
-                      name='radioGroup2'
-                      checked={this.state.enable_comments === true}
-                      onChange={this.handleEnableComments}
-                      //label ={ comment_value}
-                      label={comment_value}
-
-                    />
-                  </Form.Field>
-
-
-
-
-                </Form>
-                <h5> Featured Image</h5>
-                <div className="featured-pix-block">
-                  <img src={this.state.featured_image} className="featured-image" />
-                  <input className="featured-pix-cover" onChange={this.handle_profile_photo.bind(this)}
-                    type='file' id='photo' style={{ visibility: 'hidden' }} />
-
-                  <div className="featured-pix-cover" onClick={this.toggleDialogFeatured.bind(this)}>
-                    <Icon color="teal" size="small" name='image' /> Upload Featured Image </div>
-                </div>
-
-              </div>
-
+                  
+                </Modal.Actions>
+              </Modal>
 
             </Grid.Column>
 
