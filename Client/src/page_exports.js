@@ -1,17 +1,13 @@
-/*
-*
-*           ALL PAGES STAY RIGHT HERE
-*
+/*  
+ALL PAGES STAY RIGHT HERE
 */
 import Signup from '../src/AuthPage/signup';
 //import Documentation from './documentation';
 import Account from './Dashboard/account';
-//import Blog from './blog';
+import Comments from './Comments/comment';
 import Home from './home'
 import Login from './AuthPage/login';
 import Profile from './Profile/profile';
-// ARTICLES CATEGORY
-
 
 import Articles from './Articles/Components/articles';// MAIN PAGE
 import AddPost from './NewPost/addpost';
@@ -35,4 +31,4 @@ var ImagesCategory ={
 }
 
 
-export { Signup, Account, Home, Login, ImagesCategory, ArticlesCategory, Profile };
+export { Signup, Account, Home, Login,  ArticlesCategory, Profile, Comments };

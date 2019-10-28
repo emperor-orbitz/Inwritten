@@ -1,5 +1,5 @@
 import React from 'react';
-import { Signup, Account, Login, ArticlesCategory, Profile, ImagesCategory } from './page_exports';
+import { Signup, Account, Login, ArticlesCategory, Profile, Comments  } from './page_exports';
 import '../Resources/styles/style.scss';
 import { Switch, Route } from 'react-router';
 import HeaderAccount from '../src/Dashboard/header_account';
@@ -21,8 +21,7 @@ function App() {
         <HeaderAccount>
 
           <Switch>
-            <Route path='/add-image' component={ImagesCategory.AddImage} />
-            <Route path='/gallery' component={ImagesCategory.Gallery} />
+            <Route path='/comments/:postID' component={Comments} />
             <Route path='/edit-post/:postID' component={ArticlesCategory.EditPost} />
             <Route path='/dashboard' component={Account} />
             <Route path='/profile' component={Profile} />

@@ -97,7 +97,6 @@ class Profile extends React.Component {
 
             reader.onloadend = function () {
                 resolve(reader.result);
-                console.log(reader.result)
             }
         })
 
@@ -235,7 +234,6 @@ class Profile extends React.Component {
     //update password 
     updatePasswordButton(e) {
         e.preventDefault();
-        // console.log(this.state);
 
         this.setState({ dimmerLoad: true, buttonDisabled: true });
 
@@ -311,7 +309,7 @@ class Profile extends React.Component {
 
 
     render() {
-        console.log(this.props.ProfileReducer);
+
         var { email, username, bio, mobile_number, first_name, last_name } = this.state;
         let fullname = first_name !="" ? `${first_name} ${last_name}`: "Update your Names"
         var bio = bio !="" ? bio :` - `

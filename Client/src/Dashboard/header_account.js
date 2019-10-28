@@ -11,7 +11,14 @@ import SideBar from '../../src/Dashboard/sidebar';
 import splash from '../../Resources/images/splash.png';
 
 
+function sidebb(props){
+return (<div style={{background:"yellow", fontSize:"40px"}}>
+  
+  sideBAR
 
+  </div>
+  )
+}
 
 class HeaderAccount extends React.Component {
   constructor(props) {
@@ -184,7 +191,6 @@ class HeaderAccount extends React.Component {
 
           <div className="sideBar">
 
-
               <Modal size="mini" open={open} onClose={this.close}>
                 <Modal.Header>LOGOUT</Modal.Header>
                 <Modal.Content>
@@ -199,14 +205,13 @@ class HeaderAccount extends React.Component {
               </Modal>
             
 
-            <Responsive as={Sidebar.Pushable}>
+            <Sidebar.Pushable>
               <Sidebar as={Accordion}
                 animation="push"
                 onHide={this.toggle}
                 visible={visible}
                 vertical='true'
                 className='sidebar'
-
               >
                 <div style={{ textAlign: 'center', padding: '20px 2px', paddingBottom: '10px', color: 'rgb(3, 68, 94)', background: 'white' }} >
                   <Link to="/dashboard" style={{ color: "black" }}> <h3>DASHBOARD</h3></Link>
@@ -215,7 +220,7 @@ class HeaderAccount extends React.Component {
 
                 <div className="accordion-item">
                   <Accordion.Title icon="file alternate" active={this.state.activeAccordion === 1} style={{ padding: '1px 20px' }} index={1} onClick={this.handleClick}  >
-                    <Icon name="file alternate" className="accordion-icon" size="large" /> <b style={{ fontSize: '12px' }}>MY ARTICLES</b>
+                    <Icon name="file alternate" className="accordion-icon" size="large" /> <h3 >My Articles</h3>
                   </Accordion.Title>
                   <Accordion.Content style={{ padding: '1px 20px' }} active={activeAccordion === 1} content={articleSubmenu} />
                   
@@ -223,7 +228,7 @@ class HeaderAccount extends React.Component {
                 </div>
                 <div className="accordion-item">
                   <Accordion.Title active={this.state.activeAccordion === 2} style={{ padding: '1px 20px' }} index={2} onClick={this.handleClick}  >
-                    <Icon name="file image outline" className="accordion-icon" size="large" />  <b style={{ fontSize: '12px' }}>BOOKMARK</b>
+                    <Icon name="file image outline" className="accordion-icon" size="large" />  <h3>Bookmarks</h3>
                   </Accordion.Title>
                   <Accordion.Content style={{ padding: '1px 20px' }} active={activeAccordion === 2} content={imageSubmenu} />
                 </div>
@@ -231,7 +236,7 @@ class HeaderAccount extends React.Component {
 
                 <div className="accordion-item">
                   <Accordion.Title active={this.state.activeAccordion === 3} style={{ padding: '1px 20px' }} index={3} onClick={this.handleClick}>
-                    <Icon name="hashtag" className="accordion-icon" size="large" />  <b style={{ fontSize: '12px' }}>INTERESTS</b>
+                    <Icon name="hashtag" className="accordion-icon" size="large" />  <h3>Interests</h3>
                   </Accordion.Title>
                   <Accordion.Content style={{ padding: '1px 20px' }} active={activeAccordion === 3} content={categorySubmenu} />
 
@@ -239,14 +244,14 @@ class HeaderAccount extends React.Component {
 
                 <div className="accordion-item">
                   <Accordion.Title active={this.state.activeAccordion === 4} style={{ padding: '1px 20px' }} index={4} onClick={this.handleClick}>
-                    <Icon name="sliders horizontal" className="accordion-icon" size="large" />  <b style={{ fontSize: '12px' }}>SETTINGS</b>
+                    <Icon name="sliders horizontal" className="accordion-icon" size="large" />  <h3>Settings</h3>
                   </Accordion.Title>
                   <Accordion.Content style={{ padding: '1px 20px' }} active={activeAccordion === 4} content={settingsSubmenu} />
                 </div>
 
                 <div className="accordion-item">
                   <Accordion.Title active={this.state.activeAccordion === 4} style={{ padding: '1px 20px' }} index={4} onClick={this.handleClick}>
-                    <Icon name="comments" className="accordion-icon" size="large" />  <b style={{ fontSize: '12px' }}>COMMENTS</b>
+                    <Icon name="comments" className="accordion-icon" size="large" />  <h3>Comments</h3>
                   </Accordion.Title>
                 </div>
 
@@ -269,7 +274,7 @@ class HeaderAccount extends React.Component {
 
 
               </Sidebar.Pusher>
-            </Responsive>
+            </Sidebar.Pushable>
           </div>
 
 
