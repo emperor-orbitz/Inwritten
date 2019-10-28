@@ -272,7 +272,7 @@ float:left;
 
             .featured-image{
                 width: $profile-width;
-                height: $profile-width;
+                height: $profile-height;
                 float:left;
                 position: relative; 
             
@@ -379,7 +379,7 @@ font-size:10px;
 .profile-pix-block{
 //border-radius: $profile-width;
 width: $profile-width;
-height: $profile-width;
+height: $profile-height;
 float:left;
 position: relative; 
 background:rgb(0,0,7);
@@ -388,7 +388,7 @@ background:rgb(0,0,7);
 .featured-pix-block{
     //border-radius: $profile-width;
     width: $profile-width;
-    height: $profile-width;
+    height: $profile-height;
     float:left;
     position: relative; 
     margin:5px 10px;
@@ -398,7 +398,7 @@ background:rgb(0,0,7);
 
 .featured-image{
     width: $profile-width;
-    height: $profile-width;
+    height: $profile-height;
     float:left;
     position: relative; 
 
@@ -441,13 +441,13 @@ top:0px;
     background: rgba(0,0,0,0.5);
     //border-radius: $profile-width;
     width: $profile-width;
-    height: $profile-width;
+    height: $profile-height;
     left:-$profile-width;
-    padding:36%;
+    padding:30%;
     cursor: pointer;
     color:white;
     border:none;
-    top:0px;
+    
     }
     
     
@@ -471,7 +471,7 @@ transform: translateX(100px);
 transform: translateX(120px);
 }
 100%{
-transform: translateX(150px);
+transform: translateX(200px);
 }
 }
 
