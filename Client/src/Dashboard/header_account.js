@@ -261,7 +261,7 @@ class HeaderAccount extends React.Component {
                 </div>
 
                 <div className="accordion-item">
-                  <Button as={Link} to="/about_us" fluid style={{ color: 'white' }}>
+                  <Button as={Link} to="/about_us" fluid style={{ color: 'teal', background:"white" }}>
                     <Icon name="info" />
                     THE APP
                   </Button>

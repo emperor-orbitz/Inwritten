@@ -340,7 +340,7 @@ class Profile extends React.Component {
 
                 <div className="profile-body">
                     <div className="data-info-profile" style={{ display: this.state.dispProf }}>
-                        <h3 style={{ padding: '5px', color:"black" }}> Account Info</h3>
+                        <h3 style={{ padding: '5px', color:"black" }}> Edit Profile</h3>
                     
                         <ButtonGroup size="small" secondary >
                             <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false}>Profile </Button>

@@ -29,8 +29,8 @@ width:100%;
     background:white;
     line-break: loose;
     color:teal !important;
-    $profile-width:250px;
-    $profile-height:250px;
+    $profile-width:200px;
+    $profile-height:200px;
     color:black;
     
 
@@ -54,9 +54,11 @@ float:left;
    // margin-left:200px;
     float:left;
     height:auto;
+   // box-shadow: 2px 1px 3px 1px rgb(224, 230, 227);
+
 
 span{
-    color:black;
+    color:black !important;
 }
 
 

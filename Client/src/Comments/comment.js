@@ -14,7 +14,10 @@ class Comment extends React.Component {
 
     constructor(props) {
         super(props);
-        
+       this.state={
+
+        comments:[]
+       } 
      
     }
 
@@ -25,22 +28,24 @@ class Comment extends React.Component {
         console.log(this.props);
                 if (Object.keys(this.props.ArticleReducer).length == 0) {
                 
-            this.load_articles.fetch_articles_list().then((articles, none) => {
+            /*this.load_articles.fetch_articles_list().then((articles, none) => {
                 if (articles) {
 
                   this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: articles});
-                    this.setState({dimmerLoad:false})
-                }
-                else {
-                    //error
-                    //this.props.history.replace('/login');
-                }
-            })
+                    //Load the article with the attributed :ID
 
+
+
+                    this.setState({dimmerLoad:false, comments: articles })
+                }
+                else;
+            })
+*/
 }
 
 else {
   this.setState({dimmerLoad:false})
+
 }
 
 this.setState({dimmerLoad:false})
@@ -66,7 +71,7 @@ this.setState({dimmerLoad:false})
 
             <div className="comment-div" style={{marginTop:"0px !important"}}>
 
-               ADULTSJNFBS
+               
                {this.props.match.params.postID}
 
             </div>

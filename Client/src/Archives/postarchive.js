@@ -204,41 +204,10 @@ class PostArchive extends React.Component {
     }
 
     componentDidMount() {
-        if (Object.keys(this.props.ArticleReducer).length == 0) {
 
-
-            this.fetchArticle.fetch_articles_list().then((articles, none) => {
-                if (articles) {
-                    this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: articles.RESULT });
-
-                    var filter_privacy = this.props.ArticleReducer.filter((nor) => nor.public == false );
-                    this.setState({ filter_privacy });
-                    this.state.filter_privacy_const = filter_privacy;
-
-                }
-                else {
-                    //error
-                    this.props.history.replace('/login');
-
-                }
-            })
-
-
-        }
-
-        else {
-            //DONT WORRY PROPS IS AVAILABLE 
-            //SAME PRINCIPLE
-
-            var filter_privacy = this.props.ArticleReducer.filter( nor => nor.public == false);
-            this.setState({ filter_privacy });
-            this.state.filter_privacy_const = filter_privacy;
-
-        }
-
-
-
-
+    var filter_privacy = this.props.ArticleReducer.filter((nor) => nor.public == false );
+    this.setState({ filter_privacy });
+    this.state.filter_privacy_const = filter_privacy;
 
     }
 
@@ -289,7 +258,6 @@ class PostArchive extends React.Component {
     render() {
 
         var { filter_privacy } = this.state;
-
 
 
         if (filter_privacy.length == 0) {
@@ -393,7 +361,7 @@ class PostArchive extends React.Component {
                                                                     <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/'+ e._id  }} />
                                                                     <Button icon='external alternate' target="__blank" as={Link} to={`http://localhost:5000/${this.props.ProfileReducer.username}/${e.title}`} />
                                                                     <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
-                                                                    <Button icon='info' />
+                                                                    <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
 
                                                                 </Button.Group>
                                                             </div>
