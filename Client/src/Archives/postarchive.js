@@ -1,7 +1,7 @@
 
 import React from 'react';
 import '../../Resources/styles/article.scss';
-import { Button, Icon, Form, Modal, Grid,  Select } from 'semantic-ui-react';
+import { Button, Icon, Form, Modal, Grid, Select, Input } from 'semantic-ui-react';
 import Connection from '../../Controllers/auth.controller';
 
 import { withRouter } from 'react-router';
@@ -115,11 +115,11 @@ class PostArchive extends React.Component {
     }
     handleSearchCriteria(e, p) {
 
-        this.setState({ not_found:false, search_criteria: p.value })
+        this.setState({ not_found: false, search_criteria: p.value })
     }
 
 
-  
+
 
     deletePost = () => {
         var id = this.state.deleteArticleId;
@@ -129,15 +129,15 @@ class PostArchive extends React.Component {
             .then((fulfilled, unfulfilled) => {
                 if (fulfilled) {
 
-        this.props.dispatch(
+                    this.props.dispatch(
                         {
                             type: 'DELETE', payload: { _id: this.state.deleteArticleId }
                         });
-                        var filter_privacy = this.props.ArticleReducer.filter( nor => nor.public == false);
+                    var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == false);
 
 
-                    this.setState({ deleteArticleId: null, open: false, messageDismiss: true, filter_privacy:filter_privacy });
-                    
+                    this.setState({ deleteArticleId: null, open: false, messageDismiss: true, filter_privacy: filter_privacy });
+
 
                 }
                 else {
@@ -146,7 +146,7 @@ class PostArchive extends React.Component {
             })
 
     }
-    focusOnId= (elem) =>{ document.getElementById(elem).focus() }
+    focusOnId = (elem) => { document.getElementById(elem).focus() }
 
     dontDeletePost = () => {
 
@@ -164,38 +164,38 @@ class PostArchive extends React.Component {
     connect = new Connection();
     fetchArticle = new FetchArticles();
 
-    onChangeSearch = (e) => { this.setState({ search:e.target.value, not_found:false }) }
+    onChangeSearch = (e) => { this.setState({ search: e.target.value, not_found: false }) }
 
     search_with_criteria = (/*scope*/) => {
 
-        var SC=this.state.search_criteria;
+        var SC = this.state.search_criteria;
         this.setState({ not_found: false });
-        var search= this.state.search;
+        var search = this.state.search;
 
         var ask = this.state.filter_privacy.filter(function (portion, index) {
             return portion[SC].toLowerCase().indexOf(search.toLowerCase()) != -1;
         })
 
-        if (ask.length == 0) this.setState({ not_found: true }, ()=>{  this.focusOnId('search')  })
+        if (ask.length == 0) this.setState({ not_found: true }, () => { this.focusOnId('search') })
         else if (search.length == 0) {
-            this.setState({ filter_privacy: this.state.filter_privacy_const }, ()=>{this.focusOnId('search') } )
+            this.setState({ filter_privacy: this.state.filter_privacy_const }, () => { this.focusOnId('search') })
 
         }
         else {
 
-            this.setState({ filter_privacy: ask }, ()=>{this.focusOnId('search') } )
+            this.setState({ filter_privacy: ask }, () => { this.focusOnId('search') })
 
 
         }
-      
+
 
 
     }
 
 
     shouldComponentUpdate(nextProps, nextState) {
-        /*
- FUTURE UPDATES
+
+        /*FUTURE UPDATES
         */
         return true;
 
@@ -205,9 +205,9 @@ class PostArchive extends React.Component {
 
     componentDidMount() {
 
-    var filter_privacy = this.props.ArticleReducer.filter((nor) => nor.public == false );
-    this.setState({ filter_privacy });
-    this.state.filter_privacy_const = filter_privacy;
+        var filter_privacy = this.props.ArticleReducer.filter((nor) => nor.public == false);
+        this.setState({ filter_privacy });
+        this.state.filter_privacy_const = filter_privacy;
 
     }
 
@@ -264,31 +264,31 @@ class PostArchive extends React.Component {
             return (<div>
 
 
-                    <div className='bodyArticle'>
-                        <Grid>
-                            <Grid.Row>
-                                <Grid.Column style={{ padding: '5px' }} computer={13} mobile={16} tablet={8}  >
+                <div className='bodyArticle'>
+                    <Grid>
+                        <Grid.Row>
+                            <Grid.Column style={{ padding: '5px' }} computer={13} mobile={16} tablet={8}  >
 
 
-                                    It seems you don't have any published item yet. You can start right <a href="/add-post">here</a>
+                                It seems you don't have any published item yet. You can start right <a href="/add-post">here</a>
 
-                                </Grid.Column>
-
-
-                                <Grid.Column style={{ padding: '5px' }} computer={3} mobile={16} tablet={8}  >
+                            </Grid.Column>
 
 
-                            
+                            <Grid.Column style={{ padding: '5px' }} computer={3} mobile={16} tablet={8}  >
 
 
 
-                                </Grid.Column>
-
-                            </Grid.Row>
-                        </Grid>
 
 
-                    </div>
+
+                            </Grid.Column>
+
+                        </Grid.Row>
+                    </Grid>
+
+
+                </div>
 
             </div>
 
@@ -304,108 +304,108 @@ class PostArchive extends React.Component {
 
                     <Modal dimmer={true} size='mini' open={this.state.open}  >
 
-                       <Modal.Content style={{ height: '200px', background: "", color:'black', padding: '10%' }}  >
-                       <p style={{textAlign:'center'}}> <Icon size='big' name='trash' />
-                        <h3 >{`Really want to delete -${this.state.deleteArticleName} ?`}  </h3>
-                        <br />
-                        <Button.Group size='small'  >
-                                <Button onClick={this.dontDeletePost.bind(this)} icon='close' labelPosition='right' content='Close' size='tiny' />
-                                <Button color='red' icon='trash alternate outline' labelPosition='right' content='Delete' size='tiny' onClick={this.deletePost.bind(this, [this.state.deleteArticleId])} />
-                            </Button.Group>
-                        </p>
+                        <Modal.Content style={{ height: '200px', background: "", color: 'black', padding: '10%' }}  >
+                            <p style={{ textAlign: 'center' }}> <Icon size='big' name='trash' />
+                                <h3 >{`Really want to delete -${this.state.deleteArticleName} ?`}  </h3>
+                                <br />
+                                <Button.Group size='small'  >
+                                    <Button onClick={this.dontDeletePost.bind(this)} icon='close' labelPosition='right' content='Close' size='tiny' />
+                                    <Button color='red' icon='trash alternate outline' labelPosition='right' content='Delete' size='tiny' onClick={this.deletePost.bind(this, [this.state.deleteArticleId])} />
+                                </Button.Group>
+                            </p>
 
 
-                    </Modal.Content>
+                        </Modal.Content>
                     </Modal>
 
-                        <div className='bodyArticle'>
-                        {this.state.not_found ==true ? <div className='error-notification'> No {this.state.search_criteria} similar to <b> {this.state.search}</b> was found</div>: '' }
+                    <div className='bodyArticle'>
 
-                            <Grid>
-                                <Grid.Row >
-                                    <Grid.Column computer={13} mobile={16} tablet={8}  >
+                        <Grid>
+                            <Grid.Row >
+                            <Grid.Column computer={13} mobile={16} tablet={15}  >
 
-                                        {filter_privacy.map((e) => {
 
-                                            return (
-                                                <div key={e._id} className='image-thumbnail-template-cover-big'>
+                                    <div >
 
-                                                    <div style={{ margin: '10px 3px' }}>
+                                        <Form size="small" >  
 
-                                                        <div className={'customCard-' + e.category} >
+                                            <Input id='search' className='custom-input' name='title' maxLength='50'  value={this.state.search} onChange= {this.onChangeSearch}  placeholder='Search Drafts' />
 
-                                                            <div className='customCard-inner' >
-                                                                <span style={{}} >Title </span>
-                                                                <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis', height: '30%' }}>
-                                                                    {e.title}
-                                                                </h4>
+                                            <Select name='category' className='custom-label' value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions}  />
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <Button basic size="small" onClick={this.search_with_criteria}> Search <Icon name='chevron right' />
+                                            </Button>
+                                        </Form>
+                                        <br />
 
-                                                                <span><b>Created On </b> </span>
-                                                                <p>{date_to_string(e.createdAt)}</p>
 
-                                                            </div>
+                                    </div>
+
+
+
+                                </Grid.Column>
+
+                                <Grid.Column computer={13} mobile={16} tablet={15}  >
+
+                                {this.state.not_found == true ? <div className='error-notification'> No {this.state.search_criteria} similar to <b> {this.state.search}</b> was found</div> : ''}
+
+                                    {filter_privacy.map((e) => {
+
+                                        return (
+                                            <div key={e._id} className='image-thumbnail-template-cover-big'>
+
+                                                <div style={{ margin: '10px 3px' }}>
+
+                                                    <div className={'customCard-' + e.category} >
+
+                                                        <div className='customCard-inner' >
+                                                            <span style={{}} >Title </span>
+                                                            <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis', height: '30%' }}>
+                                                                {e.title}
+                                                            </h4>
+
+                                                            <span><b>Created On </b> </span>
+                                                            <p>{date_to_string(e.createdAt)}</p>
 
                                                         </div>
+
                                                     </div>
-
-
-                                                    <div className='template-thumbnail-hover-big'>
-                                                        <h2 style={{ marginTop: '0px', padding: '0px' }}>{e.category}</h2>
-
-                                                        <div style={{}}>
-                                                            <div className="category">
-                                                                <span><b>Description</b> </span>
-                                                                <p>{e.description} </p>
-
-                                                                <Button.Group size='small' color='teal' secondary >
-                                                                    <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/'+ e._id  }} />
-                                                                    <Button icon='external alternate' target="__blank" as={Link} to={`http://localhost:5000/${this.props.ProfileReducer.username}/${e.title}`} />
-                                                                    <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
-                                                                    <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
-
-                                                                </Button.Group>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-
                                                 </div>
 
 
+                                                <div className='template-thumbnail-hover-big'>
+                                                    <h2 style={{ marginTop: '0px', padding: '0px' }}>{e.category}</h2>
 
-                                            )
+                                                    <div style={{}}>
+                                                        <div className="category">
+                                                            <span><b>Description</b> </span>
+                                                            <p>{e.description} </p>
 
-                                        })}
-                                    </Grid.Column>
+                                                            <Button.Group size='small' color='teal' secondary >
+                                                                <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
+                                                                <Button icon='external alternate' target="__blank" as={Link} to={`http://localhost:5000/${this.props.ProfileReducer.username}/${e.title}`} />
+                                                                <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
+                                                                <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
 
-                                    <Grid.Column style={{ padding: '5px' }} computer={3} mobile={16} tablet={8}  >
+                                                            </Button.Group>
+                                                        </div>
 
+                                                    </div>
+                                                </div>
 
-                                        <div >
-
-                                            <Form size="mini">
-                                                <h4> SEARCH DRAFTS </h4><Icon name='search' size='small' style={{ float: 'right' }} />
-                                                <p> </p>
-
-                                                <Form.Field id='search' name='title' maxLength='50' label='Search' value={this.state.search} onChange={this.onChangeSearch} control='input' placeholder='Search' />
-
-                                                <Select name='category' className='custom-label' value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
-                                                <br />
-                                                <br />
-                                                <Button color='blue' size='mini' onClick={this.search_with_criteria} > Search <Icon name='chevron right' />
-                                                </Button>
-                                            </Form>
-                                            <br />
-
-
-                                        </div>
+                                            </div>
 
 
 
-                                    </Grid.Column>
-                                </Grid.Row>
-                            </Grid>
-                        </div>
+                                        )
+
+                                    })}
+                                </Grid.Column>
+
+
+                            </Grid.Row>
+                        </Grid>
+                    </div>
 
 
 

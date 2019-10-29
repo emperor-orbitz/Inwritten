@@ -506,8 +506,7 @@ class EditPost extends React.Component {
             </Grid.Column>
 
             <Grid.Column mobile={16} tablet={4} computer={3}>
-              <br></br>
-              <br></br>
+              
               <Button primary onClick={() => { this.setState({ open_options: true }) }}> Ready to re-publish</Button>
               <br></br><br></br> 
               <p><Link to ={response_link} >View Responses</Link></p>

@@ -3,76 +3,115 @@ import '../../Resources/styles/comment.scss';
 //import { Icon, Form, Divider, Button, Loader, ButtonGroup } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import FetchArticles from '../../Controllers/article.controller';
+import { Icon } from 'semantic-ui-react';
+//import FetchArticles from '../../Controllers/article.controller';
 
 
+function getmonthName(number) {
+    var months = [
+        '01', '02', '03', '04', '05', '06',
+        '07',
+        '08',
+        '09', '10', '11', '12'
+    ]
+    return months[number];
 
+}
 
-
+function date_to_string(date) {
+    var fulldate = new Date(date);
+    var month = getmonthName(fulldate.getMonth());
+    var year = fulldate.getFullYear();
+    var day = fulldate.getDate();
+    var convert = `${day}- ${month}`;
+    return convert;
+}
 
 class Comment extends React.Component {
 
     constructor(props) {
         super(props);
-       this.state={
+        this.state = {
 
-        comments:[]
-       } 
-     
+            comments: [],
+            post_title: ""
+        }
+
     }
 
 
-    load_articles =new FetchArticles();
+    //load_articles = new FetchArticles();
 
     componentDidMount() {
         console.log(this.props);
-                if (Object.keys(this.props.ArticleReducer).length == 0) {
-                
-            /*this.load_articles.fetch_articles_list().then((articles, none) => {
-                if (articles) {
+        var { ArticleReducer, match } = this.props;
+        for (var x of ArticleReducer) {
+            if (x._id == match.params.postID) {
 
-                  this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: articles});
-                    //Load the article with the attributed :ID
+                this.setState({
+                    comments: x.comments,
+                    post_title: x.title
+                })
 
 
+            }
+        }
 
-                    this.setState({dimmerLoad:false, comments: articles })
-                }
-                else;
-            })
-*/
-}
 
-else {
-  this.setState({dimmerLoad:false})
-
-}
-
-this.setState({dimmerLoad:false})
-
-     
 
     }
 
 
 
-   
 
 
 
 
- 
+
+
 
 
 
     render() {
-       
+        console.log(this.state.comments, "this is comments oo");
+
+        if (this.state.comments.length == 0){
+            return (<div className="comment-div" style={{ marginTop: "0px !important" }}>
+            <p>Sorry your post hasn't received any response yet.</p>
+            <p>Try sharing your links to your audience (this can help).</p>
+            </div>)
+        }
+
         return (
 
-            <div className="comment-div" style={{marginTop:"0px !important"}}>
+            <div className="comment-div" style={{ marginTop: "0px !important" }}>
 
-               
-               {this.props.match.params.postID}
+                <h3 style={{color:"rgb(3, 68, 94)"}}>Responses to your story: "{this.state.post_title}" </h3>
+
+                {
+                    this.state.comments.map(each => {
+                        return (
+                            <div className="comment-panel">
+                                <h5>{each.comment}</h5>
+                                <p>{each.commenter_id}</p>
+                                <Icon name="like" size='small' color="teal"/> {each.likes}
+                                &nbsp;&nbsp;&nbsp;
+                                <Icon name="trash alternate outline" size='small' color="teal"/>
+                                &nbsp;&nbsp;&nbsp;
+                                <Icon name="clock outline" size='small' color="teal"/> {date_to_string(each.createdAt)}
+                                &nbsp;&nbsp;&nbsp; 
+                                {each.seen == true? 'hide':"accept"}
+
+                            
+                            </div>
+
+                        )
+
+                    })
+
+
+
+                }
 
             </div>
         )

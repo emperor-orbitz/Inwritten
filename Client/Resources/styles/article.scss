@@ -44,7 +44,7 @@ float:left;
 .bodyArticle{
 
 background:white;
-margin: 0px 5%;
+margin: 0px 2%;
 width:100%;
 color:black;
 }  
@@ -143,6 +143,14 @@ border-radius: 0px !important;
 color:rgba(3, 68, 94, 0.8);
 
 }
+
+.custom-input{
+
+    border:1px solid rgb(3, 68, 94) !important;
+    border-radius: 0px !important;
+    width:60%;
+    
+    }
 
 .modalContent{
     background:rgba(3, 68, 94, 0.9);
@@ -608,7 +616,7 @@ min-height:50px;
 }
 
 
-button,select, input{
+button,select, input {
     border-radius:0px !important;
     //height: 15px;
 }

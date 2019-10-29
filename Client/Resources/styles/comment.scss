@@ -1,8 +1,23 @@
 .comment-div{
 color:black;
 margin: 0px 5%;
-width:100%;
+width:80%;
 height: 100%;
 
 
 }
+
+
+
+.comment-panel{
+border:1px solid rgb(3, 68, 94);
+margin-bottom:10px;
+padding: 20px;
+
+}
+
+.comment-panel:hover{
+    border-radius:3px;
+    box-shadow: 1px 1px 2px 2px rgba(143, 142, 142, 0.4);
+    cursor: pointer;
+    }

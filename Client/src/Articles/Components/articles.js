@@ -1,11 +1,11 @@
 
 import React from 'react';
 import '../../../Resources/styles/article.scss';
-import { Button, Icon, Form, Modal, Grid,  Select } from 'semantic-ui-react';
+import { Button, Icon, Form, Modal, Grid, Select, Input } from 'semantic-ui-react';
 import Connection from '../../../Controllers/auth.controller';
 
 import { withRouter } from 'react-router';
-import {  Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import FetchArticles from '../../../Controllers/article.controller';
 
@@ -64,7 +64,7 @@ class Articles extends React.Component {
             filter_privacy_const: [],
             not_found: false
         }
-      
+
 
     }
 
@@ -84,10 +84,10 @@ class Articles extends React.Component {
     }
     handleSearchCriteria = (e, p) => {
 
-        this.setState({ not_found:false, search_criteria: p.value })
+        this.setState({ not_found: false, search_criteria: p.value })
     }
 
- 
+
     deletePost = () => {
         var id = this.state.deleteArticleId;
 
@@ -100,9 +100,9 @@ class Articles extends React.Component {
                         {
                             type: 'DELETE', payload: { _id: this.state.deleteArticleId }
                         });
-                        
+
                     this.setState({ deleteArticleId: null, open: false, messageDismiss: true });
-                    var filter_privacy = this.props.ArticleReducer.filter( nor=> nor.public == true );
+                    var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == true);
                     this.setState({ filter_privacy });
 
                 }
@@ -112,15 +112,15 @@ class Articles extends React.Component {
             })
 
     }
-    focusOnId =(elem)=>{
+    focusOnId = (elem) => {
         document.getElementById(elem).focus();
 
     }
     dontDeletePost = () => this.setState({ open: !this.state.open, deleteArticleId: null });
 
 
-    handleMessageDismiss=() => this.setState({ messageDismiss: false });
-    
+    handleMessageDismiss = () => this.setState({ messageDismiss: false });
+
 
     close = () => this.setState({ open: false })
 
@@ -130,71 +130,42 @@ class Articles extends React.Component {
 
     onChangeSearch = (e) => {
         var search = e.target.value;
-        this.setState({ search:search, not_found:false })
+        this.setState({ search: search, not_found: false })
     }
 
 
-    search_with_criteria = ( ) => {
+    search_with_criteria = () => {
 
-        var SC=this.state.search_criteria;
+        var SC = this.state.search_criteria;
         this.setState({ not_found: false });
-        var search= this.state.search;
+        var search = this.state.search;
 
-        var ask = this.state.filter_privacy.filter( (portion, index)=> portion[SC].toLowerCase().indexOf(search.toLowerCase()) != -1);
+        var ask = this.state.filter_privacy.filter((portion, index) => portion[SC].toLowerCase().indexOf(search.toLowerCase()) != -1);
 
-        if (ask.length == 0) this.setState({ not_found: true }, ()=>{  this.focusOnId('search')  })
+        if (ask.length == 0) this.setState({ not_found: true }, () => { this.focusOnId('search') })
         else if (search.length == 0) {
-            this.setState({ filter_privacy: this.state.filter_privacy_const }, ()=>{this.focusOnId('search') } )
+            this.setState({ filter_privacy: this.state.filter_privacy_const }, () => { this.focusOnId('search') })
 
         }
         else {
 
-            this.setState({ filter_privacy: ask }, ()=>{this.focusOnId('search') } )
+            this.setState({ filter_privacy: ask }, () => { this.focusOnId('search') })
 
 
         }
-       
+
 
     }
 
 
 
     componentDidMount() {
-        if (Object.keys(this.props.ArticleReducer).length == 0){
+       
 
-
-            this.fetchArticle.fetch_articles_list().then((articles, none) => {
-                if (articles) {
-                    this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: articles });
-
-                    var filter_privacy = this.props.ArticleReducer.filter( nor => nor.public == true)
-                    this.setState({ filter_privacy });
-                    this.state.filter_privacy_const = filter_privacy;
-
-                }
-                else {
-                    //error
-                    this.props.history.replace('/login');
-
-                }
-            })
-
-        }
-
-        else {
-            //DONT WORRY PROPS IS AVAILABLE 
-            //SAME PRINCIPLE
-
-            var filter_privacy = this.props.ArticleReducer.filter( nor => nor.public == true );
+            var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == true);
 
             this.setState({ filter_privacy });
             this.state.filter_privacy_const = filter_privacy;
-
-        }
-
-
-
-
 
     }
 
@@ -213,7 +184,7 @@ class Articles extends React.Component {
 
     ]
 
-   
+
     render() {
 
         var { filter_privacy } = this.state;
@@ -223,67 +194,90 @@ class Articles extends React.Component {
         if (filter_privacy.length == 0) {
             return (<div>
 
-                    <div className='bodyArticle'>
-                        <Grid>
-                            <Grid.Row>
-                                <Grid.Column style={{ padding: '5px' }} computer={13} mobile={16} tablet={8}  >
+                <div className='bodyArticle'>
+                    <Grid>
+                        <Grid.Row>
+                            <Grid.Column style={{ padding: '5px' }} computer={13} mobile={16} tablet={8}  >
 
 
 
-                    It seems you don't have any published item yet. You can start right <a href="/add-post">here</a>
+                                It seems you don't have any published item yet. You can start right <a href="/add-post">here</a>
 
-                                </Grid.Column>
-
-
-                                <Grid.Column style={{ padding: '5px' }} computer={3} mobile={16} tablet={8}  >
+                            </Grid.Column>
 
 
-
-                                </Grid.Column>
-
-                            </Grid.Row>
-                        </Grid>
+                            <Grid.Column style={{ padding: '5px' }} computer={3} mobile={16} tablet={8}  >
 
 
-                    </div>
+
+                            </Grid.Column>
+
+                        </Grid.Row>
+                    </Grid>
+
+
+                </div>
 
             </div>
 
             )
 
         }
-  
+
 
         else {
             return (
 
-            <div>
+                <div>
 
-                <Modal dimmer={true} size='mini' open={this.state.open}  >
+                    <Modal dimmer={true} size='mini' open={this.state.open}  >
 
-                    <Modal.Content style={{ height: '200px', background: "", color:'black', padding: '5% ' }}  >
-                   <div style={{textAlign:'center'}}> <Icon size='big' name='trash' />
-                        <h3 >{`Really want to delete -${this.state.deleteArticleName} ?`}  </h3>
-                       
-                        <Button.Group size='small'  >
-                                <Button onClick={this.dontDeletePost.bind(this)} icon='close' labelPosition='right' content='Close' size='mini' />
-                                <Button color='red' icon='trash alternate outline' labelPosition='right' content='Delete' size='tiny' onClick={this.deletePost.bind(this, [this.state.deleteArticleId])} />
-                            </Button.Group>
-                        </div>
-                        
-                       
+                        <Modal.Content style={{ height: '200px', background: "", color: 'black', padding: '5% ' }}  >
+                            <div style={{ textAlign: 'center' }}> <Icon size='big' name='trash' />
+                                <h3 >{`Really want to delete -${this.state.deleteArticleName} ?`}  </h3>
 
-                    </Modal.Content>
+                                <Button.Group size='small'  >
+                                    <Button onClick={this.dontDeletePost.bind(this)} icon='close' labelPosition='right' content='Close' size='mini' />
+                                    <Button color='red' icon='trash alternate outline' labelPosition='right' content='Delete' size='tiny' onClick={this.deletePost.bind(this, [this.state.deleteArticleId])} />
+                                </Button.Group>
+                            </div>
 
-                </Modal>
+
+
+                        </Modal.Content>
+
+                    </Modal>
 
 
                     <div className='bodyArticle'>
 
                         <Grid>
                             <Grid.Row >
-                                <Grid.Column computer={12} mobile={16} tablet={12}  >
-                                {this.state.not_found ==true ? <div className='error-notification'> No {this.state.search_criteria} similar to <b> {this.state.search}</b> was found</div>: '' }
+                                <Grid.Column computer={13} mobile={16} tablet={15}  >
+
+
+                                    <div >
+
+                                        <Form size="small" >
+
+                                            <Input id='search' className='custom-input' name='title' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search Drafts' />
+
+                                            <Select name='category' className='custom-label' value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <Button basic size="small" onClick={this.search_with_criteria}> Search <Icon name='chevron right' />
+                                            </Button>
+                                        </Form>
+                                        <br />
+
+
+                                    </div>
+
+
+
+                                </Grid.Column>
+
+                                <Grid.Column computer={12} mobile={16} tablet={15}  >
+                                    {this.state.not_found == true ? <div className='error-notification'> No {this.state.search_criteria} similar to <b> {this.state.search}</b> was found</div> : ''}
 
                                     {filter_privacy.map((e) => {
 
@@ -318,7 +312,7 @@ class Articles extends React.Component {
                                                             <p>{e.description} </p>
 
                                                             <Button.Group size='small' color='teal' secondary >
-                                                                <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/'+e._id }} />
+                                                                <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
                                                                 <Button icon='external alternate' target="__blank" as={Link} to={`http://localhost:5000/${this.props.ProfileReducer.username}/${e.title}`} />
                                                                 <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
                                                                 <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
@@ -338,29 +332,7 @@ class Articles extends React.Component {
                                     })}
                                 </Grid.Column>
 
-                                <Grid.Column style={{ padding: '5px' }} computer={4} mobile={16} tablet={3}>
-                                    <div >
 
-                                        <Form size="mini">
-                                        <h4> Search Articles </h4><Icon name='search' size='small' style={{ float: 'right' }} />
-                                            <p> </p>
-
-                                            <Form.Field id='search' name='title' maxLength='50' label='Search' value={this.state.search} onChange={this.onChangeSearch} control='input' placeholder='Search' />
-
-                                            <Select name='category' className='custom-label' value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
-                                            <br />
-                                            <br />
-                                            <Button color='blue' size='mini' onClick={this.search_with_criteria} > Search <Icon name='chevron right' />
-                                            </Button>
-                                        </Form>
-                                        <br />
-                                    
-                                     
-                                    </div>
-
-
-
-                                </Grid.Column>
                             </Grid.Row>
                         </Grid>
                     </div>
@@ -368,11 +340,11 @@ class Articles extends React.Component {
 
 
 
-            </div>
+                </div>
 
-        )
+            )
 
-    }
+        }
 
     }
 

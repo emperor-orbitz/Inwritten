@@ -10,7 +10,7 @@ const HTMLWebpackPluginConfig = new HTMLWebpackPlugin(
         filename:'index.html',
         title:'Penboxio',
         minify:true,   
-        inject:'body'
+        inject: false
         
     }
 )

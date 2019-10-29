@@ -71,10 +71,11 @@ export default function ArticlePreview(props) {
         return (
             <div className='bodyArticle'>
                 Oops, It seems you have no Article written
-You can start from <Link to="/add-post" >HERE</Link>
+                You can start from
+                <Link to="/add-post" >HERE</Link>
                 <br /> OR Click the pencil
-                
-</div>
+
+            </div>
 
         )
     }
@@ -84,7 +85,7 @@ You can start from <Link to="/add-post" >HERE</Link>
 
     else {
 
-        articles_preview = ArticleReducer.slice(0, 3);
+        articles_preview = ArticleReducer.slice(0, 5);
 
 
         return (
