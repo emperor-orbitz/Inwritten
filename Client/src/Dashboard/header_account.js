@@ -165,7 +165,27 @@ class HeaderAccount extends React.Component {
       return (
 
         <div className="head">
-          <Responsive as={Menu} minWidth={300} className="nav" secondary  >
+       
+
+
+          <div className="sideBar">
+
+              <Modal size="mini" open={open} onClose={this.close}>
+                <Modal.Header>LOGOUT</Modal.Header>
+                <Modal.Content>
+                  <p style={{ color: 'black' }}>Are you sure you want to log out?<br /> There's still a lot to write about!</p>
+                </Modal.Content>
+                <Modal.Actions>
+                  <Button onClick={() => {
+                    this.setState({ open: false })
+                  }} color="teal">Nope</Button>
+                  <Button onClick={this.logout} negative icon='checkmark' labelPosition='right' content='Yes' />
+                </Modal.Actions>
+              </Modal>
+            
+
+            <Sidebar.Pushable>
+            <Responsive as={Menu} minWidth={300} className="nav" secondary  >
             <Menu.Item icon="bars" onClick={this.toggleSide} size="big" />
             <Menu.Item style={{ 'width': '20%' }} header ><h3>Hashstack.io</h3> </Menu.Item>
 
@@ -188,24 +208,6 @@ class HeaderAccount extends React.Component {
             </Menu.Menu>
           </Responsive>
 
-
-          <div className="sideBar">
-
-              <Modal size="mini" open={open} onClose={this.close}>
-                <Modal.Header>LOGOUT</Modal.Header>
-                <Modal.Content>
-                  <p style={{ color: 'black' }}>Are you sure you want to log out?<br /> There's still a lot to write about!</p>
-                </Modal.Content>
-                <Modal.Actions>
-                  <Button onClick={() => {
-                    this.setState({ open: false })
-                  }} color="teal">Nope</Button>
-                  <Button onClick={this.logout} negative icon='checkmark' labelPosition='right' content='Yes' />
-                </Modal.Actions>
-              </Modal>
-            
-
-            <Sidebar.Pushable>
               <Sidebar as={Accordion}
                 animation="push"
                 onHide={this.toggle}
@@ -214,49 +216,52 @@ class HeaderAccount extends React.Component {
                 className='sidebar'
               >
                 <div style={{ textAlign: 'center', padding: '20px 2px', paddingBottom: '10px', color: 'rgb(3, 68, 94)', background: 'white' }} >
-                  <Link to="/dashboard" style={{ color: "black" }}> <h3>DASHBOARD</h3></Link>
+                  <Link to="/dashboard" style={{ color: "black" }}> <h3>Hashstack.io</h3></Link>
                 </div>
 
 
                 <div className="accordion-item">
-                  <Accordion.Title icon="file alternate" active={this.state.activeAccordion === 1} style={{ padding: '1px 20px' }} index={1} onClick={this.handleClick}  >
-                    <Icon name="file alternate" className="accordion-icon" size="large" /> <h3 >My Articles</h3>
+                  <Accordion.Title icon="file alternate" active={this.state.activeAccordion === 1} style={{ padding: '7px 20px', paddingTop:"10px" }} index={1} onClick={this.handleClick}  >
+                    <Icon name="file alternate" className="accordion-icon" size="large" /> <span style={{fontSize:"15px",color:"white"}}>My Articles</span>
                   </Accordion.Title>
-                  <Accordion.Content style={{ padding: '1px 20px' }} active={activeAccordion === 1} content={articleSubmenu} />
+                  <Accordion.Content style={{ padding: '1px 20px' }} className="accordion-contentt" active={activeAccordion === 1} content={articleSubmenu} />
                   
 
                 </div>
                 <div className="accordion-item">
-                  <Accordion.Title active={this.state.activeAccordion === 2} style={{ padding: '1px 20px' }} index={2} onClick={this.handleClick}  >
-                    <Icon name="file image outline" className="accordion-icon" size="large" />  <h3>Bookmarks</h3>
+                  <Accordion.Title active={this.state.activeAccordion === 2} style={{ padding: '5px 20px' }} index={2} onClick={this.handleClick}  >
+                    <Icon name="file image outline" className="accordion-icon" size="large" />  <span style={{fontSize:"15px",color:"white"}}>Bookmarks</span>
                   </Accordion.Title>
-                  <Accordion.Content style={{ padding: '1px 20px' }} active={activeAccordion === 2} content={imageSubmenu} />
+                  <Accordion.Content style={{ padding: '1px 20px' }} className="accordion-contentt" active={activeAccordion === 2} content={imageSubmenu} />
                 </div>
 
 
                 <div className="accordion-item">
-                  <Accordion.Title active={this.state.activeAccordion === 3} style={{ padding: '1px 20px' }} index={3} onClick={this.handleClick}>
-                    <Icon name="hashtag" className="accordion-icon" size="large" />  <h3>Interests</h3>
+                  <Accordion.Title active={this.state.activeAccordion === 3} style={{ padding: '5px 20px' }} index={3} onClick={this.handleClick}>
+                    <Icon name="hashtag" className="accordion-icon" size="large" />  <span style={{fontSize:"15px",color:"white"}}>Interests</span>
                   </Accordion.Title>
-                  <Accordion.Content style={{ padding: '1px 20px' }} active={activeAccordion === 3} content={categorySubmenu} />
+                  <Accordion.Content style={{ padding: '1px 20px', }} className="accordion-contentt" active={activeAccordion === 3} content={categorySubmenu} />
 
                 </div>
 
                 <div className="accordion-item">
-                  <Accordion.Title active={this.state.activeAccordion === 4} style={{ padding: '1px 20px' }} index={4} onClick={this.handleClick}>
-                    <Icon name="sliders horizontal" className="accordion-icon" size="large" />  <h3>Settings</h3>
+                  <Accordion.Title active={this.state.activeAccordion === 4} style={{ padding: '5px 20px' }} index={4} onClick={this.handleClick}>
+                    <Icon name="sliders horizontal" className="accordion-icon" size="large" /> <span style={{fontSize:"15px",color:"white"}}>Settings</span>
                   </Accordion.Title>
-                  <Accordion.Content style={{ padding: '1px 20px' }} active={activeAccordion === 4} content={settingsSubmenu} />
+                  <Accordion.Content style={{ padding: '1px 20px' }} className="accordion-contentt" active={activeAccordion === 4} content={settingsSubmenu} />
                 </div>
 
                 <div className="accordion-item">
-                  <Accordion.Title active={this.state.activeAccordion === 4} style={{ padding: '1px 20px' }} index={4} onClick={this.handleClick}>
-                    <Icon name="comments" className="accordion-icon" size="large" />  <h3>Comments</h3>
+                <Accordion.Title active={this.state.activeAccordion === 4} style={{ padding: '5px 20px' }} >
+                    <Icon name="comments" className="accordion-icon" size="large" />
+                    <Link to="/comments" style={{ color: "white" }}><span style={{fontSize:"15px",color:"white"}}>Comments</span></Link> 
                   </Accordion.Title>
+                
+
                 </div>
 
                 <div className="accordion-item">
-                  <Button as={Link} to="/about_us" fluid style={{ color: 'rgb(3, 68, 94)' }}>
+                  <Button as={Link} to="/about_us" fluid style={{ color: 'white' }}>
                     <Icon name="info" />
                     THE APP
                   </Button>

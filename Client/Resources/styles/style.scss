@@ -52,14 +52,18 @@ height:70px;
 
 .nav{
  margin-bottom:0px;
-  height:100%;
+height:70px;
  //background: linear-gradient(to left, white, silver, rgb(4,68,8) ) !important;
   // box-shadow:2px 2px 2px 1px silver !important;
   
  
 }
 }
+.accordion-contentt{
 
+background:white;
+
+}
 
 a.item {
   color: white;
@@ -81,6 +85,11 @@ a .active .item {
   width:100%;
 color:white;
 margin-top: 0px ;
+
+}
+
+.accordion.ui.ui.push.left.visible.sidebar.sidebar{
+  background:rgb(3, 68, 94);
 
 }
 
@@ -138,23 +147,28 @@ margin: 10%;
   
 
   .accordion-icon{
-    color: rgb(3, 68, 94);
-     float:left;
-   margin-right:20px;
+    color: white;
+     float:right;
+   margin-left:20px;
    }
 
    .accordion-item{
      min-height:60px;
       //border-top:1px solid teal;
-      border-bottom:1px solid teal;
+      //border-bottom:1px solid teal;
      padding:10px;
+     color:white;
+
+     h4{
+       color:white;
+     }
    }
    .row{
 margin:1px 2%;
 
 
    }
-   .section-header{
+  .section-header{
 margin: 3% 8%;
 margin-left:50px;
 color:teal;

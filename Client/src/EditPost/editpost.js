@@ -456,7 +456,7 @@ class EditPost extends React.Component {
 
 
 
-
+    var response_link =`/comments/${this.props.match.params.postID}`;
 
 
 
@@ -510,7 +510,7 @@ class EditPost extends React.Component {
               <br></br>
               <Button primary onClick={() => { this.setState({ open_options: true }) }}> Ready to re-publish</Button>
               <br></br><br></br> 
-              <p><Link to ='/comments/abc'>View Responses</Link></p>
+              <p><Link to ={response_link} >View Responses</Link></p>
 
 
               <Modal size="small" open={this.state.open_options} onClose={this.close} closeOnDimmerClick >

@@ -93,10 +93,6 @@ var credentials={
     return (
 
       <div >
-        <Dimmer active={this.state.dimmerLoad}>
-          <Loader size="small"> Loading Dashboard in a bit...</Loader>
-        </Dimmer>
-
 
           <div className="bodyAccount">
             <Grid >

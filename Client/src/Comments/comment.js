@@ -3,6 +3,8 @@ import '../../Resources/styles/comment.scss';
 //import { Icon, Form, Divider, Button, Loader, ButtonGroup } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import FetchArticles from '../../Controllers/article.controller';
+
 
 
 
@@ -17,21 +19,33 @@ class Comment extends React.Component {
     }
 
 
+    load_articles =new FetchArticles();
 
-    connect = new Connection();
     componentDidMount() {
         console.log(this.props);
-        let auth_token = localStorage.getItem("hs_token");
+                if (Object.keys(this.props.ArticleReducer).length == 0) {
+                
+            this.load_articles.fetch_articles_list().then((articles, none) => {
+                if (articles) {
 
-        this.connect.isLoggedin(auth_token)
-            .then( user => {
-                //Do something here
-
-                //this.setState({...this.props.ProfileReducer});
-
+                  this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: articles});
+                    this.setState({dimmerLoad:false})
+                }
+                else {
+                    //error
+                    //this.props.history.replace('/login');
+                }
             })
-            .catch( _ => this.props.history.replace('/login'))
 
+}
+
+else {
+  this.setState({dimmerLoad:false})
+}
+
+this.setState({dimmerLoad:false})
+
+     
 
     }
 
@@ -46,16 +60,14 @@ class Comment extends React.Component {
 
 
 
-
-
-
     render() {
        
         return (
 
-            <div className="profile-div" style={{marginTop:"0px !important"}}>
+            <div className="comment-div" style={{marginTop:"0px !important"}}>
 
-               
+               ADULTSJNFBS
+               {this.props.match.params.postID}
 
             </div>
         )

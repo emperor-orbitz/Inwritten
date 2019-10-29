@@ -157,9 +157,6 @@ class Articles extends React.Component {
 
     }
 
-  hideSideSearch = (e)=>{
-      alert('fuckn uu');
-  }
 
 
     componentDidMount() {
@@ -225,7 +222,6 @@ class Articles extends React.Component {
 
         if (filter_privacy.length == 0) {
             return (<div>
-
 
                     <div className='bodyArticle'>
                         <Grid>
@@ -346,7 +342,7 @@ class Articles extends React.Component {
                                     <div >
 
                                         <Form size="mini">
-                                        <h4> SEARCH ARTICLES </h4><Icon name='search' size='small' style={{ float: 'right' }} onClick={this.hideSideSearch.bind(this)} />
+                                        <h4> Search Articles </h4><Icon name='search' size='small' style={{ float: 'right' }} />
                                             <p> </p>
 
                                             <Form.Field id='search' name='title' maxLength='50' label='Search' value={this.state.search} onChange={this.onChangeSearch} control='input' placeholder='Search' />
