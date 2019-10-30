@@ -37,12 +37,12 @@ class SideBar {
                 <Menu.Item as={Link} to="/interests?topic=art"><Icon name="paint brush"/>Art</Menu.Item>
                 <Menu.Item as={Link} to="/interests?topic=os"><Icon name="windows" />Operating systems</Menu.Item>
                 <Menu.Item as={Link} to="/interests?topic=js"><Icon name="code"/>Javascript</Menu.Item>
-                <Menu.Item><Icon name="book"/>Education</Menu.Item>
-                <Menu.Item><Icon name="microchip"/>Tech and Hardwares</Menu.Item>
-                <Menu.Item><Icon name="flask"/>Science</Menu.Item>
-                <Menu.Item><Icon name="ambulance"/>Health</Menu.Item>
-                <Menu.Item><Icon name="heart"/>Romance</Menu.Item>
-                <Menu.Item><Icon name="building"/>Real Estate</Menu.Item>
+                <Menu.Item as={Link} to="/interests?topic=edu"><Icon name="book"/>Education</Menu.Item>
+                <Menu.Item as={Link} to="/interests?topic=tech"><Icon name="microchip"/>Tech and Hardwares</Menu.Item>
+                <Menu.Item as={Link} to="/interests?topic=sci"><Icon name="flask"/>Science</Menu.Item>
+                <Menu.Item as={Link} to="/interests?topic=health"><Icon name="ambulance"/>Health</Menu.Item>
+                <Menu.Item as={Link} to="/interests?topic=romance"><Icon name="heart"/>Romance</Menu.Item>
+                <Menu.Item as={Link} to="/interests?topic=realtor"><Icon name="building"/>Real Estate</Menu.Item>
 
             </Menu>
         ),

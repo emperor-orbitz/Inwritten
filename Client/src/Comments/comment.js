@@ -38,7 +38,18 @@ class Comment extends React.Component {
 
     }
 
+    delete_comment =(id) =>{
 
+        alert("Are u sure u want to delete this???"+id);
+    
+        }
+
+
+        like_comment =(id) =>{
+
+            alert("I like this???"+id);
+        
+            }
     //load_articles = new FetchArticles();
 
     componentDidMount() {
@@ -55,12 +66,11 @@ class Comment extends React.Component {
 
             }
         }
-
-
-
     }
 
 
+
+   
 
 
 
@@ -94,8 +104,8 @@ class Comment extends React.Component {
                                 <h5>{each.comment}</h5>
                                 <p>By <i>{each.commenter_id.username}({each.commenter_id.email})</i></p>
                                 <Button.Group size='mini' basic >
-                                            <Button icon='like'  />
-                                            <Button icon='trash alternate outline' />
+                                            <Button icon='like' onClick ={()=>{this.like_comment(each._id)}} />
+                                            <Button icon='trash alternate outline' onClick ={()=>{this.delete_comment(each._id)}} />
                                             <Button>{each.seen == true? 'Hide':"Accept"}</Button>
 
                                 </Button.Group>

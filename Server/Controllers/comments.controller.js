@@ -73,7 +73,9 @@ var list = (req, res, next) =>{
 var remove = (req, res, ) =>{
   comments.deleteOne({_id:req.body.id})
             .then(result =>{ res.send({data: result, status:200 }) })
-            .catch(err=> res.send({data:[], message:`Error occured ${err}`}))
+            .catch(err=> res.send({data:[], message:`Error occured ${err}`,
+            status:500
+        }))
   
   }
 

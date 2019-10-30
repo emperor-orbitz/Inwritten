@@ -44,7 +44,7 @@ class Account extends React.Component {
 
 componentDidMount() {
 
-        if (Object.keys(this.props.ArticleReducer).length == 0) {
+     /*   if (Object.keys(this.props.ArticleReducer).length == 0) {
                 
                     this.fetchArticle.fetch_articles_list().then((articles, none) => {
                         if (articles) {
@@ -66,7 +66,7 @@ componentDidMount() {
         }
 
         this.setState({dimmerLoad:false})
-
+*/
   }
 
 
