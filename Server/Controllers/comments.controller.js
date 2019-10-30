@@ -39,10 +39,10 @@ var create = (req, res) => {
 }
 
 
-var update = (req, res)=>{
+var update = (req, res) =>{
 
     var comment = new comments();
-    comment.update_comment(req.body, (error,results)=>{
+    comment.update_comment(req.body, (error,results) => {
         if(error){
             res.status(401)
                .send({status:401, data:[]})
@@ -51,8 +51,6 @@ var update = (req, res)=>{
            res.send({
                        data: results, status:200
                    })
-   
-   
         }
    
       })

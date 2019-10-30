@@ -53,7 +53,7 @@ const SCHEME = {
 
         title: { type: String },
         body_html: { type: mongoose.Schema.Types.Mixed },
-        body_schema:{type: mongoose.Schema.Types.Mixed},
+        body_schema:{ type: mongoose.Schema.Types.Mixed},
         featured_image: { type: String },
         category: { type: String, lowercase: true },
         createdAt: { type: Date },
@@ -77,8 +77,8 @@ const SCHEME = {
 
     comments: new Schema({
         seen: {type:Boolean, default:false},
-        author_id: { type: mongoose.Schema.Types.ObjectId, required:true },
-        commenter_id:{type:mongoose.Schema.Types.ObjectId},
+        author_id: { type: mongoose.Schema.Types.ObjectId,  ref:"User" },
+        commenter_id: { type:mongoose.Schema.Types.ObjectId, ref:"User"},
         likes:{type:Number, default:0 },
         post_id: { type: mongoose.Schema.Types.ObjectId, required:true },
         public: { type: Boolean, default:false },

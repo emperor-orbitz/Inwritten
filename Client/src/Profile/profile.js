@@ -330,7 +330,6 @@ class Profile extends React.Component {
                         <h2 style={{ color: 'black' }}> {fullname} </h2>
                         <div className='span-details'>Username</div> <span> @{username} </span><br></br>
                         <div className='span-details'>Email</div><span> {email}</span><br></br>
-                        <div className='span-details'>Bio</div><span> {bio}</span><br></br>
                         <div className='span-details'>Telephone</div><span> {mobile_number}</span><br></br>
 
                     </div>

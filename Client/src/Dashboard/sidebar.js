@@ -34,9 +34,9 @@ class SideBar {
 
         categorySubmenu: (
             <Menu secondary vertical  >
-                <Menu.Item><Icon name="paint brush"/>Art</Menu.Item>
-                <Menu.Item><Icon name="windows" />Operating systems</Menu.Item>
-                <Menu.Item><Icon name="code"/>Javascript</Menu.Item>
+                <Menu.Item as={Link} to="/interests?topic=art"><Icon name="paint brush"/>Art</Menu.Item>
+                <Menu.Item as={Link} to="/interests?topic=os"><Icon name="windows" />Operating systems</Menu.Item>
+                <Menu.Item as={Link} to="/interests?topic=js"><Icon name="code"/>Javascript</Menu.Item>
                 <Menu.Item><Icon name="book"/>Education</Menu.Item>
                 <Menu.Item><Icon name="microchip"/>Tech and Hardwares</Menu.Item>
                 <Menu.Item><Icon name="flask"/>Science</Menu.Item>

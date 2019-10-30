@@ -13,9 +13,8 @@ import Articles from './Articles/Components/articles';// MAIN PAGE
 import AddPost from './NewPost/addpost';
 import EditPost from './EditPost/editpost';
 import PostArchive from '../src/Archives/postarchive';
+import Interests from "../src/Interests/interests";
 
-import AddImage from '../src/NewImage/addimage';
-import Gallery from '../src/NewImage/addimage';
 
 
 var ArticlesCategory ={
@@ -25,10 +24,7 @@ var ArticlesCategory ={
     AddPost:AddPost
 }
 
-var ImagesCategory ={
-    AddImage: AddImage,
-    Gallery: Gallery
-}
 
 
-export { Signup, Account, Home, Login,  ArticlesCategory, Profile, Comments };
+
+export { Signup, Account, Home, Login,  ArticlesCategory, Profile, Comments, Interests };

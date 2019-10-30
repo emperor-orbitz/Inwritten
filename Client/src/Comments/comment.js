@@ -1,9 +1,8 @@
 import React from 'react';
 import '../../Resources/styles/comment.scss';
-//import { Icon, Form, Divider, Button, Loader, ButtonGroup } from 'semantic-ui-react';
+import { Icon, Button } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { Icon } from 'semantic-ui-react';
 //import FetchArticles from '../../Controllers/article.controller';
 
 
@@ -23,7 +22,7 @@ function date_to_string(date) {
     var month = getmonthName(fulldate.getMonth());
     var year = fulldate.getFullYear();
     var day = fulldate.getDate();
-    var convert = `${day}- ${month}`;
+    var convert = `${day}'${month}`;
     return convert;
 }
 
@@ -93,15 +92,18 @@ class Comment extends React.Component {
                         return (
                             <div className="comment-panel">
                                 <h5>{each.comment}</h5>
-                                <p>{each.commenter_id}</p>
-                                <Icon name="like" size='small' color="teal"/> {each.likes}
-                                &nbsp;&nbsp;&nbsp;
-                                <Icon name="trash alternate outline" size='small' color="teal"/>
-                                &nbsp;&nbsp;&nbsp;
-                                <Icon name="clock outline" size='small' color="teal"/> {date_to_string(each.createdAt)}
-                                &nbsp;&nbsp;&nbsp; 
-                                {each.seen == true? 'hide':"accept"}
+                                <p>By <i>{each.commenter_id.username}({each.commenter_id.email})</i></p>
+                                <Button.Group size='mini' basic >
+                                            <Button icon='like'  />
+                                            <Button icon='trash alternate outline' />
+                                            <Button>{each.seen == true? 'Hide':"Accept"}</Button>
 
+                                </Button.Group>
+                                &nbsp;&nbsp;&nbsp; 
+
+                                <Icon name="clock outline" size='small' color="blue" /> {date_to_string(each.createdAt)}
+                                &nbsp;&nbsp;&nbsp; 
+                                
                             
                             </div>
 

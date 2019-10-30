@@ -13,7 +13,9 @@ postSchema.methods.loadUserPost = (_id, limit, callback) => {
     return mongoose.model('Post', postSchema)
         .find({ authorId: _id }, {
         }, { limit: limit }, callback)
-        .populate('comments');
+        .populate('comments')
+        
+        ;
 };
 
 
@@ -81,8 +83,12 @@ postSchema.methods.loadAllPost = (username, callback) => {
     //no limit
     return mongoose.model('Post', postSchema)
         .find({ author: username }, callback)
-        .populate('comments');
+        .populate({
+                   path:"comments",
+                   populate:{path:"commenter_id", select:"username email"}
+    })
 
+        
 };
 
 
