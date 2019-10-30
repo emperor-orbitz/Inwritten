@@ -64,7 +64,7 @@ const SCHEME = {
         author: String,
         description: { type: String },
         template_id: { type: String },
-        likes:{ Type:Number, default:0 },
+        likes:{ Type: mongoose.Schema.Types.Number, default:0 },
         comments: [{type: mongoose.Schema.Types.ObjectId, ref:"Comment"}],
         //show_link:{type:String, default:""},
         authorId: { type: mongoose.Schema.Types.ObjectId }

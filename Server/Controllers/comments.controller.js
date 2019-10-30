@@ -79,6 +79,20 @@ var remove = (req, res, ) =>{
   
   }
 
+  var like =(req, res) =>{
+
+    comments.updateOne({_id:req.body.id}, {$inc:{likes: req.body.like}},
+      (err, resolve)=>{
+          if (err) 
+              res.send({message:`An error Occured ${err}`})
+          else
+              res.send({data:resolve, status:200})
+      }
+      
+      
+      )
+      
+  }
 
 
 
@@ -91,5 +105,6 @@ module.exports = {
     create:create,
     update: update,
     list:list,
-    delete: remove
+    delete: remove,
+    like:like
 };

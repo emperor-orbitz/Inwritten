@@ -71,7 +71,7 @@ var DATA ={
   password:this.state.passwordValue,
 
 }
-var URL='http://localhost:5000/auth/register';
+var URL='/auth/register';
 
 var GET_OPTIONS={
   method:'POST',

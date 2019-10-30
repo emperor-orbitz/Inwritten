@@ -116,7 +116,8 @@ class EditPost extends React.Component {
       post_description: '',
       time_to_read: 5,
       body_schema: '',
-      open_options: false
+      open_options: false,
+      likes:0
 
     }
 
@@ -308,7 +309,7 @@ class EditPost extends React.Component {
           time_to_read: x.time_to_read,
           body_schema: x.body_schema,
           featured_image: x.featured_image,
-          comments: x.comments
+          likes: x.likes
         });
 
 
@@ -510,6 +511,8 @@ class EditPost extends React.Component {
               <Button primary onClick={() => { this.setState({ open_options: true }) }}> Ready to re-publish</Button>
               <br></br><br></br> 
               <p><Link to ={response_link} >View Responses</Link></p>
+              <p color="black" >{this.state.likes==0? "No": this.state.likes} likes</p>
+
 
 
               <Modal size="small" open={this.state.open_options} onClose={this.close} closeOnDimmerClick >

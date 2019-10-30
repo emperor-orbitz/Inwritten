@@ -38,5 +38,9 @@ router.delete('/comment/delete',  (req, res, next) => {
     
 })
 
+router.patch('/comment/like',  (req, res, next) => {   
+    controller.like(req, res, next);
+    
+})
 
 module.exports = router;

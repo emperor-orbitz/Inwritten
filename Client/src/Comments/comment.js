@@ -104,7 +104,7 @@ class Comment extends React.Component {
                                 <h5>{each.comment}</h5>
                                 <p>By <i>{each.commenter_id.username}({each.commenter_id.email})</i></p>
                                 <Button.Group size='mini' basic >
-                                            <Button icon='like' onClick ={()=>{this.like_comment(each._id)}} />
+                                            <Button icon='like' onClick ={()=>{this.like_comment(each._id)}} content={each.likes} />
                                             <Button icon='trash alternate outline' onClick ={()=>{this.delete_comment(each._id)}} />
                                             <Button>{each.seen == true? 'Hide':"Accept"}</Button>
 
