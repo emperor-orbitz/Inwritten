@@ -14,9 +14,9 @@ module.exports = class email{
   const mailOptions= {
     from:"malorbit360@gmail.com",
     to:this.to,
-    subject:"One last step to greatness",
-    html:`<p>Hi ${data.username}, Click the link below to verify your account </p><br/>
-    <a href="http://localhost:5000/auth/verify_mail/${data._id}>VERIFY YOUR ACCOUNT </a>`
+    subject:"Hashstack.io: Just one more step ",
+    html:`<p>Hi ${data.username}, Click the link below to verify your hashstack.io account </p><br/>
+    <a href="http://www.penbox.herokuapp.com/auth/verify_mail/${data._id}>VERIFY YOUR ACCOUNT </a>`
         
      }
      var transporter = nodeMail.createTransport({
