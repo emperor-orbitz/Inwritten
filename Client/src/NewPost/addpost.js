@@ -147,7 +147,7 @@ class AddPost extends React.Component {
 
     this.setState({ buttonDisabled: true, dimmerLoad: true });
 
-    this.setState({ network_error: `` });
+    this.setState({ network_error:`` });
 
     var post = {
       title: this.state.post_title.trim(),
@@ -159,8 +159,8 @@ class AddPost extends React.Component {
       public: this.state.privacy_value,
       body_html: panel.exposeHTMLEditorValue,
       body_schema: panel.exposeEditorValue,
-      featured_image: this.state.featured_image
-
+      featured_image: this.state.featured_image,
+      comments:[]
 
     }
 
@@ -171,7 +171,6 @@ class AddPost extends React.Component {
         (okay) => {
 
           let with_id = Object.assign({}, post, { _id: okay._id });
-
           this.props.dispatch({ type: 'INSERT_ARTICLE', payload: with_id });
 
           this.setState({
@@ -185,11 +184,9 @@ class AddPost extends React.Component {
           var note = document.getElementsByClassName('notification-background');
           note[0].classList.remove('reverse-anime');
 
-        }
-
-
-      ).catch(
-        (err) => {
+        })
+        .catch(
+          (err) => {
           this.setState({ buttonDisabled: false,
                           dimmerLoad: false,
                           open_options:false,

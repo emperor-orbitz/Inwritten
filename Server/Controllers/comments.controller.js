@@ -81,7 +81,7 @@ var remove = (req, res, ) =>{
 
   var like =(req, res) =>{
 
-    comments.updateOne({_id:req.body.id}, {$inc:{likes: req.body.like}},
+    comments.updateOne({_id:req.body.id}, {$inc:{likes: 1}},
       (err, resolve)=>{
           if (err) 
               res.send({message:`An error Occured ${err}`})

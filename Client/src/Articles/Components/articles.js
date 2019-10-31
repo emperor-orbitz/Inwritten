@@ -161,7 +161,7 @@ class Articles extends React.Component {
 
     componentDidMount() {
        
-
+            console.log(this.props.ArticleReducer)
             var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == true);
 
             this.setState({ filter_privacy });
@@ -264,7 +264,7 @@ class Articles extends React.Component {
 
                                             <Select name='category' className='custom-label' value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <Button basic size="small" onClick={this.search_with_criteria}> Search <Icon name='chevron right' />
+                                                <Button basic size="small" onClick={this.search_with_criteria}> Search <Icon name='chevron right' />
                                             </Button>
                                         </Form>
                                         <br />
@@ -276,7 +276,7 @@ class Articles extends React.Component {
 
                                 </Grid.Column>
 
-                                <Grid.Column computer={12} mobile={16} tablet={15}  >
+                                <Grid.Column computer={12} mobile={16} tablet={15} >
                                     {this.state.not_found == true ? <div className='error-notification'> No {this.state.search_criteria} similar to <b> {this.state.search}</b> was found</div> : ''}
 
                                     {filter_privacy.map((e) => {

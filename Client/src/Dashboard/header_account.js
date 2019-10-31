@@ -299,7 +299,7 @@ class HeaderAccount extends React.Component {
 
         <img src={splash} className='splash' />
         <p>HASHSTACK</p>
-        <h5>Loading your contents a bit... </h5>
+        <h5>Loading your contents in a bit... </h5>
       </div>)
     }
 

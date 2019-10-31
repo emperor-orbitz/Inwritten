@@ -29,7 +29,7 @@ function App() {
             <Route path='/articles' component={ArticlesCategory.Articles} />
             <Route path='/drafts' component={ArticlesCategory.Drafts} />
             <Route path='/add-post' component={ArticlesCategory.AddPost} />
-            <Route render={() => <h2> Oops, it's a 404  </h2>} />
+            <Route render={() => <h2 style={{color:"black"}}> Oops, it's a 404  </h2>} />
           </Switch>
 
         </HeaderAccount>

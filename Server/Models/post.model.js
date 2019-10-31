@@ -82,10 +82,14 @@ postSchema.methods.updateAuthor =  (new_author, authorId)=>{
 postSchema.methods.loadAllPost = (username, callback) => {
     //no limit
     return mongoose.model('Post', postSchema)
-        .find({ author: username }, callback)
+        .find({ author: username },
+            callback)
+        .sort({createdAt:-1})
         .populate({
                    path:"comments",
-                   populate:{path:"commenter_id", select:"username email"}
+                   populate:{path:"commenter_id", 
+                   select:"username email display_picture"
+                            }
     })
 
         

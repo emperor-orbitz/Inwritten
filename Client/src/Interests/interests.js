@@ -81,6 +81,7 @@ class Interests extends React.Component {
 
                 <h3 style={{color:"rgb(3, 68, 94)"}}>Latest on: "{item}" </h3>
                     {item}s
+                <p>This feature is coming soon in the future release</p>
             </div>
         )
 

@@ -8,7 +8,7 @@ var dataState = [];
 
 var ProfileReducer = (state = profileState, data) => {
 
-    console.log(data.payload, "payload data")
+    //console.log(data.payload, "payload data")
     switch (data.type) {
         case 'INJECT_PROFILE':
             state = data.payload;
@@ -44,7 +44,7 @@ var ArticleReducer = (state = dataState, action) => {
           }
           })
     
-        console.log(state, "FROMMMM", payload)
+       // console.log(state, "FROMMMM", payload)
         return state;
 
         case 'DELETE':
