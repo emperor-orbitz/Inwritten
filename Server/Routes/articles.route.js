@@ -61,4 +61,12 @@ router.patch('/articles/like', isAuth, (req, res, next) => {
 
 
 
+
+//Load list of interests based on post category from everyone's post
+router.get('/articles/interests', isAuth, (req, res, next)=>{
+controller.interests(req, res, next)
+})
+
+
+
 module.exports = router;

@@ -228,11 +228,14 @@ class HeaderAccount extends React.Component {
                   
 
                 </div>
+
                 <div className="accordion-item">
-                  <Accordion.Title active={this.state.activeAccordion === 2} style={{ padding: '5px 20px' }} index={2} onClick={this.handleClick}  >
-                    <Icon name="file image outline" className="accordion-icon" size="large" />  <span style={{fontSize:"15px",color:"white"}}>Bookmarks</span>
+                <Accordion.Title active={this.state.activeAccordion === 2} style={{ padding: '5px 20px' }} >
+                    <Link to="/bookmark" style={{ color: "white" }}>
+                    <Icon name="bookmark outline" className="accordion-icon" size="large" />
+                    <span style={{fontSize:"15px",color:"white"}}>Bookmarks</span></Link> 
                   </Accordion.Title>
-                  <Accordion.Content style={{ padding: '1px 20px' }} className="accordion-contentt" active={activeAccordion === 2} content={imageSubmenu} />
+                
                 </div>
 
 
@@ -253,9 +256,9 @@ class HeaderAccount extends React.Component {
 
                 <div className="accordion-item">
                 <Accordion.Title active={this.state.activeAccordion === 4} style={{ padding: '5px 20px' }} >
-                    <Link to="/comments" style={{ color: "white" }}>
-                    <Icon name="comments" className="accordion-icon" size="large" />
-                    <span style={{fontSize:"15px",color:"white"}}>Comments</span></Link> 
+                    <Link to="/stats" style={{ color: "white" }}>
+                    <Icon name="chart bar outline" className="accordion-icon" size="large" />
+                    <span style={{fontSize:"15px",color:"white"}}>Stats</span></Link> 
                   </Accordion.Title>
                 
 

@@ -345,12 +345,12 @@ class Profile extends React.Component {
                             <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false}>Profile </Button>
                             <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} >Advance</Button>
                         </ButtonGroup>
-                        <Divider />
 
 
                         <div className={this.state.validationClass} style={{ marginBottom: '5px' }} > {this.state.validationMessage}</div>
 
                         <Form size="small" style={{ width: '70%' }} id='formUpdate'>
+                        <Divider />
 
                             <Form.Group widths='equal'>
                                 <Form.Field label='Email' value={this.state.email} control='input' placeholder='Email' onChange={this.handle_email} disabled required type='email' pattern={/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/} />
@@ -378,7 +378,7 @@ class Profile extends React.Component {
                     </div>
 
                     <div className="data-info-password" style={{ display: this.state.dispPass }} >
-                        <h3 style={{ padding: '5px' }}> Account Info</h3>
+                        <h3 style={{ padding: '5px', color:'black' }}> Account Info</h3>
 
                         <ButtonGroup size="small" secondary >
                             <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false}>Profile </Button>

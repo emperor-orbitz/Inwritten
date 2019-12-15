@@ -258,6 +258,21 @@ var like =(req, res) =>{
 
 
 
+  var interests =(req, res) =>{
+
+    posts.find({category: req.query.topic},
+      (err, resolve)=>{
+          if (err) 
+              res.send({message:`An error Occured ${err}`, status:500})
+          else
+              res.send({data:resolve, status:200})
+      }
+      
+      
+      )
+      
+  }
+
 
 
 module.exports = {
@@ -267,5 +282,6 @@ module.exports = {
     update: update,
     deletePost: deletePost,
     article: article,
-    like:like
+    like:like,
+    interests:interests
 };

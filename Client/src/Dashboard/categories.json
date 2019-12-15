@@ -1,0 +1,71 @@
+{
+    "categories": [
+        {
+            "key":1,
+            "code":"os",
+            "icon":"windows",
+            "name":"operating system"
+        },
+        { 
+            "key":2,
+            "code":"js",
+            "icon":"code",
+            "name":"Javascript"
+        },
+        {
+            "key":3,
+            "code":"edu",
+            "icon":"book",
+            "name":"Education"
+        },
+        {
+            "key":4,
+            "code":"os",
+            "icon":"windows",
+            "name":"operating system"
+        },
+        {
+            "key":5,
+            "code":"art",
+            "icon":"paint brush",
+            "name":"Art"
+        },
+        {
+            "key":6,
+            "code":"tech",
+            "icon":"microchip",
+            "name":"Technology"
+        },
+        {
+            "key":7,
+            "code":"sci",
+            "icon":"flask",
+            "name":"Science"
+        },
+    
+        {
+            "key":9,
+            "code":"health",
+            "icon":"ambulance",
+            "name":"Health"
+        },
+        {
+            "key":10,
+            "code":"rom",
+            "icon":"heart",
+            "name":"Romance"
+        },
+        {
+            "key":11,
+            "code":"realtor",
+            "icon":"building",
+            "name":"Real Estate"
+        }
+
+        
+        
+
+    ]
+}
+
+

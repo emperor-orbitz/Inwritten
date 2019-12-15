@@ -145,7 +145,29 @@ const_options ={
 
     }
 
+    interest(topic) {
 
+        this.const_options.method = "GET";
+      
+      
+        var get_options = {
+                url:  this.const_url +'/interests?topic='+topic,
+                options: this.const_options     
+        }
+    
+            return new Promise((resolve, reject) => {
+                fetch(get_options.url, get_options.options)
+                    .then( user => user.json())
+                    .then( result => { resolve(result.data) })
+                    .catch( _ => {
+                       
+                        reject(_)
+    
+                    })
+            }) 
+    
+        }
+    
 
 
 

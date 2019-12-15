@@ -1,13 +1,19 @@
 import React from 'react';
 import {  Menu, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import '../../Resources/styles/style.scss';
+import '../../Resources/styles/style.scss'; 
+import cat from './categories'
 
 
+var xxxx= ["sds"]
+console.log(cat)
+
+//console.log(xx);
+ 
+//const category = cat.
 
 class SideBar {
-  
-
+    
 
     subMenu = {
 
@@ -32,18 +38,20 @@ class SideBar {
             </Menu>
         ),
 
-        categorySubmenu: (
+        categorySubmenu: 
+      
+         (
             <Menu secondary vertical  >
-                <Menu.Item as={Link} to="/interests?topic=art"><Icon name="paint brush"/>Art</Menu.Item>
-                <Menu.Item as={Link} to="/interests?topic=os"><Icon name="windows" />Operating systems</Menu.Item>
-                <Menu.Item as={Link} to="/interests?topic=js"><Icon name="code"/>Javascript</Menu.Item>
-                <Menu.Item as={Link} to="/interests?topic=edu"><Icon name="book"/>Education</Menu.Item>
-                <Menu.Item as={Link} to="/interests?topic=tech"><Icon name="microchip"/>Tech and Hardwares</Menu.Item>
-                <Menu.Item as={Link} to="/interests?topic=sci"><Icon name="flask"/>Science</Menu.Item>
-                <Menu.Item as={Link} to="/interests?topic=health"><Icon name="ambulance"/>Health</Menu.Item>
-                <Menu.Item as={Link} to="/interests?topic=romance"><Icon name="heart"/>Romance</Menu.Item>
-                <Menu.Item as={Link} to="/interests?topic=realtor"><Icon name="building"/>Real Estate</Menu.Item>
-
+                {
+                    cat.categories.map(
+                        (category)=>{
+                            return (
+                                <Menu.Item as={Link} key= {category.key} to={`/interests?topic=${category.code}`}><Icon name={category.icon} />{category.name}</Menu.Item>
+      
+                            )
+                        }
+                    )
+                }
             </Menu>
         ),
         settingsSubmenu: (
@@ -61,3 +69,4 @@ class SideBar {
   
 }
 export default SideBar;
+

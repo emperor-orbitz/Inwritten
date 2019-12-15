@@ -3,28 +3,11 @@ import '../../Resources/styles/comment.scss';
 import { Icon, Button } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-//import FetchArticles from '../../Controllers/article.controller';
+import FetchArticles from '../../Controllers/article.controller';
 
 
-function getmonthName(number) {
-    var months = [
-        '01', '02', '03', '04', '05', '06',
-        '07',
-        '08',
-        '09', '10', '11', '12'
-    ]
-    return months[number];
 
-}
 
-function date_to_string(date) {
-    var fulldate = new Date(date);
-    var month = getmonthName(fulldate.getMonth());
-    var year = fulldate.getFullYear();
-    var day = fulldate.getDate();
-    var convert = `${day}'${month}`;
-    return convert;
-}
 
 class Interests extends React.Component {
 
@@ -32,56 +15,107 @@ class Interests extends React.Component {
         super(props);
         this.state = {
 
-            comments: [],
-            post_title: ""
+            posts: [],
+            loading: true
         }
 
     }
 
 
-    //load_articles = new FetchArticles();
+    parseMatch(param) {
+        let search =param
+        return /\?topic=(.+)/.test(search) == true ? search.match(/\?topic=(.+)/)[1] : "empty";
+    }
+
 
     componentDidMount() {
-        console.log(this.props);
+        //find topic
+        var topic = this.parseMatch(this.props.location.search);
+        var article_controller = new FetchArticles();
+        article_controller.interest(topic)
+            .then(value => {
+                this.setState({ posts: value, loading:false })
+                console.log(value)
+            })
+            .catch(err => {
+                this.setState({ loading:false })
+                console.log(err)
+            })
+
+
+    }
+  
     
+    componentWillUpdate(nextProp, nextState){
+
+            var topic = this.parseMatch(nextProp.location.search);
+            var article_controller = new FetchArticles();
+
+            if(nextProp.location.search !== this.props.location.search){
+                article_controller.interest(topic)
+                .then(value => {
+                        this.setState({ posts: value, loading: false })
+
+                })
+                .catch(err => {
+                    this.setState({loading: false })
+                })
+
+        }
+           }
 
 
-    }
 
 
 
 
 
-
-
-    parseMatch(){
-        let {search} =this.props.location
-        return /\?topic=(.+)/.test(search) ==true? search.match(/\?topic=(.+)/)[1] : "empty" ;
-    }
 
 
 
 
     render() {
-        console.log(this.props.location.search)
-    
-        var item = this.parseMatch();
-        
-        
-        if (item =="empty" || item.length == 0){
-            return (<div className="comment-div" style={{ marginTop: "0px !important" }}>
-            <p>Oops, seems no one has been talking about xxx lately.</p>
-            <p>Be the first to discuss it.</p>
-            </div>)
-        } 
 
+        var item = this.parseMatch(this.props.location.search);
+
+
+        if (item == "empty" || item.length == 0) {
+            return (<div className="comment-div" style={{ marginTop: "0px !important" }}>
+                <p>Oops, seems no one has been talking about xxx lately.</p>
+                <p>Be the first to discuss it.</p>
+            </div>)
+        }
+        else if (this.state.loading == true) {
+            return (<div className="comment-div" style={{ marginTop: "0px !important" }}>
+                <p>Loading....</p>
+                </div>)
+        }
+        else if (this.state.posts.length > 0) {
+            return (<div className="comment-div" style={{ marginTop: "10px !important" }}>
+            <h3>Latest on {item}:</h3>
+               { this.state.posts.map((x, index) => {
+                   return (
+                   <div key={x._id}>
+                   <h3>#{++index}. {x.title} </h3>
+                    <span>{x.description}</span>
+                    <p>By <b>{x.author}</b></p>
+                    <br></br>
+                    </div>
+                    
+                    )
+               })
+
+
+               }
+        
+                    </div>)
+        }
         return (
 
             <div className="comment-div" style={{ marginTop: "0px !important" }}>
 
-                <h3 style={{color:"rgb(3, 68, 94)"}}>Latest on: "{item}" </h3>
-                    {item}s
-                <p>This feature is coming soon in the future release</p>
+                
+                <p>Nothing here yet....</p>
             </div>
         )
 
