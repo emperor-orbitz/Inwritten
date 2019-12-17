@@ -45,6 +45,7 @@ class Bookmark extends React.Component {
 
             <div className="comment-div" style={{ marginTop: "10px !important" }}>
             <h3 style={{color:"black"}}>Bookmarks</h3>
+            <p>Coming soon in future release</p>
             </div>
         )
 

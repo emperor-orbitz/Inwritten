@@ -46,7 +46,7 @@ class Interests extends React.Component {
     onChangeSearch = (e) => {
         var search = e.target.value;
         this.state.not_found == true ? this.setState({ not_found: false }) : "";
-
+        console.log(this.props)
         this.setState({ search: search })
     }
 
@@ -54,22 +54,17 @@ class Interests extends React.Component {
     search_with_criteria = () => {
 
         var { posts, search_criteria, search } = this.state;
-        //let ds =this.data_store;
-        let search_results = posts.filter((v, i, a) => v["description"]
-            .indexOf(search.toLowerCase()) != -1)
-        console.log(search_results, search, search_criteria)
+        let search_results = posts.filter((v, i) => v[search_criteria]
+                                  .toLowerCase()
+                                  .indexOf(search.toLowerCase()) != -1)
 
         if (search_results.length === 0 || search.length == 0) {
-            console.log(search_results, "lenght is 0")
             this.setState({ posts: this.data_store, not_found: true })
-            //console.log(posts)
         }
-        else {
+        else 
             this.setState({ posts: search_results, not_found: false })
-            console.log(search_results, "length is more than 0")
-        }
+        
 
-        //alert(`${this.state.search_criteria}, is ${this.state.search}`)
 
 
 
@@ -174,8 +169,8 @@ class Interests extends React.Component {
                         <div key={x._id}>
                             <h3>#{++index}. {x.title} </h3>
                             <span>{x.description}</span>
-                            <p style={{ fontSize: "10px" }}>By <i>{x.author}({x.authorId.email})</i></p>
-                            <br></br>
+                            <p style={{ fontSize: "10px" }}>
+                            By <i>{x.author}({ this.props.ProfileReducer.email == x.authorId.email ? "you" :x.authorId.email  })</i></p>                           <br></br>
                         </div>
 
                     )

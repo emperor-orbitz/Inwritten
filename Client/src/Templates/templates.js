@@ -29,7 +29,8 @@ class Templates extends React.Component {
         return (
 
             <div className="comment-div" style={{ marginTop: "0px !important" }}>  
-                <p>Templates coming soon...</p>
+            <h3 style={{color:"black"}}>Templates</h3>
+            <p>Coming soon in future release</p>
             </div>
         )
 

@@ -29,8 +29,8 @@ class Stats extends React.Component {
         return (
 
             <div className="comment-div" style={{ marginTop: "0px !important" }}>  
-                <p>Statistics coming soon...</p>
-            </div>
+            <h3 style={{color:"black"}}>Stats</h3>
+            <p>Coming soon in future release</p>            </div>
         )
 
 

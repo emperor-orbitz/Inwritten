@@ -2,8 +2,8 @@
     "categories": [
         {
             "key":1,
-            "value":"any",
-            "icon":"all",
+            "value":"all",
+            "icon":"random",
             "name":"Uncategorised",
             "text":"Uncategorised"
         },
