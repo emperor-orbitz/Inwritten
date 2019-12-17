@@ -260,7 +260,7 @@ var like =(req, res) =>{
 
   var interests =(req, res) =>{
 
-    posts.find({category: req.query.topic},
+    posts.find({category: req.query.topic, public:true},"-body_html -body_schema -comments",
       (err, resolve)=>{
           if (err) 
               res.send({message:`An error Occured ${err}`, status:500})
@@ -270,6 +270,8 @@ var like =(req, res) =>{
       
       
       )
+      .populate("authorId", "email username featured_image")
+      
       
   }
 

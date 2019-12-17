@@ -7,7 +7,7 @@ import {Link} from "react-router-dom"
 import { connect } from 'react-redux';
 import FetchArticles from '../../Controllers/article.controller'
 import EditorPanel from './Components/editor-panel';
-
+import cat from "../Dashboard/categories"
 
 
 function DimmerLoad(props) {
@@ -380,56 +380,7 @@ class EditPost extends React.Component {
       }
     ]
 
-    var categoryOptions = [
-      {
-        key: 1,
-        value: 'all',
-        text: 'Select Category',
-
-      },
-      {
-        key: 2,
-        value: 'art',
-        text: 'Art'
-      },
-      {
-        key: 3,
-        value: 'os',
-        text: 'Operating Systems (OS)'
-      },
-      {
-        key: 4,
-        value: 'js',
-        text: 'Javascript'
-      },
-      {
-        key: 5,
-        value: 'edu',
-        text: 'Education'
-      },
-      {
-        key: 6,
-        value: 'tech',
-        text: 'Technology'
-      },
-      {
-        key: 7,
-        value: 'sci',
-        text: 'Science'
-      }
-      ,
-      {
-        key: 8,
-        value: 'health',
-        text: 'health'
-      }
-      ,
-      {
-        key: 9,
-        value: 'rom',
-        text: 'Romance'
-      }
-    ]
+    var categoryOptions = cat.categories;
 
 
 
@@ -532,7 +483,7 @@ class EditPost extends React.Component {
                       type='file' id='photo' style={{ visibility: 'hidden' }} />
 
                     <div className="featured-pix-cover" onClick={this.toggleDialogFeatured.bind(this)}>
-                      <Icon color="teal" size="small" name='image' /> Upload Featured Image </div>
+                      <Icon color="teal" size="small" name='image' /> <p>featured image</p> </div>
                   </div>
 
                   <Modal.Description>

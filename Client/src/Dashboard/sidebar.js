@@ -46,7 +46,7 @@ class SideBar {
                     cat.categories.map(
                         (category)=>{
                             return (
-                                <Menu.Item as={Link} key= {category.key} to={`/interests?topic=${category.code}`}><Icon name={category.icon} />{category.name}</Menu.Item>
+                                <Menu.Item as={Link} key= {category.key} to={`/interests?topic=${category.value}`}><Icon name={category.icon} />{category.text}</Menu.Item>
       
                             )
                         }

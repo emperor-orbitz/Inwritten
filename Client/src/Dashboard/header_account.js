@@ -178,8 +178,8 @@ class HeaderAccount extends React.Component {
                 <Modal.Actions>
                   <Button onClick={() => {
                     this.setState({ open: false })
-                  }} color="teal">Nope</Button>
-                  <Button onClick={this.logout} negative icon='checkmark' labelPosition='right' content='Yes' />
+                  }} >Nope</Button>
+                  <Button onClick={this.logout} positive icon='checkmark' labelPosition='right' content='Yes' />
                 </Modal.Actions>
               </Modal>
             
@@ -198,9 +198,8 @@ class HeaderAccount extends React.Component {
                 <Dropdown.Menu>
                   <Dropdown.Item icon='user outline' text='Profile' as={Link} to='/profile' />
                   <Dropdown.Item icon='dashboard' text='Dashboard' as={Link} to='/dashboard' />
-                  <Dropdown.Item icon='sliders horizontal' text='Settings' />
                   <Dropdown.Item icon='graduation' text='Penbox Acad' />
-                  <Dropdown.Item icon='help' text='Help' />
+                  <Dropdown.Item icon='help' text='Docs' />
                   <Dropdown.Item color="red" onClick={this.showModal} as={Button} fluid icon='sign out' text='logout ' />
                 </Dropdown.Menu>
               </Menu.Item>

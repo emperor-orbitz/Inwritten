@@ -28,6 +28,7 @@ const SCHEME = {
 
     profile: new Schema({
         username: { type: String, lowercase: true, trim: true, required: true },
+        address:{ type: String, trim:true, lowercase:true},
         email: { type: String, lowercase: true, required: true, trim: true, unique:true },
         password: { type: String, required: true },
         telephone: { type: Number },
@@ -36,7 +37,8 @@ const SCHEME = {
         display_picture: { type: String, default: "https://images.app.goo.gl/FasJx4k9JKgCmP3t7" },
         bio: { type: String },
         verified: { type: Boolean, required: true, default: false },
-        lastVerified: { type: Date, default: Date.now() }
+        lastVerified: { type: Date, default: Date.now() },
+        profile_link:{type:String, default:"", lowercase:true}
     },
         {
             timestamps: true,
@@ -66,8 +68,9 @@ const SCHEME = {
         template_id: { type: String },
         likes:{ Type: mongoose.Schema.Types.Number, default:0 },
         comments: [{type: mongoose.Schema.Types.ObjectId, ref:"Comment"}],
-        //show_link:{type:String, default:""},
-        authorId: { type: mongoose.Schema.Types.ObjectId }
+        post_link:{type:String, default:""},
+        authorId: { type: mongoose.Schema.Types.ObjectId, ref:"User" },
+        times_read:{ type:Number, default:0 }
     },
         {
             timestamps: true,

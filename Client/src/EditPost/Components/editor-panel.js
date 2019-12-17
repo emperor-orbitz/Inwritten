@@ -134,12 +134,11 @@ onClickBlock = (event, type) => {
 
   return (
     <Button name={icon}
-    color="black"
     size="mini"
     icon={icon}
-    secondary
     onMouseDown={event => this.onClickMark(event, type)}
     className='editor-editorButtons' active={isActive} 
+
     />
   )
 }
@@ -163,19 +162,17 @@ renderBlockButton = (type, icon) => {
 
     return (
         <Button name={icon}
-        color="black"
         size="mini"
         icon={icon}
-        secondary
          onMouseDown={event => this.onClickBlock(event, type)}
-        className='editor-editorButtons' active={isActive} />
+        className='editor-editorButtons' active={isActive}
+        />
     )
   }
 
   else
     return (
     <Button name={icon}
-      color="black"
       size="mini"
       icon={icon}
       secondary

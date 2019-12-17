@@ -125,10 +125,8 @@ onClickBlock = (event, type) => {
 
   return (
     <Button name={icon}
-    color="black"
     size="mini"
     icon={icon}
-    secondary
     onMouseDown={event => this.onClickMark(event, type)}
     className='editor-editorButtons' active={isActive} />
   )
@@ -153,10 +151,8 @@ renderBlockButton = (type, icon) => {
 
     return (
         <Button name={icon}
-        color="black"
         size="mini"
         icon={icon}
-        secondary
          onMouseDown={event => this.onClickBlock(event, type)}
         className='editor-editorButtons' active={isActive} />
     )
@@ -165,10 +161,8 @@ renderBlockButton = (type, icon) => {
   else
     return (
     <Button name={icon}
-      color="black"
       size="mini"
       icon={icon}
-      secondary
       className='editor-editorButtons'
       onClick={this.showMedia.bind(this, ['image'])}
       />

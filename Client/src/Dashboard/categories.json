@@ -2,64 +2,84 @@
     "categories": [
         {
             "key":1,
-            "code":"os",
-            "icon":"windows",
-            "name":"operating system"
-        },
-        { 
-            "key":2,
-            "code":"js",
-            "icon":"code",
-            "name":"Javascript"
+            "value":"any",
+            "icon":"all",
+            "name":"Uncategorised",
+            "text":"Uncategorised"
         },
         {
+            "key":2,
+            "value":"os",
+            "icon":"windows",
+            "name":"Operating system",
+            "text":"Operating system"
+
+        },
+        { 
             "key":3,
-            "code":"edu",
-            "icon":"book",
-            "name":"Education"
+            "value":"js",
+            "icon":"code",
+            "name":"Javascript",
+            "text":"Javascript"
+
         },
         {
             "key":4,
-            "code":"os",
-            "icon":"windows",
-            "name":"operating system"
+            "value":"edu",
+            "icon":"book",
+            "name":"Education",
+            "text":"Education"
+
         },
+     
         {
             "key":5,
-            "code":"art",
+            "value":"art",
             "icon":"paint brush",
-            "name":"Art"
+            "name":"Art",
+            "text":"Art"
+
         },
         {
             "key":6,
-            "code":"tech",
+            "value":"tech",
             "icon":"microchip",
-            "name":"Technology"
+            "name":"Technology",
+            "text":"Technology"
+
         },
         {
             "key":7,
-            "code":"sci",
+            "value":"sci",
             "icon":"flask",
-            "name":"Science"
+            "name":"Science",
+            "text":"Science"
+
         },
     
         {
-            "key":9,
-            "code":"health",
+            "key":8,
+            "value":"health",
             "icon":"ambulance",
-            "name":"Health"
+            "name":"Health",
+            "text":"Health"
+
+        },
+        {
+            "key":9,
+            "value":"rom",
+            "icon":"heart",
+            "name":"Romance",
+            "text":"Romance"
+
         },
         {
             "key":10,
-            "code":"rom",
-            "icon":"heart",
-            "name":"Romance"
-        },
-        {
-            "key":11,
-            "code":"realtor",
+            "value":"realtor",
             "icon":"building",
-            "name":"Real Estate"
+            "name":"Real Estate",
+            "text":"Real Estate"
+
         }
 
         

@@ -8,12 +8,17 @@ import Comments from './Comments/comment';
 import Home from './home'
 import Login from './AuthPage/login';
 import Profile from './Profile/profile';
+import Bookmark from './Bookmark/bookmark';
 
 import Articles from './Articles/Components/articles';// MAIN PAGE
 import AddPost from './NewPost/addpost';
 import EditPost from './EditPost/editpost';
 import PostArchive from '../src/Archives/postarchive';
 import Interests from "../src/Interests/interests";
+import Stats from "../src/Statistics/stats";
+import Templates from "../src/Templates/templates";
+
+
 
 
 
@@ -27,4 +32,8 @@ var ArticlesCategory ={
 
 
 
-export { Signup, Account, Home, Login,  ArticlesCategory, Profile, Comments, Interests };
+export { Signup, Account, Home, Login,  
+        ArticlesCategory, Profile, 
+        Comments, Interests, Bookmark,
+        Stats, Templates
+    };

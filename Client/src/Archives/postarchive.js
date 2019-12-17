@@ -306,7 +306,7 @@ class PostArchive extends React.Component {
 
                         <Modal.Content style={{ height: '200px', background: "", color: 'black', padding: '10%' }}  >
                             <p style={{ textAlign: 'center' }}> <Icon size='big' name='trash' />
-                                <h3 >{`Really want to delete -${this.state.deleteArticleName} ?`}  </h3>
+                                <h3 >{`Delete -${this.state.deleteArticleName} ?`}  </h3>
                                 <br />
                                 <Button.Group size='small'  >
                                     <Button onClick={this.dontDeletePost.bind(this)} icon='close' labelPosition='right' content='Close' size='tiny' />
@@ -331,7 +331,7 @@ class PostArchive extends React.Component {
 
                                             <Input id='search' className='custom-input' name='title' maxLength='50'  value={this.state.search} onChange= {this.onChangeSearch}  placeholder='Search Drafts' />
 
-                                            <Select name='category' className='custom-label' value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions}  />
+                                            <Select name='category' style={{border:"none"}} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <Button basic size="small" onClick={this.search_with_criteria}> Search <Icon name='chevron right' />
                                             </Button>
@@ -374,11 +374,10 @@ class PostArchive extends React.Component {
 
 
                                                 <div className='template-thumbnail-hover-big'>
-                                                    <h2 style={{ marginTop: '0px', padding: '0px' }}>{e.category}</h2>
 
                                                     <div style={{}}>
                                                         <div className="category">
-                                                            <span><b>Description</b> </span>
+                                                            <span><b>About</b> </span>
                                                             <p>{e.description} </p>
 
                                                             <Button.Group size='small' color='teal' secondary >

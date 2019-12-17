@@ -8,6 +8,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import FetchArticles from '../../Controllers/article.controller'
 import EditorPanel from '../../src/NewPost/Components/editor-panel';
+import cat from '../Dashboard/categories';
 
 function DimmerLoad(props) {
   return <Loader active={props.active} size={props.size} inline />
@@ -253,56 +254,7 @@ class AddPost extends React.Component {
     var privacy_value = (this.state.privacy_value == true) ? 'Publish to the World' : ' Save to draft';
     var comment_value = (this.state.enable_comments == true) ? 'Commenting is enabled' : 'Commenting is disabled';
 
-    var categoryOptions = [
-      {
-        key: 1,
-        value: 'all',
-        text: 'Select Category',
-
-      },
-      {
-        key: 2,
-        value: 'art',
-        text: 'Art'
-      },
-      {
-        key: 3,
-        value: 'os',
-        text: 'Operating Systems (OS)'
-      },
-      {
-        key: 4,
-        value: 'js',
-        text: 'Javascript'
-      },
-      {
-        key: 5,
-        value: 'edu',
-        text: 'Education'
-      },
-      {
-        key: 6,
-        value: 'tech',
-        text: 'Technology'
-      },
-      {
-        key: 7,
-        value: 'sci',
-        text: 'Science'
-      }
-      ,
-      {
-        key: 8,
-        value: 'health',
-        text: 'health'
-      }
-      ,
-      {
-        key: 9,
-        value: 'rom',
-        text: 'Romance'
-      }
-    ]
+    var categoryOptions = cat.categories;
 
 
 

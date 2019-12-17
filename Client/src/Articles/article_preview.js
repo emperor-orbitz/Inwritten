@@ -117,11 +117,10 @@ export default function ArticlePreview(props) {
 
 
                             <div className='template-thumbnail-hover-big'>
-                                <h2 style={{ marginTop: '0px', padding: '0px' }}>{e.category}</h2>
 
                                 <div style={{}}>
                                     <div className="category">
-                                        <span><b>Description</b> </span>
+                                        <span><b>About</b> </span>
                                         <p>{e.description} </p>
 
                                         <Button.Group size='small' color='teal' secondary >
