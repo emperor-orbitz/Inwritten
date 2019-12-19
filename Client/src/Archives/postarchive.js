@@ -382,7 +382,7 @@ class PostArchive extends React.Component {
 
                                                             <Button.Group size='small' color='teal' secondary >
                                                                 <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
-                                                                <Button icon='external alternate' target="__blank" as={Link} to={`http://localhost:5000/${this.props.ProfileReducer.username}/${e.title}`} />
+                                                                <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
                                                                 <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
                                                                 <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
 

@@ -1,11 +1,78 @@
-var blogModel = require('../Models/blog.model');
-var Router =require('express').Router();
+var comments = require('../Models/comments.model');
+//var http_status = require("../Utils/http_status");
+var posts =  require('../Models/post.model');
 
 
-Router.get('/blog/:author/:title', function(req, res, next){
-console.log(req.params.author);
 
-})
 
-module.exports =Router;
 
+
+
+//*           LOAD ALL ARTICLES
+
+var display = (req, res) => {
+
+
+
+    var link =  req.originalUrl
+    console.log(link)
+    posts.findOne({post_link:link}, (err, data)=>{
+        if(err){
+            res.send("Sorry there was an error"+err)
+        }
+        else
+             res.render("Templates/template1", { name:"dddd"});
+             console.log(data)
+
+    })
+
+    
+    //res.send("i have seen this"+ title+author)
+
+
+
+}
+
+
+
+var update = (req, res) =>{
+
+   
+
+    }
+
+    
+
+var list = (req, res, next) =>{
+
+  
+}
+
+
+
+
+var remove = (req, res, ) =>{
+  
+  }
+
+
+
+  var like =(req, res) =>{
+
+      
+  }
+
+
+
+
+
+  
+
+//EXPORTS
+module.exports = {
+    display:display,
+    update: update,
+    list:list,
+    delete: remove,
+    like:like
+};

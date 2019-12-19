@@ -115,10 +115,11 @@ featured_image=undefined;
         time_to_read: time_to_read,
         comments_enabled: comments_enabled,
         public: public,
-        authorId: req.user._id
+        authorId: req.user._id,
+        post_link: `/user/${req.user.username}---${title.replace(new RegExp(/\s/ig), "-")}
+                    --- ${Date.now()}`
 
     }
-
 
     if (featured_image != undefined) {
 

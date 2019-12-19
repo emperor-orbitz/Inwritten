@@ -125,7 +125,7 @@ export default function ArticlePreview(props) {
 
                                         <Button.Group size='small' color='teal' secondary >
                                             <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
-                                            <Button icon='external alternate' target="__blank" as={Link} to={`http://localhost:5000/${username}/${e.title}`} />
+                                            <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`}  />
                                             <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
 
                                         </Button.Group>
