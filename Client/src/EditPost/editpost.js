@@ -10,10 +10,7 @@ import EditorPanel from './Components/editor-panel';
 import cat from "../Dashboard/categories"
 
 
-function DimmerLoad(props) {
-  return <Loader active={props.active} size={props.size} inline />
 
-}
 /*
 function HoverableDiv(props) {
   return (
@@ -31,29 +28,6 @@ function HoverableDiv(props) {
 
 */
 
-function optionsModal(props) {
-
-  return (<Modal>
-
-    cxjncuxncx
-</Modal>)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
 
 
 
@@ -117,7 +91,8 @@ class EditPost extends React.Component {
       time_to_read: 5,
       body_schema: '',
       open_options: false,
-      likes:0
+      likes:0,
+      post_link:""
 
     }
 
@@ -242,6 +217,8 @@ class EditPost extends React.Component {
 
       add.update_article(post).then(
         (okay) => {
+          this.state.post_link= okay.post_link;
+
           this.props.dispatch({ type: 'UPDATE_ARTICLE', payload: post });
 
           this.setState({
@@ -309,7 +286,8 @@ class EditPost extends React.Component {
           time_to_read: x.time_to_read,
           body_schema: x.body_schema,
           featured_image: x.featured_image,
-          likes: x.likes
+          likes: x.likes,
+          post_link: x.post_link
         });
 
 
@@ -433,7 +411,7 @@ class EditPost extends React.Component {
                       note[0].style.display = 'none';
                     }} ><Icon name='close' onClick={() => { this.state.success_message = "" }} /> </span>
                     <Icon name='check circle outline' color="green" size='big' />
-                    {this.state.success_message} <a href={'http://localhost:5000/' + this.state.post_title} target='_blank' style={{ color: 'black' }} ><u>here</u> </a>
+                    {this.state.success_message} <a href={`${this.state.post_link}`} target='_blank' style={{ color: 'black' }} ><u>here</u> </a>
                   </div>
 
                   </div>

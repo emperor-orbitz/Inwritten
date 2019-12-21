@@ -1,18 +1,18 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-
-    <meta charset="utf-8">
-    <title>NEW BLOG TITLE</title>
+ <link rel="stylesheet" type="text/css" href="/styles.css">
+ 
+<title>{{ data.title }}</title>
 
 </head>
 
 <body>
 
-    This is a sample render template
-
-   <h1> {{ name }}</h1>
+   <h1> {{ data.title }}</h1><span> Category: {{data.category}}
+   <br> by {{ data.author }}
+   <hr>
+   {{{ data.body_html }}}
    
 </body>
 

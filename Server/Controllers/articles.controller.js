@@ -116,8 +116,7 @@ featured_image=undefined;
         comments_enabled: comments_enabled,
         public: public,
         authorId: req.user._id,
-        post_link: `/user/${req.user.username}---${title.replace(new RegExp(/\s/ig), "-")}
-                    --- ${Date.now()}`
+        post_link: `/user/${req.user.username}---${title.replace(new RegExp(/\s/ig), "-")}---${Date.now()}`
 
     }
 
@@ -153,7 +152,8 @@ featured_image=undefined;
 
                         else {
                             res.send({ data: success._id,
-                                status: http_status.OK.code
+                                      post_link: success.post_link,
+                                     status: http_status.OK.code
                               })       
                         }
 

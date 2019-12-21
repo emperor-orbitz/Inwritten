@@ -37,7 +37,8 @@ class AddPost extends React.Component {
       post_description: '',
       time_to_read: 5,
       tagMax: '',
-      open_options: false
+      open_options: false,
+      post_link:""
     }
 
     this.handleTags = this.handleTags.bind(this);
@@ -170,7 +171,8 @@ class AddPost extends React.Component {
 
       add.create_article(post).then(
         (okay) => {
-
+          
+          this.state.post_link =okay.post_link;
           let with_id = Object.assign({}, post, { _id: okay._id });
           this.props.dispatch({ type: 'INSERT_ARTICLE', payload: with_id });
 
@@ -181,6 +183,7 @@ class AddPost extends React.Component {
             dimmerLoad: false,
             open_options:false
           });
+          alert("guck yuu")
 
           var note = document.getElementsByClassName('notification-background');
           note[0].classList.remove('reverse-anime');
@@ -301,7 +304,7 @@ class AddPost extends React.Component {
                       note[0].style.display = 'none';
                     }} ><Icon name='close' onClick={() => { this.state.success_message = "" }} /> </span>
                     <Icon name='check circle outline' color="green" size='big' />
-                    {this.state.success_message} <a href={'http://localhost:5000/' + this.state.post_title} target='_blank' style={{ color: 'black' }} ><u>here</u> </a>
+                    {this.state.success_message} <a href={`${this.state.post_link}`} target='_blank' style={{ color: 'black' }} ><u>here</u> </a>
                   </div>
 
                   </div>

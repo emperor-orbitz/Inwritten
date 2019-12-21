@@ -6,7 +6,7 @@ var process = require('process');
 var express = require('express')
 var app = express();
 var bodyParser = require('body-parser');
-var handleBar = require('consolidate').ejs;
+var handleBar = require('consolidate').handlebars;
 var passport = require("passport");
 var path = require("path")
 require("dotenv").config({path:__dirname +"/.env"});
@@ -40,7 +40,10 @@ app.use(express.static('./public'));
 app.engine('handlebars', handleBar);
 app.set('view engine', 'handlebars');
 app.set("views", __dirname+"/public/views");
-console.log(__dirname+"/public/views")
+
+
+//console.log(__dirname+"/public/views")
+
 app.use(express.static(path.resolve(__dirname, "../Client/src/")))
 
 //ROUTE CONFIGURATION IN PRODUCTION

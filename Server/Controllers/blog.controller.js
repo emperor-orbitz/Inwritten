@@ -15,14 +15,14 @@ var display = (req, res) => {
 
 
     var link =  req.originalUrl
-    console.log(link)
+
     posts.findOne({post_link:link}, (err, data)=>{
         if(err){
             res.send("Sorry there was an error"+err)
         }
         else
-             res.render("Templates/template1", { name:"dddd"});
-             console.log(data)
+             res.render("Templates/western", { data })
+             //console.log(data)
 
     })
 
