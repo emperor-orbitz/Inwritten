@@ -207,17 +207,17 @@ class EditPost extends React.Component {
       public: this.state.privacy_value,
       body_html: panel.exposeHTMLEditorValue,
       body_schema: panel.exposeEditorValue,
-      featured_image: this.state.featured_image
+      featured_image: this.state.featured_image,
+      post_link: this.state.post_link
 
     }
-    console.log(post.category, post.createdAt, "this is null")
 
     let val = this.postValidation();
     if (val === true) {
 
       add.update_article(post).then(
         (okay) => {
-          this.state.post_link= okay.post_link;
+          this.state.post_link= post.post_link
 
           this.props.dispatch({ type: 'UPDATE_ARTICLE', payload: post });
 
@@ -226,17 +226,15 @@ class EditPost extends React.Component {
             error_message: '',
             buttonDisabled: false,
             dimmerLoad: false,
-            open_options: false
+            open_options: false,
           });
 
 
           var note = document.getElementsByClassName('notification-background');
           note[0].classList.remove('reverse-anime');
 
-        }
-
-
-      ).catch(
+        })
+        .catch(
         (err) => {
           this.setState({
             buttonDisabled: false,
@@ -271,10 +269,9 @@ class EditPost extends React.Component {
   componentDidMount() {
 
 
-
     for (var x of this.props.ArticleReducer) {
       if (x._id == this.props.match.params.postID) {
-        console.log(x._id, this.props.match.params.postID, x.body_schema, 'X.BODY IS HERE')
+        console.log(x.post_link, 'X.BODY IS HERE')
 
         this.setState({
           post_id: x._id,
@@ -382,7 +379,6 @@ class EditPost extends React.Component {
 
 
     }
-
 
 
 

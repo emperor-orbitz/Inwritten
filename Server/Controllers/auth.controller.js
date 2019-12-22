@@ -98,28 +98,28 @@ var verify_mail = async (req, res) => {
         var result = await finduser.findUserById(userid);
 
         if (result === null) {
-            res.render('broken_email');
+            res.render('Utility/broken_email');
 
         }
         else if (result != null) {
             //IS IT VERIFIED?
             var date = new Date();
             if ((date.getTime() - result.lastVerified) > (1 * 24 * 60 * 60 * 1000)) {
-                res.render('broken_email')
+                res.render('Utility/broken_email')
 
             }
             else if (result.verified === true) {
 
-                res.render('broken_email')
+                res.render('Utility/broken_email')
             }
 
             else {
                 finduser.verifyUser(userid, function (err, success) {
                     if (err) {
-                        res.render('broken_email')
+                        res.render('Utility/broken_email')
                     }
                     else {
-                        res.render('confirm_email')
+                        res.render('Utility/confirm_email')
                     }
 
                 })
@@ -130,7 +130,7 @@ var verify_mail = async (req, res) => {
     }
     catch (error) {
 
-        res.render('broken_email');
+        res.render('Utility/broken_email');
 
     }
 

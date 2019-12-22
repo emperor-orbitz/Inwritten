@@ -173,7 +173,7 @@ class AddPost extends React.Component {
         (okay) => {
           
           this.state.post_link =okay.post_link;
-          let with_id = Object.assign({}, post, { _id: okay._id });
+          let with_id = Object.assign({}, post, { _id: okay._id, post_link: okay.post_link});
           this.props.dispatch({ type: 'INSERT_ARTICLE', payload: with_id });
 
           this.setState({

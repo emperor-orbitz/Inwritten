@@ -12,8 +12,6 @@ var posts =  require('../Models/post.model');
 
 var display = (req, res) => {
 
-
-
     var link =  req.originalUrl
 
     posts.findOne({post_link:link}, (err, data)=>{
@@ -21,7 +19,7 @@ var display = (req, res) => {
             res.send("Sorry there was an error"+err)
         }
         else
-             res.render("Templates/western", { data })
+             res.render("template-default-01/index", { data })
              //console.log(data)
 
     })
@@ -34,8 +32,8 @@ var display = (req, res) => {
 }
 
 
-
-var update = (req, res) =>{
+//load User Profile
+var user = (req, res) =>{
 
    
 
@@ -71,7 +69,7 @@ var remove = (req, res, ) =>{
 //EXPORTS
 module.exports = {
     display:display,
-    update: update,
+    user: user,
     list:list,
     delete: remove,
     like:like
