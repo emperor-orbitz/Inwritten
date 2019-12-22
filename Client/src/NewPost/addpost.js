@@ -292,7 +292,7 @@ class AddPost extends React.Component {
         <Grid stackable>
           <Grid.Row reversed="mobile" >
 
-            <Grid.Column mobile={16} tablet={12} computer={13} style={{ padding: '0px 5px' }}  >
+            <Grid.Column mobile={16} tablet={13} computer={14} style={{ padding: '0px 5px' }}  >
 
               {this.state.success_message === '' ?
                 ""
@@ -328,9 +328,9 @@ class AddPost extends React.Component {
 
             </Grid.Column>
 
-            <Grid.Column mobile={16} tablet={3} computer={3}>
+            <Grid.Column mobile={16} tablet={2} computer={2}>
               &nbsp;&nbsp; &nbsp;
-              <Button primary onClick= {()=>{ this.setState({open_options:true})}}> Ready to Publish </Button>
+              <Button primary icon="checkmark" onClick= {()=>{ this.setState({open_options:true})}}/>
 
               
               <Modal size="small" open={this.state.open_options} onClose={this.close} closeOnDimmerClick >

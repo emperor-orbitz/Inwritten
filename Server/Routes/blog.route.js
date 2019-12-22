@@ -4,7 +4,7 @@ var blogController =require("../Controllers/blog.controller")
 
 
 
-Router.get('/user/:author/:title', function(req, res, next){
+Router.get('/user/:link', function(req, res, next){
 
 blogController.display(req, res)
 

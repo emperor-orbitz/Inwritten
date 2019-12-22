@@ -603,13 +603,14 @@ min-height:50px;
 //off all overflows, none must be hidden!
 
     .editor-buttons{
-        width:20px;
-        position:sticky;
-        top:20px;
-        float:left;
+        width:30px;
+        position:fixed;
+        top:0px;
+        //float:left;
         padding:10px 0px; 
-       // box-shadow:3px 2px 5px 1px rgba(3, 68, 94, 0.2);
+        //box-shadow: 2px 1px 17px 2px rgba(82, 82, 82, 0.4);
         color:black;
+        //border-radius: 5px;
         //top:1000px;
         
 }

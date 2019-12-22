@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 import Connection from '../../Controllers/auth.controller';
 import { connect } from 'react-redux';
 import ProfileUpdate from '../../Controllers/profile.controller';
-
+import Countries from './country';
 
 
 
@@ -42,7 +42,8 @@ class Profile extends React.Component {
             validationClass: '',
             //passwordDisabled: true,
             dispPass: "none",
-            dispProf: "block"
+            dispProf: "block",
+            country:[]
 
 
 
@@ -188,9 +189,7 @@ class Profile extends React.Component {
                 bio: this.state.bio,
                 profile_photo: this.state.profile_photo,
                 username: this.state.username,
-               // old_password: this.state.old_password,
-               // new_password: this.state.new_password,
-               // confirm_password: this.state.confirm_password
+              
             }
 
 
@@ -361,6 +360,18 @@ class Profile extends React.Component {
                                 <Form.Field label='Firstname' value={this.state.first_name} control='input' placeholder='Firstname' onChange={this.handle_first_name} />
                                 <Form.Field label='Lastname' control='input' placeholder='Lastname' value={this.state.last_name} onChange={this.handle_last_name} />
                             </Form.Group>
+
+                            <span style={{color:"black"}}>Country</span>
+                            <Countries />
+                            <br></br>
+                            
+                            <span style={{color:"black"}}>Gender</span>
+                            <select>
+                                <option value="none">Select gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                            <br></br>
 
                             <Form.Field id='bio' label='Bio (Write something...)' control='textarea' value={this.state.bio} onChange={this.handle_bio} minLength='20' maxLength='150' name='bio' />
 

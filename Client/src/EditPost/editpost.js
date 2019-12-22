@@ -43,30 +43,6 @@ function HoverableDiv(props) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class EditPost extends React.Component {
 
   constructor(props) {
@@ -336,25 +312,7 @@ class EditPost extends React.Component {
 
     var privacy_value = (this.state.privacy_value == true) ? 'Publish to the World' : 'Save Save to draft';
     var comment_value = (this.state.enable_comments == true) ? 'Commenting is enabled' : 'Commenting is disabled';
-    var template_sample = [
-      {
-        _name: 'Diana \'s Rose ',
-        _category: 'Red',
-        _id: 12
-      },
-      {
-        _name: 'Diana \'s Rose ',
-        _category: 'Blue',
-        _id: 23
-      }
-      ,
-      {
-        _name: 'Diana \'s Rose ',
-        _category: 'Golden Eaglet',
-        _id: 234
-      }
-    ]
-
+   
     var categoryOptions = cat.categories;
 
 
@@ -385,8 +343,6 @@ class EditPost extends React.Component {
     var response_link =`/comments/${this.props.match.params.postID}`;
 
 
-
-
     return (
 
       <div className='add-post'>
@@ -394,7 +350,7 @@ class EditPost extends React.Component {
         <Grid stackable>
           <Grid.Row>
 
-            <Grid.Column mobile={16} tablet={12} computer={13} style={{ padding: '0px 5px' }}  >
+            <Grid.Column mobile={16} tablet={14} computer={14} style={{ padding: '0px 5px auto auto' }}  >
 
               {this.state.success_message === '' ?
                 ""
@@ -431,9 +387,9 @@ class EditPost extends React.Component {
 
             </Grid.Column>
 
-            <Grid.Column mobile={16} tablet={4} computer={3}>
+            <Grid.Column mobile={16} tablet={2} computer={2}>
               
-              <Button primary onClick={() => { this.setState({ open_options: true }) }}> Ready to re-publish</Button>
+              <Button primary onClick={() => { this.setState({ open_options: true }) }} icon='angle right'/>
               <br></br><br></br> 
               <p><Link to ={response_link} >View Responses</Link></p>
               <p color="black" >{this.state.likes==0? "No": this.state.likes} likes</p>

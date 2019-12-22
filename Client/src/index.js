@@ -23,7 +23,7 @@ render() {
  
 return (
 
-<div style={{height:'100%'}}>
+<div>
 <Provider store={store}>
 <Router>
 

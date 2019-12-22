@@ -162,13 +162,13 @@ class Interests extends React.Component {
 
 
 
-                <h3>Latest on {item}:</h3>
+                <h3>Most Recent on {item}:</h3>
                 {this.state.not_found == true ? (<p style={{ color: "red" }}>{`${this.state.search} was not found!`} </p>) : ""}
                 {this.state.posts.map((x, index) => {
                     return (
                         <div key={x._id}>
-                            <h3>#{++index}. {x.title} </h3>
-                            <span>{x.description}</span>
+                            <a href={x.post_link} target="__blank" ><h3>#{++index}. {x.title} </h3> </a>
+                            <span>{x.description==""? "-":x.description}</span>
                             <p style={{ fontSize: "10px" }}>
                             By <i>{x.author}({ this.props.ProfileReducer.email == x.authorId.email ? "you" :x.authorId.email  })</i></p>                           <br></br>
                         </div>

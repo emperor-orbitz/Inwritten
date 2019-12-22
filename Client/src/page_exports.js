@@ -17,6 +17,7 @@ import PostArchive from '../src/Archives/postarchive';
 import Interests from "../src/Interests/interests";
 import Stats from "../src/Statistics/stats";
 import Templates from "../src/Templates/templates";
+import Notifications from "../src/Notifications/notifications";
 
 
 
@@ -35,5 +36,5 @@ var ArticlesCategory ={
 export { Signup, Account, Home, Login,  
         ArticlesCategory, Profile, 
         Comments, Interests, Bookmark,
-        Stats, Templates
+        Stats, Templates, Notifications
     };

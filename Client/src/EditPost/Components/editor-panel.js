@@ -219,7 +219,7 @@ renderBlockButton = (type, icon) => {
   render() {
 
     return (
-      <div>
+      <div style={{width:"85%", margin:'auto',overflow:"auto", top:0, left:'250px', bottom:0, right:0}}>
         
         
           {this.state.mediaInfo == 'image' ? (
