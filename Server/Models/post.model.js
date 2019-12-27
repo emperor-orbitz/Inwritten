@@ -13,6 +13,7 @@ postSchema.methods.loadUserPost = (_id, limit, callback) => {
     return mongoose.model('Post', postSchema)
         .find({ authorId: _id }, {
         }, { limit: limit }, callback)
+        .sort({createdAt:-1})
         .populate('comments')
         
         ;
@@ -88,7 +89,7 @@ postSchema.methods.loadAllPost = (username, callback) => {
         .populate({
                    path:"comments",
                    populate:{path:"commenter_id", 
-                   select:"username email display_picture"
+                   select:"username email display_picture template_id"
                             }
     })
 

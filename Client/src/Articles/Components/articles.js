@@ -160,12 +160,12 @@ class Articles extends React.Component {
 
 
     componentDidMount() {
-       
-            console.log(this.props.ArticleReducer)
-            var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == true);
 
-            this.setState({ filter_privacy });
-            this.state.filter_privacy_const = filter_privacy;
+        console.log(this.props.ArticleReducer)
+        var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == true);
+
+        this.setState({ filter_privacy });
+        this.state.filter_privacy_const = filter_privacy;
 
     }
 
@@ -262,10 +262,10 @@ class Articles extends React.Component {
 
                                             <Input id='search' className='custom-input' name='title' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search Drafts' />
 
-                                           <Select name='category'  style={{border:"none"}} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
+                                            <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <Button basic size="small" onClick={this.search_with_criteria}> Search <Icon name='chevron right' />
-                                            </Button>
+                                            <Button primary icon="search" onClick={this.search_with_criteria}/>
+
                                         </Form>
                                         <br />
 
@@ -276,28 +276,79 @@ class Articles extends React.Component {
 
                                 </Grid.Column>
 
-                                <Grid.Column computer={12} mobile={16} tablet={15} >
+                                <Grid.Column computer={16} mobile={16} tablet={15} >
                                     {this.state.not_found == true ? <div className='error-notification'> No {this.state.search_criteria} similar to <b> {this.state.search}</b> was found</div> : ''}
 
                                     {filter_privacy.map((e) => {
 
+                                        if (e.featured_image == undefined || e.featured_image == "") {
+                                            return (
+                                                <div key={e._id} className='image-thumbnail-template-cover-big'>
+
+                                                    <div style={{ margin: '10px 3px' }}>
+
+                                                        <div className={'customCard-' + e.category} >
+
+                                                            {/*  <div className='customCard-inner' >
+                                                                    <span style={{}} >Title </span>
+                                                                    <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis', height: '30%' }}>
+                                                                        {e.title}
+                                                                    </h4>
+        
+                                                                    <span><b>Created On </b> </span>
+                                                                    <p>{date_to_string(e.createdAt)}</p>
+        
+                                                </div>*/}
+
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div className='template-thumbnail-hover-big'>
+
+                                                        <div style={{}}>
+                                                            <div className="category">
+                                                                <span><b>{e.category}</b> </span>
+                                                                <p>{e.title} </p>
+
+                                                                    <Button.Group className="button-hover" size='small' color='teal' secondary >
+                                                                        <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
+                                                                        <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
+                                                                        <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
+                                                                        <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
+
+                                                                    </Button.Group>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+
+                                            )
+
+                                        }
+
+                                        else
                                         return (
                                             <div key={e._id} className='image-thumbnail-template-cover-big'>
 
                                                 <div style={{ margin: '10px 3px' }}>
 
-                                                    <div className={'customCard-' + e.category} >
+                                                    <div className={'customCard-' + e.category} style={{ backgroundImage: `url('${e.featured_image}')`, backgroundSize: "cover", backgroundPosition: "bottom right" }}>
 
-                                                        <div className='customCard-inner' >
-                                                            <span style={{}} >Title </span>
-                                                            <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis', height: '30%' }}>
-                                                                {e.title}
-                                                            </h4>
-
-                                                            <span><b>Created On </b> </span>
-                                                            <p>{date_to_string(e.createdAt)}</p>
-
-                                                        </div>
+                                                        {/*<div className='customCard-inner'  >
+                                                                <span style={{}}>Title </span>
+                                                                <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis', height: '30%' }}>
+                                                                    {e.title}
+                                                                </h4>
+    
+                                                                <span><b>Created On </b> </span>
+                                                                <p>{date_to_string(e.createdAt)}</p>
+    
+                                            </div>*/}
 
                                                     </div>
                                                 </div>
@@ -305,19 +356,17 @@ class Articles extends React.Component {
 
                                                 <div className='template-thumbnail-hover-big'>
 
-                                                    <div style={{}}>
                                                         <div className="category">
-                                                            <span><b>About</b> </span>
-                                                            <p>{e.description} </p>
+                                                            <span><b>{e.category}</b> </span>
+                                                            <h5>{e.title} </h5>
 
-                                                            <Button.Group size='small' color='teal' secondary >
-                                                                <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
-                                                                <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`}  />
-                                                                <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
-                                                                <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
+                                                                <Button.Group size='small' color='teal' secondary className="button-hover" >
+                                                                    <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
+                                                                    <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
+                                                                    <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
+                                                                    <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
 
-                                                            </Button.Group>
-                                                        </div>
+                                                                </Button.Group>
 
                                                     </div>
                                                 </div>
@@ -327,6 +376,7 @@ class Articles extends React.Component {
 
 
                                         )
+
 
                                     })}
                                 </Grid.Column>

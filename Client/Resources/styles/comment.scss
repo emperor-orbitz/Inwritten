@@ -1,7 +1,7 @@
 .comment-div{
 color:black;
 margin: 0px 5%;
-width:90%;
+width:95%;
 //overflow: auto;
 
 
@@ -29,3 +29,21 @@ display: table;
     cursor: pointer;
     //border:1px solid rgba(143, 142, 142, 0.4);
     }
+
+
+    .modal-content{
+        display:flow-root;
+
+        p, span{
+
+            color:black;
+        }
+        }
+
+
+
+
+
+
+
+        

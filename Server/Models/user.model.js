@@ -1,11 +1,15 @@
 
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
+var scheme = require('./scheme');
+var userSchema = scheme.profile;
+
+
+
+
+
 
 const SALT_FACTOR = 10;
-var scheme = require('./scheme');
-
-var userSchema = scheme.profile;
 
 
 

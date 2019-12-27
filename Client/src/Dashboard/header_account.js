@@ -260,7 +260,15 @@ class HeaderAccount extends React.Component {
                     <span style={{fontSize:"15px",color:"white"}}>Stats</span></Link> 
                   </Accordion.Title>
                 
+                </div>
 
+                  <div className="accordion-item">
+                <Accordion.Title active={this.state.activeAccordion === 5} style={{ padding: '5px 20px' }} >
+                    <Link to="/notification" style={{ color: "white" }}>
+                    <Icon name="bell outline" className="accordion-icon" size="large" />
+                    <span style={{fontSize:"15px",color:"white"}}>Notifications</span></Link> 
+                  </Accordion.Title>
+                
                 </div>
 
                 <div className="accordion-item">

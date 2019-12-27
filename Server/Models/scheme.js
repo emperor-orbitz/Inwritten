@@ -7,11 +7,18 @@ const SCHEME = {
     /*         BLOG POST SCHEMA
     */
 
-    blog_post: new Schema({
+    template: new Schema({
 
-        content: { type: String, required: true },
-        date: { type: Date, required: true },
-        title: { required: true, type: String }
+        template_name: { type: String, required: true, unique:true },
+        template_description: {type:String, default:"No template description"},
+        file_location: { required: true, type: String },
+        featured_image: {type:String },
+        showcase_url: {type:String},
+        category:{type:String, default:'all'},
+        profile_url: {type:String, required:true},
+        blogs_url:{type:String, required:true},
+        index:{type:String, required:true}
+
 
     },
         {
@@ -39,9 +46,11 @@ const SCHEME = {
         verified: { type: Boolean, required: true, default: false },
         lastVerified: { type: Date, default: Date.now() },
         profile_link:{type:String, default:"", lowercase:true},
-        country:{type: "String", default:""  },
-        gender: {type:mongoose.Schema.Types.Array, default:[]},
-        template_id: { type: String },
+        country:{type: mongoose.Schema.Types.Array, default:[]  },
+        gender: {type:String, default:""},
+        template_id: { type: mongoose.Schema.Types.ObjectId, default: "5e01d83ff47d3806c0aa6992",
+        ref:"Template"
+    },
 
     },
         {
@@ -73,7 +82,9 @@ const SCHEME = {
         comments: [{type: mongoose.Schema.Types.ObjectId, ref:"Comment"}],
         post_link:{type:String, default:""},
         authorId: { type: mongoose.Schema.Types.ObjectId, ref:"User" },
-        times_read:{ type:Number, default:0 }
+        times_read:{ type:Number, default:0 },
+        template_id: { type: mongoose.Schema.Types.ObjectId, default: "5e01d83ff47d3806c0aa6992" },
+
     },
         {
             timestamps: true,

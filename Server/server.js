@@ -9,17 +9,20 @@ var bodyParser = require('body-parser');
 var handleBar = require('consolidate').handlebars;
 var passport = require("passport");
 var path = require("path")
-require("dotenv").config({path:__dirname +"/.env"});
+require("dotenv").config({ path: __dirname + "/.env" });
 require('./Utils/passport');
 require("./Database/db");
 
-var port = process.env.PORT || 5000;
 
+
+var port = process.env.PORT || 5000;
 var route_config = require('./Utils/route_config');
 
 
-app.use(bodyParser.urlencoded({ extended: false, limit: '20mb'}));
-app.use(bodyParser.json({limit:'50mb'}))
+app.use(bodyParser.urlencoded({ extended: false, limit: '20mb' }));
+app.use(bodyParser.json({ limit: '50mb' }))
+
+
 
 
 
@@ -33,30 +36,41 @@ app.use(function (req, res, next) {
   next();
 });
 
+
+
+
 app.use(passport.initialize());
-
-
 app.use(express.static('./public'));
 app.engine('handlebars', handleBar);
 app.set('view engine', 'handlebars');
-app.set("views", __dirname+"/public/views");
+app.set("views", __dirname + "/public/views");
 
 
 //console.log(__dirname+"/public/views")
 
 app.use(express.static(path.resolve(__dirname, "../Client/src/")))
 
+
+
+
+
+
+
+
+
 //ROUTE CONFIGURATION IN PRODUCTION
 
-if(process.env.NODE_ENV =="production"){
+if (process.env.NODE_ENV == "production") {
 
   app.use('/', route_config);
 
   app.get('*', (req, res) => {
 
-    res.sendFile( path.resolve(__dirname, "../Client/src/index.html") );
+    res.sendFile(path.resolve(__dirname, "../Client/src/index.html"));
   });
 }
+
+
 
 
 

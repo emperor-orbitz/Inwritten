@@ -1,8 +1,10 @@
-var comments = require('../Models/comments.model');
+
+
+
+var userModel = require('../Models/user.model');
 //var http_status = require("../Utils/http_status");
-var posts =  require('../Models/post.model');
-
-
+var posts = require('../Models/post.model');
+var templ = require('../Models/template.model');
 
 
 
@@ -10,67 +12,97 @@ var posts =  require('../Models/post.model');
 
 //*           LOAD ALL ARTICLES
 
-var display = (req, res) => {
+var index = async (req, res) => {
 
-    var link =  req.originalUrl
+    let { originalUrl } = req;
+    var link = req.params.link
+    let username = link.split('---')[0];
+    console.log(originalUrl)
+    try {
+        var user_data = await userModel.findOne({ username: username });
 
-    posts.findOne({post_link:link}, (err, data)=>{
-        if(err){
-            res.send("Sorry there was an error"+err)
+        let template_data = await templ.findById(user_data.template_id)
+
+        let data = await posts.findOne({ post_link: originalUrl, public: true })
+        if (data != null) {
+            res.render(`${template_data.template_name}/index`, { data })
         }
+
         else
-             res.render("template-default-01/index", { data })
-             //console.log(data)
+            res.send("Could not load article successfully")
 
-    })
-
-    
-    //res.send("i have seen this"+ title+author)
-
-
-
-}
-
-
-//load User Profile
-var user = (req, res) =>{
-
-   
+    } catch (error) {
+        res.send("An error occured" + error)
 
     }
 
-    
-
-var list = (req, res, next) =>{
-
-  
 }
 
 
 
 
-var remove = (req, res, ) =>{
-  
-  }
-
-
-
-  var like =(req, res) =>{
-
-      
-  }
 
 
 
 
+//load User Profile
+var user = async (req, res) => {
 
-  
+    try {
+
+        let data = await posts.findOne({ username: req.param.username });
+        let found_template = await templ.findById(data.template_id)
+        if (found_template != null) {
+            res.render(`${found_template.template_name}/profile`, data)
+        }
+        else res.send("Could not load article successfully")
+
+    }
+    catch (error) {
+        res.send("An error occured" + error)
+
+
+    }
+
+
+
+
+}
+
+
+
+var blog = async (req, res, next) => {
+
+    try {
+        let userData = await userModel.findOne({ username: req.params.username })
+            .populate("template_id");
+        if (userData != null) {
+            res.render(`${userData.template_id.template_name}/blog`)
+        }
+        else res.render("Operation was unsuccessful")
+
+    }
+
+    catch (error) {
+        res.send("Ooops, there was an error")
+        console.log(error)
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
 
 //EXPORTS
 module.exports = {
-    display:display,
+    index: index,
     user: user,
-    list:list,
-    delete: remove,
-    like:like
+    blog: blog
 };

@@ -183,7 +183,7 @@ class AddPost extends React.Component {
             dimmerLoad: false,
             open_options:false
           });
-          alert("guck yuu")
+
 
           var note = document.getElementsByClassName('notification-background');
           note[0].classList.remove('reverse-anime');
@@ -339,7 +339,6 @@ class AddPost extends React.Component {
                     <Button name='configure' onClick={changeOptions} id='side1' title='Settings' bordered basic >Basic</Button>
                     <Button name='ellipsis horizontal' onClick={changeOptions} id='side2' title='More options' bordered basic>Advanced</Button>
                   </Button.Group>
-
                 </Modal.Header>
 
 
@@ -350,8 +349,8 @@ class AddPost extends React.Component {
                       type='file' id='photo' style={{ visibility: 'hidden' }} />
 
                     <div className="featured-pix-cover" onClick={this.toggleDialogFeatured.bind(this)}>
-                      <Icon color="teal" size="small" name='image' /> Upload Featured Image </div>
-                  </div>
+                    </div>     
+                    </div>
 
                   <Modal.Description>
 

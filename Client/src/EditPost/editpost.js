@@ -188,6 +188,7 @@ class EditPost extends React.Component {
 
     }
 
+
     let val = this.postValidation();
     if (val === true) {
 
@@ -316,9 +317,6 @@ class EditPost extends React.Component {
     var categoryOptions = cat.categories;
 
 
-
-
-
     function changeOptions(side) {
       let id = side.target.id;
 
@@ -350,7 +348,7 @@ class EditPost extends React.Component {
         <Grid stackable>
           <Grid.Row>
 
-            <Grid.Column mobile={16} tablet={14} computer={14} style={{ padding: '0px 5px auto auto' }}  >
+            <Grid.Column mobile={16} tablet={14} computer={14} style={{ padding: 'auto' }}  >
 
               {this.state.success_message === '' ?
                 ""
@@ -410,10 +408,10 @@ class EditPost extends React.Component {
                   <div className="featured-pix-block">
                     <img src={this.state.featured_image} className="featured-image" />
                     <input className="featured-pix-cover" onChange={this.handle_profile_photo.bind(this)}
-                      type='file' id='photo' style={{ visibility: 'hidden' }} />
+                      type='file' id='photo' style={{visibility: 'hidden'}} />
 
                     <div className="featured-pix-cover" onClick={this.toggleDialogFeatured.bind(this)}>
-                      <Icon color="teal" size="small" name='image' /> <p>featured image</p> </div>
+                       </div>
                   </div>
 
                   <Modal.Description>
@@ -450,6 +448,7 @@ class EditPost extends React.Component {
                       </Form>
                       <br />
                     </div>
+
 
                     <div className='editor-side2' id='editor-side2'>
                       <p>  </p>
