@@ -43,48 +43,55 @@ class Templates extends React.Component {
 
 
     async componentDidMount() {
-        var templ = new TemplateController()
+        var templ = new TemplateController();
+        let { template_id } = this.props.ProfileReducer;
         try {
-          let mine = templ.my_template(this.props.ProfileReducer.template_id) 
+          let mine = await templ.my_template(template_id)
+          var result = await templ.get_templates(template_id)
 
+          if(mine.message !== null){
+            let templates = result.data.filter((v,i,a)=> v._id !== this.props.ProfileReducer.template_id)
+            this.setState({ templates, my_template: mine.message })
+          }
 
         } catch (error) {
-            
+            console.log( "Something wrong has happened", error )
+
         }
 
-        templ.get_templates()
-            .then(result => {
-                console.log(result.data)
-                let templates = result.data.filter((v,i,a)=>{
-                    return v._id !== this.props.ProfileReducer.template_id
-                })
-                this.setState({ templates })
-
-            })
-            .catch(err => {
-
-                console.log("Something wrong has happened")
-            })
 
 
     }
 
 
-    save_template = (ev, data) => {
+    save_template = async (ev, data) => {
 
         this.setState({ save_disabled:true })
-        var id = this.state.selected._id
+        var { templates } = this.state;
         let tempControl = new TemplateController()
+try{
 
-        tempControl.save_template(id)
-            .then(_ => this.setState({ save_text: 'Templates successfully saved!',
-                                      open_options: false,
-                                      save_disabled: false,
+     await tempControl.save_template(this.state.selected._id);
+     let updated = await tempControl.get_templates(this.state.selected._id);
 
-                                    }))
 
-            .catch(__ => this.setState({ save_text: 'Unable to save template' }))
+     this.setState({ save_text: 'Templates successfully saved!',
+     open_options: false,
+     save_disabled: false,
+     templates: updated.data,
+     my_template: this.state.selected
 
+
+   })
+ 
+}
+catch(err){
+    this.setState({ save_text: 'Unable to save template' })
+    console.log(err)
+    
+
+}
+        
 
 
     }
@@ -92,7 +99,7 @@ class Templates extends React.Component {
 
 
     render() {
-        var { templates } = this.state;
+        var { templates,selected,my_template } = this.state;
 
         if (templates.length == 0) {
             return (
@@ -109,9 +116,11 @@ class Templates extends React.Component {
                     <h3 style={{ color: "black" }}>Templates</h3>
 
                     <div className="template-container"> 
-                    <img src ='/8d7be38b85f237d90b6fb6bb583c0af2.jpg' className="template-image" />
+                    <img src ={my_template.featured_image} className="template-image" />
                     <div className="template-cover">
-                    <h3> Cover on hover  </h3>
+                    <h1>  { my_template.template_name} </h1>
+                    <p>  { my_template.template_description} <u>(you are currently using this)</u> </p>
+
                     
                     </div>
 
@@ -119,33 +128,29 @@ class Templates extends React.Component {
                     <Divider />
 
                     <p>Select one. Templates are the different designs in which your articles can be rendered.</p>
-                   
-                    <span style={{ color:"green" }}>{this.state.save_text}</span>
-                    <br></br>
-
-
+                    <p style={{ color:"green" }}>{this.state.save_text}</p>
 
                     <Modal size="small" open={this.state.open_options} onClose={this.close} closeOnDimmerClick closeOnDocumentClick >
                         <Modal.Header>
-                            {this.state.selected.template_name}
+                            {selected.template_name}
                         </Modal.Header>
 
                         <Modal.Content image scrolling className='modal-content' style={{ display: "flow-root" }} >
                             <div className="featured-pix-block">
-                                <img src={this.state.selected.featured_image} className="featured-image" />
+                                <img src={selected.featured_image} className="featured-image" />
                                 <input className="featured-pix-cover" type='file' id='photo' style={{ visibility: 'hidden' }} />
                             </div>
 
                             <Modal.Description >
                                 <div style={{ marginLeft: "10px" }}>
                                     <h4 style={{ marginBottom: "3px" }}>Description</h4>
-                                    <p >{this.state.selected.template_description}</p>
+                                    <p >{selected.template_description}</p>
 
                                     <h4 style={{ marginBottom: "3px" }}>Category</h4>
-                                    <span >{this.state.selected.category}</span>
+                                    <span >{selected.category}</span>
 
                                     <h4 style={{ marginBottom: "3px" }}>Created on:</h4>
-                                    <span >{this.state.selected.createdAt}</span>
+                                    <span >{selected.createdAt}</span>
                                     <br></br>
 
 
@@ -154,7 +159,7 @@ class Templates extends React.Component {
                             </Modal.Description>
                         </Modal.Content>
                         <Modal.Actions>
-                        <Button size="small" as={Link} as={Link} target="__blank" to={`/template/template_sample/${this.state.selected._id}`}>Preview</Button>
+                        <Button size="small" as={Link} as={Link} target="__blank" to={`/template/template_sample/${selected._id}`}>Preview</Button>
                         <Button primary size="small" disabled={this.state.save_disabled} onClick={this.save_template}>Save</Button>
                         </Modal.Actions>
 

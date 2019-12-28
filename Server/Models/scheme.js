@@ -10,7 +10,7 @@ const SCHEME = {
     template: new Schema({
 
         template_name: { type: String, required: true, unique:true },
-        template_description: {type:String, default:"No template description"},
+        template_description: { type:String, default:"No template description", maxlength: 255 },
         file_location: { required: true, type: String },
         featured_image: {type:String },
         showcase_url: {type:String},

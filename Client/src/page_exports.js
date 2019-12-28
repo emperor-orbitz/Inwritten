@@ -15,7 +15,7 @@ import AddPost from './NewPost/addpost';
 import EditPost from './EditPost/editpost';
 import PostArchive from '../src/Archives/postarchive';
 import Interests from "../src/Interests/interests";
-import Stats from "../src/Statistics/stats";
+import Stats from "../src/Activities/activities";
 import Templates from "../src/Templates/templates";
 import Notifications from "../src/Notifications/notifications";
 

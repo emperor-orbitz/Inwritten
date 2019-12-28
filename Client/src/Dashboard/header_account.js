@@ -255,9 +255,9 @@ class HeaderAccount extends React.Component {
 
                 <div className="accordion-item">
                 <Accordion.Title active={this.state.activeAccordion === 4} style={{ padding: '5px 20px' }} >
-                    <Link to="/stats" style={{ color: "white" }}>
+                    <Link to="/activities" style={{ color: "white" }}>
                     <Icon name="chart bar outline" className="accordion-icon" size="large" />
-                    <span style={{fontSize:"15px",color:"white"}}>Stats</span></Link> 
+                    <span style={{fontSize:"15px",color:"white"}}>Activities</span></Link> 
                   </Accordion.Title>
                 
                 </div>

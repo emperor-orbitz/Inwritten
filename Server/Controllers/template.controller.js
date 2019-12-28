@@ -43,7 +43,7 @@ var template_sample = (req, res, next) => {
 
 // LOAD ALL TEMPLATES
 var templates = (req, res, next) => {
-    templ.find({})
+    templ.find({ _id: {$ne: req.params.current_template }})
         .then(data => {
             res.send({ data:data, status:200 });
 
@@ -103,7 +103,7 @@ var add_template_to_profile = async (req, res, next) => {
 
  var my_template = (req, res, next) =>{
 
-    templ.findById(req.params.id)
+    templ.findById(req.params.template_id)
          .then( result => {
              if(result == null) res.send({ message:null, status:200  })
              else res.send({ message:result, status:200  }) 

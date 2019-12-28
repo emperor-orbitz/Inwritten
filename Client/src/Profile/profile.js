@@ -342,7 +342,9 @@ class Profile extends React.Component {
                     
                         <ButtonGroup size="small" secondary >
                             <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false}>Profile </Button>
-                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} >Advance</Button>
+                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} >Password</Button>
+                            <Button id="preferences" >preferences</Button>
+
                         </ButtonGroup>
 
 
@@ -393,8 +395,11 @@ class Profile extends React.Component {
 
                         <ButtonGroup size="small" secondary >
                             <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false}>Profile </Button>
-                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} >Advance</Button>
+                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} >Password</Button>
+                            <Button id="preferences" >preferences</Button>
+
                         </ButtonGroup>
+
 
                         <div className={this.state.validationClass} style={{ marginBottom: '5px' }} > {this.state.validationMessage}
                         </div>

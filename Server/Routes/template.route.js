@@ -28,7 +28,7 @@ router.get('/template/template_sample/:template_id', (req, res, next) => {
 
 })
 
-router.get('/template/get', (req, res, next) => {
+router.get('/template/get/:current_template', (req, res, next) => {
     controller.templates(req, res, next);
 
 })

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Signup, Account, Login, ArticlesCategory, Profile, Comments, Interests,Bookmark, Stats, Templates, Notifications } from './page_exports';
+import { Signup, Account, Login, ArticlesCategory, Profile, Comments, Interests,Bookmark, Activities, Templates, Notifications } from './page_exports';
 import '../Resources/styles/style.scss';
 import { Switch, Route } from 'react-router';
 import HeaderAccount from '../src/Dashboard/header_account';
@@ -30,7 +30,7 @@ function App() {
             <Route path='/drafts' component={ArticlesCategory.Drafts} />
             <Route path='/add-post' component={ArticlesCategory.AddPost} />
             <Route path='/bookmark' component={Bookmark} />
-            <Route path='/stats' component={Stats} />
+            <Route path='/activities' component={Activities} />
             <Route path='/templates' component={Templates} />
             <Route path='/notification' component={Notifications} />
 

@@ -29,10 +29,10 @@ const_options ={
 */
 
 
- get_templates () {
+ get_templates (current_template) {
         this.const_options.method = "GET";
         var get_options = {
-            url:  this.const_url +'/get',
+            url:  this.const_url +'/get/'+ current_template,
             options: this.const_options
         }
 
@@ -74,8 +74,10 @@ const_options ={
 
                     if (result.status == 200) {
                         resolve(result);
+                        console.log(result)
                     }
                     else {
+                        console.log("errororr", result)
                         reject(result)
                      }
 

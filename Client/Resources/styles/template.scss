@@ -1,5 +1,5 @@
 .template-container{
-    width:90%;
+    width:98%;
 
 
 
@@ -18,14 +18,16 @@
     }
 
     .template-cover{
-        width:75%;
+        width:70%;
         border-radius:5px;
-        
-        height:400px;
+        text-align: center;
+        min-height:250px;
         background: rgba(0,0, 0, 0.7);
-        top:5%;
+        top:0px;
+        margin:7%;
         position: absolute;
         color:white;
+        padding:7% 10%;
 
     }
 
