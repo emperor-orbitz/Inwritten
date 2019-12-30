@@ -2,15 +2,15 @@ var webpack= require('webpack');
 var path= require('path');
 var HTMLWebpackPlugin =require('html-webpack-plugin');
 
-console.log(path.resolve(__dirname,'./client/src/resources/'))
+//console.log(path.resolve(__dirname,'./client/src/resources/'))
 
 const HTMLWebpackPluginConfig = new HTMLWebpackPlugin(
     {
-        template:'./Client/src/index.html',
+        template:'./Client/assets/index.html',
         filename:'index.html',
         title:'Penboxio',
         minify:true,   
-        inject: false
+        inject: true
         
     }
 )
@@ -20,7 +20,7 @@ var config ={
     entry: './Client/src/index.js',
 
     output:{
-    path: path.resolve(__dirname,'./Client/src'),
+    path: path.resolve(__dirname,'./Client/assets'),
     filename: 'index_bundle.js',
     publicPath: '/'
    

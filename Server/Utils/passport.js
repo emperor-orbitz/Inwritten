@@ -144,8 +144,8 @@ passport.use('jwt', new JWTStrategy(JWT_options,
 
       }
       catch (err) {
-
-        done(new Error('Something terrible went wrong' + err));
+        //console.log("new error", err)
+        return done( new Error(err) );
 
       }
     }

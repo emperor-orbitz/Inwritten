@@ -236,6 +236,7 @@ var login = (req, res, next) => {
                 });
 
             res.status(200)
+                .cookie("hs_token", `${signature}`, {maxAge:1080000})
                 .send({ token: `bearer ${signature}`, user: user });
 
         }
@@ -253,8 +254,6 @@ var isloggedin = (req, res, next) => {
     res.status(200)
         .send({ data: req.user });
 }
-
-
 
 
 

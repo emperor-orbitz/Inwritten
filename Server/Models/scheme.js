@@ -107,7 +107,18 @@ const SCHEME = {
             versionKey: false,
             strict: false
         }
-    )
+    ),
+    preferences: new Schema({
+        background: {type:String, default:"white"},
+       
+    },
+        {
+            timestamps: true,
+            versionKey: false,
+            strict: false
+        }
+    )    
+
 }
 
 

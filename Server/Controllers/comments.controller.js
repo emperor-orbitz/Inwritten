@@ -16,6 +16,7 @@ var create = (req, res) => {
 
    comment.create_comment(req.body, async (error, results)=>{
      if(error){
+         console.log(error)
          res.status(400)
             .send({status:400, data:[]})
      }
@@ -27,7 +28,7 @@ var create = (req, res) => {
             if(err)
                res.send({ message:`An error occured ${err}`, status:400 });
             else
-                res.send({data: updated, status:200})
+                res.send({message:req.originalUrl})
 
         })
        

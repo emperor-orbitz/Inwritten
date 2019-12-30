@@ -5,6 +5,7 @@ var passport = require("passport");
 var valid = require("../Utils/validation");                                                                       
 
 
+
 var isAuth = (req, res, next)=> {
 passport.authenticate("jwt", {session:false})
 (req, res, next);
@@ -21,7 +22,6 @@ passport.authenticate("jwt", {session:false})
 
 router.get('/articles/loadlist', isAuth, (req, res, next) => {   
 controller.loadList(req, res, next);
-
 });
 
 
