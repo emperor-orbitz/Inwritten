@@ -196,7 +196,7 @@ class HeaderAccount extends React.Component {
               <Menu.Item text={this.props.ProfileReducer.username} as={Dropdown} floating >
 
                 <Dropdown.Menu>
-                  <Dropdown.Item icon='user outline' text='Profile' as={Link} to='/profile' />
+                  <Dropdown.Item icon='user outline' text='Profile' as={Link} to='/settings/profile' />
                   <Dropdown.Item icon='dashboard' text='Dashboard' as={Link} to='/dashboard' />
                   <Dropdown.Item icon='graduation' text='Penbox Acad' />
                   <Dropdown.Item icon='help' text='Docs' />
@@ -253,14 +253,6 @@ class HeaderAccount extends React.Component {
                   <Accordion.Content style={{ padding: '1px 20px' }} className="accordion-contentt" active={activeAccordion === 4} content={settingsSubmenu} />
                 </div>
 
-                <div className="accordion-item">
-                <Accordion.Title active={this.state.activeAccordion === 4} style={{ padding: '5px 20px' }} >
-                    <Link to="/activities" style={{ color: "white" }}>
-                    <Icon name="chart bar outline" className="accordion-icon" size="large" />
-                    <span style={{fontSize:"15px",color:"white"}}>Activities</span></Link> 
-                  </Accordion.Title>
-                
-                </div>
 
                   <div className="accordion-item">
                 <Accordion.Title active={this.state.activeAccordion === 5} style={{ padding: '5px 20px' }} >

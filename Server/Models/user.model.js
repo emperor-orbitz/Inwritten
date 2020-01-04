@@ -106,20 +106,41 @@ userSchema.methods.findUserById = (id) => {
 
 
 
-userSchema.methods.updateProfile = (id, update, cb) => {
-    return mongoose.model('User', userSchema).updateMany({ _id: id },
-        {
-            $set: {
-                firstName: update.firstName,
-                lastName: update.lastName,
-                telephone: update.telephone,
-                //email:update.email,
-                bio: update.bio,
-                display_picture: update.profile_photo,
-                username: update.username
+userSchema.methods.updateProfile = (id, update, change_photo_too = true, cb) => {
 
-            }
-        }, cb)
+    if (change_photo_too == true)
+        return mongoose.model('User', userSchema).updateMany({ _id: id },
+            {
+                $set: {
+                    firstName: update.firstName,
+                    lastName: update.lastName,
+                    telephone: update.telephone,
+                    //email:update.email,
+                    bio: update.bio,
+                    display_picture: update.profile_photo,
+                    username: update.username,
+                    gender: update.gender,
+                    country: update.country
+
+                }
+            }, cb)
+    else
+        return mongoose.model('User', userSchema).updateMany({ _id: id },
+            {
+                $set: {
+                    firstName: update.firstName,
+                    lastName: update.lastName,
+                    telephone: update.telephone,
+                    //email:update.email,
+                    bio: update.bio,
+                    // display_picture: update.profile_photo,
+                    username: update.username,
+                    gender: update.gender,
+                    country: update.country
+
+                }
+            }, cb)
+
 
 }
 

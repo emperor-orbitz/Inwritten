@@ -43,7 +43,8 @@ class Profile extends React.Component {
             //passwordDisabled: true,
             dispPass: "none",
             dispProf: "block",
-            country:[]
+            country:[],
+            gender:""
 
 
 
@@ -68,7 +69,8 @@ class Profile extends React.Component {
                     mobile_number: user.telephone == null? " ": user.telephone,
                     first_name: user.firstName,
                     last_name: user.lastName,
-                    bio: user.bio
+                    bio: user.bio,
+                    gender:user.gender
                 })
 
                 //this.setState({...this.props.ProfileReducer});
@@ -123,7 +125,7 @@ class Profile extends React.Component {
     handle_username = (ev) => this.setState({ username: ev.target.value });
     
     handle_mobile_number=(ev) => this.setState({ mobile_number: ev.target.value });
-    
+    handle_gender =(ev) => this.setState({gender: ev.target.value})
 
 
     toggleDialog() {
@@ -189,7 +191,7 @@ class Profile extends React.Component {
                 bio: this.state.bio,
                 profile_photo: this.state.profile_photo,
                 username: this.state.username,
-              
+                gender: this.state.gender
             }
 
 
@@ -204,7 +206,8 @@ class Profile extends React.Component {
                         telephone: this.state.mobile_number,
                         first_name: this.state.firstName,
                         last_name: this.state.lastName,
-                        bio: this.state.bio
+                        bio: this.state.bio,
+                        gender:this.state.gender
 
                     }  })
 
@@ -368,7 +371,7 @@ class Profile extends React.Component {
                             <br></br>
                             
                             <span style={{color:"black"}}>Gender</span>
-                            <select>
+                            <select onChange={  this.handle_gender } value={this.state.gender} >
                                 <option value="none">Select gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>

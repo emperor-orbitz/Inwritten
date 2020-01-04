@@ -1,19 +1,19 @@
 import React from 'react';
-import {  Menu, Icon } from 'semantic-ui-react';
+import { Menu, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import '../../Resources/styles/style.scss'; 
+import '../../Resources/styles/style.scss';
 import cat from './categories'
 
 
-var xxxx= ["sds"]
+var xxxx = ["sds"]
 console.log(cat)
 
 //console.log(xx);
- 
+
 //const category = cat.
 
 class SideBar {
-    
+
 
     subMenu = {
 
@@ -25,12 +25,12 @@ class SideBar {
             </Menu>
         ),
 
-       /* draftSubmenu: (
-            <Menu secondary vertical className='menu-item' >
-                <Menu.Item as={Link} to="/add"><Icon name="add" />Add</Menu.Item>
-                <Menu.Item as={Link} to="/drafts"  ><Icon name="folder outline" />Archive</Menu.Item>
-            </Menu>
-        ),*/
+        /* draftSubmenu: (
+             <Menu secondary vertical className='menu-item' >
+                 <Menu.Item as={Link} to="/add"><Icon name="add" />Add</Menu.Item>
+                 <Menu.Item as={Link} to="/drafts"  ><Icon name="folder outline" />Archive</Menu.Item>
+             </Menu>
+         ),*/
         imageSubmenu: (
             <Menu secondary vertical className='menu-item' >
                 <Menu.Item as={Link} to="/add-image"><Icon name="add" />Insert new image</Menu.Item>
@@ -38,26 +38,27 @@ class SideBar {
             </Menu>
         ),
 
-        categorySubmenu: 
-      
-         (
-            <Menu secondary vertical  >
-                {
-                    cat.categories.map(
-                        (category)=>{
-                            return (
-                                <Menu.Item as={Link} key= {category.key} to={`/interests?topic=${category.value}`}><Icon name={category.icon} />{category.text}</Menu.Item>
-      
-                            )
-                        }
-                    )
-                }
-            </Menu>
-        ),
+        categorySubmenu:
+
+            (
+                <Menu secondary vertical  >
+                    {
+                        cat.categories.map(
+                            (category) => {
+                                return (
+                                    <Menu.Item as={Link} key={category.key} to={`/interests?topic=${category.value}`}><Icon name={category.icon} />{category.text}</Menu.Item>
+
+                                )
+                            }
+                        )
+                    }
+                </Menu>
+            ),
         settingsSubmenu: (
             <Menu secondary vertical  >
-                <Menu.Item as={Link} to="/templates"><Icon name="block layout" />Templates</Menu.Item>
-                <Menu.Item as={Link} to="/profile"><Icon name="user" />Profile</Menu.Item>
+                <Menu.Item as={Link} to="/settings/profile"><Icon name="user" />Profile</Menu.Item>
+                <Menu.Item as={Link} to="/settings/templates"><Icon name="block layout" />Templates</Menu.Item>
+                <Menu.Item as={Link} to="/settings/preferences"><Icon name="user" />Preferences</Menu.Item>
 
             </Menu>
         )
@@ -66,7 +67,7 @@ class SideBar {
 
     }
 
-  
+
 }
 export default SideBar;
 

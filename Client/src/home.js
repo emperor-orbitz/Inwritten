@@ -1,5 +1,5 @@
 import React from 'react';
-import { Signup, Account, Login, ArticlesCategory, Profile, Comments, Interests,Bookmark, Activities, Templates, Notifications } from './page_exports';
+import { Signup, Account, Login, ArticlesCategory, Profile, Comments, Interests,Bookmark, Activities, Templates, Notifications, Preferences } from './page_exports';
 import '../Resources/styles/style.scss';
 import { Switch, Route } from 'react-router';
 import HeaderAccount from '../src/Dashboard/header_account';
@@ -25,13 +25,14 @@ function App() {
             <Route path='/interests'  component={Interests} />
             <Route path='/edit-post/:postID' component={ArticlesCategory.EditPost} />
             <Route path='/dashboard' component={Account} />
-            <Route path='/profile' component={Profile} />
+            <Route path='/settings/profile' component={Profile} />
             <Route path='/articles' component={ArticlesCategory.Articles} />
             <Route path='/drafts' component={ArticlesCategory.Drafts} />
             <Route path='/add-post' component={ArticlesCategory.AddPost} />
             <Route path='/bookmark' component={Bookmark} />
-            <Route path='/activities' component={Activities} />
-            <Route path='/templates' component={Templates} />
+            <Route path='/settings/templates' component={Templates} />
+            <Route path='/settings/preferences' component={Preferences} />
+
             <Route path='/notification' component={Notifications} />
 
 

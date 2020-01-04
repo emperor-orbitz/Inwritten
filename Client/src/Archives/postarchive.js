@@ -322,13 +322,13 @@ class PostArchive extends React.Component {
 
                         <Grid>
                             <Grid.Row >
-                            <Grid.Column computer={13} mobile={16} tablet={15}  >
+                            <Grid.Column computer={13} mobile={16} tablet={15}  >     
 
 
                                     <div >
                                         <Form size="small" >  
 
-                                            <Input id='search' className='custom-input' name='title' maxLength='50'  value={this.state.search} onChange= {this.onChangeSearch}  placeholder='Search Drafts' />
+                                            <Input id='search' className='custom-input' style={{background:"yellow"}} name='title' maxLength='50'  value={this.state.search} onChange= {this.onChangeSearch}  placeholder='Search Drafts' />
 
                                             <Select name='category' style={{border:"none"}} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

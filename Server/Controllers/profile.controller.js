@@ -25,7 +25,41 @@ var update_profile = (req, res, next) => {
     var post = new posts();
     var update = req.body;
 
-    
+    if(req.user.display_picture === req.body.profile_photo){
+        console.log(true)
+        profile.updateProfile(req.user._id, req.body, false, (err, success) => {
+                    if (err) {
+                        res.send({
+                            code: http_status.BAD_REQUEST.code,
+                            message: http_status.BAD_REQUEST.message,
+                            data: []
+                        })
+                    }
+                    else {
+
+                        var updateAuthor = post.updateAuthor(req.body.username, req.user._id);
+                        if (updateAuthor == false)
+                            res.send({
+                                code: http_status.INTERNAL_SERVER_ERROR.code,
+                                message: http_status.INTERNAL_SERVER_ERROR.message,
+                                data: []
+                            });
+                        
+                           
+                        else
+                            res.send({
+                                code: http_status.OK.code,
+                                message: http_status.OK.message,
+                                data: []
+                            })
+
+
+        }
+    })
+}
+
+    else{
+
     cloudinary.v2.uploader.upload( 
         req.body.profile_photo, {
             resource_type: "image",
@@ -87,7 +121,7 @@ var update_profile = (req, res, next) => {
            //SERVER ERROR
             console.log(err)
         })
-
+    }
 }
 
 

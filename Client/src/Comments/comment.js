@@ -79,8 +79,8 @@ class Comment extends React.Component {
             
         
             }
-    //load_articles = new FetchArticles();
 
+            
     componentDidMount() {
         console.log(this.props);
         var { ArticleReducer, match } = this.props;

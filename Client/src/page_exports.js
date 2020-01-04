@@ -15,7 +15,7 @@ import AddPost from './NewPost/addpost';
 import EditPost from './EditPost/editpost';
 import PostArchive from '../src/Archives/postarchive';
 import Interests from "../src/Interests/interests";
-import Stats from "../src/Activities/activities";
+import Preferences from "../src/Preferences/preferences";
 import Templates from "../src/Templates/templates";
 import Notifications from "../src/Notifications/notifications";
 
@@ -36,5 +36,5 @@ var ArticlesCategory ={
 export { Signup, Account, Home, Login,  
         ArticlesCategory, Profile, 
         Comments, Interests, Bookmark,
-        Stats, Templates, Notifications
+        Preferences, Templates, Notifications
     };

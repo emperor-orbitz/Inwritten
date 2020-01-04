@@ -20,7 +20,7 @@ var check_in = () =>{
             }
             
             else{
-                document.getElementById("loggedininfo").innerHTML = ` you are logged in as  <b> ${ result.data.username } (${result.data.email})</b>`
+                document.getElementById("loggedininfo").innerHTML = ` you are logged in as <b> ${ result.data.username } (${result.data.email})</b>`
                 document.getElementById('commenter_id').value = result.data._id;
 
 

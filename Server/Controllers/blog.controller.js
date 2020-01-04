@@ -92,6 +92,8 @@ var user = async (req, res) => {
 
 
 
+
+
 var blog = async (req, res, next) => {
 
     try {
@@ -115,6 +117,74 @@ var blog = async (req, res, next) => {
 
 
 
+var bookmark = async (req, res, next) => {
+
+    try {
+        console.log(req.user._id)
+        let user = await userModel.update({_id: req.params.user_id},{
+            $addToSet:{ //for uniqueness instead of $push
+                bookmarks: req.params.blog_id
+            }
+        })
+        if(user.nModified == 1){
+            res.send({ user, message:"Successfully Added"})
+        }
+        else res.send({ user, message:"Not successfully added"})
+    }
+
+    catch (error) {
+        res.send("Ooops, there was an error")
+        console.log(error)
+    }
+
+
+}
+
+
+
+
+var remove_bookmark = async (req, res, next) => {
+
+    try {
+        let user = await userModel.updateOne( { _id: req.user._id }, {
+            $pull: {"bookmarks": req.params.bookmark_id}
+        })
+        if(user.nModified == 1) res.send({ user, message:"Successfully removed"})
+        else  res.send({ user, message:"Not successfully removed"})
+        
+    }
+
+    catch (error) {
+        res.send("Ooops, there was an error")
+        console.log(error)
+    }
+
+
+}
+
+
+
+
+var list_bookmark = async (req, res, next) => {
+
+    try {
+        let bookmarks = await userModel.findOne( { _id: req.user._id },"bookmarks")
+                                  .populate("bookmarks", "_id title description createdAt")
+
+        if(bookmarks == null) res.send({ bookmarks, message:"Successfully listed"})
+        else  res.send({ bookmarks, message:"Empty bookmarks"})
+        
+    }
+
+    catch (error) {
+        res.send("Ooops, there was an error")
+        console.log(error)
+    }
+
+
+}
+
+
 
 
 
@@ -125,5 +195,8 @@ var blog = async (req, res, next) => {
 module.exports = {
     index: index,
     user: user,
-    blog: blog
+    blog: blog,
+    bookmark: bookmark,
+    remove_bookmark:remove_bookmark,
+    list_bookmark: list_bookmark
 };

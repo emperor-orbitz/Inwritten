@@ -9,15 +9,15 @@ const SCHEME = {
 
     template: new Schema({
 
-        template_name: { type: String, required: true, unique:true },
-        template_description: { type:String, default:"No template description", maxlength: 255 },
+        template_name: { type: String, required: true, unique: true },
+        template_description: { type: String, default: "No template description", maxlength: 255 },
         file_location: { required: true, type: String },
-        featured_image: {type:String },
-        showcase_url: {type:String},
-        category:{type:String, default:'all'},
-        profile_url: {type:String, required:true},
-        blogs_url:{type:String, required:true},
-        index:{type:String, required:true}
+        featured_image: { type: String },
+        showcase_url: { type: String },
+        category: { type: String, default: 'all' },
+        profile_url: { type: String, required: true },
+        blogs_url: { type: String, required: true },
+        index: { type: String, required: true }
 
 
     },
@@ -34,9 +34,9 @@ const SCHEME = {
 
 
     profile: new Schema({
-        username: { type: String, lowercase: true, trim: true, required: true, unique:true },
-        address:{ type: String, trim:true, lowercase:true},
-        email: { type: String, lowercase: true, required: true, trim: true, unique:true },
+        username: { type: String, lowercase: true, trim: true, required: true, unique: true },
+        address: { type: String, trim: true, lowercase: true },
+        email: { type: String, lowercase: true, required: true, trim: true, unique: true },
         password: { type: String, required: true },
         telephone: { type: Number },
         lastName: { type: String, trim: true },
@@ -45,12 +45,19 @@ const SCHEME = {
         bio: { type: String },
         verified: { type: Boolean, required: true, default: false },
         lastVerified: { type: Date, default: Date.now() },
-        profile_link:{type:String, default:"", lowercase:true},
-        country:{type: mongoose.Schema.Types.Array, default:[]  },
-        gender: {type:String, default:""},
-        template_id: { type: mongoose.Schema.Types.ObjectId, default: "5e01d83ff47d3806c0aa6992",
-        ref:"Template"
-    },
+        profile_link: { type: String, default: "", lowercase: true },
+        country: { type: mongoose.Schema.Types.Array, default: [] },
+        gender: { type: String, default: "" },
+        template_id: {
+            type: mongoose.Schema.Types.ObjectId, default: "5e01d83ff47d3806c0aa6992",
+            ref: "Template"
+        },
+        bookmarks: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Post",
+            unique:true,
+            
+        }],
 
     },
         {
@@ -58,6 +65,8 @@ const SCHEME = {
             versionKey: false,
             strict: false
         }),
+
+
 
 
     /*
@@ -68,7 +77,7 @@ const SCHEME = {
 
         title: { type: String },
         body_html: { type: mongoose.Schema.Types.Mixed },
-        body_schema:{ type: mongoose.Schema.Types.Mixed},
+        body_schema: { type: mongoose.Schema.Types.Mixed },
         featured_image: { type: String },
         category: { type: String, lowercase: true },
         createdAt: { type: Date },
@@ -78,11 +87,11 @@ const SCHEME = {
         public: { type: Boolean },
         author: String,
         description: { type: String },
-        likes:{ Type: mongoose.Schema.Types.Number, default:0 },
-        comments: [{type: mongoose.Schema.Types.ObjectId, ref:"Comment"}],
-        post_link:{type:String, default:""},
-        authorId: { type: mongoose.Schema.Types.ObjectId, ref:"User" },
-        times_read:{ type:Number, default:0 },
+        likes: { Type: mongoose.Schema.Types.Number, default: 0 },
+        comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+        post_link: { type: String, default: "" },
+        authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        times_read: { type: Number, default: 0 },
         template_id: { type: mongoose.Schema.Types.ObjectId, default: "5e01d83ff47d3806c0aa6992" },
 
     },
@@ -93,14 +102,20 @@ const SCHEME = {
         }
     ),
 
+
+  /*
+               COMMENTS SCHEMA
+    */
+
+
     comments: new Schema({
-        seen: {type:Boolean, default:false},
-        author_id: { type: mongoose.Schema.Types.ObjectId,  ref:"User" },
-        commenter_id: { type:mongoose.Schema.Types.ObjectId, ref:"User"},
-        likes:{type:Number, default:0 },
-        post_id: { type: mongoose.Schema.Types.ObjectId, required:true },
-        public: { type: Boolean, default:false },
-        comment: {type: String}
+        seen: { type: Boolean, default: false },
+        author_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        commenter_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        likes: { type: Number, default: 0 },
+        post_id: { type: mongoose.Schema.Types.ObjectId, required: true },
+        public: { type: Boolean, default: false },
+        comment: { type: String }
     },
         {
             timestamps: true,
@@ -108,16 +123,26 @@ const SCHEME = {
             strict: false
         }
     ),
+
+
+
+
+
+      /*
+               PREFERENCES SCHEMA
+    */
+
     preferences: new Schema({
-        background: {type:String, default:"white"},
-       
+        background: { type: String, default: "white" },
+        font_family: { type: String, default: "Times New Roman" }
+
     },
         {
             timestamps: true,
             versionKey: false,
             strict: false
         }
-    )    
+    )
 
 }
 
