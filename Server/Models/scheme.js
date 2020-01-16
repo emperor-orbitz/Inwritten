@@ -46,7 +46,7 @@ const SCHEME = {
         verified: { type: Boolean, required: true, default: false },
         lastVerified: { type: Date, default: Date.now() },
         profile_link: { type: String, default: "", lowercase: true },
-        country: { type: mongoose.Schema.Types.Array, default: [] },
+        country: { type: String, default: "[]" },
         gender: { type: String, default: "" },
         template_id: {
             type: mongoose.Schema.Types.ObjectId, default: "5e01d83ff47d3806c0aa6992",
@@ -93,6 +93,7 @@ const SCHEME = {
         authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
         times_read: { type: Number, default: 0 },
         template_id: { type: mongoose.Schema.Types.ObjectId, default: "5e01d83ff47d3806c0aa6992" },
+        tags: {type: String, maxlength: 100}
 
     },
         {

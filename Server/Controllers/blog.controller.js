@@ -36,7 +36,7 @@ var index = async (req, res) => {
                               
 
         if (data != null) {
-            console.log(req.user)
+
             var scripts = [{script:"/template-starter-02/js/auth.js"}];
             res.render(`${template_data.template_name}/index`,
              { data,  comment_data: data.comments, partials:{
@@ -120,7 +120,7 @@ var blog = async (req, res, next) => {
 var bookmark = async (req, res, next) => {
 
     try {
-        console.log(req.user._id)
+
         let user = await userModel.update({_id: req.params.user_id},{
             $addToSet:{ //for uniqueness instead of $push
                 bookmarks: req.params.blog_id
@@ -169,15 +169,17 @@ var list_bookmark = async (req, res, next) => {
 
     try {
         let bookmarks = await userModel.findOne( { _id: req.user._id },"bookmarks")
-                                  .populate("bookmarks", "_id title description createdAt")
+                                  .populate("bookmarks", "_id title author post_link description createdAt")
 
-        if(bookmarks == null) res.send({ bookmarks, message:"Successfully listed"})
-        else  res.send({ bookmarks, message:"Empty bookmarks"})
+        if(bookmarks !== null) res.send({ bookmarks, message:"Successfully listed", status:200})
+        else  res.send({ bookmarks, message:"Empty bookmarks", status:200})
         
     }
 
     catch (error) {
-        res.send("Ooops, there was an error")
+        res.send({message:"Ooops, there was an error", status:500})
+            .status(500)
+
         console.log(error)
     }
 

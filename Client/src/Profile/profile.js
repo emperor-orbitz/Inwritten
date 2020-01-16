@@ -9,6 +9,7 @@ import Countries from './country';
 
 
 
+
 function DimmerLoad(props) {
     return <Loader active={props.active} size={props.size} inline />
 
@@ -43,7 +44,7 @@ class Profile extends React.Component {
             //passwordDisabled: true,
             dispPass: "none",
             dispProf: "block",
-            country:[],
+            country:"",
             gender:""
 
 
@@ -70,7 +71,8 @@ class Profile extends React.Component {
                     first_name: user.firstName,
                     last_name: user.lastName,
                     bio: user.bio,
-                    gender:user.gender
+                    gender:user.gender,
+                    country: user.country
                 })
 
                 //this.setState({...this.props.ProfileReducer});
@@ -126,6 +128,12 @@ class Profile extends React.Component {
     
     handle_mobile_number=(ev) => this.setState({ mobile_number: ev.target.value });
     handle_gender =(ev) => this.setState({gender: ev.target.value})
+    handle_country = (ev) => this.setState({country: ev.target.value})
+
+
+
+
+
 
 
     toggleDialog() {
@@ -191,7 +199,8 @@ class Profile extends React.Component {
                 bio: this.state.bio,
                 profile_photo: this.state.profile_photo,
                 username: this.state.username,
-                gender: this.state.gender
+                gender: this.state.gender,
+                country: this.state.country
             }
 
 
@@ -207,7 +216,8 @@ class Profile extends React.Component {
                         first_name: this.state.firstName,
                         last_name: this.state.lastName,
                         bio: this.state.bio,
-                        gender:this.state.gender
+                        gender:this.state.gender,
+                        country: this.state.country
 
                     }  })
 
@@ -325,14 +335,13 @@ class Profile extends React.Component {
                     <div className="profile-pix-block">
                         <img src={this.state.profile_photo} className="profile-pix" id='profile_photo' />
                         <input className="profile-pix-cover" onChange={this.handle_profile_photo} type='file' placeholder='Mobile Number' id='photo' style={{ visibility: 'hidden' }} />
-                        <div className="profile-pix-cover" onClick={this.toggleDialog.bind(this)}><Icon color="white" size="massive" name='image' /></div>
+                        <div className="profile-pix-cover" onClick={this.toggleDialog.bind(this)}></div>
                     </div>
 
                     <div className="profile-primary-info">
                         <h2 style={{ color: 'black' }}> {fullname} </h2>
                         <div className='span-details'>Username</div> <span> @{username} </span><br></br>
                         <div className='span-details'>Email</div><span> {email}</span><br></br>
-                        <div className='span-details'>Telephone</div><span> {mobile_number}</span><br></br>
 
                     </div>
                 </div>
@@ -343,10 +352,9 @@ class Profile extends React.Component {
                     <div className="data-info-profile" style={{ display: this.state.dispProf }}>
                         <h3 style={{ padding: '5px', color:"black" }}> Edit Profile</h3>
                     
-                        <ButtonGroup size="small" secondary >
+                        <ButtonGroup size="small"  >
                             <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false}>Profile </Button>
                             <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} >Password</Button>
-                            <Button id="preferences" >preferences</Button>
 
                         </ButtonGroup>
 
@@ -367,7 +375,8 @@ class Profile extends React.Component {
                             </Form.Group>
 
                             <span style={{color:"black"}}>Country</span>
-                            <Countries />
+
+                            <Countries handleChange={this.handle_country} value={this.state.country} />
                             <br></br>
                             
                             <span style={{color:"black"}}>Gender</span>
@@ -396,10 +405,9 @@ class Profile extends React.Component {
                     <div className="data-info-password" style={{ display: this.state.dispPass }} >
                         <h3 style={{ padding: '5px', color:'black' }}> Account Info</h3>
 
-                        <ButtonGroup size="small" secondary >
+                        <ButtonGroup size="small" >
                             <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false}>Profile </Button>
                             <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} >Password</Button>
-                            <Button id="preferences" >preferences</Button>
 
                         </ButtonGroup>
 

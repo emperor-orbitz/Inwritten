@@ -5,7 +5,7 @@ $profile-width:250px;
 $profile-height:250px;
 
 *{
-font-family: 'Noto Sans', sans-serif;
+font-family: 'Oswald', sans-serif;
 }
 
 .pushable{
@@ -18,7 +18,7 @@ font-family: 'Noto Sans', sans-serif;
 }
 
 input{
-border-radius:0px;
+border-radius:7px;
 }
 
 h4{
@@ -222,7 +222,7 @@ float:left;
 
     float:left;
      position:relative;
-   width:190px;
+    width:190px;
      height:200px;
        //background:yellow;
        margin-bottom:13px;
@@ -643,11 +643,11 @@ border:none;
 
 $card-height:200px;
 $card-width:90%;
-
+/*
 .customCard-all{
     border-radius: 3px;
-  font-size:10px;
-    height:$card-height;
+    font-size:10px;
+    height:60%;
     width:90%;
     //margin-bottom:10px ;
     position: relative;
@@ -667,17 +667,6 @@ h4{
     margin:0px;
 }
 
-.customCard-inner{
-   
-        width:100%;
-        height:80%;
-     white-space: normal;
-     word-wrap:normal;
-        //margin-top:5%;
-        text-overflow:ellipsis;
-        position:relative;
-
-    }
     .float-button-bottom{
        margin-bottom:0px;
         float:right;
@@ -699,24 +688,8 @@ h4{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
-   /* .customCard-actions{
+    .customCard-actions{
         position: relative;
         width:100%;
         height:15%;
@@ -726,9 +699,28 @@ h4{
         //border-radius:3px ;
         color:white;
         padding:2%;
-    }*/
+    }
 
 }
+*/
+
+
+
+.customCard-all{
+    border-radius: 3px;
+
+    height:$card-height;
+    width:90%;
+    margin-bottom:10px ;
+    position: relative;
+    border-radius:3px;
+    padding:5%;
+    color:black;
+    box-shadow:2px 3px 10px 1px rgba(158, 157, 157, 0.5);
+    border-top: 2px solid rgb(150, 150, 5);
+    border-bottom: 2px solid rgb(150, 150, 5);
+}
+
 
 .customCard-art{
     border-radius: 3px;
@@ -879,4 +871,18 @@ h4{
     }
 
 
+}
+
+
+
+.ui.card {
+    margin-bottom: 7px !important;
+    margin-right:12px !important;
+}
+
+
+.left-card{
+    float: left !important;
+    width:auto !important;
+    //margin:5px;
 }

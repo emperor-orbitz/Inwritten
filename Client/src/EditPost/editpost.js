@@ -184,7 +184,8 @@ class EditPost extends React.Component {
       body_html: panel.exposeHTMLEditorValue,
       body_schema: panel.exposeEditorValue,
       featured_image: this.state.featured_image,
-      post_link: this.state.post_link
+      post_link: this.state.post_link,
+      tags: this.state.tag_value
 
     }
 
@@ -248,7 +249,7 @@ class EditPost extends React.Component {
 
     for (var x of this.props.ArticleReducer) {
       if (x._id == this.props.match.params.postID) {
-        console.log(x.post_link, 'X.BODY IS HERE')
+        //console.log(x.post_link, 'X.BODY IS HERE')
 
         this.setState({
           post_id: x._id,
@@ -261,7 +262,9 @@ class EditPost extends React.Component {
           body_schema: x.body_schema,
           featured_image: x.featured_image,
           likes: x.likes,
-          post_link: x.post_link
+          post_link: x.post_link,
+          tag_value:x.tags
+
         });
 
 
@@ -439,7 +442,7 @@ class EditPost extends React.Component {
                             <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}>  Description length is small</p>
                             : ''
                         }
-                        <Form.Field name='tags' maxLength={this.state.tagMax} label='Tags (good to have!)' value={this.state.tag_value} onChange={this.handleTags} control='input' placeholder='e.g sport, gym, race. Separate with( , )' />
+                        <Form.Field name='tags' label='Tags (good to have!)' value={this.state.tag_value} onChange={this.handleTags} control='input' placeholder='e.g sport, gym, race. Separate with( , )' />
                         {
                           this.state.error_message == 'tag-error' ?
                             <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}>  Sorry, u've got max of 5 tags</p>

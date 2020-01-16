@@ -29,8 +29,8 @@
 {{/each}}
  <form class="ui reply form" id="formSubmit" method="POST" action="/comment/create" >
     <div class="field">
-      <input name="post_id" hidden value={{data._id}} />
-      <input name="commenter_id"  hidden id="commenter_id" />
+      <input name="post_id" id="post_id" hidden  value={{data._id}} />
+      <input name="commenter_id" id="commenter_id" hidden value=""  />
       
       <div id="textarea">
       <textarea style="width:90%" name="comment" id='comment' required minlength="10" ></textarea>
@@ -45,8 +45,8 @@ No comments here. Be the first to comment!
 
  <form class="ui reply form" id="formSubmit" method="POST" action="/comment/create" >
     <div class="field">
-      <input name="post_id" hidden value={{data._id}} />
-      <input name="commenter_id"  hidden id="commenter_id" />
+      <input name="post_id" id="post_id" hidden value={{data._id}} />
+      <input name="commenter_id" id="commenter_id" hidden />
       
       <div id="textarea">
       <textarea style="width:90%" name="comment" id='comment' required minlength="10" ></textarea>

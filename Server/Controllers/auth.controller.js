@@ -179,7 +179,7 @@ var register = (req, res) => {
                     send.sendVerifyMail({ username: result.username, _id: result._id });
                  
                     res.status(200)
-                        .json({ message: "Account successfully created" });
+                      .json({ message: "Account successfully created" });
 
                 }
 

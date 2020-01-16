@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Oswald:400,700');
 
 
 #app{
@@ -59,9 +59,11 @@ height:70px;
  
 }
 }
-.accordion-contentt{
-
-background:white;
+.accordion-content{
+  a.item{
+    color:black !important;
+    font-size:12px;
+  }
 
 }
 
@@ -89,7 +91,7 @@ margin-top: 0px ;
 }
 
 .accordion.ui.ui.push.left.visible.sidebar.sidebar{
-  background:rgb(3, 68, 94);
+  background:white;//rgb(3, 68, 94);
 
 }
 
@@ -176,7 +178,7 @@ color:teal;
 
    .card{
 border-radius:none;
-font-size:14px;
+font-size:12px;
 margin-bottom:10px;
    }
 

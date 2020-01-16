@@ -5,12 +5,7 @@ import '../../Resources/styles/style.scss';
 import cat from './categories'
 
 
-var xxxx = ["sds"]
-console.log(cat)
 
-//console.log(xx);
-
-//const category = cat.
 
 class SideBar {
 
@@ -22,19 +17,6 @@ class SideBar {
                 <Menu.Item as={Link} to='/add-post'><Icon name="add" />Create new</Menu.Item>
                 <Menu.Item as={Link} to='/articles'><Icon name="folder outline" />Published Items</Menu.Item>
                 <Menu.Item as={Link} to='/drafts'><Icon name="box" />Draft Items</Menu.Item>
-            </Menu>
-        ),
-
-        /* draftSubmenu: (
-             <Menu secondary vertical className='menu-item' >
-                 <Menu.Item as={Link} to="/add"><Icon name="add" />Add</Menu.Item>
-                 <Menu.Item as={Link} to="/drafts"  ><Icon name="folder outline" />Archive</Menu.Item>
-             </Menu>
-         ),*/
-        imageSubmenu: (
-            <Menu secondary vertical className='menu-item' >
-                <Menu.Item as={Link} to="/add-image"><Icon name="add" />Insert new image</Menu.Item>
-                <Menu.Item as={Link} to="/gallery"  ><Icon name="images" />Gallery</Menu.Item>
             </Menu>
         ),
 
@@ -58,7 +40,7 @@ class SideBar {
             <Menu secondary vertical  >
                 <Menu.Item as={Link} to="/settings/profile"><Icon name="user" />Profile</Menu.Item>
                 <Menu.Item as={Link} to="/settings/templates"><Icon name="block layout" />Templates</Menu.Item>
-                <Menu.Item as={Link} to="/settings/preferences"><Icon name="user" />Preferences</Menu.Item>
+                {/*<Menu.Item as={Link} to="/settings/preferences" disabled={true}><Icon name="user" />Preferences</Menu.Item>)*/}
 
             </Menu>
         )

@@ -99,23 +99,25 @@ var create = (req, res) => {
         comments_enabled,
         time_to_read,
         public,
-        featured_image 
+        featured_image,
+        tags
     } = req.body;
 featured_image=undefined;
 
 
     var postDoc = {
         title: title,
-        body_schema: body_schema,
-        body_html:body_html,
-        createdAt: createdAt,
+        body_schema,
+        body_html,
+        createdAt,
         author: req.user.username,
-        category: category,
-        description: description,
-        time_to_read: time_to_read,
-        comments_enabled: comments_enabled,
+        category,
+        description,
+        time_to_read,
+        comments_enabled,
         public: public,
         authorId: req.user._id,
+        tags,
         post_link: `/user/${req.user.username}---${title.replace(new RegExp(/\s/ig), "-")}---${Date.now()}`
 
     }

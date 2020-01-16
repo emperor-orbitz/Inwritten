@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-export default function countries(){
+export default function countries(props){
     return(
-        <select>
-<option value="">Select Country</option>
+<select onChange={props.handleChange} value={props.value} >
+<option value="[]">Select Country</option>
 <option value="['Nigeria','NG']">Nigeria</option>
 <option value="['Afghanistan','AF']">Afghanistan</option>
 <option value="['Ãƒâ€¦land Islands','AX']">Ãƒâ€¦land Islands</option>

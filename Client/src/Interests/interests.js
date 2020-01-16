@@ -38,6 +38,8 @@ class Interests extends React.Component {
         }
 
     ]
+
+
     parseMatch(param) {
         let search = param
         return /\?topic=(.+)/.test(search) == true ? search.match(/\?topic=(.+)/)[1] : "empty";
@@ -65,12 +67,8 @@ class Interests extends React.Component {
             this.setState({ posts: search_results, not_found: false })
 
 
-
-
-
-
-
     }
+    
 
     handleSearchCriteria = (e, p) => {
 

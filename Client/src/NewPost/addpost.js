@@ -162,7 +162,8 @@ class AddPost extends React.Component {
       body_html: panel.exposeHTMLEditorValue,
       body_schema: panel.exposeEditorValue,
       featured_image: this.state.featured_image,
-      comments:[]
+      comments:[],
+      tags: this.state.tag_value
 
     }
 
@@ -377,7 +378,7 @@ class AddPost extends React.Component {
                             <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}>  Description length is small</p>
                             : ''
                         }
-                        <Form.Field name='tags' maxLength={this.state.tagMax} label='Tags (good to have!)' value={this.state.tag_value} onChange={this.handleTags} control='input' placeholder='e.g sport, gym, race. Separate with( , )' />
+                        <Form.Field name='tags' label='Tags (good to have!)' value={this.state.tag_value} onChange={this.handleTags} control='input' placeholder='e.g sport, gym, race. Separate with( , )' />
                         {
                           this.state.error_message == 'tag-error' ?
                             <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}>  Sorry, u've got max of 5 tags</p>
