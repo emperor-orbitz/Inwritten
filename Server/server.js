@@ -46,10 +46,6 @@ app.set('view engine', 'handlebars');
 app.engine('handlebars', handleBar );
 app.set("views", __dirname + "/public/views");
 
-//console.log(__dirname+"/public/views")
-
-app.use(express.static(path.resolve(__dirname, "../Client/assets/")))
-
 
 
 
@@ -61,15 +57,32 @@ app.use(express.static(path.resolve(__dirname, "../Client/assets/")))
 //ROUTE CONFIGURATION IN PRODUCTION
 
 if (process.env.NODE_ENV == "production") {
+  
+  app.use(express.static(path.resolve(__dirname, "../Client/assets/"), {index:"homepage.html"}))
 
-  app.use('/', route_config);
+  app.use("/", route_config);
+ 
 
-  app.get('*', (req, res) => {
+  app.get("*", (req, res) => {
 
     res.sendFile(path.resolve(__dirname, "../Client/assets/index.html"));
   });
+
 }
 
+
+/*
+["/comments",
+'/interests',
+'/edit-post',
+'/dashboard' ,
+'/settings', 
+'/articles',
+'/drafts', 
+'/add-post',
+'/bookmark', 
+'/settings/templates',
+'/settings/preferences' ]*/
 
 
 

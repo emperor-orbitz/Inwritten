@@ -36,142 +36,142 @@ class EditorPanel extends React.Component {
 
 
 
-get exposeEditorValue(){
-  return window.editor;
-}
+  get exposeEditorValue() {
+    return window.editor;
+  }
 
-get exposeHTMLEditorValue(){
+  get exposeHTMLEditorValue() {
 
     const html = new Html({ rules });
     var HTMLValue = html.serialize(window.editor);
     console.log(HTMLValue);
     return HTMLValue;
-}
-
-
- onChange = ({ value }) => {
-
-  this.setState({ value })
-  window.editor = value
-
-}
-
-
-
-// EDITOR HANDLERS, ONKEYDOWN, ONCLICKMARK, ONCLICKBLOCK,ETC
-onClickMark = (event, type) => {
-  event.preventDefault()
-  this.editor.toggleMark(type)
-}
-
-
-
-
-onClickBlock = (event, type) => {
-  event.preventDefault()
-  const { editor } = this
-  const { value } = editor
-  const { document } = value
-  console.log(value, editor, document)
-
-  // Handle everything but list buttons.
-  if (type !== 'bulleted-list' && type !== 'numbered-list') {
-    const isActive = this.hasBlock(type)
-    const isList = this.hasBlock('list-item')
-
-    if (isList) {
-      editor
-        .setBlocks(isActive ? DEFAULT_NODE : type)
-        .unwrapBlock('bulleted-list')
-        .unwrapBlock('numbered-list')
-    }
-
-    else {
-      editor.setBlocks(isActive ? DEFAULT_NODE : type)
-        .unwrapBlock(type)
-    }
   }
 
 
-  else {
-    // Handle the extra wrapping required for list buttons.
-    const isList = this.hasBlock('list-item')
-    const isType = value.blocks.some(block => {
-      return !!document.getClosest(block.key, parent => parent.type === type)
-    })
+  onChange = ({ value }) => {
 
-    if (isList && isType) {
-      editor
-        .setBlocks(DEFAULT_NODE)
-        .unwrapBlock('bulleted-list')
-        .unwrapBlock('numbered-list')
-    } else if (isList) {
-      editor
-        .unwrapBlock(
-          type === 'bulleted-list' ? 'numbered-list' : 'bulleted-list'
-        )
-        .wrapBlock(type)
-    } else {
-      editor.setBlocks('list-item').wrapBlock(type)
-    }
+    this.setState({ value })
+    window.editor = value
+
   }
-}
 
 
 
-//RENDERMARK BUTTON RENDERER
- renderMarkButton = (type, icon) => {
-  const isActive = this.hasMark(type)
-
-  return (
-    <Button name={icon}
-    size="mini"
-    icon={icon}
-    onMouseDown={event => this.onClickMark(event, type)}
-    className='editor-editorButtons' active={isActive} />
-  )
-}
+  // EDITOR HANDLERS, ONKEYDOWN, ONCLICKMARK, ONCLICKBLOCK,ETC
+  onClickMark = (event, type) => {
+    event.preventDefault()
+    this.editor.toggleMark(type)
+  }
 
 
 
-//RENDERBLOCK BUTTON RENDERER
 
-renderBlockButton = (type, icon) => {
-  let isActive = this.hasBlock(type);
+  onClickBlock = (event, type) => {
+    event.preventDefault()
+    const { editor } = this
+    const { value } = editor
+    const { document } = value
+    console.log(value, editor, document)
 
-  if (type != 'image') {
-    if (['numbered-list', 'bulleted-list'].includes(type)) {
-      const { value: { document, blocks } } = this.state
+    // Handle everything but list buttons.
+    if (type !== 'bulleted-list' && type !== 'numbered-list') {
+      const isActive = this.hasBlock(type)
+      const isList = this.hasBlock('list-item')
 
-      if (blocks.size > 0) {
-        const parent = document.getParent(blocks.first().key)
-        isActive = this.hasBlock('list-item') && parent && parent.type === type
+      if (isList) {
+        editor
+          .setBlocks(isActive ? DEFAULT_NODE : type)
+          .unwrapBlock('bulleted-list')
+          .unwrapBlock('numbered-list')
+      }
+
+      else {
+        editor.setBlocks(isActive ? DEFAULT_NODE : type)
+          .unwrapBlock(type)
       }
     }
 
+
+    else {
+      // Handle the extra wrapping required for list buttons.
+      const isList = this.hasBlock('list-item')
+      const isType = value.blocks.some(block => {
+        return !!document.getClosest(block.key, parent => parent.type === type)
+      })
+
+      if (isList && isType) {
+        editor
+          .setBlocks(DEFAULT_NODE)
+          .unwrapBlock('bulleted-list')
+          .unwrapBlock('numbered-list')
+      } else if (isList) {
+        editor
+          .unwrapBlock(
+            type === 'bulleted-list' ? 'numbered-list' : 'bulleted-list'
+          )
+          .wrapBlock(type)
+      } else {
+        editor.setBlocks('list-item').wrapBlock(type)
+      }
+    }
+  }
+
+
+
+  //RENDERMARK BUTTON RENDERER
+  renderMarkButton = (type, icon) => {
+    const isActive = this.hasMark(type)
+
     return (
-        <Button name={icon}
+      <Button name={icon}
         size="mini"
         icon={icon}
-         onMouseDown={event => this.onClickBlock(event, type)}
+        onMouseDown={event => this.onClickMark(event, type)}
         className='editor-editorButtons' active={isActive} />
     )
   }
 
-  else
-    return (
-    <Button name={icon}
-      size="mini"
-      icon={icon}
-      className='editor-editorButtons'
-      onClick={this.showMedia.bind(this, ['image'])}
-      />
 
-    )
 
-}
+  //RENDERBLOCK BUTTON RENDERER
 
-//HAS MARK? FUNCTION
+  renderBlockButton = (type, icon) => {
+    let isActive = this.hasBlock(type);
+
+    if (type != 'image') {
+      if (['numbered-list', 'bulleted-list'].includes(type)) {
+        const { value: { document, blocks } } = this.state
+
+        if (blocks.size > 0) {
+          const parent = document.getParent(blocks.first().key)
+          isActive = this.hasBlock('list-item') && parent && parent.type === type
+        }
+      }
+
+      return (
+        <Button name={icon}
+          size="mini"
+          icon={icon}
+          onMouseDown={event => this.onClickBlock(event, type)}
+          className='editor-editorButtons' active={isActive} />
+      )
+    }
+
+    else
+      return (
+        <Button name={icon}
+          size="mini"
+          icon={icon}
+          className='editor-editorButtons'
+          onClick={this.showMedia.bind(this, ['image'])}
+        />
+
+      )
+
+  }
+
+  //HAS MARK? FUNCTION
 
   hasMark = type => {
     const { value } = this.state
@@ -179,16 +179,16 @@ renderBlockButton = (type, icon) => {
   }
 
 
-  
-//HAS BLOCK? FUNCTION
+
+  //HAS BLOCK? FUNCTION
 
   hasBlock = type => {
     const { value } = this.state
     return value.blocks.some(node => node.type === type)
   }
 
- 
-// EDITOR REFERENCE
+
+  // EDITOR REFERENCE
   ref = editor => {
     this.editor = editor
   }
@@ -206,10 +206,10 @@ renderBlockButton = (type, icon) => {
   render() {
 
     return (
-      <div style={{width:"85%", margin:'auto', top:0, left:'250px', bottom:0, right:0}}>
-        
-        
-          {this.state.mediaInfo == 'image' ? (
+      <div style={{ width: "85%", margin: 'auto', top: 0, left: '250px', bottom: 0, right: 0 }}>
+
+
+        {this.state.mediaInfo == 'image' ? (
           <Modal dimmer={true} size='mini' open={this.state.openMedia} >
 
             <Modal.Header><Icon size='small' style={{ cursor: 'pointer', color: 'rgb(3, 68, 94)' }} title='Use hashstack gallery or insert image URL' name={this.state.modalToggle} /> Insert new {this.state.mediaInfo} {this.state.deleteArticleName}</Modal.Header>
@@ -242,21 +242,21 @@ renderBlockButton = (type, icon) => {
 
 
           </Modal>)
-            :
-            (<Modal dimmer={true} size='mini' open={this.state.openMedia} >
-              <Modal.Header> <Icon name='close' link onClick={() => this.setState({ openMedia: false })} /> Insert EMBED Url </Modal.Header>
-              <Modal.Content>
-                <Input type='text' id='link_insert' placeholder='insert url &amp; click enter' style={{ width: '100%', background: 'white' }}>
-                  <input value={this.state.embedurl} onChange={this.embedVideoItem.bind(this)} onKeyDown={this.embedVideoItemClick.bind(this)} />
-                  <Icon name='paper plane outline' />
+          :
+          (<Modal dimmer={true} size='mini' open={this.state.openMedia} >
+            <Modal.Header> <Icon name='close' link onClick={() => this.setState({ openMedia: false })} /> Insert EMBED Url </Modal.Header>
+            <Modal.Content>
+              <Input type='text' id='link_insert' placeholder='insert url &amp; click enter' style={{ width: '100%', background: 'white' }}>
+                <input value={this.state.embedurl} onChange={this.embedVideoItem.bind(this)} onKeyDown={this.embedVideoItemClick.bind(this)} />
+                <Icon name='paper plane outline' />
 
-                </Input>
-              </Modal.Content>
-            </Modal>
-            )
-          }
+              </Input>
+            </Modal.Content>
+          </Modal>
+          )
+        }
 
-        
+
 
 
 
@@ -267,21 +267,29 @@ renderBlockButton = (type, icon) => {
           {this.renderMarkButton('bold', 'bold')}
           {this.renderMarkButton('italic', 'italic')}
           {this.renderMarkButton('underline', 'underline')}
+
+          <Button name="plus"
+            className="hoverToDisplay"
+            size="mini"
+            icon="plus"
+             />
+
+          <div className='hoverDisplayTool'>
           {this.renderMarkButton('code', 'code')}
           {this.renderMarkButton('strikethrough', 'strikethrough')}
-
-          {this.renderBlockButton('align-right', 'align right')}
-          {this.renderBlockButton('heading-one', 'heading')}
-          {this.renderBlockButton('heading-two', 'h square')}
-          {this.renderBlockButton('block-quote', 'quote right')}
-          {this.renderBlockButton('numbered-list', 'ordered list')}
-          {this.renderBlockButton('bulleted-list', 'unordered list')}
-          {this.renderBlockButton('image', 'image')}
+            {this.renderBlockButton('align-right', 'align right')}
+            {this.renderBlockButton('heading-one', 'heading')}
+            {this.renderBlockButton('heading-two', 'h square')}
+            {this.renderBlockButton('block-quote', 'quote right')}
+            {this.renderBlockButton('numbered-list', 'ordered list')}
+            {this.renderBlockButton('bulleted-list', 'unordered list')}
+            {this.renderBlockButton('image', 'image')}
+          </div>
 
         </div>
 
 
-        <div style={{padding:"5px 10px", margin:"5px 10px"}}>
+        <div style={{ padding: "5px 10px", margin: "5px 10px" }}>
           <Editor
             spellCheck
             autoFocus
@@ -311,7 +319,7 @@ renderBlockButton = (type, icon) => {
 
 
 
-//SET IMAGE BLOCK IN EDITOR
+  //SET IMAGE BLOCK IN EDITOR
 
   sign_image() {
 
@@ -334,15 +342,15 @@ renderBlockButton = (type, icon) => {
 
 
 
-//READ FILE STREAM
+  //READ FILE STREAM
 
   readFile(doc) {
-    return new Promise( resolve => {
+    return new Promise(resolve => {
       var reader = new FileReader();
 
       reader.readAsDataURL(doc);
 
-      reader.onloadend =  () =>{
+      reader.onloadend = () => {
         resolve(reader.result);
       }
     })
@@ -362,7 +370,7 @@ renderBlockButton = (type, icon) => {
       var { name } = ev.target.files[0];
 
       if (img_regexp.test(name)) {
-        this.readFile(ev.target.files[0]).then( result => {
+        this.readFile(ev.target.files[0]).then(result => {
 
           this.state.image_url = result;
           this.setState({ img_submit_inactive: false, invalid_file: false })
@@ -370,9 +378,9 @@ renderBlockButton = (type, icon) => {
         })
 
       }
-      else 
+      else
         this.setState({ img_submit_inactive: true, invalid_file: true });
-      
+
 
     }
     else if (ev.target.type == 'text') {
@@ -391,17 +399,17 @@ renderBlockButton = (type, icon) => {
 
 
     //else
-    else 
+    else
       this.setState({ img_submit_inactive: true, invalid_file: true })
-      return null;
-    
+    return null;
+
 
   }
 
 
 
 
-//INSERT EMBED URL
+  //INSERT EMBED URL
 
   embedVideoItem(ev) {
     this.setState({ embedurl: ev.target.value });
@@ -410,7 +418,7 @@ renderBlockButton = (type, icon) => {
 
 
 
-//INSERT <EMBED> BLOCK IN EDITOR
+  //INSERT <EMBED> BLOCK IN EDITOR
   embedVideoItemClick(ev) {
 
     if (ev.key == 'Enter') {

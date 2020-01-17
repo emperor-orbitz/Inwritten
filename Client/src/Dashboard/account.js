@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '../../Resources/styles/account.scss';
-import { Button,  Grid, Dimmer, Card, Image, Header, Label, Item, Loader } from 'semantic-ui-react';
+import { Button,  Grid, Dimmer, Card, Image, Label, Item, Loader, Divider } from 'semantic-ui-react';
 import {  Icon,  Progress } from 'semantic-ui-react';
 import Connection from '../../Controllers/auth.controller';
 
@@ -44,29 +44,7 @@ class Account extends React.Component {
 
 componentDidMount() {
 
-     /*   if (Object.keys(this.props.ArticleReducer).length == 0) {
-                
-                    this.fetchArticle.fetch_articles_list().then((articles, none) => {
-                        if (articles) {
-
-                          this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: articles});
-                            this.setState({dimmerLoad:false})
-                        }
-                        else {
-                            //error
-                            //this.props.history.replace('/login');
-
-                        }
-                    })
-
-        }
-
-        else {
-          this.setState({dimmerLoad:false})
-        }
-
-        this.setState({dimmerLoad:false})
-*/
+  
   }
 
 
@@ -94,8 +72,12 @@ var credentials={
 
       <div >
 
-          <div className="bodyAccount">
+          <div className="bodyArticle">
             <Grid >
+              <h3>Your recent stories</h3>
+              <ArticlePreview credentials= {credentials} imports={imports} />
+              <Divider />
+              <h3>Stories you've bookmarked</h3>
               <ArticlePreview credentials= {credentials} imports={imports} />
 
 

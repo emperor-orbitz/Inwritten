@@ -183,26 +183,31 @@ class HeaderAccount extends React.Component {
             
 
             <Sidebar.Pushable>
-            <Responsive as={Menu} minWidth={300} className="nav" secondary   >
+            <Responsive as={Menu} minWidth={300} className="nav" secondary style={{ fontSize:"12px"}}   >
             <Menu.Item icon="bars" onClick={this.toggleSide} size="big" />
             <Menu.Item style={{ 'width': '20%' }} header ><h3>Hashstack.io</h3> </Menu.Item>
 
 
-            <Menu.Menu pointing='true' position="right">
+            <Menu.Menu position="right"  >
               <Menu.Item as={Link} to="/add-post" icon="compose" content="Write a story"/>
               <Menu.Item text={`@${this.props.ProfileReducer.username}`} as={Dropdown} floating >
 
                 <Dropdown.Menu>
                   <Dropdown.Item icon='dashboard' text='Dashboard' as={Link} to='/dashboard' />
-                  <Dropdown.Item icon='bookmark outline' text='Bookmarks' as={Link} to='/bookmark' />
                   <DropdownDivider  />
 
+                  <Dropdown.Item icon='bookmark outline' text='Bookmarks' as={Link} to='/bookmark' />
                   <Dropdown.Item icon='folder outline' text='Published Stories' as={Link} to='/articles' />
                   <Dropdown.Item icon='box' text='Drafts' as={Link} to='/drafts' />
                     <DropdownDivider />
 
+                  <Dropdown.Item icon='user' text='Profile' as={Link} to='/settings/profile' />
+                  <Dropdown.Item icon='block layout' text='Templates' as={Link} to='/settings/templates' />
+                  
+                  <DropdownDivider/>
+
+
                   <Dropdown.Item icon='help' text='Docs' />
-                  <Dropdown.Item icon='graduation' text='Penbox Acad' />
                   <Dropdown.Item color="red" onClick={this.showModal} as={Button} fluid icon='sign out' text='logout ' />
                 </Dropdown.Menu>
               </Menu.Item>
@@ -235,14 +240,6 @@ class HeaderAccount extends React.Component {
                   </Accordion.Title>
                   <Accordion.Content style={{ padding: '1px 20px', }} className="accordion-content" active={true} content={categorySubmenu} />
 
-                </div>
-
-                <div className="accordion-item">
-                  <Accordion.Title active={true} style={{ padding: '5px 20px' }} index={4} onClick={this.handleClick} >
-                     <span style={{fontSize:"14px",color:"black"}}>SETTINGS</span>
-                     <Divider />
-                  </Accordion.Title>
-                  <Accordion.Content style={{ padding: '1px 20px' }} className="accordion-content" active={true} content={settingsSubmenu} />
                 </div>
 
 

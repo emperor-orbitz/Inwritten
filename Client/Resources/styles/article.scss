@@ -5,7 +5,7 @@ $profile-width:250px;
 $profile-height:250px;
 
 *{
-font-family: 'Oswald', sans-serif;
+font-family: 'Montserrat', sans-serif;
 }
 
 .pushable{
@@ -15,6 +15,7 @@ font-family: 'Oswald', sans-serif;
 .pushable>.pusher{
     overflow:inherit !important;
     margin:4px;
+    //background: rgb(60, 60, 77)
 }
 
 input{

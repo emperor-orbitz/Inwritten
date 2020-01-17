@@ -1,12 +1,28 @@
-@import url('https://fonts.googleapis.com/css?family=Oswald:400,700');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,400i&display=swap');
 
+
+body{
+  
+
+::-webkit-scrollbar{
+  width:12px;
+}
+::-webkit-scrollbar-thumb{
+  border-radius:5px;
+  background:rgb(3, 68, 94);
+}
+
+}
 
 #app{
   height:100%;
+  font-size: 12px;
+
+
+
 }
 *{
-  font-family: 'Noto Sans', sans-serif;
-//font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .headerDiv{
