@@ -38,7 +38,7 @@ const SCHEME = {
         address: { type: String, trim: true, lowercase: true },
         email: { type: String, lowercase: true, required: true, trim: true, unique: true },
         password: { type: String, required: true },
-        telephone: { type: Number },
+        telephone: { type: String },
         lastName: { type: String, trim: true },
         firstName: { type: String, trim: true },
         display_picture: { type: String, default: "/user-icon.png" },

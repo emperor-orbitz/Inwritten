@@ -1,10 +1,10 @@
 import React from 'react';
 import '../../Resources/styles/comment.scss';
-import { Icon, Button, Image, Grid, GridColumn } from 'semantic-ui-react';
+import { Icon, Button, List, Grid, GridColumn } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import comment_controller from '../../Controllers/comments.controller';
-
+import ListExampleSelection from "./cards"
 
 function getmonthName(number) {
     var months = [
@@ -38,49 +38,49 @@ class Comment extends React.Component {
 
     }
 
-    delete_comment =(id) =>{
+    delete_comment = (id) => {
 
-        var comment =new comment_controller();
-        var new_comment =[];
+        var comment = new comment_controller();
+        var new_comment = [];
         comment.delete_comment(id)
-        .then(_ =>  {
-        new_comment = this.state.comments.filter(e =>{
-            if(e._id != id) return e;
+            .then(_ => {
+                new_comment = this.state.comments.filter(e => {
+                    if (e._id != id) return e;
 
-            })
-        
-            this.setState({comments:new_comment})
-            alert("deleted successfully")
+                })
 
-        }
+                this.setState({ comments: new_comment })
+                alert("deleted successfully")
+
+            }
             )
-        .catch(e => console.log(e)); //remember an error mesage display
-
-        
-        }
+            .catch(e => console.log(e)); //remember an error mesage display
 
 
-        like_comment =(id) =>{
-            var comment =new comment_controller();
+    }
 
-            comment.like_comment(id)
-            .then(_ =>  {
-                for(var x of this.state.comments){
-                    if(x._id == id){
+
+    like_comment = (id) => {
+        var comment = new comment_controller();
+
+        comment.like_comment(id)
+            .then(_ => {
+                for (var x of this.state.comments) {
+                    if (x._id == id) {
                         x.likes++;
                     }
                 }
-                this.setState({comments:this.state.comments})
+                this.setState({ comments: this.state.comments })
 
             }
-                )
+            )
             .catch(e => console.log(e)); //remember an error mesage display
 
-            
-        
-            }
 
-            
+
+    }
+
+
     componentDidMount() {
         console.log(this.props);
         var { ArticleReducer, match } = this.props;
@@ -93,13 +93,13 @@ class Comment extends React.Component {
                 })
 
             }
-           // break;
+            // break;
         }
     }
 
 
 
-   
+
 
 
 
@@ -113,10 +113,10 @@ class Comment extends React.Component {
     render() {
         console.log(this.state.comments, "this is comments oo");
 
-        if (this.state.comments.length == 0){
+        if (this.state.comments.length == 0) {
             return (<div className="comment-div" style={{ marginTop: "0px !important" }}>
-            <p>Sorry your post hasn't received any response yet.</p>
-            <p>Try sharing your links to your audience (this can help).</p>
+                <p>Sorry your post hasn't received any response yet.</p>
+                <p>Try sharing your links to your audience (this can help).</p>
             </div>)
         }
 
@@ -124,45 +124,35 @@ class Comment extends React.Component {
 
             <div className="comment-div" style={{ marginTop: "0px !important" }}>
 
-                <h3 style={{color:"rgb(3, 68, 94)"}}>Responses to your story: "{this.state.post_title}" </h3>
-<Grid>
-    <Grid.Row>
-                {
-                    this.state.comments.map(each => {
-                        return (
-                            <Grid.Column computer={5} mobile={16} tablet={8}>
+                <h3 style={{ color: "rgb(3, 68, 94)" }}>Responses to your story: "{this.state.post_title}" </h3>
+                <Grid>
+                    <Grid.Row>
+                        
+                                    <Grid.Column computer={16} mobile={16} tablet={8}>
 
-                            <div className="comment-panel">
-                             <Image spaced="right" className='comment-thumbnail' src={each.commenter_id.display_picture} size='mini' />
-                                <div style={{float:"left", position:"relative", display: "table-row"}}>
+                                            {this.state.comments.map((x, index) => {
+                                                return (
+                                                    <div style={{ minHeight: "50px", width: "100%" }}>
+                                                        <List size="big" selection verticalAlign="middle" >
 
-                                <span>{each.comment}</span>
-                                <br></br>
-                                <p> <i style={{fontSize:"11px"}}>{each.commenter_id.username}({each.commenter_id.email})</i>
-                                </p>
-                                 
-                                <Button.Group size='mini' >
-                                            <Button icon='like' onClick ={()=>{this.like_comment(each._id)}} content={each.likes} />
-                                            <Button icon='trash alternate outline' onClick ={()=>{this.delete_comment(each._id)}} />
-                                            <Button>{each.seen == true? 'Hide':"Accept"}</Button>
-                                            <Button><Icon name="clock outline" size='small' color="blue" /> {date_to_string(each.createdAt)}</Button>
+                                                            <ListExampleSelection index={index} x={x} like_comment={this.like_comment} delete_comment={this.delete_comment} />
 
-                                </Button.Group>
-                                &nbsp;&nbsp;&nbsp; 
- 
-                                </div>
-                            
-                            </div>
-                            </Grid.Column>
+                                                        </List>
 
-                        )
+                                                    </div>
+                                                )
 
-                    })
+                                            })
+                                        }
+
+                                            
+
+                                    </Grid.Column>
 
 
-                }
-                </Grid.Row>
-</Grid>
+
+                    </Grid.Row>
+                </Grid>
             </div>
         )
 

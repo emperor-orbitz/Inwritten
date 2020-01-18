@@ -6,7 +6,7 @@ import Connection from '../../Controllers/auth.controller';
 import { connect } from 'react-redux';
 import ProfileUpdate from '../../Controllers/profile.controller';
 import Countries from './country';
-
+import validateProfile from "../../Controllers/validators/profile.validator"
 
 
 
@@ -141,17 +141,8 @@ class Profile extends React.Component {
         photo.click();
     }
 
-    check_number(form_no) {
-
-        if ((form_no.length < 11) || (form_no.length > 14)) {
-
-            return false;
-        }
-
-        else {
-            return true;
-        }
-    }
+    check_number = (form_no) => (form_no.length < 11) || (form_no.length > 14) ? false : true
+    
 
 
 
@@ -159,34 +150,21 @@ class Profile extends React.Component {
     //update profile
     updateProfileButton(e) {
         e.preventDefault();
-
+        var validate_class = new validateProfile();
+        var update_profile = new ProfileUpdate()
+        let { username, last_name, mobile_number, bio } = this.state;
         this.setState({ dimmerLoad: true, buttonDisabled: true })
 
-        var update_profile = new ProfileUpdate()
 
+        let { error } = validate_class.validate( username, last_name, mobile_number, bio )
 
-        if (this.state.username == '') {
-
-            this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: 'Please fill compulsory fields', validationClass: 'error-bar' });
+        if (error) {
+            console.log(error.details)
+            this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: `INVALID: ${error.details[0].message}`, validationClass: 'error-bar' });
             this.state.validationClass = this.state.validationMessage = '';
         }
 
-        else if ((this.state.last_name.length > 0) && (this.state.last_name.length < 4)) {
-            //form.number.setCustomValidity('The Mobile Number is invalid');
-            this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: 'Sorry, too small for a lastname', validationClass: 'error-bar' });
-            this.state.validationClass = this.state.validationMessage = '';
-        }
-
-        else if (this.state.mobile_number.length > 0 && this.check_number(this.state.mobile_number) === false) {
-            //form.number.setCustomValidity('The Mobile Number is invalid');
-            this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: 'Please enter a valid mobile number', validationClass: 'error-bar' });
-            this.state.validationClass = this.state.validationMessage = '';
-        }
-       
-        else if (this.state.bio.length > 0 && this.state.bio.length < 20) {
-            this.setState({ dimmerLoad: false, buttonDisabled: false, validationMessage: 'Please make bio lenghtier', validationClass: 'error-bar' });
-            this.state.validationClass = this.state.validationMessage = '';
-        }
+        
 
         else {
 

@@ -78,16 +78,8 @@ export default class Validator {
     }
 
 
-    validatePassword = (password = this.password) => {
+    validatePassword = (password = this.password) =>  password.length < 6 ? false :true
 
-        if ((password.length < 6)) {
-            return false;
-        }
-
-        else {
-            return true;
-        }
-    }
 
 
 
