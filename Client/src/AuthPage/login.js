@@ -165,12 +165,7 @@ class Login extends React.Component {
                 <h1>TELL A STORY</h1>
                 <p>Create contents that matter to what you do. Intrigue the world from different perspectives
 </p>
-                {/*<Icon name="js" color="teal" size="big" />
-                <Icon name="edit outline" size="big" />
-                <Icon name="database" color="teal" size="big" />
-                <Icon name="html5" size="big" />
-
-    */}
+       
               </div>
 
 
@@ -181,17 +176,16 @@ class Login extends React.Component {
 
               <Form >
 
-                <Form.Field width={8}>
+                <Form.Field width={10}>
                   <label style={{ 'color': 'rgb(3, 68, 94)' }}>Email</label>
                   <input placeholder='Email' type="text" value={this.state.emailValue} onChange={this.eChange} />
                 </Form.Field>
-                <Form.Field width={8}>
+                <Form.Field width={10}>
                   <label style={{'color': 'rgb(3, 68, 94)'}}>Password</label>
                   <input placeholder='Password' type="password" value={this.state.passwordValue} onChange={this.pChange} />
                 </Form.Field>
 
-
-                <Button size="large" color="teal" disabled={this.state.button.disabled} type='submit' onClick={this.submit}>LOGIN<DimmerLoad size="small" active={this.state.button.dimmerLoad} /></Button>
+                <Button size="large" style={{'color': 'rgb(3, 68, 94)'}} color="teal" disabled={this.state.button.disabled} type='submit' onClick={this.submit}>LOGIN<DimmerLoad size="small" active={this.state.button.dimmerLoad} /></Button>
               </Form>
             </Grid.Column>
 

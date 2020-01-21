@@ -181,11 +181,11 @@ console.log(user)
                   <label style={{ 'color': 'rgb(3, 68, 94)' }} color="white" htmlFor="username">Username</label>
                   <input placeholder='Username' type="text" value={this.state.usernameValue} onChange={this.uChange} id="username" />
                 </Form.Field>
-                <Form.Field width={8}>
+                <Form.Field width={10}>
                   <label style={{ 'color': 'rgb(3, 68, 94)' }}>Email</label>
                   <input placeholder='Email' type="text" value={this.state.emailValue} onChange={this.eChange} />
                 </Form.Field>
-                <Form.Field width={8}>
+                <Form.Field width={10}>
                   <label style={{ 'color': 'rgb(3, 68, 94)' }} >Password</label>
                   <input placeholder='Password' type="password" value={this.state.passwordValue} onChange={this.pChange} />
                 </Form.Field>
