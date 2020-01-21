@@ -6,6 +6,7 @@ var http_status = require("../Utils/http_status");
 var jwt = require("jsonwebtoken");
 var validate = require("../Utils/validation");
 var mail = require("../Utils/email");
+var path = require("path")
 
 
 
@@ -83,7 +84,6 @@ var send_mail = async (req, res) => {
 
            SEND VERIFICATION EMAIL
               verify_mail
-            #NOT YET TESTED
 */
 
 
@@ -98,28 +98,28 @@ var verify_mail = async (req, res) => {
         var result = await finduser.findUserById(userid);
 
         if (result === null) {
-            res.render('Utility/broken_email');
+                            res.sendFile(path.resolve(__dirname, "../../Client/assets/broken_email.html"))
 
         }
         else if (result != null) {
             //IS IT VERIFIED?
             var date = new Date();
             if ((date.getTime() - result.lastVerified) > (1 * 24 * 60 * 60 * 1000)) {
-                res.render('Utility/broken_email')
+          res.sendFile(path.resolve(__dirname, "../../Client/assets/broken_email.html"))
 
             }
             else if (result.verified === true) {
 
-                res.render('Utility/broken_email')
+          res.sendFile(path.resolve(__dirname, "../../Client/assets/broken_email.html"))
             }
 
             else {
                 finduser.verifyUser(userid, function (err, success) {
                     if (err) {
-                        res.render('Utility/broken_email')
+                         res.sendFile(path.resolve(__dirname, "../../Client/assets/broken_email.html"))
                     }
                     else {
-                        res.render('Utility/confirm_email')
+                        res.sendFile(path.resolve(__dirname, "../../Client/assets/confirm_email.html"))
                     }
 
                 })
@@ -130,7 +130,7 @@ var verify_mail = async (req, res) => {
     }
     catch (error) {
 
-        res.render('Utility/broken_email');
+  res.sendFile(path.resolve(__dirname, "../../Client/assets/broken_email.html"))
 
     }
 
@@ -153,14 +153,12 @@ var verify_mail = async (req, res) => {
 
 
 var register = (req, res) => {
-    const { username, email, password } = req.body;
     var valid = new validate();
-    console.log(email + "this is req.body @ try block")
 
     valid.validate(req.body).then(good => {
         var saves = new signup();
 
-        saves.findByEmail(email, async (err, success) => {
+        saves.findByEmail(req.body.email, async (err, success) => {
             if (err)
                 res.json({ message: 'Error already occured' });
 
@@ -173,13 +171,21 @@ var register = (req, res) => {
             else {
 
                 try {
-                    const { username, email, password } = req.body;
-                    var result = await saves.createUser(username, email, password);
-                    var send = new mail(result.email);
-                    send.sendVerifyMail({ username: result.username, _id: result._id });
-                 
-                    res.status(200)
-                      .json({ message: "Account successfully created" });
+                    const { username, email, password } = req.body;  
+                    let check_username = await saves.findByUsername(username);
+                    //console.log(check_username)
+                    if( check_username == null ){
+                        var result = await saves.createUser(username, email, password);
+                        var send = new mail(result.email);
+                        send.sendVerifyMail({ username: result.username, _id: result._id });
+                     
+                        res.status(200)
+                          .json({ message: "Account successfully created" });
+    
+                    }
+                    else  
+                        res.status(400)
+                        .json({ message: "This username has been taken. Try something else" });
 
                 }
 
@@ -256,7 +262,10 @@ var isloggedin = (req, res, next) => {
 }
 
 
+var testemail = (req, res, next) => {
+    res.send('What API are you looking for?');
 
+}
 
 /*
 *          API TESTING
@@ -266,7 +275,7 @@ var isloggedin = (req, res, next) => {
 
 
 var api = (req, res, next) => {
-    res.send('What API are you looking for?');
+    res.render('Utility/broken_email');
 
 }
 
@@ -277,6 +286,7 @@ module.exports = {
     verify_mail: verify_mail,
     send_mail: send_mail,
     api: api,
-    isloggedin: isloggedin
+    isloggedin: isloggedin,
+    testemail:testemail
 
 };

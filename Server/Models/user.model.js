@@ -69,12 +69,18 @@ userSchema.methods.createUser = function (username, email, password) {
 }
 
 
-/*          FIND USER WITH EMAIL
+/*          FIND USER WITH {OPTIONS}
 */
 userSchema.methods.findByEmail = function (email, cb) {
     return mongoose.model('User', userSchema)
         .findOne({ email: email }, cb);
 }
+
+userSchema.methods.findByUsername = function (username) {
+    return mongoose.model('User', userSchema)
+        .findOne({ username: username });
+}
+//
 
 userSchema.methods.signIn = function (email, cb) {
     return mongoose.model('User', userSchema)

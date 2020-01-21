@@ -93,7 +93,11 @@ class Signup extends React.Component {
         withCredentials: true,
         credentials: 'include',
       })
-        .then(user => user.json())
+        .then(user => {
+console.log(user)
+        
+        return user.json()
+      })
         .then( message => {
           button.dimmerLoad = button.disabled = false;
           this.setState({ button });
@@ -104,6 +108,13 @@ class Signup extends React.Component {
             let { loginError } = this.state;
             this.setState({ loginError });
           }
+          else if (message.message == 'This username has been taken') {
+
+            this.state.loginError.push(message);
+            let { loginError } = this.state;
+            this.setState({ loginError });
+          }
+          
           else if (message.message == 'Account successfully created') {
 
             alert('account created successfully. You can now login with Username')
@@ -155,9 +166,8 @@ class Signup extends React.Component {
             <Grid.Column>
               <div className="note">
                 <h2>CREATE RICH PERSPECTIVES</h2>
-                <p>Create an account let's knows what you do. Let the world know your true potentials
+                <p>Create an account and write your own story
 </p>
-
               </div>
 
 

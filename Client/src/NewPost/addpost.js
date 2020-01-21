@@ -27,7 +27,7 @@ class AddPost extends React.Component {
       dimmerLoad: false,
       error_message: '',
       success_message: '',
-      privacy_value: false,
+      privacy_value: true,
       enable_comments: true,
       post_title: '',
       featured_image: '',

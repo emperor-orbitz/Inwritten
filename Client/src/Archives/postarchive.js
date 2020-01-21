@@ -267,10 +267,10 @@ class PostArchive extends React.Component {
                 <div className='bodyArticle'>
                     <Grid>
                         <Grid.Row>
-                            <Grid.Column style={{ padding: '5px' }} computer={13} mobile={16} tablet={8}  >
+                            <Grid.Column style={{ padding: '2px' }} computer={13} mobile={16} tablet={8}  >
 
 
-                                It seems you don't have any published item yet. You can start right <a href="/add-post">here</a>
+                                You don't have any draft left. You can create one <Button as={Link} to="/add-post">here</Button>
 
                             </Grid.Column>
 

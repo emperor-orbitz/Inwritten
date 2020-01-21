@@ -1,5 +1,5 @@
 //var http_status = require("../Utils/http_status");
-var posts =  require('../Models/post.model');
+var path =  require('path');
 
 
 
@@ -14,6 +14,11 @@ var index = (req, res) => {
     res.render("index")
 }
 
+var terms_and_conditions =(req, res) =>{
+    res.sendFile(path.resolve(__dirname, "../../Client/assets/terms-and-conditions.html"))
+    
+}
+
 
 
 
@@ -24,5 +29,6 @@ var index = (req, res) => {
 
 //EXPORTS
 module.exports = {
-    index:index
+    index:index,
+    terms_and_conditions: terms_and_conditions
 };

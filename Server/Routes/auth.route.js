@@ -46,4 +46,14 @@ controller.api(req, res, next);
 })
 
 
+
+router.get('/test-email-template', (req, res, next) => {
+    controller.testemail(req, res, next);
+    
+    })
+    
+    
+
+//TESTING 
+
 module.exports = router;

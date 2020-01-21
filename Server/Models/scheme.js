@@ -34,9 +34,9 @@ const SCHEME = {
 
 
     profile: new Schema({
-        username: { type: String, lowercase: true, trim: true, required: true, unique: true },
+        username: { type: String, lowercase: true, trim: true, required: true, unique: true, index:true },
         address: { type: String, trim: true, lowercase: true },
-        email: { type: String, lowercase: true, required: true, trim: true, unique: true },
+        email: { type: String, lowercase: true, required: true, trim: true, unique: true, index:true },
         password: { type: String, required: true },
         telephone: { type: String },
         lastName: { type: String, trim: true },
@@ -49,7 +49,7 @@ const SCHEME = {
         country: { type: String, default: "[]" },
         gender: { type: String, default: "" },
         template_id: {
-            type: mongoose.Schema.Types.ObjectId, default: "5e01d83ff47d3806c0aa6992",
+            type: mongoose.Schema.Types.ObjectId, default: "5e01d93cf47d3806c0aa6994",
             ref: "Template"
         },
         bookmarks: [{
@@ -84,7 +84,7 @@ const SCHEME = {
         like_count: { type: Number },
         time_to_read: { type: Number },
         comments_enabled: { type: Boolean },
-        public: { type: Boolean },
+        public: { type: Boolean, default:true },
         author: String,
         description: { type: String },
         likes: { Type: mongoose.Schema.Types.Number, default: 0 },

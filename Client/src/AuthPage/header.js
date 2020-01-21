@@ -21,22 +21,16 @@ class Header extends React.Component {
     visible: false
   }
 
-  toggle = () => {
-    //console.log(this.state.visible);
-    this.setState({ visible: false });
-  }
+  toggle = () => this.setState({ visible: false })
 
-  toggleSide = () => {
-    //console.log(this.state.visible);
-    this.setState({ visible: !this.state.visible });
+  toggleSide = () =>  this.setState({ visible: !this.state.visible })
 
-  }
+
 
   render() {
 
     var activeBar = this.state.status.activeBar;
     const { visible } = this.state;
-    console.log(this.state.visible);
 
     return (
 
@@ -53,18 +47,7 @@ class Header extends React.Component {
 
 
         <Responsive as={Sidebar.Pushable} maxWidth={59}>
-          <Sidebar as={Menu}
-            animation="overlay"
-            onHide={this.toggle}
-            visible={visible}
-            width="wide"
-            vertical>
-
-            <Menu.Item name="Games" icon="gamepad" as={Link} to="/" />
-            <Menu.Item name="Games" icon="gamepad" />
-
-            <Button primary onClick={this.toggleSide}>CLICK ME</Button>
-          </Sidebar>
+         
           <Sidebar.Pusher>
 
             <Menu secondary className="no-radius" >

@@ -5,8 +5,78 @@ module.exports = class email{
  constructor(to){
 
   this.to =to;
+  this.verify_email_template = (data)=>{
+    return `
+   
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,400i&display=swap');
+    *{
+      font-family: 'Montserrat', Calibri;
+      }
 
+      .body{
+        background-image: linear-gradient(115deg,  rgb(4, 82, 112), rgb(44, 43, 43) );
+        height:100%;
+        width:100%;
+      }
+      .btn{
+        background-image: linear-gradient(115deg,  rgb(4, 82, 112), rgb(44, 43, 43) );
 
+      }
+
+      .grad-bg{
+        color: linear-gradient(115deg,  rgb(4, 82, 112), rgb(44, 43, 43) );
+
+      }
+
+      .part-1, .part-2{
+        width:80%;
+        left: auto;
+        right:auto;
+        margin:5% 10%;
+      }
+    
+    </style>
+
+    <div style="font-family:Calibri;background-image: linear-gradient(115deg,  rgb(4, 82, 112), rgb(44, 43, 43) );
+    height:100%;
+    width:100%;
+    text-align:center;
+    padding-top:10%;
+    padding-bottom:10%">
+    <div style="color:white; width:80%; left: auto; right:auto; margin:10%; margin-bottom:5%;"> 
+        <img style="width:60%;margin-left:5%" src="penbox.herokuapp.com/logo.png" />
+        <h1 >Welcome from us</h1>
+    </div>
+
+    <div style="width:80%;
+    left: auto;
+    right:auto;
+    margin:5%;
+    margin-top:0px;
+    background:white;
+    color:black;
+    padding:5%"> 
+
+    <p>Hey <b>${data.username}</b>, verify your email by clicking the button below, gracias. </p><br/>   
+    <a href="https://penbox.herokuapp.com/auth/verify_mail/${data._id}"><button style="background-image: linear-gradient(115deg,  rgb(4, 82, 112), rgb(44, 43, 43));color:white;border:none; padding:20px;margin-left:5%; border-radius:3px; width:50%">VERIFY</button> </a>
+
+    </div>
+
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    `
+  }
  }
   //SET API KEY
  sendVerifyMail(data){
@@ -15,9 +85,7 @@ module.exports = class email{
     from:"malorbit360@gmail.com",
     to:this.to,
     subject:"Hashstack.io: Just one more step ",
-    html:`<p>Hi ${data.username}, Click the link below to verify your hashstack.io account </p><br/>
-    <a href="http://www.penbox.herokuapp.com/auth/verify_mail/${data._id}>VERIFY YOUR ACCOUNT </a>`
-        
+    html:this.verify_email_template(data)
      }
      var transporter = nodeMail.createTransport({
       service:"gmail",
