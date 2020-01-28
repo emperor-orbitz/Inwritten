@@ -108,7 +108,7 @@ console.log(user)
             let { loginError } = this.state;
             this.setState({ loginError });
           }
-          else if (message.message == 'This username has been taken') {
+          else if (message.message == 'This username has been taken. Try something else') {
 
             this.state.loginError.push(message);
             let { loginError } = this.state;

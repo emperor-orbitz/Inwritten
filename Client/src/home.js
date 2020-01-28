@@ -33,7 +33,7 @@ function App() {
           <Route path='/settings/templates' component={Templates} />
           <Route path='/settings/preferences' component={Preferences} />
 
-          {/* <Route path='/notification' component={Notifications} /> */}
+          <Route path='/notification' component={Notifications} /> 
 
 
 

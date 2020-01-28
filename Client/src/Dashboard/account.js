@@ -77,9 +77,7 @@ var credentials={
               <h3>Your recent stories</h3>
               <ArticlePreview credentials= {credentials} imports={imports} />
               <Divider />
-              <h3>Stories you've bookmarked</h3>
-              <ArticlePreview credentials= {credentials} imports={imports} />
-
+              
 
             </Grid>
 

@@ -324,23 +324,15 @@ class PostArchive extends React.Component {
                             <Grid.Row >
                             <Grid.Column computer={13} mobile={16} tablet={15}  >     
 
-
-                                    <div >
-                                        <Form size="small" >  
-
-                                            <Input id='search' className='custom-input' style={{background:"yellow"}} name='title' maxLength='50'  value={this.state.search} onChange= {this.onChangeSearch}  placeholder='Search Drafts' />
-
-                                            <Select name='category' style={{border:"none"}} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <Button primary icon="search" onClick={this.search_with_criteria}/>
-
-                                        </Form>
-                                        <br />
-
-
-                                    </div>
-
-
+                                    <Form 
+                                         size="small" >
+                                            <Input action id='search' className='custom-input' size='small' name='title' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search and hit enter' >
+                                            <input />
+                                            <Select  name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
+                                            <Button primary icon='search' basic onClick={this.search_with_criteria} />
+                                        </Input>
+                                    </Form>
+                                
 
                                 </Grid.Column>
 

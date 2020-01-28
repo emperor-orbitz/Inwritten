@@ -34,7 +34,7 @@ const SCHEME = {
 
 
     profile: new Schema({
-        username: { type: String, lowercase: true, trim: true, required: true, unique: true, index:true },
+        username: { type: String, lowercase: true, trim: true, required: true, unique: true },
         address: { type: String, trim: true, lowercase: true },
         email: { type: String, lowercase: true, required: true, trim: true, unique: true, index:true },
         password: { type: String, required: true },
@@ -55,7 +55,7 @@ const SCHEME = {
         bookmarks: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Post",
-            unique:true,
+//            unique:true,
             
         }],
 
@@ -117,6 +117,26 @@ const SCHEME = {
         post_id: { type: mongoose.Schema.Types.ObjectId, required: true },
         public: { type: Boolean, default: false },
         comment: { type: String }
+    },
+        {
+            timestamps: true,
+            versionKey: false,
+            strict: false
+        }
+    ),
+
+
+    /*
+        NOTIFICATIONS SCHEMA
+        
+    */
+    notifications: new Schema({
+        sender: { type: mongoose.Schema.Types.ObjectId, ref:"User" },
+        receiver: { type: mongoose.Schema.Types.ObjectId, ref:"User" },
+        type: { type: String, enum:["FOLLOW", "LIKE", "COMMENT"], default: 'FOLLOW' },
+        message: { type: String, required:true },
+        post_id: { type: mongoose.Schema.Types.ObjectId, ref:"Post" },
+        content_source: { type: String, default: null },
     },
         {
             timestamps: true,

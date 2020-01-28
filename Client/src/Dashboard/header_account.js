@@ -185,7 +185,7 @@ class HeaderAccount extends React.Component {
             <Sidebar.Pushable>
             <Responsive as={Menu} minWidth={300} className="nav" secondary style={{ fontSize:"12px"}}   >
             <Menu.Item icon="bars" onClick={this.toggleSide} size="big" />
-            <Menu.Item style={{ 'width': '20%' }} header ><h3>Hashstack.io</h3> </Menu.Item>
+            <Menu.Item style={{ 'width': '20%' }} header ><h3>Inwritten</h3> </Menu.Item>
 
 
             <Menu.Menu position="right"  >
@@ -194,6 +194,8 @@ class HeaderAccount extends React.Component {
 
                 <Dropdown.Menu>
                   <Dropdown.Item icon='dashboard' text='Dashboard' as={Link} to='/dashboard' />
+                  <Dropdown.Item icon='bell' text='Notifications' as={Link} to='/notification' />
+
                   <DropdownDivider  />
 
                   <Dropdown.Item icon='bookmark outline' text='Bookmarks' as={Link} to='/bookmark' />
@@ -224,7 +226,7 @@ class HeaderAccount extends React.Component {
                 className='sidebar'>
 
                 <div style={{ textAlign: 'center', padding: '20px 2px',  color: 'rgb(3, 68, 94)', background: 'white' }} >
-                  <Link to="/dashboard" style={{ color: "black" }}> <h2>Hashstack.io</h2></Link>
+                  <Link to="/dashboard" style={{ color: "black" }}> <h2>Inwritten</h2></Link>
                   <br/>
                   <h4>{`${this.props.ProfileReducer.firstName} ${this.props.ProfileReducer.lastName}`}</h4>
                   

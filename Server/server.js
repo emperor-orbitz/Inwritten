@@ -7,14 +7,17 @@ var express = require('express')
 var app = express();
 var bodyParser = require('body-parser');
 var cookieparser = require("cookie-parser");
-
+var server = require('http').Server(app)
 var handleBar = require('consolidate').handlebars;
 var passport = require("passport");
-var path = require("path")
+var path = require("path");
+var io = require("socket.io")(server)
+
+
 require("dotenv").config({ path: __dirname + "/.env" });
 require('./Utils/passport');
 require("./Database/db");
-
+require("./Utils/notifications")(server)
 
 
 var port = process.env.PORT || 5000;
@@ -53,16 +56,14 @@ app.set("views", __dirname + "/public/views");
 
 
 
-
 //ROUTE CONFIGURATION IN PRODUCTION
 
 if (process.env.NODE_ENV == "production") {
   
+
+  
   app.use(express.static(path.resolve(__dirname, "../Client/assets/"), {index:"homepage.html"}))
-
   app.use("/", route_config);
- 
-
   app.get("*", (req, res) => {
 
     res.sendFile(path.resolve(__dirname, "../Client/assets/index.html"));
@@ -94,7 +95,7 @@ process.on("unhandledRejection", (reason, promise) => {
   console.log(`Unhandled rejection at ${reason.stack}` || reason)
 })
 
-app.listen(port, console.log(`api running on port ${port}`));
+server.listen(port, console.log(`api running on port ${port}`));
 
 
 

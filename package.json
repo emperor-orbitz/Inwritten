@@ -85,6 +85,8 @@
     "slate": "^0.47.8",
     "slate-html-serializer": "^0.8.10",
     "slate-react": "^0.22.9",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
     "url-loader": "^2.1.0"
   }
 }

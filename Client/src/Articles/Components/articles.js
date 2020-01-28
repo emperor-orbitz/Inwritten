@@ -50,6 +50,7 @@ class Articles extends React.Component {
             visible: false,
             activeAccordion: 0,
             open: false,
+            open_criteria: false,
             deleteArticleId: null,
             deleteArticleName: null,
             deleteStatus: 'Delete',
@@ -77,14 +78,19 @@ class Articles extends React.Component {
                 deleteArticleId: id,
             }
 
-        );
-
-
-
+        )
     }
+
+
+    showCriteriaModal = (e) => {
+
+        this.setState({ open_criteria: true })
+    }
+
+
     handleSearchCriteria = (e, p) => {
 
-        this.setState({ not_found: false, search_criteria: p.value })
+        this.setState({ not_found: false, search_criteria: p.value, open_criteria: false })
     }
 
 
@@ -124,12 +130,15 @@ class Articles extends React.Component {
 
     close = () => this.setState({ open: false })
 
-
+    closeCriteria = () => {
+        this.setState({ open_criteria: false })
+      }
     connect = new Connection();
     fetchArticle = new FetchArticles();
 
-    onChangeSearch = (e) => {
+    onChangeSearch = (e, p ) => {
         var search = e.target.value;
+        console.log(e.keyCode )
         this.setState({ search: search, not_found: false })
     }
 
@@ -197,18 +206,14 @@ class Articles extends React.Component {
                 <div className='bodyArticle'>
                     <Grid>
                         <Grid.Row>
-                            <Grid.Column style={{ padding: '2px' }} computer={13} mobile={16} tablet={8}  >
+                            <Grid.Column computer={13} mobile={16} tablet={8}  >
 
                                 You don't have any published story. You can create one <Button as={Link} to="/add-post">here</Button>
 
                             </Grid.Column>
 
 
-                            <Grid.Column style={{ padding: '5px' }} computer={3} mobile={16} tablet={8}  >
 
-
-
-                            </Grid.Column>
 
                         </Grid.Row>
                     </Grid>
@@ -240,13 +245,22 @@ class Articles extends React.Component {
                                 </Button.Group>
                             </div>
 
-
-
                         </Modal.Content>
 
                     </Modal>
 
+                    <Modal size='mini' open={this.state.open_criteria} onClose={this.closeCriteria} closeOnDimmerClick closeOnDocumentClick>
 
+                        <Modal.Content style={{ height: '200px', background: "", color: 'black', padding: '5%' }}  >
+                            <div style={{ textAlign: 'center' }}>
+                                <h3 >Search by: </h3>
+                                <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
+
+                            </div>
+
+                        </Modal.Content>
+
+                    </Modal>
                     <div className='bodyArticle'>
 
                         <Grid>
@@ -256,17 +270,14 @@ class Articles extends React.Component {
 
                                     <div >
 
-                                        <Form size="small" >
-
-                                            <Input id='search' className='custom-input' name='title' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search Drafts' />
-
-                                            <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <Button primary icon="search" onClick={this.search_with_criteria}/>
-
+                                        <Form 
+                                         size="small" >
+                                            <Input  action id='search' className='custom-input' size='small' name='title' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search and hit enter' >
+                                            <input />
+                                            <Select  name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
+                                            <Button primary icon='search' basic onClick={this.search_with_criteria} />
+                                        </Input>
                                         </Form>
-                                        <br />
-
 
                                     </div>
 
@@ -275,7 +286,7 @@ class Articles extends React.Component {
                                 </Grid.Column>
 
                                 <Grid.Column computer={16} mobile={16} tablet={15} >
-                                    {this.state.not_found == true ? <div className='error-notification'> No {this.state.search_criteria} similar to <b> {this.state.search}</b> was found</div> : ''}
+                                    {this.state.not_found == true ? <div className='error-notification'>  No result for <b> {this.state.search}</b> was not found</div> : ''}
 
                                     {filter_privacy.map((e) => {
 
@@ -309,13 +320,13 @@ class Articles extends React.Component {
                                                                 <span><b>{e.category}</b> </span>
                                                                 <p>{e.title} </p>
 
-                                                                    <Button.Group className="button-hover" size='small' color='teal' secondary >
-                                                                        <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
-                                                                        <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
-                                                                        <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
-                                                                        <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
+                                                                <Button.Group className="button-hover" size='small' color='teal' secondary >
+                                                                    <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
+                                                                    <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
+                                                                    <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
+                                                                    <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
 
-                                                                    </Button.Group>
+                                                                </Button.Group>
                                                             </div>
 
                                                         </div>
@@ -330,14 +341,14 @@ class Articles extends React.Component {
                                         }
 
                                         else
-                                        return (
-                                            <div key={e._id} className='image-thumbnail-template-cover-big'>
+                                            return (
+                                                <div key={e._id} className='image-thumbnail-template-cover-big'>
 
-                                                <div style={{ margin: '10px 3px' }}>
+                                                    <div style={{ margin: '10px 3px' }}>
 
-                                                    <div className={'customCard-' + e.category} style={{ backgroundImage: `url('${e.featured_image}')`, backgroundSize: "cover", backgroundPosition: "bottom right" }}>
+                                                        <div className={'customCard-' + e.category} style={{ backgroundImage: `url('${e.featured_image}')`, backgroundSize: "cover", backgroundPosition: "bottom right" }}>
 
-                                                        {/*<div className='customCard-inner'  >
+                                                            {/*<div className='customCard-inner'  >
                                                                 <span style={{}}>Title </span>
                                                                 <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis', height: '30%' }}>
                                                                     {e.title}
@@ -348,32 +359,32 @@ class Articles extends React.Component {
     
                                             </div>*/}
 
+                                                        </div>
                                                     </div>
-                                                </div>
 
 
-                                                <div className='template-thumbnail-hover-big'>
+                                                    <div className='template-thumbnail-hover-big'>
 
                                                         <div className="category">
                                                             <span><b>{e.category}</b> </span>
                                                             <h5>{e.title} </h5>
 
-                                                                <Button.Group size='small' color='teal' secondary className="button-hover" >
-                                                                    <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
-                                                                    <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
-                                                                    <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
-                                                                    <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
+                                                            <Button.Group size='small' color='teal' secondary className="button-hover" >
+                                                                <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
+                                                                <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
+                                                                <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
+                                                                <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
 
-                                                                </Button.Group>
+                                                            </Button.Group>
 
+                                                        </div>
                                                     </div>
+
                                                 </div>
 
-                                            </div>
 
 
-
-                                        )
+                                            )
 
 
                                     })}
