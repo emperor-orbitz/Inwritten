@@ -60,10 +60,7 @@ class EditorPanel extends React.Component {
   onChange = ({ value }) => {
     this.setState({ value })
     window.editor = value
-    console.log(this.exposeEditorValue,
-
-      this.exposeHTMLEditorValue)
-
+  
   }
 
 

@@ -147,9 +147,7 @@ class AddPost extends React.Component {
     var add = new FetchArticles()
     var panel = new EditorPanel();
 
-    this.setState({ buttonDisabled: true, dimmerLoad: true });
-
-    this.setState({ network_error:`` });
+    this.setState({ buttonDisabled: true, dimmerLoad: true, network_error:`` });
 
     var post = {
       title: this.state.post_title.trim(),

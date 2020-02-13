@@ -27,8 +27,9 @@
     "concurrently": "concurrently \"npm run postinstall\" \"npm run start\""
   },
   "keywords": [
-    "reactapp"
+    "inwritten"
   ],
+  
   "author": "Abdulgaffar",
   "license": "ISC",
   "devDependencies": {

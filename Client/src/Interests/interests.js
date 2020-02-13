@@ -3,6 +3,7 @@ import '../../Resources/styles/comment.scss';
 import { Button, Form, Input, Icon, Select, List, Image } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import { Link } from "react-router-dom"
 import FetchArticles from '../../Controllers/article.controller';
 import ListExampleSelection from "./card"
 
@@ -158,9 +159,7 @@ class Interests extends React.Component {
                 </Form>
 
 
-
-
-                <h3>Most Recent on {item}:</h3>
+                <h3>Most Recent on {item} </h3> | <Link to="/settings/templates" style={{ textDecoration:"underline"}} >View templates in this Category</Link>
                 {this.state.not_found == true ? (<p style={{ color: "red" }}>{`${this.state.search} was not found!`} </p>) : ""}
                 <List selection verticalAlign="middle">
 

@@ -206,30 +206,29 @@ class EditorPanel extends React.Component {
   render() {
 
     return (
-      <div style={{ width: "85%", margin: 'auto', top: 0, left: '250px', bottom: 0, right: 0 }}>
+      <div style={{ color:"black", width: "85%", margin: 'auto', top: 0, left: '250px', bottom: 0, right: 0 }}>
 
 
         {this.state.mediaInfo == 'image' ? (
-          <Modal dimmer={true} size='mini' open={this.state.openMedia} >
+          <Modal dimmer={true} size='mini' open={this.state.openMedia} closeOnDimmerClick >
 
             <Modal.Header><Icon size='small' style={{ cursor: 'pointer', color: 'rgb(3, 68, 94)' }} title='Use hashstack gallery or insert image URL' name={this.state.modalToggle} /> Insert new {this.state.mediaInfo} {this.state.deleteArticleName}</Modal.Header>
 
-            <Modal.Content style={{ background: "url('src/img/tech.png') no-repeat right top", padding: '0px' }}  >
+            <Modal.Content style={{ padding: '0px' }}  >
               <div className='modalContent' style={{ display: this.state.modal1display }} >
 
                 <p style={{ display: this.state.invalid_file == true ? 'block' : 'none', color: 'red' }} >Unacceptable image format </p>
                 <br />
                 <p>{'Select ' + this.state.mediaInfo}</p>
-                <Input size='mini' type='file' onChange={this.handle_image.bind(this)} id='input_file' style={{ width: '70%', borderRadius: 'none' }} />
-
+                <Input size='mini' type='file' onChange={this.handle_image.bind(this)} id='input_file' style={{ width: '85%', borderRadius: 'none' }} />
 
                 <p>{'Insert ' + this.state.mediaInfo + 'URL'}</p>
-                <Input size='small' type='text' control='input' id="input_url" onChange={this.handle_image.bind(this)} style={{ width: '70%', borderRadius: 'none' }} />
+                <Input size='small' type='text' control='input' id="input_url" onChange={this.handle_image.bind(this)} style={{ width: '85%', borderRadius: 'none', marginTop:"2px" }} />
 
                 <p>Insert Caption </p>
                 <input id='caption' type='text' label='Insert caption (optional)' style={{
-                  width: '70%', height: '35px',
-                  border: 'none'
+                  width: '85%', height: '35px',
+                  border: '1px solid black'
                 }} onChange={() => { document.getElementById('caption').style.borderBottom = '3px solid teal' }} />
               </div>
 

@@ -36,7 +36,7 @@ class Header extends React.Component {
 
       <div className="head">
         <Responsive as={Menu} style={{color:'white'}} minWidth={60} className="nav" secondary >
-          <Menu.Item style={{ 'width': '20%' , color:'black'}} header as="h2">Hashstack.io</Menu.Item>
+          <Menu.Item style={{ 'width': '20%' , color:'black'}} header as="h2">Inwritten</Menu.Item>
 
 
           <Menu.Menu  position="right">

@@ -12,7 +12,7 @@ const BLOCK_TAGS= {
     p: 'align-right',
     h1:"heading-one",
     h2:"heading-two",
-  
+    caption:"caption",
     p: 'align-left',
     ul:"bulleted-list"
     //embed:'embed'
@@ -73,9 +73,9 @@ module.exports = {
                         return <p className={obj.data.get('className')}>{children}</p>
   
                     case 'image':
-                   // console.log("images here", obj.data.get('src'))
                         return (< img src={obj.data.get('src')} className={obj.data.get('className')} />)
   
+                        
                     case 'embedvideo':
                         return ( <div>
                             <iframe src={obj.data.get('src')} className={obj.data.get('className')} />
@@ -144,6 +144,8 @@ module.exports = {
                 switch (obj.type) {
                     case 'code':
                         return (<code className="editor-code">{children}</code>)
+                    case 'span':
+                        return (<span style={{ textAlign:"center" }}>{children}</span>)
                     case 'linkify':
                         return (<a className='editor-link' href={obj.data.get('src')}>{children}</a>)
   
@@ -283,14 +285,18 @@ renderMark: (props, editor, next) => {
   renderBlock: (props, editor, next) => {
     const { attributes, children, node, isFocused } = props
     let src= null || node.data.get('src')
+    let caption= null || node.data.get('caption')
 
     switch (node.type) {
 
       case 'image':
-    return <img src={src} {...attributes} className='editor-image'style={{
-        outline: isFocused ? "4px solid black":"none"
-    }} />
-
+    return (
+        <div>
+        <img src={src} {...attributes} className='editor-image'style={{
+        outline: isFocused ? "4px solid black":"none"}} />
+       <p><span style={{ textAlign:"center"}}>{caption}</span></p>
+    </div>
+    )
       case 'paragraph':
         return <p {...attributes}>{children}</p>
 

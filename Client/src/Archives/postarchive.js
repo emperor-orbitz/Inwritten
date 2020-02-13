@@ -322,84 +322,83 @@ class PostArchive extends React.Component {
 
                         <Grid>
                             <Grid.Row >
-                            <Grid.Column computer={13} mobile={16} tablet={15}  >     
+                                <Grid.Column computer={13} mobile={16} tablet={15}  >
 
-                                    <Form 
-                                         size="small" >
-                                            <Input action id='search' className='custom-input' size='small' name='title' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search and hit enter' >
-                                            <input />
-                                            <Select  name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
-                                            <Button primary icon='search' basic onClick={this.search_with_criteria} />
-                                        </Input>
+                                    <Form size="small" >
+
+                                        <Input id='search' className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search Interests' />
+                                        <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
+                                        <Button primary icon="search" onClick={this.search_with_criteria} />
+
                                     </Form>
-                                
+
 
                                 </Grid.Column>
 
                                 <Grid.Column computer={16} mobile={16} tablet={15}  >
 
-                                {this.state.not_found == true ? <div className='error-notification'> No {this.state.search_criteria} similar to <b> {this.state.search}</b> was found</div> : ''}
+                                    {this.state.not_found == true ?  <div className='error-notification'> <Icon name="close" size="big" color="red" />  No {this.state.search_criteria} similar to <b> {this.state.search}</b> was found</div> : ''}
 
                                     {filter_privacy.map((e) => {
-             if(e.featured_image == undefined  || e.featured_image =="" ){
-                return (
-                    <div key={e._id} className='image-thumbnail-template-cover-big'>
+                                        if (e.featured_image == undefined || e.featured_image == "") {
+                                            return (
+                                                <div key={e._id} className='image-thumbnail-template-cover-big'>
 
-                        <div style={{ margin: '10px 3px' }}>
+                                                    <div style={{ margin: '10px 3px' }}>
 
-                            <div className={'customCard-' + e.category} >
+                                                        <div className={'customCard-' + e.category} >
 
-                                <div className='customCard-inner' >
-                                    <span>Title </span>
-                                    <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis', height: '30%' }}>
-                                        {e.title}
-                                    </h4>
+                                                            <div className='customCard-inner' >
+                                                                <span>Title </span>
+                                                                <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis', height: '30%' }}>
+                                                                    {e.title}
+                                                                </h4>
 
-                                    <span><b>created on </b> </span>
-                                    <p>{date_to_string(e.createdAt)}</p>
+                                                                <span><b>created on </b> </span>
+                                                                <p>{date_to_string(e.createdAt)}</p>
 
-                                </div>
+                                                            </div>
 
-                            </div>
-                        </div>
-
-
-                        <div className='template-thumbnail-hover-big'>
-
-                                <div className="category">
-                                    <span><b>About</b> </span>
-                                    <p>{e.description} </p>
+                                                        </div>
+                                                    </div>
 
 
-                                <Button.Group className="button-hover" size='small' color='teal' secondary >
-                                    <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
-                                    <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} disabled= { true } />
-                                    <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
-                                    <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
+                                                    <div className='template-thumbnail-hover-big'>
 
-                                </Button.Group>
-
-                            </div>
-                        </div>
-
-                    </div>
+                                                        <div className="category">
+                                                            <span><b>About</b> </span>
+                                                            <p>{e.description} </p>
 
 
+                                                            <Button.Group className="button-hover" size='small' color='teal' secondary >
+                                                                <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
+                                                                <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} disabled={true} />
+                                                                <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
+                                                                <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
 
-                )
+                                                            </Button.Group>
 
-            }
+                                                        </div>
+                                                    </div>
 
-            else
-            console.log("Shown this", e.featured_image)
-            return (
-                <div key={e._id} className='image-thumbnail-template-cover-big'>
+                                                </div>
 
-                    <div style={{ margin: '10px 3px' }}>
 
-                        <div className={'customCard-' + e.category} style={{backgroundImage: `url('${e.featured_image}')`, backgroundSize:"cover", backgroundPosition:"bottom right"}}>
 
-                            {/*<div className='customCard-inner'  >
+                                            )
+
+                                        }
+
+                                        else
+                                            console.log("Shown this", e.featured_image)
+                                        return (
+                                            <div key={e._id} className='image-thumbnail-template-cover-big'>
+
+                                                <div style={{ margin: '10px 3px' }}>
+
+                                                    <div className={'customCard-' + e.category} style={{ backgroundImage: `url('${e.featured_image}')`, backgroundSize: "cover", backgroundPosition: "bottom right" }}>
+
+                                                        {/*<div className='customCard-inner'  >
                                 <span style={{}}>Title </span>
                                 <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis', height: '30%' }}>
                                     {e.title}
@@ -410,35 +409,35 @@ class PostArchive extends React.Component {
 
             </div>*/}
 
-                        </div>
-                    </div>
+                                                    </div>
+                                                </div>
 
 
-                    <div className='template-thumbnail-hover-big'>
+                                                <div className='template-thumbnail-hover-big'>
 
-                        <div style={{}}>
-                            <div className="category">
-                                <span><b>Title</b> </span>
-                                <h3>{e.title} </h3>
-
-
-                                <Button.Group className="button-hover" size='small' color='teal' secondary >
-                                    <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
-                                    <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`}  />
-                                    <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
-                                    <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
-
-                                </Button.Group>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
+                                                    <div style={{}}>
+                                                        <div className="category">
+                                                            <span><b>Title</b> </span>
+                                                            <h3>{e.title} </h3>
 
 
+                                                            <Button.Group className="button-hover" size='small' color='teal' secondary >
+                                                                <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
+                                                                <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
+                                                                <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
+                                                                <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
 
-            )
+                                                            </Button.Group>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+
+                                        )
 
                                     })}
                                 </Grid.Column>

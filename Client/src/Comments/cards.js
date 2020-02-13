@@ -5,21 +5,19 @@ const ListExampleSelection = (props) =>{
     var { index, x } =props;
     return(
         <List.Item key={x._id}>
-            <List.Content floated="right">
-            <Button.Group size='mini' >
-               <Button icon='like' onClick ={()=>{props.like_comment(x._id)}} content={x.likes} />
-               <Button icon='trash alternate outline' onClick ={()=>{props.delete_comment(x._id)}} />
-               <Button>{x.seen == true? 'Hide':"Accept"}</Button>
-
-          </Button.Group>
-            </List.Content>
+            
             <Image avatar src={x.commenter_id.display_picture} />
-            <List.Content><h3>{x.comment}</h3>
-            <span>{x.commenter_id.username}</span>
-            <br/>
-            {x.createdAt}
+            <List.Content><h4 style={{color:"black"}}>{x.comment}</h4>
+            <p style={{ fontSize:"12px"}}>@{x.commenter_id.username} ({x.createdAt})</p>
+            
             </List.Content>
-             
+            <List.Content>
+               <Button.Group size="small">
+               <Button icon='like' onClick ={ ()=>{props.like_comment(x._id)} } content={x.likes} />
+               <Button icon='trash alternate outline' onClick ={()=>{props.delete_comment(x._id)}} />
+               <Button>{x.seen == true ? 'Hide':"Accept"}</Button>
+                </Button.Group>
+            </List.Content>
         </List.Item>
 
 )

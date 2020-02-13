@@ -102,11 +102,9 @@ var create = (req, res) => {
         featured_image,
         tags
     } = req.body;
-featured_image=undefined;
-
 
     var postDoc = {
-        title: title,
+        title,
         body_schema,
         body_html,
         createdAt,
@@ -115,83 +113,68 @@ featured_image=undefined;
         description,
         time_to_read,
         comments_enabled,
-        public: public,
+        public,
         authorId: req.user._id,
+        featured_image : featured_image != undefined ? featured_image: "link_to_image",
         tags,
         post_link: `/user/${req.user.username}---${title.replace(new RegExp(/\s/ig), "-")}---${Date.now()}`
 
     }
 
-    if (featured_image != undefined) {
 
         cloudinary.v2.uploader.upload(featured_image, {
             resource_type: "image",
             public_id: `featured_image/${req.user._id}-${createdAt}`,
             overwrite: true
-        },
-       (err, result) => {
+        })
+        .then(result =>{
 
-              if(err){
+            var post = new posts();
+            let final = Object.assign({}, postDoc, { featured_image: result.url });
+            post.insertPost(final, (err, success) => {
+                if (err) {
 
-                res.status(http_status.INTERNAL_SERVER_ERROR.code)
-                   .send({ data: [],
-                         status: http_status.INTERNAL_SERVER_ERROR.code 
-                      })
-                    
-                    }
-                  else{ 
-                    var post = new posts();
-                    let final = Object.assign({}, postDoc, { featured_image: result.url });
-                    post.insertPost(final, (err, success) => {
-                        if (err) {
-
-                            res.status(http_status.INTERNAL_SERVER_ERROR.code)
-                               .send({ data: [],
-                                        status: http_status.INTERNAL_SERVER_ERROR.code 
-                                     })
-                
-                        }
-
-                        else {
-                            res.send({ data: success._id,
-                                      post_link: success.post_link,
-                                     status: http_status.OK.code
-                              })       
-                        }
-
-                    })
-
+                    res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                       .send({ data: [],
+                                status: http_status.INTERNAL_SERVER_ERROR.code 
+                             })
+        
                 }
 
+                else {
+                    res.send({ data: success,
+                             status: http_status.OK.code
+                      })       
+                }
+
+        })}
+     )
+            .catch(error =>{
+                var post = new posts()
+
+                post.insertPost(postDoc, (err, success) => {
+                    if (success) {
+                        res.status(200)
+                            .send({
+                                  status:200,
+                                  data:success 
+                                  })
+                    }
+                    else{
+                        res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                        .send({ 
+                            status:500,
+                            data: [] });
+                    }
+                        
+        
+        
+                })
+        
             })
 
+    
 
-    }
-
-
-    else {
-        var post = new posts();
-
-        post.insertPost(postDoc, (err, success) => {
-            if (success) {
-                res.status(200)
-                    .send({
-                          status:200,
-                          data:success 
-                          })
-            }
-            else{
-                res.status(http_status.INTERNAL_SERVER_ERROR.code)
-                .send({ 
-                    status:500,
-                    data: [] });
-            }
-                
-
-
-        })
-
-    }
 
 }
 

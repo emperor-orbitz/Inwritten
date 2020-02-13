@@ -31,6 +31,7 @@ module.exports = function(server){
 
           //new comment
           socket.on("new_comment", function(data){
+            
            users['5e2be5f74fbc8e2450df004b'].emit('new_notification', "YOU HAVE NEW NOTIFICATIONS OGA")
 
            console.log(socket.handshake.query.userid)

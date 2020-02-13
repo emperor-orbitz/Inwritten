@@ -50,7 +50,6 @@ class Comment extends React.Component {
                 })
 
                 this.setState({ comments: new_comment })
-                alert("deleted successfully")
 
             }
             )

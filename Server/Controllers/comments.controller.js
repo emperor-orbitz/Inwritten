@@ -1,7 +1,7 @@
 var comments = require('../Models/comments.model');
 //var http_status = require("../Utils/http_status");
 var posts =  require('../Models/post.model');
-
+var axios =require("axios").default;
 
 
 
@@ -13,8 +13,8 @@ var posts =  require('../Models/post.model');
 var create = (req, res) => {
 
     var comment = new comments();
-
-   comment.create_comment(req.body, async (error, results)=>{
+    //console.log(req.body, "rrrr")
+   comment.create_comment(req.body,  (error, results)=>{
      if(error){
          console.log(error)
          res.status(400)
@@ -25,10 +25,29 @@ var create = (req, res) => {
         posts.updateOne({_id: req.body.post_id }, {
             $push:{comments: results._id}
         }, (err,updated)=>{
-            if(err)
-               res.send({ message:`An error occured ${err}`, status:400 });
-            else
+            if(err){
+                res.send({ message:`An error occured ${err}`, status:400 });
+
+            }
+            else if(req.body.commenter_id == req.body.author_id){
+                // Don't send notif if its emitted by author
                 res.send({message:req.originalUrl})
+            }
+            else{
+
+                axios.post("http://localhost:5000/notifications/create", 
+                   {
+                        sender: req.body.commenter_id,
+                        receiver: req.body.author_id,
+                        type:'COMMENT',
+                        message_id: results._id
+                    }, { method:"POST"}
+                )
+                .then(data => res.send({message:req.originalUrl}) )
+                .catch(err => res.send({ message:`An error occured ${err}`, status:400 }) )
+                
+            }
+                
 
         })
        

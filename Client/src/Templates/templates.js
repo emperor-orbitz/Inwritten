@@ -46,16 +46,16 @@ class Templates extends React.Component {
         var templ = new TemplateController();
         let { template_id } = this.props.ProfileReducer;
         try {
-          let mine = await templ.my_template(template_id)
-          var result = await templ.get_templates(template_id)
+            let mine = await templ.my_template(template_id)
+            var result = await templ.get_templates(template_id)
 
-          if(mine.message !== null){
-            let templates = result.data.filter((v,i,a)=> v._id !== this.props.ProfileReducer.template_id)
-            this.setState({ templates, my_template: mine.message })
-          }
+            if (mine.message !== null) {
+                let templates = result.data.filter((v, i, a) => v._id !== this.props.ProfileReducer.template_id)
+                this.setState({ templates, my_template: mine.message })
+            }
 
         } catch (error) {
-            console.log( "Something wrong has happened", error )
+            console.log("Something wrong has happened", error)
 
         }
 
@@ -66,32 +66,33 @@ class Templates extends React.Component {
 
     save_template = async (ev, data) => {
 
-        this.setState({ save_disabled:true })
+        this.setState({ save_disabled: true })
         var { templates } = this.state;
         let tempControl = new TemplateController()
-try{
+        try {
 
-     await tempControl.save_template(this.state.selected._id);
-     let updated = await tempControl.get_templates(this.state.selected._id);
-
-
-     this.setState({ save_text: 'Templates successfully saved!',
-     open_options: false,
-     save_disabled: false,
-     templates: updated.data,
-     my_template: this.state.selected
+            await tempControl.save_template(this.state.selected._id);
+            let updated = await tempControl.get_templates(this.state.selected._id);
 
 
-   })
- 
-}
-catch(err){
-    this.setState({ save_text: 'Unable to save template' })
-    console.log(err)
-    
+            this.setState({
+                save_text: 'Templates successfully saved!',
+                open_options: false,
+                save_disabled: false,
+                templates: updated.data,
+                my_template: this.state.selected
 
-}
-        
+
+            })
+
+        }
+        catch (err) {
+            this.setState({ save_text: 'Unable to save template' })
+            console.log(err)
+
+
+        }
+
 
 
     }
@@ -99,7 +100,7 @@ catch(err){
 
 
     render() {
-        var { templates,selected,my_template } = this.state;
+        var { templates, selected, my_template } = this.state;
 
         if (templates.length == 0) {
             return (
@@ -114,21 +115,20 @@ catch(err){
 
                 <div className="comment-div" style={{ marginTop: "0px !important" }}>
                     <h3 style={{ color: "black" }}>Templates</h3>
+                    <p>Preset templates help define structures to publish your stories. Worry less of design, promote a good content</p>
 
-                    <div className="template-container"> 
-                    <img src ={my_template.featured_image} className="template-image" />
-                    <div className="template-cover">
-                    <h1>  { my_template.template_name} </h1>
-                    <p>  { my_template.template_description} <u>(you are currently using this)</u> </p>
+                    <div className="template-container" style={{ backgroundImage: `url('${my_template.featured_image}')` }}>
+                        <div className="template-cover">
+                            <h1>  {my_template.template_name} </h1>
+                            <p>  {my_template.template_description} <u>(you are currently using this)</u> </p>
 
-                    
+
+                        </div>
+
                     </div>
-
-                     </div>
                     <Divider />
 
-                    <p>Select one. Templates are the different designs in which your articles can be rendered.</p>
-                    <p style={{ color:"green" }}>{this.state.save_text}</p>
+                    {this.state.save_text != "" ? <p><Icon name="check circle outline" color="green" size="big" /> {this.state.save_text}</p> :""}
 
                     <Modal size="small" open={this.state.open_options} onClose={this.close} closeOnDimmerClick closeOnDocumentClick >
                         <Modal.Header>
@@ -159,49 +159,51 @@ catch(err){
                             </Modal.Description>
                         </Modal.Content>
                         <Modal.Actions>
-                        <Button size="small" as={Link} as={Link} target="__blank" to={`/template/template_sample/${selected._id}`}>Preview</Button>
-                        <Button primary size="small" disabled={this.state.save_disabled} onClick={this.save_template}>Save</Button>
+                            <Button size="small" as={Link} as={Link} target="__blank" to={`/template/template_sample/${selected._id}`}>Preview</Button>
+                            <Button primary size="small" disabled={this.state.save_disabled} onClick={this.save_template}>Save</Button>
                         </Modal.Actions>
 
 
                     </Modal>
 
 
+        <div style={{ position: "relative" }}>
+                        {templates.map((e, i, a) => {
+                            return (
+                                <div key={e._id} className='image-thumbnail-template-cover-big'>
 
+                                    <div style={{ margin: '10px 3px' }}>
 
+                                        <div className={'customCard-' + e.category} style={{ backgroundImage: `url('${e.featured_image}')`, backgroundSize: "cover", backgroundPosition: "bottom right" }}>
 
-                    {templates.map((e, i, a) => {
-                        return (
-                            <div key={e._id} className='image-thumbnail-template-cover-big'>
-
-                                <div style={{ margin: '10px 3px' }}>
-
-                                    <div className={'customCard-' + e.category} style={{ backgroundImage: `url('${e.featured_image}')`, backgroundSize: "cover", backgroundPosition: "bottom right" }}>
-
+                                        </div>
                                     </div>
+
+
+                                    <div className='template-thumbnail-hover-big'>
+
+                                        <div className="category">
+                                            <span><b>{e.category}</b> </span>
+                                            <h5>{e.template_name} </h5>
+                                            <Button primary size='mini' className="button-hover" onClick={() => { this.setState({ open_options: true, selected: e }) }} > Select</Button>
+
+                                        </div>
+                                    </div>
+
                                 </div>
 
 
-                                <div className='template-thumbnail-hover-big'>
-
-                                    <div className="category">
-                                        <span><b>{e.category}</b> </span>
-                                        <h5>{e.template_name} </h5>
-                                        <Button primary size='mini' className="button-hover" onClick={() => { this.setState({ open_options: true, selected: e }) }} > Select</Button>
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                        )
+                            )
 
 
 
 
-                    })}
+                        })}
 
+                    </div>
+
+                    
+           
 
 
                 </div>

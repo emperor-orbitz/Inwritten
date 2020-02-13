@@ -32,15 +32,17 @@ var index = async (req, res) => {
                                     select:"display_picture email username body_html"
                                 }
                             })
-                              .select("")
+                             // .select("")
                               
 
         if (data != null) {
-
             var scripts = [{script:"/template-starter-02/js/auth.js"}];
             res.render(`${template_data.template_name}/index`,
              { data,  comment_data: data.comments, partials:{
-                comments:`./partials/comment.partials`
+                comments:`./partials/comment.partials`,
+                author:`./partials/author.partials`,
+                interests:`./partials/interests.partials`
+
              },
              scripts:scripts,
              user: req.user

@@ -154,7 +154,7 @@ var verify_mail = async (req, res) => {
 
 var register = (req, res) => {
     var valid = new validate();
-
+    console.log(req.body)
     valid.validate(req.body).then(good => {
         var saves = new signup();
 
@@ -163,7 +163,7 @@ var register = (req, res) => {
                 res.json({ message: 'Error already occured' });
 
             else if (success != null) {
-                console.log(success);
+                //console.log(success);
                 res.status(400)
                     .json({ message: 'Account already exists' });
 
@@ -180,19 +180,19 @@ var register = (req, res) => {
                         send.sendVerifyMail({ username: result.username, _id: result._id });
                      
                         res.status(200)
-                          .json({ message: "Account successfully created" });
+                          .send({ message: "Account successfully created" });
     
                     }
                     else  
                         res.status(400)
-                        .json({ message: "This username has been taken. Try something else" });
+                        .send({ message: "This username has been taken. Try something else" });
 
                 }
 
                 catch (error) {
                     console.log("error" + error)
                     res.status(500)
-                        .json({ message: 'Failed! An error is here' + error });
+                        .send({ message: 'Failed! An error is here' + error });
                 }
 
             }
@@ -202,10 +202,13 @@ var register = (req, res) => {
 
 
     })
-        .catch(err => res.status(401)
-                        .send({
-                            message: "Invalid Parameters",
-                        }))
+        .catch(err =>{
+            console.log("err", err)
+            res.status(400)
+            .send({
+                message: "Invalid Parameters",
+            })
+        } )
 
 
 }

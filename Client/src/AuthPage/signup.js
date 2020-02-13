@@ -94,9 +94,9 @@ class Signup extends React.Component {
         credentials: 'include',
       })
         .then(user => {
-console.log(user)
-        
-        return user.json()
+        if(user.status == 400 ) return user.json()
+          else 
+         return user.json()
       })
         .then( message => {
           button.dimmerLoad = button.disabled = false;

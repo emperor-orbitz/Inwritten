@@ -134,9 +134,9 @@ const SCHEME = {
         sender: { type: mongoose.Schema.Types.ObjectId, ref:"User" },
         receiver: { type: mongoose.Schema.Types.ObjectId, ref:"User" },
         type: { type: String, enum:["FOLLOW", "LIKE", "COMMENT"], default: 'FOLLOW' },
-        message: { type: String, required:true },
-        post_id: { type: mongoose.Schema.Types.ObjectId, ref:"Post" },
-        content_source: { type: String, default: null },
+        message_id: { type: mongoose.Schema.Types.ObjectId },
+        note: { type: String, default:'' }
+    
     },
         {
             timestamps: true,

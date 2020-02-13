@@ -228,7 +228,7 @@ class HeaderAccount extends React.Component {
                 <div style={{ textAlign: 'center', padding: '20px 2px',  color: 'rgb(3, 68, 94)', background: 'white' }} >
                   <Link to="/dashboard" style={{ color: "black" }}> <h2>Inwritten</h2></Link>
                   <br/>
-                  <h4>{`${this.props.ProfileReducer.firstName} ${this.props.ProfileReducer.lastName}`}</h4>
+                  <h4>{`${this.props.ProfileReducer.email}`}</h4>
                   
                 </div>
              
@@ -244,7 +244,15 @@ class HeaderAccount extends React.Component {
 
                 </div>
 
+                <div className="accordion-item">
+                  <Accordion.Title active={true} style={{ padding: '5px 20px' }} index={4} onClick={this.handleClick}>
+                     <span style={{fontSize:"14px",color:"black"}}>SOCIALS</span>
 
+                     <Divider />
+                  </Accordion.Title>
+                  <Accordion.Content style={{ padding: '1px 20px', }} className="accordion-content" active={true} content={settingsSubmenu} />
+
+                </div>
              
 
                 <div className="accordion-item">

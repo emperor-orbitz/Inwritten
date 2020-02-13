@@ -132,13 +132,13 @@ class Articles extends React.Component {
 
     closeCriteria = () => {
         this.setState({ open_criteria: false })
-      }
+    }
     connect = new Connection();
     fetchArticle = new FetchArticles();
 
-    onChangeSearch = (e, p ) => {
+    onChangeSearch = (e, p) => {
         var search = e.target.value;
-        console.log(e.keyCode )
+        console.log(e.keyCode)
         this.setState({ search: search, not_found: false })
     }
 
@@ -270,13 +270,12 @@ class Articles extends React.Component {
 
                                     <div >
 
-                                        <Form 
-                                         size="small" >
-                                            <Input  action id='search' className='custom-input' size='small' name='title' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search and hit enter' >
-                                            <input />
-                                            <Select  name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
-                                            <Button primary icon='search' basic onClick={this.search_with_criteria} />
-                                        </Input>
+                                        <Form size="small" >
+
+                                            <Input id='search' className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search Interests' />
+                                            <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
+                                            <Button primary icon="search" onClick={this.search_with_criteria} />
+
                                         </Form>
 
                                     </div>
@@ -286,7 +285,7 @@ class Articles extends React.Component {
                                 </Grid.Column>
 
                                 <Grid.Column computer={16} mobile={16} tablet={15} >
-                                    {this.state.not_found == true ? <div className='error-notification'>  No result for <b> {this.state.search}</b> was not found</div> : ''}
+                                    {this.state.not_found == true ? <div className='error-notification'> <Icon name="close" size="big" color="red" /> No result for <b> {this.state.search}</b> was not found</div> : ''}
 
                                     {filter_privacy.map((e) => {
 

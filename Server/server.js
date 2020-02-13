@@ -13,19 +13,30 @@ var passport = require("passport");
 var path = require("path");
 var io = require("socket.io")(server)
 
+//easily attach io to server
 
 require("dotenv").config({ path: __dirname + "/.env" });
 require('./Utils/passport');
 require("./Database/db");
-require("./Utils/notifications")(server)
+//require("./Utils/notifications")(server)
+var users_socket={}
+
+
+  io.on("connection", function(socket){
+   users_socket[socket.handshake.query.userid] = socket;
+   app.locals.users_socket = users_socket
+
+   })
+
 
 
 var port = process.env.PORT || 5000;
 var route_config = require('./Utils/route_config');
 
 app.use(cookieparser())
-app.use(bodyParser.urlencoded({ extended: false, limit: '20mb' }));
-app.use(bodyParser.json({ limit: '50mb' }))
+app.use(bodyParser.json({limit:"50mb"}))
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
+//app.use(bodyParser.urlencoded({ limit: '50mb' }));
 
 
 
@@ -54,14 +65,11 @@ app.set("views", __dirname + "/public/views");
 
 
 
-
-
 //ROUTE CONFIGURATION IN PRODUCTION
 
 if (process.env.NODE_ENV == "production") {
-  
 
-  
+ 
   app.use(express.static(path.resolve(__dirname, "../Client/assets/"), {index:"homepage.html"}))
   app.use("/", route_config);
   app.get("*", (req, res) => {
@@ -69,22 +77,8 @@ if (process.env.NODE_ENV == "production") {
     res.sendFile(path.resolve(__dirname, "../Client/assets/index.html"));
   });
 
+  
 }
-
-
-/*
-["/comments",
-'/interests',
-'/edit-post',
-'/dashboard' ,
-'/settings', 
-'/articles',
-'/drafts', 
-'/add-post',
-'/bookmark', 
-'/settings/templates',
-'/settings/preferences' ]*/
-
 
 
 
