@@ -58,7 +58,7 @@ app.use(function (req, res, next) {
 app.use(passport.initialize());
 app.set('view engine', 'handlebars');
 app.engine('handlebars', handleBar );
-app.set("views", __dirname + "/assets/views");
+app.set("views", path.resolve(__dirname, "../Client/assets/views"));
 
 
 

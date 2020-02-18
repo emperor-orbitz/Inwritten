@@ -82,6 +82,7 @@ var update = (req, res) =>{
 var list = (req, res, next) =>{
 
     comments.find({post_id: req.query.id})
+            .populate("commenter_id", "username email display_picture")
           .then(result =>{ res.send({data: result, status:200 }) })
           .catch(err=> res.send({data:[], message:`Error occured ${err}`}))
   

@@ -6,19 +6,12 @@ import { withRouter } from 'react-router';
 import Link from 'react-router-dom/Link';
 import FetchArticles from '../../Controllers/article.controller';
 import Connection from '../../Controllers/auth.controller';
+import socketIOClient from 'socket.io-client';
 
 import SideBar from '../../src/Dashboard/sidebar';
 import splash from '../../Resources/images/splash.png';
 
 
-function sidebb(props){
-return (<div style={{background:"yellow", fontSize:"40px"}}>
-  
-  sideBAR
-
-  </div>
-  )
-}
 
 class HeaderAccount extends React.Component {
   constructor(props) {
@@ -28,18 +21,25 @@ class HeaderAccount extends React.Component {
       activeBar: this.props.active,
       visible: false,
       activeAccordion: 0,
-      //dimmerActive:true,
       open: false,
       pageTitle: '',
       email_variable: '',
       loadFinish: false,
+      new_notification:""
 
     }
+    // realtime notification socket  
+    this.socket = socketIOClient("http://localhost:5000", {query:`userid=${this.props.ProfileReducer._id}`})
+
     if (this.state.visible == true) this.setState({ visible: false });
     else;
 
 
   }
+
+  connect = new Connection();
+  fetchArticle = new FetchArticles();
+
 
 
   UNSAFE_componentWillReceiveProps() {
@@ -48,12 +48,15 @@ class HeaderAccount extends React.Component {
     else;
 
   }
+  componentWillMount() {
+    this.socket.on("new_notification", (data)=>{
+        this.setState({ new_notification:"You have a new notification" })
+        alert("you have a new notif")
 
+    })
+}
 
-  connect = new Connection();
-  fetchArticle = new FetchArticles();
-
-
+ 
   componentDidMount() {
 
     let token = localStorage.getItem("hs_token");
@@ -163,21 +166,19 @@ class HeaderAccount extends React.Component {
       return (
 
         <div className="head">
-       
-
 
           <div className="sideBar">
 
-              <Modal size="mini" open={open} onClose={this.close}>
+              <Modal size="mini" open={open} onClose={this.close} closeOnDimmerClick>
                 <Modal.Header>LOGOUT</Modal.Header>
                 <Modal.Content>
                   <p style={{ color: 'black' }}>Are you sure you want to log out?<br /> There's still a lot to write about!</p>
                 </Modal.Content>
                 <Modal.Actions>
-                  <Button onClick={() => {
+               {/*   <Button onClick={() => {
                     this.setState({ open: false })
-                  }} >Nope</Button>
-                  <Button onClick={this.logout} positive icon='checkmark' labelPosition='right' content='Yes' />
+                  }} >Nope</Button>*/}
+                  <Button onClick={this.logout} icon='sign out' labelPosition='right' content='Exit' />
                 </Modal.Actions>
               </Modal>
             
@@ -194,7 +195,7 @@ class HeaderAccount extends React.Component {
 
                 <Dropdown.Menu>
                   <Dropdown.Item icon='dashboard' text='Dashboard' as={Link} to='/dashboard' />
-                  <Dropdown.Item icon='bell' text='Notifications' as={Link} to='/notification' />
+                  <Dropdown.Item icon='bell' text='Notifications' as={Link} to='/notification' style={{color: 'green'}} />
 
                   <DropdownDivider  />
 
@@ -244,6 +245,7 @@ class HeaderAccount extends React.Component {
 
                 </div>
 
+                {/* UNTIL SECOND VERSION RELEASE
                 <div className="accordion-item">
                   <Accordion.Title active={true} style={{ padding: '5px 20px' }} index={4} onClick={this.handleClick}>
                      <span style={{fontSize:"14px",color:"black"}}>SOCIALS</span>
@@ -253,7 +255,7 @@ class HeaderAccount extends React.Component {
                   <Accordion.Content style={{ padding: '1px 20px', }} className="accordion-content" active={true} content={settingsSubmenu} />
 
                 </div>
-             
+                */}
 
                 <div className="accordion-item">
                   <Button as={Link} to="/about_us" fluid style={{ color: 'teal', background:"white" }}>

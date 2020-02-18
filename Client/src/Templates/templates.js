@@ -128,7 +128,8 @@ class Templates extends React.Component {
                     </div>
                     <Divider />
 
-                    {this.state.save_text != "" ? <p><Icon name="check circle outline" color="green" size="big" /> {this.state.save_text}</p> :""}
+                    {this.state.save_text == "Templates successfully saved!" ? <p><Icon name="check circle outline" color="green" size="big" /> {this.state.save_text}</p>:""}
+                    {this.state.save_text == 'Unable to save template' ? <p><Icon name="cross" color="red" size="big" /> {this.state.save_text}</p>:""}
 
                     <Modal size="small" open={this.state.open_options} onClose={this.close} closeOnDimmerClick closeOnDocumentClick >
                         <Modal.Header>

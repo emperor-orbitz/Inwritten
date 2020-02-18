@@ -45,10 +45,29 @@ Router.get('/user/bookmark/list', isAuth, function (req, res, next) {
 
 })
 
+Router.get('/user/blog/follow/follow_status', isAuth, function (req, res, next) {
+
+    blogController.follow_status(req, res, next)
+
+})
+
+Router.post('/user/blog/follow/follow_user', isAuth, function (req, res, next) {
+
+    blogController.follow_user(req, res, next)
+
+})
+
 
 Router.delete('/user/remove_bookmark/:bookmark_id', isAuth, function (req, res, next) {
 
     blogController.remove_bookmark(req, res)
+
+})
+
+
+Router.get('/user/blog/follow/other_interests', function (req, res, next) {
+
+    blogController.other_interests(req, res, next)
 
 })
 

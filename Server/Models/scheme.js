@@ -103,6 +103,26 @@ const SCHEME = {
         }
     ),
 
+    /*
+               USER SOCIALS SCHEMA
+    */
+
+
+   comments: new Schema({
+    user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    facebook_link: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    linkedin_link: { type: Number, default: 0 },
+    youtube_link: { type: mongoose.Schema.Types.ObjectId, required: true },
+    twitter_link: { type: Boolean, default: false },
+    instagram_link: { type: String }
+},
+    {
+        timestamps: true,
+        versionKey: false,
+        strict: false
+    }
+),
+
 
   /*
                COMMENTS SCHEMA
@@ -134,7 +154,7 @@ const SCHEME = {
         sender: { type: mongoose.Schema.Types.ObjectId, ref:"User" },
         receiver: { type: mongoose.Schema.Types.ObjectId, ref:"User" },
         type: { type: String, enum:["FOLLOW", "LIKE", "COMMENT"], default: 'FOLLOW' },
-        message_id: { type: mongoose.Schema.Types.ObjectId },
+        reference_data: { type: String, default:"#" },
         note: { type: String, default:'' }
     
     },
@@ -144,6 +164,23 @@ const SCHEME = {
             strict: false
         }
     ),
+
+     /*
+        FOLLOW SCHEMA
+        
+    */
+   follow: new Schema({
+    follower_id: { type: mongoose.Schema.Types.ObjectId, ref:"User" },
+    followee_id: { type: mongoose.Schema.Types.ObjectId, ref:"User" },
+    
+
+},
+    {
+        timestamps: true,
+        versionKey: false,
+        strict: false
+    }
+),
 
 
 
