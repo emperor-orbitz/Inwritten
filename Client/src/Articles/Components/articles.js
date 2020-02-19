@@ -295,7 +295,7 @@ class Articles extends React.Component {
 
                                                     <div style={{ margin: '10px 3px' }}>
 
-                                                        <div className={'customCard-' + e.category} >
+                                                        <div className='customCard-all' >
 
                                                                     <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis' }}>
                                                                         {e.title}

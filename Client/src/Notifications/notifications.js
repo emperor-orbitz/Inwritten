@@ -26,9 +26,21 @@ class Notifications extends React.Component {
 
 
 
-delete_notification = () =>{
-alert("deleted notificcation")
-//clear from board
+delete_notification = async (id) =>{
+    let notifications = new FetchNotifications();
+    let notif = await notifications.delete_notification(id)
+    console.log(notif, "nottiff", id)
+    if (notif.message == "Delete Successful!"){
+        //clear from board
+
+        var deleted = this.state.notifications.filter( v => v._id != id );
+        this.setState({ notifications: deleted })
+
+
+    }
+    else{
+        // alert("unable to clear notification")
+}
 
 }
 
@@ -86,7 +98,6 @@ read_notification = () =>{
                                 return (
 
                                     <ListExampleSelection index={index} x={x} read_notification={this.read_notification} delete_notification={this.delete_notification} />
-
 
                                 )
 

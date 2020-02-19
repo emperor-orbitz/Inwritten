@@ -14,6 +14,9 @@ var io = require("socket.io")
 var get = async (req, res) => {
 
 model.find({ receiver: req.query.user_id })
+.populate('receiver', "username email ")
+.populate('sender', "username email ")
+
 .then( docs=>{
 
     docs.length !== 0 ? 
@@ -75,8 +78,27 @@ catch (err){
 
 
 
-var remove = (req, res, next) => {
- 
+var remove = (req, res) => {
+
+ //use notification _id to delete notification from board
+ model.deleteOne({ _id: req.body._id })
+        .then(success =>{
+            if(success.deletedCount == 1) {
+                res.status(200).send({ message: "Delete Successful!", status: 200 })
+                console.log(req.body, success)
+            }
+            else{
+                console.log(req.body, success)
+
+                res.status(200).send({ message: "Deletion operation failed!", status: 200 })
+            } 
+
+
+        },
+        error =>{
+            res.status(500).send({ message: `Server error occured ${error}`, status: 200 })
+
+        })
 
 
 

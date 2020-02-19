@@ -11,16 +11,41 @@ const ListExampleSelection = (props) =>{
             case "COMMENT":
             return(
                 <Table.Row>
-                    <Table.Cell>@{x.sender}</Table.Cell>
-                    <Table.Cell><b>They {x.type} responded to your story xxx </b> | {x.createdAt}</Table.Cell>
+                    <Table.Cell>@{x.sender.username}</Table.Cell>
+                    <Table.Cell><b>They responded to your story <a href="#">xxx</a> </b> | {x.createdAt}</Table.Cell>
                     <Table.Cell>
-                     <Button icon='check' onClick ={()=>{props.read_notification(x._id)}} />
-                      <Button icon='trash alternate outline' onClick ={()=>{props.delete_notification(x._id)}} />
+                     <Button icon='times' onClick ={()=>{props.delete_notification(x._id)}} />
                     </Table.Cell>
         
                 </Table.Row>
         
-        )
+        );
+        case "LIKE":
+        return(
+            <Table.Row>
+            <Table.Cell>@{x.sender}</Table.Cell>
+            <Table.Cell><b>They liked your story <a href="#">xxx</a> </b> | {x.createdAt}</Table.Cell>
+            <Table.Cell>
+            <Button icon='times' onClick ={()=>{props.delete_notification(x._id)}} />
+
+            </Table.Cell>
+
+        </Table.Row>
+    
+    )
+    case "FOLLOW":
+    return(
+        <Table.Row>
+        <Table.Cell>@{x.sender}</Table.Cell>
+        <Table.Cell><b>Cool, You have a new follower. <a href="#">xxx</a> </b> | {x.createdAt}</Table.Cell>
+        <Table.Cell>
+        <Button icon='times' onClick ={()=>{props.delete_notification(x._id)}} />
+
+        </Table.Cell>
+
+    </Table.Row>
+
+)
         
         }
 
