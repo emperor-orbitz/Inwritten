@@ -1,10 +1,33 @@
 import React from 'react'
-import { List, ListIcon, Button, Image, Icon } from 'semantic-ui-react'
+import { List, ListIcon, Table,Button, Image, Icon } from 'semantic-ui-react'
 
 const ListExampleSelection = (props) =>{ 
     var { index, x } =props;
     return(
-        <List.Item key={x._id}>
+        <Table.Row>
+            <Table.Cell>@{x.commenter_id.username}</Table.Cell>
+            <Table.Cell><b>{x.comment}</b></Table.Cell>
+            <Table.Cell>{x.createdAt}</Table.Cell>
+            <Table.Cell>
+                <Button.Group size="small" icon>
+               <Button icon='like' onClick ={ ()=>{props.like_comment(x._id)} } content={x.likes} />
+               <Button icon='trash alternate outline' onClick ={()=>{props.delete_comment(x._id)}} />
+                </Button.Group>
+            </Table.Cell>
+
+        </Table.Row>
+
+
+)
+
+}
+
+
+
+export default ListExampleSelection
+
+/*
+ <List.Item key={x._id}>
             
             <ListIcon children={ <img style={{ width:"50px", height:"50px"}} src={x.commenter_id.display_picture}/> } />
             <List.Content><h4 style={{color:"black"}}>{x.comment}</h4>
@@ -18,15 +41,6 @@ const ListExampleSelection = (props) =>{
           
         </List.Item>
 
-)
-
-}
-
-
-
-export default ListExampleSelection
-
-/*
 
    <List.Header as='h4'> <a href={x.post_link} target="__blank">{x.title}</a> </List.Header>
                 <List.Description as="i">{x.description==""? "---":x.description}</List.Description>

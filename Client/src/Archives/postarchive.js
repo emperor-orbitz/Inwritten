@@ -366,11 +366,8 @@ class PostArchive extends React.Component {
                                                     <div className='template-thumbnail-hover-big'>
 
                                                         <div className="category">
-                                                            <span><b>About</b> </span>
-                                                            <p>{e.description} </p>
 
-
-                                                            <Button.Group className="button-hover" size='small' color='teal' secondary >
+                                                            <Button.Group className="button-hover" size='small' icon >
                                                                 <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
                                                                 <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} disabled={true} />
                                                                 <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
@@ -389,55 +386,6 @@ class PostArchive extends React.Component {
 
                                         }
 
-                                        else
-                                            console.log("Shown this", e.featured_image)
-                                        return (
-                                            <div key={e._id} className='image-thumbnail-template-cover-big'>
-
-                                                <div style={{ margin: '10px 3px' }}>
-
-                                                    <div className={'customCard-' + e.category} style={{ backgroundImage: `url('${e.featured_image}')`, backgroundSize: "cover", backgroundPosition: "bottom right" }}>
-
-                                                        {/*<div className='customCard-inner'  >
-                                <span style={{}}>Title </span>
-                                <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis', height: '30%' }}>
-                                    {e.title}
-                                </h4>
-
-                                <span><b>Created On </b> </span>
-                                <p>{date_to_string(e.createdAt)}</p>
-
-            </div>*/}
-
-                                                    </div>
-                                                </div>
-
-
-                                                <div className='template-thumbnail-hover-big'>
-
-                                                    <div style={{}}>
-                                                        <div className="category">
-                                                            <span><b>Title</b> </span>
-                                                            <h3>{e.title} </h3>
-
-
-                                                            <Button.Group className="button-hover" size='small' color='teal' secondary >
-                                                                <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
-                                                                <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
-                                                                <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
-                                                                <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
-
-                                                            </Button.Group>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-
-
-                                        )
 
                                     })}
                                 </Grid.Column>

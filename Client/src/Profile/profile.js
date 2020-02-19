@@ -336,8 +336,8 @@ class Profile extends React.Component {
 
                         </ButtonGroup>
 
-                    {this.state.validationClass == "success-bar" ? <p style={{ height:"50px", margin:"5px auto" }}><Icon name="check circle outline" color="green" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p>: ""} 
-                    {this.state.validationClass == "error-bar" ? <p style={{ height:"50px", margin:"5px auto" }} ><Icon name="cross" color="red" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p> :"" }
+                    {this.state.validationClass == "success-bar" ? <p style={{  margin:"15px auto" }}><Icon name="check circle outline" color="green" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p>: ""} 
+                    {this.state.validationClass == "error-bar" ? <p style={{  margin:"15px auto" }} ><Icon name="cross" color="red" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p> :"" }
 
 
 

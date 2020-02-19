@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../Resources/styles/comment.scss';
-import { Icon, Button, List, Grid, GridColumn } from 'semantic-ui-react';
+import { Icon, Button, Table, Grid, GridColumn } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import comment_controller from '../../Controllers/comments.controller';
@@ -128,23 +128,29 @@ class Comment extends React.Component {
                     <Grid.Row>
                         
                                     <Grid.Column computer={16} mobile={16} tablet={8}>
+                                    <Table>
+                                                        <Table.Header>
+                                                            <Table.HeaderCell>Username</Table.HeaderCell>
+                                                            <Table.HeaderCell>Comment</Table.HeaderCell>
+                                                            <Table.HeaderCell>Date</Table.HeaderCell>
+                                                            <Table.HeaderCell>Actions</Table.HeaderCell>
 
+                                                        </Table.Header>
+                                                        <Table.Body>
                                             {this.state.comments.map((x, index) => {
                                                 return (
-                                                    <div style={{ minHeight: "50px", width: "100%" }}>
-                                                        <List size="big" selection verticalAlign="middle" >
+                                                   
+                                                        <ListExampleSelection index={index} x={x} like_comment={this.like_comment} delete_comment={this.delete_comment} />
 
-                                                            <ListExampleSelection index={index} x={x} like_comment={this.like_comment} delete_comment={this.delete_comment} />
-
-                                                        </List>
-
-                                                    </div>
+                                                
                                                 )
 
                                             })
+                                          
                                         }
 
-                                            
+                                          </Table.Body>
+                                            </Table>    
 
                                     </Grid.Column>
 

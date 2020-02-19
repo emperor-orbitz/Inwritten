@@ -155,7 +155,8 @@ const SCHEME = {
         receiver: { type: mongoose.Schema.Types.ObjectId, ref:"User" },
         type: { type: String, enum:["FOLLOW", "LIKE", "COMMENT"], default: 'FOLLOW' },
         reference_data: { type: String, default:"#" },
-        note: { type: String, default:'' }
+        note: { type: String, default:'' },
+        read: {type:Boolean, default: false}
     
     },
         {

@@ -3,7 +3,7 @@ import '../../Resources/styles/style.scss';
 import {  Menu, Icon, Sidebar, Button, Responsive } from 'semantic-ui-react';
 import {  withRouter } from 'react-router';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-
+import logo from "../../Resources/images/logo-page.png"
 
 
 class Header extends React.Component {
@@ -36,7 +36,7 @@ class Header extends React.Component {
 
       <div className="head">
         <Responsive as={Menu} style={{color:'white'}} minWidth={60} className="nav" secondary >
-          <Menu.Item style={{ 'width': '20%' , color:'black'}} header as="h2">Inwritten</Menu.Item>
+          <Menu.Item style={{ 'width': '20%' , color:'black'}} header ><img src={logo} style={{ width:"150px", height:"100px" }}/></Menu.Item>
 
 
           <Menu.Menu  position="right">
