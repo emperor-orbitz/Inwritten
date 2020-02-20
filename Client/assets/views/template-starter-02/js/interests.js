@@ -16,11 +16,16 @@ function interests(category) {
             var interests ="";
         
             result.message.forEach(element => {
-                interests+= `<p>
-                <a href='${element.post_link}'><h3>${element.title}</h3></a>
-                <span>${element.description==''?'No description':element.description}</span>
                 
-                </p>`
+                interests+= `
+                <div class="card">
+                <img src="${element.featured_image}" class="card-img-top" alt="${element.title}">
+                <div class="card-body">
+                <h5 class="card-title">${element.title}</h5>
+                <p class="card-text">${element.description==''?'No description':element.description}</p>
+                <p class="card-text"><small class="text-muted">${element.updatedAt}</small></p>
+                </div>
+                </div>`
             });
             
     

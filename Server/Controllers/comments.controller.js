@@ -30,12 +30,12 @@ var create = (req, res) => {
 
             }
             else if(req.body.commenter_id == req.body.author_id){
-                
+
                 // Don't send notif if its emitted by author
                 res.send({message:req.originalUrl})
             }
             else{
-
+                console.log(req,"requesrrr")
 
                 axios.post("http://localhost:5000/notifications/create", 
                    {
