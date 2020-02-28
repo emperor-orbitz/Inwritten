@@ -2,7 +2,7 @@ var http_status = require("../Utils/http_status");
 var signup = require('../Models/user.model');
 var cloudinary = require('cloudinary');
 var posts = require('../Models/post.model');
-
+var socialSchema = require('../Models/socials.model');
 
 /*           CLOUDINARY CREDENTIALS
 */
@@ -168,10 +168,7 @@ var update_password = (req, res, next) => {
 
         }
 
-
     })
-
-
 
 
 
@@ -179,7 +176,52 @@ var update_password = (req, res, next) => {
 
 
 
+//update social media links
+var update_social = (req, res) =>{
+    //upsert: Create if not available
+    socialSchema.updateOne({ user_id: req.user._id }, {
+        $set:{...req.body}
+    }, { upsert:true })
+    .then(onfulfilled =>{
+        res.status(http_status.OK.code)
+        .send({ code: http_status.OK.code,
+                message: http_status.OK.message
+     })
+        })
+    .catch(onrejected =>{
+        res.status(http_status.INTERNAL_SERVER_ERROR.code)
+        .send({  code: http_status.INTERNAL_SERVER_ERROR.code,
+                 message: http_status.INTERNAL_SERVER_ERROR.message })
+})
+
+}
+
+
+
+//fetch social media links
+var fetch_social = (req, res) =>{
+
+    socialSchema.findOne({ user_id: req.user._id })
+    .then(data =>{
+        console.log(data)
+        res.status(http_status.OK.code)
+        .send({ code: http_status.OK.code,
+                data: data
+     })
+        })
+    .catch(onrejected =>{
+        res.status(http_status.INTERNAL_SERVER_ERROR.code)
+        .send({  code: http_status.INTERNAL_SERVER_ERROR.code,
+                 message: http_status.INTERNAL_SERVER_ERROR.message })
+})
+
+}
+
+
 module.exports = {
     update_profile: update_profile,
     update_password: update_password,
+    update_social: update_social,
+    fetch_social:fetch_social,
+
 };

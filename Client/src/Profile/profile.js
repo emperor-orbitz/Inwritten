@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../Resources/styles/profile.scss';
-import { Icon, Form, Divider, Button, Loader, ButtonGroup } from 'semantic-ui-react';
+import { Icon, Form, Input, Divider, Button, Loader, ButtonGroup } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import Connection from '../../Controllers/auth.controller';
 import { connect } from 'react-redux';
@@ -37,6 +37,13 @@ class Profile extends React.Component {
             new_password: '',
             confirm_password: '',
             bio: '',
+            social_facebook: "",
+            social_instagram: "",
+            social_linkedin: "",
+            social_whatsapp: "",
+            social_youtube:"",
+
+
             validationMessage: '',
             buttonDisabled: false,
             dimmerLoad: false,
@@ -44,6 +51,7 @@ class Profile extends React.Component {
             //passwordDisabled: true,
             dispPass: "none",
             dispProf: "block",
+            dispSoc:"none",
             country:"",
             gender:""
 
@@ -58,8 +66,10 @@ class Profile extends React.Component {
     connect = new Connection();
     componentDidMount() {
 
-        let auth_token = localStorage.getItem("hs_token");
 
+
+        let auth_token = localStorage.getItem("hs_token");
+       //fetch user data
         this.connect.isLoggedin(auth_token)
             .then( user => {
                 this.setState({
@@ -79,6 +89,22 @@ class Profile extends React.Component {
 
             })
             .catch( _ => this.props.history.replace('/login'))
+
+
+            //Then, fetch social media links
+            var fetch_socials = new ProfileUpdate()
+            fetch_socials.fetchSocials()
+            .then(data => {
+                var { facebook_link, linkedin_link, whatsapp_link, youtube_link, instagram_link } = data.data;
+                this.setState({
+                    social_facebook: facebook_link,
+                    social_linkedin: linkedin_link,
+                    social_instagram: instagram_link,
+                    social_whatsapp: whatsapp_link,
+                    social_youtube: youtube_link
+                })
+            })
+
 
 
     }
@@ -108,6 +134,8 @@ class Profile extends React.Component {
     }
 
 
+
+
     handle_profile_photo =(ev) => {
         this.readFile(ev.target.files[0]).then( result => {
             this.setState({ profile_photo: result })
@@ -132,7 +160,27 @@ class Profile extends React.Component {
 
 
 
-
+    handle_social = (ev) =>{
+        var { name, value} = ev.target;
+            switch(name){
+                case "facebook":
+                this.setState({social_facebook: value})
+                break;
+                case "whatsapp":
+                this.setState({social_whatsapp: value})
+                break;
+                case "linkedin":
+                this.setState({social_linkedin: value})
+                break;
+                case "instagram":
+                this.setState({social_instagram: value})
+                break;
+                case "youtube":
+                this.setState({social_youtube: value})
+                break;
+                
+            }
+    }
 
 
 
@@ -141,7 +189,6 @@ class Profile extends React.Component {
         photo.click();
     }
 
-    check_number = (form_no) => (form_no.length < 11) || (form_no.length > 14) ? false : true
     
 
 
@@ -279,19 +326,59 @@ class Profile extends React.Component {
 
 
     }
+
+
+//update socials
+updateSocialButton(e){
+e.preventDefault()
+var controller = new ProfileUpdate()
+let {social_facebook, social_instagram, social_linkedin, social_whatsapp, social_youtube} = this.state;
+
+var data ={
+    facebook_link: social_facebook,
+    youtube_link:social_youtube,
+    instagram_link: social_instagram,
+    linkedin_link:social_linkedin,
+    whatsapp_link: social_whatsapp,
+}
+
+controller.updateSocials(data)
+.then(saved =>{
+    if(saved.code == 200){
+        this.setState({
+            validationMessage:"Social Media added successfully!",
+            validationClass:"success-bar"
+        })
+    } 
+    else {
+        this.setState({
+            validationMessage:"Soemthing went wrong. We'll fix it",
+            validationClass:"error-bar"
+        })
+    }
+})
+}
+
+
     swapSettings(e) {
 
-        if (e.target.id == "password") {
+        switch(e.target.id){
+            case "password":
             if (this.state.dispPass == "block");
-            else if (this.state.dispPass == "none") { this.setState({ dispPass: "block", dispProf: "none" }) }
+            else if (this.state.dispPass == "none") { this.setState({ dispPass: "block", dispProf: "none", dispSoc:"none" }) }
+            break;
 
-        }
-        else if (e.target.id == "profile") {
+            case "profile":
             if (this.state.dispProf == "block");
-            else if (this.state.dispProf == "none") { this.setState({ dispProf: "block", dispPass: "none" }) }
+            else if (this.state.dispProf == "none") { this.setState({ dispProf: "block", dispPass: "none", dispSoc:'none' })  }
+            break;
 
-
+            case "socials":
+            if (this.state.dispSoc == "block");
+            else if (this.state.dispSoc == "none") { this.setState({ dispSoc:"block", dispProf: "none", dispPass: "none" })  }
+            break;
         }
+    
 
 
     }
@@ -327,12 +414,19 @@ class Profile extends React.Component {
 
 
                 <div className="profile-body">
+
+
+
+
+
+
                     <div className="data-info-profile" style={{ display: this.state.dispProf }}>
-                        <h3 style={{ padding: '5px', color:"black" }}> Edit Profile</h3>
+                        <h3 style={{ padding: '5px', color:"black" }}> Profile</h3>
                     
                         <ButtonGroup size="small"  >
-                            <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false}>Profile </Button>
-                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} >Password</Button>
+                            <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false} icon='user'>Profile </Button>
+                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} icon="gear" >Password</Button>
+                            <Button id="socials" onClick={(e) => this.swapSettings(e)} active ={this.state.dispSoc=='block' ? true:false} icon="gear" >Socials</Button>
 
                         </ButtonGroup>
 
@@ -341,7 +435,7 @@ class Profile extends React.Component {
 
 
 
-                        <Form size="small" style={{ width: '70%' }} id='formUpdate'>
+                        <Form size="small" style={{ width: '70%' }} id='formUpdate1'>
                         <Divider />
 
                             <Form.Group widths='equal'>
@@ -366,10 +460,10 @@ class Profile extends React.Component {
                                 <option value="female">Female</option>
                             </select>
                             <br></br>
-
+                            <Form.Group widths='equal'>
                             <Form.Field id='bio' label='Bio (Write something...)' control='textarea' value={this.state.bio} onChange={this.handle_bio} minLength='20' maxLength='150' name='bio' />
-
                             <Form.Field id='number' label='Mobile Number' control='input' type='tel' value={this.state.mobile_number} onChange={this.handle_mobile_number} minLength='11' maxLength='14' name='number' />
+                            </Form.Group>
 
                             <Button type='submit' secondary color='teal' disabled={this.state.buttonDisabled} size='small' floated='right' onClick={this.updateProfileButton.bind(this)}>
                                 Update Profile <DimmerLoad size="small" active={this.state.dimmerLoad} />
@@ -377,26 +471,27 @@ class Profile extends React.Component {
                         </Form>
 
 
-
-
-
                     </div>
 
-                    <div className="data-info-password" style={{ display: this.state.dispPass }} >
-                        <h3 style={{ padding: '5px', color:'black' }}> Account Info</h3>
 
-                        <ButtonGroup size="small" >
-                            <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false}>Profile </Button>
-                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} >Password</Button>
+
+
+
+
+                    <div className="data-info-password" style={{ display: this.state.dispPass }} >
+                        <h3 style={{ padding: '5px', color:'black' }}> Passwords</h3>
+
+                          <ButtonGroup size="small"  >
+                            <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false} icon='user'>Profile </Button>
+                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} icon="gear" >Password</Button>
+                            <Button id="socials" onClick={(e) => this.swapSettings(e)} active ={this.state.dispSoc=='block' ? true:false} icon="gear" >Socials</Button>
 
                         </ButtonGroup>
 
+                       {this.state.validationClass == "success-bar" ? <p style={{  margin:"15px auto" }}><Icon name="check circle outline" color="green" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p>: ""} 
+                    {this.state.validationClass == "error-bar" ? <p style={{  margin:"15px auto" }} ><Icon name="cross" color="red" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p> :"" }
 
-                        <div className={this.state.validationClass} style={{ marginBottom: '5px' }} > {this.state.validationMessage}
-                        </div>
-
-
-                        <Form size="small" style={{ width: '70%' }} id='formUpdate'>
+                        <Form size="small" style={{ width: '70%' }} id='formUpdate2'>
 
                             <Divider />
                             <Form.Field label='Old Password ' control='input' type='password' placeholder='Old password' minLength='6' value={this.state.old_password} onChange={this.handle_old_password} />
@@ -410,11 +505,45 @@ class Profile extends React.Component {
                             </Button>
                         </Form>
 
+                    </div> 
+
+
+
+
+
+
+                    <div className="data-info-socials" style={{ display: this.state.dispSoc }} >
+                        <h3 style={{ padding: '5px', color:'black' }}> Socials</h3>
+  
+                        <ButtonGroup size="small"  >
+                            <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false} icon='user'>Profile </Button>
+                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} icon="gear" >Password</Button>
+                            <Button id="socials" onClick={(e) => this.swapSettings(e)} active ={this.state.dispSoc=='block' ? true:false} icon="gear" >Socials</Button>
+
+                        </ButtonGroup>
+                        {this.state.validationClass == "success-bar" ? <p style={{  margin:"15px auto" }}><Icon name="check circle outline" color="green" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p>: ""} 
+                       {this.state.validationClass == "error-bar" ? <p style={{  margin:"15px auto" }} ><Icon name="cross" color="red" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p> :"" }
+
+                        <Form size="small" style={{ width: '70%' }} id='formUpdate3'>
+
+                            <Divider />
+                            <p style={{color:"black"}}> Socials allow your readers connect to you on other popular platforms. </p>
+
+                            <Form.Field label= "Facebook" control='input' name='facebook' placeholder='Your facebook URL' minLength='6' value={this.state.social_facebook} onChange={this.handle_social} />
+                            <Form.Field label="Whatsapp Chat" control='input' name="whatsapp"  placeholder='Your Whatsapp URL' minLength='6' value={this.state.social_whatsapp} onChange={this.handle_social} />
+                            <Form.Field label='LinkedIn' control='input' name="linkedin" placeholder='Your LinkedIn URL' value={this.state.social_linkedin} onChange={this.handle_social} />
+                            <Form.Field label='Instagram' control='input' name="instagram" placeholder='Your Instagram URL' value={this.state.social_instagram} onChange={this.handle_social} />
+                            <Form.Field label='Youtube Channel' control='input' name="youtube" placeholder='Link to your Yotube Channel' value={this.state.social_youtube} onChange={this.handle_social} />
+
+                           
+                            <Button type='submit' secondary color='teal'  disabled={this.state.buttonDisabled} size='small' floated='right' onClick={this.updateSocialButton.bind(this)}>
+                                Update Socials <DimmerLoad size="small" active={this.state.dimmerLoad} />
+                            </Button>
+                        </Form>
+
 
 
                     </div> 
-                    <div>kjhjh</div>
-
                 </div>
 
 

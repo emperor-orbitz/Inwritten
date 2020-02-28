@@ -29,7 +29,7 @@ class Notifications extends React.Component {
 delete_notification = async (id) =>{
     let notifications = new FetchNotifications();
     let notif = await notifications.delete_notification(id)
-    console.log(notif, "nottiff", id)
+
     if (notif.message == "Delete Successful!"){
         //clear from board
 
@@ -45,8 +45,13 @@ delete_notification = async (id) =>{
 }
 
 read_notification = () =>{
-    alert("notification read")
+    //alert("notification read")
 }
+
+
+
+
+
 
     async componentDidMount() {
         //fetch notifications
@@ -62,7 +67,7 @@ read_notification = () =>{
             }
         } catch (err) {
             //catch uncaught server error
-            alert('error')
+            //alert('error')
             console.log(err, "error")
         }
 

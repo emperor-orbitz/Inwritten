@@ -86,14 +86,15 @@ const SCHEME = {
         comments_enabled: { type: Boolean },
         public: { type: Boolean, default:true },
         author: String,
-        description: { type: String },
+        description: { type: String, default:"No Description"},
         likes: { Type: mongoose.Schema.Types.Number, default: 0 },
         comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
         post_link: { type: String, default: "" },
         authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
         times_read: { type: Number, default: 0 },
         template_id: { type: mongoose.Schema.Types.ObjectId, default: "5e01d83ff47d3806c0aa6992" },
-        tags: {type: String, maxlength: 100}
+        tags: {type: String, maxlength: 100},
+        
 
     },
         {
@@ -108,13 +109,13 @@ const SCHEME = {
     */
 
 
-   comments: new Schema({
+   socials: new Schema({
     user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    facebook_link: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    linkedin_link: { type: Number, default: 0 },
-    youtube_link: { type: mongoose.Schema.Types.ObjectId, required: true },
-    twitter_link: { type: Boolean, default: false },
-    instagram_link: { type: String }
+    facebook_link: { type:String, default:"#" },
+    linkedin_link: { type: String, default: "#" },
+    youtube_link: { type: String, default:"#" },
+    whatsapp_link: { type: String, default: "#" },
+    instagram_link: { type: String, default:"#" }
 },
     {
         timestamps: true,
@@ -134,7 +135,7 @@ const SCHEME = {
         author_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
         commenter_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
         likes: { type: Number, default: 0 },
-        post_id: { type: mongoose.Schema.Types.ObjectId, required: true },
+        post_id: { type: mongoose.Schema.Types.ObjectId, required: true, ref:"Post" },
         public: { type: Boolean, default: false },
         comment: { type: String }
     },

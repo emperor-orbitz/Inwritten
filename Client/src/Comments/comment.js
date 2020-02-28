@@ -17,14 +17,6 @@ function getmonthName(number) {
 
 }
 
-function date_to_string(date) {
-    var fulldate = new Date(date);
-    var month = getmonthName(fulldate.getMonth());
-    var year = fulldate.getFullYear();
-    var day = fulldate.getDate();
-    var convert = `${day}'${month}`;
-    return convert;
-}
 
 class Comment extends React.Component {
 
@@ -33,7 +25,9 @@ class Comment extends React.Component {
         this.state = {
 
             comments: [],
-            post_title: ""
+            post_title: "",
+            updatedAt:"",
+            description:""
         }
 
     }
@@ -81,14 +75,15 @@ class Comment extends React.Component {
 
 
     componentDidMount() {
-        console.log(this.props);
+        
         var { ArticleReducer, match } = this.props;
         for (var x of ArticleReducer) {
             if (x._id == match.params.postID) {
-
                 this.setState({
                     comments: x.comments,
-                    post_title: x.title
+                    post_title: x.title,
+                    description: x.description,
+                    updatedAt: x.updatedAt
                 })
 
             }
@@ -124,6 +119,7 @@ class Comment extends React.Component {
             <div className="comment-div" style={{ marginTop: "0px !important" }}>
 
                 <h3 style={{ color: "rgb(3, 68, 94)" }}>Responses to your story: "{this.state.post_title}" </h3>
+                <p>{this.state.description} | ( last modified on {this.state.updatedAt} ) </p> 
                 <Grid>
                     <Grid.Row>
                         

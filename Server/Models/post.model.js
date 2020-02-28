@@ -90,10 +90,11 @@ postSchema.methods.loadAllPost = (username, callback) => {
         .select("-featured_image")
         .populate({
                    path:"comments",
-                   populate:{path:"commenter_id", 
+                   populate:{ path:"commenter_id", 
                    select:"username email display_picture template_id"
                             }
     })
+    
 
         
 };

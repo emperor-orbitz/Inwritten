@@ -186,7 +186,7 @@ class HeaderAccount extends React.Component {
             <Sidebar.Pushable>
             <Responsive as={Menu} minWidth={300} className="nav" secondary style={{ fontSize:"12px"}}   >
             <Menu.Item icon="bars" onClick={this.toggleSide} size="big" />
-            <Menu.Item header ><img src={double_u} style={{ width:"70px", height:"70px" }}/> </Menu.Item>
+            <Menu.Item header ><img src={double_u} style={{ width:"60px", height:"60px" }}/> </Menu.Item>
 
 
             <Menu.Menu position="right"  >
@@ -227,7 +227,7 @@ class HeaderAccount extends React.Component {
                 className='sidebar'>
 
                 <div style={{ textAlign: 'center', padding: '10px 2px',  color: 'rgb(3, 68, 94)', background: 'white' }} >
-                  <Link to="/dashboard" style={{ color: "black" }}> <img src={logo} style={{ width:"160px", height:"90px" }}/></Link>
+                  <Link to="/dashboard" style={{ color: "black" }}> <img src={logo} style={{ width:"165px", height:"75px" }}/></Link>
                   <br/>
                   <h4>{`${this.props.ProfileReducer.email}`}</h4>
                   

@@ -14,7 +14,8 @@ var create = (req, res) => {
 
     var comment = new comments();
     //console.log(req.body, "rrrr")
-   comment.create_comment(req.body,  (error, results)=>{
+   var body = Object.assign({}, req.body,  {reference_data: req.headers.referer })
+   comment.create_comment(body,  (error, results)=>{
      if(error){
          console.log(error)
          res.status(400)
@@ -35,14 +36,15 @@ var create = (req, res) => {
                 res.send({message:req.originalUrl})
             }
             else{
-                console.log(req,"requesrrr")
+                console.log(req.headers.referer,"requesrrr")
 
                 axios.post("http://localhost:5000/notifications/create", 
                    {
                         sender: req.body.commenter_id,
                         receiver: req.body.author_id,
                         type:'COMMENT',
-                        message_id: results._id
+                        message_id: results._id,
+                        reference_data: req.headers.referer
                     }, { method:"POST"}
                 )
                 .then(data => res.send({message:req.originalUrl}) )
@@ -85,6 +87,7 @@ var list = (req, res, next) =>{
 
     comments.find({post_id: req.query.id})
             .populate("commenter_id", "username email display_picture")
+            //.populate("post_id", "description")
           .then(result =>{ res.send({data: result, status:200 }) })
           .catch(err=> res.send({data:[], message:`Error occured ${err}`}))
   
@@ -118,6 +121,7 @@ var remove = (req, res, ) =>{
   }
 
 
+//SUBCOMMENTING
 
 
 

@@ -32,4 +32,12 @@ controller.update_password(req, res);
 
 
 
+router.post('/profile/update_social', isAuth, (req, res, next) => {
+    controller.update_social(req, res);
+    });
+    
+
+    router.post('/profile/fetch_social', isAuth, (req, res, next) => {
+        controller.fetch_social(req, res);
+        });
 module.exports = router;

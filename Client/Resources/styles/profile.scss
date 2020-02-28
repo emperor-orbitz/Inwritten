@@ -29,8 +29,8 @@ width:100%;
     background:white;
     line-break: loose;
     color:rgb(3, 68, 94) !important;
-    $profile-width:200px;
-    $profile-height:200px;
+    $profile-width:170px;
+    $profile-height:170px;
     color:black;
     
 
@@ -136,10 +136,19 @@ transform: translateX(10px);
     //border:1px solid black;
    margin: auto 20%;
    margin-left: 5%;
-
     padding:2% 5%;
     padding-bottom:20%;
 }
+
+.data-info-socials{
+    width:100%;
+    //border:1px solid black;
+   margin: auto 20%;
+   margin-left: 5%;
+    padding:2% 5%;
+    padding-bottom:20%;  
+}
+
 .data-info-profile{
     width:100%;
     //border:1px solid black;

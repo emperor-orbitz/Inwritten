@@ -43,7 +43,7 @@ model.find({ receiver: req.query.user_id })
 var create = async (req, res) => {
     //req.io =io;
     var { sender, receiver, type, message } = req.body;
-    console.log(req.body)
+    console.log(req.headers.referer)
     try{
 
     var new_model = await model.create({
@@ -51,6 +51,7 @@ var create = async (req, res) => {
         receiver,
         type,
         message,
+        reference_data
     })
     if (new_model !== null) {
         res.send({ message: "Notification Sent succcessfull", status: 200 })
@@ -73,7 +74,7 @@ catch (err){
 
 
 /*          DELETE
-    remve notification
+    remove notification
 */
 
 

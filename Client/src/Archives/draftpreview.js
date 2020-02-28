@@ -29,28 +29,7 @@ function getmonthName(number) {
 
 }
 
-function HoverableDiv(props) {
-    let Button = props.button;
-    return (
-        <div className='image-thumbnail-template-cover-big'>
 
-            {props.children}
-
-            <div className='template-thumbnail-hover-big'>
-                <h2 style={{ marginTop: '0px', padding: '0px' }}>{props.type}</h2>
-
-                <div size='large' style={{ marginTop: '100px', float: 'right' }}>
-                    <Button.Group size='small' color='teal' secondary >
-                        <Button icon='external alternate' target="__blank" as={Link} to={`http://localhost:5000/${this.props.ProfileReducer.username}/${e.title}`} />
-                        <Button icon='info' />
-
-                    </Button.Group>
-                </div>
-            </div>
-
-        </div>
-    )
-}
 
 
 /*
@@ -59,21 +38,18 @@ function HoverableDiv(props) {
 *
 */
 
-export default function ArticlePreview(props) {
-
-
-
+export default function DraftPreview(props) {
+    
     var { ArticleReducer, Grid, Button } = props.imports;
-    var { username } = props.credentials;
-    var articles_preview = [];
-    if (ArticleReducer.length == 0) {
+    var articles_preview = ArticleReducer.filter((v)=>{
+        return v.public == false
+    });
+
+    if (articles_preview.length == 0) {
 
         return (
             <div className='bodyArticle'>
-                Oops, It seems you have no Article written
-                You can start from
-                <Link to="/add-post" >HERE</Link>
-                <br /> OR Click the pencil
+               <p>Great!, You have no unpublished draft </p> 
 
             </div>
 
@@ -85,18 +61,17 @@ export default function ArticlePreview(props) {
 
     else {
 
-        articles_preview = ArticleReducer.slice(0, 5);
+      
 
 
         return (
             //<Grid.Row className="row">
 
             <Grid.Row className='row' >
-                <h5>Your recent stories</h5>
+                <h5>Unpublished Drafts |  <Link to="/drafts">See more</Link></h5>
 
                 {articles_preview.map(function (e) {
 
-                    if (e.featured_image == undefined || e.featured_image == "") {
                         return (
 
                             <div key={e._id} className='image-thumbnail-template-cover-big'>
@@ -133,7 +108,7 @@ export default function ArticlePreview(props) {
 
                         )
 
-                    }
+                    
 
 
                 })
