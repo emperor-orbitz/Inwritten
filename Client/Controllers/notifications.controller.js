@@ -45,13 +45,11 @@ const_options ={
                         resolve(result);
                     }
                     else {
-                        console.log(result +"UNCATWSA")
                         reject(result)
                      }
 
                 })
                 .catch(err => { 
-                    console.log(err +"UNCATWSA")
                     reject(err)
                  })
         })

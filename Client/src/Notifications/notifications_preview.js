@@ -42,10 +42,12 @@ export default function NotificationsPreview(props) {
     
     var { data } = props;
    
-    if (data == null) {
+    if (data.data == null) {
 
         return (
             <div className='bodyArticle'>
+         <h5>Recent Activities | <Link to="/notification">Notifications</Link></h5>
+
                <p>Great!, You have no notifications </p> 
 
             </div>
@@ -66,7 +68,7 @@ export default function NotificationsPreview(props) {
             <div style={{width:"100%"}}>
 
             <Grid.Row className='row' >
-                <h5>Recent Activities | <Link to="/notification">See more</Link></h5>
+                <h5>Recent Activities | <Link to="/notification">Notifications</Link></h5>
                     <Table>
                 {data.map(function (e) {
 

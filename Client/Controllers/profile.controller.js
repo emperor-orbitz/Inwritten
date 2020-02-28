@@ -161,10 +161,8 @@ export default class ProfileUpdate {
                 headers: { 'Content-Type': 'application/json',
                            'Authorization': localStorage.getItem("hs_token")       
                          },
-                //body: JSON.stringify(updateDetails),
                 credentials: 'include',
                 withCredentials: true,
-                //mode: 'cors'
 
             }
         }
@@ -177,7 +175,55 @@ export default class ProfileUpdate {
                     if (updated.code == 200) {
 
                         resolved({ data:updated.data, code:200 })
-                        console.log
+                    }
+                    else if (updated.code == 500 ) {
+
+                        rejected({ message:"Server error", code: 500 });
+                    }
+                    else {
+                        //rejected(updated);
+                    }
+                })
+                .catch( e =>{
+                    rejected({message:"Something just happened. We'll fix it soon", code:500 })
+                } )
+
+
+        })
+
+
+
+
+
+
+    }
+
+
+
+    //fetch stats counts
+    fetchStats = () => {
+        const get_options = {
+            url: '/profile',
+            options: {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json',
+                           'Authorization': localStorage.getItem("hs_token")       
+                         },
+                credentials: 'include',
+                withCredentials: true,
+
+            }
+        }
+
+        return new Promise((resolved, rejected) => {
+            fetch(`${get_options.url}/fetch_stats`,
+                get_options.options)
+                .then( res => res.json())
+                .then( updated => {
+                    if (updated.code == 200) {
+
+                        resolved({ data:updated, code:200 })
+                        console.log("data is herer pooooo", updated)
                     }
                     else if (updated.code == 500 ) {
 

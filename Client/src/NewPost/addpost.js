@@ -176,7 +176,7 @@ class AddPost extends React.Component {
           this.props.dispatch({ type: 'INSERT_ARTICLE', payload: with_id });
 
           this.setState({
-            success_message: 'Yippee, Check out your story ',
+            success_message: 'Nice one, Check out your story ',
             error_message: '',
             buttonDisabled: false, 
             dimmerLoad: false,
@@ -303,7 +303,7 @@ class AddPost extends React.Component {
                       note[0].style.display = 'none';
                     }} ><Icon name='close' onClick={() => { this.state.success_message = "" }} /> </span>
                     <Icon name='check circle outline' color="green" size='big' />
-                    {this.state.success_message} <a href={`${this.state.post_link}`} target='_blank' style={{ color: 'black' }} ><u>here</u> </a>
+                    {this.state.success_message} { this.state.privacy_value ==true ?<a href={`${this.state.post_link}`} target='_blank' style={{ color: 'black' }} ><u>here</u> </a>: 'in drafts'}
                   </div>
 
                   </div>

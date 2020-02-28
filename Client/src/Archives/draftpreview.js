@@ -68,7 +68,7 @@ export default function DraftPreview(props) {
             //<Grid.Row className="row">
 
             <Grid.Row className='row' >
-                <h5>Unpublished Drafts |  <Link to="/drafts">See more</Link></h5>
+                <h5>Unpublished Drafts |  <Link to="/drafts">Drafts</Link></h5>
 
                 {articles_preview.map(function (e) {
 
@@ -93,7 +93,6 @@ export default function DraftPreview(props) {
 
                                             <Button.Group className="button-hover" size='small' icon >
                                                 <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
-                                                <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
                                                 <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
 
                                             </Button.Group>

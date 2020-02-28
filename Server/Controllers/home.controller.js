@@ -7,13 +7,14 @@ var path =  require('path');
 
 
 
-//*           LOAD ALL ARTICLES
 
 var index = (req, res) => {
 
     res.render("index")
 }
 
+
+//*T & C page
 var terms_and_conditions =(req, res) =>{
     res.sendFile(path.resolve(__dirname, "../../Client/assets/terms-and-conditions.html"))
     

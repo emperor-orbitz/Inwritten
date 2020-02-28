@@ -1,5 +1,5 @@
 
-
+//DEPRECATED LOGIN VALIDATION
 export default class Validator {
     constructor(params) {
         this.email = params.email;

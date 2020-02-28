@@ -7,6 +7,8 @@ import Account from './Dashboard/account';
 import Comments from './Comments/comment';
 import Home from './home'
 import Login from './AuthPage/login';
+import ForgotPassword from './AuthPage/forgot_password';
+
 import Profile from './Profile/profile';
 import Bookmark from './Bookmark/bookmark';
 
@@ -36,5 +38,5 @@ var ArticlesCategory ={
 export { Signup, Account, Home, Login,  
         ArticlesCategory, Profile, 
         Comments, Interests, Bookmark,
-        Preferences, Templates, Notifications
+        Preferences, Templates, Notifications, ForgotPassword
     };

@@ -3,7 +3,7 @@ import { Value } from 'slate'
 import React from 'react'
 import initialValue from './value'
 
-import { Button, Icon, Modal, Input, Grid } from 'semantic-ui-react'
+import { Button, Icon, Modal, Input } from 'semantic-ui-react'
 import Html from "slate-html-serializer"
 import { DEFAULT_NODE, schema, rules, renderMark, renderBlock, onKeyDown } from "./editor-rules";
 import "../../../Resources/styles/editor.scss";

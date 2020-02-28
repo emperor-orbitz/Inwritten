@@ -1,9 +1,9 @@
 import React from 'react';
-import { Signup, Account, Login, ArticlesCategory, Profile, Comments, Interests, Bookmark, Activities, Templates, Notifications, Preferences } from './page_exports';
+import { Signup, Account, Login, ForgotPassword, ArticlesCategory, Profile, Comments, Interests, Bookmark, Templates, Notifications, Preferences } from './page_exports';
 import '../Resources/styles/style.scss';
 import { Switch, Route } from 'react-router';
 import HeaderAccount from '../src/Dashboard/header_account';
-import RichTextExample from '../src/NewPost/Components/test-editor';
+//import RichTextExample from '../src/NewPost/Components/test-editor';
 
 
 
@@ -13,9 +13,10 @@ function App() {
 
 
     <Switch>
-      <Route exact path='/test' component={RichTextExample} />
       <Route exact path='/login' component={Login} />
       <Route exact path='/signup' component={Signup} />
+      <Route path='/forgot_password' component={ForgotPassword} />
+
 
 
       <HeaderAccount>

@@ -138,7 +138,6 @@ class Articles extends React.Component {
 
     onChangeSearch = (e, p) => {
         var search = e.target.value;
-        console.log(e.keyCode)
         this.setState({ search: search, not_found: false })
     }
 
@@ -170,7 +169,6 @@ class Articles extends React.Component {
 
     componentDidMount() {
 
-        console.log(this.props.ArticleReducer)
         var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == true);
 
         this.setState({ filter_privacy });
@@ -206,13 +204,8 @@ class Articles extends React.Component {
                 <div className='bodyArticle'>
                     <Grid>
                         <Grid.Row>
-                            <Grid.Column computer={13} mobile={16} tablet={8}  >
 
-                                You don't have any published story. You can create one <Button as={Link} to="/add-post">here</Button>
-
-                            </Grid.Column>
-
-
+                                You don't have any published story. You can create one <Button size="small" as={Link} to="/add-post">here</Button>
 
 
                         </Grid.Row>

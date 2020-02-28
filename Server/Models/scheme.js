@@ -85,7 +85,7 @@ const SCHEME = {
         time_to_read: { type: Number },
         comments_enabled: { type: Boolean },
         public: { type: Boolean, default:true },
-        author: String,
+        author: String, //author email
         description: { type: String, default:"No Description"},
         likes: { Type: mongoose.Schema.Types.Number, default: 0 },
         comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
@@ -94,7 +94,7 @@ const SCHEME = {
         times_read: { type: Number, default: 0 },
         template_id: { type: mongoose.Schema.Types.ObjectId, default: "5e01d83ff47d3806c0aa6992" },
         tags: {type: String, maxlength: 100},
-        
+
 
     },
         {

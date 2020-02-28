@@ -4,6 +4,9 @@ var cloudinary = require('cloudinary');
 var posts = require('../Models/post.model');
 var socialSchema = require('../Models/socials.model');
 
+
+var followSchema = require("../Models/follow.model")
+
 /*           CLOUDINARY CREDENTIALS
 */
 
@@ -203,7 +206,6 @@ var fetch_social = (req, res) =>{
 
     socialSchema.findOne({ user_id: req.user._id })
     .then(data =>{
-        console.log(data)
         res.status(http_status.OK.code)
         .send({ code: http_status.OK.code,
                 data: data
@@ -218,10 +220,37 @@ var fetch_social = (req, res) =>{
 }
 
 
+//fetch preview dashboard stats
+var fetch_stats = async (req, res) =>{
+//fetch total count of stories,bookmarks and followers
+try{
+    let story_count = await posts.find({authorId: req.user._id}).countDocuments()
+   
+    let follower_count = await followSchema.find({followee_id: req.user._id}).countDocuments()
+    
+    res.status(http_status.OK.code)
+    .send({ code: http_status.OK.code,
+            story_count, follower_count })
+
+            console.log(story_count, follower_count)
+}
+catch(error){
+        //server error
+        console.log(error)
+        res.status(http_status.INTERNAL_SERVER_ERROR.code)
+        .send({  code: http_status.INTERNAL_SERVER_ERROR.code,
+                 message: http_status.INTERNAL_SERVER_ERROR.message })
+}
+
+    
+
+}
+
 module.exports = {
     update_profile: update_profile,
     update_password: update_password,
     update_social: update_social,
     fetch_social:fetch_social,
+    fetch_stats: fetch_stats
 
 };
