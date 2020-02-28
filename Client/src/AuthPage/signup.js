@@ -165,8 +165,8 @@ class Signup extends React.Component {
           <Grid columns={2} divided stackable>
             <Grid.Column>
               <div className="note">
-                <h2>CREATE RICH PERSPECTIVES</h2>
-                <p>Create an account and write your own story
+                <h2>LEARN SOMETHING NEW</h2>
+                <p>Create an account, share a knowledge, learn something different
 </p>
               </div>
 

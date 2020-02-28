@@ -163,7 +163,7 @@ class Login extends React.Component {
             <Grid.Column>
               <div className="note">
                 <h1>TELL A STORY</h1>
-                <p>Create contents that matter to what you do. Intrigue the world from different perspectives
+                <p>Create contents that matters to what you love. Intrigue the world from your perspectives
 </p>
        
               </div>
