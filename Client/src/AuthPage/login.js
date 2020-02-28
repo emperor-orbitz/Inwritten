@@ -185,7 +185,8 @@ class Login extends React.Component {
                   <input placeholder='Password' type="password" value={this.state.passwordValue} onChange={this.pChange} />
                 </Form.Field>
 
-                <Button size="large" style={{'color': 'rgb(3, 68, 94)'}} color="teal" disabled={this.state.button.disabled} type='submit' onClick={this.submit}>LOGIN<DimmerLoad size="small" active={this.state.button.dimmerLoad} /></Button>
+                <Button size="large" style={{'color': 'rgb(3, 68, 94)'}}  disabled={this.state.button.disabled} type='submit' onClick={this.submit}>LOGIN<DimmerLoad size="small" active={this.state.button.dimmerLoad} /></Button>
+                <p><a href="/forgot_password">Forgot password?</a></p>
               </Form>
             </Grid.Column>
 

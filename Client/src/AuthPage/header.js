@@ -36,7 +36,7 @@ class Header extends React.Component {
 
       <div className="head">
         <Responsive as={Menu} style={{color:'white'}} minWidth={60} className="nav" secondary >
-          <Menu.Item style={{ 'width': '20%' , color:'black'}} header ><img src={logo} style={{ width:"150px", height:"100px" }}/></Menu.Item>
+          <Menu.Item style={{ 'width': '20%' , color:'black'}} header ><img src={logo} style={{ width:"165px", height:"75px" }}/></Menu.Item>
 
 
           <Menu.Menu  position="right">

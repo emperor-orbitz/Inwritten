@@ -181,9 +181,9 @@ class Templates extends React.Component {
                                     </div>
 
 
-                                    <div className='template-thumbnail-hover-big'>
+                                    <div className='template-thumbnail-hover-big' style={{marginTop:"-100%"}}>
 
-                                        <div className="category">
+                                        <div className="category" style={{color:"black"}}>
                                             <span><b>{e.category}</b> </span>
                                             <h5>{e.template_name} </h5>
                                             <Button primary size='mini' className="button-hover" onClick={() => { this.setState({ open_options: true, selected: e }) }} > Select</Button>
