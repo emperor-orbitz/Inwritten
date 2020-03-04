@@ -87,49 +87,48 @@ class ForgotPassword extends React.Component {
   submit(_) {
     var connect = new Connection();
 
-    var data = {
-      email: this.state.emailValue,
-      password: this.state.passwordValue,
-    }
+   
 
     let button = Object.assign({}, this.state.button);
-    var validate = new Validator({ email: this.state.emailValue, password: this.state.passwordValue });
+    var email_test = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var test = email_test.test(this.state.emailValue)
     button.dimmerLoad = button.disabled = true
 
+    if(test == true){
+      this.setState({button})
+      connect.login({email: this.state.emailValue})
+      .then( _ => {
+        
+        button.dimmerLoad = button.disabled = false
+        //this.setState({ button })
+        this.props.history.replace('/dashboard')
 
-    this.setState({ button })
-    validate.emailPromise().then(_ => {
+      }).catch(_ => {
+        this.state.loginError = [];
+        var { loginError } = this.state;
 
-      connect.login(data)
-        .then( _ => {
-          
-          button.dimmerLoad = button.disabled = false
-          //this.setState({ button })
-          this.props.history.replace('/dashboard')
+        button.disabled = button.dimmerLoad = false;
 
-        }).catch(_ => {
-          this.state.loginError = [];
-          var { loginError } = this.state;
+        loginError.push(_);
+        this.setState({ loginError, button });
 
-          button.disabled = button.dimmerLoad = false;
+      })
 
-          loginError.push(_);
-          this.setState({ loginError, button });
+    }
 
-        })
-
-    })
-      .catch( err => {
-
+   
+else{
         var { loginError } = this.state;
         button.dimmerLoad = button.disabled = false;
 
-        this.setState({ loginError:err,
+        this.setState({ loginError:[{id:1, message:"Please correct your email"}],
           button: button
         })
         this.state.loginError = [];
+}
+      
 
-      })
+      
 
   }
 
@@ -176,7 +175,7 @@ class ForgotPassword extends React.Component {
                   <input placeholder='What is your email?' type="text" value={this.state.emailValue} onChange={this.eChange} />
                 </Form.Field>
           
-                <Button size="large" style={{'color': 'rgb(3, 68, 94)'}}  disabled={this.state.button.disabled} type='submit' onClick={this.submit}>SEND A PASSWORD RESET LINK<DimmerLoad size="small" active={this.state.button.dimmerLoad} /></Button>
+                <Button size="large" style={{'color': 'rgb(3, 68, 94)'}}  disabled={this.state.button.disabled} type='submit' onClick={this.submit}>SEND ME A LINK<DimmerLoad size="small" active={this.state.button.dimmerLoad} /></Button>
               </Form>
             </Grid.Column>
 

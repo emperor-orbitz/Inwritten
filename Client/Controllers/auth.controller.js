@@ -141,6 +141,50 @@ return new Promise((resolve, reject)=>{
 
 
 
+reset_password = function (data){
+
+    var a_token = localStorage.getItem("hs_token");
+    
+     var get_options={
+            url:'/auth/reset_password',
+             options:{
+            method:'POST',
+             headers:{
+                 'Content-Type':'application/json',
+                 'Accept':'application/json',
+                 'Authorization': a_token
+            },
+             body:JSON.stringify(data),
+             credentials:'include',
+             withCredentials: true,
+             //mode:'cors'
+             }
+           }
+           
+    
+    return new Promise((resolve, reject)=>{
+     fetch(get_options.url, get_options.options)
+     .then( _ => _.json())
+     .then((success)=>{
+         if(success.user == null){
+    
+             reject(success);
+         }
+         else{
+    
+            localStorage.setItem("hs_token", success.token)
+             resolve(success.user);  
+         }
+     })
+    })
+    
+    }
+    
+    
+    
+    
+    
+    
 
 
 

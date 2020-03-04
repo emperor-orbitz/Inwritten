@@ -7,7 +7,7 @@ var posts = require('../Models/post.model');
 var templ = require('../Models/template.model');
 var comment_model = require('../Models/comments.model');
 var follow_model = require('../Models/follow.model');
-
+var social_model = require("../Models/socials.model")
 
 
 
@@ -32,14 +32,17 @@ var index = async (req, res) => {
                                     select:"display_picture email username"
                                 }
                             })
-                            .populate("authorId", "username email display_picture")
+                            .populate("authorId", "username email display_picture bio")
                              // .select("")
                               
 
         if (data != null) {
-            var scripts = [{script:"/template-starter-02/js/auth.js"}];
+            var scripts = [{script:`${template_data.template_name}/js/auth.js`}];
+
+            console.log(data.tags.length)
             res.render(`${template_data.template_name}/index`,
-             { data,  comment_data: data.comments, author_data: data.authorId ,partials:{
+             { data,  comment_data: data.comments, author_data: data.authorId ,tag_data:data.tags.split(","),
+             partials:{
                 comments:`./partials/comment.partials`,
                 author:`./partials/author.partials`,
                 interests:`./partials/interests.partials`
@@ -73,11 +76,14 @@ var index = async (req, res) => {
 var user = async (req, res) => {
 
     try {
-        console.log("meeme")
-        let data = await posts.findOne({ username: req.param.username });
-        let found_template = await templ.findById(data.template_id)
+
+        let data = await userModel.findOne({ username: req.params.username });
+        let found_template = await templ.findOne({ _id:data.template_id })
+        let socials = await social_model.findOne({user_id: data._id}) || {}
+
         if (found_template != null) {
-            res.render(`${found_template.template_name}/profile`, data)
+
+            res.render(`${found_template.template_name}/profile`, {user_data: data, social_data: socials})
         }
         else res.send("Could not load article successfully")
 
@@ -100,12 +106,14 @@ var user = async (req, res) => {
 var blog = async (req, res, next) => {
 
     try {
-        let userData = await userModel.findOne({ username: req.params.username })
-            .populate("template_id");
-        if (userData != null) {
-            res.render(`${userData.template_id.template_name}/blog`)
+        let data = await posts.find({ author: req.params.username, public: true })
+        let user_data = await userModel.findOne({ username:req.params.username })
+                                        .populate('template_id')
+
+        if (data != null) {
+            res.render(`${user_data.template_id.template_name}/blog`, { data, user_data })
         }
-        else res.send("Operation was unsuccessful")
+        else res.send("Seems there is no story yet")
 
     }
 
@@ -193,7 +201,7 @@ var list_bookmark = async (req, res, next) => {
 
 var follow_status = async (req, res, next) => {
 
-    console.log(req.query.followee, req.user._id)
+
     try {
     var count = await follow_model.find({ follower_id: req.user._id, followee_id: req.query.followee }).countDocuments()
 
@@ -269,7 +277,6 @@ var other_interests = async (req, res, next) => {
     var data = await posts.find({ category:req.query.category })
                         .skip(rand)
                         .limit(3)
-
 
 
     res.send({ message:data })

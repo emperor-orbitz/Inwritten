@@ -270,6 +270,56 @@ var testemail = (req, res, next) => {
 
 }
 
+
+
+
+
+/*           RESET PASSWORD
+*           RESET USER PASSWORD
+*/
+
+
+var reset_password = (req, res) => {
+    var valid = new validate();
+    console.log(req.body)
+
+    var email_test = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if(email_test.test(req.body.email)){
+    var saves = new signup();
+
+        saves.findByEmail(req.body.email, async (err, success) => {
+            if (err)
+                res.json({ message: 'Oops, we don\'t have this email with us. Create bone instead.' });
+
+            else if (success != null) {
+                //console.log(success);
+                //send a reset link here
+               
+
+            }
+            
+            
+
+
+        })
+
+    }
+    else{
+        console.log("err", err)
+        res.status(400)
+        .send({
+            message: "Invalid Parameters",
+        })
+    }
+        
+
+
+
+}
+
+
+
 /*
 *          API TESTING
 */
@@ -290,6 +340,7 @@ module.exports = {
     send_mail: send_mail,
     api: api,
     isloggedin: isloggedin,
-    testemail:testemail
+    testemail:testemail,
+    reset_password: reset_password
 
 };
