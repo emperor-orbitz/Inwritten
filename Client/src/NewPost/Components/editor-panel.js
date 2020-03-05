@@ -122,12 +122,21 @@ class EditorPanel extends React.Component {
   //RENDERMARK BUTTON RENDERER
   renderMarkButton = (type, icon) => {
     const isActive = this.hasMark(type)
-
+    if(type =="linkify"){
+      return(
+      <Button name={icon}
+        size="mini"
+        icon={icon}
+        onMouseDown={event => this.insertLinkify(event, type)}
+        className='editor-editorButtons' active={isActive} />
+    )
+    }
+    else
     return (
       <Button name={icon}
         size="mini"
         icon={icon}
-        onMouseDown={event => this.onClickMark(event, type)}
+        onClick={ this.onClickMark()}
         className='editor-editorButtons' active={isActive} />
     )
   }
@@ -200,7 +209,10 @@ class EditorPanel extends React.Component {
     this.setState({ openMedia: true, mediaInfo: media_type })
 
   }
+  insertLinkify =()=>{
+    this.setState({ openMedia: true, mediaInfo: "linkify" })
 
+  }
 
 
   render() {
@@ -266,6 +278,7 @@ class EditorPanel extends React.Component {
           {this.renderMarkButton('bold', 'bold')}
           {this.renderMarkButton('italic', 'italic')}
           {this.renderMarkButton('underline', 'underline')}
+          {this.renderMarkButton('linkify', 'linkify')}
 
           <Button name="plus"
             className="hoverToDisplay"

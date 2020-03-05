@@ -266,6 +266,8 @@ renderMark: (props, editor, next) => {
     switch (mark.type) {
       case 'bold':
         return <strong {...{attributes}}>{children}</strong>
+        case 'linkify':
+        return <a {...{attributes}}>{children}</a>
       case 'code':
         return <code className="editor-code" {...attributes}>{children}</code>
       case 'italic':

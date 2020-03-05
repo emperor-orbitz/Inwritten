@@ -45,15 +45,33 @@ controller.api(req, res, next);
 
 })
 
+router.post('/auth/reset_password', (req, res, next) => {
+    controller.reset_password(req, res, next);
+    
+    })
 
 
+    
+  
+router.get('/auth/change_password_page', (req, res, next) => {
+    controller.change_password_page(req, res, next);
+    
+    })  
+
+  
+    router.post('/auth/change_password_page_submit', (req, res, next) => {
+        controller.change_password_page_submit(req, res, next);
+        
+        })  
+
+
+//TESTING 
 router.get('/test-email-template', (req, res, next) => {
     controller.testemail(req, res, next);
     
     })
-    
+
     
 
-//TESTING 
 
 module.exports = router;

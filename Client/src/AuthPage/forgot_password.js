@@ -96,7 +96,7 @@ class ForgotPassword extends React.Component {
 
     if(test == true){
       this.setState({button})
-      connect.login({email: this.state.emailValue})
+      connect.reset_password({email: this.state.emailValue})
       .then( _ => {
         
         button.dimmerLoad = button.disabled = false

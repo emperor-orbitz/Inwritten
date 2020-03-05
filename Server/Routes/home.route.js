@@ -30,7 +30,8 @@ router.get('/terms-and-conditions', (req, res, next) => {
 
     controller.terms_and_conditions(req, res, next);
     
-    });
+});
+
 
 
 

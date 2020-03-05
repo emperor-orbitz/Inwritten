@@ -7,7 +7,7 @@ var jwt = require("jsonwebtoken");
 var validate = require("../Utils/validation");
 var mail = require("../Utils/email");
 var path = require("path")
-
+var URL = require("url")
 
 
 /*
@@ -154,7 +154,7 @@ var verify_mail = async (req, res) => {
 
 var register = (req, res) => {
     var valid = new validate();
-    console.log(req.body)
+
     valid.validate(req.body).then(good => {
         var saves = new signup();
 
@@ -203,7 +203,7 @@ var register = (req, res) => {
 
     })
         .catch(err =>{
-            console.log("err", err)
+
             res.status(400)
             .send({
                 message: "Invalid Parameters",
@@ -281,21 +281,42 @@ var testemail = (req, res, next) => {
 
 var reset_password = (req, res) => {
     var valid = new validate();
-    console.log(req.body)
 
+    
     var email_test = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if(email_test.test(req.body.email)){
     var saves = new signup();
 
         saves.findByEmail(req.body.email, async (err, success) => {
-            if (err)
-                res.json({ message: 'Oops, we don\'t have this email with us. Create bone instead.' });
-
-            else if (success != null) {
+     
+           if (success != null) {
                 //console.log(success);
-                //send a reset link here
+                //send a reset link here/ HASH
+                try{
+                    var signature = jwt.sign({ email: success.email, id:success._id }, process.env.PASSWORD_RESET_SECRET,
+                        {
+                            expiresIn: "5m"
+                        });
+                    //send JWT
+
+                    var send = new mail(success.email)
+                    send.send_password_reset({ username:success.username, email:success.email, hash:signature })
+                    res.json({ status:200, message: 'Sent! Check your email to continue' });
+
+                }
+                catch(err){
+                    res.json({ message: 'Oops, something went wrong. We\'ll fix it soon' });
+
+                }
                
+
+
+            }
+            else{
+                //no matvh
+                res.json({ status:401, message: 'Oops, we don\'t know about this email. Signup for free' });
+
 
             }
             
@@ -318,15 +339,73 @@ var reset_password = (req, res) => {
 
 }
 
+//REDIRECT TO PASSWORD CHANGE PAGE
+var change_password_page =(req,res, next) =>{
+
+    var token = req.query.token;
+    //verify token & go to page
+    try{
+        let verify = jwt.verify(token, process.env.PASSWORD_RESET_SECRET);
+        if (verify != null){
+            res.sendFile(path.resolve(__dirname, "../../Client/assets/change_password_page.html"))
+    
+        }
+    }
+    catch(JWTError){
+
+        res.sendFile(path.resolve(__dirname, "../../Client/assets/broken_email.html"))
+
+        //res.send("JWT ERROR"+ JWTError)
+    }
+    
+}
+
+
+
+
+
+
+//SUBMIT PASSWORD CHANGE FORM
+var change_password_page_submit = (req,res, next) =>{
+
+    //verify token & go to page
+    try{
+        if(req.body.new_password == req.body.confirm_password){
+            var token = URL.parse(req.headers.referer,/** parse query string too */true).query.token;
+            var data = jwt.verify(token, process.env.PASSWORD_RESET_SECRET)
+            let password_change = new signup;
+            password_change.updateProfile_password(data.id, {new_password: req.body.confirm_password}, (err, ok)=>{
+                if(err){
+                    res.send("there was an error"+ err)
+                }
+                else{
+                    res.json({message:"Password Changed successfully", type:"success"})
+                }
+            })
+            //change password
+        }
+        else{
+            res.json({message:"confirm password properly", type:"error"})
+        }
+        
+    }
+    catch(JWTError){
+
+        res.sendFile(path.resolve(__dirname, "../../Client/assets/broken_email.html"))
+
+        //res.send("JWT ERROR"+ JWTError)
+    }
+    
+}
+
+
+
+
 
 
 /*
 *          API TESTING
 */
-
-
-
-
 var api = (req, res, next) => {
     res.render('Utility/broken_email');
 
@@ -341,6 +420,8 @@ module.exports = {
     api: api,
     isloggedin: isloggedin,
     testemail:testemail,
-    reset_password: reset_password
+    reset_password: reset_password,
+    change_password_page:change_password_page,
+    change_password_page_submit: change_password_page_submit
 
 };
