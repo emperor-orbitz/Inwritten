@@ -11,33 +11,6 @@ import cat from "../Dashboard/categories"
 
 
 
-/*
-function HoverableDiv(props) {
-  return (
-    <div className='image-thumbnail-template-cover'>
-
-      {props.children}
-
-      <div className='template-thumbnail-hover'> <h5>{props.name} </h5>
-        <h6>{props.type}</h6>
-      </div>
-
-    </div>
-  )
-}
-
-*/
-
-
-
-
-
-
-
-
-
-
-
 
 
 

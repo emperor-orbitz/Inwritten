@@ -1,12 +1,13 @@
 import { Editor } from 'slate-react'
-import { Value } from 'slate'
+import { Value, Inline, Node, Text } from 'slate'
 import React from 'react'
-import initialValue from '../Controllers/value'
+import initialValue from './value'
 
-import { Button, Icon, Modal, Input, Grid } from 'semantic-ui-react'
+import { Button, Icon, Modal, Input } from 'semantic-ui-react'
 import Html from "slate-html-serializer"
-import { DEFAULT_NODE, schema, rules, renderMark, renderBlock, onKeyDown } from "../Controllers/editor-rules";
+import { DEFAULT_NODE, schema, rules, renderMark, renderBlock,renderInline, onKeyDown } from "./editor-rules";
 import "../../../Resources/styles/editor.scss";
+//import EditorPanel from '../../../backup-editor';
 
 
 
@@ -14,34 +15,25 @@ import "../../../Resources/styles/editor.scss";
 
 class EditorPanel extends React.Component {
 
-  constructor(props) {
-    super(props)
 
-    this.state = {
-      value: Value.fromJSON(initialValue),
-      keys: '',
-      h: '',
-      openMedia: false,
-      mediaInfo: '',
-      image_url: '',
-      modal1display: 'block',
-      modal2display: 'none',
-      modalToggle: 'grid layout',
-      img_submit_inactive: true,
-      invalid_file: false,
-      link_insert_display: 'none',
-      embedurl: '',
-      activeBlock: ""
+  state = {
+    value: Value.fromJSON(initialValue),
+    keys: '',
+    h: '',
+    openMedia: false,
+    mediaInfo: '',
+    image_url: '',
+    modal1display: 'block',
+    modal2display: 'none',
+    modalToggle: 'grid layout',
+    img_submit_inactive: true,
+    invalid_file: false,
+    link_insert_display: 'none',
+    embedurl: '',
+    activeBlock: ""
 
-    }
   }
 
-  componentWillReceiveProps(props) {
-    if (this.props.initialValue == props.initialValue) {
-      //DO NOTHING
-    }
-    else this.setState({ value: Value.fromJSON(props.initialValue) });
-  }
 
 
   get exposeEditorValue() {
@@ -58,12 +50,16 @@ class EditorPanel extends React.Component {
 
 
   onChange = ({ value }) => {
+
     this.setState({ value })
     window.editor = value
-  
+
   }
 
+  insertLinkify =()=>{
+    this.setState({ openMedia: true, mediaInfo: "linkify" })
 
+}
 
   // EDITOR HANDLERS, ONKEYDOWN, ONCLICKMARK, ONCLICKBLOCK,ETC
   onClickMark = (event, type) => {
@@ -128,15 +124,22 @@ class EditorPanel extends React.Component {
   //RENDERMARK BUTTON RENDERER
   renderMarkButton = (type, icon) => {
     const isActive = this.hasMark(type)
-
+    if(type =="linkify"){
+      return(
+      <Button name={icon}
+        size="mini"
+        icon={icon}
+        onClick={event => this.insertLinkify()}
+        className='editor-editorButtons' active={isActive} />
+    )
+    }
+    else
     return (
       <Button name={icon}
         size="mini"
         icon={icon}
         onMouseDown={event => this.onClickMark(event, type)}
-        className='editor-editorButtons' active={isActive}
-
-      />
+        className='editor-editorButtons' active={isActive} />
     )
   }
 
@@ -162,8 +165,7 @@ class EditorPanel extends React.Component {
           size="mini"
           icon={icon}
           onMouseDown={event => this.onClickBlock(event, type)}
-          className='editor-editorButtons' active={isActive}
-        />
+          className='editor-editorButtons' active={isActive} />
       )
     }
 
@@ -172,7 +174,6 @@ class EditorPanel extends React.Component {
         <Button name={icon}
           size="mini"
           icon={icon}
-          secondary
           className='editor-editorButtons'
           onClick={this.showMedia.bind(this, ['image'])}
         />
@@ -216,30 +217,29 @@ class EditorPanel extends React.Component {
   render() {
 
     return (
-      <div style={{ width: "85%", margin: 'auto', top: 0, left: '250px', bottom: 0, right: 0 }}>
+      <div style={{ color:"black", width: "85%", margin: 'auto', top: 0, left: '250px', bottom: 0, right: 0 }}>
 
 
         {this.state.mediaInfo == 'image' ? (
-          <Modal dimmer={true} size='mini' open={this.state.openMedia} >
+          <Modal dimmer={true} size='mini' open={this.state.openMedia} closeOnDimmerClick >
 
             <Modal.Header><Icon size='small' style={{ cursor: 'pointer', color: 'rgb(3, 68, 94)' }} title='Use hashstack gallery or insert image URL' name={this.state.modalToggle} /> Insert new {this.state.mediaInfo} {this.state.deleteArticleName}</Modal.Header>
 
-            <Modal.Content style={{ background: "url('src/img/tech.png') no-repeat right top", padding: '0px' }}  >
+            <Modal.Content style={{ padding: '0px' }}  >
               <div className='modalContent' style={{ display: this.state.modal1display }} >
 
                 <p style={{ display: this.state.invalid_file == true ? 'block' : 'none', color: 'red' }} >Unacceptable image format </p>
                 <br />
                 <p>{'Select ' + this.state.mediaInfo}</p>
-                <Input size='mini' type='file' onChange={this.handle_image.bind(this)} id='input_file' style={{ width: '70%', borderRadius: 'none' }} />
-
+                <Input size='mini' type='file' onChange={this.handle_image.bind(this)} id='input_file' style={{ width: '85%', borderRadius: 'none' }} />
 
                 <p>{'Insert ' + this.state.mediaInfo + 'URL'}</p>
-                <Input size='small' type='text' control='input' id="input_url" onChange={this.handle_image.bind(this)} style={{ width: '70%', borderRadius: 'none' }} />
+                <Input size='small' type='text' control='input' id="input_url" onChange={this.handle_image.bind(this)} style={{ width: '85%', borderRadius: 'none', marginTop:"2px" }} />
 
                 <p>Insert Caption </p>
                 <input id='caption' type='text' label='Insert caption (optional)' style={{
-                  width: '70%', height: '35px',
-                  border: 'none'
+                  width: '85%', height: '35px',
+                  border: '1px solid black'
                 }} onChange={() => { document.getElementById('caption').style.borderBottom = '3px solid teal' }} />
               </div>
 
@@ -282,11 +282,11 @@ class EditorPanel extends React.Component {
             className="hoverToDisplay"
             size="mini"
             icon="plus"
-          />
+             />
 
           <div className='hoverDisplayTool'>
-            {this.renderMarkButton('code', 'code')}
-            {this.renderMarkButton('strikethrough', 'strikethrough')}
+          {this.renderMarkButton('linkify', 'linkify')}
+          {this.renderMarkButton('strikethrough', 'strikethrough')}
             {this.renderBlockButton('align-right', 'align right')}
             {this.renderBlockButton('heading-one', 'heading')}
             {this.renderBlockButton('heading-two', 'h square')}
@@ -310,6 +310,7 @@ class EditorPanel extends React.Component {
             onKeyDown={onKeyDown}
             renderBlock={renderBlock}
             renderMark={renderMark}
+            renderInline={renderInline}
             schema={schema}
             role="textbox"
             className="editor"
@@ -375,7 +376,7 @@ class EditorPanel extends React.Component {
     ev.preventDefault();
 
     //test if its jpg or png or gif
-    var img_regexp = /(http(s?):)|([/|.|\w|\s])*\.(?:jpg|gif|png)/;
+    var img_regexp = /(http(s?):)|([/|.|\w|\s])*\.(?:jpg|gif|png|jpeg)/;
     if (ev.target.type == 'file') {
       var { name } = ev.target.files[0];
 
@@ -432,16 +433,29 @@ class EditorPanel extends React.Component {
   embedVideoItemClick(ev) {
 
     if (ev.key == 'Enter') {
-      var status = this.editor
-        .insertBlock({
-          type: 'embedvideo',
+      /*var status = this.editor
+        .insertInline({
+          type: 'linkify',
           isVoid: true,
           data: {
             src: this.state.embedurl,
             className: 'editor-images',
 
           }
+        })*/
+        
+      
+
+        var status = this.editor.wrapInline({
+          type:"linkify",
+          data: { href:this.state.embedurl },
+        
+        })/*.insertInline({
+          type:"linkify",
+          isVoid:true,
+          data: { href:this.state.embedurl },
         })
+*/
       this.setState({ openMedia: false })
       this.onChange(status);
     }

@@ -277,7 +277,6 @@ class EditorPanel extends React.Component {
           {this.renderMarkButton('bold', 'bold')}
           {this.renderMarkButton('italic', 'italic')}
           {this.renderMarkButton('underline', 'underline')}
-          {this.renderMarkButton('linkify', 'linkify')}
 
           <Button name="plus"
             className="hoverToDisplay"
@@ -286,6 +285,7 @@ class EditorPanel extends React.Component {
              />
 
           <div className='hoverDisplayTool'>
+          {this.renderMarkButton('linkify', 'linkify')}
           {this.renderMarkButton('strikethrough', 'strikethrough')}
             {this.renderBlockButton('align-right', 'align right')}
             {this.renderBlockButton('heading-one', 'heading')}

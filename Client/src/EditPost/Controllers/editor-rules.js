@@ -1,5 +1,5 @@
 import React from 'react'
-import {  Block } from 'slate'
+import {  Block} from 'slate'
 import { isKeyHotkey } from 'is-hotkey';
 
 const BLOCK_TAGS= {
@@ -12,7 +12,7 @@ const BLOCK_TAGS= {
     p: 'align-right',
     h1:"heading-one",
     h2:"heading-two",
-  
+    caption:"caption",
     p: 'align-left',
     ul:"bulleted-list"
     //embed:'embed'
@@ -73,9 +73,9 @@ module.exports = {
                         return <p className={obj.data.get('className')}>{children}</p>
   
                     case 'image':
-                   // console.log("images here", obj.data.get('src'))
                         return (< img src={obj.data.get('src')} className={obj.data.get('className')} />)
   
+                        
                     case 'embedvideo':
                         return ( <div>
                             <iframe src={obj.data.get('src')} className={obj.data.get('className')} />
@@ -130,7 +130,7 @@ module.exports = {
                     type: type,
                     data: {
                         className: el.getAttribute('class'),
-                        src: el.getAttribute('src')
+                        href: el.getAttribute('href')
   
                     },
                     nodes: next(el.childNodes),
@@ -144,8 +144,10 @@ module.exports = {
                 switch (obj.type) {
                     case 'code':
                         return (<code className="editor-code">{children}</code>)
+                    case 'span':
+                        return (<span style={{ textAlign:"center" }}>{children}</span>)
                     case 'linkify':
-                        return (<a className='editor-link' href={obj.data.get('src')}>{children}</a>)
+                        return (<a className='editor-link' href={obj.data.get('href')}>{children}</a>)
   
                 }
             }
@@ -204,9 +206,6 @@ module.exports = {
                         return (<p className='editor-alignLeft'>{children}</p>)
   
   */
-                    case 'linkify':
-                        return (<a>{children}</a>)
-  
   
                     case 'code':
                         return (<code className="editor-code">{children}</code>)
@@ -229,8 +228,7 @@ module.exports = {
                     return change.insertNodeByKey(node.key, node.nodes.size, paragraph)
                 }
             }
-        }
-        ,
+        },
   
         last: { type: 'paragraph' },
   
@@ -244,6 +242,12 @@ module.exports = {
         embedvideo: {
             isVoid: true,
         }
+    },
+    inlines: {
+       linkify:{
+           isVoid:true
+       }
+  
     },
     nodes: {
         kind: 'block',
@@ -264,6 +268,7 @@ renderMark: (props, editor, next) => {
     switch (mark.type) {
       case 'bold':
         return <strong {...{attributes}}>{children}</strong>
+       
       case 'code':
         return <code className="editor-code" {...attributes}>{children}</code>
       case 'italic':
@@ -283,14 +288,18 @@ renderMark: (props, editor, next) => {
   renderBlock: (props, editor, next) => {
     const { attributes, children, node, isFocused } = props
     let src= null || node.data.get('src')
+    let caption= null || node.data.get('caption')
 
     switch (node.type) {
 
       case 'image':
-    return <img src={src} {...attributes} className='editor-image'style={{
-        outline: isFocused ? "4px solid black":"none"
-    }} />
-
+    return (
+        <div>
+        <img src={src} {...attributes} className='editor-image'style={{
+        outline: isFocused ? "4px solid black":"none"}} />
+       <p><span style={{ textAlign:"center"}}>{caption}</span></p>
+    </div>
+    )
       case 'paragraph':
         return <p {...attributes}>{children}</p>
 
@@ -319,6 +328,26 @@ renderMark: (props, editor, next) => {
         return (<p {...attributes} className="editor-alignright">{children}</p>)
 
     
+
+      default:
+        return next()
+    }
+  },
+
+  renderInline: (props, editor, next) => {
+    const { attributes, children, node, isFocused } = props
+    let href= null || node.data.get('href');
+    console.log(href)
+
+
+    switch (node.type) {
+
+      case 'paragraph':
+        return <p {...attributes}>{children}</p>
+
+        case 'linkify':
+        return (<a href={`//${href}`} {...attributes}>{node.text}</a>)
+  
 
       default:
         return next()
