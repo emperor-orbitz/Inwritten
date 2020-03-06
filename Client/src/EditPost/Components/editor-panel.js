@@ -1,11 +1,11 @@
 import { Editor } from 'slate-react'
 import { Value, Inline, Node, Text } from 'slate'
 import React from 'react'
-import initialValue from './value'
+import initialValue from '../Controllers/value'
 
 import { Button, Icon, Modal, Input } from 'semantic-ui-react'
 import Html from "slate-html-serializer"
-import { DEFAULT_NODE, schema, rules, renderMark, renderBlock,renderInline, onKeyDown } from "./editor-rules";
+import { DEFAULT_NODE, schema, rules, renderMark, renderBlock,renderInline, onKeyDown } from "../Controllers/editor-rules";
 import "../../../Resources/styles/editor.scss";
 //import EditorPanel from '../../../backup-editor';
 
