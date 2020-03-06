@@ -1,5 +1,5 @@
 import React from 'react'
-import {  Block } from 'slate'
+import {  Block} from 'slate'
 import { isKeyHotkey } from 'is-hotkey';
 
 const BLOCK_TAGS= {
@@ -130,7 +130,7 @@ module.exports = {
                     type: type,
                     data: {
                         className: el.getAttribute('class'),
-                        src: el.getAttribute('src')
+                        href: el.getAttribute('href')
   
                     },
                     nodes: next(el.childNodes),
@@ -147,7 +147,7 @@ module.exports = {
                     case 'span':
                         return (<span style={{ textAlign:"center" }}>{children}</span>)
                     case 'linkify':
-                        return (<a className='editor-link' href={obj.data.get('src')}>{children}</a>)
+                        return (<a className='editor-link' href={obj.data.get('href')}>{children}</a>)
   
                 }
             }
@@ -206,9 +206,6 @@ module.exports = {
                         return (<p className='editor-alignLeft'>{children}</p>)
   
   */
-                    case 'linkify':
-                        return (<a>{children}</a>)
-  
   
                     case 'code':
                         return (<code className="editor-code">{children}</code>)
@@ -231,8 +228,7 @@ module.exports = {
                     return change.insertNodeByKey(node.key, node.nodes.size, paragraph)
                 }
             }
-        }
-        ,
+        },
   
         last: { type: 'paragraph' },
   
@@ -246,6 +242,12 @@ module.exports = {
         embedvideo: {
             isVoid: true,
         }
+    },
+    inlines: {
+       linkify:{
+           isVoid:true
+       }
+  
     },
     nodes: {
         kind: 'block',
@@ -266,8 +268,7 @@ renderMark: (props, editor, next) => {
     switch (mark.type) {
       case 'bold':
         return <strong {...{attributes}}>{children}</strong>
-        case 'linkify':
-        return <a {...{attributes}}>{children}</a>
+       
       case 'code':
         return <code className="editor-code" {...attributes}>{children}</code>
       case 'italic':
@@ -327,6 +328,26 @@ renderMark: (props, editor, next) => {
         return (<p {...attributes} className="editor-alignright">{children}</p>)
 
     
+
+      default:
+        return next()
+    }
+  },
+
+  renderInline: (props, editor, next) => {
+    const { attributes, children, node, isFocused } = props
+    let href= null || node.data.get('href');
+    console.log(href)
+
+
+    switch (node.type) {
+
+      case 'paragraph':
+        return <p {...attributes}>{children}</p>
+
+        case 'linkify':
+        return (<a href={`//${href}`} {...attributes}>{node.text}</a>)
+  
 
       default:
         return next()

@@ -1,11 +1,11 @@
 import { Editor } from 'slate-react'
-import { Value } from 'slate'
+import { Value, Inline, Node, Text } from 'slate'
 import React from 'react'
 import initialValue from './value'
 
 import { Button, Icon, Modal, Input } from 'semantic-ui-react'
 import Html from "slate-html-serializer"
-import { DEFAULT_NODE, schema, rules, renderMark, renderBlock, onKeyDown } from "./editor-rules";
+import { DEFAULT_NODE, schema, rules, renderMark, renderBlock,renderInline, onKeyDown } from "./editor-rules";
 import "../../../Resources/styles/editor.scss";
 //import EditorPanel from '../../../backup-editor';
 
@@ -56,7 +56,10 @@ class EditorPanel extends React.Component {
 
   }
 
+  insertLinkify =()=>{
+    this.setState({ openMedia: true, mediaInfo: "linkify" })
 
+}
 
   // EDITOR HANDLERS, ONKEYDOWN, ONCLICKMARK, ONCLICKBLOCK,ETC
   onClickMark = (event, type) => {
@@ -72,7 +75,6 @@ class EditorPanel extends React.Component {
     const { editor } = this
     const { value } = editor
     const { document } = value
-    console.log(value, editor, document)
 
     // Handle everything but list buttons.
     if (type !== 'bulleted-list' && type !== 'numbered-list') {
@@ -127,7 +129,7 @@ class EditorPanel extends React.Component {
       <Button name={icon}
         size="mini"
         icon={icon}
-        onMouseDown={event => this.insertLinkify(event, type)}
+        onClick={event => this.insertLinkify()}
         className='editor-editorButtons' active={isActive} />
     )
     }
@@ -136,7 +138,7 @@ class EditorPanel extends React.Component {
       <Button name={icon}
         size="mini"
         icon={icon}
-        onClick={ this.onClickMark()}
+        onMouseDown={event => this.onClickMark(event, type)}
         className='editor-editorButtons' active={isActive} />
     )
   }
@@ -209,10 +211,7 @@ class EditorPanel extends React.Component {
     this.setState({ openMedia: true, mediaInfo: media_type })
 
   }
-  insertLinkify =()=>{
-    this.setState({ openMedia: true, mediaInfo: "linkify" })
 
-  }
 
 
   render() {
@@ -287,7 +286,6 @@ class EditorPanel extends React.Component {
              />
 
           <div className='hoverDisplayTool'>
-          {this.renderMarkButton('code', 'code')}
           {this.renderMarkButton('strikethrough', 'strikethrough')}
             {this.renderBlockButton('align-right', 'align right')}
             {this.renderBlockButton('heading-one', 'heading')}
@@ -312,6 +310,7 @@ class EditorPanel extends React.Component {
             onKeyDown={onKeyDown}
             renderBlock={renderBlock}
             renderMark={renderMark}
+            renderInline={renderInline}
             schema={schema}
             role="textbox"
             className="editor"
@@ -377,7 +376,7 @@ class EditorPanel extends React.Component {
     ev.preventDefault();
 
     //test if its jpg or png or gif
-    var img_regexp = /(http(s?):)|([/|.|\w|\s])*\.(?:jpg|gif|png)/;
+    var img_regexp = /(http(s?):)|([/|.|\w|\s])*\.(?:jpg|gif|png|jpeg)/;
     if (ev.target.type == 'file') {
       var { name } = ev.target.files[0];
 
@@ -434,16 +433,29 @@ class EditorPanel extends React.Component {
   embedVideoItemClick(ev) {
 
     if (ev.key == 'Enter') {
-      var status = this.editor
-        .insertBlock({
-          type: 'embedvideo',
+      /*var status = this.editor
+        .insertInline({
+          type: 'linkify',
           isVoid: true,
           data: {
             src: this.state.embedurl,
             className: 'editor-images',
 
           }
+        })*/
+        
+      
+
+        var status = this.editor.wrapInline({
+          type:"linkify",
+          data: { href:this.state.embedurl },
+        
+        })/*.insertInline({
+          type:"linkify",
+          isVoid:true,
+          data: { href:this.state.embedurl },
         })
+*/
       this.setState({ openMedia: false })
       this.onChange(status);
     }
