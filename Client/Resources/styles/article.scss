@@ -256,6 +256,21 @@ float:left;
             color:white;
             border-radius: 0px;
         }
+
+        .template-thumbnail-hover-big-black{
+         
+            display:block;
+            position: relative;
+            width:90%;
+            border-radius:2px;
+            height: 100%;
+            margin-top: -60px;
+                cursor:pointer;
+            background:rgba(0,0,0,0.7);
+                padding:5%;
+                color:white;
+                border-radius: 0px;
+            }
         .button-hover{
             display:block;
         }
@@ -704,6 +719,7 @@ h4{
 .image-thumbnail-template-cover-big:hover > .template-thumbnail-hover-big{
     display:block;
 }
+
 
 
 .customCard-all{

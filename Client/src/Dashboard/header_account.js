@@ -51,7 +51,7 @@ class HeaderAccount extends React.Component {
   componentWillMount() {
     this.socket.on("new_notification", (data)=>{
         this.setState({ new_notification:"You have a new notification" })
-        alert("you have a new notif")
+        alert("You have a new notification! Check notifications")
 
     })
 }

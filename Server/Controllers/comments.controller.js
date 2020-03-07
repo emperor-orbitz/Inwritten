@@ -38,7 +38,7 @@ var create = (req, res) => {
             else{
                 console.log(req.headers.referer,"requesrrr")
 
-                axios.post("http://localhost:5000/notifications/create", 
+                axios.post("http://www.inwritten.com/notifications/create", 
                    {
                         sender: req.body.commenter_id,
                         receiver: req.body.author_id,

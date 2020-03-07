@@ -106,7 +106,7 @@ class Templates extends React.Component {
             return (
                 <div className="comment-div" style={{ marginTop: "0px !important" }}>
                     <h3 style={{ color: "black" }}>Templates</h3>
-                    <p>Oops, there seem to be no templates for now. Check back later.</p>
+                    <p>Loading...</p>
                 </div>
             )
         }
@@ -126,10 +126,12 @@ class Templates extends React.Component {
                         </div>
 
                     </div>
-                    <Divider />
 
-                    {this.state.save_text == "Templates successfully saved!" ? <p><Icon name="check circle outline" color="green" size="big" /> {this.state.save_text}</p>:""}
-                    {this.state.save_text == 'Unable to save template' ? <p><Icon name="cross" color="red" size="big" /> {this.state.save_text}</p>:""}
+                    <Divider />
+                    <h3>Blogs | Free</h3>
+
+                    {this.state.save_text == "Templates successfully saved!" ? <p><Icon name="check circle outline" color="green" size="big" /> {this.state.save_text}</p> : ""}
+                    {this.state.save_text == 'Unable to save template' ? <p><Icon name="cross" color="red" size="big" /> {this.state.save_text}</p> : ""}
 
                     <Modal size="small" open={this.state.open_options} onClose={this.close} closeOnDimmerClick closeOnDocumentClick >
                         <Modal.Header>
@@ -160,30 +162,27 @@ class Templates extends React.Component {
                             </Modal.Description>
                         </Modal.Content>
                         <Modal.Actions>
-                            <Button size="small" as={Link} as={Link} target="__blank" to={`/template/template_sample/${selected._id}`}>Preview</Button>
-                            <Button primary size="small" disabled={this.state.save_disabled} onClick={this.save_template}>Save</Button>
+                            <Button size='tiny' as={Link} as={Link} target="__blank" to={`/template/template_sample/${selected._id}`}>Preview</Button>
+                            <Button primary size="tiny" disabled={this.state.save_disabled} onClick={this.save_template} icon='angle right' >Save <Icon name="angle right" /></Button>
                         </Modal.Actions>
 
 
                     </Modal>
 
 
-        <div style={{ position: "relative" }}>
+                    <div style={{ width: "90%", position: "relative", minHeight: "250px" }}>
                         {templates.map((e, i, a) => {
                             return (
                                 <div key={e._id} className='image-thumbnail-template-cover-big'>
 
                                     <div style={{ margin: '10px 3px' }}>
-
                                         <div className={'customCard-' + e.category} style={{ backgroundImage: `url('${e.featured_image}')`, backgroundSize: "cover", backgroundPosition: "bottom right" }}>
-
                                         </div>
                                     </div>
 
 
-                                    <div className='template-thumbnail-hover-big' style={{marginTop:"-100%"}}>
-
-                                        <div className="category" style={{color:"black"}}>
+                                    <div className='template-thumbnail-hover-big-black' style={{ marginTop: "-110%" }}>
+                                        <div className="category" style={{ color: "white" }}>
                                             <h5>{e.template_name} </h5>
                                             <Button primary size='mini' className="button-hover" onClick={() => { this.setState({ open_options: true, selected: e }) }} > View</Button>
 
@@ -202,9 +201,29 @@ class Templates extends React.Component {
 
                     </div>
 
-                    
-           
 
+                    <br />
+                    <div style={{ position: "relative" }}><h3>Blogs | Paid</h3>
+                        <p> Your favorite Templates are coming soon...</p>
+
+                        <div className='image-thumbnail-template-cover-big'>
+
+                            <div style={{ margin: '10px 3px' }}>
+                                <div className={'customCard-all'} style={{ backgroundImage: `url("/views/template-default-01/images/featured_image.jpg")`, backgroundSize: "cover", backgroundPosition: "bottom right" }}>
+                                </div>
+                            </div>
+
+
+                            <div className='template-thumbnail-hover-big-black' style={{ marginTop: "-110%" }}>
+                                <div className="category" style={{ color: "white" }}>
+                                    <h5>Premium Designs </h5>
+                                    <Button primary size='mini' className="button-hover"  disabled={true}> View</Button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
 
                 </div>
 
