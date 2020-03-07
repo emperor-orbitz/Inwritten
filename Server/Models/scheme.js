@@ -49,7 +49,7 @@ const SCHEME = {
         country: { type: String, default: "[]" },
         gender: { type: String, default: "" },
         template_id: {
-            type: mongoose.Schema.Types.ObjectId, default: "5e01d93cf47d3806c0aa6994",
+            type: mongoose.Schema.Types.ObjectId, default: "5e01d951f47d3806c0aa6996",
             ref: "Template"
         },
         bookmarks: [{
