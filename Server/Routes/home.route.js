@@ -32,7 +32,11 @@ router.get('/terms-and-conditions', (req, res, next) => {
     
 });
 
+router.post('/subscribeToPreLanuch', (req, res, next) => {  
 
+    controller.subscribe(req, res, next);
+    
+});
 
 
 module.exports = router;

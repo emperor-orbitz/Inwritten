@@ -70,7 +70,7 @@ app.set("views", path.resolve(__dirname, "../Client/assets/views"));
 if (process.env.NODE_ENV == "production") {
 
  
-  app.use(express.static(path.resolve(__dirname, "../Client/assets/"), {index:"homepage.html"}))
+  app.use(express.static(path.resolve(__dirname, "../Client/assets/"), {index:"launchpage.html"}))
   app.use("/", route_config);
   app.get("*", (req, res) => {
 

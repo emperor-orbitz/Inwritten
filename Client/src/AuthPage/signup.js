@@ -193,7 +193,7 @@ class Signup extends React.Component {
                 <span style={{ 'color': 'black' }}> By Creating an account you have agreed to the <br /><a href="/terms-and-conditions">terms and conditions</a>
                 </span>
                 <br /><br />
-                <Button size="large" color="teal" disabled={this.state.button.disabled} type='submit' onClick={this.submit}>CREATE AN ACCOUNT<DimmerLoad size="small" active={this.state.button.dimmerLoad} /></Button>
+                <Button size="large" disabled={this.state.button.disabled} type='submit' onClick={this.submit}>CREATE AN ACCOUNT<DimmerLoad size="small" active={this.state.button.dimmerLoad} /></Button>
               </Form>
             </Grid.Column>
 

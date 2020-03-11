@@ -202,6 +202,20 @@ const SCHEME = {
             versionKey: false,
             strict: false
         }
+    ),
+    subscribers: new Schema({
+        email: { type: String, maxlength:255, required:true, ref:"User", unique:true },
+        ip_address: {type: String,  default:"" },
+        country: {type: String,  default:""},
+        city: {type: String, default:""},
+        ll:{type:mongoose.Schema.Types.Array, default:[]}
+
+    },
+        {
+            timestamps: true,
+            versionKey: false,
+            strict: false
+        }
     )
 
 }

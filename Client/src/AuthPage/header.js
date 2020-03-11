@@ -40,7 +40,7 @@ class Header extends React.Component {
 
 
           <Menu.Menu  position="right">
-            <Menu.Item name="login" style={{color:'black'}}  as={Link} to="/login" active={activeBar === 'login'} />
+        {/* TILL LAUNCH DAY    <Menu.Item name="login" style={{color:'black'}}  as={Link} to="/login" active={activeBar === 'login'} /> */}
             <Menu.Item name="Signup" style={{color:'black'}}  as={Link} to="/signup" active={activeBar === 'signup'} />
           </Menu.Menu>
         </Responsive>
