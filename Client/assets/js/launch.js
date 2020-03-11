@@ -16,7 +16,7 @@ else{
     $("#change_of_words")[0].innerHTML = arr[i]
     i++
 }
-}, 3000)
+}, 2000)
 
 })
 
