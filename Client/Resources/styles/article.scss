@@ -14,7 +14,7 @@ font-family: 'Montserrat', sans-serif;
 
 .pushable>.pusher{
     overflow:inherit !important;
-    margin:4px;
+    //margin:4px;
     //background: rgb(60, 60, 77)
 }
 
@@ -147,7 +147,7 @@ color:rgba(3, 68, 94, 0.8);
 
     background: rgb(3, 68, 94) !important;
     border-radius: 30px;
-    //width:200px;
+    width:200px;
 
     
     }
@@ -215,7 +215,15 @@ float:left;
         }
 
 
-
+@media only screen and (max-width:410px){
+    .image-thumbnail-template-cover-big{
+        width: 90% !important;
+    }
+    
+    .custom-input{
+        width:100%;
+    }
+}
 
 //FOR BIG THUMBNAILS IN TEMPLATE ARTICLE LISTS
 .image-thumbnail-template-cover-big{
@@ -249,7 +257,7 @@ float:left;
         border-top:1px solid white;
        
         height: 50px;
-        margin-top: -60px;
+        margin-top: -80px;
             cursor:pointer;
            // background:rgba(0,0,0,0.7);
             padding:5%;

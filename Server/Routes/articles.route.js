@@ -31,6 +31,11 @@ controller.deletePost(req, res);
 });
 
 
+router.delete('/articles/delete_all', isAuth, (req, res, next) => {
+
+    controller.delete_all(req, res);
+});
+
 router.get('/articles/loadAllList', isAuth, (req, res, next) => {
 
 controller.loadAllList(req, res, next);
@@ -59,7 +64,9 @@ router.patch('/articles/like', isAuth, (req, res, next) => {
 });
     
 
-
+router.get('/articles/fetchimage', (req, res, next) => {   
+    controller.loadImage(req, res, next);
+    });
 
 
 //Load list of interests based on post category from everyone's post

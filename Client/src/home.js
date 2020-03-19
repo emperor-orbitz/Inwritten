@@ -14,7 +14,7 @@ function App() {
 
     <Switch>
       <Route exact path='/signup' component={Signup} />
-  {/*    <Route path='/forgot_password' component={ForgotPassword} />
+   <Route path='/forgot_password' component={ForgotPassword} />
 
       <Route exact path='/login' component={Login} />
 
@@ -50,7 +50,7 @@ function App() {
         </Switch>
 
       </HeaderAccount>
-          */}
+          
     </Switch>
 
 

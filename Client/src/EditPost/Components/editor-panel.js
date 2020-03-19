@@ -68,6 +68,18 @@ class EditorPanel extends React.Component {
   }
 
 
+ componentWillReceiveProps(nextProps){
+  if(this.props.initialValue == nextProps.initialValue){
+    //DONT UPDATE
+  }
+  else{
+    let jsonvalue = Value.fromJSON(nextProps.initialValue)
+    this.setState({ value: jsonvalue })
+  
+  }
+ 
+}
+
 
 
   onClickBlock = (event, type) => {

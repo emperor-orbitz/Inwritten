@@ -11,7 +11,7 @@ import socketIOClient from 'socket.io-client';
 import SideBar from '../../src/Dashboard/sidebar';
 import double_u from '../../Resources/images/double-u.png';
 import logo from "../../Resources/images/logo-page.png"
-
+import Footer from "../../src/AuthPage/footer"
 
 class HeaderAccount extends React.Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class HeaderAccount extends React.Component {
 
     }
     // realtime notification socket  
-    this.socket = socketIOClient("http://localhost:5000", {query:`userid=${this.props.ProfileReducer._id}`})
+    this.socket = socketIOClient("http://www.inwritten.com", {query:`userid=${this.props.ProfileReducer._id}`})
 
     if (this.state.visible == true) this.setState({ visible: false });
     else;
@@ -271,7 +271,6 @@ class HeaderAccount extends React.Component {
 
 
                 {this.props.children}
-
 
 
 

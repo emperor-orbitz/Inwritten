@@ -147,7 +147,7 @@ module.exports = {
                     case 'span':
                         return (<span style={{ textAlign:"center" }}>{children}</span>)
                     case 'linkify':
-                        return (<a className='editor-link' href={obj.data.get('href')}>{children}</a>)
+                        return (<a className='editor-link' href={`//${obj.data.get('href')}`}>{children}</a>)
   
                 }
             }

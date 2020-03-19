@@ -84,7 +84,6 @@ class EditPost extends React.Component {
         case 'tags':
           this.handleTags();
           //this.setState({post_tags:value})
-          alert('fu');
 
       }
     }
@@ -166,8 +165,7 @@ class EditPost extends React.Component {
     let val = this.postValidation();
     if (val === true) {
 
-      add.update_article(post).then(
-        (okay) => {
+      add.update_article(post).then( okay => {
           this.state.post_link= post.post_link
 
           this.props.dispatch({ type: 'UPDATE_ARTICLE', payload: post });
@@ -185,8 +183,7 @@ class EditPost extends React.Component {
           note[0].classList.remove('reverse-anime');
 
         })
-        .catch(
-        (err) => {
+        .catch( err => {
           this.setState({
             buttonDisabled: false,
             dimmerLoad: false,
@@ -213,17 +210,24 @@ class EditPost extends React.Component {
 
 
 
-  /*
-  *           REACTJS LIFECYCLE HOOKS
-  */
+      /*
+      *           REACTJS LIFECYCLE HOOKS
+      *
+      */
 
   componentDidMount() {
 
+    //Fetch featured_image
+    var fetch_image = new FetchArticles()
+    fetch_image.fetch_image(this.props.match.params.postID)
+                .then(data =>{
+                  this.setState({featured_image:data})
+                })
+    
 
     for (var x of this.props.ArticleReducer) {
       if (x._id == this.props.match.params.postID) {
-        //console.log(x.post_link, 'X.BODY IS HERE')
-
+      //Retrieve data except from featured_image
         this.setState({
           post_id: x._id,
           post_title: x.title,
@@ -233,12 +237,15 @@ class EditPost extends React.Component {
           enable_comments: x.comments_enabled,
           time_to_read: x.time_to_read,
           body_schema: x.body_schema,
-          featured_image: x.featured_image,
+          //featured_image: x.featured_image,
           likes: x.likes,
           post_link: x.post_link,
           tag_value:x.tags
 
         });
+
+
+
 
 
 
@@ -364,9 +371,10 @@ class EditPost extends React.Component {
             <Grid.Column mobile={16} tablet={2} computer={2}>
               
               <Button primary onClick={() => { this.setState({ open_options: true }) }} icon='angle right'/>
-              <br></br><br></br> 
-              <p><Link to ={response_link} >View Responses</Link></p>
-              <p color="black" >{this.state.likes==0? "No": this.state.likes} likes</p>
+              <br></br><br></br>
+              <p><Button as={Link} to ={response_link} icon='comments' /></p>
+              <p><Button icon='share' /></p>
+
 
 
 

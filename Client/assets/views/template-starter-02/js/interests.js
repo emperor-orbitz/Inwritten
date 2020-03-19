@@ -13,15 +13,16 @@ function interests(category) {
         data: { category },
 
         success: function (result) {
+            console.log(result)
             var interests ="";
-        
+            
             result.message.forEach(element => {
                 
                 interests+= `
                 <div class="card">
                 <img src="${element.featured_image}" class="card-img-top" alt="${element.title}">
                 <div class="card-body">
-                <h5 class="card-title">${element.title}</h5>
+                <h5 class="card-title"><a target="__blank" href="${element.post_link}">${element.title}</a></h5>
                 <p class="card-text">${element.description==''?'No description':element.description}</p>
                 <p class="card-text"><small class="text-muted">${element.updatedAt}</small></p>
                 </div>

@@ -36,6 +36,15 @@ var ArticleReducer = (state = dataState, action) => {
             return state;
 
 
+        case 'DELETE_ALL_STORY':
+        var state = state.filter( e => e.public !== true);
+        return state;
+
+        case 'DELETE_ALL_DRAFT':
+        var state = state.filter( e => e.public !== false);
+        return state;
+    
+
         case 'UPDATE_ARTICLE':
         var payload = action.payload;
         state.forEach((x, i) =>{

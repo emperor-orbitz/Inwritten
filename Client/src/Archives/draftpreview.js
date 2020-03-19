@@ -2,6 +2,7 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import '../../Resources/styles/article.scss';
+import { Icon } from 'semantic-ui-react';
 
 
 //   DATE CONVSERSION
@@ -94,6 +95,7 @@ export default function DraftPreview(props) {
                                             <Button.Group className="button-hover" size='small' icon >
                                                 <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
                                                 <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
+                                                <Button icon='share outline'  />
 
                                             </Button.Group>
                                         </div>

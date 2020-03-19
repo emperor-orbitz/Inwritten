@@ -33,6 +33,26 @@ var loadAllList = (req, res, next) => {
 
 
     })
+}
+
+
+
+var loadAllList = (req, res, next) => {
+
+    var post = new posts();
+
+    post.loadAllPost(req.user.username, function (err, results) {
+        if (err) {
+            res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                .send({ data: [] })
+        }
+
+        else
+            res.status(http_status.OK.code)
+                .send({ data: results });
+
+
+    })
 
 
 }
@@ -41,26 +61,27 @@ var loadAllList = (req, res, next) => {
 
 
 
-//          LOAD FEW ARTICLES WITH LIMIT e.g. ?limit=2
-
-var loadList = (req, res, next) => {
-
-    var limit = parseInt(req.query.limit);
-    var post = new posts();
-
-    post.loadUserPost(req.user._id, limit, (err, results) => {
-            if (err) {
-                res.status(http_status.INTERNAL_SERVER_ERROR.code)
-                    .send({ data: [] })
-            }
 
 
-            else
-                res.status(http_status.OK.code)
-                    .send({ data: results })
 
+//          LOAD FEATURED IMAGE
 
-        })
+var loadImage = (req, res, next) => {
+
+    var story_id = req.query.id ;
+    posts.findById(story_id).select("featured_image")
+    .then(doc =>{
+        if(doc == null){
+            console.log("empty image place", doc)
+        }
+        else{
+            res.send({ data: doc.featured_image, type: "success" })
+            console.log(doc)
+        }
+    })                
+                        
+    
+    
 }
 
 
@@ -262,14 +283,30 @@ var like =(req, res) =>{
   }
 
 
+//DELETE AL THE ARTICLES
+var delete_all = (req, res, next) => {
+
+    var post = posts.deleteMany({ authorId: req.user._id, public: req.body.public })
+                    .then( data =>{
+                        res.send({ message:"successfully deleted all", data , status:200})
+                    })
+                    .catch( error =>{
+                        res.send({ message:"successfully deleted all", status:500, error })
+
+                    })
+}
+
+
+
 
 module.exports = {
     loadAllList: loadAllList,
-    loadList: loadList,
     create: create,
     update: update,
     deletePost: deletePost,
     article: article,
     like:like,
-    interests:interests
+    interests:interests,
+    loadImage: loadImage,
+    delete_all: delete_all
 };

@@ -1,7 +1,7 @@
 
 //          IMPORTS
 import React, { Component } from 'react';
-import { Button, Form, Checkbox, Loader, Icon, Select, Grid, Modal } from 'semantic-ui-react';
+import { Button, Form, Checkbox, Icon, Select, Grid, Modal } from 'semantic-ui-react';
 import '../../Resources/styles/article.scss';
 import { withRouter } from 'react-router';
 
@@ -10,10 +10,7 @@ import FetchArticles from '../../Controllers/article.controller'
 import EditorPanel from '../../src/NewPost/Components/editor-panel';
 import cat from '../Dashboard/categories';
 
-function DimmerLoad(props) {
-  return <Loader active={props.active} size={props.size} inline />
 
-}
 
 
 
@@ -188,8 +185,7 @@ class AddPost extends React.Component {
           note[0].classList.remove('reverse-anime');
 
         })
-        .catch(
-          (err) => {
+        .catch( err => {
           this.setState({ buttonDisabled: false,
                           dimmerLoad: false,
                           open_options:false,
@@ -217,6 +213,8 @@ class AddPost extends React.Component {
     this.setState({ open_options: false })
   }
 
+
+  
   toggleDialogFeatured() {
     var photo = document.getElementById('photo');
     photo.click();

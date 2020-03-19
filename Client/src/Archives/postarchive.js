@@ -11,30 +11,6 @@ import FetchArticles from '../../Controllers/article.controller';
 
 
 
-function HoverableDiv(props) {
-
-    return (
-        <div className='image-thumbnail-template-cover-big'>
-
-            {props.children}
-
-            <div className='template-thumbnail-hover-big'>
-                <h2 style={{ marginTop: '0px', padding: '0px' }}>{props.type}</h2>
-
-                <div size='large' style={{ marginTop: '100px', float: 'right' }}>
-                    <Button.Group size='small' color='teal' secondary >
-                        <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post', state: { editState: props.id } }} />
-                        <Button icon='external alternate' as={Link} to={`http://localhost:5000/${props.username}/${props.name}`} />
-                        <Button icon='trash alternate outline' />
-                        <Button icon='info' />
-
-                    </Button.Group>
-                </div>
-            </div>
-
-        </div>
-    )
-}
 
 
 
@@ -110,9 +86,30 @@ class PostArchive extends React.Component {
 
         );
 
+    }
 
+
+    deleteAll = () => {
+        
+        //delete all posts
+        var del = new FetchArticles;
+        del.delete_all({public: false})
+            .then(suc =>{
+                this.props.dispatch( { type: 'DELETE_ALL_DRAFT', payload: { public: false } })       
+                var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == false);
+                this.setState({ deleteArticleId: null, open: false, messageDismiss: true, filter_privacy: filter_privacy });
+                alert("Successfully deleted Drafts")
+
+            })
+            .catch(err => console.log(err))
 
     }
+
+
+
+
+
+
     handleSearchCriteria(e, p) {
 
         this.setState({ not_found: false, search_criteria: p.value })
@@ -126,13 +123,14 @@ class PostArchive extends React.Component {
 
         var __delete = new FetchArticles;
         __delete.delete_article(id)
-            .then((fulfilled, unfulfilled) => {
+            .then( fulfilled => {
                 if (fulfilled) {
 
                     this.props.dispatch(
                         {
                             type: 'DELETE', payload: { _id: this.state.deleteArticleId }
-                        });
+                        })
+                        
                     var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == false);
 
 
@@ -302,16 +300,13 @@ class PostArchive extends React.Component {
 
                 <div>
 
-                    <Modal dimmer={true} size='mini' open={this.state.open}  >
+                    <Modal dimmer={true} size='mini' open={this.state.open} closeOnDimmerClick={true} onClose={() => { this.setState({ open: false }) }}>
 
                         <Modal.Content style={{ height: '200px', background: "", color: 'black', padding: '10%' }}  >
                             <p style={{ textAlign: 'center' }}> <Icon size='big' name='trash' />
-                                <h3 >{`Delete -${this.state.deleteArticleName} ?`}  </h3>
+                                <h3 >{`Delete "${this.state.deleteArticleName}" ?`}  </h3>
                                 <br />
-                                <Button.Group size='small'  >
-                                    <Button onClick={this.dontDeletePost.bind(this)} icon='close' labelPosition='right' content='Close' size='tiny' />
-                                    <Button color='red' icon='trash alternate outline' labelPosition='right' content='Delete' size='tiny' onClick={this.deletePost.bind(this, [this.state.deleteArticleId])} />
-                                </Button.Group>
+                                <Button size="small" color='red' icon='trash alternate outline' labelPosition='right' content='Delete' size='tiny' onClick={this.deletePost.bind(this, [this.state.deleteArticleId])} />
                             </p>
 
 
@@ -323,21 +318,22 @@ class PostArchive extends React.Component {
                         <Grid>
                             <Grid.Row >
                                 <Grid.Column computer={13} mobile={16} tablet={15}  >
+                                    <div style={{ borderBottom: "3px solid navyblue", marginBottom: "20px", padding: "10px", width: "100%" }} >
+                                        <Form size="small" >
 
-                                    <Form size="small" >
+                                            <Input id='search' className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search Interests' />
+                                            <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
+                                            <Button primary icon="search" onClick={this.search_with_criteria} />
+                                            <Button color="red" labelPosition='left' content='Delete All' icon="trash alternate outline"  onClick={ this.deleteAll } />
 
-                                        <Input id='search' className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search Interests' />
-                                        <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
-                                        <Button primary icon="search" onClick={this.search_with_criteria} />
+                                        </Form>
 
-                                    </Form>
-
-
+                                    </div>
                                 </Grid.Column>
 
                                 <Grid.Column computer={16} mobile={16} tablet={15}  >
 
-                                    {this.state.not_found == true ?  <div className='error-notification'> <Icon name="close" size="big" color="red" />  No {this.state.search_criteria} similar to <b> {this.state.search}</b> was found</div> : ''}
+                                    {this.state.not_found == true ? <div className='error-notification'> <Icon name="close" size="big" color="red" />  No {this.state.search_criteria} similar to <b> {this.state.search}</b> was found</div> : ''}
 
                                     {filter_privacy.map((e) => {
                                         if (e.featured_image == undefined || e.featured_image == "") {

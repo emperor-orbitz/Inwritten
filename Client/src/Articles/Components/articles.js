@@ -50,7 +50,7 @@ class Articles extends React.Component {
             visible: false,
             activeAccordion: 0,
             open: false,
-            open_criteria: false,
+            open_share: false,
             deleteArticleId: null,
             deleteArticleName: null,
             deleteStatus: 'Delete',
@@ -63,11 +63,32 @@ class Articles extends React.Component {
             search: '',
             filter_privacy: [],
             filter_privacy_const: [],
-            not_found: false
+            not_found: false,
+            share_data: {},
+            copyToClipboard: "Copy to clipboard"
         }
 
 
     }
+
+
+
+    shareToFacebook = (e, data)=>{
+
+        e.preventDefault() 
+       let url = encodeURIComponent(data.post_link)
+        console.log(url)
+         window.open(
+             'https://www.facebook.com/dialog/share?app_id=508448136537979&display=popup&href='+url+'&redirect_uri=https%3A%2F%2Fwww.inwritten.com/articles', 
+             'facebook-share-dialog', 
+             'width=400,height=300', false); 
+            
+     }
+
+
+
+
+
 
     showModal = (e, p) => {
         var { title, id } = p;
@@ -82,15 +103,27 @@ class Articles extends React.Component {
     }
 
 
-    showCriteriaModal = (e) => {
+    deleteAll = () => {
 
-        this.setState({ open_criteria: true })
+        //delete all posts
+        var del = new FetchArticles;
+        del.delete_all({public: true})
+            .then( suc =>{
+
+                this.props.dispatch( { type: 'DELETE_ALL_STORY', payload: { public: true } })       
+                var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == true);
+                this.setState({ deleteArticleId: null, open: false, messageDismiss: true, filter_privacy: filter_privacy });
+                alert("Successfully deleted stories")
+
+            })
+            .catch(err => console.log(err))
+
     }
 
 
     handleSearchCriteria = (e, p) => {
 
-        this.setState({ not_found: false, search_criteria: p.value, open_criteria: false })
+        this.setState({ not_found: false, search_criteria: p.value, open_share: false })
     }
 
 
@@ -130,9 +163,26 @@ class Articles extends React.Component {
 
     close = () => this.setState({ open: false })
 
-    closeCriteria = () => {
-        this.setState({ open_criteria: false })
+    openShare = (share_data) => {
+        this.setState({ open_share: true, share_data, copyToClipboard: "Copy to clipboard" })
     }
+
+    copyToClipboard = () => {
+        var dummy = document.createElement("textarea")
+        // dummy.style.display="none";
+        document.body.appendChild(dummy)
+        dummy.setAttribute("id", 'dummy_id');
+        document.getElementById("dummy_id").value = `http://www.inwritten.com${this.state.share_data.post_link}`;
+        dummy.select()
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+        this.setState({ copyToClipboard: "Copied!" })
+    }
+
+    closeShare = () => {
+        this.setState({ open_share: false })
+    }
+
     connect = new Connection();
     fetchArticle = new FetchArticles();
 
@@ -205,7 +255,7 @@ class Articles extends React.Component {
                     <Grid>
                         <Grid.Row>
 
-                                You don't have any published story. You can create one <Button size="small" as={Link} to="/add-post">here</Button>
+                            You don't have any published story. You can create one <Button size="tiny" as={Link} to="/add-post">here</Button>
 
 
                         </Grid.Row>
@@ -226,118 +276,120 @@ class Articles extends React.Component {
 
                 <div>
 
-                    <Modal dimmer={true} size='mini' open={this.state.open}  >
-
-                        <Modal.Content style={{ height: '200px', background: "", color: 'black', padding: '5% ' }}  >
-                            <div style={{ textAlign: 'center' }}> <Icon size='big' name='trash' />
-                                <h3 >{`Delete -${this.state.deleteArticleName} ?`}  </h3>
-
-                                <Button.Group size='small'  >
-                                    <Button onClick={this.dontDeletePost.bind(this)} icon='close' labelPosition='right' content='Close' size='mini' />
-                                    <Button color='red' icon='trash alternate outline' labelPosition='right' content='Delete' size='tiny' onClick={this.deletePost.bind(this, [this.state.deleteArticleId])} />
-                                </Button.Group>
-                            </div>
-
-                        </Modal.Content>
-
-                    </Modal>
-
-                    <Modal size='mini' open={this.state.open_criteria} onClose={this.closeCriteria} closeOnDimmerClick closeOnDocumentClick>
+                    <Modal dimmer={true} size='mini' open={this.state.open} closeOnDimmerClick={true} onClose={() => { this.setState({ open: false }) }}>
 
                         <Modal.Content style={{ height: '200px', background: "", color: 'black', padding: '5%' }}  >
-                            <div style={{ textAlign: 'center' }}>
-                                <h3 >Search by: </h3>
-                                <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
+                            <div style={{ textAlign: 'center' }}> <Icon size='big' name='trash' />
+                                <h3 >{`Delete "${this.state.deleteArticleName}" ?`}  </h3>
 
+                                <Button size='small' color='red' icon='trash alternate outline' labelPosition='right' content='Delete' size='tiny' onClick={this.deletePost.bind(this, [this.state.deleteArticleId])} />
                             </div>
 
                         </Modal.Content>
 
                     </Modal>
-                    <div className='bodyArticle'>
 
-                        <Grid>
-                            <Grid.Row >
-                                <Grid.Column computer={13} mobile={16} tablet={15}  >
+                    <Modal size='mini' open={this.state.open_share} onClose={this.closeShare} closeOnDimmerClick >
+
+                        <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
+                            <div style={{ textAlign: 'center' }}>
+                                <h4 >Share {this.state.share_data.title} </h4>
+
+                        <Button icon="copy outline" labelPosition='left' content={this.state.copyToClipboard} size='small' onClick={this.copyToClipboard} disabled={this.state.copyToClipboard == "Copied!"} />
+                                <br /> <br />
+                                 
+                                    <Button onClick={ (e) => this.shareToFacebook(e, this.state.share_data) } 
+                                       color="facebook" icon="facebook" labelPosition='left' content='Share to facebook ' size='small' />
+                            <br /> <br />
+                            <Button color="twitter" icon="twitter" labelPosition='left' content='Share to Twitter' size='small' />
+                                </div>
+                        </Modal.Content>
+
+                    </Modal>
+                <div className='bodyArticle'>
+
+                    <Grid>
+                        <Grid.Row >
+                            <Grid.Column computer={16} mobile={16} tablet={15}  >
 
 
-                                    <div >
+                                <div style={{ borderBottom:"3px solid navyblue", marginBottom:"20px",padding:"10px", width:"100%"}} >
 
-                                        <Form size="small" >
+                                    <Form size="small" >
 
-                                            <Input id='search' className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search Interests' />
-                                            <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
-                                            <Button primary icon="search" onClick={this.search_with_criteria} />
-
-                                        </Form>
-
-                                    </div>
+                                        <Input id='search' className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search Interests' />
+                                        <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
+                                        <Button primary icon="search" onClick={this.search_with_criteria} />
+                                        
+                                        <Button color="red" labelPosition='left' content='Delete All' icon="trash alternate outline"  onClick={this.deleteAll } />
 
 
+                                    </Form>
 
-                                </Grid.Column>
+                                </div>
 
-                                <Grid.Column computer={16} mobile={16} tablet={15} >
-                                    {this.state.not_found == true ? <div className='error-notification'> <Icon name="close" size="big" color="red" /> No result for <b> {this.state.search}</b> was not found</div> : ''}
+                            </Grid.Column>
 
-                                    {filter_privacy.map((e) => {
+                            <Grid.Column computer={16} mobile={16} tablet={15} >
+                                {this.state.not_found == true ? <div className='error-notification'> <Icon name="close" size="big" color="red" /> No result for <b> {this.state.search}</b> was not found</div> : ''}
 
-                                        if (e.featured_image == undefined || e.featured_image == "") {
-                                            return (
-                                                <div key={e._id} className='image-thumbnail-template-cover-big'>
+                                {filter_privacy.map((e) => {
 
-                                                    <div style={{ margin: '10px 3px' }}>
+                                    if (e.featured_image == undefined || e.featured_image == "") {
+                                        return (
+                                            <div key={e._id} className='image-thumbnail-template-cover-big'>
 
-                                                        <div className='customCard-all' >
+                                                <div style={{ margin: '10px 3px' }}>
 
-                                                                    <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis' }}>
-                                                                        {e.title}
-                                                                    </h4>
-        
-                                                                    <p>{date_to_string(e.createdAt)}</p>
-        
+                                                    <div className='customCard-all' >
 
-                                                        </div>
+                                                        <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis' }}>
+                                                            {e.title}
+                                                        </h4>
+
+                                                                <span><b>created on </b> </span>
+                                                                <p>{date_to_string(e.createdAt)}</p>
                                                     </div>
+                                                </div>
 
 
-                                                    <div className='template-thumbnail-hover-big'>
+                                                <div className='template-thumbnail-hover-big'>
 
-                                                            <div className="category">
-                                                        
+                                                    <div className="category">
 
-                                                                <Button.Group className="button-hover" size='small' icon >
-                                                                    <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
-                                                                    <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
-                                                                    <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
-                                                                    <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
 
-                                                                </Button.Group>
-                                                            </div>
+                                                        <Button.Group className="button-hover" size='small' icon >
+                                                            <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
+                                                            <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
+                                                            <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
+                                                            <Button icon="share alternate" onClick={() => { this.openShare(e) }} />
 
+                                                        </Button.Group>
                                                     </div>
 
                                                 </div>
 
-
-
-                                            )
-
-                                        }
-
-
-                                    })}
-                                </Grid.Column>
-
-
-                            </Grid.Row>
-                        </Grid>
-                    </div>
+                                            </div>
 
 
 
+                                        )
 
+                                    }
+
+
+                                })}
+                            </Grid.Column>
+
+
+                        </Grid.Row>
+                    </Grid>
                 </div>
+
+
+
+
+                </div >
 
             )
 
