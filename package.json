@@ -65,6 +65,7 @@
     "is-hotkey": "^0.1.6",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
+    "mailgun-js": "^0.22.0",
     "memoize-one": "^5.1.1",
     "mongoose": "^5.5.2",
     "net": "^1.0.2",
