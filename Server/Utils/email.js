@@ -1,4 +1,5 @@
 var nodeMail = require('nodemailer');
+const mailgun = require("mailgun-js");
 
 module.exports = class email{
 
@@ -144,30 +145,29 @@ module.exports = class email{
 
 
   //SET API KEY
- sendVerifyMail(data){
+ sendVerifyMail(result){
 
-  const mailOptions= {
-    from:"malorbit360@gmail.com",
-    to:this.to,
-    subject:"Hashstack.io: Click the link to reset your password ",
-    html:this.reset_password_template(data)
-     }
-     var transporter = nodeMail.createTransport({
-      service:"gmail",
-      auth:{
-        user:process.env.SMTP_USER,
-        pass:process.env.SMTP_PASS
-      }
-    })
+//USING @MAILGUN
+const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, 
+domain: "sandbox523b5fd6c87b40e0800b73684351e623.mailgun.org", 
+host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
 
-    transporter.sendMail(mailOptions, function(err, info){
-  if(err){
-    console.log("THERE WAS AN ERROR IN THE EMAIL"+err);
 
-  } 
+const data = {
+from: "Inwritten <support@inwritten.com>",
+to: 'malorbit360@gmail.com',
+subject: 'Verify your email',
+text: 'Testing some Inwritten awesomness!',
+template: "verify_email", //template name
+'v:username': result.username,
+'v:_id': result._id   
+};
 
-  else console.log("THE PASSWORD RESET MAIL WAS SUCCESSFUL"+ info)
-})
+
+mg.messages().send(data)
+.then(sent =>{console.log("email sent successfully", sent)})
+.catch(err =>{ console.log("email was not sent successfully", err)})
+
 
 
 }
@@ -178,32 +178,31 @@ module.exports = class email{
 
 
   //SEND PASSWORD RESET
-  send_password_reset(data){
+  send_password_reset(result){
 
-    const mailOptions= {
-      from:"malorbit360@gmail.com",
-      to:this.to,
-      subject:"Hashstack.io: Just one more step ",
-      html:this.reset_password_template(data)
-       }
-       var transporter = nodeMail.createTransport({
-        service:"gmail",
-        auth:{
-          user:process.env.SMTP_USER,
-          pass:process.env.SMTP_PASS
-        }
-      })
-      console.log(process.env.SMTP_USER, process.env.SMTP_PASS)
-  
-      transporter.sendMail(mailOptions, function(err, info){
-    if(err){
-      console.log("THERE WAS AN ERROR IN THE EMAIL"+err);
-  
-    } 
-  
-    else console.log("THE EMAIL WAS SUCCESSFUL"+ info)
-  })
-  
+    //USING @MAILGUN
+
+const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, 
+domain: "sandbox523b5fd6c87b40e0800b73684351e623.mailgun.org", 
+host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
+
+
+const data = {
+from: "Inwritten <support@inwritten.com>",
+to: 'malorbit360@gmail.com',
+subject: 'Verify your email',
+text: 'Testing some Inwritten awesomness!',
+template: "reset_password", //template name
+'v:username': result.username,
+'v:hash': result.hash   
+};
+
+
+mg.messages().send(data)
+.then(sent =>{console.log("email sent successfully", sent)})
+.catch(err =>{ console.log("email was not sent successfully", err)})
+
+
   
   }
 

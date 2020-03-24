@@ -12,6 +12,8 @@ var handleBar = require('consolidate').handlebars;
 var passport = require("passport");
 var path = require("path");
 var io = require("socket.io")(server)
+var sslRedirect = require("heroku-ssl-redirect")
+
 
 //easily attach io to server
 
@@ -68,8 +70,8 @@ app.set("views", path.resolve(__dirname, "../Client/assets/views"));
 //ROUTE CONFIGURATION IN PRODUCTION
 
 if (process.env.NODE_ENV == "production") {
+  app.use(sslRedirect());
 
- 
   app.use(express.static(path.resolve(__dirname, "../Client/assets/"), {index:"launchpage.html"}))
   app.use("/", route_config);
   app.get("*", (req, res) => {
@@ -81,6 +83,18 @@ if (process.env.NODE_ENV == "production") {
 }
 
 
+if (process.env.NODE_ENV == "test") {
+  //app.use(sslRedirect());
+
+  app.use(express.static(path.resolve(__dirname, "../Client/assets/"), {index:"launchpage.html"}))
+  app.use("/", route_config);
+  app.get("*", (req, res) => {
+
+    res.sendFile(path.resolve(__dirname, "../Client/assets/index.html"));
+  });
+
+  
+}
 
 
 //         LISTEN TO SERVER

@@ -21,7 +21,8 @@
     <div class="field">
       <input name="post_id" id="post_id" hidden value={{data._id}} />
       <input name="commenter_id" id="commenter_id" hidden />
-      
+         <input name="author_id" id="author_id" hidden value={{author_data._id}} />
+
       <div id="textarea">
       <textarea style="width:80%" name="comment" id='comment' required minlength="10" ></textarea><br>
          <button class="btn btn-sm" type='submit'>Submit</button>

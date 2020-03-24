@@ -11,7 +11,7 @@ var io = require("socket.io")
 */
 
 
-var get = async (req, res) => {
+var get = (req, res) => {
 
 model.find({ receiver: req.query.user_id })
 .populate('receiver', "username email ")
@@ -42,31 +42,27 @@ model.find({ receiver: req.query.user_id })
 
 var create = async (req, res) => {
     //req.io =io;
-    var { sender, receiver, type, message } = req.body;
-    console.log(req.headers.referer)
+    var { sender, receiver, type, reference_data } = req.body;
+
     try{
 
     var new_model = await model.create({
         sender,
         receiver,
         type,
-        message,
         reference_data
     })
     if (new_model !== null) {
-        res.send({ message: "Notification Sent succcessfull", status: 200 })
-        //lauch notify
       
-        req.app.locals.users_socket[receiver].emit('new_notification', "YOU HAVE NEW NOTIFICATIONS OGA")
-           
-
+      //lauch notify
+        res.send({ message: "Notification Sent succcessfull", status: 200 })
+        req.app.locals.users_socket[receiver].emit("new_notification", "YOU HAVE NEW NOTIFICATIONS OGA")      
     }
     else 
       res.status(500).send({ message: "Notification unsuccessful", status: 500 })
 
 }
 catch (err){
-    //res.status(500).send({ message: "Notification unsuccessful", status: 500 })
      console.log(err, "erorrrr ooo")
 }
 }

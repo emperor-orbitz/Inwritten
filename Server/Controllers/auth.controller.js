@@ -176,27 +176,10 @@ var register = (req, res) => {
                     //console.log(check_username)
                     if( check_username == null ){
                         var result = await saves.createUser(username, email, password);
-                        //var send = new mail(result.email);
-                        //send.sendVerifyMail({ username: result.username, _id: result._id });
+                        var send = new mail("malorbit360@gmail.com");
+                        send.sendVerifyMail({ username: result.username, _id: result._id });
                      
-                        const mailgun = require("mailgun-js");
-
-                        const mg = mailgun({apiKey:"9b9963cdfa861f088284918736ce4aec-c322068c-c7e889ef"
-
-    ,domain: "sandbox523b5fd6c87b40e0800b73684351e623.mailgun.org", 
-    host: "api.mailgun.net",  // -> Add this line for EU region domains
-
-});
-const data = {
-    from: "Support <support@inwritten.com>",
-	to: 'malorbit360@gmail.com',
-	subject: 'Hi from us',
-    text: 'Testing some Mailgun awesomness!',
-    template: "verify_email",
-    'v:username': result.username,
-    'v:_id': result._id   // 'h:X-Mailgun-Variables': {email:"xxx@ccc.com", username:"dddd", _id:"ifhdufd"}
-};
-mg.messages().send(data)
+                       
                         res.status(200)
                           .send({ message: "Account successfully created" });
     
@@ -208,7 +191,6 @@ mg.messages().send(data)
                 }
 
                 catch (error) {
-                    console.log("error" + error)
                     res.status(500)
                         .send({ message: 'Failed! An error is here' + error });
                 }
@@ -224,7 +206,7 @@ mg.messages().send(data)
 
             res.status(400)
             .send({
-                message: "Invalid Parameters",
+                message: `Invalid Parameters: ${err}` ,
             })
         } )
 

@@ -57,12 +57,13 @@ read_notification = () =>{
         //fetch notifications
         try {
             let notifications = new FetchNotifications();
+            console.log(this.props.ProfileReducer)
             let notif = await notifications.get_notifications(this.props.ProfileReducer._id)
             if (notif == null) {
 
             }
             else {
-                console.log(notif.data);
+                console.log(notif);
                 this.setState({ notifications: notif.data })
             }
         } catch (err) {

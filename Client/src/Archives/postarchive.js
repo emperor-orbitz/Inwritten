@@ -63,7 +63,8 @@ class PostArchive extends React.Component {
             search: '',
             filter_privacy: [],
             filter_privacy_const: [],
-            not_found: false
+            not_found: false,
+            open_deleteall: false
         }
         this.search_with_criteria = this.search_with_criteria.bind(this);
 
@@ -90,15 +91,14 @@ class PostArchive extends React.Component {
 
 
     deleteAll = () => {
-        
+
         //delete all posts
         var del = new FetchArticles;
-        del.delete_all({public: false})
-            .then(suc =>{
-                this.props.dispatch( { type: 'DELETE_ALL_DRAFT', payload: { public: false } })       
+        del.delete_all({ public: false })
+            .then(suc => {
+                this.props.dispatch({ type: 'DELETE_ALL_DRAFT', payload: { public: false } })
                 var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == false);
-                this.setState({ deleteArticleId: null, open: false, messageDismiss: true, filter_privacy: filter_privacy });
-                alert("Successfully deleted Drafts")
+                this.setState({ deleteArticleId: null, open: false, messageDismiss: true, filter_privacy: filter_privacy, open_deleteall: false });
 
             })
             .catch(err => console.log(err))
@@ -123,14 +123,14 @@ class PostArchive extends React.Component {
 
         var __delete = new FetchArticles;
         __delete.delete_article(id)
-            .then( fulfilled => {
+            .then(fulfilled => {
                 if (fulfilled) {
 
                     this.props.dispatch(
                         {
                             type: 'DELETE', payload: { _id: this.state.deleteArticleId }
                         })
-                        
+
                     var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == false);
 
 
@@ -309,8 +309,22 @@ class PostArchive extends React.Component {
                                 <Button size="small" color='red' icon='trash alternate outline' labelPosition='right' content='Delete' size='tiny' onClick={this.deletePost.bind(this, [this.state.deleteArticleId])} />
                             </p>
 
+                        </Modal.Content>
+                    </Modal>
+
+                    <Modal dimmer={true} size='mini' open={this.state.open_deleteall} closeOnDimmerClick={true} onClose={() => { this.setState({ open_deleteall: false }) }}>
+
+                        <Modal.Content style={{ height: '400px', background: "", color: 'black', padding: '10%' }}  >
+                            <p style={{ textAlign: 'center' }}> <Icon size='big' name='trash' />
+                            <h3 >Delete All your drafts? </h3>
+                                <p>You will lose all your drafts by clicking delete, are you sure?</p>
+                                <br />
+                                <Button size="small" color='red' icon='trash alternate outline' labelPosition='right' content='Delete All' size='tiny' onClick={this.deleteAll} />
+                            </p>
+
 
                         </Modal.Content>
+
                     </Modal>
 
                     <div className='bodyArticle'>
@@ -324,7 +338,7 @@ class PostArchive extends React.Component {
                                             <Input id='search' className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search Interests' />
                                             <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
                                             <Button primary icon="search" onClick={this.search_with_criteria} />
-                                            <Button color="red" labelPosition='left' content='Delete All' icon="trash alternate outline"  onClick={ this.deleteAll } />
+                                            <Button color="red" icon="trash alternate outline" onClick={() => { this.setState({ open_deleteall: true }) }} />
 
                                         </Form>
 

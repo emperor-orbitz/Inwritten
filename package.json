@@ -61,6 +61,7 @@
     "express-session": "^1.15.6",
     "file-loader": "^1.1.11",
     "geoip-lite": "^1.4.0",
+    "heroku-ssl-redirect": "0.0.4",
     "immutable": "^4.0.0-rc.12",
     "is-hotkey": "^0.1.6",
     "joi": "^14.3.1",

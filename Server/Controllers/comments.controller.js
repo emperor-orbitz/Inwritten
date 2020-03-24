@@ -13,8 +13,8 @@ var axios =require("axios").default;
 var create = (req, res) => {
 
     var comment = new comments();
-    //console.log(req.body, "rrrr")
-   var body = Object.assign({}, req.body,  {reference_data: req.headers.referer })
+
+    var body = Object.assign({}, req.body,  {reference_data: req.headers.referer })
    comment.create_comment(body,  (error, results)=>{
      if(error){
          console.log(error)
@@ -36,15 +36,17 @@ var create = (req, res) => {
                 res.send({message:req.originalUrl})
             }
             else{
-                console.log(req.headers.referer,"requesrrr")
 
-                axios.post("http://www.inwritten.com/notifications/create", 
+                let referer = req.get('referer')  
+                              console.log( req.body.author_id,"requesrrr")
+
+                axios.post("http://localhost:5000/notifications/create", 
                    {
                         sender: req.body.commenter_id,
                         receiver: req.body.author_id,
                         type:'COMMENT',
                         message_id: results._id,
-                        reference_data: req.headers.referer
+                        reference_data: referer
                     }, { method:"POST"}
                 )
                 .then(data => res.send({message:req.originalUrl}) )

@@ -11,7 +11,6 @@ import socketIOClient from 'socket.io-client';
 import SideBar from '../../src/Dashboard/sidebar';
 import double_u from '../../Resources/images/double-u.png';
 import logo from "../../Resources/images/logo-page.png"
-import Footer from "../../src/AuthPage/footer"
 
 class HeaderAccount extends React.Component {
   constructor(props) {
@@ -29,10 +28,7 @@ class HeaderAccount extends React.Component {
 
     }
     // realtime notification socket  
-    this.socket = socketIOClient("http://www.inwritten.com", {query:`userid=${this.props.ProfileReducer._id}`})
-
-    if (this.state.visible == true) this.setState({ visible: false });
-    else;
+   
 
 
   }
@@ -49,11 +45,7 @@ class HeaderAccount extends React.Component {
 
   }
   componentWillMount() {
-    this.socket.on("new_notification", (data)=>{
-        this.setState({ new_notification:"You have a new notification" })
-        alert("You have a new notification! Check notifications")
-
-    })
+    
 }
 
  
@@ -62,12 +54,20 @@ class HeaderAccount extends React.Component {
     let token = localStorage.getItem("hs_token");
 
     if (Object.keys(this.props.ProfileReducer).length == 0) {
-
       this.connect.isLoggedin(token)
         .then(_ => {
 
-          this.props.dispatch({ type: 'INJECT_PROFILE', payload: _ })
+          //SUBSCRIBE TO SOCKET
+         let socket = socketIOClient("http://localhost:5000", {query:`userid=${_._id}`})
+          socket.on("new_notification", _ =>{
+            this.setState({ new_notification:"You have a new notification" })
+            alert("You have a new notification! Check notifications")
+    
+        })
+        
 
+          //POPULATE PROFILE REDUCER & ARTICLE REDUCER
+          this.props.dispatch({ type: 'INJECT_PROFILE', payload: _ })
           this.fetchArticle.fetch_articles_list().then(articles => {
 
             if (articles.length > 0) {

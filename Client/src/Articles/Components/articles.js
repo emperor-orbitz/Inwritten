@@ -65,7 +65,8 @@ class Articles extends React.Component {
             filter_privacy_const: [],
             not_found: false,
             share_data: {},
-            copyToClipboard: "Copy to clipboard"
+            copyToClipboard: "Copy to clipboard",
+            open_deleteall: false
         }
 
 
@@ -73,17 +74,17 @@ class Articles extends React.Component {
 
 
 
-    shareToFacebook = (e, data)=>{
+    shareToFacebook = (e, data) => {
 
-        e.preventDefault() 
-       let url = encodeURIComponent(data.post_link)
+        e.preventDefault()
+        let url = encodeURIComponent(data.post_link)
         console.log(url)
-         window.open(
-             'https://www.facebook.com/dialog/share?app_id=508448136537979&display=popup&href='+url+'&redirect_uri=https%3A%2F%2Fwww.inwritten.com/articles', 
-             'facebook-share-dialog', 
-             'width=400,height=300', false); 
-            
-     }
+        window.open(
+            'https://www.facebook.com/dialog/share?app_id=508448136537979&display=popup&href=' + url + '&redirect_uri=https%3A%2F%2Fwww.inwritten.com/articles',
+            'facebook-share-dialog',
+            'width=400,height=300', false);
+
+    }
 
 
 
@@ -107,13 +108,12 @@ class Articles extends React.Component {
 
         //delete all posts
         var del = new FetchArticles;
-        del.delete_all({public: true})
-            .then( suc =>{
+        del.delete_all({ public: true })
+            .then(suc => {
 
-                this.props.dispatch( { type: 'DELETE_ALL_STORY', payload: { public: true } })       
+                this.props.dispatch({ type: 'DELETE_ALL_STORY', payload: { public: true } })
                 var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == true);
-                this.setState({ deleteArticleId: null, open: false, messageDismiss: true, filter_privacy: filter_privacy });
-                alert("Successfully deleted stories")
+                this.setState({ deleteArticleId: null, open: false, messageDismiss: true, filter_privacy: filter_privacy, open_deleteall: false });
 
             })
             .catch(err => console.log(err))
@@ -289,102 +289,116 @@ class Articles extends React.Component {
 
                     </Modal>
 
+
+                    <Modal dimmer={true} size='mini' open={this.state.open_deleteall} closeOnDimmerClick={true} onClose={() => { this.setState({ open_deleteall: false }) }}>
+
+                        <Modal.Content style={{ height: '400px', background: "", color: 'black', padding: '10%' }}  >
+                            <p style={{ textAlign: 'center' }}> <Icon size='big' name='trash' />
+                                <h3 >Delete All your stories? </h3>
+                                <p>You will lose all your stories by clicking delete, are you sure?</p>
+                                <br />
+                                <Button size="small" color='red' icon='trash alternate outline' labelPosition='right' content='Delete All' size='tiny' onClick={this.deleteAll} />
+                            </p>
+
+
+                        </Modal.Content>
+
+                    </Modal>
+
                     <Modal size='mini' open={this.state.open_share} onClose={this.closeShare} closeOnDimmerClick >
 
                         <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
                             <div style={{ textAlign: 'center' }}>
                                 <h4 >Share {this.state.share_data.title} </h4>
 
-                        <Button icon="copy outline" labelPosition='left' content={this.state.copyToClipboard} size='small' onClick={this.copyToClipboard} disabled={this.state.copyToClipboard == "Copied!"} />
+                                <Button icon="copy outline" labelPosition='left' content={this.state.copyToClipboard} size='small' onClick={this.copyToClipboard} disabled={this.state.copyToClipboard == "Copied!"} />
                                 <br /> <br />
-                                 
-                                    <Button onClick={ (e) => this.shareToFacebook(e, this.state.share_data) } 
-                                       color="facebook" icon="facebook" labelPosition='left' content='Share to facebook ' size='small' />
-                            <br /> <br />
-                            <Button color="twitter" icon="twitter" labelPosition='left' content='Share to Twitter' size='small' />
-                                </div>
+
+                                <Button onClick={(e) => this.shareToFacebook(e, this.state.share_data)}
+                                    color="facebook" icon="facebook" labelPosition='left' content='Share to facebook ' size='small' />
+                                <br /> <br />
+                                <Button color="twitter" icon="twitter" labelPosition='left' content='Share to Twitter' size='small' />
+                            </div>
                         </Modal.Content>
 
                     </Modal>
-                <div className='bodyArticle'>
+                    <div className='bodyArticle'>
 
-                    <Grid>
-                        <Grid.Row >
-                            <Grid.Column computer={16} mobile={16} tablet={15}  >
-
-
-                                <div style={{ borderBottom:"3px solid navyblue", marginBottom:"20px",padding:"10px", width:"100%"}} >
-
-                                    <Form size="small" >
-
-                                        <Input id='search' className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search Interests' />
-                                        <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
-                                        <Button primary icon="search" onClick={this.search_with_criteria} />
-                                        
-                                        <Button color="red" labelPosition='left' content='Delete All' icon="trash alternate outline"  onClick={this.deleteAll } />
+                        <Grid>
+                            <Grid.Row >
+                                <Grid.Column computer={16} mobile={16} tablet={15}  >
 
 
-                                    </Form>
+                                    <div style={{ borderBottom: "3px solid navyblue", marginBottom: "20px", padding: "10px", width: "100%" }} >
 
-                                </div>
+                                        <Form size="small" >
 
-                            </Grid.Column>
+                                            <Input id='search' className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search Interests' />
+                                            <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
+                                            <Button primary icon="search" onClick={this.search_with_criteria} />
+                                            <Button color="red" icon="trash alternate outline" onClick={() => { this.setState({ open_deleteall: true }) }} />
 
-                            <Grid.Column computer={16} mobile={16} tablet={15} >
-                                {this.state.not_found == true ? <div className='error-notification'> <Icon name="close" size="big" color="red" /> No result for <b> {this.state.search}</b> was not found</div> : ''}
+                                        </Form>
 
-                                {filter_privacy.map((e) => {
+                                    </div>
 
-                                    if (e.featured_image == undefined || e.featured_image == "") {
-                                        return (
-                                            <div key={e._id} className='image-thumbnail-template-cover-big'>
+                                </Grid.Column>
 
-                                                <div style={{ margin: '10px 3px' }}>
+                                <Grid.Column computer={16} mobile={16} tablet={15} >
+                                    {this.state.not_found == true ? <div className='error-notification'> <Icon name="close" size="big" color="red" /> No result for <b> {this.state.search}</b> was not found</div> : ''}
 
-                                                    <div className='customCard-all' >
+                                    {filter_privacy.map((e) => {
 
-                                                        <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis' }}>
-                                                            {e.title}
-                                                        </h4>
+                                        if (e.featured_image == undefined || e.featured_image == "") {
+                                            return (
+                                                <div key={e._id} className='image-thumbnail-template-cover-big'>
 
-                                                                <span><b>created on </b> </span>
-                                                                <p>{date_to_string(e.createdAt)}</p>
+                                                    <div style={{ margin: '10px 3px' }}>
+
+                                                        <div className='customCard-all' >
+
+                                                            <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis' }}>
+                                                                {e.title}
+                                                            </h4>
+
+                                                            <span><b>created on </b> </span>
+                                                            <p>{date_to_string(e.createdAt)}</p>
+                                                        </div>
                                                     </div>
+
+
+                                                    <div className='template-thumbnail-hover-big'>
+
+                                                        <div className="category">
+
+
+                                                            <Button.Group className="button-hover" size='small' icon >
+                                                                <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
+                                                                <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
+                                                                <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
+                                                                <Button icon="share alternate" onClick={() => { this.openShare(e) }} />
+
+                                                            </Button.Group>
+                                                        </div>
+
+                                                    </div>
+
                                                 </div>
 
 
-                                                <div className='template-thumbnail-hover-big'>
 
-                                                    <div className="category">
+                                            )
 
-
-                                                        <Button.Group className="button-hover" size='small' icon >
-                                                            <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
-                                                            <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
-                                                            <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
-                                                            <Button icon="share alternate" onClick={() => { this.openShare(e) }} />
-
-                                                        </Button.Group>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
+                                        }
 
 
-
-                                        )
-
-                                    }
+                                    })}
+                                </Grid.Column>
 
 
-                                })}
-                            </Grid.Column>
-
-
-                        </Grid.Row>
-                    </Grid>
-                </div>
+                            </Grid.Row>
+                        </Grid>
+                    </div>
 
 
 
