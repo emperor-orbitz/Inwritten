@@ -71,6 +71,11 @@ app.set("views", path.resolve(__dirname, "../Client/assets/views"));
 
 if (process.env.NODE_ENV == "production") {
   app.use(sslRedirect());
+  app.get('*.js', function (req, res, next) {
+    req.url = req.url + '.gz';
+    res.set('Content-Encoding', 'gzip');
+    next();
+  })
 
   app.use(express.static(path.resolve(__dirname, "../Client/assets/"), {index:"launchpage.html"}))
   app.use("/", route_config);
@@ -79,7 +84,8 @@ if (process.env.NODE_ENV == "production") {
     res.sendFile(path.resolve(__dirname, "../Client/assets/index.html"));
   });
 
-  
+  ;
+
 }
 
 

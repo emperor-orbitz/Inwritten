@@ -1,7 +1,8 @@
 var webpack= require('webpack');
 var path= require('path');
 var HTMLWebpackPlugin =require('html-webpack-plugin');
-
+var CompressionPlugin = require('compression-webpack-plugin');
+//var UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 //console.log(path.resolve(__dirname,'./client/src/resources/'))
 
 const HTMLWebpackPluginConfig = new HTMLWebpackPlugin(
@@ -127,8 +128,30 @@ use:[{
     
  plugins: [
     
-    HTMLWebpackPluginConfig
-  ]
+    HTMLWebpackPluginConfig,
+
+    new webpack.DefinePlugin({ 
+        'process.env': {
+          'NODE_ENV': JSON.stringify('production')
+        }
+      }),
+
+     // new webpack.optimize.DedupePlugin(),
+    
+      //new webpack.optimize.UglifyJsPlugin(),
+     // new webpack.optimize.AggressiveMergingPlugin(),
+      new CompressionPlugin({  
+        filename: "[path].gz[query]",
+        algorithm: "gzip",
+        test: /\.js$/,
+        threshold: 10240,
+        minRatio: 0.8
+      })
+  ],
+
+ // optimization: {
+   // minimizer: [new UglifyJsPlugin(    )],
+  //}
 
 }
 module.exports = config;

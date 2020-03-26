@@ -22,7 +22,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "nodemon": "./node_modules/nodemon/bin/nodemon.js --config nodemon.json --exec npm run server",
     "start": "nodemon ./Server/server.js ",
-    "postinstall": "webpack -p",
+    "postinstall": "webpack -p --mode=production",
     "dev": "node_modules/.bin/webpack-dev-server --config   ./webpack.config.js",
     "concurrently": "concurrently \"npm run postinstall\" \"npm run start\""
   },
@@ -33,11 +33,13 @@
   "license": "ISC",
   "devDependencies": {
     "babel-loader": "^7.1.5",
+    "compression-webpack-plugin": "^3.1.0",
     "css-loader": "^0.28.11",
     "gulp": "^3.9.1",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.8.0",
     "style-loader": "^0.21.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.19.1",
     "webpack-cli": "^2.1.4",
     "webpack-dev-server": "^3.1.4"
@@ -77,6 +79,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "pure-react-carousel": "^1.24.1",
+    "query-string": "^5.1.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",
