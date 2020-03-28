@@ -31,6 +31,13 @@
     height:50px;
 }
 
+.modal-body{
+    padding: 10% 20%;
+     background:url('../images/landingpage.png'); 
+     min-height: 300px;
+    color: white
+}
+
 body {
     font-family: 'Rubik', sans-serif;
     position: relative;

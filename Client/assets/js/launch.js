@@ -20,6 +20,12 @@ else{
 
 })
 
+
+setTimeout(()=>{
+    $('#myModal').modal("show")
+},5000) 
+
+
 $("#subscribeForm").submit(function (e) {
 
     e.preventDefault();

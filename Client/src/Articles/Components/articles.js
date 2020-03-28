@@ -255,7 +255,7 @@ class Articles extends React.Component {
                     <Grid>
                         <Grid.Row>
 
-                            You don't have any published story. You can create one <Button size="tiny" as={Link} to="/add-post">here</Button>
+                            You don't have any published story. You can create one <Button size="tiny" as={Link} to="/app/add-post">here</Button>
 
 
                         </Grid.Row>
@@ -373,7 +373,7 @@ class Articles extends React.Component {
 
 
                                                             <Button.Group className="button-hover" size='small' icon >
-                                                                <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
+                                                                <Button icon='edit outline' as={Link} to={{ pathname: '/app/edit-post/' + e._id }} />
                                                                 <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
                                                                 <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
                                                                 <Button icon="share alternate" onClick={() => { this.openShare(e) }} />

@@ -70,15 +70,19 @@ app.set("views", path.resolve(__dirname, "../Client/assets/views"));
 //ROUTE CONFIGURATION IN PRODUCTION
 
 if (process.env.NODE_ENV == "production") {
-  app.use(sslRedirect());
-  app.get('*.js', function (req, res, next) {
+ //app.use(sslRedirect());
+  app.get('/index_bundle.js', function (req, res, next) {
     req.url = req.url + '.gz';
     res.set('Content-Encoding', 'gzip');
     next();
   })
 
-  app.use(express.static(path.resolve(__dirname, "../Client/assets/"), {index:"launchpage.html"}))
+  app.use(express.static(path.resolve(__dirname, "../Client/assets/"), {index:"homepage.html"}))
   app.use("/", route_config);
+  app.get("/subscribe", (req, res) => {
+
+    res.sendFile(path.resolve(__dirname, "../Client/assets/launchpage.html"));
+  });
   app.get("*", (req, res) => {
 
     res.sendFile(path.resolve(__dirname, "../Client/assets/index.html"));

@@ -118,7 +118,7 @@ class Signup extends React.Component {
           else if (message.message == 'Account successfully created') {
 
             alert('account created successfully. You can now login with Username')
-            this.props.history.replace('/login');
+            this.props.history.replace('/app/login');
 
           }
 

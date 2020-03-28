@@ -321,7 +321,7 @@ class EditPost extends React.Component {
 
 
 
-    var response_link =`/comments/${this.props.match.params.postID}`;
+    var response_link =`/app/comments/${this.props.match.params.postID}`;
 
 
     return (

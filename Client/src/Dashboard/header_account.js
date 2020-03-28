@@ -58,7 +58,7 @@ class HeaderAccount extends React.Component {
         .then(_ => {
 
           //SUBSCRIBE TO SOCKET
-         let socket = socketIOClient("http://localhost:5000", {query:`userid=${_._id}`})
+         let socket = socketIOClient("https://www.inwritten.com", {query:`userid=${_._id}`})
           socket.on("new_notification", _ =>{
             this.setState({ new_notification:"You have a new notification" })
             alert("You have a new notification! Check notifications")
@@ -83,7 +83,7 @@ class HeaderAccount extends React.Component {
           }).catch(e => this.setState({ loadFinish: true }))
 
         })
-        .catch(err => this.props.history.replace('/login'))
+        .catch(err => this.props.history.replace('/app/login'))
 
     }
 
@@ -101,7 +101,7 @@ class HeaderAccount extends React.Component {
 
 
         })
-        .catch(err => this.props.history.replace('/login'))
+        .catch(err => this.props.history.replace('/app/login'))
 
 
     }
@@ -139,7 +139,7 @@ class HeaderAccount extends React.Component {
 
 
     localStorage.removeItem("hs_token");
-    this.props.history.replace('/login');
+    this.props.history.replace('/app/login');
     this.props =null;
 
 
@@ -190,22 +190,22 @@ class HeaderAccount extends React.Component {
 
 
             <Menu.Menu position="right"  >
-              <Menu.Item as={Link} to="/add-post" icon="compose" content="Write a story"/>
+              <Menu.Item as={Link} to="/app/add-post" icon="compose" content="Write a story"/>
               <Menu.Item text={`@${this.props.ProfileReducer.username}`} as={Dropdown} floating >
 
                 <Dropdown.Menu>
-                  <Dropdown.Item icon='dashboard' text='Dashboard' as={Link} to='/dashboard' />
-                  <Dropdown.Item icon='bell' text='Notifications' as={Link} to='/notification' style={{color: 'green'}} />
+                  <Dropdown.Item icon='dashboard' text='Dashboard' as={Link} to='/app/dashboard' />
+                  <Dropdown.Item icon='bell' text='Notifications' as={Link} to='/app/notification' style={{color: 'green'}} />
 
                   <DropdownDivider  />
 
-                  <Dropdown.Item icon='bookmark outline' text='Bookmarks' as={Link} to='/bookmark' />
-                  <Dropdown.Item icon='folder outline' text='Published Stories' as={Link} to='/articles' />
-                  <Dropdown.Item icon='box' text='Drafts' as={Link} to='/drafts' />
+                  <Dropdown.Item icon='bookmark outline' text='Bookmarks' as={Link} to='/app/bookmark' />
+                  <Dropdown.Item icon='folder outline' text='Published Stories' as={Link} to='/app/articles' />
+                  <Dropdown.Item icon='box' text='Drafts' as={Link} to='/app/drafts' />
                     <DropdownDivider />
 
-                  <Dropdown.Item icon='user' text='Profile' as={Link} to='/settings/profile' />
-                  <Dropdown.Item icon='block layout' text='Templates' as={Link} to='/settings/templates' />
+                  <Dropdown.Item icon='user' text='Profile' as={Link} to='/app/settings/profile' />
+                  <Dropdown.Item icon='block layout' text='Templates' as={Link} to='/app/settings/templates' />
                   
                   <DropdownDivider/>
 
@@ -227,7 +227,7 @@ class HeaderAccount extends React.Component {
                 className='sidebar'>
 
                 <div style={{ textAlign: 'center', padding: '10px 2px',  color: 'rgb(3, 68, 94)', background: 'white' }} >
-                  <Link to="/dashboard" style={{ color: "black" }}> <img src={logo} style={{ width:"165px", height:"75px" }}/></Link>
+                  <Link to="/app/dashboard" style={{ color: "black" }}> <img src={logo} style={{ width:"165px", height:"75px" }}/></Link>
                   <br/>
                   <h4>{`${this.props.ProfileReducer.email}`}</h4>
                   

@@ -13,28 +13,28 @@ function App() {
 
 
     <Switch>
-      <Route exact path='/signup' component={Signup} />
-   <Route path='/forgot_password' component={ForgotPassword} />
+      <Route exact path='/app/signup' component={Signup} />
+   <Route path='/app/forgot_password' component={ForgotPassword} />
 
-      <Route exact path='/login' component={Login} />
+      <Route exact path='/app/login' component={Login} />
 
 
       <HeaderAccount>
 
         <Switch>
-          <Route path='/comments/:postID' component={Comments} />
-          <Route path='/interests' component={Interests} />
-          <Route path='/edit-post/:postID' component={ArticlesCategory.EditPost} />
-          <Route path='/dashboard' component={Account} />
-          <Route path='/settings/profile' component={Profile} />
-          <Route path='/articles' component={ArticlesCategory.Articles} />
-          <Route path='/drafts' component={ArticlesCategory.Drafts} />
-          <Route path='/add-post' component={ArticlesCategory.AddPost} />
-          <Route path='/bookmark' component={Bookmark} />
-          <Route path='/settings/templates' component={Templates} />
-          <Route path='/settings/preferences' component={Preferences} />
+          <Route path='/app/comments/:postID' component={Comments} />
+          <Route path='/app/interests' component={Interests} />
+          <Route path='/app/edit-post/:postID' component={ArticlesCategory.EditPost} />
+          <Route path='/app/dashboard' component={Account} />
+          <Route path='/app/settings/profile' component={Profile} />
+          <Route path='/app/articles' component={ArticlesCategory.Articles} />
+          <Route path='/app/drafts' component={ArticlesCategory.Drafts} />
+          <Route path='/app/add-post' component={ArticlesCategory.AddPost} />
+          <Route path='/app/bookmark' component={Bookmark} />
+          <Route path='/app/settings/templates' component={Templates} />
+          <Route path='/app/settings/preferences' component={Preferences} />
 
-          <Route path='/notification' component={Notifications} /> 
+          <Route path='/app/notification' component={Notifications} /> 
 
 
 

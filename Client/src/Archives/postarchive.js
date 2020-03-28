@@ -268,7 +268,7 @@ class PostArchive extends React.Component {
                             <Grid.Column style={{ padding: '2px' }} computer={13} mobile={16} tablet={8}  >
 
 
-                                You don't have any draft left. You can create one <Button as={Link} to="/add-post">here</Button>
+                                You don't have any draft left. You can create one <Button as={Link} to="/app/add-post">here</Button>
 
                             </Grid.Column>
 
