@@ -186,7 +186,7 @@ class Login extends React.Component {
                 </Form.Field>
 
                 <Button size="large" style={{'color': 'rgb(3, 68, 94)'}}  disabled={this.state.button.disabled} type='submit' onClick={this.submit}  >LOGIN<DimmerLoad size="small" active={this.state.button.dimmerLoad} /></Button>
-              <p><a href="/forgot_password">Forgot password?</a> | <a href="/app/signup">Don't have an account?</a> </p>
+              <p><a href="/app/forgot_password">Forgot password?</a> | <a href="/app/signup">Don't have an account?</a> </p>
               </Form>
             </Grid.Column>
 

@@ -36,8 +36,7 @@ class Header extends React.Component {
 
       <div className="head">
         <Responsive as={Menu} style={{color:'white'}} minWidth={60} className="nav" secondary >
-          <Menu.Item style={{ 'width': '20%' , color:'black'}} header ><img src={logo} style={{ width:"165px", height:"75px" }}/></Menu.Item>
-
+          <Menu.Item style={{ 'width': '50%' , color:'black'}} header ><img src={logo} style={{ width:"165px", height:"75px" }}/></Menu.Item>
 
           <Menu.Menu  position="right">
             <Menu.Item name="login" style={{color:'black'}}  as={Link} to="/app/login" active={activeBar === 'login'} />
@@ -45,17 +44,14 @@ class Header extends React.Component {
           </Menu.Menu>
         </Responsive>
 
-
         <Responsive as={Sidebar.Pushable} maxWidth={59}>
          
           <Sidebar.Pusher>
-
             <Menu secondary className="no-radius" >
               <Menu.Item><Icon name="align justify" size="big" onClick={this.toggleSide} /></Menu.Item>
               <Menu.Menu >
                 <Menu.Item header as="h2" name="APPSOLIT">Appsolit</Menu.Item>
               </Menu.Menu>
-
             </Menu>
             {this.props.children}
           </Sidebar.Pusher>

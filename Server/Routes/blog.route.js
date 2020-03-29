@@ -9,12 +9,18 @@ var isAuth = (req, res, next)=> {
     }
     
 
+    Router.get('/stories', function (req, res, next) {
+
+        blogController.stories(req, res)
+    
+    })
+
+
 
 
 Router.get('/user/:link', function (req, res, next) {
 
     blogController.index(req, res)
-
 
 })
 

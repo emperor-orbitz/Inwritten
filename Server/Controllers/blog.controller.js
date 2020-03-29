@@ -290,6 +290,17 @@ var other_interests = async (req, res, next) => {
 
 
 
+var stories = async (req, res, next) => {
+
+  res.json({data:'from blog'})
+
+}
+
+
+
+
+
+
 //EXPORTS
 module.exports = {
     index: index,
@@ -300,5 +311,6 @@ module.exports = {
     list_bookmark: list_bookmark,
     follow_user: follow_user,
     follow_status: follow_status,
-    other_interests: other_interests
+    other_interests: other_interests,
+    stories: stories
 };

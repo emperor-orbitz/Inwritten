@@ -166,7 +166,7 @@ class Signup extends React.Component {
             <Grid.Column>
               <div className="note">
                 <h2>LEARN SOMETHING NEW</h2>
-                <p>Create an account, share a knowledge, learn something different
+                <p>Create an account, share knowledge, learn something different.
 </p>
               </div>
 
