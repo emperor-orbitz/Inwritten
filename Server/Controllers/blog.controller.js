@@ -8,7 +8,7 @@ var templ = require('../Models/template.model');
 var comment_model = require('../Models/comments.model');
 var follow_model = require('../Models/follow.model');
 var social_model = require("../Models/socials.model")
-
+var path = require("path")
 
 
 
@@ -292,7 +292,28 @@ var other_interests = async (req, res, next) => {
 
 var stories = async (req, res, next) => {
 
-  res.json({data:'from blog'})
+  //  res.sendFile(path.resolve(__dirname, "../../Client/assets/storypage.html"));
+ try{
+    var stories = await posts.find({ public:true }).populate("authorId", "username email display_picture").sort({createdAt:-1});
+    if(stories.length == 0){
+        res.render('../storypage', { stories: null })
+
+    }
+    else{
+        //stories.tags.split(",")
+
+     
+
+ 
+        res.render('../storypage', { stories })
+    }
+ 
+  
+ }
+ catch( new_error ){
+  console.log(new_error)
+ }
+
 
 }
 

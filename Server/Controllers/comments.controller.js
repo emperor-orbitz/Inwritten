@@ -40,7 +40,7 @@ var create = (req, res) => {
                 let referer = req.get('referer')  
                               console.log( req.body.author_id,"requesrrr")
 
-                axios.post("http://localhost:5000/notifications/create", 
+                axios.post("https://www.inwritten.com/notifications/create", 
                    {
                         sender: req.body.commenter_id,
                         receiver: req.body.author_id,

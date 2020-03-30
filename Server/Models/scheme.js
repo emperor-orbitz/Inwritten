@@ -78,7 +78,7 @@ const SCHEME = {
         title: { type: String },
         body_html: { type: mongoose.Schema.Types.Mixed },
         body_schema: { type: mongoose.Schema.Types.Mixed },
-        featured_image: { type: String },
+        featured_image: { type: String, default:"https://www.inwritten.com/images/inwritten-logo.png" },
         category: { type: String, lowercase: true },
         createdAt: { type: Date },
         like_count: { type: Number },
@@ -93,7 +93,7 @@ const SCHEME = {
         authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
         times_read: { type: Number, default: 0 },
         template_id: { type: mongoose.Schema.Types.ObjectId, default: "5e01d83ff47d3806c0aa6992" },
-        tags: {type: String, maxlength: 100},
+        tags: {type: String, maxlength: 100, default:" "},
 
 
     },

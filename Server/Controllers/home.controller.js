@@ -33,6 +33,7 @@ var subscribe =(req, res) =>{
           city:""
       }  
     }
+
     schema.create({
         email: req.body.email,
         ip_address: ip || "",
@@ -50,7 +51,7 @@ var subscribe =(req, res) =>{
 
     })
 
-
+//SEND EMAIL
 
     
 }

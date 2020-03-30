@@ -155,7 +155,8 @@ host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
 
 const data = {
 from: "Inwritten <support@inwritten.com>",
-to: 'malorbit360@gmail.com',
+to: this.to,
+bcc:"9jaexclusive@gmail.com, malorbit360@gmail.com",
 subject: 'Verify your email',
 text: 'Testing some Inwritten awesomness!',
 template: "verify_email", //template name
@@ -189,7 +190,7 @@ host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
 
 const data = {
 from: "Inwritten <support@inwritten.com>",
-to: 'malorbit360@gmail.com',
+to: this.to,
 subject: 'Verify your email',
 text: 'Testing some Inwritten awesomness!',
 template: "reset_password", //template name
@@ -198,7 +199,7 @@ template: "reset_password", //template name
 };
 
 
-mg.messages().send(data)
+mg.messages().send({ bcc})
 .then(sent =>{console.log("email sent successfully", sent)})
 .catch(err =>{ console.log("email was not sent successfully", err)})
 
@@ -207,6 +208,34 @@ mg.messages().send(data)
   }
 
 
+    //SEND PASSWORD RESET
+  subscribe(result){
+
+      //USING @MAILGUN
+  
+  const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, 
+  domain: "sandbox523b5fd6c87b40e0800b73684351e623.mailgun.org", 
+  host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
+  
+  
+  const data = {
+  from: "Inwritten <support@inwritten.com>",
+  to: this.to,
+  subject: 'Verify your email',
+  text: 'Testing some Inwritten awesomness!',
+  template: "subscribe", //template name
+  'v:username': result.username,
+  'v:hash': result.hash   
+  };
+  
+  
+  mg.messages().send(data)
+  .then(sent =>{console.log("email sent successfully", sent)})
+  .catch(err =>{ console.log("email was not sent successfully", err)})
+  
+  
+    
+    }
 
  }
 

@@ -176,7 +176,7 @@ var register = (req, res) => {
                     //console.log(check_username)
                     if( check_username == null ){
                         var result = await saves.createUser(username, email, password);
-                        var send = new mail("malorbit360@gmail.com");
+                        var send = new mail(email);
                         send.sendVerifyMail({ username: result.username, _id: result._id });
                      
                        
