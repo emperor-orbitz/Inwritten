@@ -199,7 +199,7 @@ template: "reset_password", //template name
 };
 
 
-mg.messages().send({ bcc})
+mg.messages().send(data)
 .then(sent =>{console.log("email sent successfully", sent)})
 .catch(err =>{ console.log("email was not sent successfully", err)})
 

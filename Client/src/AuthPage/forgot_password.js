@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../Resources/styles/style.scss';
-import { Button, Form, Grid, Loader, } from 'semantic-ui-react';
+import { Button, Form, Grid, Loader, Icon, } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import Connection from '../../Controllers/auth.controller';
 import { connect } from 'react-redux';
@@ -16,9 +16,21 @@ function DimmerLoad(props) {
 function Error(props) {
   var { loginError } = props;
   if (loginError.length <= 0) return (<div></div>)
+  else if(loginError[0].type == "success"){
+    return (
+      <div>
+        {
+          loginError.map( val => {
+          return <div style={{color:"green"}} key={loginError.indexOf(val)}>
+           <Icon name="checkmark"/> {val.message}
+          </div>
+        })
+      }
   
+      </div>
+      )
+  }
   else 
-  console.log(props.loginError+"jkjj")
     return (
     <div>
       {
@@ -121,7 +133,7 @@ else{
         var { loginError } = this.state;
         button.dimmerLoad = button.disabled = false;
 
-        this.setState({ loginError:[{id:1, message:"Please correct your email"}],
+        this.setState({ loginError:[{ id:1, message:"Please correct your email" }],
           button: button
         })
         this.state.loginError = [];

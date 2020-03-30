@@ -302,11 +302,12 @@ var reset_password = (req, res) => {
 
                     var send = new mail(success.email)
                     send.send_password_reset({ username:success.username, email:success.email, hash:signature })
-                    res.json({ status:200, message: 'Sent! Check your email to continue' });
+                    res.json({ status:200, message: 'Sent! Check your email to continue', type:"success" });
 
                 }
                 catch(err){
-                    res.json({ message: 'Oops, something went wrong. We\'ll fix it soon' });
+                    console.log(err)
+                    res.json({ message: 'Oops, somessssthing went wrong. We\'ll fix it soon', type:"error" });
 
                 }
                
@@ -343,6 +344,7 @@ var reset_password = (req, res) => {
 var change_password_page =(req,res, next) =>{
 
     var token = req.query.token;
+    console.log(token)
     //verify token & go to page
     try{
         let verify = jwt.verify(token, process.env.PASSWORD_RESET_SECRET);
@@ -350,9 +352,9 @@ var change_password_page =(req,res, next) =>{
             res.sendFile(path.resolve(__dirname, "../../Client/assets/change_password_page.html"))
     
         }
+      
     }
     catch(JWTError){
-
         res.sendFile(path.resolve(__dirname, "../../Client/assets/broken_email.html"))
 
         //res.send("JWT ERROR"+ JWTError)

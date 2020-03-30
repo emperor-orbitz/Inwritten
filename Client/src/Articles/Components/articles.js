@@ -77,10 +77,10 @@ class Articles extends React.Component {
     shareToFacebook = (e, data) => {
 
         e.preventDefault()
-        let url = encodeURIComponent(data.post_link)
+        let url = encodeURIComponent(`https://www.inwritten.com/${data.post_link}`)
         console.log(url)
         window.open(
-            'https://www.facebook.com/dialog/share?app_id=508448136537979&display=popup&href=' + url + '&redirect_uri=https%3A%2F%2Fwww.inwritten.com/articles',
+            'https://www.facebook.com/dialog/share?app_id=508448136537979&display=popup&href=' + url + '&redirect_uri=https%3A%2F%2Fwww.inwritten.com/stories',
             'facebook-share-dialog',
             'width=400,height=300', false);
 
