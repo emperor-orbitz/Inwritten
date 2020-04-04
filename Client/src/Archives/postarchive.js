@@ -262,31 +262,14 @@ class PostArchive extends React.Component {
             return (<div>
 
 
-                <div className='bodyArticle'>
-                    <Grid>
-                        <Grid.Row>
-                            <Grid.Column style={{ padding: '2px' }} computer={13} mobile={16} tablet={8}  >
+                   <div className='bodyArticle'>
+                   
+                   <img src="/images/empty.png" className='empty-png'/>
+                   <br/>
+                   <h4 style={{textAlign:"center"}}>No Drafts yet. You can create one <Button size="tiny" as={Link} to="/app/add-post">here</Button></h4>
 
-
-                                You don't have any draft left. You can create one <Button as={Link} to="/app/add-post">here</Button>
-
-                            </Grid.Column>
-
-
-                            <Grid.Column style={{ padding: '5px' }} computer={3} mobile={16} tablet={8}  >
-
-
-
-
-
-
-                            </Grid.Column>
-
-                        </Grid.Row>
-                    </Grid>
-
-
-                </div>
+       
+       </div>
 
             </div>
 

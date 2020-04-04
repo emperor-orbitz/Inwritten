@@ -83,8 +83,13 @@ read_notification = () =>{
         if (this.state.notifications == null) {
             return (
                 <div className="comment-div" style={{ marginTop: "0px !important" }}>
-                    There are no unread notifications now
-                    </div>
+                   
+                   <img src="/images/no-notif.png" className='empty-png'/>
+                   <br/>
+                   <h4 style={{textAlign:"center"}}>You don't have any unread notifications</h4>
+
+       
+                  </div>
             )
         }
         else

@@ -35,7 +35,7 @@ const BLOCK_TAGS= {
     
  }
 
-module.exports = {
+export default {
 
     DEFAULT_NODE: 'paragraph',
 

@@ -8,6 +8,22 @@ $profile-height:250px;
 font-family: 'Montserrat', sans-serif;
 }
 
+
+
+.empty-png{
+    width: 400px;
+    height: 400px;
+    margin: auto 30%;
+
+}
+
+.empty-png-cover{
+    display: flex;
+    align-content: center;
+
+}
+
+
 .pushable{
     overflow:inherit !important;
 }
@@ -217,13 +233,15 @@ float:left;
 
 @media only screen and (max-width:410px){
     .image-thumbnail-template-cover-big{
-        width: 90% !important;
+        width: 100% !important;
     }
     
     .custom-input{
         width:100%;
     }
 }
+
+
 
 //FOR BIG THUMBNAILS IN TEMPLATE ARTICLE LISTS
 .image-thumbnail-template-cover-big{

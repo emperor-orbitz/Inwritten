@@ -1,21 +1,21 @@
 import { Editor } from 'slate-react'
-import { Value, Inline, Node, Text } from 'slate'
+import { Value } from 'slate'
 import React from 'react'
 import initialValue from '../Controllers/value'
 
 import { Button, Icon, Modal, Input } from 'semantic-ui-react'
 import Html from "slate-html-serializer"
-import { DEFAULT_NODE, schema, rules, renderMark, renderBlock,renderInline, onKeyDown } from "../Controllers/editor-rules";
+import { default as Rules }  from "../Controllers/editor-rules";
 import "../../../Resources/styles/editor.scss";
 //import EditorPanel from '../../../backup-editor';
 
-
+//DEFAULT_NODE, schema, Rules.rules, renderMark, renderBlock,renderInline, onKeyDown
 
 
 
 class EditorPanel extends React.Component {
 
-
+  rulers = Rules.rules;
   state = {
     value: Value.fromJSON(initialValue),
     keys: '',
@@ -41,7 +41,7 @@ class EditorPanel extends React.Component {
   }
 
   get exposeHTMLEditorValue() {
-
+    var rules = this.rulers
     const html = new Html({ rules });
     var HTMLValue = html.serialize(window.editor);
     console.log(HTMLValue);
@@ -95,13 +95,13 @@ class EditorPanel extends React.Component {
 
       if (isList) {
         editor
-          .setBlocks(isActive ? DEFAULT_NODE : type)
+          .setBlocks(isActive ? Rules.DEFAULT_NODE : type)
           .unwrapBlock('bulleted-list')
           .unwrapBlock('numbered-list')
       }
 
       else {
-        editor.setBlocks(isActive ? DEFAULT_NODE : type)
+        editor.setBlocks(isActive ? Rules.DEFAULT_NODE : type)
           .unwrapBlock(type)
       }
     }
@@ -116,7 +116,7 @@ class EditorPanel extends React.Component {
 
       if (isList && isType) {
         editor
-          .setBlocks(DEFAULT_NODE)
+          .setBlocks(Rules.DEFAULT_NODE)
           .unwrapBlock('bulleted-list')
           .unwrapBlock('numbered-list')
       } else if (isList) {
@@ -319,11 +319,11 @@ class EditorPanel extends React.Component {
             ref={this.ref}
             value={this.state.value}
             onChange={this.onChange}
-            onKeyDown={onKeyDown}
-            renderBlock={renderBlock}
-            renderMark={renderMark}
-            renderInline={renderInline}
-            schema={schema}
+            onKeyDown={Rules.onKeyDown}
+            renderBlock={Rules.renderBlock}
+            renderMark={Rules.renderMark}
+            renderInline={Rules.renderInline}
+            schema={Rules.schema}
             role="textbox"
             className="editor"
 

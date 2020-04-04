@@ -1,6 +1,6 @@
-import React, { } from 'react';
+import React, { createRef } from 'react';
 import '../../Resources/styles/style.scss';
-import { Menu, Icon, Sidebar, Modal, Button, Responsive, Accordion, Dropdown, Divider, MenuItem, MenuHeader, DropdownDivider } from 'semantic-ui-react';
+import { Menu, Icon, Sidebar, Modal, Button, Responsive, Accordion, Dropdown, Divider, MenuItem, MenuHeader, DropdownDivider, Sticky } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Link from 'react-router-dom/Link';
@@ -13,6 +13,8 @@ import double_u from '../../Resources/images/double-u.png';
 import logo from "../../Resources/images/logo-page.png"
 
 class HeaderAccount extends React.Component {
+  contextRef = createRef()
+
   constructor(props) {
     super(props);
 
@@ -182,15 +184,15 @@ class HeaderAccount extends React.Component {
                 </Modal.Actions>
               </Modal>
             
-
             <Sidebar.Pushable>
-            <Responsive as={Menu} minWidth={300} className="nav" secondary style={{ fontSize:"12px"}}   >
+
+            <Responsive as={Menu} minWidth={300} className="nav" secondary style={{ fontSize:"12px"}}  >
             <Menu.Item icon="bars" onClick={this.toggleSide} size="big" />
             <Menu.Item header ><img src={double_u} style={{ width:"60px", height:"60px" }}/> </Menu.Item>
 
 
             <Menu.Menu position="right"  >
-              <Menu.Item as={Link} to="/app/add-post" icon="compose" content="Write a story"/>
+              <Menu.Item as={Link} to="/app/add-post" icon="compose" content="Write a story" />
               <Menu.Item text={`@${this.props.ProfileReducer.username}`} as={Dropdown} floating >
 
                 <Dropdown.Menu>

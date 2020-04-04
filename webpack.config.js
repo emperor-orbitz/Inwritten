@@ -18,7 +18,7 @@ const HTMLWebpackPluginConfig = new HTMLWebpackPlugin(
 
 var config ={
     mode:'development',
-    entry: './Client/src/index.js',
+    entry:["babel-polyfill", './Client/src/index.js'],
 
     output:{
     path: path.resolve(__dirname,'./Client/assets'),
@@ -44,8 +44,10 @@ var config ={
                 exclude:/node_modules/,
             loader:"babel-loader",
             query:{
-                presets:['react', 'es2015'],
-                plugins:["transform-class-properties"]
+            sourceType:"unambiguous",
+                presets:[  "@babel/preset-env", "@babel/preset-react"
+            ],
+                plugins:[ "transform-regenerator","transform-class-properties"]
             }
                
             },

@@ -173,7 +173,7 @@ class Templates extends React.Component {
                     <div style={{ width: "90%", position: "relative", minHeight: "250px" }}>
                         {templates.map((e, i, a) => {
                             return (
-                                <div key={e._id} className='image-thumbnail-template-cover-big'>
+                                <div key={e._id} className='image-thumbnail-template-cover-big-template'>
 
                                     <div style={{ margin: '10px 3px' }}>
                                         <div className={'customCard-' + e.category} style={{ backgroundImage: `url('${e.featured_image}')`, backgroundSize: "cover", backgroundPosition: "bottom right" }}>
@@ -181,7 +181,7 @@ class Templates extends React.Component {
                                     </div>
 
 
-                                    <div className='template-thumbnail-hover-big-black' style={{ marginTop: "-110%" }}>
+                                    <div className='template-thumbnail-hover-big-black-template' style={{ marginTop: "-110%" }}>
                                         <div className="category" style={{ color: "white" }}>
                                             <h5>{e.template_name} </h5>
                                             <Button primary size='mini' className="button-hover" onClick={() => { this.setState({ open_options: true, selected: e }) }} > View</Button>
@@ -206,7 +206,7 @@ class Templates extends React.Component {
                     <div style={{ position: "relative" }}><h3>Blogs | Paid</h3>
                         <p> Your favorite Templates are coming soon...</p>
 
-                        <div className='image-thumbnail-template-cover-big'>
+                        <div className='image-thumbnail-template-cover-big-template'>
 
                             <div style={{ margin: '10px 3px' }}>
                                 <div className={'customCard-all'} style={{ backgroundImage: `url("/views/template-default-01/images/featured_image.jpg")`, backgroundSize: "cover", backgroundPosition: "bottom right" }}>
@@ -214,7 +214,7 @@ class Templates extends React.Component {
                             </div>
 
 
-                            <div className='template-thumbnail-hover-big-black' style={{ marginTop: "-110%" }}>
+                             <div className='template-thumbnail-hover-big-black-template' style={{ marginTop: "-110%" }}>
                                 <div className="category" style={{ color: "white" }}>
                                     <h5>Premium Designs </h5>
                                     <Button primary size='mini' className="button-hover"  disabled={true}> View</Button>

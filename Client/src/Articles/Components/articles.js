@@ -252,16 +252,12 @@ class Articles extends React.Component {
             return (<div>
 
                 <div className='bodyArticle'>
-                    <Grid>
-                        <Grid.Row>
+                   
+                            <img src="/images/empty.png" className='empty-png'/>
+                            <br/>
+                            <h4 style={{textAlign:"center"}}>You don't have any published story. You can create one <Button size="tiny" as={Link} to="/app/add-post">here</Button></h4>
 
-                            You don't have any published story. You can create one <Button size="tiny" as={Link} to="/app/add-post">here</Button>
-
-
-                        </Grid.Row>
-                    </Grid>
-
-
+                
                 </div>
 
             </div>
