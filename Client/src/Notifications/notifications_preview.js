@@ -46,7 +46,7 @@ export default function NotificationsPreview(props) {
 
         return (
             <div className='bodyArticle'>
-         <h5>Recent Activities | <Link to="/notification">Notifications</Link></h5>
+         <h5>Recent Activities | <Link to="/app/notification">Notifications</Link></h5>
 
                <p>Great!, You have no notifications </p> 
 

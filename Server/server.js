@@ -84,6 +84,7 @@ if (process.env.NODE_ENV == "production") {
   app.get("/subscribe", (req, res) => {
 
     res.sendFile(path.resolve(__dirname, "../Client/assets/launchpage.html"));
+    
   });
   app.get("*", (req, res) => {
 

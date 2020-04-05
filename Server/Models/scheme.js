@@ -111,11 +111,11 @@ const SCHEME = {
 
    socials: new Schema({
     user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    facebook_link: { type:String, default:"#" },
-    linkedin_link: { type: String, default: "#" },
+    facebook_link: { type:String, default:"https://www.facebook.com/inwritten" },
+    linkedin_link: { type: String, default: "https://www.linkedin.com/company/42405525/admin/" },
     youtube_link: { type: String, default:"#" },
     whatsapp_link: { type: String, default: "#" },
-    instagram_link: { type: String, default:"#" }
+    instagram_link: { type: String, default:"https://www.instagram.com/inwritten_" }
 },
     {
         timestamps: true,

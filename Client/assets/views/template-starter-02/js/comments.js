@@ -49,9 +49,9 @@ function comments(post_id) {
    
             
     
-           $(".comment-space")[0].innerHTML = interests
+           $(".comment-space")[0].innerHTML = `${interests}<br>`
               
-            console.log(result.data)
+           // console.log(result.data)
 
 
         },

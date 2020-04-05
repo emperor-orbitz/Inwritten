@@ -12,8 +12,9 @@ function follow(followee){
         data: {followee:followee},
         
         success: function(result){
+            //change button text to "followed"
             console.log(result)
-
+            document.getElementById("follow-btn").innerText ="unfollow";
             
         },
 
@@ -44,7 +45,6 @@ function follow_status(followee){
 
             
         },
-
 
         error: function(err){
       console.log(err)

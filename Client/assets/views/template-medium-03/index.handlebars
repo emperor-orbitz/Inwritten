@@ -33,7 +33,7 @@
 		<!-- Begin Menu -->
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item active">
-			<a class="nav-link" href="index.html">Refresh <span class="sr-only">(current)</span></a>
+			<a class="nav-link" href="/">Refresh <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">
 			<a class="nav-link" href="/user/blog/{{data.authorId.username}}">Blog</a>
@@ -89,10 +89,10 @@
 				<!-- Begin Top Meta -->
 				<div class="row post-top-meta">
 					<div class="col-md-2">
-						<a href="author.html"><img class="author-thumb" src="{{author_data.display_picture}}" alt="Sal"></a>
+						<a href="/user/profile/{{data.authorId.username}}"><img class="author-thumb" src="{{author_data.display_picture}}" alt="Sal"></a>
 					</div>
 					<div class="col-md-10">
-						<a class="link-dark" href="author.html">{{data.author}}</a><button class="btn btn-sm" id="follow-btn" value="{{author_data._id}}" >follow</button>
+						<a class="link-dark" href="/user/profile/{{data.authorId.username}}">{{data.author}}</a><button class="btn btn-sm" id="follow-btn" value="{{author_data._id}}" >follow</button>
 						<span class="author-description">{{ author_data.bio }}</span>
 						<span class="post-date">{{data.createdAt}}</span><span class="dot"></span><span class="post-read">6 min read</span>
 					</div>
