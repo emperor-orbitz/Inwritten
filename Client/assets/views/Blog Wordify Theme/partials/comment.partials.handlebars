@@ -1,0 +1,42 @@
+
+
+<div class="container">
+<div class="ui threaded comments"  style="width:100%; color:white !important;">
+
+<h5 class=" ui-dividing">Responses</h5>
+
+<div class="comment-space" id={{ data._id }}>
+<button id='load_comments' class="btn btn-sm  btn-info">Load Comments</button>
+<br></br>
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<div class="container">
+
+ <form class="ui reply form" id="formSubmit" method="POST" action="/comment/create" >
+    <div class="field">
+      <input name="post_id" id="post_id" hidden value={{data._id}} />
+      <input name="commenter_id" id="commenter_id" hidden />
+         <input name="author_id" id="author_id" hidden value={{author_data._id}} />
+
+      <div id="textarea">
+      <textarea style="width:80%" name="comment" id='comment' required minlength="10" ></textarea><br>
+         <button class="btn btn-sm btn-dark" type='submit'>Submit</button>
+
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+
+

@@ -229,7 +229,7 @@ class HeaderAccount extends React.Component {
                 className='sidebar'>
 
                 <div style={{ textAlign: 'center', padding: '10px 2px',  color: 'rgb(3, 68, 94)', background: 'white' }} >
-                  <Link to="/app/dashboard" style={{ color: "black" }}> <img src={logo} style={{ width:"165px", height:"75px" }}/></Link>
+                  <a target="__blank" href="/" style={{ color: "black" }}> <img src={logo} style={{ width:"165px", height:"73px" }}/></a>
                   <br/>
                   <h4>{`${this.props.ProfileReducer.email}`}</h4>
                   
@@ -260,11 +260,11 @@ class HeaderAccount extends React.Component {
                 */}
 
                 <div className="accordion-item">
-                  <Button as={Link} to="/about_us" fluid style={{ color: 'black', background:"white" }}>
-                    <Icon name="info" />
-                    THE APP
+                 <a href='/'> <Button  fluid style={{ color: 'black', background:"white" }}>
+                    <Icon name="home"/>
+GO TO HOME
                   </Button>
-
+</a>
                 </div>
 
               </Sidebar>

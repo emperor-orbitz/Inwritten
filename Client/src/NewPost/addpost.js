@@ -27,7 +27,7 @@ class AddPost extends React.Component {
       privacy_value: true,
       enable_comments: true,
       post_title: '',
-      featured_image: '',
+      featured_image: 'https://www.inwritten.com/images/double-u.png',
       createdAt: Date.now(),
       tag_value: '',
       post_category: 'all',
@@ -76,7 +76,6 @@ class AddPost extends React.Component {
         case 'tags':
           this.handleTags();
           //this.setState({post_tags:value})
-          alert('fu');
 
       }
     }
@@ -346,6 +345,7 @@ class AddPost extends React.Component {
                       type='file' id='photo' style={{ visibility: 'hidden' }} />
 
                     <div className="featured-pix-cover" onClick={this.toggleDialogFeatured.bind(this)}>
+                    Change Featured Image
                     </div>     
                     </div>
 

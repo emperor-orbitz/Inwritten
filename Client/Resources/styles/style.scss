@@ -7,19 +7,29 @@
   background:rgb(1, 16, 49);
 }
 
-
+div.ui.secondary.nav.menu{
+  font-size: 12px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 50;
+    /* background: blue; */
+}
+}
 
 #app{
   height:100%;
   width:100%;
   font-size: 12px;
-
-
-
 }
+
+
 *{
-  font-family: 'Montserrat', sans-serif;
-}
+
+  margin: 0px;
+  padding:0;
+  box-sizing: border-box;
+  }
 
 .headerDiv{
 background-color:silver;

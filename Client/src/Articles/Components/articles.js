@@ -74,18 +74,30 @@ class Articles extends React.Component {
 
 
 
+    shareToWhatsApp = (e, data) => {
+
+        e.preventDefault()
+        let url = encodeURIComponent(`Hey, check out my new story on Inwritten. It's here: https://www.inwritten.com${data.post_link}`)
+        console.log(url)
+        window.location.href= `https://wa.me/?text="${url}"`
+        
+        
+
+
+    }
+
+
     shareToFacebook = (e, data) => {
 
         e.preventDefault()
-        let url = encodeURIComponent(`https://www.inwritten.com/${data.post_link}`)
-        console.log(url)
+        let url = encodeURIComponent(`https://www.inwritten.com${data.post_link}`)
+
         window.open(
             'https://www.facebook.com/dialog/share?app_id=508448136537979&display=popup&href=' + url + '&redirect_uri=https%3A%2F%2Fwww.inwritten.com/stories',
             'facebook-share-dialog',
             'width=400,height=300', false);
 
     }
-
 
 
 
@@ -313,10 +325,9 @@ class Articles extends React.Component {
                                 <Button onClick={(e) => this.shareToFacebook(e, this.state.share_data)}
                                     color="facebook" icon="facebook" labelPosition='left' content='Share to facebook ' size='small' />
                                 <br /> <br />
-                                <Button color="twitter" icon="twitter" labelPosition='left' content='Share to Twitter' size='small' />
+                                <Button onClick={(e) => this.shareToWhatsApp(e, this.state.share_data)} color="green" icon="whatsapp" labelPosition='left' content='Share to WhatsApp' size='small' />
                             </div>
                         </Modal.Content>
-
                     </Modal>
                     <div className='bodyArticle'>
 

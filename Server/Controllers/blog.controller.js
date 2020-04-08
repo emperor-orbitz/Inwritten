@@ -34,14 +34,16 @@ var index = async (req, res) => {
                             })
                             .populate("authorId", "username email display_picture bio")
                              // .select("")
-                              
-
+        let social_data = await social_model.findOne({user_id: data.authorId}) ;             
+ 
         if (data != null) {
             var scripts = [{script:`${template_data.template_name}/js/auth.js`}];
 
-            console.log(data.tags.length)
+            //console.log(data.tags.length)
             res.render(`${template_data.template_name}/index`,
              { data,  comment_data: data.comments, author_data: data.authorId ,tag_data:data.tags.split(","),
+             social_data,
+             template_data: template_data.template_name,
              partials:{
                 comments:`./partials/comment.partials`,
                 author:`./partials/author.partials`,
@@ -83,7 +85,10 @@ var user = async (req, res) => {
 
         if (found_template != null) {
 
-            res.render(`${found_template.template_name}/profile`, {user_data: data, social_data: socials})
+            res.render(`${found_template.template_name}/profile`, {user_data: data, social_data: socials,
+                template_data: found_template.template_name,
+
+            })
         }
         else res.send("Could not load article successfully")
 
@@ -111,7 +116,7 @@ var blog = async (req, res, next) => {
                                         .populate('template_id')
 
         if (data != null) {
-            res.render(`${user_data.template_id.template_name}/blog`, { data, user_data })
+            res.render(`${user_data.template_id.template_name}/blog`, { data, user_data, template_data: user_data.template_id.template_name })
         }
         else res.send("Seems there is no story yet")
 
@@ -209,7 +214,12 @@ var follow_status = async (req, res, next) => {
         
             res.send({message:"Already following", status:200})
             .status(200)
-    } 
+    }
+    else if( req.user._id == req.query.followee ){
+        //User cannot follow himself
+        res.send({message:"Not allowed", status:200})
+        .status(200)
+    }
     else {
         res.send({message:"Not following", status:200})
         .status(200)
@@ -277,7 +287,6 @@ var other_interests = async (req, res, next) => {
     var data = await posts.find({ category:req.query.category })
                         .skip(rand)
                         .limit(3)
-
 
     res.send({ message:data })
                     
