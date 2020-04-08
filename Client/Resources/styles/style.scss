@@ -7,14 +7,17 @@
   background:rgb(1, 16, 49);
 }
 
-div.ui.secondary.nav.menu{
+div.ui.secondary.nav.menu {
   font-size: 12px;
-    position: fixed;
+    position: sticky;
     top: 0;
     width: 100%;
     z-index: 50;
     /* background: blue; */
 }
+
+div.ui.secondary.nav.menu >.item {
+  color: white !important;
 }
 
 #app{
