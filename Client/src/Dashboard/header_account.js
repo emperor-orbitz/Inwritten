@@ -188,7 +188,7 @@ class HeaderAccount extends React.Component {
 
             <Responsive as={Menu} minWidth={300} className="nav" secondary style={{ fontSize:"12px"}}  >
             <Menu.Item icon="bars" onClick={this.toggleSide} size="big" />
-            <Menu.Item header ><img src={double_u} style={{ width:"60px", height:"60px" }}/> </Menu.Item>
+            <Menu.Item header ><img src="/images/inwritten-logo-white.png" style={{ width:"130px", height:"50px" }}/> </Menu.Item>
 
 
             <Menu.Menu position="right"  >

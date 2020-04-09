@@ -14,8 +14,8 @@ class Notifications extends React.Component {
 
     constructor(props) {
         super(props);
-        // this.socket = socketIOClient("http://localhost:5000", {query:`userid=${this.props.ProfileReducer._id}`})
 
+        
         this.state = {
             new_notification: "",
             notifications: [],
@@ -53,19 +53,22 @@ read_notification = () =>{
 
 
 
-    async componentDidMount() {
+  componentDidMount() {
         //fetch notifications
         try {
             let notifications = new FetchNotifications();
             console.log(this.props.ProfileReducer)
-            let notif = await notifications.get_notifications(this.props.ProfileReducer._id)
-            if (notif == null) {
+            notifications.get_notifications(this.props.ProfileReducer._id)
+            .then(notif =>{
+                if (notif == null) {
 
-            }
-            else {
-                console.log(notif);
-                this.setState({ notifications: notif.data })
-            }
+                }
+                else {
+                    console.log(notif);
+                    this.setState({ notifications: notif.data })
+                }
+            })
+           
         } catch (err) {
             //catch uncaught server error
             //alert('error')

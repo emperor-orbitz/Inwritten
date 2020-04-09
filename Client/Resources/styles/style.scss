@@ -13,12 +13,17 @@ div.ui.secondary.nav.menu {
     top: 0;
     width: 100%;
     z-index: 50;
-    /* background: blue; */
+    background: #27395c; 
 }
 
-div.ui.secondary.nav.menu >.item {
-  color: white !important;
+div.ui.secondary.nav.menu > .item{
+ color: white !important;
 }
+
+div.right.menu > .item, div.right.menu > .text {
+  color:white !important;
+}
+
 
 #app{
   height:100%;

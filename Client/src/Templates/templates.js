@@ -203,7 +203,7 @@ class Templates extends React.Component {
 
 
                     <br />
-                    <div style={{ position: "relative" }}><h3>Blogs | Paid</h3>
+               {  /*   <div style={{ position: "relative" }}><h3>Blogs | Paid</h3>
                         <p> Your favorite Templates are coming soon...</p>
 
                         <div className='image-thumbnail-template-cover-big-template'>
@@ -223,7 +223,7 @@ class Templates extends React.Component {
                             </div>
 
                         </div>
-                    </div>
+                    </div> */}
 
                 </div>
 
