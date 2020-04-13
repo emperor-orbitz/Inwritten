@@ -1,5 +1,5 @@
 import React from 'react';
-import { Signup, Account, Login, ForgotPassword, ArticlesCategory, Profile, Comments, Interests, Bookmark, Templates, Notifications, Preferences } from './page_exports';
+import { Signup, Account, Login, ForgotPassword, ArticlesCategory, Profile, Comments, Interests, Bookmark, Templates, Notifications, Preferences, QuillTest } from './page_exports';
 import '../Resources/styles/style.scss';
 import { Switch, Route } from 'react-router';
 import HeaderAccount from '../src/Dashboard/header_account';
@@ -14,7 +14,8 @@ function App() {
 
     <Switch>
       <Route exact path='/app/signup' component={Signup} />
-   <Route path='/app/forgot_password' component={ForgotPassword} />
+      <Route path='/app/forgot_password' component={ForgotPassword} />
+      <Route exact path='/app/test' component={QuillTest} />
 
       <Route exact path='/app/login' component={Login} />
 

@@ -40,10 +40,24 @@ display: table;
         }
         }
 
+ .ql-container{
+    color:black !important;
+    hr{
+        border: none;
+        color: #111;
+        letter-spacing: 1em;
+        text-align: center;
+        }
+        img{
+            width:90%;
+            height:500px;
+        }
+ } 
 
-
-
-
+.ql-container hr:before{
+    content: "...";
+    font-size: 200%
+}
 
 
         

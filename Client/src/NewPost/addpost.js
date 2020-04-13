@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import FetchArticles from '../../Controllers/article.controller'
 import EditorPanel from '../../src/NewPost/Components/editor-panel';
 import cat from '../Dashboard/categories';
+import QuillTest from '../Notifications/QuillTest';
 
 
 
@@ -153,8 +154,8 @@ class AddPost extends React.Component {
       time_to_read: this.state.time_to_read,
       comments_enabled: this.state.enable_comments,
       public: this.state.privacy_value,
-      body_html: panel.exposeHTMLEditorValue,
-      body_schema: panel.exposeEditorValue,
+     // body_html: panel.exposeHTMLEditorValue,
+      //body_schema: panel.exposeEditorValue,
       featured_image: this.state.featured_image,
       comments:[],
       tags: this.state.tag_value
@@ -319,8 +320,7 @@ class AddPost extends React.Component {
               }
 
 
-              <EditorPanel />
-
+<QuillTest/>
 
             </Grid.Column>
 

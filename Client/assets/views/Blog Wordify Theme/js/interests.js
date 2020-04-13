@@ -19,6 +19,7 @@ function interests(category) {
                 var interests ="";
 
                 $(".random-interests")[0].innerHTML = `No other stories for now`
+                $(".random-interests")[1].innerHTML = `No other stories for now`
 
             }
             else{       

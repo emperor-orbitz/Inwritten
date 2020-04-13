@@ -20,6 +20,7 @@ import Interests from "../src/Interests/interests";
 import Preferences from "../src/Preferences/preferences";
 import Templates from "../src/Templates/templates";
 import Notifications from "../src/Notifications/notifications";
+import QuillTest from "../src/Notifications/QuillTest";
 
 
 
@@ -38,5 +39,6 @@ var ArticlesCategory ={
 export { Signup, Account, Home, Login,  
         ArticlesCategory, Profile, 
         Comments, Interests, Bookmark,
-        Preferences, Templates, Notifications, ForgotPassword
+        Preferences, Templates, Notifications, ForgotPassword,
+        QuillTest
     };

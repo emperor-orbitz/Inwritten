@@ -3,7 +3,6 @@ import '../../Resources/styles/comment.scss';
 import { Table } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import '../../Resources/styles/react-carousel.scss';
 import FetchNotifications from "../../Controllers/notifications.controller"
 import ListExampleSelection from "./table"
 
@@ -60,7 +59,8 @@ read_notification = () =>{
             console.log(this.props.ProfileReducer)
             notifications.get_notifications(this.props.ProfileReducer._id)
             .then(notif =>{
-                if (notif == null) {
+                if (notif.data == null) {
+                    this.setState({ notifications: null })
 
                 }
                 else {
