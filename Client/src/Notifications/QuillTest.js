@@ -4,14 +4,13 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import ReactQuill, { Quill } from 'react-quill'; // ES6
 
-require("quill/dist/quill.core.scss");
+import  "./quillcore.scss";
 import  "quill/dist/quill.core.js";
 
 import "quill/dist/quill.min.js";
 import "quill/dist/quill.js";
 
-require ("quill/dist/quill.bubble.scss");
-
+import "./quillbubble.scss";
 //import "quill/dist/quill.snow.scss";
 
 
