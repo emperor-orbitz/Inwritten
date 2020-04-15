@@ -24,7 +24,6 @@ export default class ProfileUpdate {
 
             }
         }
-        alert("swdsdsdsdsdsd");
 
         return new Promise((resolved, rejected) => {
             fetch(`${get_options.url}/update_password`,

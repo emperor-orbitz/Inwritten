@@ -56,7 +56,7 @@ read_notification = () =>{
         //fetch notifications
         try {
             let notifications = new FetchNotifications();
-            console.log(this.props.ProfileReducer)
+
             notifications.get_notifications(this.props.ProfileReducer._id)
             .then(notif =>{
                 if (notif.data == null) {
@@ -64,14 +64,13 @@ read_notification = () =>{
 
                 }
                 else {
-                    console.log(notif);
+
                     this.setState({ notifications: notif.data })
                 }
             })
            
         } catch (err) {
             //catch uncaught server error
-            //alert('error')
             console.log(err, "error")
         }
 

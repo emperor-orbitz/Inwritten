@@ -4,11 +4,12 @@ import '../Resources/styles/style.scss';
 import { Switch, Route } from 'react-router';
 import HeaderAccount from '../src/Dashboard/header_account';
 //import RichTextExample from '../src/NewPost/Components/test-editor';
-
+import {CSSTransition, TransitionGroup } from "react-transition-group"
+import {  useLocation } from 'react-router-dom';
 
 
 function App() {
-
+  let location = useLocation();
   return (
 
 
@@ -22,13 +23,19 @@ function App() {
 
       <HeaderAccount>
 
-        <Switch>
-          <Route path='/app/comments/:postID' component={Comments} />
+<TransitionGroup>
+<CSSTransition
+key={location.key}
+classNames="fade"
+timeout={200}
+>
+        <Switch location={location}>
+          <Route path='/app/comments/:postID' component={Comments}  />
           <Route path='/app/interests' component={Interests} />
           <Route path='/app/edit-post/:postID' component={ArticlesCategory.EditPost} />
           <Route path='/app/dashboard' component={Account} />
           <Route path='/app/settings/profile' component={Profile} />
-          <Route path='/app/articles' component={ArticlesCategory.Articles} />
+          <Route path='/app/articles' component={ArticlesCategory.Articles}  />
           <Route path='/app/drafts' component={ArticlesCategory.Drafts} />
           <Route path='/app/add-post' component={ArticlesCategory.AddPost} />
           <Route path='/app/bookmark' component={Bookmark} />
@@ -36,7 +43,6 @@ function App() {
           <Route path='/app/settings/preferences' component={Preferences} />
 
           <Route path='/app/notification' component={Notifications} /> 
-
 
 
 
@@ -49,7 +55,9 @@ function App() {
             </div>
           )} />
         </Switch>
+        </CSSTransition>
 
+</TransitionGroup>
       </HeaderAccount>
           
     </Switch>

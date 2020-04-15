@@ -10,10 +10,13 @@ import socketIOClient from 'socket.io-client';
 
 import SideBar from '../../src/Dashboard/sidebar';
 import double_u from '../../Resources/images/double-u.png';
-import logo from "../../Resources/images/logo-page.png"
+import logo from "../../Resources/images/logo-page.png";
+import {CSSTransition} from "react-transition-group";
+
+
+
 
 class HeaderAccount extends React.Component {
-  contextRef = createRef()
 
   constructor(props) {
     super(props);
@@ -26,11 +29,12 @@ class HeaderAccount extends React.Component {
       pageTitle: '',
       email_variable: '',
       loadFinish: false,
-      new_notification:""
+      new_notification: "",
+      switch_story_option: "Write a story"
 
     }
     // realtime notification socket  
-   
+
 
 
   }
@@ -43,30 +47,48 @@ class HeaderAccount extends React.Component {
   UNSAFE_componentWillReceiveProps() {
     //push sideBAR back IN TWEAK
     if (this.state.visible == true) this.setState({ visible: false });
-    else;
+    else { };
 
   }
-  componentWillMount() {
-    
-}
 
- 
+
+
+  componentWillReceiveProps(nextProps, nextState) {
+
+    let bool = /\/app\/edit-post\/[a-zA-Z0-9]+/.test(nextProps.location.pathname)
+
+    if (nextProps.location.pathname == "/app/add-post") {
+      this.setState({ switch_story_option: "SAVE" })
+
+    }
+    else if (bool == true) {
+      this.setState({ switch_story_option: "Save Changes" })
+    }
+    else
+    this.setState({ switch_story_option: "Write a story" })
+
+
+  }
+
+
+
+
   componentDidMount() {
 
-    let token = localStorage.getItem("hs_token");
 
+    let token = localStorage.getItem("hs_token");
     if (Object.keys(this.props.ProfileReducer).length == 0) {
       this.connect.isLoggedin(token)
         .then(_ => {
 
           //SUBSCRIBE TO SOCKET
-         let socket = socketIOClient("https://www.inwritten.com", {query:`userid=${_._id}`})
-          socket.on("new_notification", _ =>{
-            this.setState({ new_notification:"You have a new notification" })
+          let socket = socketIOClient("https://www.inwritten.com", { query: `userid=${_._id}` })
+          socket.on("new_notification", _ => {
+            this.setState({ new_notification: "You have a new notification" })
             alert("You have a new notification! Check notifications")
-    
-        })
-        
+
+          })
+
 
           //POPULATE PROFILE REDUCER & ARTICLE REDUCER
           this.props.dispatch({ type: 'INJECT_PROFILE', payload: _ })
@@ -136,14 +158,32 @@ class HeaderAccount extends React.Component {
 
   }
 
+  story_switch = () => {
 
-  logout=() => {
+    if (this.state.switch_story_option == "SAVE") {
+
+      this.props.dispatch({ type: 'SAVE', payload: true })
+
+    }
+   else if (this.state.switch_story_option == "Save Changes") {
+
+      this.props.dispatch({ type: 'EDIT_STORY', payload: true })
+
+    }
+    else
+     { 
+       this.props.history.push("/app/add-post")
+     }
+    
+  }
+
+
+  logout = () => {
 
 
     localStorage.removeItem("hs_token");
     this.props.history.replace('/app/login');
-    this.props =null;
-
+    this.props = null;
 
   }
 
@@ -151,13 +191,12 @@ class HeaderAccount extends React.Component {
 
   render() {
     var side = new SideBar();
-    var { articleSubmenu, categorySubmenu } = side.subMenu;
+    var { categorySubmenu } = side.subMenu;
     const { visible } = this.state;
-    var { activeAccordion } = this.state;
 
     //PAGE NAME    
-    var xx = this.props.location.pathname.lastIndexOf('/');
-    var xx_page = (xx === 0) ? this.props.location.pathname.slice(1) : this.props.location.pathname.slice(1, xx);
+    var xx = this.props.location.pathname.lastIndexOf('/'); // this.props.location.pathname == "/app/add-post"
+    //var xx_page = (xx === 0) ? this.props.location.pathname.slice(1) : this.props.location.pathname.slice(1, xx);
 
 
 
@@ -171,77 +210,74 @@ class HeaderAccount extends React.Component {
 
           <div className="sideBar">
 
-              <Modal size="mini" open={open} onClose={this.close} closeOnDimmerClick>
-                <Modal.Header>LOGOUT</Modal.Header>
-                <Modal.Content>
-                  <p style={{ color: 'black' }}>Are you sure you want to log out?<br /> There's still a lot to write about!</p>
-                </Modal.Content>
-                <Modal.Actions>
-               {/*   <Button onClick={() => {
+            <Modal size="mini" open={open} onClose={this.close} closeOnDimmerClick>
+              <Modal.Header>LOGOUT</Modal.Header>
+              <Modal.Content>
+                <p style={{ color: 'black' }}>Are you sure you want to log out?<br /> There's still a lot to write about!</p>
+              </Modal.Content>
+              <Modal.Actions>
+                {/*   <Button onClick={() => {
                     this.setState({ open: false })
                   }} >Nope</Button>*/}
-                  <Button onClick={this.logout} icon='sign out' labelPosition='right' content='Exit' />
-                </Modal.Actions>
-              </Modal>
-            
+                <Button onClick={this.logout} icon='sign out' labelPosition='right' content='Exit' />
+              </Modal.Actions>
+            </Modal>
+
             <Sidebar.Pushable>
 
-            <Responsive as={Menu} minWidth={300} className="nav" secondary style={{ fontSize:"12px"}}  >
-            <Menu.Item icon="bars" onClick={this.toggleSide} size="large" />
-            <Menu.Item header ><img src="/images/double-u.png" style={{ width:"50px", height:"50px" }}/> </Menu.Item>
+              <Responsive as={Menu} minWidth={300} className="nav" secondary style={{ fontSize: "12px" }}  >
+                <Menu.Item icon="bars" onClick={this.toggleSide} size="large" />
+                <Menu.Item header ><img src="/images/double-u.png" style={{ width: "50px", height: "50px" }} /> </Menu.Item>
 
 
-            <Menu.Menu position="right"  >
-              <Menu.Item as={Link} to="/app/add-post" icon="compose" content="Write a story" />
-              <Menu.Item text={`@${this.props.ProfileReducer.username}`} as={Dropdown} floating >
+                <Menu.Menu position="right"  >
+                  <Menu.Item onClick={this.story_switch} content={<Button positive size='mini' >{this.state.switch_story_option}</Button>} />
+                  <Menu.Item text={`@${this.props.ProfileReducer.username}`} as={Dropdown} floating >
 
-                <Dropdown.Menu>
-                  <Dropdown.Item icon='dashboard' text='Dashboard' as={Link} to='/app/dashboard' />
-                  <Dropdown.Item icon='bell' text='Notifications' as={Link} to='/app/notification' style={{color: 'green'}} />
+                    <Dropdown.Menu>
+                      <Dropdown.Item icon='dashboard' text='Dashboard' as={Link} to='/app/dashboard' />
+                      <Dropdown.Item icon='bell' text='Notifications' as={Link} to='/app/notification' style={{ color: 'green' }} />
 
-                  <DropdownDivider  />
+                      <DropdownDivider />
 
-                  <Dropdown.Item icon='bookmark outline' text='Bookmarks' as={Link} to='/app/bookmark' />
-                  <Dropdown.Item icon='folder outline' text='Published Stories' as={Link} to='/app/articles' />
-                  <Dropdown.Item icon='boxes' text='Drafts' as={Link} to='/app/drafts' />
-                    <DropdownDivider />
+                      <Dropdown.Item icon='bookmark outline' text='Bookmarks' as={Link} to='/app/bookmark' />
+                      <Dropdown.Item icon='folder outline' text='Published Stories' as={Link} to='/app/articles' />
+                      <Dropdown.Item icon='boxes' text='Drafts' as={Link} to='/app/drafts' />
+                      <DropdownDivider />
 
-                  <Dropdown.Item icon='user' text='Profile' as={Link} to='/app/settings/profile' />
-                  <Dropdown.Item icon='theme' text='Templates' as={Link} to='/app/settings/templates' />
-                  
-                  <DropdownDivider/>
+                      <Dropdown.Item icon='user' text='Settings' as={Link} to='/app/settings/profile' />
+                      <Dropdown.Item icon='theme' text='My Templates' as={Link} to='/app/settings/templates' />
+
+                      <DropdownDivider />
 
 
-                  <Dropdown.Item icon='help' text='Docs' />
-                  <Dropdown.Item color="red" onClick={this.showModal} as={Button} fluid icon='sign out' text='logout ' />
-                </Dropdown.Menu>
-              </Menu.Item>
+                      <Dropdown.Item icon='help' text='Docs' />
+                      <Dropdown.Item color="red" onClick={this.showModal} as={Button} fluid icon='sign out' text='logout ' />
+                    </Dropdown.Menu>
+                  </Menu.Item>
 
-            </Menu.Menu>
-          </Responsive>
+                </Menu.Menu>
+              </Responsive>
 
               <Sidebar as={Accordion}
                 animation="push"
-                
                 onHide={this.toggle}
                 visible={visible}
                 vertical='true'
                 className='sidebar'>
 
-                <div style={{ textAlign: 'center', padding: '10px 2px',  color: 'rgb(3, 68, 94)', background: 'white' }} >
-                  <a target="__blank" href="/" style={{ color: "black" }}> <img src={logo} style={{ width:"165px", height:"73px" }}/></a>
-                  <br/>
+                <div style={{ textAlign: 'center', padding: '10px 2px', color: 'rgb(3, 68, 94)', background: 'white' }} >
+                  <a target="__blank" href="/" style={{ color: "black" }}> <img src={logo} style={{ width: "165px", height: "73px" }} /></a>
+                  <br />
                   <h4>{`${this.props.ProfileReducer.email}`}</h4>
-                  
+
                 </div>
-             
-    
 
 
                 <div className="accordion-item">
                   <Accordion.Title active={true} style={{ padding: '5px 20px' }} index={3} onClick={this.handleClick}>
-                     <span style={{fontSize:"14px",color:"black"}}>INTERESTS</span>
-                     <Divider />
+                    <span style={{ fontSize: "14px", color: "black" }}>INTERESTS</span>
+                    <Divider />
                   </Accordion.Title>
                   <Accordion.Content style={{ padding: '1px 20px', }} className="accordion-content" active={true} content={categorySubmenu} />
 
@@ -260,21 +296,18 @@ class HeaderAccount extends React.Component {
                 */}
 
                 <div className="accordion-item">
-                 <a href='/'> <Button  fluid style={{ color: 'black', background:"white" }}>
-                    <Icon name="home"/>
-GO TO HOME
+                  <a href='/'> <Button fluid style={{ color: 'black', background: "white" }}>
+                    <Icon name="home" />
+                    GO TO HOME
                   </Button>
-</a>
+                  </a>
                 </div>
 
               </Sidebar>
               <Sidebar.Pusher>
 
 
-
                 {this.props.children}
-
-
 
               </Sidebar.Pusher>
             </Sidebar.Pushable>

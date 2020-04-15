@@ -113,8 +113,9 @@ userSchema.methods.findUserById = (id) => {
 
 
 userSchema.methods.updateProfile = (id, update, change_photo_too = true, cb) => {
-
-    if (change_photo_too == true)
+        console.log("GOT HERE")
+    if (change_photo_too == true){
+        console.log("CAHANGE")
         return mongoose.model('User', userSchema).updateMany({ _id: id },
             {
                 $set: {
@@ -130,6 +131,7 @@ userSchema.methods.updateProfile = (id, update, change_photo_too = true, cb) => 
 
                 }
             }, cb)
+        }
     else
         return mongoose.model('User', userSchema).updateMany({ _id: id },
             {

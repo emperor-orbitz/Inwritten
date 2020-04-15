@@ -1,5 +1,8 @@
 var profileState = {}
 var dataState = [];
+var storyPage = false;
+var EditPage = false;
+
 
 
 /*          PROFILE ACTIONS
@@ -74,4 +77,44 @@ var ArticleReducer = (state = dataState, action) => {
 };
 
 
-module.exports = { ProfileReducer, ArticleReducer };
+var StoryPage = (state = storyPage, action) => {
+        switch(action.type){
+            case "SAVE":
+            state = true;
+            return state;
+   
+        case "WRITE A STORY":
+            state = false
+            return state
+    
+            default:
+            return state;
+
+}
+
+}
+
+
+
+
+var EditPage = (state = EditPage, action) => {
+    switch(action.type){
+        case "EDIT_STORY":
+        state = true;
+        return state;
+
+        case "WRITE A STORY2":
+            state = false
+            return state
+
+    
+        default:
+        return state;
+
+}
+
+}
+
+
+
+module.exports = { ProfileReducer, ArticleReducer, StoryPage, EditPage }

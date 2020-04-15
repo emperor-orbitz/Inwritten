@@ -74,6 +74,7 @@ class Articles extends React.Component {
 
 
 
+
     shareToWhatsApp = (e, data) => {
 
         e.preventDefault()
@@ -380,7 +381,7 @@ class Articles extends React.Component {
 
 
                                                             <Button.Group className="button-hover" size='small' icon >
-                                                                <Button icon='edit outline' as={Link} to={{ pathname: '/app/edit-post/' + e._id }} />
+                                                                <Button icon='eye' as={Link} to={{ pathname: '/app/edit-post/' + e._id }} />
                                                                 <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
                                                                 <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
                                                                 <Button icon="share alternate" onClick={() => { this.openShare(e) }} />

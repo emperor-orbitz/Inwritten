@@ -361,7 +361,7 @@ class PostArchive extends React.Component {
                                                         <div className="category">
 
                                                             <Button.Group className="button-hover" size='small' icon >
-                                                                <Button icon='edit outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
+                                                                <Button icon='eye' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
                                                                 <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} disabled={true} />
                                                                 <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
                                                                 <Button icon='comments' as={Link} to={`/comments/${e._id}`} />

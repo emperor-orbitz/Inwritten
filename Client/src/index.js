@@ -4,13 +4,13 @@ import {  BrowserRouter as Router } from 'react-router-dom';
 import App from  './home';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
-import { ProfileReducer, ArticleReducer } from '../Store/reducers';
+import { ProfileReducer, ArticleReducer, StoryPage, EditPage } from '../Store/reducers';
 import "babel-polyfill"
 
 
 
 const app = document.getElementById('app');
-const AllReducers = combineReducers({ ProfileReducer, ArticleReducer });
+const AllReducers = combineReducers({ ProfileReducer, ArticleReducer, StoryPage, EditPage });
 const store = createStore(AllReducers);
 
 

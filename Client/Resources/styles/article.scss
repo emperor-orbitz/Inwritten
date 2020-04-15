@@ -1,8 +1,8 @@
 
 //@import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css';
 
-$profile-width:250px;
-$profile-height:250px;
+$profile-width:200px;
+$profile-height:200px;
 
 *{
 font-family: 'Montserrat', sans-serif;
@@ -457,16 +457,17 @@ background:rgb(0,0,7);
     height: $profile-height;
     float:left;
     position: relative; 
+    border: 2px solid black;
+    border-radius: 2px;
 
 }
 
 
-.profile-pix-block:hover >.profile-pix-cover{
-display:block;
-animation: profileroll 0.2s ease-in-out forwards;
+//.profile-pix-block:hover >.profile-pix-cover{
+//display:block;profile-pix-cover
+//animation: profileroll 0.2s ease-in-out forwards;
 
-
-} 
+//} 
 
 .featured-pix-block:hover >.featured-pix-cover{
     display:block;
@@ -477,7 +478,7 @@ animation: profileroll 0.2s ease-in-out forwards;
 
 .profile-pix-cover{
 position: absolute;
-display:none;
+display:block;
 background: rgba(0,0,0,0.5);
 //border-radius: $profile-width;
 width: $profile-width;

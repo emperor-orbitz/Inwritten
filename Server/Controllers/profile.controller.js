@@ -29,9 +29,11 @@ var update_profile = (req, res, next) => {
     var update = req.body;
 
     if(req.user.display_picture === req.body.profile_photo){
-        console.log(true)
+
+        // console.log(true)
         profile.updateProfile(req.user._id, req.body, false, (err, success) => {
                     if (err) {
+
                         res.send({
                             code: http_status.BAD_REQUEST.code,
                             message: http_status.BAD_REQUEST.message,
@@ -63,6 +65,7 @@ var update_profile = (req, res, next) => {
 
     else{
 
+        
     cloudinary.v2.uploader.upload( 
         req.body.profile_photo, {
             resource_type: "image",
@@ -70,7 +73,7 @@ var update_profile = (req, res, next) => {
             public_id: `${req.user._id}-${req.body.username}-${Date.now()}`,
             overwrite: true,
             transformation: [
-                {width: 600, crop: "scale"},
+                {width: 300, crop: "scale"},
                 {quality: "auto"}
                 ]
         },
@@ -78,18 +81,21 @@ var update_profile = (req, res, next) => {
         function (error, result) {
             if (error) {
                 //Bad formats
+
                 res.send({
                     code: http_status.BAD_REQUEST.code,
                     message: http_status.BAD_REQUEST.message,
                     data: []
-                });
+                })
             }
 
             else {
 
                 update.profile_photo = result.url;
-                profile.updateProfile(req.user._id, update, (err, success) => {
+                profile.updateProfile(req.user._id, update,true, (err, success) => {
+
                     if (err) {
+
                         res.send({
                             code: http_status.BAD_REQUEST.code,
                             message: http_status.BAD_REQUEST.message,
@@ -99,16 +105,20 @@ var update_profile = (req, res, next) => {
                     else {
 
                         var updateAuthor = post.updateAuthor(req.body.username, req.user._id);
-                        if (updateAuthor == false)
+                        if (updateAuthor == false){
+
                             res.send({
                                 code: http_status.INTERNAL_SERVER_ERROR.code,
                                 message: http_status.INTERNAL_SERVER_ERROR.message,
                                 data: []
-                            });
+                            })
                         
+                        }
+                           
                            
                         else
-                            res.send({
+
+                        res.send({
                                 code: http_status.OK.code,
                                 message: http_status.OK.message,
                                 data: []
@@ -120,9 +130,6 @@ var update_profile = (req, res, next) => {
 
 
             }
-        }).catch((err)=>{
-           //SERVER ERROR
-            console.log(err)
         })
     }
 }
@@ -232,11 +239,10 @@ try{
     .send({ code: http_status.OK.code,
             story_count, follower_count })
 
-            console.log(story_count, follower_count)
 }
 catch(error){
         //server error
-        console.log(error)
+
         res.status(http_status.INTERNAL_SERVER_ERROR.code)
         .send({  code: http_status.INTERNAL_SERVER_ERROR.code,
                  message: http_status.INTERNAL_SERVER_ERROR.message })

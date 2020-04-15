@@ -1,3 +1,7 @@
+
+
+
+
 import { Editor } from 'slate-react'
 import { Value, Inline, Node, Text } from 'slate'
 import React from 'react'
@@ -492,3 +496,4 @@ class EditorPanel extends React.Component {
  */
 
 export default EditorPanel
+

@@ -40,8 +40,24 @@ display: table;
         }
         }
 
+
+        .rq-container{
+         width:90%;
+         left:50%;
+         transform: translate(-50%);
+            position: absolute;
+
+
+
+        }
+
+
+
  .ql-container{
     color:black !important;
+    min-height:100%;
+
+
     hr{
         border: none;
         color: #111;
@@ -49,8 +65,8 @@ display: table;
         text-align: center;
         }
         img{
-            width:90%;
-            height:500px;
+            width:100%;
+            height:330px;
         }
  } 
 
