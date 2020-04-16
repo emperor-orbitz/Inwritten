@@ -79,7 +79,7 @@ export default function DraftPreview(props) {
                             <Card.Content description={e.description} />
                             <Card.Content extra>
                             <Button.Group className="button-hover" size='small' icon >
-                                                <Button icon='eye outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
+                                                <Button icon='eye outline' as={Link} to={{ pathname: '/app/edit-post/' + e._id }} />
                                                 <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
                                                 <Button icon='share outline'  />
 

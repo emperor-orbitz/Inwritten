@@ -395,16 +395,18 @@ leavePage = ({id, post_link})=>{
                     <a href={this.state.share_data.post_link}><Button icon="internet explorer" labelPosition='left' content="View your story live" size='small' fluid onClick={this.copyToClipboard} /></a>
                     <br /> <br />
 
-                    <Button icon="copy outline" labelPosition='left' content={this.state.copyToClipboard} size='small' onClick={this.copyToClipboard} disabled={this.state.copyToClipboard == "Copied!"} />
+                    <Button icon="copy outline" labelPosition='left' content={this.state.copyToClipboard} size='small' onClick={this.copyToClipboard} fluid disabled={this.state.copyToClipboard == "Copied!"} />
                     <br /> <br />
 
                     <Button onClick={(e) => this.shareToFacebook(e, this.state.share_data)}
-                      color="facebook" icon="facebook" labelPosition='left' content='Share to facebook ' size='small' />
+                      color="facebook" icon="facebook" labelPosition='left' content='Share to facebook' fluid size='small' />
                     <br /> <br />
                     <Button onClick={(e) => this.shareToWhatsApp(e, this.state.share_data)} color="green" icon="whatsapp" labelPosition='left' content='Share to WhatsApp' size='small' />
                   </div>
                 </Modal.Content>
               </Modal>
+
+              
               <Modal size="small" basic style={{ color: "white !important" }} open={this.state.open_options} onClose={this.close}  >
                 <h3 style={{ margin: '1px 2%', color: "white" }}>Settings</h3>
                 <Modal.Content image >

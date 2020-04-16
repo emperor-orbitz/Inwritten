@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'react-router-dom/Link';
 import '../../Resources/styles/comment.scss';
 import '../../Resources/styles/template.scss';
-import { Icon, Button, Modal, Divider } from 'semantic-ui-react';
+import { Icon, Button, Modal, Divider, Container, Grid } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 //import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
@@ -112,9 +112,15 @@ class Templates extends React.Component {
         }
         else
             return (
-
+<Container>
+    
                 <div className="comment-div" style={{ marginTop: "0px !important" }}>
-                    <h3 style={{ color: "black" }}>Templates</h3>
+
+                <Grid>
+        <Grid.Row >
+        <Grid.Column computer={16} mobile={16} tablet={15}   >
+
+                    <h3 style={{ color: "black" }}>My Templates</h3>
                     <p>Preset templates help define structures to publish your stories. Worry less of design, promote a good content</p>
 
                     <div className="template-container" style={{ backgroundImage: `url('${my_template.featured_image}')` }}>
@@ -126,6 +132,10 @@ class Templates extends React.Component {
                         </div>
 
                     </div>
+        </Grid.Column >
+        </Grid.Row >
+
+<Grid.Row divided columns='5' stretched >
 
                     <Divider />
                     <h3>Blogs | Free</h3>
@@ -170,9 +180,11 @@ class Templates extends React.Component {
                     </Modal>
 
 
-                    <div style={{ width: "90%", position: "relative", minHeight: "250px" }}>
+                    <div style={{ width: "100%", position: "relative", minHeight: "250px" }}>
                         {templates.map((e, i, a) => {
                             return (
+                                <Grid.Column computer={3} mobile={16} tablet={4} >
+
                                 <div key={e._id} className='image-thumbnail-template-cover-big-template'>
 
                                     <div style={{ margin: '10px 3px' }}>
@@ -191,6 +203,7 @@ class Templates extends React.Component {
 
                                 </div>
 
+                                                </Grid.Column  >
 
                             )
 
@@ -200,34 +213,13 @@ class Templates extends React.Component {
                         })}
 
                     </div>
+</Grid.Row>
 
-
-                    <br />
-               {  /*   <div style={{ position: "relative" }}><h3>Blogs | Paid</h3>
-                        <p> Your favorite Templates are coming soon...</p>
-
-                        <div className='image-thumbnail-template-cover-big-template'>
-
-                            <div style={{ margin: '10px 3px' }}>
-                                <div className={'customCard-all'} style={{ backgroundImage: `url("/views/template-default-01/images/featured_image.jpg")`, backgroundSize: "cover", backgroundPosition: "bottom right" }}>
-                                </div>
-                            </div>
-
-
-                             <div className='template-thumbnail-hover-big-black-template' style={{ marginTop: "-110%" }}>
-                                <div className="category" style={{ color: "white" }}>
-                                    <h5>Premium Designs </h5>
-                                    <Button primary size='mini' className="button-hover"  disabled={true}> View</Button>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div> */}
-
+            
+</Grid>
                 </div>
 
-
+</Container>
             )
 
 
@@ -243,23 +235,6 @@ class Templates extends React.Component {
 const mapStateToProps = (state) => {
     return state;
 }
-/*
- <CarouselProvider
-                    naturalSlideWidth={100}
-                    naturalSlideHeight={125}
-                    totalSlides={3}
-                >
-                    <Slider style={{ height: "400px", width:'700px', color: 'black !important', boxShadow: '2px 1px 17px 2px rgba(82, 82, 82, 0.4)' }}>
-                        <Slide index={0} > <h2>TEMPLATE-DEFAULT-01</h2></Slide>
-                        <Slide index={1}> <h2>TEMPLATE-STARTER-02</h2></Slide>
-                        <Slide index={2}> <h2>TEMPLATE-NOVA-03</h2></Slide>
-                    </Slider>
-                    <ButtonBack style={{ background: 'black', color: 'white', marginRight: '10px', border: 'none', padding: "8px 15px" }}><Icon name='arrow left'/></ButtonBack>
-                    <ButtonNext style={{ background: 'black', color: 'white', border: 'none', padding: "8px 15px" }}><Icon name='arrow right'/></ButtonNext>
-                </CarouselProvider>
-*/
-
-
 
 
 

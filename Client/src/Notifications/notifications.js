@@ -24,7 +24,7 @@ class Notifications extends React.Component {
     }
 
 
-
+/*
 delete_notification = async (id) =>{
     let notifications = new FetchNotifications();
     let notif = await notifications.delete_notification(id)
@@ -78,11 +78,10 @@ read_notification = () =>{
     }
 
 
-
+*/
 
     render() {
 
-        if (this.state.notifications.length == 0) {
             return (
                 <div className="comment-div" style={{ marginTop: "0px !important" }}>
                    
@@ -92,8 +91,7 @@ read_notification = () =>{
 
                   </div>
             )
-        }
-        else
+        /*else
             return (
                 <div className="comment-div" style={{ marginTop: "0px !important" }}>
                     <h3 style={{ color: "black" }}>Notifications</h3>
@@ -103,12 +101,11 @@ read_notification = () =>{
                             <Table.HeaderCell>Username</Table.HeaderCell>
                             <Table.HeaderCell>Notification</Table.HeaderCell>
                             <Table.HeaderCell>Actions</Table.HeaderCell>
-
                         </Table.Header>
+
                         <Table.Body>
                             {this.state.notifications.map((x, index) => {
                                 return (
-
                                     <ListExampleSelection index={index} x={x} read_notification={this.read_notification} delete_notification={this.delete_notification} />
 
                                 )
@@ -123,7 +120,7 @@ read_notification = () =>{
 
 
             )
-
+*/
 
     }
 

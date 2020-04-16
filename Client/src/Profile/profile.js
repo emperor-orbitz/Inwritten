@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../Resources/styles/profile.scss';
-import { Icon, Form, Input, Divider, Button, Loader, ButtonGroup } from 'semantic-ui-react';
+import { Icon, Form, Input, Divider, Button, Loader, ButtonGroup, Tab, Container } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import Connection from '../../Controllers/auth.controller';
 import { connect } from 'react-redux';
@@ -391,10 +391,137 @@ controller.updateSocials(data)
         let fullname = first_name !="" ? `${first_name} ${last_name}`: "Update your Names"
         var bio = bio !="" ? bio :` - `
         var username = username !="" ? username :` - `
-        var mobile_number = mobile_number !="" ? mobile_number :` - `
-        return (
+        var mobile_number = mobile_number !="" ? mobile_number :` - `;
 
+
+        const panes = [
+            {
+              menuItem: 'Profile',
+              render: () => <Tab.Pane attached={false}>
+              <div className="data-info-profile" >
+                            <h3 style={{ padding: '5px', color:"black" }}> Profile</h3>
+                        
+                          
+                            {this.state.validationClass == "success-bar" ? <p style={{  margin:"15px auto" }}><Icon name="check circle outline" color="green" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p>: ""} 
+                            {this.state.validationClass == "error-bar" ? <p style={{  margin:"15px auto" }} ><Icon name="cross" color="red" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p> :"" }
+                    
+                    
+                    
+                            <Form size="small" style={{ width: '100%' }} id='formUpdate1'>
+                    
+                                <Form.Group widths='equal'>
+                                    <Form.Field label='Email' value={this.state.email} control='input' placeholder='Email' onChange={this.handle_email} disabled required type='email' pattern={/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/} />
+                                    <Form.Field label='Username' control='input' placeholder='Username' value={this.state.username} onChange={this.handle_username} name='username' id='username' type='text' required />
+                                </Form.Group>
+                    
+                                <Form.Group widths='equal'>
+                                    <Form.Field label='Firstname' value={this.state.first_name} control='input' placeholder='Firstname' onChange={this.handle_first_name} />
+                                    <Form.Field label='Lastname' control='input' placeholder='Lastname' value={this.state.last_name} onChange={this.handle_last_name} />
+                                </Form.Group>
+                    
+                                <span style={{color:"black"}}>Country</span>
+                    
+                                <Countries handleChange={this.handle_country} value={this.state.country} />
+                                <br></br>
+                                
+                                <span style={{color:"black"}}>Gender</span>
+                                <select onChange={  this.handle_gender } value={this.state.gender} >
+                                    <option value="none">Select gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                                <br></br>
+                                <Form.Group widths='equal'>
+                                <Form.Field id='bio' label='Bio (Write something...)' control='textarea' value={this.state.bio} onChange={this.handle_bio} minLength='20' maxLength='150' name='bio' />
+                                <Form.Field id='number' label='Mobile Number' control='input' type='tel' value={this.state.mobile_number} onChange={this.handle_mobile_number} minLength='11' maxLength='14' name='number' />
+                                </Form.Group>
+                    
+                                <Button type='submit' secondary color='teal' disabled={this.state.buttonDisabled} size='small' floated='right' onClick={this.updateProfileButton.bind(this)}>
+                                    Update Profile <DimmerLoad size="small" active={this.state.dimmerLoad} />
+                                </Button>
+                            </Form>
+                    </div>
+            
+            
+            
+            </Tab.Pane>,
+            },
+            {
+              menuItem: 'Passwords',
+              render: () => <Tab.Pane attached={false}>
+
+              <div className="data-info-password"  >
+                  <h3 style={{ padding: '5px', color:'black' }}> Passwords</h3>
+
+                 {this.state.validationClass == "success-bar" ? <p style={{  margin:"15px auto" }}><Icon name="check circle outline" color="green" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p>: ""} 
+              {this.state.validationClass == "error-bar" ? <p style={{  margin:"15px auto" }} ><Icon name="cross" color="red" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p> :"" }
+
+                            <Form size="small" style={{ width: '100%' }} id='formUpdate1'>
+
+                      <Form.Field label='Old Password ' control='input' type='password' placeholder='Old password' minLength='6' value={this.state.old_password} onChange={this.handle_old_password} />
+
+                      <Form.Field label='New Password' control='input' type='password' placeholder='New password' minLength='6' value={this.state.new_password} onChange={this.handle_new_password} />
+                      <Form.Field label='Confirm New Password' control='input' type='password' placeholder='Confirm New password' value={this.state.confirm_password} onChange={this.handle_confirm_password} />
+
+
+                      <Button type='submit' secondary color='teal'  disabled={this.state.buttonDisabled} size='small' floated='right' onClick={this.updatePasswordButton.bind(this)}>
+                          Update Password <DimmerLoad size="small" active={this.state.dimmerLoad} />
+                      </Button>
+                  </Form>
+
+              </div> 
+
+</Tab.Pane>,
+            },
+            {
+              menuItem: 'Socials',
+              render: () => <Tab.Pane attached={false}>
+
+
+              <div className="data-info-socials" >
+                  <h3 style={{ padding: '5px', color:'black' }}> Socials</h3>
+
+                 
+                  {this.state.validationClass == "success-bar" ? <p style={{  margin:"15px auto" }}><Icon name="check circle outline" color="green" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p>: ""} 
+                 {this.state.validationClass == "error-bar" ? <p style={{  margin:"15px auto" }} ><Icon name="cross" color="red" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p> :"" }
+
+                            <Form size="small" style={{ width: '100%' }} id='formUpdate1'>
+
+                      <Divider />
+                      <p style={{color:"black"}}> Socials allow your readers connect to you on other popular platforms. </p>
+
+                      <Form.Field label= "Facebook" control='input' name='facebook' placeholder='Your facebook URL' minLength='6' value={this.state.social_facebook} onChange={this.handle_social} />
+                      <Form.Field label="Whatsapp Chat" control='input' name="whatsapp"  placeholder='Your Whatsapp URL' minLength='6' value={this.state.social_whatsapp} onChange={this.handle_social} />
+                      <Form.Field label='LinkedIn' control='input' name="linkedin" placeholder='Your LinkedIn URL' value={this.state.social_linkedin} onChange={this.handle_social} />
+                      <Form.Field label='Instagram' control='input' name="instagram" placeholder='Your Instagram URL' value={this.state.social_instagram} onChange={this.handle_social} />
+                      <Form.Field label='Youtube Channel' control='input' name="youtube" placeholder='Link to your Yotube Channel' value={this.state.social_youtube} onChange={this.handle_social} />
+
+                     
+                      <Button type='submit' secondary color='teal'  disabled={this.state.buttonDisabled} size='small' floated='right' onClick={this.updateSocialButton.bind(this)}>
+                          Update Socials <DimmerLoad size="small" active={this.state.dimmerLoad} />
+                      </Button>
+                  </Form>
+
+
+
+              </div> </Tab.Pane>,
+            },
+          ]
+          
+          
+     
+
+
+
+
+
+
+
+     
+        return (
+<Container>
             <div className="profile-div" style={{marginTop:"0px !important"}}>
+
 
                 <div className='profile-header'>
                     <div className="profile-pix-block">
@@ -410,140 +537,21 @@ controller.updateSocials(data)
 
                     </div>
                 </div>
-
+              
 
 
                 <div className="profile-body">
+ 
+
+
+               <Tab
+    menu={{ secondary: true, pointing: true }}
+    panes={panes} />
 
 
 
 
 
-
-                    <div className="data-info-profile" style={{ display: this.state.dispProf }}>
-                        <h3 style={{ padding: '5px', color:"black" }}> Profile</h3>
-                    
-                        <ButtonGroup size="small"  >
-                            <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false} icon='user'>Profile </Button>
-                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} icon="gear" >Password</Button>
-                            <Button id="socials" onClick={(e) => this.swapSettings(e)} active ={this.state.dispSoc=='block' ? true:false} icon="gear" >Socials</Button>
-
-                        </ButtonGroup>
-
-                        {this.state.validationClass == "success-bar" ? <p style={{  margin:"15px auto" }}><Icon name="check circle outline" color="green" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p>: ""} 
-                        {this.state.validationClass == "error-bar" ? <p style={{  margin:"15px auto" }} ><Icon name="cross" color="red" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p> :"" }
-
-
-
-                        <Form size="small" style={{ width: '70%' }} id='formUpdate1'>
-                        <Divider />
-
-                            <Form.Group widths='equal'>
-                                <Form.Field label='Email' value={this.state.email} control='input' placeholder='Email' onChange={this.handle_email} disabled required type='email' pattern={/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/} />
-                                <Form.Field label='Username' control='input' placeholder='Username' value={this.state.username} onChange={this.handle_username} name='username' id='username' type='text' required />
-                            </Form.Group>
-
-                            <Form.Group widths='equal'>
-                                <Form.Field label='Firstname' value={this.state.first_name} control='input' placeholder='Firstname' onChange={this.handle_first_name} />
-                                <Form.Field label='Lastname' control='input' placeholder='Lastname' value={this.state.last_name} onChange={this.handle_last_name} />
-                            </Form.Group>
-
-                            <span style={{color:"black"}}>Country</span>
-
-                            <Countries handleChange={this.handle_country} value={this.state.country} />
-                            <br></br>
-                            
-                            <span style={{color:"black"}}>Gender</span>
-                            <select onChange={  this.handle_gender } value={this.state.gender} >
-                                <option value="none">Select gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                            </select>
-                            <br></br>
-                            <Form.Group widths='equal'>
-                            <Form.Field id='bio' label='Bio (Write something...)' control='textarea' value={this.state.bio} onChange={this.handle_bio} minLength='20' maxLength='150' name='bio' />
-                            <Form.Field id='number' label='Mobile Number' control='input' type='tel' value={this.state.mobile_number} onChange={this.handle_mobile_number} minLength='11' maxLength='14' name='number' />
-                            </Form.Group>
-
-                            <Button type='submit' secondary color='teal' disabled={this.state.buttonDisabled} size='small' floated='right' onClick={this.updateProfileButton.bind(this)}>
-                                Update Profile <DimmerLoad size="small" active={this.state.dimmerLoad} />
-                            </Button>
-                        </Form>
-
-
-                    </div>
-
-
-
-
-
-
-                    <div className="data-info-password" style={{ display: this.state.dispPass }} >
-                        <h3 style={{ padding: '5px', color:'black' }}> Passwords</h3>
-
-                          <ButtonGroup size="small"  >
-                            <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false} icon='user'>Profile </Button>
-                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} icon="gear" >Password</Button>
-                            <Button id="socials" onClick={(e) => this.swapSettings(e)} active ={this.state.dispSoc=='block' ? true:false} icon="gear" >Socials</Button>
-
-                        </ButtonGroup>
-
-                       {this.state.validationClass == "success-bar" ? <p style={{  margin:"15px auto" }}><Icon name="check circle outline" color="green" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p>: ""} 
-                    {this.state.validationClass == "error-bar" ? <p style={{  margin:"15px auto" }} ><Icon name="cross" color="red" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p> :"" }
-
-                        <Form size="small" style={{ width: '70%' }} id='formUpdate2'>
-
-                            <Divider />
-                            <Form.Field label='Old Password ' control='input' type='password' placeholder='Old password' minLength='6' value={this.state.old_password} onChange={this.handle_old_password} />
-
-                            <Form.Field label='New Password' control='input' type='password' placeholder='New password' minLength='6' value={this.state.new_password} onChange={this.handle_new_password} />
-                            <Form.Field label='Confirm New Password' control='input' type='password' placeholder='Confirm New password' value={this.state.confirm_password} onChange={this.handle_confirm_password} />
-
-
-                            <Button type='submit' secondary color='teal'  disabled={this.state.buttonDisabled} size='small' floated='right' onClick={this.updatePasswordButton.bind(this)}>
-                                Update Password <DimmerLoad size="small" active={this.state.dimmerLoad} />
-                            </Button>
-                        </Form>
-
-                    </div> 
-
-
-
-
-
-
-                    <div className="data-info-socials" style={{ display: this.state.dispSoc }} >
-                        <h3 style={{ padding: '5px', color:'black' }}> Socials</h3>
-  
-                        <ButtonGroup size="small"  >
-                            <Button id="profile" onClick={(e) => this.swapSettings(e)} active= {this.state.dispProf=='block' ? true:false} icon='user'>Profile </Button>
-                            <Button id="password" onClick={(e) => this.swapSettings(e)} active ={this.state.dispPass=='block' ? true:false} icon="gear" >Password</Button>
-                            <Button id="socials" onClick={(e) => this.swapSettings(e)} active ={this.state.dispSoc=='block' ? true:false} icon="gear" >Socials</Button>
-
-                        </ButtonGroup>
-                        {this.state.validationClass == "success-bar" ? <p style={{  margin:"15px auto" }}><Icon name="check circle outline" color="green" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p>: ""} 
-                       {this.state.validationClass == "error-bar" ? <p style={{  margin:"15px auto" }} ><Icon name="cross" color="red" size="big" /> <span style={{color:"black"}}> {this.state.validationMessage} </span></p> :"" }
-
-                        <Form size="small" style={{ width: '70%' }} id='formUpdate3'>
-
-                            <Divider />
-                            <p style={{color:"black"}}> Socials allow your readers connect to you on other popular platforms. </p>
-
-                            <Form.Field label= "Facebook" control='input' name='facebook' placeholder='Your facebook URL' minLength='6' value={this.state.social_facebook} onChange={this.handle_social} />
-                            <Form.Field label="Whatsapp Chat" control='input' name="whatsapp"  placeholder='Your Whatsapp URL' minLength='6' value={this.state.social_whatsapp} onChange={this.handle_social} />
-                            <Form.Field label='LinkedIn' control='input' name="linkedin" placeholder='Your LinkedIn URL' value={this.state.social_linkedin} onChange={this.handle_social} />
-                            <Form.Field label='Instagram' control='input' name="instagram" placeholder='Your Instagram URL' value={this.state.social_instagram} onChange={this.handle_social} />
-                            <Form.Field label='Youtube Channel' control='input' name="youtube" placeholder='Link to your Yotube Channel' value={this.state.social_youtube} onChange={this.handle_social} />
-
-                           
-                            <Button type='submit' secondary color='teal'  disabled={this.state.buttonDisabled} size='small' floated='right' onClick={this.updateSocialButton.bind(this)}>
-                                Update Socials <DimmerLoad size="small" active={this.state.dimmerLoad} />
-                            </Button>
-                        </Form>
-
-
-
-                    </div> 
                 </div>
 
 
@@ -552,6 +560,7 @@ controller.updateSocials(data)
 
 
             </div>
+            </Container>
         )
 
 

@@ -343,7 +343,7 @@ this.search_with_criteria()
                     <div className='bodyArticle'>
 
                         <Grid >
-                        <Grid.Row style={{background:"#12305c", padding:"7px", borderRadius:"4px"}}>
+                        <Grid.Row style={{background:"#12305c", padding:"8px", borderRadius:"5px"}}>
                                 <Grid.Column floated="right" computer={16} mobile={16} tablet={15}   >
 
 
