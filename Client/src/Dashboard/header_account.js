@@ -246,12 +246,12 @@ class HeaderAccount extends React.Component {
 
                       <DropdownDivider />
 
-                      <Dropdown.Item icon='bookmark outline' text='Bookmarks' as={Link} to='/app/bookmark' />
+                      <Dropdown.Item icon='bookmark outline' text='Saved Bookmarks' as={Link} to='/app/bookmark' />
                       <Dropdown.Item icon='folder outline' text='Published Stories' as={Link} to='/app/articles' />
-                      <Dropdown.Item icon='boxes' text='Drafts' as={Link} to='/app/drafts' />
+                      <Dropdown.Item icon='boxes' text='Saved Drafts' as={Link} to='/app/drafts' />
                       <DropdownDivider />
 
-                      <Dropdown.Item icon='user' text='Settings' as={Link} to='/app/settings/profile' />
+                      <Dropdown.Item icon='setting' text='Settings' as={Link} to='/app/settings/profile' />
                       <Dropdown.Item icon='theme' text='My Templates' as={Link} to='/app/settings/templates' />
 
                       <DropdownDivider />

@@ -66,7 +66,8 @@ class Articles extends React.Component {
             not_found: false,
             share_data: {},
             copyToClipboard: "Copy to clipboard",
-            open_deleteall: false
+            open_deleteall: false,
+            
         }
 
 
@@ -342,7 +343,7 @@ this.search_with_criteria()
                     <div className='bodyArticle'>
 
                         <Grid >
-                            <Grid.Row style={{background:"#12305c"}}>
+                        <Grid.Row style={{background:"#12305c", padding:"7px", borderRadius:"4px"}}>
                                 <Grid.Column floated="right" computer={16} mobile={16} tablet={15}   >
 
 
@@ -350,7 +351,7 @@ this.search_with_criteria()
 
                                         <Form size="small"   >
 
-                                            <Input id='search' fluid icon={<Icon name="times" circular />} className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} onKeyDown={this.handleEnter} placeholder='Search by title and hit enter. e.g The angry bird fight/category' />
+                                            <Input id='search' fluid icon={<Icon name="chevron left" />} className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} onKeyDown={this.handleEnter} placeholder='Search by title and hit enter. e.g The angry bird fight/category' />
                                            {/* <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions}  />*/}
                                            {/* <Button primary icon="search" onClick={this.search_with_criteria} />*/}
                                             {/*<Button color="red" icon="trash alternate outline" onClick={() => { this.setState({ open_deleteall: true }) }} />*/}

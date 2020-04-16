@@ -360,9 +360,9 @@ class EditPost extends React.Component {
 
             <Grid.Column mobile={16} tablet={2} computer={2}>
 
-              <Modal size="tiny" style={{ color: "white !important" }} open={this.state.open_options} onClose={this.close} closeOnDimmerClick >
-              <h4 style={{margin:'5% 2%'}}>Settings</h4><br /> 
-                <Modal.Content image scrolling>
+                 <Modal size="small" basic style={{ color: "white !important" }} open={this.state.open_options} onClose={this.close}  >
+              <h3 style={{margin:'1px 2%', color:"white"}}>Settings</h3> 
+                <Modal.Content image >
 
                   <div className="featured-pix-block">
                     <img src={this.state.featured_image} className="featured-image" />
@@ -377,9 +377,9 @@ class EditPost extends React.Component {
                   <Modal.Description>
 
                     <div className='editor-side1' id='editor-side1'>
-                      <Form size='mini'>
+                      <Form size="mini">
 
-                        <Form.Field name='title' maxLength='50' value={this.state.post_title} onChange={this.handleInputs.bind(this)} control='input' placeholder='Title' required />
+                        <Form.Field name='title' maxLength='50' value={this.state.post_title} onChange={this.handleInputs.bind(this)} control='input' placeholder='Story Title' required />
                         {
                           this.state.error_message == 'title-error' ?
                             <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}> Title is required</p>
@@ -414,7 +414,6 @@ class EditPost extends React.Component {
                         <Form.Field>
 
                           <Checkbox
-                          
                             slider
                             name='radioGroup1'
                             checked={this.state.privacy_value === true}
@@ -432,26 +431,30 @@ class EditPost extends React.Component {
                             checked={this.state.enable_comments === true}
                             onChange={this.handleEnableComments}
                             label={comment_value}
-                          />
+                            className='small-fonts' />
+
                         </Form.Field>
                       </Form>
                       <br />
                     </div>
 
-                
+                  
 
 
                   </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
+                <Button disabled={this.state.buttonDisabled} type='submit' size='mini'  title='back'
+                    onClick={()=>{this.setState({open_options:false})}} >
+                    Back
+                </Button>
                   <Button disabled={this.state.buttonDisabled} type='submit' size='mini' color="green" title='save'
                     onClick={this.updatePost} >
-                    Save Changes
+                    Save and Publish
                 </Button>
 
                 </Modal.Actions>
               </Modal>
-
             </Grid.Column>
 
           </Grid.Row>

@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import '../../Resources/styles/article.scss';
-
+import {Card} from "semantic-ui-react"
 
 //   DATE CONVSERSION
 

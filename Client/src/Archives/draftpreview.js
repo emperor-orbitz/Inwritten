@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import '../../Resources/styles/article.scss';
-import { Icon } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 
 
 //   DATE CONVSERSION
@@ -74,36 +74,19 @@ export default function DraftPreview(props) {
                 {articles_preview.map(function (e) {
 
                         return (
-
-                            <div key={e._id} className='image-thumbnail-template-cover-big'>
-
-                                <div style={{ margin: '7px 7px' }}>
-                                    <div className={`customCard-${e.category} hover-group`} >
-                                        <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis' }}>
-                                            {e.title}
-                                        </h4>
-                                        <p>{date_to_string(e.createdAt)}</p>
-
-                                    </div>
-                                </div>
-
-                                <div className='template-thumbnail-hover-big'>
-
-                                    <div style={{}}>
-                                        <div className="category">
-
-                                            <Button.Group className="button-hover" size='small' icon >
+                            <Card key={e._id} fluid >
+                            <Card.Content header={e.title} />
+                            <Card.Content description={e.description} />
+                            <Card.Content extra>
+                            <Button.Group className="button-hover" size='small' icon >
                                                 <Button icon='eye outline' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
                                                 <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
                                                 <Button icon='share outline'  />
 
                                             </Button.Group>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
+                            </Card.Content>
+                            </Card>
+                          
 
 
 

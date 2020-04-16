@@ -21,6 +21,10 @@ class AddPost extends React.Component {
     super(props)
 
     this.state = {
+      open_share: false,
+      copyToClipboard: "Copy to clipboard",
+      share_data: {},
+
       buttonDisabled: false,
       dimmerLoad: false,
       error_message: '',
@@ -28,7 +32,7 @@ class AddPost extends React.Component {
       privacy_value: true,
       enable_comments: true,
       post_title: '',
-      featured_image: 'http://localhost:5000/images/preview_featured2.jpg',
+      featured_image: 'https://www.inwritten.com/images/preview_featured2.jpg',
       createdAt: Date.now(),
       tag_value: '',
       post_category: 'all',
@@ -36,7 +40,8 @@ class AddPost extends React.Component {
       time_to_read: 5,
       tagMax: '',
       open_options: false,
-      post_link: ""
+      post_link: "",
+      network_error: ""
     }
 
     this.handleTags = this.handleTags.bind(this);
@@ -57,11 +62,54 @@ class AddPost extends React.Component {
 
 
 
+  shareToWhatsApp = (e, data) => {
+
+    e.preventDefault()
+    let url = encodeURIComponent(`Hey, check out my new story on Inwritten. It's here: https://www.inwritten.com${data.post_link}`)
+    console.log(url)
+    window.location.href = `https://wa.me/?text="${url}"`
 
 
 
 
+  }
 
+
+  shareToFacebook = (e, data) => {
+
+    e.preventDefault()
+    let url = encodeURIComponent(`https://www.inwritten.com${data.post_link}`)
+
+    window.open(
+      'https://www.facebook.com/dialog/share?app_id=508448136537979&display=popup&href=' + url + '&redirect_uri=https%3A%2F%2Fwww.inwritten.com/stories',
+      'facebook-share-dialog',
+      'width=400,height=300', false);
+
+  }
+
+
+
+
+  openShare = (share_data) => {
+    this.setState({ open_share: true, share_data, copyToClipboard: "Copy to clipboard" })
+  }
+
+  copyToClipboard = () => {
+    var dummy = document.createElement("textarea")
+    // dummy.style.display="none";
+    document.body.appendChild(dummy)
+    dummy.setAttribute("id", 'dummy_id');
+    document.getElementById("dummy_id").value = `http://www.inwritten.com${this.state.share_data.post_link}`;
+    dummy.select()
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
+    this.setState({ copyToClipboard: "Copied!" })
+  }
+
+
+  closeShare = () => {
+    this.setState({ open_share: false })
+  }
 
 
   /*
@@ -129,8 +177,8 @@ class AddPost extends React.Component {
   postValidation(title = this.state.post_title, duration = this.state.time_to_read, tags = this.state.tag_value) {
 
     //if (window.editor.length < 11 || window.editor == undefined) { 
-      //this.setState({open_options:false})
-      //return 'editor-error'; 
+    //this.setState({open_options:false})
+    //return 'editor-error'; 
     //}
 
     if (title.length == 0) {
@@ -194,17 +242,19 @@ class AddPost extends React.Component {
           this.props.dispatch({ type: 'INSERT_ARTICLE', payload: with_id });
 
           this.setState({
-            success_message: 'Story published Successfully ',
+            success_message: ' ',
             error_message: '',
             buttonDisabled: false,
             dimmerLoad: false,
             open_options: false
           });
 
+          this.openShare(okay)
 
-          var note = document.getElementsByClassName('notification-background');
-          note[0].classList.remove('reverse-anime');
-     
+
+          //   var note = document.getElementsByClassName('notification-background');
+          // note[0].classList.remove('reverse-anime');
+
 
         })
         .catch(err => {
@@ -267,7 +317,13 @@ class AddPost extends React.Component {
     })
   }
 
-
+//LEAVE PAGE
+leavePage = ({id, post_link})=>{
+  this.setState({open_share:false})
+  //this.props.history.replace("/edit-post/"+id);
+  window.history.pushState("","","/app/edit-post/"+id );
+  window.location = post_link
+}
 
 
   /*          RENDER FILE
@@ -282,9 +338,9 @@ class AddPost extends React.Component {
 
 
 
-   
-   
-    
+
+
+
 
 
     return (
@@ -298,28 +354,24 @@ class AddPost extends React.Component {
 
             <Grid.Column mobile={16} tablet={13} computer={13} style={{ padding: '0px 5px' }}  >
 
-              {this.state.success_message === '' ?
+              {this.state.network_error === '' ?
                 ""
                 :
                 <div className='notification-background'>
-                  <div style={{ width: '90%', color: 'green', background: '', padding: '3px 5%' }} ><div>
+                  <div style={{ width: '90%', color: 'red', background: '', padding: '3px 5%' }} ><div>
                     <span style={{ float: 'right', cursor: 'pointer' }} onClick={function () {
                       var note = document.getElementsByClassName('notification-background');
                       note[0].style.display = 'none';
                     }} ><Icon name='close' onClick={() => { this.state.success_message = "" }} /> </span>
-                    <Icon name='check circle outline' color="green" size='big' />
-                    {this.state.success_message} {this.state.privacy_value == true ? <a href={`${this.state.post_link}`} target='_blank' style={{ color: 'black' }} ><u>here</u> </a> : 'in drafts'}
+                    <Icon name='unlink' size='big' />
+                    <p style={{ padding: '5px', color: 'red', width: '90%', borderRadius: '0px' }}>  {this.state.network_error} </p>
                   </div>
 
                   </div>
                 </div>
               }
 
-              {
-                this.state.network_error !== '' ?
-                  <p style={{ padding: '5px', color: 'red', width: '90%', borderRadius: '0px' }}>  {this.state.network_error} </p>
-                  : ''
-              }
+
               {
                 this.state.error_message == 'editor-error' ?
                   <p style={{ padding: '5px 5%', color: 'red', width: '90%', borderRadius: '0px' }}><Icon name="close" color="yellow" size='big' /> You've not written anything yet! </p>
@@ -332,9 +384,29 @@ class AddPost extends React.Component {
             </Grid.Column>
 
             <Grid.Column mobile={16} tablet={2} computer={2}>
+              <Modal size='mini' open={this.state.open_share} onClose={this.closeShare} closeOnDimmerClick={false} closeIcon={<Icon name="times" size="big" color="black" onClick={ ()=> {this.leavePage({id:this.state.share_data._id, post_link:this.state.share_data.post_link })}} />} >
 
+                <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
+                  <div style={{ textAlign: 'center' }}>
+                    <Icon name="check circle" color="green" size="huge" />
+                    <h4 >Your story has been published  </h4>
+                    <p style={{ fontSize: "10px" }}> Preview and Share your story with your friends and other connections </p>
+
+                    <a href={this.state.share_data.post_link}><Button icon="internet explorer" labelPosition='left' content="View your story live" size='small' fluid onClick={this.copyToClipboard} /></a>
+                    <br /> <br />
+
+                    <Button icon="copy outline" labelPosition='left' content={this.state.copyToClipboard} size='small' onClick={this.copyToClipboard} disabled={this.state.copyToClipboard == "Copied!"} />
+                    <br /> <br />
+
+                    <Button onClick={(e) => this.shareToFacebook(e, this.state.share_data)}
+                      color="facebook" icon="facebook" labelPosition='left' content='Share to facebook ' size='small' />
+                    <br /> <br />
+                    <Button onClick={(e) => this.shareToWhatsApp(e, this.state.share_data)} color="green" icon="whatsapp" labelPosition='left' content='Share to WhatsApp' size='small' />
+                  </div>
+                </Modal.Content>
+              </Modal>
               <Modal size="small" basic style={{ color: "white !important" }} open={this.state.open_options} onClose={this.close}  >
-              <h3 style={{margin:'1px 2%', color:"white"}}>Settings</h3> 
+                <h3 style={{ margin: '1px 2%', color: "white" }}>Settings</h3>
                 <Modal.Content image >
 
                   <div className="featured-pix-block">
@@ -399,25 +471,26 @@ class AddPost extends React.Component {
                         <Form.Field>
 
                           <Checkbox
-                          slider
+                            slider
                             name='radioGroup2'
                             checked={this.state.enable_comments === true}
                             onChange={this.handleEnableComments}
                             label={comment_value}
-                          />
+                            className='small-fonts' />
+
                         </Form.Field>
                       </Form>
                       <br />
                     </div>
 
-                  
+
 
 
                   </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
-                <Button disabled={this.state.buttonDisabled} type='submit' size='mini'  title='back'
-                    onClick={()=>{this.setState({open_options:false})}} >
+                  <Button disabled={this.state.buttonDisabled} type='submit' size='mini' title='back'
+                    onClick={() => { this.setState({ open_options: false }) }} >
                     Back
                 </Button>
                   <Button disabled={this.state.buttonDisabled} type='submit' size='mini' color="green" title='save'

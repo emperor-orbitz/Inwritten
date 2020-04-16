@@ -27,7 +27,7 @@ function App() {
 <CSSTransition
 key={location.key}
 classNames="fade"
-timeout={200}
+timeout={300}
 >
         <Switch location={location}>
           <Route path='/app/comments/:postID' component={Comments}  />

@@ -60,7 +60,7 @@ read_notification = () =>{
             notifications.get_notifications(this.props.ProfileReducer._id)
             .then(notif =>{
                 if (notif.data == null) {
-                    this.setState({ notifications: null })
+                    this.setState({ notifications: [] })
 
                 }
                 else {
@@ -82,7 +82,7 @@ read_notification = () =>{
 
     render() {
 
-        if (this.state.notifications == null) {
+        if (this.state.notifications.length == 0) {
             return (
                 <div className="comment-div" style={{ marginTop: "0px !important" }}>
                    
@@ -90,7 +90,6 @@ read_notification = () =>{
                    <br/>
                    <h4 style={{textAlign:"center"}}>You don't have any unread notifications</h4>
 
-       
                   </div>
             )
         }

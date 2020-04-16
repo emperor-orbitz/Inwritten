@@ -1,7 +1,7 @@
 
 import React from 'react';
 import '../../Resources/styles/article.scss';
-import { Button, Icon, Form, Modal, Grid, Select, Input } from 'semantic-ui-react';
+import { Button, Icon, Form, Modal, Grid, Select, Input, Card } from 'semantic-ui-react';
 import Connection from '../../Controllers/auth.controller';
 
 import { withRouter } from 'react-router';
@@ -116,6 +116,12 @@ class PostArchive extends React.Component {
     }
 
 
+    handleEnter =(e)=>{
+
+        if (e.key ==="Enter"){
+this.search_with_criteria()
+        }
+    }
 
 
     deletePost = () => {
@@ -310,83 +316,65 @@ class PostArchive extends React.Component {
 
                     </Modal>
 
-                    <div className='bodyArticle'>
+                         <div className='bodyArticle'>
 
-                        <Grid>
-                            <Grid.Row >
-                                <Grid.Column computer={13} mobile={16} tablet={15}  >
-                                    <div style={{ borderBottom: "3px solid navyblue", marginBottom: "20px", padding: "10px", width: "100%" }} >
-                                        <Form size="small" >
-
-                                            <Input id='search' className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search Interests' />
-                                            <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
-                                            <Button primary icon="search" onClick={this.search_with_criteria} />
-                                            <Button color="red" icon="trash alternate outline" onClick={() => { this.setState({ open_deleteall: true }) }} />
-
-                                        </Form>
-
-                                    </div>
-                                </Grid.Column>
-
-                                <Grid.Column computer={16} mobile={16} tablet={15}  >
-
-                                    {this.state.not_found == true ? <div className='error-notification'> <Icon name="close" size="big" color="red" />  No {this.state.search_criteria} similar to <b> {this.state.search}</b> was found</div> : ''}
-
-                                    {filter_privacy.map((e) => {
-                                        if (e.featured_image == undefined || e.featured_image == "") {
-                                            return (
-                                                <div key={e._id} className='image-thumbnail-template-cover-big'>
-
-                                                    <div style={{ margin: '10px 3px' }}>
-
-                                                        <div className={'customCard-' + e.category} >
-
-                                                            <div className='customCard-inner' >
-                                                                <span>Title </span>
-                                                                <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis', height: '30%' }}>
-                                                                    {e.title}
-                                                                </h4>
-
-                                                                <span><b>created on </b> </span>
-                                                                <p>{date_to_string(e.createdAt)}</p>
-
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
+<Grid >
+    <Grid.Row style={{background:"#12305c", padding:"7px"}}>
+        <Grid.Column floated="right" computer={16} mobile={16} tablet={15}   >
 
 
-                                                    <div className='template-thumbnail-hover-big'>
+            <div style={{ borderBottom: "3px solid navyblue", marginBottom: "5px", padding: "0px", width: "100%" }} >
 
-                                                        <div className="category">
+                <Form size="small"   >
 
-                                                            <Button.Group className="button-hover" size='small' icon >
-                                                                <Button icon='eye' as={Link} to={{ pathname: '/edit-post/' + e._id }} />
-                                                                <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} disabled={true} />
-                                                                <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
-                                                                <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
+                    <Input id='search' fluid icon={<Icon name="chevron left"  />} className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} onKeyDown={this.handleEnter} placeholder='Search by title and hit enter. e.g The angry bird fight/category' />
+                   {/* <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions}  />*/}
+                   {/* <Button primary icon="search" onClick={this.search_with_criteria} />*/}
+                    {/*<Button color="red" icon="trash alternate outline" onClick={() => { this.setState({ open_deleteall: true }) }} />*/}
 
-                                                            </Button.Group>
+                </Form>
 
-                                                        </div>
-                                                    </div>
+            </div>
+            {this.state.not_found == true ? <div className='error-notification'> <Icon name="unlink" size='mini' color="black" /> No result for <b> {this.state.search}</b> was not found</div> : ''}
 
-                                                </div>
+        </Grid.Column>
+
+</Grid.Row>
+<Grid.Row divided columns='5' stretched >
+
+            {filter_privacy.map((e) => {
+
+                if (e.featured_image == undefined || e.featured_image == "") {
+                    return (
+                        <Grid.Column computer={3} mobile={16} tablet={4} >
+
+                     <Card key={e._id} fluid >
+<Card.Content header={e.title} />
+<Card.Content description={e.description} />
+<Card.Content extra>
+<Button.Group className="button-hover" size='small' icon >
+                                        <Button icon='eye' as={Link} to={{ pathname: '/app/edit-post/' + e._id }} />
+
+                                        <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
 
 
-
-                                            )
-
-                                        }
-
-
-                                    })}
-                                </Grid.Column>
+                                    </Button.Group>
+</Card.Content>
+</Card>
+        </Grid.Column>
 
 
-                            </Grid.Row>
-                        </Grid>
-                    </div>
+                    )
+
+                }
+
+
+            })}
+
+
+    </Grid.Row>
+</Grid>
+</div>
 
 
 
