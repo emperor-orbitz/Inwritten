@@ -238,7 +238,6 @@ class QuillTest extends React.Component {
         return (
             <div className="rq-container">
 
-            
                 <ReactQuill value={this.state.text}
                     onChange={this.handleChange}
                     ref={(el) => { this.reactQuillRef = el }}

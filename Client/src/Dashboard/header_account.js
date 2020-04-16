@@ -158,6 +158,14 @@ class HeaderAccount extends React.Component {
 
   }
 
+
+  toggleSearch =() =>{
+
+
+  }
+
+
+
   story_switch = () => {
 
     if (this.state.switch_story_option == "SAVE") {
@@ -194,10 +202,7 @@ class HeaderAccount extends React.Component {
     var { categorySubmenu } = side.subMenu;
     const { visible } = this.state;
 
-    //PAGE NAME    
-    var xx = this.props.location.pathname.lastIndexOf('/'); // this.props.location.pathname == "/app/add-post"
-    //var xx_page = (xx === 0) ? this.props.location.pathname.slice(1) : this.props.location.pathname.slice(1, xx);
-
+    //PAGE NAME   
 
 
     var { open } = this.state;
@@ -227,12 +232,13 @@ class HeaderAccount extends React.Component {
 
               <Responsive as={Menu} minWidth={300} className="nav" secondary style={{ fontSize: "12px" }}  >
                 <Menu.Item icon="bars" onClick={this.toggleSide} size="large" />
-                <Menu.Item header ><img src="/images/double-u.png" style={{ width: "50px", height: "50px" }} /> </Menu.Item>
+                <Menu.Item header ><img src="/images/double-u.png" style={{ width: "45px", height: "48px" }} /> </Menu.Item>
 
 
                 <Menu.Menu position="right"  >
+
                   <Menu.Item onClick={this.story_switch} content={<Button positive size='mini' >{this.state.switch_story_option}</Button>} />
-                  <Menu.Item text={`@${this.props.ProfileReducer.username}`} as={Dropdown} floating >
+                  <Menu.Item text={`@${this.props.ProfileReducer.username}`} as={Dropdown}  >
 
                     <Dropdown.Menu>
                       <Dropdown.Item icon='dashboard' text='Dashboard' as={Link} to='/app/dashboard' />

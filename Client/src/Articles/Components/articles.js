@@ -1,7 +1,7 @@
 
 import React from 'react';
 import '../../../Resources/styles/article.scss';
-import { Button, Icon, Form, Modal, Grid, Select, Input } from 'semantic-ui-react';
+import { Button, Icon, Form, Modal, Grid, Select, Input, Card } from 'semantic-ui-react';
 import Connection from '../../../Controllers/auth.controller';
 
 import { withRouter } from 'react-router';
@@ -136,6 +136,7 @@ class Articles extends React.Component {
 
     handleSearchCriteria = (e, p) => {
 
+
         this.setState({ not_found: false, search_criteria: p.value, open_share: false })
     }
 
@@ -200,9 +201,19 @@ class Articles extends React.Component {
     fetchArticle = new FetchArticles();
 
     onChangeSearch = (e, p) => {
+
         var search = e.target.value;
         this.setState({ search: search, not_found: false })
     }
+
+    handleEnter =(e)=>{
+
+        if (e.key ==="Enter"){
+this.search_with_criteria()
+        }
+    }
+
+
 
 
     search_with_criteria = () => {
@@ -259,10 +270,8 @@ class Articles extends React.Component {
 
         var { filter_privacy } = this.state;
 
-
-
         if (filter_privacy.length == 0) {
-            return (<div>
+            return (
 
                 <div className='bodyArticle'>
                    
@@ -273,7 +282,7 @@ class Articles extends React.Component {
                 
                 </div>
 
-            </div>
+         
 
             )
 
@@ -332,67 +341,50 @@ class Articles extends React.Component {
                     </Modal>
                     <div className='bodyArticle'>
 
-                        <Grid>
-                            <Grid.Row >
-                                <Grid.Column computer={16} mobile={16} tablet={15}  >
+                        <Grid >
+                            <Grid.Row style={{background:"#12305c"}}>
+                                <Grid.Column floated="right" computer={16} mobile={16} tablet={15}   >
 
 
-                                    <div style={{ borderBottom: "3px solid navyblue", marginBottom: "20px", padding: "10px", width: "100%" }} >
+                                    <div style={{ borderBottom: "3px solid navyblue", marginBottom: "5px", padding: "0px", width: "100%" }} >
 
-                                        <Form size="small" >
+                                        <Form size="small"   >
 
-                                            <Input id='search' className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search Interests' />
-                                            <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
-                                            <Button primary icon="search" onClick={this.search_with_criteria} />
-                                            <Button color="red" icon="trash alternate outline" onClick={() => { this.setState({ open_deleteall: true }) }} />
+                                            <Input id='search' fluid icon={<Icon name="times" circular />} className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} onKeyDown={this.handleEnter} placeholder='Search by title and hit enter. e.g The angry bird fight/category' />
+                                           {/* <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions}  />*/}
+                                           {/* <Button primary icon="search" onClick={this.search_with_criteria} />*/}
+                                            {/*<Button color="red" icon="trash alternate outline" onClick={() => { this.setState({ open_deleteall: true }) }} />*/}
 
                                         </Form>
 
                                     </div>
+                                    {this.state.not_found == true ? <div className='error-notification'> <Icon name="unlink" size='mini' color="black" /> No result for <b> {this.state.search}</b> was not found</div> : ''}
 
                                 </Grid.Column>
 
-                                <Grid.Column computer={16} mobile={16} tablet={15} >
-                                    {this.state.not_found == true ? <div className='error-notification'> <Icon name="close" size="big" color="red" /> No result for <b> {this.state.search}</b> was not found</div> : ''}
+</Grid.Row>
+<Grid.Row divided columns='5' stretched >
 
                                     {filter_privacy.map((e) => {
 
                                         if (e.featured_image == undefined || e.featured_image == "") {
                                             return (
-                                                <div key={e._id} className='image-thumbnail-template-cover-big'>
+                                                <Grid.Column computer={3} mobile={16} tablet={4} >
 
-                                                    <div style={{ margin: '10px 3px' }}>
-
-                                                        <div className='customCard-all' >
-
-                                                            <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis' }}>
-                                                                {e.title}
-                                                            </h4>
-
-                                                            <span><b>created on </b> </span>
-                                                            <p>{date_to_string(e.createdAt)}</p>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div className='template-thumbnail-hover-big'>
-
-                                                        <div className="category">
-
-
-                                                            <Button.Group className="button-hover" size='small' icon >
+                                             <Card key={e._id} fluid >
+    <Card.Content header={e.title} />
+    <Card.Content description={e.description} />
+    <Card.Content extra>
+    <Button.Group className="button-hover" size='small' icon >
                                                                 <Button icon='eye' as={Link} to={{ pathname: '/app/edit-post/' + e._id }} />
                                                                 <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
                                                                 <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
                                                                 <Button icon="share alternate" onClick={() => { this.openShare(e) }} />
 
                                                             </Button.Group>
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-
+    </Card.Content>
+  </Card>
+                                </Grid.Column>
 
 
                                             )
@@ -401,7 +393,6 @@ class Articles extends React.Component {
 
 
                                     })}
-                                </Grid.Column>
 
 
                             </Grid.Row>

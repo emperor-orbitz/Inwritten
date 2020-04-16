@@ -85,10 +85,15 @@ color:black;
 .editor-side1 {
 animation:0.8s modalanime ease-in-out forwards;
 padding:5% ;
-color: black;
+color: white !important;
 display: block;
 border-radius: 3px;
 width:100%;
+
+
+.small-fonts{
+    color:white !important;
+}
 
 
 .template-drawer:hover{
@@ -148,7 +153,8 @@ font-weight:bold;
 }
 
 .error-notification{
-padding:12px 0px;
+padding:10px 0px;
+color: white;
 //position:sticky;
 font-size:12px;
 
@@ -443,7 +449,7 @@ background:rgb(0,0,7);
 }
 .featured-pix-block{
     //border-radius: $profile-width;
-    width: $profile-width;
+    width: auto;
     height: $profile-height;
     float:left;
     position: relative; 
