@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import '../../Resources/styles/article.scss';
-import { Card } from 'semantic-ui-react';
+import { Card, Button } from 'semantic-ui-react';
 
 
 //   DATE CONVSERSION
@@ -41,16 +41,14 @@ function getmonthName(number) {
 
 export default function DraftPreview(props) {
     
-    var { ArticleReducer, Grid, Button } = props.imports;
-    var articles_preview = ArticleReducer.filter((v)=>{
-        return v.public == false
-    });
+    var {  Grid, Item, Dropdown} = props.imports;
 
-    if (articles_preview.length == 0) {
+    console.log(props.data,"component")
+    if (props.data.length == 0) {
 
         return (
             <div className='bodyArticle'>
-               <p>Great!, You have no unpublished draft </p> 
+               <p>Oops, we have no stories yet! </p> 
 
             </div>
 
@@ -68,26 +66,28 @@ export default function DraftPreview(props) {
         return (
             //<Grid.Row className="row">
 
-            <Grid.Row className='row' >
-                <h5>Unpublished Drafts |  <Link to="/drafts">Drafts</Link></h5>
-
-                {articles_preview.map(function (e) {
+            <Grid.Row className='row' style={{topMargin:'10px'}} >
+                <h3>Top Stories </h3>
+<br/>
+                {props.data.data.map(function (e) {
 
                         return (
-                            <Card key={e._id} fluid >
-                            <Card.Content header={e.title} />
-                            <Card.Content description={e.description} />
-                            <Card.Content extra>
-                            <Button.Group className="button-hover" size='small' icon >
-                                                <Button icon='eye outline' as={Link} to={{ pathname: '/app/edit-post/' + e._id }} />
-                                                <Button icon='comments' as={Link} to={`/comments/${e._id}`} />
-                                                <Button icon='share outline'  />
+                        
+                            <Grid.Column style={{margin:"10px auto"}} computer={5} mobile={16} tablet={4} >
+<Item style={{marginBottom:'12px'}} key={e._id} >
+<Item.Image floated="right" size="small" src={e.featured_image} />
 
-                                            </Button.Group>
-                            </Card.Content>
-                            </Card>
-                          
+<Item.Content verticalAlign="middle" >
+<Item.Header><h4 ><a style={{color:"black"}} href={e.post_link}>{e.title}</a></h4></Item.Header>
+<Item.Description>@{e.author.toUpperCase()}</Item.Description>     
+<Item.Meta>{e.time_to_read} mins read</Item.Meta>
 
+
+
+
+</Item.Content>
+</Item>
+             </Grid.Column>
 
 
                         )
@@ -98,6 +98,12 @@ export default function DraftPreview(props) {
                 })
 
                 }
+
+
+                             <Grid.Column computer={5} mobile={16} tablet={4} >
+
+                             <a href="/stories" target="_blank"><Button secondary>SEE MORE STORIES</Button></a>
+             </Grid.Column>
             </Grid.Row>
 
 

@@ -12,6 +12,45 @@ var path = require("path")
 
 
 
+
+//LOAD BLOGPOSTS LIMIT
+
+var five_posts = async (req, res) => {
+
+    try {
+        var list = await posts.find({public:true}).limit(5);
+  //console.log(data.tags.length)
+      res.send({data:list, message:'success', status:200})
+
+    }
+    catch(e){
+        res.send({ message:"An error occured" + error , status:500 })
+
+    }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //*           LOAD ALL ARTICLES
 
 var index = async (req, res) => {
@@ -22,6 +61,7 @@ var index = async (req, res) => {
     
 
     try {
+        
         var user_data = await userModel.findOne({ username: username });
         let template_data = await templ.findById(user_data.template_id)
 
@@ -342,5 +382,6 @@ module.exports = {
     follow_user: follow_user,
     follow_status: follow_status,
     other_interests: other_interests,
-    stories: stories
+    stories: stories,
+    five_posts: five_posts
 };

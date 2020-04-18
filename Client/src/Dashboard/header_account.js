@@ -237,7 +237,7 @@ class HeaderAccount extends React.Component {
 
                 <Menu.Menu position="right"  >
 
-                  <Menu.Item onClick={this.story_switch} content={<Button positive size='mini' >{this.state.switch_story_option}</Button>} />
+                  <Menu.Item onClick={this.story_switch} content={<Button color="black" size='mini' >{this.state.switch_story_option}</Button>} />
                   <Menu.Item text={`@${this.props.ProfileReducer.username}`} as={Dropdown}  >
 
                     <Dropdown.Menu>

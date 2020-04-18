@@ -37,25 +37,6 @@ var loadAllList = (req, res, next) => {
 
 
 
-var loadAllList = (req, res, next) => {
-
-    var post = new posts();
-
-    post.loadAllPost(req.user.username, function (err, results) {
-        if (err) {
-            res.status(http_status.INTERNAL_SERVER_ERROR.code)
-                .send({ data: [] })
-        }
-
-        else
-            res.status(http_status.OK.code)
-                .send({ data: results });
-
-
-    })
-
-
-}
 
 
 

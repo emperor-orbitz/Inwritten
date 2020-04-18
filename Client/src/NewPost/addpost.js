@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import FetchArticles from '../../Controllers/article.controller'
 //import EditorPanel from '../../src/NewPost/Components/editor-panel';
 import cat from '../Dashboard/categories';
-import QuillTest from '../Notifications/QuillTest';
+import QuillTestNew from './Components/QuillTestNew';
 
 
 
@@ -52,6 +52,7 @@ class AddPost extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
+    
     if (nextProps.StoryPage == true) {
       this.setState({ open_options: true }, () => {
         this.props.dispatch({ type: 'WRITE A STORY', payload: true })
@@ -211,7 +212,7 @@ class AddPost extends React.Component {
 
   addPost() {
     var add = new FetchArticles()
-    var panel = new QuillTest();
+    var panel = new QuillTestNew();
 
     this.setState({ buttonDisabled: true, dimmerLoad: true, network_error: `` });
 
@@ -224,7 +225,7 @@ class AddPost extends React.Component {
       comments_enabled: this.state.enable_comments,
       public: this.state.privacy_value,
       body_html: panel.exposedHTMLvalue,
-      //body_schema: panel.exposedHTMLvalue,
+      body_schema: panel.exposedEditorValue,
       featured_image: this.state.featured_image,
       comments: [],
       tags: this.state.tag_value
@@ -250,11 +251,6 @@ class AddPost extends React.Component {
           });
 
           this.openShare(okay)
-
-
-          //   var note = document.getElementsByClassName('notification-background');
-          // note[0].classList.remove('reverse-anime');
-
 
         })
         .catch(err => {
@@ -300,7 +296,6 @@ class AddPost extends React.Component {
       var reader = new FileReader();
 
       reader.readAsDataURL(doc);
-
       reader.onloadend = function () {
         resolve(reader.result);
       }
@@ -320,7 +315,6 @@ class AddPost extends React.Component {
 //LEAVE PAGE
 leavePage = ({id, post_link})=>{
   this.setState({open_share:false})
-  //this.props.history.replace("/edit-post/"+id);
   window.history.pushState("","","/app/edit-post/"+id );
   window.location = post_link
 }
@@ -379,7 +373,7 @@ leavePage = ({id, post_link})=>{
               }
 
 
-              <QuillTest />
+              <QuillTestNew />
 
             </Grid.Column>
 
@@ -393,14 +387,15 @@ leavePage = ({id, post_link})=>{
                     <p style={{ fontSize: "10px" }}> Preview and Share your story with your friends and other connections </p>
 
                     <a href={this.state.share_data.post_link}><Button icon="internet explorer" labelPosition='left' content="View your story live" size='small' fluid onClick={this.copyToClipboard} /></a>
-                    <br /> <br />
+                    <br /> 
 
                     <Button icon="copy outline" labelPosition='left' content={this.state.copyToClipboard} size='small' onClick={this.copyToClipboard} fluid disabled={this.state.copyToClipboard == "Copied!"} />
-                    <br /> <br />
+                    <br />
 
                     <Button onClick={(e) => this.shareToFacebook(e, this.state.share_data)}
                       color="facebook" icon="facebook" labelPosition='left' content='Share to facebook' fluid size='small' />
-                    <br /> <br />
+                    <br />
+                    
                     <Button onClick={(e) => this.shareToWhatsApp(e, this.state.share_data)} color="green" icon="whatsapp" labelPosition='left' content='Share to WhatsApp' size='small' />
                   </div>
                 </Modal.Content>

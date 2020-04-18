@@ -3,11 +3,10 @@ import React, { useState } from 'react';
 import { Button, Form, Checkbox, Loader, Icon, Select, Grid, Image, Modal } from 'semantic-ui-react';
 import '../../Resources/styles/article.scss';
 import { withRouter } from 'react-router';
-import {Link} from "react-router-dom"
 import { connect } from 'react-redux';
 import FetchArticles from '../../Controllers/article.controller'
 import cat from "../Dashboard/categories";
-import QuillTest from "../Notifications/QuillTest"
+import QuillTestEdit from "./Components/QuillTestEdit"
 
 
 
@@ -140,7 +139,7 @@ class EditPost extends React.Component {
 
   updatePost = () => {
     var add = new FetchArticles()
-    var panel = new QuillTest();
+    var panel = new QuillTestEdit();
     this.setState({ buttonDisabled: true, dimmerLoad: true });
 
     const post = {
@@ -153,7 +152,7 @@ class EditPost extends React.Component {
       comments_enabled: this.state.enable_comments,
       public: this.state.privacy_value,
       body_html: panel.exposedHTMLvalue,
-     // body_schema: panel.exposeEditorValue,
+      body_schema: panel.exposedEditorValue,
       featured_image: this.state.featured_image,
       post_link: this.state.post_link,
       tags: this.state.tag_value
@@ -177,9 +176,6 @@ class EditPost extends React.Component {
             open_options: false,
           });
 
-
-          var note = document.getElementsByClassName('notification-background');
-          note[0].classList.remove('reverse-anime');
 
         })
         .catch( err => {
@@ -354,7 +350,7 @@ class EditPost extends React.Component {
               }
 
 
-              <QuillTest initialValue={this.state.body_html}/>
+              <QuillTestEdit initialValue={this.state.body_schema}/>
 
             </Grid.Column>
 

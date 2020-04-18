@@ -163,7 +163,7 @@ class Signup extends React.Component {
 
         <div className="login">
           <Grid columns={2} divided stackable>
-            <Grid.Column>
+            <Grid.Column width="7">
               <div className="note">
                 <h2>LEARN SOMETHING NEW</h2>
                 <p>Create an account, share knowledge, learn something different.
@@ -173,20 +173,20 @@ class Signup extends React.Component {
 
             </Grid.Column>
 
-            <Grid.Column >
+            <Grid.Column width="9" >
               <Error loginError={this.state.loginError} />
 
               <Form >
                
-                <Form.Field width={10}>
+                <Form.Field width={15}>
                   <label style={{ 'color': 'rgb(3, 68, 94)' }}>Email</label>
                   <input placeholder='Email' type="email" value={this.state.emailValue} onChange={this.eChange} />
                 </Form.Field>
-                <Form.Field width={10}>
+                <Form.Field width={15}>
                   <label style={{ 'color': 'rgb(3, 68, 94)' }} color="white" htmlFor="username">Username</label>
                   <input placeholder='Username' type="text" value={this.state.usernameValue} onChange={this.uChange} id="username" />
                 </Form.Field>
-                <Form.Field width={10}>
+                <Form.Field width={15}>
                   <label style={{ 'color': 'rgb(3, 68, 94)' }} >Password</label>
                   <input placeholder='Password' type="password" value={this.state.passwordValue} onChange={this.pChange} />
                 </Form.Field>

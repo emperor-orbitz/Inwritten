@@ -87,7 +87,7 @@ postSchema.methods.loadAllPost = (username, callback) => {
         .find({ author: username },
             callback)
         .sort({createdAt:-1})
-        .select("-featured_image")
+        //.select("featured_image")
         .populate({
                    path:"comments",
                    populate:{ path:"commenter_id", 

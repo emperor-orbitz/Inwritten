@@ -15,6 +15,12 @@ var isAuth = (req, res, next)=> {
     
     })
 
+    
+    Router.post('/blog/fivestories', function (req, res, next) {
+
+        blogController.five_posts(req, res)
+    
+    })
 
 
 

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import '../../Resources/styles/article.scss';
-import { Button, Icon, Form, Modal, Grid, Select, Input, Card } from 'semantic-ui-react';
+import { Button, Icon, Form, Modal, Grid, Select,Item, Input, Dropdown } from 'semantic-ui-react';
 import Connection from '../../Controllers/auth.controller';
 
 import { withRouter } from 'react-router';
@@ -319,12 +319,12 @@ this.search_with_criteria()
                          <div className='bodyArticle'>
 
 <Grid >
-    <Grid.Row style={{background:"#12305c", padding:"7px"}}>
+    <Grid.Row >
         <Grid.Column floated="right" computer={16} mobile={16} tablet={15}   >
 
 
             <div style={{ borderBottom: "3px solid navyblue", marginBottom: "5px", padding: "0px", width: "100%" }} >
-
+    <h3> Your Unsaved Drafts</h3>
                 <Form size="small"   >
 
                     <Input id='search' fluid icon={<Icon name="chevron left"  />} className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} onKeyDown={this.handleEnter} placeholder='Search by title and hit enter. e.g The angry bird fight/category' />
@@ -340,33 +340,46 @@ this.search_with_criteria()
         </Grid.Column>
 
 </Grid.Row>
-<Grid.Row divided columns='5' stretched >
+<Grid.Row  stretched >
 
             {filter_privacy.map((e) => {
 
-                if (e.featured_image == undefined || e.featured_image == "") {
                     return (
-                        <Grid.Column computer={3} mobile={16} tablet={4} >
-
-                     <Card key={e._id} fluid >
-<Card.Content header={e.title} />
-<Card.Content description={e.description} />
-<Card.Content extra>
-<Button.Group className="button-hover" size='small' icon >
-                                        <Button icon='eye' as={Link} to={{ pathname: '/app/edit-post/' + e._id }} />
-
-                                        <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
 
 
-                                    </Button.Group>
-</Card.Content>
-</Card>
-        </Grid.Column>
+
+                        <Grid.Column computer={5} mobile={16} tablet={4} >
+                        <Item style={{marginBottom:'12px'}} key={e._id} >
+                              <Item.Image floated="right" size="small" src={e.featured_image} />
+                        
+                              <Item.Content verticalAlign="middle" >
+                                <Item.Header as={Link} to={{ pathname: '/app/edit-post/' + e._id }}><h4 style={{color:"black"}}>{e.title}</h4></Item.Header>
+                                <Item.Description>{e.category.toUpperCase()}</Item.Description>     
+                                   <Item.Meta>{e.time_to_read} mins read</Item.Meta>
+                        
+                        
+                                <Item.Extra >
+                                <Dropdown text="actions ">
+                            <Dropdown.Menu>
+                              <Dropdown.Item text='Preview' icon='eye' as={Link} to={{ pathname: '/app/edit-post/' + e._id }}/>
+                              <Dropdown.Item text='Delete' icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal}/>
+                            
+                            </Dropdown.Menu>
+                          </Dropdown>
+                             
+                                
+                                </Item.Extra>
+                        
+                              </Item.Content>
+                            </Item>
+                                                         </Grid.Column>
+                        
+
+
 
 
                     )
 
-                }
 
 
             })}

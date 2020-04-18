@@ -1,15 +1,14 @@
 import React from 'react';
-import '../../Resources/styles/comment.scss';
+import '../../../Resources/styles/comment.scss';
 
 import ReactQuill, { Quill } from 'react-quill'; // ES6
 import { Button } from "semantic-ui-react";
 import "./quillcore.scss";
 import "quill/dist/quill.core.js";
-import "../../Resources/styles/editor.scss";
+import "../../../Resources/styles/editor.scss";
 
 import "quill/dist/quill.min.js";
 import "quill/dist/quill.js";
-
 import "./quillbubble.scss";
 //import "quill/dist/quill.snow.scss";
 
@@ -75,7 +74,7 @@ ReactQuill.Quill.register({
 });
 
 
-class QuillTest extends React.Component {
+class QuillTestNew extends React.Component {
 
     constructor(props) {
         super(props);
@@ -97,23 +96,7 @@ class QuillTest extends React.Component {
     }
 
 
-    componentWillReceiveProps(nextProps, nextContext){
-        console.log(nextProps.initialValue, this.reactQuillRef.getEditor().getContents(), "will receive props")
-
-       if(nextProps.initialValue == this.quillRef.getContents() ){//we are the same things
-    }
-    else{ 
-        this.quillRef.setContents(nextProps.initialValue)
-       // this.reactQuillRef.getEditor().setContents(nextProps.initialValue)
-
-    }
-
-
-       //this.quillRef.setContents(nextProps.initialValue)
-       // this.setState({text: nextProps.initialValue})
-     
-    }
-
+  
 
 
     componentDidMount() {
@@ -286,7 +269,7 @@ const mapStateToProps = (state) => {
     return state;
 }
 
-export default QuillTest
+export default QuillTestNew
 
 
 

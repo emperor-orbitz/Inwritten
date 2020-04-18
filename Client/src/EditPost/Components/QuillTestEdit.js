@@ -1,16 +1,16 @@
 import React from 'react';
-import '../../Resources/styles/comment.scss';
+import '../../../Resources/styles/comment.scss';
 
 import ReactQuill, { Quill } from 'react-quill'; // ES6
-import { Button } from "semantic-ui-react";
 import "./quillcore.scss";
 import "quill/dist/quill.core.js";
-import "../../Resources/styles/editor.scss";
+import "../../../Resources/styles/editor.scss";
 
 import "quill/dist/quill.min.js";
 import "quill/dist/quill.js";
 
 import "./quillbubble.scss";
+import { ButtonNext } from 'pure-react-carousel';
 //import "quill/dist/quill.snow.scss";
 
 
@@ -98,23 +98,15 @@ class QuillTest extends React.Component {
 
 
     componentWillReceiveProps(nextProps, nextContext){
-        console.log(nextProps.initialValue, this.reactQuillRef.getEditor().getContents(), "will receive props")
-
-       if(nextProps.initialValue == this.quillRef.getContents() ){//we are the same things
-    }
-    else{ 
-        this.quillRef.setContents(nextProps.initialValue)
-       // this.reactQuillRef.getEditor().setContents(nextProps.initialValue)
-
+       // console.log(nextProps.initialValue, this.reactQuillRef.getEditor().getContents(),this.quillRef.getText().length ,  "will receive props")
+        //DON'T TOUCH THIS LINE
+       if(this.quillRef.getText().length == 1){
+        this.reactQuillRef.getEditor().setContents(nextProps.initialValue)
+       }
+    
     }
 
-
-       //this.quillRef.setContents(nextProps.initialValue)
-       // this.setState({text: nextProps.initialValue})
-     
-    }
-
-
+   
 
     componentDidMount() {
         console.log("this is did mount", this.props.initialValue)
@@ -149,7 +141,6 @@ class QuillTest extends React.Component {
 
 
     get exposedHTMLvalue(){
-  
         //console.log(this.quillRef.getContents(index, length) )
         return window.editor;
     }
