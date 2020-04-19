@@ -41,40 +41,4 @@ display: table;
         }
 
 
-        .rq-container{
-         width:90%;
-         left:50%;
-         min-height: 400px;
-         transform: translate(-50%);
-            position: absolute;
-
-
-
-        }
-
-
-
- .ql-container{
-    color:black !important;
-    min-height:100%;
-
-
-    hr{
-        border: none;
-        color: #111;
-        letter-spacing: 1em;
-        text-align: center;
-        }
-        img{
-            width:100%;
-            height:330px;
-        }
- } 
-
-.ql-container hr:before{
-    content: "...";
-    font-size: 200%
-}
-
-
         

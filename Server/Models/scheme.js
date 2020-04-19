@@ -79,7 +79,7 @@ const SCHEME = {
         body_html: { type: mongoose.Schema.Types.Mixed },
         body_schema: { type: mongoose.Schema.Types.Mixed, default:null },
         featured_image: { type: String, default:"https://www.inwritten.com/images/inwritten-logo.png" },
-        category: { type: String, lowercase: true },
+        category: { type: String, lowercase: true, default:"unc" },
         createdAt: { type: Date },
         like_count: { type: Number },
         time_to_read: { type: Number },

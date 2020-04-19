@@ -36,6 +36,10 @@
 		<!-- Begin Menu -->
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item active">
+			<a class="nav-link" id="loggedininfo" href="/app/edit-post/{{data._id}}"> <span class="sr-only">(current)</span></a>
+			</li>
+
+			<li class="nav-item active">
 			<a class="nav-link" href="/">Refresh <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">
@@ -57,6 +61,48 @@
 
 <!-- Begin Article
 ================================================== -->
+
+
+		    <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+   <div class="modal-header">
+              <h6 class="modal-title" id="exampleModalLongTitle">Subscribe </h6>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div> 
+            <div class="modal-body" >
+
+                <h3 style="color:white;"> A place to share your <b id="change_of_words">thoughts</b> </h3>
+                <p style="margin-bottom:20px;color:white"> Be the first to get updates on our beta version and receive exclusive access to our in-app store.</p>
+            <p>
+                <form action="" id="subscribeForm" method="POST">
+                    <p id="error-box"></p>
+                <input type="email" name="email" placeholder="    Enter your email address" required aria-required="true" style="border:none;height:40px; border-radius:25px; width:100%"/>
+                <input type="submit" class=" btn btn-submit" value="Subscribe" style="height:40px; border:none; margin-top:5px; border-radius: 25px ;width:120px"/>
+            </form>     
+               </div>
+      
+          </div>
+        </div>
+      </div>
+    <!-- Modal End-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="container">
 	<div class="row">
 
@@ -166,7 +212,8 @@
 ================================================== -->
 <div class="alertbar" id="alertbar">
 	<div class="container text-center">
-		<img src="/images/double-u.png" alt="" style="height:50px"> &nbsp; Never miss a <b>story</b> from us. <a href="#" class="btn subscribe">Get Updates</a>
+
+		<img src="/images/double-u.png" alt="" style="height:50px"> &nbsp; Never miss a <b>story</b> from us. <a href="#" data-toggle="modal" data-target="#myModal" class="btn subscribe">Get Updates</a>
 		<i class="fa fa-close" id="close-alertbar" style="float:right"></i>
 	</div>
 </div>
@@ -196,6 +243,7 @@
 <script src="/views/{{template_data}}/js/comments.js"></script>
 <script src="/views/{{template_data}}/js/auth.js"></script>
 <script src="/views/{{template_data}}/js/follow.js"></script>
+<!--<script src="/views/{{template_data}}/js/launch.js"></script>-->
 
 
 

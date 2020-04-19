@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,400i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
 
 ::-webkit-scrollbar{
   width:10px;
@@ -8,7 +8,7 @@
 }
 
 div.ui.secondary.nav.menu {
-  font-size: 12px;
+  font-size: 13px;
     position: sticky;
     top: 0;
     width: 100%;
@@ -29,7 +29,7 @@ div.right.menu > .item, div.right.menu > .text {
 #app{
   height:100%;
   width:100%;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 
@@ -93,7 +93,7 @@ height:70px;
 .accordion-content{
   a.item{
     color:black !important;
-    font-size:12px;
+    font-size:14px;
   }
 
 }

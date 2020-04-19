@@ -20,12 +20,13 @@ check_in()
             null;
 
 
-            $("#loggedininfo").html( `<b> ${result.data.username} (${result.data.email})</b>`)
+            $("#loggedininfo").html( `<b><i class="fa fa-cogs"></i> Edit this story</b>`)
             document.getElementById("commenter_id").defaultValue = result.data._id
         },
 
 
         error: function(err){
+
             document.getElementById('textarea').innerHTML = `<p>Sorry, you must <a href="/app/login">login</a> or <a href="/app/signup">signup</a> before you can comment..`;
 
         }

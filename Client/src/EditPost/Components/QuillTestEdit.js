@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../Resources/styles/comment.scss';
+import '../../../Resources/styles/editor.scss';
 
 import ReactQuill, { Quill } from 'react-quill'; // ES6
 import "./quillcore.scss";
@@ -10,7 +10,6 @@ import "quill/dist/quill.min.js";
 import "quill/dist/quill.js";
 
 import "./quillbubble.scss";
-import { ButtonNext } from 'pure-react-carousel';
 //import "quill/dist/quill.snow.scss";
 
 

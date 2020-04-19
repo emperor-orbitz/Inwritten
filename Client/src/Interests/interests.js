@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../Resources/styles/comment.scss';
-import { Button, Form, Input, Icon, Select, List, Image } from 'semantic-ui-react';
+import { Button, Form, Input, Icon, Select, List, Image, Grid } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom"
@@ -116,6 +116,12 @@ class Interests extends React.Component {
 
 
 
+    handleEnter =(e)=>{
+
+        if (e.key ==="Enter"){
+this.search_with_criteria()
+        }
+    }
 
 
 
@@ -150,36 +156,28 @@ class Interests extends React.Component {
         else if (this.state.posts.length > 0) {
             return (
             <div className="comment-div" style={{ marginTop: "10px !important" }}>
+            <h3>Most Recent on {item} </h3>
+
                 <Form size="small" >
 
-                    <Input id='search' className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search Interests' />
-                    <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
-                    <Button primary icon="search" onClick={this.search_with_criteria}/>
+                    <Input id='search' className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch}  onKeyDown={this.handleEnter} placeholder='Search by title and hit enter. e.g The angry bird fight/category'  />
+                    {/*<Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
+                    <Button primary icon="search" onClick={this.search_with_criteria} hidden />*/}
+                    {this.state.not_found == true ? (<p style={{ color: "black" }}>{`${this.state.search} was not found!`} </p>) : ""}
 
                 </Form>
 
 
-                <h3>Most Recent on {item} </h3> | <Link to="/settings/templates" style={{ textDecoration:"underline"}} >View templates in this Category</Link>
-                {this.state.not_found == true ? (<p style={{ color: "red" }}>{`${this.state.search} was not found!`} </p>) : ""}
-                <List selection verticalAlign="middle">
-
+                 
+                <Grid >
+                    <Grid.Row stretched style={{margin:"15px auto"}}>
                     {this.state.posts.map((x, index) => {
-                        return (
-                            <div style={{ minHeight: "50px", width: "100%" }}>
-                                <List divided relaxed>
-
-                                    <ListExampleSelection index={index} x={x} />
-
-                                </List>
-
-                            </div>
-                        )
+                        return (  <ListExampleSelection index={index} x={x} />  )
 
                     })
-
-
                     }
-                </List>
+                    </Grid.Row>
+                </Grid>
 
             </div>)
         }
@@ -187,8 +185,7 @@ class Interests extends React.Component {
 
             <div className="comment-div" style={{ marginTop: "0px !important" }}>
 
-
-                <p>Nothing here yet....</p>
+                <h3>Nothing here yet....</h3>
             </div>
         )
 

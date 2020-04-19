@@ -10,6 +10,7 @@ import FetchArticles from '../../Controllers/article.controller'
 //import EditorPanel from '../../src/NewPost/Components/editor-panel';
 import cat from '../Dashboard/categories';
 import QuillTestNew from './Components/QuillTestNew';
+import { Link } from "react-router-dom"
 
 
 
@@ -52,7 +53,7 @@ class AddPost extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
-    
+
     if (nextProps.StoryPage == true) {
       this.setState({ open_options: true }, () => {
         this.props.dispatch({ type: 'WRITE A STORY', payload: true })
@@ -92,6 +93,7 @@ class AddPost extends React.Component {
 
 
   openShare = (share_data) => {
+
     this.setState({ open_share: true, share_data, copyToClipboard: "Copy to clipboard" })
   }
 
@@ -312,12 +314,12 @@ class AddPost extends React.Component {
     })
   }
 
-//LEAVE PAGE
-leavePage = ({id, post_link})=>{
-  this.setState({open_share:false})
-  window.history.pushState("","","/app/edit-post/"+id );
-  window.location = post_link
-}
+  //LEAVE PAGE
+  leavePage = ({ id, post_link }) => {
+    this.setState({ open_share: false })
+    window.history.pushState("", "", "/app/edit-post/" + id);
+    window.location = post_link
+  }
 
 
   /*          RENDER FILE
@@ -344,7 +346,7 @@ leavePage = ({id, post_link})=>{
       <div className='add-post'>
 
         <Grid stackable>
-          <Grid.Row reversed="mobile" >
+          <Grid.Row  >
 
             <Grid.Column mobile={16} tablet={13} computer={13} style={{ padding: '0px 5px' }}  >
 
@@ -378,30 +380,46 @@ leavePage = ({id, post_link})=>{
             </Grid.Column>
 
             <Grid.Column mobile={16} tablet={2} computer={2}>
-              <Modal size='mini' open={this.state.open_share} onClose={this.closeShare} closeOnDimmerClick={false} closeIcon={<Icon name="times" size="big" color="black" onClick={ ()=> {this.leavePage({id:this.state.share_data._id, post_link:this.state.share_data.post_link })}} />} >
+              <Modal size='mini' open={this.state.open_share} onClose={this.closeShare} closeOnDimmerClick={false} closeIcon={<Icon name="times" size="small" color="black" onClick={() => {
+                if (this.state.share_data.public == true)
+                  this.leavePage({ id: this.state.share_data._id, post_link: this.state.share_data.post_link })
+                else
+                  this.closeShare()
 
-                <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
+
+
+              }} />} >
+
+                {this.state.share_data.public == true ? <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
                   <div style={{ textAlign: 'center' }}>
                     <Icon name="check circle" color="green" size="huge" />
                     <h4 >Your story has been published  </h4>
                     <p style={{ fontSize: "10px" }}> Preview and Share your story with your friends and other connections </p>
 
                     <a href={this.state.share_data.post_link}><Button icon="internet explorer" labelPosition='left' content="View your story live" size='small' fluid onClick={this.copyToClipboard} /></a>
-                    <br /> 
 
                     <Button icon="copy outline" labelPosition='left' content={this.state.copyToClipboard} size='small' onClick={this.copyToClipboard} fluid disabled={this.state.copyToClipboard == "Copied!"} />
-                    <br />
 
                     <Button onClick={(e) => this.shareToFacebook(e, this.state.share_data)}
                       color="facebook" icon="facebook" labelPosition='left' content='Share to facebook' fluid size='small' />
-                    <br />
-                    
-                    <Button onClick={(e) => this.shareToWhatsApp(e, this.state.share_data)} color="green" icon="whatsapp" labelPosition='left' content='Share to WhatsApp' size='small' />
+
+                    <Button onClick={(e) => this.shareToWhatsApp(e, this.state.share_data)} color="green" fluid icon="whatsapp" labelPosition='left' content='Share to WhatsApp' size='small' />
                   </div>
                 </Modal.Content>
+                  :
+                  <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
+                    <div style={{ textAlign: 'center' }}>
+                      <Icon name="check circle" color="green" size="huge" />
+                      <h4 >Your Draft has been Saved  </h4>
+                      <Button as={Link} to={{ pathname: "/app/edit-post/" + this.state.share_data._id }}>Continue Editing</Button>
+
+                    </div>
+                  </Modal.Content>
+
+                }
               </Modal>
 
-              
+
               <Modal size="small" basic style={{ color: "white !important" }} open={this.state.open_options} onClose={this.close}  >
                 <h3 style={{ margin: '1px 2%', color: "white" }}>Settings</h3>
                 <Modal.Content image >

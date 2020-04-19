@@ -1,7 +1,7 @@
 
 import React from 'react';
 import '../../Resources/styles/article.scss';
-import { Button, Icon, Form, Modal, Grid, Select,Item, Input, Dropdown } from 'semantic-ui-react';
+import { Button, Icon, Form, Modal, Grid, Select, Item, Input, Dropdown } from 'semantic-ui-react';
 import Connection from '../../Controllers/auth.controller';
 
 import { withRouter } from 'react-router';
@@ -116,10 +116,10 @@ class PostArchive extends React.Component {
     }
 
 
-    handleEnter =(e)=>{
+    handleEnter = (e) => {
 
-        if (e.key ==="Enter"){
-this.search_with_criteria()
+        if (e.key === "Enter") {
+            this.search_with_criteria()
         }
     }
 
@@ -268,14 +268,14 @@ this.search_with_criteria()
             return (<div>
 
 
-                   <div className='bodyArticle'>
-                   
-                   <img src="/images/empty.png" className='empty-png'/>
-                   <br/>
-                   <h4 style={{textAlign:"center"}}>No Drafts yet. You can create one <Button size="tiny" as={Link} to="/app/add-post">here</Button></h4>
+                <div className='bodyArticle'>
 
-       
-       </div>
+                    <img src="/images/empty.png" className='empty-png' />
+                    <br />
+                    <h4 style={{ textAlign: "center" }}>No Drafts yet. You can create one <Button size="tiny" as={Link} to="/app/add-post">here</Button></h4>
+
+
+                </div>
 
             </div>
 
@@ -305,7 +305,7 @@ this.search_with_criteria()
 
                         <Modal.Content style={{ height: '400px', background: "", color: 'black', padding: '10%' }}  >
                             <p style={{ textAlign: 'center' }}> <Icon size='big' name='trash' />
-                            <h3 >Delete All your drafts? </h3>
+                                <h3 >Delete All your drafts? </h3>
                                 <p>You will lose all your drafts by clicking delete, are you sure?</p>
                                 <br />
                                 <Button size="small" color='red' icon='trash alternate outline' labelPosition='right' content='Delete All' size='tiny' onClick={this.deleteAll} />
@@ -316,78 +316,79 @@ this.search_with_criteria()
 
                     </Modal>
 
-                         <div className='bodyArticle'>
+                    <div className='bodyArticle'>
 
-<Grid >
-    <Grid.Row >
-        <Grid.Column floated="right" computer={16} mobile={16} tablet={15}   >
-
-
-            <div style={{ borderBottom: "3px solid navyblue", marginBottom: "5px", padding: "0px", width: "100%" }} >
-    <h3> Your Unsaved Drafts</h3>
-                <Form size="small"   >
-
-                    <Input id='search' fluid icon={<Icon name="chevron left"  />} className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} onKeyDown={this.handleEnter} placeholder='Search by title and hit enter. e.g The angry bird fight/category' />
-                   {/* <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions}  />*/}
-                   {/* <Button primary icon="search" onClick={this.search_with_criteria} />*/}
-                    {/*<Button color="red" icon="trash alternate outline" onClick={() => { this.setState({ open_deleteall: true }) }} />*/}
-
-                </Form>
-
-            </div>
-            {this.state.not_found == true ? <div className='error-notification'> <Icon name="unlink" size='mini' color="black" /> No result for <b> {this.state.search}</b> was not found</div> : ''}
-
-        </Grid.Column>
-
-</Grid.Row>
-<Grid.Row  stretched >
-
-            {filter_privacy.map((e) => {
-
-                    return (
+                        <Grid >
+                            <Grid.Row >
+                                <Grid.Column floated="right" computer={16} mobile={16} tablet={15}   >
 
 
+                                    <div style={{ borderBottom: "3px solid navyblue", marginBottom: "5px", padding: "0px", width: "100%" }} >
+                                        <h3> Your Unsaved Drafts</h3>
+                                        <Form size="small"   >
 
-                        <Grid.Column computer={5} mobile={16} tablet={4} >
-                        <Item style={{marginBottom:'12px'}} key={e._id} >
-                              <Item.Image floated="right" size="small" src={e.featured_image} />
-                        
-                              <Item.Content verticalAlign="middle" >
-                                <Item.Header as={Link} to={{ pathname: '/app/edit-post/' + e._id }}><h4 style={{color:"black"}}>{e.title}</h4></Item.Header>
-                                <Item.Description>{e.category.toUpperCase()}</Item.Description>     
-                                   <Item.Meta>{e.time_to_read} mins read</Item.Meta>
-                        
-                        
-                                <Item.Extra >
-                                <Dropdown text="actions ">
-                            <Dropdown.Menu>
-                              <Dropdown.Item text='Preview' icon='eye' as={Link} to={{ pathname: '/app/edit-post/' + e._id }}/>
-                              <Dropdown.Item text='Delete' icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal}/>
-                            
-                            </Dropdown.Menu>
-                          </Dropdown>
-                             
-                                
-                                </Item.Extra>
-                        
-                              </Item.Content>
-                            </Item>
-                                                         </Grid.Column>
-                        
+                                            <Input id='search' fluid icon={<Icon name="chevron left" />} className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} onKeyDown={this.handleEnter} placeholder='Search by title and hit enter. e.g The angry bird fight/category' />
+                                            {/* <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions}  />*/}
+                                            {/* <Button primary icon="search" onClick={this.search_with_criteria} />*/}
+                                            {/*<Button color="red" icon="trash alternate outline" onClick={() => { this.setState({ open_deleteall: true }) }} />*/}
+
+                                        </Form>
+
+                                    </div>
+                                    {this.state.not_found == true ? <div className='error-notification'> <Icon name="unlink" size='mini' color="black" /> No result for <b> {this.state.search}</b> was not found</div> : ''}
+
+                                </Grid.Column>
+
+                            </Grid.Row>
+                            <Grid.Row stretched >
+
+                                {filter_privacy.map((e) => {
+
+                                    return (
 
 
 
+                                        <Grid.Column computer={5} mobile={16} tablet={4} >
+                                            <Item style={{ marginBottom: '12px' }} key={e._id} >
+                                                <Item.Image floated="right" size="small" src={e.featured_image} />
 
-                    )
+                                                <Item.Content verticalAlign="middle" >
+                                                    <Item.Header as={Link} to={{ pathname: '/app/edit-post/' + e._id }}><h4 style={{ color: "black" }}>{e.title}</h4></Item.Header>
+                                                    <Item.Description>{e.category.toUpperCase()}</Item.Description>
+                                                    <Item.Meta>{e.time_to_read} mins read</Item.Meta>
+
+
+                                                    <Item.Extra >
+                                                        <Dropdown text="actions ">
+                                                            <Dropdown.Menu>
+                                                                <Dropdown.Item text='Preview' icon='eye' as={Link} to={{ pathname: '/app/edit-post/' + e._id }} />
+                                                                <Dropdown.Item text='Delete' icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
+                                                                <Dropdown.Item icon="comment" text="Comments" as={Link} to={{ pathname: '/app/comments/' + e._id }} />
+
+                                                            </Dropdown.Menu>
+                                                        </Dropdown>
+
+
+                                                    </Item.Extra>
+
+                                                </Item.Content>
+                                            </Item>
+                                        </Grid.Column>
 
 
 
-            })}
 
 
-    </Grid.Row>
-</Grid>
-</div>
+                                    )
+
+
+
+                                })}
+
+
+                            </Grid.Row>
+                        </Grid>
+                    </div>
 
 
 

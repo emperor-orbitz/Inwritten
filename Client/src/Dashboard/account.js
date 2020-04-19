@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '../../Resources/styles/account.scss';
-import { Button,  Grid, Card, Image, Label, Item, Divider, Dropdown } from 'semantic-ui-react';
+import { Button,  Grid, Card, Image, Label, Item, Divider, Dropdown, Loader } from 'semantic-ui-react';
 import {  Icon,  Progress } from 'semantic-ui-react';
 import Connection from '../../Controllers/auth.controller';
 import {  withRouter } from 'react-router';
@@ -94,6 +94,7 @@ try {
       Button: Button,
       Label: Label,
       Item: Item,
+      Loader: Loader,
       Dropdown: Dropdown
     }
 
@@ -121,7 +122,6 @@ try {
                   <p>BOOKMARKS</p>
                 </Grid.Column>
               </Grid.Row>
-
 
               <DraftPreview data={ this.state.blog } imports={imports} />
 

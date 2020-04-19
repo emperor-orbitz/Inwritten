@@ -1,17 +1,16 @@
-import React, { createRef } from 'react';
+import React from 'react';
 import '../../Resources/styles/style.scss';
-import { Menu, Icon, Sidebar, Modal, Button, Responsive, Accordion, Dropdown, Divider, MenuItem, MenuHeader, DropdownDivider, Sticky } from 'semantic-ui-react';
+import { Menu, Icon, Sidebar, Modal, Button, Responsive, Accordion, Dropdown, Divider, DropdownDivider  } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Link from 'react-router-dom/Link';
-import FetchArticles from '../../Controllers/article.controller';
+var FetchArticles = require('../../Controllers/article.controller').default;
 import Connection from '../../Controllers/auth.controller';
 import socketIOClient from 'socket.io-client';
 
 import SideBar from '../../src/Dashboard/sidebar';
 import double_u from '../../Resources/images/double-u.png';
 import logo from "../../Resources/images/logo-page.png";
-import {CSSTransition} from "react-transition-group";
 
 
 
@@ -65,7 +64,7 @@ class HeaderAccount extends React.Component {
       this.setState({ switch_story_option: "Save Changes" })
     }
     else
-    this.setState({ switch_story_option: "Write a story" })
+    this.setState({ switch_story_option: "New story" })
 
 
   }

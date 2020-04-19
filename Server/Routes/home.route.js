@@ -32,7 +32,7 @@ router.get('/terms-and-conditions', (req, res, next) => {
     
 });
 
-router.post('/subscribe', (req, res, next) => {  
+router.post('/subscribeToPreLaunch', (req, res, next) => {  
 
     controller.subscribe(req, res, next);
     

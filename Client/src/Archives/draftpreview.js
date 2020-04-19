@@ -1,9 +1,8 @@
 
 import React from 'react';
-import Link from 'react-router-dom/Link';
 import '../../Resources/styles/article.scss';
-import { Card, Button } from 'semantic-ui-react';
-
+//import   Button  from 'semantic-ui-react';
+let Button = require("semantic-ui-react").Button;
 
 //   DATE CONVSERSION
 
@@ -40,15 +39,16 @@ function getmonthName(number) {
 */
 
 export default function DraftPreview(props) {
-    
-    var {  Grid, Item, Dropdown} = props.imports;
 
-    console.log(props.data,"component")
+    var { Grid, Item, Loader } = props.imports;
+
+    console.log(props.data, "component")
     if (props.data.length == 0) {
 
         return (
             <div className='bodyArticle'>
-               <p>Oops, we have no stories yet! </p> 
+                <h3>Top Stories </h3>
+                <Loader active={true} content='Fetching Stories...' size="small" />
 
             </div>
 
@@ -60,50 +60,47 @@ export default function DraftPreview(props) {
 
     else {
 
-      
+
 
 
         return (
             //<Grid.Row className="row">
 
-            <Grid.Row className='row' style={{topMargin:'10px'}} >
+            <Grid.Row className='row' style={{ topMargin: '10px' }} >
                 <h3>Top Stories </h3>
-<br/>
+                <br />
                 {props.data.data.map(function (e) {
 
-                        return (
-                        
-                            <Grid.Column style={{margin:"10px auto"}} computer={5} mobile={16} tablet={4} >
-<Item style={{marginBottom:'12px'}} key={e._id} >
-<Item.Image floated="right" size="small" src={e.featured_image} />
+                    return (
 
-<Item.Content verticalAlign="middle" >
-<Item.Header><h4 ><a style={{color:"black"}} href={e.post_link}>{e.title}</a></h4></Item.Header>
-<Item.Description>@{e.author.toUpperCase()}</Item.Description>     
-<Item.Meta>{e.time_to_read} mins read</Item.Meta>
+                        <Grid.Column style={{ margin: "10px auto" }} computer={5} mobile={16} tablet={4} >
+                            <Item style={{ marginBottom: '12px' }} key={e._id} >
+                                <Item.Image floated="right" size="small" src={e.featured_image} />
 
-
+                                <Item.Content verticalAlign="middle" >
+                                    <Item.Header><h4 ><a style={{ color: "black" }} href={e.post_link}>{e.title}</a></h4></Item.Header>
+                                    <Item.Description>@{e.author.toUpperCase()}</Item.Description>
+                                    <Item.Meta>{e.time_to_read} mins read</Item.Meta>
 
 
-</Item.Content>
-</Item>
-             </Grid.Column>
 
 
-                        )
+                                </Item.Content>
+                            </Item>
+                        </Grid.Column>
 
-                    
 
+                    )
 
                 })
 
                 }
 
 
-                             <Grid.Column computer={5} mobile={16} tablet={4} >
+                <Grid.Column computer={5} mobile={16} tablet={4} >
 
-                             <a href="/stories" target="_blank"><Button secondary>SEE MORE STORIES</Button></a>
-             </Grid.Column>
+                    <a href="/stories" target="_blank"><Button secondary size="tiny">SEE MORE STORIES</Button></a>
+                </Grid.Column>
             </Grid.Row>
 
 
@@ -115,29 +112,3 @@ export default function DraftPreview(props) {
         )
     }
 }
-
-/*
-
-<Card style={{ width: '200px', paddingBottom: '10px' }} size='small' >
-<Image src="src\img\background.jpg" />
-<Card.Content>
-    <Card.Header><h3>{post.title}</h3></Card.Header>
-    <Card.Meta>
-        <span style={{ color: 'rgb(3, 68, 94)' }} className='date'> By: {post.author}</span>
-    </Card.Meta>
-    <Card.Meta>
-        <span style={{ color: 'rgb(3, 68, 94)' }} className='date'> Created: {date_to_string(post.createdAt)}</span>
-    </Card.Meta>
-    <Card.Description> {post.description}
-    </Card.Description>
-</Card.Content>
-<Card.Content extra>
-
-    <Button.Group basic size="mini" floated="right">
-        <Button icon="expand" />
-
-    </Button.Group>
-
-</Card.Content>
-</Card>
-*/

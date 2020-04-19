@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { Button, Form, Checkbox, Loader, Icon, Select, Grid, Image, Modal } from 'semantic-ui-react';
 import '../../Resources/styles/article.scss';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 import FetchArticles from '../../Controllers/article.controller'
 import cat from "../Dashboard/categories";
@@ -22,7 +24,7 @@ class EditPost extends React.Component {
     this.state = {
       tag_value: '',
       tagMax: '',
-      body_html:"",
+      body_html: "",
       buttonDisabled: false,
       dimmerLoad: false,
       error_message: '',
@@ -32,14 +34,18 @@ class EditPost extends React.Component {
       post_title: '',
       featured_image: '',
       createdAt: Date.now(),
-      comments:[],
+      comments: [],
       post_category: 'all',
       post_description: '',
       time_to_read: 5,
       body_schema: '',
       open_options: false,
-      likes:0,
-      post_link:""
+      likes: 0,
+      post_link: "",
+
+      copyToClipboard: "Copy to clipboard",
+      open_share: false,
+      share_data: {}
 
     }
 
@@ -81,7 +87,7 @@ class EditPost extends React.Component {
           break;
         case 'tags':
           this.handleTags();
-          //this.setState({post_tags:value})
+        //this.setState({post_tags:value})
 
       }
     }
@@ -113,7 +119,7 @@ class EditPost extends React.Component {
 
 
   postValidation(title = this.state.post_title, description = this.state.post_description, duration = this.state.time_to_read) {
-   // if (window.editor.length < 8) return 'editor-error'
+    // if (window.editor.length < 8) return 'editor-error'
     if (title.length == 0) return 'title-error';
 
     else if (duration.length !== 0) {
@@ -163,22 +169,23 @@ class EditPost extends React.Component {
     let val = this.postValidation();
     if (val === true) {
 
-      add.update_article(post).then( okay => {
-          this.state.post_link= post.post_link
+      add.update_article(post).then(okay => {
+        this.state.post_link = post.post_link
 
-          this.props.dispatch({ type: 'UPDATE_ARTICLE', payload: post });
+        this.props.dispatch({ type: 'UPDATE_ARTICLE', payload: post });
 
-          this.setState({
-            success_message: 'Great! That\'s a little better. Click ',
-            error_message: '',
-            buttonDisabled: false,
-            dimmerLoad: false,
-            open_options: false,
-          });
+        this.setState({
+          success_message: '',
+          error_message: '',
+          buttonDisabled: false,
+          dimmerLoad: false,
+          open_options: false,
+        });
 
+        this.openShare(post)
 
-        })
-        .catch( err => {
+      })
+        .catch(err => {
           this.setState({
             buttonDisabled: false,
             dimmerLoad: false,
@@ -186,7 +193,7 @@ class EditPost extends React.Component {
             network_error: `Sorry, there was an error with your article! We would fix this soon ${err}`
           });
         }
-      );
+        );
     }
     else if (val !== true) {
       this.setState({
@@ -201,37 +208,37 @@ class EditPost extends React.Component {
 
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
 
-  if (nextProps.EditPage == true) {
-    this.setState({ open_options: true }, () => {
-      this.props.dispatch({ type: 'WRITE A STORY2', payload: true })
-    })
+    if (nextProps.EditPage == true) {
+      this.setState({ open_options: true }, () => {
+        this.props.dispatch({ type: 'WRITE A STORY2', payload: true })
+      })
+    }
+
   }
 
-  }
-  
 
 
 
-      /*
-      *           REACTJS LIFECYCLE HOOKS
-      *
-      */
+  /*
+  *           REACTJS LIFECYCLE HOOKS
+  *
+  */
 
   componentDidMount() {
 
     //Fetch featured_image
     var fetch_image = new FetchArticles()
     fetch_image.fetch_image(this.props.match.params.postID)
-                .then(data =>{
-                  this.setState({featured_image:data})
-                })
-    
+      .then(data => {
+        this.setState({ featured_image: data })
+      })
+
 
     for (var x of this.props.ArticleReducer) {
       if (x._id == this.props.match.params.postID) {
-      //Retrieve data except from featured_image
+        //Retrieve data except from featured_image
         this.setState({
           post_id: x._id,
           post_title: x.title,
@@ -241,26 +248,74 @@ class EditPost extends React.Component {
           enable_comments: x.comments_enabled,
           time_to_read: x.time_to_read,
           body_schema: x.body_schema,
-          body_html:x.body_html,
+          body_html: x.body_html,
           //featured_image: x.featured_image,
           likes: x.likes,
           post_link: x.post_link,
-          tag_value:x.tags,
-          body_html:x.body_html
+          tag_value: x.tags,
+          body_html: x.body_html
         });
-
-
-
-
-
 
       }
 
     }
 
+  }
+
+  shareToWhatsApp = (e, data) => {
+
+    e.preventDefault()
+    let url = encodeURIComponent(`Hey, check out my new story on Inwritten. It's here: https://www.inwritten.com${data.post_link}`)
+    console.log(url)
+    window.location.href = `https://wa.me/?text="${url}"`
+
+
 
 
   }
+
+
+  shareToFacebook = (e, data) => {
+
+    e.preventDefault()
+    let url = encodeURIComponent(`https://www.inwritten.com${data.post_link}`)
+
+    window.open(
+      'https://www.facebook.com/dialog/share?app_id=508448136537979&display=popup&href=' + url + '&redirect_uri=https%3A%2F%2Fwww.inwritten.com/stories',
+      'facebook-share-dialog',
+      'width=400,height=300', false);
+
+  }
+
+
+
+
+  openShare = (share_data) => {
+
+    console.log("open share", share_data)
+    this.setState({ open_share: true, share_data, copyToClipboard: "Copy to clipboard" })
+  }
+
+
+
+
+  copyToClipboard = () => {
+    var dummy = document.createElement("textarea")
+    // dummy.style.display="none";
+    document.body.appendChild(dummy)
+    dummy.setAttribute("id", 'dummy_id');
+    document.getElementById("dummy_id").value = `http://www.inwritten.com${this.state.share_data.post_link}`;
+    dummy.select()
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
+    this.setState({ copyToClipboard: "Copied!" })
+  }
+
+
+  closeShare = () => {
+    this.setState({ open_share: false })
+  }
+
 
 
   toggleDialogFeatured() {
@@ -283,6 +338,15 @@ class EditPost extends React.Component {
 
   }
 
+
+  //Leave Page
+  leavePage = ({ id, post_link }) => {
+    this.setState({ open_share: false })
+    window.history.pushState("", "", "/app/edit-post/" + id);
+    window.location = post_link
+  }
+
+
   handle_profile_photo(ev) {
 
     this.readFile(ev.target.files[0]).then((result) => {
@@ -301,25 +365,63 @@ class EditPost extends React.Component {
 
     var privacy_value = (this.state.privacy_value == true) ? 'Publish to the World' : 'Save Save to draft';
     var comment_value = (this.state.enable_comments == true) ? 'Commenting is enabled' : 'Commenting is disabled';
-   
+
     var categoryOptions = cat.categories;
 
 
-   
 
 
 
-    var response_link =`/app/comments/${this.props.match.params.postID}`;
+
 
 
     return (
 
-    
+
       <div className='add-post'>
         <Grid stackable>
-          <Grid.Row reversed="mobile" >
+          <Grid.Row  >
 
             <Grid.Column mobile={16} tablet={13} computer={13} style={{ padding: '0px 5px' }}  >
+              <Modal size='mini' open={this.state.open_share} onClose={this.closeShare} closeOnDimmerClick={false} closeIcon={<Icon name="times" size="small" color="black" onClick={() => {
+                if (this.state.share_data.public == true)
+                  this.leavePage({ id: this.state.share_data._id, post_link: this.state.share_data.post_link })
+                else
+                  this.closeShare()
+
+
+
+              }} />} >
+
+                {this.state.share_data.public == true ? <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
+                  <div style={{ textAlign: 'center' }}>
+                    <Icon name="check circle" color="green" size="huge" />
+                    <h4 >Your story has been published  </h4>
+                    <p style={{ fontSize: "10px" }}> Preview and Share your story with your friends and other connections </p>
+
+                    <a href={this.state.share_data.post_link}><Button icon="internet explorer" labelPosition='left' content="View your story live" size='small' fluid onClick={this.copyToClipboard} /></a>
+
+                    <Button icon="copy outline" labelPosition='left' content={this.state.copyToClipboard} size='small' onClick={this.copyToClipboard} fluid disabled={this.state.copyToClipboard == "Copied!"} />
+
+                    <Button onClick={(e) => this.shareToFacebook(e, this.state.share_data)}
+                      color="facebook" icon="facebook" labelPosition='left' content='Share to facebook' fluid size='small' />
+
+                    <Button onClick={(e) => this.shareToWhatsApp(e, this.state.share_data)} color="green" fluid icon="whatsapp" labelPosition='left' content='Share to WhatsApp' size='small' />
+                  </div>
+                </Modal.Content>
+                  :
+                  <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
+                    <div style={{ textAlign: 'center' }}>
+                      <Icon name="check circle" color="green" size="huge" />
+                      <h4 >Your Draft has been Saved  </h4>
+                      <Button onClick={this.closeShare}>Continue Editing</Button>
+
+                    </div>
+                  </Modal.Content>
+
+                }
+              </Modal>
+
 
               {this.state.success_message === '' ?
                 ""
@@ -350,14 +452,14 @@ class EditPost extends React.Component {
               }
 
 
-              <QuillTestEdit initialValue={this.state.body_schema}/>
+              <QuillTestEdit initialValue={this.state.body_schema} />
 
             </Grid.Column>
 
             <Grid.Column mobile={16} tablet={2} computer={2}>
 
-                 <Modal size="small" basic style={{ color: "white !important" }} open={this.state.open_options} onClose={this.close}  >
-              <h3 style={{margin:'1px 2%', color:"white"}}>Settings</h3> 
+              <Modal size="small" basic style={{ color: "white !important" }} open={this.state.open_options} onClose={this.close}  >
+                <h3 style={{ margin: '1px 2%', color: "white" }}>Settings</h3>
                 <Modal.Content image >
 
                   <div className="featured-pix-block">
@@ -422,7 +524,7 @@ class EditPost extends React.Component {
                         <Form.Field>
 
                           <Checkbox
-                          slider
+                            slider
                             name='radioGroup2'
                             checked={this.state.enable_comments === true}
                             onChange={this.handleEnableComments}
@@ -434,14 +536,12 @@ class EditPost extends React.Component {
                       <br />
                     </div>
 
-                  
-
 
                   </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
-                <Button disabled={this.state.buttonDisabled} type='submit' size='mini'  title='back'
-                    onClick={()=>{this.setState({open_options:false})}} >
+                  <Button disabled={this.state.buttonDisabled} type='submit' size='mini' title='back'
+                    onClick={() => { this.setState({ open_options: false }) }} >
                     Back
                 </Button>
                   <Button disabled={this.state.buttonDisabled} type='submit' size='mini' color="green" title='save'

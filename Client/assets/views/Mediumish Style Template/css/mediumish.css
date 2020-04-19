@@ -2,8 +2,27 @@
 Template Name:Mediumish
 Copyright:WowThemes.net,https://www.wowthemes.net
 Version:1.0.1
-License: https://www.wowthemes.net/freebies-license/
+License: https://www.wowthemes.net/freebies-license/\\
 */
+
+/*subscribe modal*/
+.modal-body{
+    padding: 10%;
+     background:url('/images/landingpage.png'); 
+     min-height: 300px;
+    color: white
+}
+
+
+
+
+
+
+
+
+
+
+
 body {
 	padding-top:5rem;
 }

@@ -368,7 +368,7 @@ this.search_with_criteria()
                                     {filter_privacy.map((e) => {
                                             return (
                                                 <Grid.Column computer={5} mobile={16} tablet={4} >
-<Item style={{marginBottom:'12px'}} key={e._id} >
+<Item style={{marginBottom:'9px'}} key={e._id} >
       <Item.Image floated="right" size="small" src={e.featured_image} />
 
       <Item.Content verticalAlign="middle" >
@@ -378,13 +378,14 @@ this.search_with_criteria()
 
 
         <Item.Extra >
-        <Dropdown text="actions ">
-    <Dropdown.Menu>
+        <Dropdown text="More">
+    <Dropdown.Menu >
       <Dropdown.Item text='Preview' icon='eye' as={Link} to={{ pathname: '/app/edit-post/' + e._id }}/>
       <Dropdown.Item text='View Story' icon="external alternate" target="__blank" as={Link} to={`${e.post_link}`} />
-      <Dropdown.Item text='Delete' icon='trash alternate outline' id={e._id} onClick={() =>{ this.showModal }}  />
+      <Dropdown.Item text='Delete' icon='trash alternate outline' id={e._id} title={e.title} onClick={ this.showModal }  />
       <Dropdown.Item icon="share alternate" onClick={() => { this.openShare(e) }} text='Share' />
-    
+      <Dropdown.Item icon="comment" text="Comments" as={Link} to={{ pathname: '/app/comments/' + e._id }} />
+
     </Dropdown.Menu>
   </Dropdown>
      
@@ -398,10 +399,7 @@ this.search_with_criteria()
 
                                             )
 
-
-
                                     })}
-
 
                         </Grid>
                     </div>

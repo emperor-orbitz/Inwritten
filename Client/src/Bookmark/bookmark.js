@@ -48,6 +48,19 @@ class Bookmark extends React.Component {
     ]
 
 
+
+
+
+
+    handleEnter =(e)=>{
+
+        if (e.key ==="Enter"){
+this.search_with_criteria()
+        }
+    }
+
+    
+
     onChangeSearch = (e) => {
         var search = e.target.value;
         this.state.not_found == true ? this.setState({ not_found: false }) : "";
@@ -127,10 +140,10 @@ class Bookmark extends React.Component {
             <div className="comment-div" style={{ marginTop: "10px !important" }}>
                 <Form size="small" >
 
-                    <Input id='search' className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} placeholder='Search Interests' />
-                    <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
+                    <Input id='search' className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch}  onKeyDown={this.handleEnter} placeholder='Search by title and hit enter. e.g The angry bird fight/category'  />
+                  {/*  <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
                     <Button primary icon="search" onClick={this.search_with_criteria}/>
-
+        */}
                 </Form>
 
 
