@@ -368,7 +368,7 @@ this.search_with_criteria()
                                     {filter_privacy.map((e) => {
                                             return (
                                                 <Grid.Column computer={5} mobile={16} tablet={4} >
-<Item style={{marginBottom:'9px'}} key={e._id} >
+<Item style={{marginBottom:'4px'}} key={e._id} >
       <Item.Image floated="right" size="small" src={e.featured_image} />
 
       <Item.Content verticalAlign="middle" >

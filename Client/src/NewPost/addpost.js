@@ -33,7 +33,7 @@ class AddPost extends React.Component {
       privacy_value: true,
       enable_comments: true,
       post_title: '',
-      featured_image: 'https://www.inwritten.com/images/preview_featured2.jpg',
+      featured_image: '/images/preview_featured2.jpg',
       createdAt: Date.now(),
       tag_value: '',
       post_category: 'all',
@@ -68,7 +68,6 @@ class AddPost extends React.Component {
 
     e.preventDefault()
     let url = encodeURIComponent(`Hey, check out my new story on Inwritten. It's here: https://www.inwritten.com${data.post_link}`)
-    console.log(url)
     window.location.href = `https://wa.me/?text="${url}"`
 
 
@@ -94,7 +93,7 @@ class AddPost extends React.Component {
 
   openShare = (share_data) => {
 
-    this.setState({ open_share: true, share_data, copyToClipboard: "Copy to clipboard" })
+    this.setState({ open_share: true, share_data:share_data, copyToClipboard: "Copy to clipboard" })
   }
 
   copyToClipboard = () => {
@@ -220,7 +219,6 @@ class AddPost extends React.Component {
 
     var post = {
       title: this.state.post_title.trim(),
-      createdAt: Date.now(),
       category: this.state.post_category,
       description: this.state.post_description.trim(),
       time_to_read: this.state.time_to_read,
@@ -250,9 +248,9 @@ class AddPost extends React.Component {
             buttonDisabled: false,
             dimmerLoad: false,
             open_options: false
-          });
+          })
 
-          this.openShare(okay)
+          this.openShare(with_id)
 
         })
         .catch(err => {
@@ -317,7 +315,8 @@ class AddPost extends React.Component {
   //LEAVE PAGE
   leavePage = ({ id, post_link }) => {
     this.setState({ open_share: false })
-    window.history.pushState("", "", "/app/edit-post/" + id);
+    
+    window.history.replaceState("", "", "/app/edit-post/" + id);
     window.location = post_link
   }
 
@@ -348,7 +347,7 @@ class AddPost extends React.Component {
         <Grid stackable>
           <Grid.Row  >
 
-            <Grid.Column mobile={16} tablet={13} computer={13} style={{ padding: '0px 5px' }}  >
+            <Grid.Column mobile={16} tablet={16} computer={16} style={{ padding: '0px 5px' }}  >
 
               {this.state.network_error === '' ?
                 ""
@@ -380,29 +379,35 @@ class AddPost extends React.Component {
             </Grid.Column>
 
             <Grid.Column mobile={16} tablet={2} computer={2}>
+
               <Modal size='mini' open={this.state.open_share} onClose={this.closeShare} closeOnDimmerClick={false} closeIcon={<Icon name="times" size="small" color="black" onClick={() => {
-                if (this.state.share_data.public == true)
+                if (this.state.share_data.public == true){
                   this.leavePage({ id: this.state.share_data._id, post_link: this.state.share_data.post_link })
-                else
+
+                }
+                else{
                   this.closeShare()
-
-
+                }
+                 
 
               }} />} >
 
-                {this.state.share_data.public == true ? <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
+                {this.state.share_data.public == true ?
+                   <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
                   <div style={{ textAlign: 'center' }}>
                     <Icon name="check circle" color="green" size="huge" />
                     <h4 >Your story has been published  </h4>
                     <p style={{ fontSize: "10px" }}> Preview and Share your story with your friends and other connections </p>
 
-                    <a href={this.state.share_data.post_link}><Button icon="internet explorer" labelPosition='left' content="View your story live" size='small' fluid onClick={this.copyToClipboard} /></a>
-
+                    <Button icon="internet explorer" labelPosition='left' content="View your story live" size='small' fluid onClick={()=>{
+                      this.leavePage({id:this.state.share_data._id, post_link: this.state.share_data.post_link })} 
+                    }/>
+                    <br />
                     <Button icon="copy outline" labelPosition='left' content={this.state.copyToClipboard} size='small' onClick={this.copyToClipboard} fluid disabled={this.state.copyToClipboard == "Copied!"} />
-
+                    <br/>
                     <Button onClick={(e) => this.shareToFacebook(e, this.state.share_data)}
                       color="facebook" icon="facebook" labelPosition='left' content='Share to facebook' fluid size='small' />
-
+                      <br/>
                     <Button onClick={(e) => this.shareToWhatsApp(e, this.state.share_data)} color="green" fluid icon="whatsapp" labelPosition='left' content='Share to WhatsApp' size='small' />
                   </div>
                 </Modal.Content>
@@ -411,7 +416,7 @@ class AddPost extends React.Component {
                     <div style={{ textAlign: 'center' }}>
                       <Icon name="check circle" color="green" size="huge" />
                       <h4 >Your Draft has been Saved  </h4>
-                      <Button as={Link} to={{ pathname: "/app/edit-post/" + this.state.share_data._id }}>Continue Editing</Button>
+                      <Button as={Link} to={{ pathname: "/app/edit-post/" + this.state.share_data._id }} size="small">Continue Editing</Button>
 
                     </div>
                   </Modal.Content>
@@ -421,7 +426,7 @@ class AddPost extends React.Component {
 
 
               <Modal size="small" basic style={{ color: "white !important" }} open={this.state.open_options} onClose={this.close}  >
-                <h3 style={{ margin: '1px 2%', color: "white" }}>Settings</h3>
+                <h3 style={{ margin: '1px 2%', color: "white" }}>Story Settings</h3>
                 <Modal.Content image >
 
                   <div className="featured-pix-block">

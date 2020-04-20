@@ -97,7 +97,7 @@ var create = (req, res) => {
         body_schema,
         category,
         description,
-        createdAt,
+       // createdAt,
         comments_enabled,
         time_to_read,
         public,
@@ -109,7 +109,7 @@ var create = (req, res) => {
         title,
         body_schema,
         body_html,
-        createdAt,
+        //createdAt,
         author: req.user.username,
         category,
         description,
@@ -126,7 +126,7 @@ var create = (req, res) => {
 
         cloudinary.v2.uploader.upload(featured_image, {
             resource_type: "image",
-            public_id: `featured_image/${req.user._id}-${createdAt}`,
+            public_id: `featured_image/${req.user._id}-${Date.now()}`,
             overwrite: true
         })
         .then(result =>{

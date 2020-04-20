@@ -123,7 +123,7 @@ postSchema.methods.update_article = (id, body, callback_func)  =>{
     var data = {
         // id:this.state.post_id,
         title: body.title.trim(),
-        createdAt: body.createdAt,
+        //createdAt: body.createdAt,
         category: body.category,
         description: body.description.trim(),
         time_to_read: body.time_to_read,

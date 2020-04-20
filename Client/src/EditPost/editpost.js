@@ -151,7 +151,6 @@ class EditPost extends React.Component {
     const post = {
       _id: this.state.post_id,
       title: this.state.post_title.trim(),
-      createdAt: Date.now(),
       category: this.state.post_category,
       description: this.state.post_description.trim(),
       time_to_read: this.state.time_to_read,
@@ -179,8 +178,8 @@ class EditPost extends React.Component {
           error_message: '',
           buttonDisabled: false,
           dimmerLoad: false,
-          open_options: false,
-        });
+          open_options: false
+        })
 
         this.openShare(post)
 
@@ -293,7 +292,7 @@ class EditPost extends React.Component {
   openShare = (share_data) => {
 
     console.log("open share", share_data)
-    this.setState({ open_share: true, share_data, copyToClipboard: "Copy to clipboard" })
+    this.setState({  share_data:share_data, open_share: true, copyToClipboard: "Copy to clipboard" })
   }
 
 
@@ -399,12 +398,13 @@ class EditPost extends React.Component {
                     <h4 >Your story has been published  </h4>
                     <p style={{ fontSize: "10px" }}> Preview and Share your story with your friends and other connections </p>
 
-                    <a href={this.state.share_data.post_link}><Button icon="internet explorer" labelPosition='left' content="View your story live" size='small' fluid onClick={this.copyToClipboard} /></a>
-
+                    <a href={this.state.share_data.post_link}><Button icon="internet explorer" labelPosition='left' content="View your story live" size='small' fluid /></a>
+                    <br/>
                     <Button icon="copy outline" labelPosition='left' content={this.state.copyToClipboard} size='small' onClick={this.copyToClipboard} fluid disabled={this.state.copyToClipboard == "Copied!"} />
-
+                    <br/>
                     <Button onClick={(e) => this.shareToFacebook(e, this.state.share_data)}
                       color="facebook" icon="facebook" labelPosition='left' content='Share to facebook' fluid size='small' />
+                    <br/>
 
                     <Button onClick={(e) => this.shareToWhatsApp(e, this.state.share_data)} color="green" fluid icon="whatsapp" labelPosition='left' content='Share to WhatsApp' size='small' />
                   </div>

@@ -17,7 +17,7 @@ const HTMLWebpackPluginConfig = new HTMLWebpackPlugin(
 )
 
 var config ={
-    mode:'development',
+    mode:'production',
     entry:["babel-polyfill", './Client/src/index.js'],
 
     output:{

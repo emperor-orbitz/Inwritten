@@ -141,7 +141,7 @@ class QuillTest extends React.Component {
 
     get exposedHTMLvalue(){
         //console.log(this.quillRef.getContents(index, length) )
-        return window.editor;
+        return window.editorHTML;
     }
 
 

@@ -10,8 +10,8 @@
     
 .profile-div{
 height:auto;
-width:90%;
-margin:3px 5%;
+width:95%;
+margin:3px auto;
 display:table;
 border-spacing: 5px 20px;
 
@@ -191,4 +191,10 @@ margin:10px 0px;
     font-weight: bold;
     padding:5px 0px;
     font-size: 15px;
+}
+
+
+
+.ui.tab.active{
+    border:none;
 }

@@ -95,14 +95,31 @@ class Profile extends React.Component {
             var fetch_socials = new ProfileUpdate()
             fetch_socials.fetchSocials()
             .then(data => {
-                var { facebook_link, linkedin_link, whatsapp_link, youtube_link, instagram_link } = data.data;
-                this.setState({
-                    social_facebook: facebook_link,
-                    social_linkedin: linkedin_link,
-                    social_instagram: instagram_link,
-                    social_whatsapp: whatsapp_link,
-                    social_youtube: youtube_link
-                })
+               // console.log(data, "isnull ooooo")
+                if(data.data == null){
+                    this.setState({
+                        social_facebook: "",
+                        social_linkedin: "",
+                        social_instagram: "",
+                        social_whatsapp: "",
+                        social_youtube: ""
+                    })   
+                }
+                else{
+                    var { facebook_link, linkedin_link, whatsapp_link, youtube_link, instagram_link } = data.data;
+                    this.setState({
+                        social_facebook: facebook_link,
+                        social_linkedin: linkedin_link,
+                        social_instagram: instagram_link,
+                        social_whatsapp: whatsapp_link,
+                        social_youtube: youtube_link
+                    })
+
+                }
+
+
+
+               
             })
 
 

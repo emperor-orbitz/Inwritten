@@ -99,8 +99,8 @@ class QuillTestNew extends React.Component {
 
 
     componentDidMount() {
-        console.log("this is did mount", this.props.initialValue)
-        this.registerFormats()
+       // console.log("this is did mount", this.props.initialValue)
+       this.registerFormats()
         this.setState({
             text: '' // trigger update
         })
@@ -133,7 +133,7 @@ class QuillTestNew extends React.Component {
     get exposedHTMLvalue(){
   
         //console.log(this.quillRef.getContents(index, length) )
-        return window.editor;
+        return window.editorHTML;
     }
 
 
@@ -248,7 +248,8 @@ class QuillTestNew extends React.Component {
                     onChange={this.handleChange}
                     modules={this.modules}
                     formats={this.formats}
-                    placeholder="Start writing something great..."
+                    placeholder="Share your story..."
+                    
                     >
                 </ReactQuill>
             </div>

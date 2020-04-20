@@ -213,6 +213,7 @@ var fetch_social = (req, res) =>{
 
     socialSchema.findOne({ user_id: req.user._id })
     .then(data =>{
+        
         res.status(http_status.OK.code)
         .send({ code: http_status.OK.code,
                 data: data
