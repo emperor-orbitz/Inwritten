@@ -1,11 +1,9 @@
 import React from 'react';
-import Link from 'react-router-dom/Link';
 import '../../Resources/styles/comment.scss';
 import '../../Resources/styles/template.scss';
-import { Icon, Button, Message, Divider, Container, Grid, Item, Image, Input } from 'semantic-ui-react';
+import { Icon, Button, Message, Divider, Container, Grid, Item, Input } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-//import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import '../../Resources/styles/react-carousel.scss';
 import TemplateController from "../../Controllers/templates.controller";
 
@@ -17,6 +15,7 @@ class Templates extends React.Component {
 
     constructor(props) {
         super(props);
+        //State Object
         this.state = {
 
             templates: [],
@@ -30,18 +29,20 @@ class Templates extends React.Component {
 
     }
 
-
+    //Show Modal
     showModal = (event, a) => {
         console.log(a)
         this.setState({ open_options: true, selected: a.data })
 
     }
 
+    //Close Modal
     close = () => {
         this.setState({ open_options: false })
     }
 
 
+    //COMPONENT HOOK: ComponentDidMount
     async componentDidMount() {
         var templ = new TemplateController();
         let { template_id } = this.props.ProfileReducer;
@@ -58,16 +59,14 @@ class Templates extends React.Component {
             console.log("Something wrong has happened", error)
 
         }
-
-
-
     }
 
 
+
+    // SAVE TEMPLATE TO DB
     save_template = async (ev, data) => {
 
         this.setState({ save_disabled: true })
-        var { templates } = this.state;
         let tempControl = new TemplateController()
         try {
 
@@ -81,24 +80,19 @@ class Templates extends React.Component {
                 save_disabled: false,
                 templates: updated.data,
                 my_template: data
-
-
             })
 
         }
         catch (err) {
             this.setState({ save_text: 'Unable to activate template' })
-            console.log(err)
 
 
         }
 
-
-
     }
 
 
-
+    // Component RENDER FUNCTION
     render() {
         var { templates, selected, my_template } = this.state;
 
@@ -144,16 +138,11 @@ class Templates extends React.Component {
                                         <Message size='small' positive>
                                             <p><Icon name="check circle outline" color="green" size="big" /> {this.state.save_text}</p></Message> : ""}
 
-
                                     {this.state.save_text == 'Unable to activate template' ?
                                         <Message negative>
                                             <p><Icon name="cross" color="red" size="big" /> {this.state.save_text}</p></Message> : ""}
 
                                 </Grid.Column >
-
-
-
-
 
                             </Grid.Row>
                             <Grid.Row stretched >
@@ -175,7 +164,7 @@ class Templates extends React.Component {
                                                         {e.template_description}
                                                     </Item.Description>
                                                     <Item.Extra style={{ marginTop: "10px" }}>
-                                                    {e.createdAt}
+
                                                         <Button size="tiny" disabled={this.state.save_disabled} onClick={(evt) => { this.save_template(evt, e) }} icon='angle right' >Activate <Icon name="angle right" /></Button>
                                                         <span>&nbsp;&nbsp;<a href="#">More Details</a></span>
                                                     </Item.Extra>
@@ -184,30 +173,9 @@ class Templates extends React.Component {
 
 
 
-                                            {/* <div key={e._id} className='image-thumbnail-template-cover-big-template'>
-
-                                    <div style={{ margin: '10px 3px' }}>
-                                        <div className={'customCard-' + e.category} style={{ backgroundImage: `url('${e.featured_image}')`, backgroundSize: "cover", backgroundPosition: "bottom right" }}>
-                                        </div>
-                                    </div>
 
 
-                                    <div className='template-thumbnail-hover-big-black-template' style={{ marginTop: "-110%" }}>
-                                        <div className="category" style={{ color: "white" }}>
-                                            <h5>{e.template_name} </h5>
-                                            <Button primary size='mini' className="button-hover" onClick={() => { this.setState({ open_options: true, selected: e }) }} > View</Button>
-
-                                        </div>
-                                    </div>
-
-                                </div>*/}
-
-                                        </Grid.Column  >
-
-                                    )
-
-
-
+                                        </Grid.Column >)
 
                                 })}
 
@@ -224,18 +192,16 @@ class Templates extends React.Component {
     }
 
 
-
-
-
-
 }
 
+
+//Map Redux state to props
 const mapStateToProps = (state) => {
     return state;
 }
 
 
-
+//Export
 export default withRouter(connect(mapStateToProps)(Templates));
 
 

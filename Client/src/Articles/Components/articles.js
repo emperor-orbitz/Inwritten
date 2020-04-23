@@ -67,7 +67,7 @@ class Articles extends React.Component {
             share_data: {},
             copyToClipboard: "Copy to clipboard",
             open_deleteall: false,
-            
+
         }
 
 
@@ -81,9 +81,9 @@ class Articles extends React.Component {
         e.preventDefault()
         let url = encodeURIComponent(`Hey, check out my new story on Inwritten. It's here: https://www.inwritten.com${data.post_link}`)
         console.log(url)
-        window.location.href= `https://wa.me/?text="${url}"`
-        
-        
+        window.location.href = `https://wa.me/?text="${url}"`
+
+
 
 
     }
@@ -207,10 +207,10 @@ class Articles extends React.Component {
         this.setState({ search: search, not_found: false })
     }
 
-    handleEnter =(e)=>{
+    handleEnter = (e) => {
 
-        if (e.key ==="Enter"){
-this.search_with_criteria()
+        if (e.key === "Enter") {
+            this.search_with_criteria()
         }
     }
 
@@ -275,15 +275,15 @@ this.search_with_criteria()
             return (
 
                 <div className='bodyArticle'>
-                   
-                            <img src="/images/empty.png" className='empty-png'/>
-                            <br/>
-                            <h4 style={{textAlign:"center"}}>You don't have any published story. You can create one <Button size="tiny" as={Link} to="/app/add-post">here</Button></h4>
 
-                
+                    <img src="/images/empty.png" className='empty-png' />
+                    <br />
+                    <h4 style={{ textAlign: "center" }}>You don't have any published story. You can create one <Button size="tiny" as={Link} to="/app/add-post">here</Button></h4>
+
+
                 </div>
 
-         
+
 
             )
 
@@ -343,7 +343,7 @@ this.search_with_criteria()
                     <div className='bodyArticle'>
 
                         <Grid >
-                        <Grid.Row >
+                            <Grid.Row >
                                 <Grid.Column floated="right" computer={16} mobile={16} tablet={15}   >
 
 
@@ -352,8 +352,8 @@ this.search_with_criteria()
                                         <Form size="small"   >
 
                                             <Input id='search' fluid icon={<Icon name="chevron left" />} className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} onKeyDown={this.handleEnter} placeholder='Search by title and hit enter. e.g The angry bird fight/category' />
-                                           {/* <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions}  />*/}
-                                           {/* <Button primary icon="search" onClick={this.search_with_criteria} />*/}
+                                            {/* <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions}  />*/}
+                                            {/* <Button primary icon="search" onClick={this.search_with_criteria} />*/}
                                             {/*<Button color="red" icon="trash alternate outline" onClick={() => { this.setState({ open_deleteall: true }) }} />*/}
 
                                         </Form>
@@ -363,43 +363,43 @@ this.search_with_criteria()
 
                                 </Grid.Column>
 
-</Grid.Row>
+                            </Grid.Row>
 
-                                    {filter_privacy.map((e) => {
-                                            return (
-                                                <Grid.Column computer={5} mobile={16} tablet={4} >
-<Item style={{marginBottom:'4px'}} key={e._id} >
-      <Item.Image floated="right" size="small" src={e.featured_image} />
+                            {filter_privacy.map((e) => {
+                                return (
+                                    <Grid.Column computer={5} mobile={16} tablet={4} >
+                                        <Item style={{ marginBottom: '4px' }} key={e._id} >
+                                            <Item.Image floated="right" size="small" src={e.featured_image} />
 
-      <Item.Content verticalAlign="middle" >
-        <Item.Header as={Link} to={{ pathname: '/app/edit-post/' + e._id }}><h4 style={{color:"black"}}>{e.title}</h4></Item.Header>
-        <Item.Description>{e.category.toUpperCase()}</Item.Description>     
-           <Item.Meta>{e.time_to_read} mins read</Item.Meta>
-
-
-        <Item.Extra >
-        <Dropdown text="More">
-    <Dropdown.Menu >
-      <Dropdown.Item text='Preview' icon='eye' as={Link} to={{ pathname: '/app/edit-post/' + e._id }}/>
-      <Dropdown.Item text='View Story' icon="external alternate" target="__blank" as={Link} to={`${e.post_link}`} />
-      <Dropdown.Item text='Delete' icon='trash alternate outline' id={e._id} title={e.title} onClick={ this.showModal }  />
-      <Dropdown.Item icon="share alternate" onClick={() => { this.openShare(e) }} text='Share' />
-      <Dropdown.Item icon="comment" text="Comments" as={Link} to={{ pathname: '/app/comments/' + e._id }} />
-
-    </Dropdown.Menu>
-  </Dropdown>
-     
-        
-        </Item.Extra>
-
-      </Item.Content>
-    </Item>
-                                 </Grid.Column>
+                                            <Item.Content verticalAlign="middle" >
+                                                <Item.Header as={Link} to={{ pathname: '/app/edit-post/' + e._id }}><h4 style={{ color: "black" }}>{e.title}</h4></Item.Header>
+                                                <Item.Description>{e.category.toUpperCase()}</Item.Description>
+                                                <Item.Meta>{e.time_to_read} mins read</Item.Meta>
 
 
-                                            )
+                                                <Item.Extra >
+                                                    <Dropdown text="More">
+                                                        <Dropdown.Menu >
+                                                            <Dropdown.Item text='Preview' icon='eye' as={Link} to={{ pathname: '/app/edit-post/' + e._id }} />
+                                                            <Dropdown.Item text='View Story' icon="external alternate" target="__blank" as={Link} to={`${e.post_link}`} />
+                                                            <Dropdown.Item text='Delete' icon='trash alternate outline' id={e._id} title={e.title} onClick={this.showModal} />
+                                                            <Dropdown.Item icon="share alternate" onClick={() => { this.openShare(e) }} text='Share' />
+                                                            <Dropdown.Item icon="comment" text="Comments" as={Link} to={{ pathname: '/app/comments/' + e._id }} />
 
-                                    })}
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
+
+
+                                                </Item.Extra>
+
+                                            </Item.Content>
+                                        </Item>
+                                    </Grid.Column>
+
+
+                                )
+
+                            })}
 
                         </Grid>
                     </div>

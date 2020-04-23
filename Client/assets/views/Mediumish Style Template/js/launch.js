@@ -33,7 +33,7 @@ $(document).ready(function(ev){
         var url = form.attr('action');
         $.ajax({
             type: "POST",
-            url: "/subscribeToPreLanuch",
+            url: "/subscribeToPreLaunch",
             data: form.serialize(),
             success: function (data) {
          // get comment again

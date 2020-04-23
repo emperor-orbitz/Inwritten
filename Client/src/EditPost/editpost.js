@@ -1,9 +1,8 @@
 
-import React, { useState } from 'react';
-import { Button, Form, Checkbox, Loader, Icon, Select, Grid, Image, Modal } from 'semantic-ui-react';
+import React from 'react';
+import { Button, Form, Checkbox, Loader, Icon, Select, Grid, Modal } from 'semantic-ui-react';
 import '../../Resources/styles/article.scss';
 import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import FetchArticles from '../../Controllers/article.controller'
@@ -21,6 +20,7 @@ class EditPost extends React.Component {
   constructor(props) {
     super(props)
 
+    //COMPONENT STATE
     this.state = {
       tag_value: '',
       tagMax: '',
@@ -52,21 +52,20 @@ class EditPost extends React.Component {
 
     this.handlePostprivacy = this.handlePostprivacy.bind(this);
 
-    //this.postValidation =this.postValidation.bind(this);
   }
 
 
-
-
-  handleTags = (e) => {
-    this.setState({ tag_value: e.target.value });
-
-  }
-
-
-  /*          HANDLE CHANGE EVENTS ON INPUT
+ /*          HANDLE CHANGE EVENTS ON INPUTS (handle*)
   */
 
+
+ handlePostprivacy = (e, { value }) => this.setState({ privacy_value: !this.state.privacy_value }); //Handle post Privacy
+ handleEnableComments = (e, { value }) => this.setState({ enable_comments: !this.state.enable_comments }) //Toggle Comments
+ close = () => { this.setState({ open_options: false }) } //Toggle Options Modal
+  handleTags = (e) =>  this.setState({ tag_value: e.target.value }) //handle Tags input
+
+
+  //handle other input items
   handleInputs(e, prop = prop || '') {
     e.preventDefault();
     var { name, value } = e.target;
@@ -85,9 +84,9 @@ class EditPost extends React.Component {
         case 'description':
           this.setState({ post_description: value });
           break;
+
         case 'tags':
           this.handleTags();
-        //this.setState({post_tags:value})
 
       }
     }
@@ -111,22 +110,16 @@ class EditPost extends React.Component {
 
 
 
-
-  handlePostprivacy = (e, { value }) => this.setState({ privacy_value: !this.state.privacy_value });
-  handleEnableComments = (e, { value }) => this.setState({ enable_comments: !this.state.enable_comments })
-
-
-
+  //validate story settings
 
   postValidation(title = this.state.post_title, description = this.state.post_description, duration = this.state.time_to_read) {
-    // if (window.editor.length < 8) return 'editor-error'
+
     if (title.length == 0) return 'title-error';
 
     else if (duration.length !== 0) {
       if (duration > 30) return "time-error";
       else if (duration < 0) return "time-error";
     }
-
 
     else {
 
@@ -139,10 +132,8 @@ class EditPost extends React.Component {
 
 
 
-  close = () => {
-    this.setState({ open_options: false })
-  }
-
+ 
+  // SUBMIT updated Content to Database
   updatePost = () => {
     var add = new FetchArticles()
     var panel = new QuillTestEdit();
@@ -165,7 +156,7 @@ class EditPost extends React.Component {
     }
 
 
-    let val = this.postValidation();
+    let val = this.postValidation()
     if (val === true) {
 
       add.update_article(post).then(okay => {
@@ -190,22 +181,32 @@ class EditPost extends React.Component {
             dimmerLoad: false,
             open_options: false,
             network_error: `Sorry, there was an error with your article! We would fix this soon ${err}`
-          });
-        }
-        );
+          })
+        })
     }
     else if (val !== true) {
       this.setState({
         buttonDisabled: false,
         dimmerLoad: false,
         error_message: val
-      });
-
+      })
 
     }
 
-
   }
+
+
+
+
+
+
+  /*
+  *           REACTJS LIFECYCLE HOOKS
+  *
+  */
+
+
+  //UNSAFE //COMPONENT 
 
   componentWillReceiveProps(nextProps) {
 
@@ -217,13 +218,6 @@ class EditPost extends React.Component {
 
   }
 
-
-
-
-  /*
-  *           REACTJS LIFECYCLE HOOKS
-  *
-  */
 
   componentDidMount() {
 
@@ -248,7 +242,6 @@ class EditPost extends React.Component {
           time_to_read: x.time_to_read,
           body_schema: x.body_schema,
           body_html: x.body_html,
-          //featured_image: x.featured_image,
           likes: x.likes,
           post_link: x.post_link,
           tag_value: x.tags,
@@ -261,24 +254,21 @@ class EditPost extends React.Component {
 
   }
 
-  shareToWhatsApp = (e, data) => {
 
+  // SHARE TO WHATSAPP
+
+  shareToWhatsApp = (e, data) => {
     e.preventDefault()
     let url = encodeURIComponent(`Hey, check out my new story on Inwritten. It's here: https://www.inwritten.com${data.post_link}`)
-    console.log(url)
-    window.location.href = `https://wa.me/?text="${url}"`
-
-
-
+    window.location.href = `https://wa.me/?text=${url}`
 
   }
 
-
+// SHARE TO FACEBOOK
   shareToFacebook = (e, data) => {
 
     e.preventDefault()
     let url = encodeURIComponent(`https://www.inwritten.com${data.post_link}`)
-
     window.open(
       'https://www.facebook.com/dialog/share?app_id=508448136537979&display=popup&href=' + url + '&redirect_uri=https%3A%2F%2Fwww.inwritten.com/stories',
       'facebook-share-dialog',
@@ -289,6 +279,7 @@ class EditPost extends React.Component {
 
 
 
+  //OPEN SHARE MODAL
   openShare = (share_data) => {
 
     console.log("open share", share_data)
@@ -297,7 +288,7 @@ class EditPost extends React.Component {
 
 
 
-
+  //COPY TO CLIPBOARD FUNCTION
   copyToClipboard = () => {
     var dummy = document.createElement("textarea")
     // dummy.style.display="none";
@@ -311,19 +302,20 @@ class EditPost extends React.Component {
   }
 
 
+  //close SHARE Modal
   closeShare = () => {
     this.setState({ open_share: false })
   }
 
 
-
+  //handle Featured Image click
   toggleDialogFeatured() {
     var photo = document.getElementById('photo');
     photo.click();
-    console.log(photo)
   }
 
 
+  // Read Image binary
   readFile(doc) {
     return new Promise((resolve, reject) => {
       var reader = new FileReader();
@@ -346,20 +338,23 @@ class EditPost extends React.Component {
   }
 
 
+  // handle Profile Photo
   handle_profile_photo(ev) {
 
-    this.readFile(ev.target.files[0]).then((result) => {
+    this.readFile(ev.target.files[0]).then( result => {
 
-      //LOL
-      this.setState({ featured_image: result });
+      this.setState({ featured_image: result })
     })
   }
-  /*
-  *
-  *          RENDER FILE
-  *
-  */
 
+
+
+  
+
+
+
+
+  // Render METHOD
   render() {
 
     var privacy_value = (this.state.privacy_value == true) ? 'Publish to the World' : 'Save Save to draft';
@@ -370,10 +365,7 @@ class EditPost extends React.Component {
 
 
 
-
-
-
-
+    
     return (
 
 
@@ -451,6 +443,7 @@ class EditPost extends React.Component {
                   : ''
               }
 
+        { /*EDITOR PANEL INITIALIZED HERE */}
 
               <QuillTestEdit initialValue={this.state.body_schema} />
 
@@ -559,27 +552,18 @@ class EditPost extends React.Component {
 
         </Grid>
 
-        { /*EDITOR PANEL INITIAL */}
 
 
-      </div>
-
-
-
-
-
-    )
-
-
-
-
-
+      </div> )
 
 
   }
 }
 
+//MAP Redux State
 var mapStatetoProps = (state) => {
   return state;
 }
+
+
 export default withRouter(connect(mapStatetoProps)(EditPost));

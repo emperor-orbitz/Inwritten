@@ -1,13 +1,12 @@
 
 //          IMPORTS
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, Form, Checkbox, Icon, Select, Grid, Modal } from 'semantic-ui-react';
 import '../../Resources/styles/article.scss';
 import { withRouter } from 'react-router';
 
 import { connect } from 'react-redux';
 import FetchArticles from '../../Controllers/article.controller'
-//import EditorPanel from '../../src/NewPost/Components/editor-panel';
 import cat from '../Dashboard/categories';
 import QuillTestNew from './Components/QuillTestNew';
 import { Link } from "react-router-dom"
@@ -21,6 +20,7 @@ class AddPost extends React.Component {
   constructor(props) {
     super(props)
 
+    // COMPNENENT STATE
     this.state = {
       open_share: false,
       copyToClipboard: "Copy to clipboard",
@@ -52,66 +52,6 @@ class AddPost extends React.Component {
   }
 
 
-  componentWillReceiveProps(nextProps) {
-
-    if (nextProps.StoryPage == true) {
-      this.setState({ open_options: true }, () => {
-        this.props.dispatch({ type: 'WRITE A STORY', payload: true })
-      })
-    }
-  }
-
-
-
-
-  shareToWhatsApp = (e, data) => {
-
-    e.preventDefault()
-    let url = encodeURIComponent(`Hey, check out my new story on Inwritten. It's here: https://www.inwritten.com${data.post_link}`)
-    window.location.href = `https://wa.me/?text="${url}"`
-
-
-
-
-  }
-
-
-  shareToFacebook = (e, data) => {
-
-    e.preventDefault()
-    let url = encodeURIComponent(`https://www.inwritten.com${data.post_link}`)
-
-    window.open(
-      'https://www.facebook.com/dialog/share?app_id=508448136537979&display=popup&href=' + url + '&redirect_uri=https%3A%2F%2Fwww.inwritten.com/stories',
-      'facebook-share-dialog',
-      'width=400,height=300', false);
-
-  }
-
-
-
-
-  openShare = (share_data) => {
-
-    this.setState({ open_share: true, share_data:share_data, copyToClipboard: "Copy to clipboard" })
-  }
-
-  copyToClipboard = () => {
-    var dummy = document.createElement("textarea")
-    // dummy.style.display="none";
-    document.body.appendChild(dummy)
-    dummy.setAttribute("id", 'dummy_id');
-    document.getElementById("dummy_id").value = `http://www.inwritten.com${this.state.share_data.post_link}`;
-    dummy.select()
-    document.execCommand("copy");
-    document.body.removeChild(dummy);
-    this.setState({ copyToClipboard: "Copied!" })
-  }
-
-
-  closeShare = () => {
-    this.setState({ open_share: false })
-  }
 
 
   /*
@@ -125,7 +65,7 @@ class AddPost extends React.Component {
 
 
 
-
+  //Handle other Input fields
   handleInputs(e, prop = prop || '') {
     e.preventDefault();
     var { name, value } = e.target;
@@ -146,7 +86,6 @@ class AddPost extends React.Component {
           break;
         case 'tags':
           this.handleTags();
-        //this.setState({post_tags:value})
 
       }
     }
@@ -170,18 +109,13 @@ class AddPost extends React.Component {
 
 
 
-  handlePostprivacy = (e, { value }) => this.setState({ privacy_value: !this.state.privacy_value });
-  handleEnableComments = (e, { value }) => this.setState({ enable_comments: !this.state.enable_comments })
+  handlePostprivacy = (e, { value }) => this.setState({ privacy_value: !this.state.privacy_value }); //Privacy Input handler
+  handleEnableComments = (e, { value }) => this.setState({ enable_comments: !this.state.enable_comments })// Toggle Comments handler
 
 
 
-
+  // Validate Input fields
   postValidation(title = this.state.post_title, duration = this.state.time_to_read, tags = this.state.tag_value) {
-
-    //if (window.editor.length < 11 || window.editor == undefined) { 
-    //this.setState({open_options:false})
-    //return 'editor-error'; 
-    //}
 
     if (title.length == 0) {
       return 'title-error';
@@ -209,8 +143,73 @@ class AddPost extends React.Component {
 
 
 
+  //UNSAFE ComponentWillReceiveProps
+  componentWillReceiveProps(nextProps) {
+
+    if (nextProps.StoryPage == true) {
+      this.setState({ open_options: true }, () => {
+        this.props.dispatch({ type: 'WRITE A STORY', payload: true })
+      })
+    }
+  }
 
 
+
+  // Share to Whatsapp Button
+  shareToWhatsApp = (e, data) => {
+
+    e.preventDefault()
+    let url = encodeURIComponent(`Hey, check out my new story on Inwritten. It's here: https://www.inwritten.com${data.post_link}`)
+    window.location.href = `https://wa.me/?text=${url}`
+  }
+
+
+  // Share to Facebook Button
+  shareToFacebook = (e, data) => {
+
+    e.preventDefault()
+    let url = encodeURIComponent(`https://www.inwritten.com${data.post_link}`)
+    window.open(
+      'https://www.facebook.com/dialog/share?app_id=508448136537979&display=popup&href=' + url + '&redirect_uri=https%3A%2F%2Fwww.inwritten.com/stories',
+      'facebook-share-dialog',
+      'width=400,height=300', false);
+
+  }
+
+
+
+  // Open Share Modal
+  openShare = (share_data) => {
+
+    this.setState({ open_share: true, share_data: share_data, copyToClipboard: "Copy to clipboard" })
+  }
+
+
+  //CopyTocLipboard Button
+  copyToClipboard = () => {
+    var dummy = document.createElement("textarea")
+    document.body.appendChild(dummy)
+    dummy.setAttribute("id", 'dummy_id');
+    document.getElementById("dummy_id").value = `http://www.inwritten.com${this.state.share_data.post_link}`;
+    dummy.select()
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
+    this.setState({ copyToClipboard: "Copied!" })
+  }
+
+
+  //Close Share Modal
+  closeShare = () => {
+    this.setState({ open_share: false })
+  }
+
+
+
+
+
+
+
+  //SUBMIT New Story to Database
   addPost() {
     var add = new FetchArticles()
     var panel = new QuillTestNew();
@@ -259,9 +258,8 @@ class AddPost extends React.Component {
             dimmerLoad: false,
             open_options: false,
             network_error: `Hey, It seems you are offline. Try again`
-          });
-        }
-        );
+          })
+        })
     }
     else if (val !== true) {
       this.setState({
@@ -269,8 +267,7 @@ class AddPost extends React.Component {
         dimmerLoad: false,
         error_message: val,
 
-      });
-
+      })
 
     }
 
@@ -278,19 +275,19 @@ class AddPost extends React.Component {
   }
 
 
-
+  //Close Modal
   close = () => {
     this.setState({ open_options: false })
   }
 
 
-
+  //Toggle Featyure Image
   toggleDialogFeatured() {
     var photo = document.getElementById('photo');
     photo.click();
   }
 
-
+  //Reaad Image Stream
   readFile(doc) {
     return new Promise((resolve, reject) => {
       var reader = new FileReader();
@@ -303,27 +300,28 @@ class AddPost extends React.Component {
 
   }
 
+
+  //handle IMAGE File
   handle_profile_photo(ev) {
 
-    this.readFile(ev.target.files[0]).then((result) => {
+    this.readFile(ev.target.files[0]).then(result => {
 
-      //LOL
       this.setState({ featured_image: result });
     })
   }
 
+
   //LEAVE PAGE
   leavePage = ({ id, post_link }) => {
     this.setState({ open_share: false })
-    
+
     window.history.replaceState("", "", "/app/edit-post/" + id);
     window.location = post_link
   }
 
 
-  /*          RENDER FILE
-  */
 
+  //RENDER METHOD
   render() {
 
     var privacy_value = (this.state.privacy_value == true) ? 'Publish to the World' : ' Save to draft';
@@ -333,13 +331,7 @@ class AddPost extends React.Component {
 
 
 
-
-
-
-
-
     return (
-
 
 
       <div className='add-post'>
@@ -373,6 +365,7 @@ class AddPost extends React.Component {
                   : ''
               }
 
+              { /*EDITOR PANEL INITIAL */}
 
               <QuillTestNew />
 
@@ -381,36 +374,37 @@ class AddPost extends React.Component {
             <Grid.Column mobile={16} tablet={2} computer={2}>
 
               <Modal size='mini' open={this.state.open_share} onClose={this.closeShare} closeOnDimmerClick={false} closeIcon={<Icon name="times" size="small" color="black" onClick={() => {
-                if (this.state.share_data.public == true){
+                if (this.state.share_data.public == true) {
                   this.leavePage({ id: this.state.share_data._id, post_link: this.state.share_data.post_link })
 
                 }
-                else{
+                else {
                   this.closeShare()
                 }
-                 
+
 
               }} />} >
 
                 {this.state.share_data.public == true ?
-                   <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
-                  <div style={{ textAlign: 'center' }}>
-                    <Icon name="check circle" color="green" size="huge" />
-                    <h4 >Your story has been published  </h4>
-                    <p style={{ fontSize: "10px" }}> Preview and Share your story with your friends and other connections </p>
+                  <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
+                    <div style={{ textAlign: 'center' }}>
+                      <Icon name="check circle" color="green" size="huge" />
+                      <h4 >Your story has been published  </h4>
+                      <p style={{ fontSize: "10px" }}> Preview and Share your story with your friends and other connections </p>
 
-                    <Button icon="internet explorer" labelPosition='left' content="View your story live" size='small' fluid onClick={()=>{
-                      this.leavePage({id:this.state.share_data._id, post_link: this.state.share_data.post_link })} 
-                    }/>
-                    <br />
-                    <Button icon="copy outline" labelPosition='left' content={this.state.copyToClipboard} size='small' onClick={this.copyToClipboard} fluid disabled={this.state.copyToClipboard == "Copied!"} />
-                    <br/>
-                    <Button onClick={(e) => this.shareToFacebook(e, this.state.share_data)}
-                      color="facebook" icon="facebook" labelPosition='left' content='Share to facebook' fluid size='small' />
-                      <br/>
-                    <Button onClick={(e) => this.shareToWhatsApp(e, this.state.share_data)} color="green" fluid icon="whatsapp" labelPosition='left' content='Share to WhatsApp' size='small' />
-                  </div>
-                </Modal.Content>
+                      <Button icon="internet explorer" labelPosition='left' content="View your story live" size='small' fluid onClick={() => {
+                        this.leavePage({ id: this.state.share_data._id, post_link: this.state.share_data.post_link })
+                      }
+                      } />
+                      <br />
+                      <Button icon="copy outline" labelPosition='left' content={this.state.copyToClipboard} size='small' onClick={this.copyToClipboard} fluid disabled={this.state.copyToClipboard == "Copied!"} />
+                      <br />
+                      <Button onClick={(e) => this.shareToFacebook(e, this.state.share_data)}
+                        color="facebook" icon="facebook" labelPosition='left' content='Share to facebook' fluid size='small' />
+                      <br />
+                      <Button onClick={(e) => this.shareToWhatsApp(e, this.state.share_data)} color="green" fluid icon="whatsapp" labelPosition='left' content='Share to WhatsApp' size='small' />
+                    </div>
+                  </Modal.Content>
                   :
                   <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
                     <div style={{ textAlign: 'center' }}>
@@ -529,24 +523,15 @@ class AddPost extends React.Component {
 
         </Grid>
 
-        { /*EDITOR PANEL INITIAL */}
 
 
-      </div>
-
-
-
-
-    )
-
-
-
-
+      </div> )
 
 
   }
 }
 
+//Map Redux State to Props
 var mapStatetoProps = (state) => {
   return state;
 }
