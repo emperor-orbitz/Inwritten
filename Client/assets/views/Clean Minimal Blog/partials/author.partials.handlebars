@@ -1,0 +1,8 @@
+<!-- This is where author Image, Name, about and follow button falls -->
+
+
+<p style="color:black"><h4>About the author</h4></p>
+<img src={{ author_data.display_picture}} class="mr-3 mb-2" style="border-radius: 50%; height:80px; width:80px"><b>@{{ author_data.username }}</b>
+<button class="btn btn-sm follow-btn btn-success" id="follow-btn" value={{author_data._id}} hidden>follow</button>
+
+<p><i>{{ author_data.bio}} </i></p>

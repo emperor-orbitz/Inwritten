@@ -1,0 +1,50 @@
+ /* *{
+    font-size:200px !important;
+}*/
+
+
+
+.editor-alignright{
+    text-align: right;
+}
+
+.editor-buttons{
+    width:35px;
+    position:sticky;
+    top:10px;
+    float:left;
+    padding:10px 2px;
+    
+    color:black;
+    top:1000px;
+    
+}
+
+.right-details{
+    height:90%;
+    background: silver;
+}
+
+.submit-post-button{
+    bottom: 15%;
+    position: sticky;
+}
+
+.editor{
+    color: black;
+padding: 5px 30px;
+/*border:3px solid black;*/
+float:left;
+width:90%;
+ 
+}
+.editor.editor-image{
+    width:100%;
+    height:100%;
+}
+
+.editor.blockquote{
+    border-left: 5px solid silver;
+    padding-left: 10px;
+    color:silver
+ }   

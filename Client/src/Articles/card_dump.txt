@@ -1,0 +1,33 @@
+    <div key={e._id} className='image-thumbnail-template-cover-big'>
+
+                                                    <div style={{ margin: '10px 3px' }}>
+
+                                                        <div className='customCard-all' >
+
+                                                            <h4 style={{ marginTop: '0px', padding: '0px', textOverflow: 'ellipsis' }}>
+                                                                {e.title}
+                                                            </h4>
+
+                                                            <span><b>created on </b> </span>
+                                                            <p>{date_to_string(e.createdAt)}</p>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div className='template-thumbnail-hover-big'>
+
+                                                        <div className="category">
+
+
+                                                            <Button.Group className="button-hover" size='small' icon >
+                                                                <Button icon='eye' as={Link} to={{ pathname: '/app/edit-post/' + e._id }} />
+                                                                <Button icon='external alternate' target="__blank" as={Link} to={`${e.post_link}`} />
+                                                                <Button icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
+                                                                <Button icon="share alternate" onClick={() => { this.openShare(e) }} />
+
+                                                            </Button.Group>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>

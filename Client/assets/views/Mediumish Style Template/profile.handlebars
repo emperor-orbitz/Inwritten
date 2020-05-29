@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="/images/double-u.png">
+<title>{{user_data.username}} | Profile</title>
+<!-- Bootstrap core CSS -->
+<link href="/views/{{template_data}}/css/bootstrap.min.css" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="/views/{{template_data}}/css/mediumish.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Begin Nav
+================================================== -->
+<nav class="navbar navbar-toggleable-md navbar-light bg-white fixed-top mediumnavigation">
+<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="container">
+	<!-- Begin Logo -->
+	<a class="navbar-brand" href="/">
+	<img src="/images/inwritten-logo.png" alt="logo" >
+	</a>
+	<!-- End Logo -->
+	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+		<!-- Begin Menu -->
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item">
+			<a class="nav-link" href="#">Refresh </a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" href="/user/blog/{{user_data.username}}">Blog</a>
+			</li>
+			<li class="nav-item active">
+			<a class="nav-link" href="/user/profile/{{user_data.username}}">Author<span class="sr-only">(current)</span></a>
+			</li>
+		</ul>
+		<!-- End Menu -->
+		<!-- Begin Search -->
+
+		<!-- End Search -->
+	</div>
+</div>
+</nav>
+<!-- End Nav
+================================================== -->
+
+<!-- Begin Top Author Page
+================================================== -->
+<div class="container">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8 col-md-offset-2">
+			<div class="mainheading">
+				<div class="row post-top-meta authorpage">
+					<div class="col-md-10 col-xs-12">
+						<h1>@{{user_data.username}}</h1>
+						<span class="author-description">{{user_data.bio}}</span>
+						<span>{{user_data.email}}</span>
+
+						<div class="sociallinks">
+						<a  target="_blank" href="//{{social_data.facebook_link}}"><i class="fa fa-facebook"></i></a> <span class="dot"></span>
+						 <a  href="//{{social_data.whatsapp_link}}"><i class="fa fa-whatsapp"></i></a><span class="dot"></span>
+						 <a  href="//{{social_data.linkedin_link}}"><i class="fa fa-linkedin"></i></a><span class="dot"></span>
+						<a  href="//{{social_data.instagram_link}}"><i class="fa fa-instagram"></i></a>
+
+						 </div>
+
+
+
+						<button class="btn follow btn-sm" id="follow-btn" value="{{user_data._id}}">Follow</button>
+					</div>
+					<div class="col-md-2 col-xs-12">
+						<img class="author-thumb" src="{{user_data.display_picture}}" alt="{{user_data.username}}">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Top Author Meta
+================================================== -->
+
+<!-- Begin Author Posts
+================================================== -->
+<div class="graybg authorpage">
+	<div class="container">
+		<div class="listrecent listrelated">
+
+			
+
+		</div>
+	</div>
+</div>
+<!-- End Author Posts
+================================================== -->
+
+
+
+<!-- Begin Footer
+================================================== -->
+<div class="container">
+	<div class="footer">
+		<p class="pull-left" style="color: black">
+			 Copyright &copy; 2020 INWRITTEN.COM
+		</p>
+		
+		<div class="clearfix">
+		</div>
+	</div>
+</div>
+<!-- End Footer
+================================================== -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+
+<script src="/views/template-medium-03/js/jquery.min.js"></script>
+<script src="/views/template-medium-03/js/interests.js"></script>
+<script src="/views/template-medium-03/js/comments.js"></script>
+<script src="/views/template-medium-03/js/auth.js"></script>
+<script src="/views/template-medium-03/js/follow.js"></script>
+
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+{
+    "categories": [
+        {
+            "key":1,
+            "value":"UNC",
+            "icon":"random",
+            "name":"Uncategorised",
+            "text":"Uncategorised"
+        },
+        {
+            "key":2,
+            "value":"BUS",
+            "icon":"building outline",
+            "name":"Business",
+            "text":"Business"
+
+        },
+        { 
+            "key":3,
+            "value":"LFS",
+            "icon":"glass martini",
+            "name":"Lifestyle",
+            "text":"Lifestyle"
+
+        },
+     
+        {
+            "key":5,
+            "value":"POE",
+            "icon":"paint brush",
+            "name":"Poetry",
+            "text":"Poetry"
+
+        },
+        {
+            "key":6,
+            "value":"MUS",
+            "icon":"headphones",
+            "name":"Music",
+            "text":"Music"
+
+        },
+        {
+            "key":7,
+            "value":"FAS",
+            "icon":"shopping bag",
+            "name":"Fashion",
+            "text":"Fashion"
+
+        },
+    
+        {
+            "key":8,
+            "value":"FOD",
+            "icon":"food",
+            "name":"Food",
+            "text":"Food"
+
+        },
+        {
+            "key":9,
+            "value":"TRA",
+            "icon":"map outline",
+            "name":"Travel",
+            "text":"Travel"
+
+        },
+        {
+            "key":10,
+            "value":"NEW",
+            "icon":"newspaper outline",
+            "name":"News",
+            "text":"News"
+
+        },
+        {
+            "key":9,
+            "value":"COD",
+            "icon":"code branch",
+            "name":"Programming/ Tech",
+            "text":"Programming/ Tech"
+
+        }
+
+        
+        
+
+    ]
+}
+
+

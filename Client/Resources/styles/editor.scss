@@ -1,0 +1,138 @@
+ /* *{
+    font-size:200px !important;
+}*/
+
+
+
+.editor-alignright{
+    text-align: right;
+}
+
+.editor-buttons{
+    width:35px;
+    position:sticky;
+    top:80px;
+    float:left;
+    padding:10px 2px;
+    color:black;
+    //top:1000px;
+    
+}
+
+.right-details{
+    height:90%;
+    background: silver;
+}
+
+.submit-post-button{
+    bottom: 15%;
+    position: sticky;
+}
+
+.editor{
+color: black;
+padding: 5px 5px 5px 40px;
+//border:3px solid black;
+//float:left;
+width:90%;
+font-size:12px !important;
+
+ blockquote{
+    border-left: 5px solid silver;
+    padding-left: 10px;
+    color:silver
+ }    
+
+
+ .editor-image{
+     width:90%;
+     height:90%;
+ }
+}
+
+.hoverDisplayTool{
+    display: none;
+}
+
+
+.hoverToDisplay{
+cursor: pointer; 
+width:40px;
+line-height: 40px;
+//height: 50px;
+padding: 15px 20px;
+position:relative;
+margin:0px 3px;
+float: left;
+border:none;
+}
+
+.hoverToDisplay:hover ~.hoverDisplayTool, .hoverDisplayTool:hover{
+display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//QUILLJS STYLES
+div.ql-editor{
+    font-size:18px;
+    line-height: 1.6;
+}
+
+
+
+
+.rq-container{
+    width:90%;
+    left:50%;
+    min-height: 400px;
+    transform: translate(-50%);
+       position: absolute;
+
+
+
+   }
+
+
+
+.ql-container{
+color:black !important;
+min-height:100%;
+
+
+hr{
+   border: none;
+   color: #111;
+   letter-spacing: 1em;
+   text-align: center;
+   }
+   img{
+       width:100%;
+       height:330px;
+   }
+} 
+
+.ql-container hr:before{
+content: "...";
+font-size: 200%
+}
+
