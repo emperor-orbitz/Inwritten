@@ -149,7 +149,11 @@ module.exports = class email{
 
 //USING @MAILGUN
 const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, 
+<<<<<<< HEAD
+domain: process.env.MAILGUN_DOMAIN, 
+=======
 domain: "sandbox523b5fd6c87b40e0800b73684351e623.mailgun.org", 
+>>>>>>> 88dbb7dc8c15ec9def228fc18f1c3a8062218ebe
 host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
 
 
@@ -184,8 +188,13 @@ mg.messages().send(data)
     //USING @MAILGUN
 
 const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, 
+<<<<<<< HEAD
+  domain: process.env.MAILGUN_DOMAIN, 
+  host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
+=======
 domain: "sandbox523b5fd6c87b40e0800b73684351e623.mailgun.org", 
 host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
+>>>>>>> 88dbb7dc8c15ec9def228fc18f1c3a8062218ebe
 
 
 const data = {
@@ -214,17 +223,17 @@ mg.messages().send(data)
       //USING @MAILGUN
   
   const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, 
+<<<<<<< HEAD
+    domain: process.env.MAILGUN_DOMAIN, 
+    host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
+=======
   domain: "sandbox523b5fd6c87b40e0800b73684351e623.mailgun.org", 
   host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
-  
-  
-  const data = {
-  from: "Inwritten <support@inwritten.com>",
-  to: this.to,
-  subject: 'Verify your email',
-  text: 'Testing some Inwritten awesomness!',
-  template: "subscribe", //template name
-  'v:username': result.username,
+>>>>>>> 88dbb7dc8c15ec9def228fc18f1c3a8062218ebe
+omain: process.env.MAILGUN_DOMAIN, 
+    host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
+>>>>>>> 62231b6... Initialized folder
+result.username,
   'v:hash': result.hash   
   };
   
