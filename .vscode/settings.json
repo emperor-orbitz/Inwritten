@@ -1,4 +1,8 @@
 {
+<<<<<<< HEAD
     "git.ignoreLimitWarning": true,
     "editor.fontSize": 12
+=======
+    "git.ignoreLimitWarning": true
+>>>>>>> 88dbb7dc8c15ec9def228fc18f1c3a8062218ebe
 }

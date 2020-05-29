@@ -149,7 +149,7 @@ module.exports = class email{
 
 //USING @MAILGUN
 const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, 
-domain: process.env.MAILGUN_DOMAIN, 
+domain: "sandbox523b5fd6c87b40e0800b73684351e623.mailgun.org", 
 host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
 
 
@@ -184,8 +184,8 @@ mg.messages().send(data)
     //USING @MAILGUN
 
 const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, 
-  domain: process.env.MAILGUN_DOMAIN, 
-  host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
+domain: "sandbox523b5fd6c87b40e0800b73684351e623.mailgun.org", 
+host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
 
 
 const data = {
@@ -214,8 +214,8 @@ mg.messages().send(data)
       //USING @MAILGUN
   
   const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, 
-    domain: process.env.MAILGUN_DOMAIN, 
-    host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
+  domain: "sandbox523b5fd6c87b40e0800b73684351e623.mailgun.org", 
+  host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
   
   
   const data = {

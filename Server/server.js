@@ -67,6 +67,11 @@ app.set("views", path.resolve(__dirname, "../Client/assets/views"));
 
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 88dbb7dc8c15ec9def228fc18f1c3a8062218ebe
 //ROUTE CONFIGURATION IN PRODUCTION
 
 if (process.env.NODE_ENV == "production") {
