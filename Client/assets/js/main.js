@@ -260,3 +260,36 @@ jQuery(document).ready(function($) {
 	searchToggle();
 
 });
+
+
+
+
+$("#subscribeForm").submit(function (e) {
+    
+	e.preventDefault();
+	var form = $(this);
+	var url = form.attr('action');
+	$.ajax({
+		type: "POST",
+		url: "/subscribeToPreLaunch",
+		data: form.serialize(),
+		success: function (data) {
+	 // get comment again
+	 if(data.status == "error"){
+		console.log(data)
+		document.getElementById("error-box").innerHTML =`<span style='color:red'>Email has already subscribed</span>`
+	 }
+	 else{
+		document.getElementById("subscribeForm").innerHTML =`<span ><i>A very big thanks to you for subscribing. We hope to see you around soon.</i></span><br>`
+
+		$(`#${e.target.id}`)[0].reset()
+
+	 }
+
+		},
+		error: function(err){
+			console.log("something went wrong", err)
+		}
+	})
+
+})

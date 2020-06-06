@@ -43,9 +43,11 @@ var subscribe =(req, res) =>{
     })
     .then(ok =>{
         res.send({ message:" Subscriber added successfully", status:"success" })
+        //send mail to subscriber
         console.log("ok sucessfull", ok)
     },
     err=>{
+        console.log(err)
         //User has subscribed before err
         res.send({ message:" Subscriber not added", status:"error" })
 

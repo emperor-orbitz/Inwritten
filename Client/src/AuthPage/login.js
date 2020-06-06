@@ -162,7 +162,7 @@ class Login extends React.Component {
           <Grid columns={2} divided stackable>
             <Grid.Column width="7">
               <div className="note">
-                <h1>TELL A STORY</h1>
+                <h1>SHARE AN ARTICLE</h1>
                 <p>Create contents that matters to what you love. Intrigue the world from your perspectives
 </p>
        

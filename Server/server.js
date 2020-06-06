@@ -77,7 +77,7 @@ if (process.env.NODE_ENV == "production") {
     next();
   })
 
-  app.use(express.static(path.resolve(__dirname, "../Client/assets/"), {index:"homepage.html"}))
+  app.use(express.static(path.resolve(__dirname, "../Client/assets/"), {index:"launchpage.html"}))
   app.use("/", route_config);
   app.get("/subscribe", (req, res) => {
 

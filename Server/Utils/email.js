@@ -149,8 +149,9 @@ module.exports = class email{
 
 //USING @MAILGUN
 const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, 
-domain: process.env.MAILGUN_DOMAIN, 
-host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
+  domain: "mg.inwritten.com",
+  host: "api.mailgun.net"
+  /* -> Add this line for EU region domains*/ });
 
 
 const data = {
@@ -184,8 +185,9 @@ mg.messages().send(data)
     //USING @MAILGUN
 
 const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, 
-  domain: process.env.MAILGUN_DOMAIN, 
-  host: "api.mailgun.net",  /* -> Add this line for EU region domains*/ });
+  domain: "mg.inwritten.com",
+  host: "api.mailgun.net"
+  /* -> Add this line for EU region domains*/ });
 
 
 const data = {
@@ -200,7 +202,11 @@ template: "reset_password", //template name
 
 
 mg.messages().send(data)
-.then(sent =>{console.log("email sent successfully", sent)})
+.then(sent =>{console.log("email sent successfully", sent)},
+err=>{
+  console.log("bad bad", err)
+}
+)
 .catch(err =>{ console.log("email was not sent successfully", err)})
 
 
@@ -229,7 +235,7 @@ mg.messages().send(data)
       
 
  mg.messages().send(data)
-  .then(sent =>{console.log("email sent successfully", sent)})
+  .then(sent =>{console.log("email sent shhhhhhhhhhhhhh vvsuccessfully", sent)})
   .catch(err =>{ console.log("email was not sent successfully", err)})
   
   
