@@ -22,17 +22,17 @@ function App() {
 
 
       <HeaderAccount>
-
+{/* 
 <TransitionGroup>
 <CSSTransition
 key={location.key}
 classNames="fade"
 timeout={300}
->
+> */}
         <Switch location={location}>
           <Route path='/app/comments/:postID' component={Comments}  />
           <Route path='/app/interests' component={Interests} />
-          <Route path='/app/edit-post/:postID' component={ArticlesCategory.EditPost} />
+          <Route path='/app/edit/:postID' component={ArticlesCategory.EditPost} />
           <Route path='/app/dashboard' component={Account} />
           <Route path='/app/settings/profile' component={Profile} />
           <Route path='/app/articles' component={ArticlesCategory.Articles}  />
@@ -55,9 +55,9 @@ timeout={300}
             </div>
           )} />
         </Switch>
-        </CSSTransition>
+        {/* </CSSTransition>
 
-</TransitionGroup>
+</TransitionGroup> */}
       </HeaderAccount>
           
     </Switch>

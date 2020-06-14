@@ -55,17 +55,18 @@ var five_posts = async (req, res) => {
 
 var index = async (req, res) => {
 
-    let { originalUrl } = req;
+    // let { originalUrl } = req;
     var link = req.params.link
-    let username = link.split('---')[0];
-    
+    let username = req.params.username
+    let chunk = req.params.chunk
+    let username_slice = username.slice(1)
 
     try {
         
-        var user_data = await userModel.findOne({ username: username });
+        var user_data = await userModel.findOne({ username: username_slice });
         let template_data = await templ.findById(user_data.template_id)
 
-        let data = await posts.findOne({ post_link: originalUrl, public: true })
+        let data = await posts.findOne({ post_link: `/user/${username}/${chunk}`, public: true })
                               .populate({path:"comments",
                                 populate:{
                                     path:"commenter_id",
@@ -73,12 +74,13 @@ var index = async (req, res) => {
                                 }
                             })
                             .populate("authorId", "username email display_picture bio")
+                            data = data.toJSON()
                              // .select("")
         let social_data = await social_model.findOne({user_id: data.authorId}) ;             
  
         if (data != null) {
             var scripts = [{script:`${template_data.template_name}/js/auth.js`}];
-
+            console.log(data, "THIS IS UR DATATA")
             //console.log(data.tags.length)
             res.render(`${template_data.template_name}/index`,
              { data,  comment_data: data.comments, author_data: data.authorId ,tag_data:data.tags.split(","),
@@ -118,8 +120,9 @@ var index = async (req, res) => {
 var user = async (req, res) => {
 
     try {
-
+        console.log("CANT U HEAT MEEE")
         let data = await userModel.findOne({ username: req.params.username });
+        console.log(data, "NA ME BE THIS")
         let found_template = await templ.findOne({ _id:data.template_id })
         let socials = await social_model.findOne({user_id: data._id}) || {}
 

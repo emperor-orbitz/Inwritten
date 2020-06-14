@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import FetchArticles from '../../Controllers/article.controller'
 import cat from "../Dashboard/categories";
 import QuillTestEdit from "./Components/QuillTestEdit"
+import FetchDrafts from "../../Controllers/draft.controller"
 
 
 
@@ -45,7 +46,9 @@ class EditPost extends React.Component {
 
       copyToClipboard: "Copy to clipboard",
       open_share: false,
-      share_data: {}
+      share_data: {},
+      dynamicSave:" ",
+      post_id:""
 
     }
 
@@ -109,6 +112,81 @@ class EditPost extends React.Component {
   }
 
 
+  manageEditorState = (html, json, plaintext) => {
+    this.state.editorHTML = html;
+    this.state.editorJSON = json;
+    //manage update
+    if(plaintext.length % 20 == 0 ){
+      
+    this.AddPostAsDraft(html, json)
+
+    }
+  }
+
+
+
+
+
+
+  AddPostAsDraft(html, json) {
+
+    console.log("Saving into DB CONTNET:..", html )
+    this.setState({ dynamicSave: "Saving..." });
+
+    let add = new FetchDrafts()
+    var post = {
+      _id: this.props.match.params.postID,
+      title: this.state.post_title,
+      category: this.state.post_category,
+      description: this.state.post_description.trim(),
+      time_to_read: this.state.time_to_read,
+      comments_enabled: this.state.enable_comments,
+      public: false,
+      body_html: html,
+      body_schema: json,
+      featured_image: this.state.featured_image,
+      comments: [],
+      tags: this.state.tag_value,
+
+    }
+
+
+    add.create_draft(post).then(
+      (okay) => {
+
+        console.log(okay, "okay_newa")
+          // this.state.post_id = 
+        //this.state.post_link = okay.data.post_link;
+
+        // let present = this.props.DraftReducer.filter(v=>v._id ==okay._id);
+      
+       
+          console.log("I RAN UPDATE")
+          this.props.dispatch({ type: 'UPDATE_DRAFT', payload: okay });
+
+        
+
+
+        this.setState({
+          dynamicSave: "Saved"
+        })
+
+
+      })
+      .catch(err => {
+        this.setState({
+          dynamicSave: "Unable to save at the moment.." + err
+        })
+      })
+
+
+
+  }
+
+
+
+
+
 
   //validate story settings
 
@@ -140,7 +218,7 @@ class EditPost extends React.Component {
     this.setState({ buttonDisabled: true, dimmerLoad: true });
 
     const post = {
-      _id: this.state.post_id,
+      _id: this.props.match.params.postID,
       title: this.state.post_title.trim(),
       category: this.state.post_category,
       description: this.state.post_description.trim(),
@@ -151,7 +229,8 @@ class EditPost extends React.Component {
       body_schema: panel.exposedEditorValue,
       featured_image: this.state.featured_image,
       post_link: this.state.post_link,
-      tags: this.state.tag_value
+      tags: this.state.tag_value,
+      published: true
 
     }
 
@@ -196,13 +275,15 @@ class EditPost extends React.Component {
   }
 
 
-
+//componentwillMount
+componentWillMount(){
+  document.title ="Editing Draft - Inwritten"
+}
 
 
 
   /*
   *           REACTJS LIFECYCLE HOOKS
-  *
   */
 
 
@@ -219,18 +300,12 @@ class EditPost extends React.Component {
   }
 
 
-  componentDidMount() {
 
-    //Fetch featured_image
-    var fetch_image = new FetchArticles()
-    fetch_image.fetch_image(this.props.match.params.postID)
-      .then(data => {
-        this.setState({ featured_image: data })
-      })
-
-
-    for (var x of this.props.ArticleReducer) {
+  fillDraft(){
+    console.log(this.props)
+    for (var x of this.props.DraftReducer) {
       if (x._id == this.props.match.params.postID) {
+        console.log("SEEN THE XXX FOR DRAFTS:", x)
         //Retrieve data except from featured_image
         this.setState({
           post_id: x._id,
@@ -245,14 +320,53 @@ class EditPost extends React.Component {
           likes: x.likes,
           post_link: x.post_link,
           tag_value: x.tags,
-          body_html: x.body_html
         });
 
       }
 
     }
+  }
+
+  // fillArticle(){
+  //   console.log(this.props)
+
+  //   for (var x of this.props.ArticleReducer) {
+  //     if (x._id == this.props.match.params.postID) {
+  //       console.log("SEEN THE XXX:", x)
+  //       //Retrieve data except from featured_image
+  //       this.setState({
+  //         post_id: x._id,
+  //         post_title: x.title,
+  //         post_description: x.description,
+  //         post_category: x.category,
+  //         privacy_value: x.public,
+  //         enable_comments: x.comments_enabled,
+  //         time_to_read: x.time_to_read,
+  //         body_schema: x.body_schema,
+  //         body_html: x.body_html,
+  //         likes: x.likes,
+  //         post_link: x.post_link,
+  //         tag_value: x.tags,
+  //       });
+
+  //     }
+
+  //   }
+  // }
+
+  componentDidMount() {
+
+    //Fetch featured_image
+    let { postID } = this.props.match.params;
+    var fetch_image = new FetchArticles()
+    fetch_image.fetch_image(postID)
+      .then(data => {
+        this.setState({ featured_image: data })
+      })
+      this.fillDraft()
 
   }
+
 
 
   // SHARE TO WHATSAPP
@@ -263,6 +377,9 @@ class EditPost extends React.Component {
     window.location.href = `https://wa.me/?text=${url}`
 
   }
+
+
+
 
 // SHARE TO FACEBOOK
   shareToFacebook = (e, data) => {
@@ -359,9 +476,7 @@ class EditPost extends React.Component {
 
     var privacy_value = (this.state.privacy_value == true) ? 'Publish to the World' : 'Save Save to draft';
     var comment_value = (this.state.enable_comments == true) ? 'Commenting is enabled' : 'Commenting is disabled';
-
     var categoryOptions = cat.categories;
-
 
 
 
@@ -372,19 +487,18 @@ class EditPost extends React.Component {
       <div className='add-post'>
         <Grid stackable>
           <Grid.Row  >
-
-            <Grid.Column mobile={16} tablet={13} computer={13} style={{ padding: '0px 5px' }}  >
+            <Grid.Column mobile={16} tablet={16} computer={13} style={{ padding: '0px 5px' }}  >
+            <p style={{ paddingLeft:"5%", color: "silver" }}><i> {this.state.dynamicSave}</i></p>
               <Modal size='mini' open={this.state.open_share} onClose={this.closeShare} closeOnDimmerClick={false} closeIcon={<Icon name="times" size="small" color="black" onClick={() => {
                 if (this.state.share_data.public == true)
                   this.leavePage({ id: this.state.share_data._id, post_link: this.state.share_data.post_link })
                 else
                   this.closeShare()
 
-
-
               }} />} >
 
-                {this.state.share_data.public == true ? <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
+                {this.state.share_data.public == true ?
+                 <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
                   <div style={{ textAlign: 'center' }}>
                     <Icon name="check circle" color="green" size="huge" />
                     <h4 >Your story has been published  </h4>
@@ -407,7 +521,6 @@ class EditPost extends React.Component {
                       <Icon name="check circle" color="green" size="huge" />
                       <h4 >Your Draft has been Saved  </h4>
                       <Button onClick={this.closeShare}>Continue Editing</Button>
-
                     </div>
                   </Modal.Content>
 
@@ -434,22 +547,21 @@ class EditPost extends React.Component {
 
               {
                 this.state.network_error !== '' ?
-                  <p style={{ padding: '5px', color: 'red', width: '90%', borderRadius: '0px' }}>  {this.state.network_error} </p>
+                  <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}>  {this.state.network_error} </p>
                   : ''
               }
               {
                 this.state.error_message == 'editor-error' ?
-                  <p style={{ padding: '5px 5%', color: 'red', width: '90%', borderRadius: '0px' }}><Icon name="close" color="yellow" size='big' /> You've not written anything yet! </p>
+                  <p style={{ color: 'red', width: '90%', borderRadius: '0px' }}><Icon name="close" color="yellow" size='big' /> You've not written anything yet! </p>
                   : ''
               }
 
-        { /*EDITOR PANEL INITIALIZED HERE */}
+               { /*EDITOR PANEL INITIALIZED HERE */}
 
-              <QuillTestEdit initialValue={this.state.body_schema} />
+              <QuillTestEdit state={this.manageEditorState} initialValue={this.state.body_schema} />
 
-            </Grid.Column>
 
-            <Grid.Column mobile={16} tablet={2} computer={2}>
+
 
               <Modal size="small" basic style={{ color: "white !important" }} open={this.state.open_options} onClose={this.close}  >
                 <h3 style={{ margin: '1px 2%', color: "white" }}>Settings</h3>
@@ -545,6 +657,11 @@ class EditPost extends React.Component {
                 </Modal.Actions>
               </Modal>
             </Grid.Column>
+
+            {/* <Grid.Column mobile={0} tablet={2} computer={2} style={{height:'0px', width:'0px'}}>
+
+         
+            </Grid.Column> */}
 
           </Grid.Row>
 

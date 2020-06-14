@@ -5,10 +5,11 @@ import { Button, Icon, Form, Modal, Grid, Select, Item, Input, Dropdown } from '
 import Connection from '../../Controllers/auth.controller';
 
 import { withRouter } from 'react-router';
-import { BrowserRouter as Router, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import FetchArticles from '../../Controllers/article.controller';
-
+import FetchDrafts from '../../Controllers/draft.controller';
+import 'moment-timezone';
+import Moment from "react-moment";
 
 
 
@@ -77,7 +78,11 @@ class PostArchive extends React.Component {
 
 
     showModal = (e, p) => {
+
+
         var { title, id } = p;
+
+        console.log(title, id)
         this.setState(
             {
                 open: true,
@@ -90,20 +95,20 @@ class PostArchive extends React.Component {
     }
 
 
-    deleteAll = () => {
+    // deleteAll = () => {
 
-        //delete all posts
-        var del = new FetchArticles;
-        del.delete_all({ public: false })
-            .then(suc => {
-                this.props.dispatch({ type: 'DELETE_ALL_DRAFT', payload: { public: false } })
-                var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == false);
-                this.setState({ deleteArticleId: null, open: false, messageDismiss: true, filter_privacy: filter_privacy, open_deleteall: false });
+    //     //delete all posts
+    //     var del = new FetchArticles;
+    //     del.delete_all({ public: false })
+    //         .then(suc => {
+    //             this.props.dispatch({ type: 'DELETE_ALL_DRAFT', payload: { public: false } })
+    //             var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == false);
+    //             this.setState({ deleteArticleId: null, open: false, messageDismiss: true, filter_privacy: filter_privacy, open_deleteall: false });
 
-            })
-            .catch(err => console.log(err))
+    //         })
+    //         .catch(err => console.log(err))
 
-    }
+    // }
 
 
 
@@ -126,18 +131,17 @@ class PostArchive extends React.Component {
 
     deletePost = () => {
         var id = this.state.deleteArticleId;
-
-        var __delete = new FetchArticles;
-        __delete.delete_article(id)
+        var __delete = new FetchDrafts;
+        __delete.delete_draft(id)
             .then(fulfilled => {
                 if (fulfilled) {
 
                     this.props.dispatch(
                         {
-                            type: 'DELETE', payload: { _id: this.state.deleteArticleId }
+                            type: 'DELETE_DRAFT', payload: { _id: this.state.deleteArticleId }
                         })
 
-                    var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == false);
+                      var filter_privacy = this.props.DraftReducer.filter(nor => nor.type == "DRAFT");
 
 
                     this.setState({ deleteArticleId: null, open: false, messageDismiss: true, filter_privacy: filter_privacy });
@@ -166,7 +170,7 @@ class PostArchive extends React.Component {
 
 
     connect = new Connection();
-    fetchArticle = new FetchArticles();
+    FetchDraft = new FetchDrafts();
 
     onChangeSearch = (e) => { this.setState({ search: e.target.value, not_found: false }) }
 
@@ -209,11 +213,12 @@ class PostArchive extends React.Component {
 
     componentDidMount() {
 
-        var filter_privacy = this.props.ArticleReducer.filter((nor) => nor.public == false);
+        var filter_privacy = this.props.DraftReducer.filter((nor) => nor.type == "DRAFT" && nor.published == false); //Dont tamper with immutability
         this.setState({ filter_privacy });
         this.state.filter_privacy_const = filter_privacy;
 
     }
+
 
     categoryOptions = [
         {
@@ -259,6 +264,8 @@ class PostArchive extends React.Component {
         }
 
     ]
+
+    
     render() {
 
         var { filter_privacy } = this.state;
@@ -324,7 +331,7 @@ class PostArchive extends React.Component {
 
 
                                     <div style={{ borderBottom: "3px solid navyblue", marginBottom: "5px", padding: "0px", width: "100%" }} >
-                                        <h3> Your Unsaved Drafts</h3>
+                                        <h4> Search Drafts</h4>
                                         <Form size="small"   >
 
                                             <Input id='search' fluid icon={<Icon name="chevron left" />} className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} onKeyDown={this.handleEnter} placeholder='Search by title and hit enter. e.g The angry bird fight/category' />
@@ -353,17 +360,20 @@ class PostArchive extends React.Component {
                                                 <Item.Image floated="right" size="small" src={e.featured_image} />
 
                                                 <Item.Content verticalAlign="middle" >
-                                                    <Item.Header as={Link} to={{ pathname: '/app/edit-post/' + e._id }}><h4 style={{ color: "black" }}>{e.title}</h4></Item.Header>
-                                                    <Item.Description>{e.category.toUpperCase()}</Item.Description>
-                                                    <Item.Meta>{e.time_to_read} mins read</Item.Meta>
+                                                    <Item.Header as={Link} to={{ pathname: '/app/edit/' + e._id + '/'+ e.type }}><h4 style={{ color: "black" }}>{e.title}</h4></Item.Header>
+                                                    <Item.Description>Draft</Item.Description>
+                                                    <Item.Meta> <span style={{color:"silver"}}>
+                                                       Updated <Moment fromNow>{e.updatedAt}</Moment>
+                                                        
+                                                        </span> </Item.Meta>
 
 
                                                     <Item.Extra >
-                                                        <Dropdown text="actions ">
+                                                        <Dropdown text="More... ">
                                                             <Dropdown.Menu>
-                                                                <Dropdown.Item text='Preview' icon='eye' as={Link} to={{ pathname: '/app/edit-post/' + e._id }} />
+                                                                <Dropdown.Item text='Continue editing' icon='eye' as={Link} to={{  pathname: '/app/edit/' + e._id  }} />
                                                                 <Dropdown.Item text='Delete' icon='trash alternate outline' title={e.title} id={e._id} onClick={this.showModal} />
-                                                                <Dropdown.Item icon="comment" text="Comments" as={Link} to={{ pathname: '/app/comments/' + e._id }} />
+                                                                {/* <Dropdown.Item icon="comment" text="Comments" as={Link} to={{ pathname: '/app/comments/' + e._id }} /> */}
 
                                                             </Dropdown.Menu>
                                                         </Dropdown>

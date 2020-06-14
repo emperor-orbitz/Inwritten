@@ -80,7 +80,7 @@ class QuillTest extends React.Component {
         super(props);
 
         //this.formats =formats;
-        this.state = { text: " " } // You can also pass a Quill Delta here
+        this.state = { text: " ", changeCount:0 } // You can also pass a Quill Delta here
 
         this.handleChange = this.handleChange.bind(this)
         this.quillRef = null;
@@ -218,7 +218,21 @@ class QuillTest extends React.Component {
             window.editorParsed = this.quillRef.getContents()
             window.editorHTML = html;
         
+            let {state} = this.props
+            
+            //change count
 
+           if(this.state.changeCount <= 1){
+            this.state.changeCount++
+            console.log(this.state.changeCount, "this is chanege count")
+           }
+           else{
+            this.state.changeCount++
+            console.log("I was called here again", this.state.changeCount)
+            state(html, this.quillRef.getContents(), this.quillRef.getText());
+
+           }
+        
     }
 
 
@@ -250,7 +264,6 @@ class QuillTest extends React.Component {
             <div className="rq-container">
 
                 <ReactQuill value={this.state.text}
-                    onChange={this.handleChange}
                     ref={(el) => { this.reactQuillRef = el }}
                     theme="bubble"
                     onChange={this.handleChange}

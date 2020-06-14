@@ -9,6 +9,14 @@ var isAuth = (req, res, next)=> {
     }
     
 
+
+    Router.get('/user/:username', function (req, res, next) {
+        console.log("I GOT HEREYYOYOYYY")
+        blogController.user(req, res)
+    
+    })
+
+    
     Router.get('/stories', function (req, res, next) {
 
         blogController.stories(req, res)
@@ -24,18 +32,9 @@ var isAuth = (req, res, next)=> {
 
 
 
-Router.get('/user/:link', function (req, res, next) {
-
-    blogController.index(req, res)
-
-})
 
 
-Router.get('/user/profile/:username', function (req, res, next) {
 
-    blogController.user(req, res)
-
-})
 
 
 Router.get('/user/blog/:username', function (req, res, next) {
@@ -84,7 +83,11 @@ Router.get('/user/blog/follow/other_interests', function (req, res, next) {
 })
 
 
+Router.get('/user/:username/:chunk', function (req, res, next) {
 
+    blogController.index(req, res)
+
+})
 
 module.exports = Router;
 

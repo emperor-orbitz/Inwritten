@@ -1,10 +1,13 @@
 import React from 'react';
+import FetchArticles from '../../../Controllers/article.controller'
 import '../../../Resources/styles/editor.scss';
+import { withRouter } from 'react-router';
 
 import ReactQuill, { Quill } from 'react-quill'; // ES6
 import "./quillcore.scss";
 import "quill/dist/quill.core.js";
 import "../../../Resources/styles/editor.scss";
+import { connect } from 'react-redux';
 
 import "quill/dist/quill.min.js";
 import "quill/dist/quill.js";
@@ -79,7 +82,7 @@ class QuillTestNew extends React.Component {
         super(props);
 
         //this.formats =formats;
-        this.state = { text: " " } // You can also pass a Quill Delta here
+        this.state = { text: " ", post_id: undefined } // You can also pass a Quill Delta here
 
         this.handleChange = this.handleChange.bind(this)
         this.quillRef = null;
@@ -202,17 +205,31 @@ class QuillTestNew extends React.Component {
 
 
 
-    handleChange(html) {
-        console.log(html, this.quillRef.getContents())
-       
-            this.setState({ text: html });    
-           
-            window.editorParsed = this.quillRef.getContents()
-            window.editorHTML = html;
-        
+  
 
+      
+    handleChange(html) {
+
+
+
+        //Dynamically save to DB after 5 seconds
+            this.setState({ text: html });    
+            window.editorParsed = this.quillRef.getContents();
+            window.editorHTML = html;
+            let {state} = this.props
+
+            
+           state( html, this.quillRef.getContents(), this.quillRef.getText());
+                
+             
     }
 
+
+
+
+
+
+    
 
 
     modules = {
@@ -242,7 +259,6 @@ class QuillTestNew extends React.Component {
             <div className="rq-container">
 
                 <ReactQuill value={this.state.text}
-                    onChange={this.handleChange}
                     ref={(el) => { this.reactQuillRef = el }}
                     theme="bubble"
                     onChange={this.handleChange}
@@ -259,17 +275,15 @@ class QuillTestNew extends React.Component {
     }
 
 
-
-
-
-
 }
 
-const mapStateToProps = (state) => {
+
+var mapStatetoProps = (state) => {
     return state;
-}
+  }
 
-export default QuillTestNew
+  export default QuillTestNew;
+
 
 
 

@@ -54,14 +54,14 @@ class HeaderAccount extends React.Component {
 
   componentWillReceiveProps(nextProps, nextState) {
 
-    let bool = /\/app\/edit-post\/[a-zA-Z0-9]+/.test(nextProps.location.pathname)
+    let bool = /\/app\/edit\/[a-zA-Z0-9]+/.test(nextProps.location.pathname)
 
     if (nextProps.location.pathname == "/app/add-post") {
-      this.setState({ switch_story_option: "SAVE" })
+      this.setState({ switch_story_option: "Publish" })
 
     }
     else if (bool == true) {
-      this.setState({ switch_story_option: "Save Changes" })
+      this.setState({ switch_story_option: "Publish Changes" })
     }
     else
     this.setState({ switch_story_option: "New story" })
@@ -72,13 +72,13 @@ class HeaderAccount extends React.Component {
 
 
 
-  componentDidMount() {
+  async componentDidMount() {
 
 
     let token = localStorage.getItem("hs_token");
     if (Object.keys(this.props.ProfileReducer).length == 0) {
       this.connect.isLoggedin(token)
-        .then(_ => {
+        .then( _ => {
 
           //SUBSCRIBE TO SOCKET
           let socket = socketIOClient("https://www.inwritten.com", { query: `userid=${_._id}` })
@@ -91,10 +91,13 @@ class HeaderAccount extends React.Component {
 
           //POPULATE PROFILE REDUCER & ARTICLE REDUCER
           this.props.dispatch({ type: 'INJECT_PROFILE', payload: _ })
-          this.fetchArticle.fetch_articles_list().then(articles => {
+          this.fetchArticle.fetch_articles_list().then(data => {
+            console.log("seen both data source", data)
 
-            if (articles.length > 0) {
-              this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: articles })
+            if ( Object.keys(data).length > 0) {
+
+              this.props.dispatch({ type: 'OVERWRITE_ARTICLE', payload: data.articles })
+              this.props.dispatch({ type: 'OVERWRITE_DRAFT', payload: data.drafts })
               this.setState({ loadFinish: true })
 
             }
@@ -121,7 +124,6 @@ class HeaderAccount extends React.Component {
       this.connect.isLoggedin(token)
         .then(_ => {
           this.setState({ loadFinish: true })
-
 
         })
         .catch(err => this.props.history.replace('/app/login'))
@@ -167,12 +169,12 @@ class HeaderAccount extends React.Component {
 
   story_switch = () => {
 
-    if (this.state.switch_story_option == "SAVE") {
+    if (this.state.switch_story_option == "Publish") {
 
       this.props.dispatch({ type: 'SAVE', payload: true })
 
     }
-   else if (this.state.switch_story_option == "Save Changes") {
+   else if (this.state.switch_story_option == "Publish Changes") {
 
       this.props.dispatch({ type: 'EDIT_STORY', payload: true })
 
@@ -230,8 +232,9 @@ class HeaderAccount extends React.Component {
             <Sidebar.Pushable>
 
               <Responsive as={Menu} minWidth={300} className="nav" secondary style={{ fontSize: "12px" }}  >
-                <Menu.Item icon="bars" onClick={this.toggleSide} size="large" />
-                <Menu.Item header ><img src="/images/double-u.png" style={{ width: "45px", height: "48px" }} /> </Menu.Item>
+                <Menu.Item icon="sidebar" onClick={this.toggleSide} size="huge" color="green" />
+                
+                <Menu.Item header ><img src="/images/double-u.png" style={{ width: "40px", height: "45px" }} /> </Menu.Item>
 
 
                 <Menu.Menu position="right"  >
@@ -240,6 +243,8 @@ class HeaderAccount extends React.Component {
                   <Menu.Item text={`@${this.props.ProfileReducer.username}`} as={Dropdown}  >
 
                     <Dropdown.Menu>
+                    <Dropdown.Item icon='hourglass start' text='New Story' as={Link} to='/app/add-post' />
+
                       <Dropdown.Item icon='dashboard' text='Dashboard' as={Link} to='/app/dashboard' />
                       <Dropdown.Item icon='bell' text='Notifications' as={Link} to='/app/notification' style={{ color: 'green' }} />
 
@@ -271,21 +276,19 @@ class HeaderAccount extends React.Component {
                 vertical='true'
                 className='sidebar'>
 
-                <div style={{ textAlign: 'center', padding: '10px 2px', color: 'rgb(3, 68, 94)', background: 'white' }} >
-                  <a target="__blank" href="/" style={{ color: "black" }}> <img src={logo} style={{ width: "165px", height: "73px" }} /></a>
+                <div style={{ textAlign: 'center', padding: '10px auto', color: 'rgb(3, 68, 94)', background: 'white' }} >
+                  <a target="__blank" href="/" style={{ color: "black" }}> <img src={logo} style={{ width: "160px", height: "68px", margin:"20px auto" }} /></a>
                   <br />
-                  <h4>{`${this.props.ProfileReducer.email}`}</h4>
 
                 </div>
 
 
                 <div className="accordion-item">
                   <Accordion.Title active={true} style={{ padding: '5px 20px' }} index={3} onClick={this.handleClick}>
-                    <span style={{ fontSize: "14px", color: "black" }}>INTERESTS</span>
+                    <h5 style={{ fontSize: "14px", color: "black" }}>TRENDING TOPICS</h5>
                     <Divider />
                   </Accordion.Title>
-                  <Accordion.Content style={{ padding: '1px 20px', }} className="accordion-content" active={true} content={categorySubmenu} />
-
+                  <Accordion.Content style={{ padding: '1px 20px' }} className="accordion-content" active={true} content={categorySubmenu} />
                 </div>
 
                 {/* UNTIL SECOND VERSION RELEASE

@@ -40,19 +40,31 @@ function getmonthName(number) {
 
 export default function DraftPreview(props) {
 
-    var { Grid, Item, Loader } = props.imports;
-
+    var { Grid, Item, Loader, Placeholder } = props.imports;
+    var test = [1,2,3,4, 5,6,7];
     console.log(props.data, "component")
     if (props.data.length == 0) {
 
-        return (
-            <div className='bodyArticle'>
-                <h3>Top Stories </h3>
-                <Loader active={true} content='Fetching Stories...' size="small" />
+        return(
+        <Grid.Row className='row' style={{ topMargin: '10px' }} >
 
-            </div>
-
+    {test.map(e=>{
+    return(
+        <Grid.Column key={e} style={{ margin: "10px auto" }} computer={5} mobile={16} tablet={4}  >
+        <Placeholder key={e}>
+            <Placeholder.Line />
+            <Placeholder.Line />
+            <Placeholder.Line />
+            <Placeholder.Line />
+            <Placeholder.Line />
+        </Placeholder> 
+        </Grid.Column>
+    )
+})
+    }
+</Grid.Row>
         )
+      
     }
 
 
@@ -65,25 +77,20 @@ export default function DraftPreview(props) {
 
         return (
             //<Grid.Row className="row">
-
             <Grid.Row className='row' style={{ topMargin: '10px' }} >
-                <h3>Top Stories </h3>
                 <br />
                 {props.data.data.map(function (e) {
 
                     return (
 
-                        <Grid.Column style={{ margin: "10px auto" }} computer={5} mobile={16} tablet={4} >
+                        <Grid.Column style={{ margin: "10px auto" }} computer={5} mobile={16} tablet={4}  >
                             <Item style={{ marginBottom: '12px' }} key={e._id} >
                                 <Item.Image floated="right" size="small" src={e.featured_image} />
 
                                 <Item.Content verticalAlign="middle" >
                                     <Item.Header><h4 ><a style={{ color: "black" }} href={e.post_link}>{e.title}</a></h4></Item.Header>
-                                    <Item.Description>@{e.author.toUpperCase()}</Item.Description>
+                                    <Item.Description>@{e.author.toLowerCase()}</Item.Description>
                                     <Item.Meta>{e.time_to_read} mins read</Item.Meta>
-
-
-
 
                                 </Item.Content>
                             </Item>
@@ -97,12 +104,11 @@ export default function DraftPreview(props) {
                 }
 
 
-                <Grid.Column computer={5} mobile={16} tablet={4} >
+                <Grid.Column style={{ margin: "10px auto" }} computer={5} mobile={16} tablet={4} >
 
-                    <a href="/stories" target="_blank"><Button secondary size="tiny">SEE MORE STORIES</Button></a>
+                    <a href="/stories" target="_blank"><Button size="tiny">Load More...</Button></a>
                 </Grid.Column>
             </Grid.Row>
-
 
 
 

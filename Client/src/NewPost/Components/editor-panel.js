@@ -55,8 +55,10 @@ class EditorPanel extends React.Component {
 
   onChange = ({ value }) => {
 
+    //dynamically save to Database after 5 seconds
     this.setState({ value })
     window.editor = value
+    
 
   }
 

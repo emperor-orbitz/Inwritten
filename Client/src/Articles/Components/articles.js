@@ -156,7 +156,7 @@ class Articles extends React.Component {
                         });
 
                     this.setState({ deleteArticleId: null, open: false, messageDismiss: true });
-                    var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == true);
+                    var filter_privacy = this.props.ArticleReducer.filter(nor => nor.type == "PUBLISH");
                     this.setState({ filter_privacy });
 
                 }
@@ -234,7 +234,6 @@ class Articles extends React.Component {
 
             this.setState({ filter_privacy: ask }, () => { this.focusOnId('search') })
 
-
         }
 
 
@@ -244,7 +243,7 @@ class Articles extends React.Component {
 
     componentDidMount() {
 
-        var filter_privacy = this.props.ArticleReducer.filter(nor => nor.public == true);
+        var filter_privacy = this.props.ArticleReducer.filter(nor => nor.type == "PUBLISH");
 
         this.setState({ filter_privacy });
         this.state.filter_privacy_const = filter_privacy;
@@ -343,19 +342,18 @@ class Articles extends React.Component {
                     <div className='bodyArticle'>
 
                         <Grid >
-                            <Grid.Row >
+                            <Grid.Row>
                                 <Grid.Column floated="right" computer={16} mobile={16} tablet={15}   >
 
 
                                     <div style={{ borderBottom: "3px solid navyblue", marginBottom: "5px", padding: "0px", width: "100%" }} >
-                                        <h3>Your Stories</h3>
-                                        <Form size="small"   >
-
+                                        <h4>Search Published Stories</h4>
+                                        <p></p>
+                                        <Form size="small" >
                                             <Input id='search' fluid icon={<Icon name="chevron left" />} className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch} onKeyDown={this.handleEnter} placeholder='Search by title and hit enter. e.g The angry bird fight/category' />
                                             {/* <Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions}  />*/}
                                             {/* <Button primary icon="search" onClick={this.search_with_criteria} />*/}
                                             {/*<Button color="red" icon="trash alternate outline" onClick={() => { this.setState({ open_deleteall: true }) }} />*/}
-
                                         </Form>
 
                                     </div>
@@ -365,6 +363,7 @@ class Articles extends React.Component {
 
                             </Grid.Row>
 
+                            <Grid.Row stretched >
                             {filter_privacy.map((e) => {
                                 return (
                                     <Grid.Column computer={5} mobile={16} tablet={4} >
@@ -372,15 +371,15 @@ class Articles extends React.Component {
                                             <Item.Image floated="right" size="small" src={e.featured_image} />
 
                                             <Item.Content verticalAlign="middle" >
-                                                <Item.Header as={Link} to={{ pathname: '/app/edit-post/' + e._id }}><h4 style={{ color: "black" }}>{e.title}</h4></Item.Header>
+                                                <Item.Header ><a href={e.post_link}><h4 style={{ color: "black" }}>{e.title}</h4></a></Item.Header>
                                                 <Item.Description>{e.category.toUpperCase()}</Item.Description>
                                                 <Item.Meta>{e.time_to_read} mins read</Item.Meta>
 
 
                                                 <Item.Extra >
-                                                    <Dropdown text="More">
+                                                    <Dropdown text="More...">
                                                         <Dropdown.Menu >
-                                                            <Dropdown.Item text='Preview' icon='eye' as={Link} to={{ pathname: '/app/edit-post/' + e._id }} />
+                                                            <Dropdown.Item text='Edit' icon='eye' as={Link} to={{  pathname: '/app/edit/' + e._id  }} />
                                                             <Dropdown.Item text='View Story' icon="external alternate" target="__blank" as={Link} to={`${e.post_link}`} />
                                                             <Dropdown.Item text='Delete' icon='trash alternate outline' id={e._id} title={e.title} onClick={this.showModal} />
                                                             <Dropdown.Item icon="share alternate" onClick={() => { this.openShare(e) }} text='Share' />
@@ -400,7 +399,7 @@ class Articles extends React.Component {
                                 )
 
                             })}
-
+                        </Grid.Row>
                         </Grid>
                     </div>
 

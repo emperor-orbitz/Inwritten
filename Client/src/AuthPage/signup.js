@@ -162,8 +162,8 @@ class Signup extends React.Component {
         <Header active="signup" />
 
         <div className="login">
-          <Grid columns={2} divided stackable>
-            <Grid.Column width="7">
+          <Grid columns={2} stackable>
+            <Grid.Column width="9">
               <div className="note">
                 <h2>LEARN SOMETHING NEW</h2>
                 <p>Create an account, share knowledge, learn something different.
@@ -173,7 +173,7 @@ class Signup extends React.Component {
 
             </Grid.Column>
 
-            <Grid.Column width="9" >
+            <Grid.Column width="7" >
               <Error loginError={this.state.loginError} />
 
               <Form >

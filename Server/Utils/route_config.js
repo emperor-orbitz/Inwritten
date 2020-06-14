@@ -7,11 +7,12 @@ var blog = require("../Routes/blog.route")
 var template = require("../Routes/template.route")
 var home = require("../Routes/home.route")
 var notifications = require("../Routes/notifications.route")
+var drafts = require("../Routes/drafts.route")
 
 
 
 
-router.use( home, authenticate, articles, profile,comments, blog, template, notifications );
+router.use( home, authenticate, articles, profile,comments, blog, template, notifications, drafts );
 
 
 

@@ -36,17 +36,15 @@
 		<!-- Begin Menu -->
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item active">
-			<a class="nav-link" id="loggedininfo" href="/app/edit-post/{{data._id}}"> <span class="sr-only">(current)</span></a>
+			<a class="nav-link" id="loggedininfo" href="/app/edit/{{data._id}}"> <span class="sr-only">(current)</span></a>
 			</li>
 
 			<li class="nav-item active">
 			<a class="nav-link" href="/">Refresh <span class="sr-only">(current)</span></a>
 			</li>
+			
 			<li class="nav-item">
-			<a class="nav-link" href="/user/blog/{{data.authorId.username}}">Blog</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" href="/user/profile/{{data.authorId.username}}">Author</a>
+			<a class="nav-link" href="/user/{{data.authorId.username}}">Author Space</a>
 			</li>
 		</ul>
 		<!-- End Menu -->
@@ -138,7 +136,7 @@
 				<!-- Begin Top Meta -->
 				<div class="row post-top-meta">
 					<div class="col-md-2">
-						<a href="/user/profile/{{data.authorId.username}}"><img class="author-thumb" src="{{author_data.display_picture}}" alt="Sal"></a>
+						<a href="/user/{{data.authorId.username}}"><img class="author-thumb" src="{{author_data.display_picture}}" alt="Sal"></a>
 					</div>
 					<div class="col-md-10">
 						<a class="link-dark" href="/user/profile/{{data.authorId.username}}"><b>@{{data.author}}</b></a><button class="btn btn-sm" id="follow-btn" value="{{author_data._id}}" >follow</button>

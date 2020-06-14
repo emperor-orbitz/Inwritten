@@ -159,8 +159,8 @@ class Login extends React.Component {
         <Header active="login" />
 
         <div className="login">
-          <Grid columns={2} divided stackable>
-            <Grid.Column width="7">
+          <Grid columns={2}  stackable>
+            <Grid.Column width="9">
               <div className="note">
                 <h1>SHARE AN ARTICLE</h1>
                 <p>Create contents that matters to what you love. Intrigue the world from your perspectives
@@ -171,7 +171,7 @@ class Login extends React.Component {
 
             </Grid.Column>
 
-            <Grid.Column width="9" >
+            <Grid.Column width="7" >
               <Error loginError={this.state.loginError} />
 
               <Form >

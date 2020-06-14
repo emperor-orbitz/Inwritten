@@ -1,5 +1,5 @@
 
-class FetchArticles {
+class FetchDrafts {
 
     constructor() { }
 
@@ -8,7 +8,7 @@ class FetchArticles {
     */
 
 
-    const_url = '/articles';
+    const_url = '/drafts';
     const_options = {
         method: 'POST',
         headers: {
@@ -30,7 +30,7 @@ class FetchArticles {
     *           UPDATE ARTICLE
     */
 
-    update_article(post) {
+    update_draft(post) {
         this.const_options.method = "PATCH";
         var get_options = {
             url: this.const_url + '/update',
@@ -111,7 +111,7 @@ class FetchArticles {
             fetch(get_options.url, get_options.options)
                 .then((user) => user.json())
                 .then((success) => {
-                    if (success.data.articles.length != 0) {
+                    if (success.data.length != 0) {
 
                         resolve(success.data)
                     }
@@ -131,7 +131,7 @@ class FetchArticles {
     *           DELETE SELECTED POST
     */
 
-    delete_article(id) {
+    delete_draft(id) {
 
         this.const_options.method = "DELETE";
         var get_options = {
@@ -160,7 +160,7 @@ class FetchArticles {
 
 
 
-    create_article(data) {
+    create_draft(data) {
 
         var const_options = Object.assign(this.const_options, { body: JSON.stringify(data) })
         var get_options = {
@@ -184,29 +184,7 @@ class FetchArticles {
 
 
 
-    //INTERESTS
-    interest(topic) {
-
-        this.const_options.method = "GET";
-
-
-        var get_options = {
-            url: this.const_url + '/interests?topic=' + topic,
-            options: this.const_options
-        }
-
-        return new Promise((resolve, reject) => {
-            fetch(get_options.url, get_options.options)
-                .then(user => user.json())
-                .then(result => { resolve(result.data) })
-                .catch(_ => {
-
-                    reject(_)
-
-                })
-        })
-
-    }
+  
 
 
 
@@ -236,4 +214,4 @@ class FetchArticles {
 
 
 }
-export default FetchArticles;
+export default FetchDrafts;

@@ -74,15 +74,16 @@ const SCHEME = {
     */
 
     posts: new Schema({
-
-        title: { type: String },
-        body_html: { type: mongoose.Schema.Types.Mixed },
+ 
+        title: { type: String, default:"Untitled" },
+        body_html: { type: mongoose.Schema.Types.Mixed, required:true },
         body_schema: { type: mongoose.Schema.Types.Mixed, default:null },
         featured_image: { type: String, default:"https://www.inwritten.com/images/preview_featured2.jpg" },
         category: { type: String, lowercase: true, default:"unc" },
        // Not needed createdAt: { type: Date, default: Date.now() },
-        like_count: { type: Number },
-        time_to_read: { type: Number },
+       like_count: { type: Number, default:0 },
+       read_count:{type:Number, default:0},
+        time_to_read: { type: Number, default:5 },
         comments_enabled: { type: Boolean },
         public: { type: Boolean, default:true },
         author: String, //author email
@@ -94,6 +95,7 @@ const SCHEME = {
         times_read: { type: Number, default: 0 },
         template_id: { type: mongoose.Schema.Types.ObjectId, default: "5e01d83ff47d3806c0aa6992" },
         tags: {type: String, maxlength: 100, default:" "},
+        type:{type:String, enum:["DRAFT", "PUBLISH"], default:"PUBLISH" }
 
 
     },
@@ -103,6 +105,48 @@ const SCHEME = {
             strict: false
         }
     ),
+
+ /*
+               DRAFTS SCHEMA
+    */
+
+   drafts: new Schema({
+ 
+    title: { type: String, default:"Untitled" },
+    body_html: { type: mongoose.Schema.Types.Mixed, required:true },
+    body_schema: { type: mongoose.Schema.Types.Mixed, default:null },
+    featured_image: { type: String, default:"https://www.inwritten.com/images/preview_featured2.jpg" },
+    category: { type: String, lowercase: true, default:"Draft" },
+   // Not needed createdAt: { type: Date, default: Date.now() },
+    like_count: { type: Number, default:0 },
+    read_count:{type:Number, default:0},
+    time_to_read: { type: Number, default:5 },
+    
+    comments_enabled: { type: Boolean },
+    public: { type: Boolean, default:true },
+    author: String, //author email
+    description: { type: String, default:"No Description"},
+    likes: { Type: mongoose.Schema.Types.Number, default: 0 },
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+    post_link: { type: String, default: "" },
+    authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    times_read: { type: Number, default: 0 },
+    template_id: { type: mongoose.Schema.Types.ObjectId, default: "5e01d83ff47d3806c0aa6992" },
+    tags: {type: String, maxlength: 100, default:" "},
+    type:{type:String, enum:["DRAFT", "PUBLISH"], default:"DRAFT" },
+    published:{type:Boolean, default:false, required:true}
+
+
+},
+    {
+        timestamps: true,
+        versionKey: false,
+        strict: false
+    }
+),
+
+ 
+       
 
     /*
                USER SOCIALS SCHEMA

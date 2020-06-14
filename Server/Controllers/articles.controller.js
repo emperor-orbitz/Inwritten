@@ -1,7 +1,7 @@
 var posts = require('../Models/post.model');
 var cloudinary = require('cloudinary');
 var http_status = require("../Utils/http_status");
-
+var drafts = require("../Models/draft.model")
 
 
 cloudinary.config({
@@ -15,21 +15,41 @@ cloudinary.config({
 
 
 
-//*           LOAD ALL ARTICLES
+//*           LOAD ALL ARTICLES AND DRAFTS
 
 var loadAllList = (req, res, next) => {
 
     var post = new posts();
-
-    post.loadAllPost(req.user.username, function (err, results) {
+    var draft = new drafts()
+    post.loadAllPost(req.user.username, function (err, articles) {
         if (err) {
             res.status(http_status.INTERNAL_SERVER_ERROR.code)
                 .send({ data: [] })
         }
 
-        else
-            res.status(http_status.OK.code)
-                .send({ data: results });
+        else{
+           //FIND MY DRAFTS TOO
+            draft.loadAllDraft(req.user.username, function(err, drafts){
+                if(err){
+                    res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                    .send({ data: [] })
+                }
+                else{
+                    //return both drafts and article
+                    res.status(http_status.OK.code)
+                    .send({ data: {
+                        articles:articles,
+                        drafts:drafts
+                    } });
+
+
+
+                }
+            })
+
+
+        }
+          
 
 
     })
@@ -89,95 +109,116 @@ var article = (req, res) => {
 
 
 
-//*   CREATE ARTICLE
+//*   CREATE ARTICLE: Finnaly creates article from draft image
 
 var create = (req, res) => {
-    let { title,
-        body_html,
-        body_schema,
-        category,
-        description,
-       // createdAt,
-        comments_enabled,
-        time_to_read,
-        public,
-        featured_image,
-        tags
-    } = req.body;
 
-    var postDoc = {
-        title,
-        body_schema,
-        body_html,
-        //createdAt,
-        author: req.user.username,
-        category,
-        description,
-        time_to_read,
-        comments_enabled,
-        public,
-        authorId: req.user._id,
-        featured_image : featured_image != undefined ? featured_image: "link_to_image",
-        tags,
-        post_link: `/user/${req.user.username}---${title.replace(new RegExp(/\s/ig), "-")}---${Date.now()}`
-
+    if(req.body._id != undefined){
+        //Save to draft and merge to articles
+        updateDraftAndSave(req, res)
     }
+    else{
+
+        //create draft and story
+        createWithDraft(req, res)
+        }
+
+}
 
 
-        cloudinary.v2.uploader.upload(featured_image, {
-            resource_type: "image",
-            public_id: `featured_image/${req.user._id}-${Date.now()}`,
-            overwrite: true
-        })
-        .then(result =>{
 
-            var post = new posts();
-            let final = Object.assign({}, postDoc, { featured_image: result.url });
-            post.insertPost(final, (err, success) => {
-                if (err) {
 
-                    res.status(http_status.INTERNAL_SERVER_ERROR.code)
-                       .send({ data: [],
-                                status: http_status.INTERNAL_SERVER_ERROR.code 
-                             })
-        
-                }
+var updateDraftAndSave = (req, res)=>{
 
-                else {
-                    res.send({ data: success,
-                             status: http_status.OK.code
-                      })       
-                }
+   var draft = new drafts();
+    let body = Object.assign({}, req.body, {author: req.user.username, authorId: req.user._id, published:true})
+    draft.update_draft(req.body._id, body, true, function(err, ops){ //published TRUE
 
-        })}
-     )
-            .catch(error =>{
+        if(err){
+            console.log("Unable to remove draft"+err)
+        }
+        else{
+            console.log("i passed here just not quite long", ops)
+            //save as an Article Now.
+            save(req,res)
+        }
+    })
+
+}
+
+
+
+
+var save = (req, res) =>{
+    let { 
+        _id, title, body_html, body_schema, category, description,
+         comments_enabled, time_to_read, public,featured_image, tags
+         } = req.body;
+ 
+ 
+ 
+     var postDoc = {
+         
+         _id, title, body_schema, body_html,author: req.user.username,
+         category, description, time_to_read, comments_enabled, public, authorId: req.user._id,
+         featured_image : featured_image != undefined ? featured_image: "https://www.inwritten.com/images/preview_featured2.jpg", tags,
+         post_link: `/user/@${req.user.username}/${title.replace(new RegExp(/\s/ig), "-")}---${Date.now()}`
+     }
+ 
+ 
+         cloudinary.v2.uploader.upload(featured_image, {
+             resource_type: "image",
+             public_id: `featured_image/${req.user._id}-${Date.now()}`,
+             overwrite: true
+         })
+         .then(result =>{
+ 
+             var post = new posts();
+             let final = Object.assign({}, postDoc, { featured_image: result.url });
+             post.insertPost(final, (err, success) => {
+                 if (err) {
+ 
+                     res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                        .send({ data: [],
+                                 status: http_status.INTERNAL_SERVER_ERROR.code 
+                              })
+         
+                 }
+ 
+                 else {
+                     res.send({ data: success,
+                              status: http_status.OK.code
+                       })       
+                 }
+ 
+         })}
+      )
+             .catch(error =>{
+                 
                 var post = new posts()
-
-                post.insertPost(postDoc, (err, success) => {
-                    if (success) {
-                        res.status(200)
-                            .send({
-                                  status:200,
-                                  data:success 
-                                  })
-                    }
-                    else{
-                        res.status(http_status.INTERNAL_SERVER_ERROR.code)
-                        .send({ 
-                            status:500,
-                            data: [] });
-                    }
-                        
-        
-        
-                })
-        
-            })
-
-    
-
-
+ 
+                 post.insertPost(postDoc, (err, success) => {
+                     if (success) {
+                         res.status(200)
+                             .send({
+                                   status:200,
+                                   data:success 
+                                   })
+                     }
+                     else{
+                         res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                         .send({ 
+                             status:500,
+                             data: [] });
+                     }
+                         
+         
+         
+                 })
+         
+                 
+         
+             })  
 }
 
 
@@ -186,11 +227,78 @@ var create = (req, res) => {
 
 
 
-//*   DELETE ARTICLE WITH SPECIAL _ID
+var createWithDraft =(req, res) =>{
+    let { 
+        title, body_html, body_schema, category, description,
+         comments_enabled, time_to_read, public,featured_image, tags
+         } = req.body;
+ 
+ 
+     var postDoc = { title, body_schema, body_html,author: req.user.username,
+         category, description, time_to_read, comments_enabled, public, authorId: req.user._id,
+         featured_image : featured_image != undefined ? featured_image: "link_to_image", tags,
+         post_link: `/user/@${req.user.username}/${title.replace(new RegExp(/\s/ig), "-")}---${Date.now()}`
+     }
+ 
+ 
+         cloudinary.v2.uploader.upload(featured_image, {
+             resource_type: "image",
+             public_id: `featured_image/${req.user._id}-${Date.now()}`,
+             overwrite: true
+         })
+         .then(result =>{
+ 
+             var post = new posts();
+             let final = Object.assign({}, postDoc, { featured_image: result.url });
+             post.insertPost(final, (err, success) => {
+                 if (err) {
+ 
+                     res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                        .send({ data: [],
+                                 status: http_status.INTERNAL_SERVER_ERROR.code 
+                              })
+         
+                 }
+ 
+                 else {
+                     res.send({ data: success,
+                              status: http_status.OK.code
+                       })       
+                 }
+ 
+         })}
+      )
+             .catch(error =>{
+                 var post = new posts()
+ 
+                 post.insertPost(postDoc, (err, success) => {
+                     if (success) {
+                         res.status(200)
+                             .send({
+                                   status:200,
+                                   data:success 
+                                   })
+                     }
+                     else{
+                         res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                         .send({ 
+                             status:500,
+                             data: [] });
+                     }
+                         
+         
+         
+                 })
+         
+             })
+}
+
+//DELETE ARTICLE WITH SPECIAL _ID
+//delete with associated draft
 
 var deletePost = (req, res) => {
     let { id } = req.body;
-
+    let draft = new drafts()
     var post = new posts();
 
     post.delete_article(id, (err, success) => {
@@ -200,8 +308,18 @@ var deletePost = (req, res) => {
 
 
         else {
-            res.status(http_status.OK.code)
-               .send({ status:200, data: success})
+            //delete associated draft
+            draft.delete_draft(id, function(err, success){
+                if(err) 
+                 res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                            .send({ status:500, data: [] });
+ 
+                            else{
+                                res.status(http_status.OK.code)
+                                .send({ status:200, data: success})
+                            }
+            })
+         
 
         }
 
@@ -214,19 +332,42 @@ var deletePost = (req, res) => {
 
 var update = (req, res) => {
     var post = new posts();
-    post.update_article(req.body._id, req.body, (err, success) => {
-        if (err) {
-            res.status(http_status.INTERNAL_SERVER_ERROR.code)
-               .send({ status:500, data: [] })
-               console.log(err+"errr")
-        }
+    //update the draft and update the post
+    let draft = new drafts()
+    let body = Object.assign({}, req.body, {author: req.user.username, authorId: req.user._id, published:true})
 
-        else
-            res.status(http_status.OK.code)
-               .send({ status:200, data: success });
+    draft.update_draft(req.body._id, body, true, (err1, result)=>{
+
+        if(err1){
+            //do nothing
+        }
+        else{
+
+
+
+            post.update_article(req.body._id, req.body, (err2, success) => {
+                if (err2) {
+                    res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                       .send({ status:500, data: [] })
+                       console.log(err+"errr")
+                }
+        
+                else
+                    res.status(http_status.OK.code)
+                       .send({ status:200, data: result });
+        
+            })
+    
+            
+
+        }
+       
+       
+
 
     })
 
+   
 }
 
 var like =(req, res) =>{
@@ -289,5 +430,6 @@ module.exports = {
     like:like,
     interests:interests,
     loadImage: loadImage,
-    delete_all: delete_all
+    delete_all: delete_all,
+    save: save
 };

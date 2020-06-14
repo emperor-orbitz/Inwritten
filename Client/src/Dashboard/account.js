@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '../../Resources/styles/account.scss';
-import { Button,  Grid, Card, Image, Label, Item, Divider, Dropdown, Loader } from 'semantic-ui-react';
+import { Button,  Grid, Card, Image, Label, Item, Divider, Dropdown, Loader, Placeholder } from 'semantic-ui-react';
 import {  Icon,  Progress } from 'semantic-ui-react';
 import Connection from '../../Controllers/auth.controller';
 import {  withRouter } from 'react-router';
@@ -60,7 +60,6 @@ try {
   let counts = await stats.fetchStats();
   let blogs = await this.fetchBlog.get_five_stories();
   let notif = await notifications.get_notifications(this.props.ProfileReducer._id);
-    console.log(blogs,"COMPONENTDIDMOUNT")
 
 
   if (notif.data == null) {
@@ -95,7 +94,8 @@ try {
       Label: Label,
       Item: Item,
       Loader: Loader,
-      Dropdown: Dropdown
+      Dropdown: Dropdown,
+      Placeholder:Placeholder
     }
 
 
@@ -106,30 +106,49 @@ try {
       <div >
 
           <div className="bodyArticle">
-          <h2>Your Board</h2>
-            <Grid stackable >
-              <Grid.Row textAlign="center" divided columns="3">
+            <Grid >
+            <Grid.Row ><h3 style={{marginLeft:"12px"}}>My Activity </h3></Grid.Row>
+
+              <Grid.Row textAlign="center" columns="3" style={{marginBottom:"20px"}}>
+              
                 <Grid.Column>
                   <p style={{fontSize:"25px"}}>{this.state.follower_count}</p>
-                  <p>FOLLOWERS</p>
+                  <p>Followers</p>
                 </Grid.Column>
-                <Grid.Column>
+                <Grid.Column >
                   <p style={{fontSize:"25px"}}>{this.state.story_count}</p>
-                  <p>STORIES</p>
+                  <p>Stories</p>
                 </Grid.Column>
                 <Grid.Column>
                   <p style={{fontSize:"25px"}}>{this.props.ProfileReducer.bookmarks.length}</p>
-                  <p>BOOKMARKS</p>
+                  <p>Bookmarks</p>
                 </Grid.Column>
               </Grid.Row>
+              <Divider />
 
+              <Grid.Row ><h3 style={{marginLeft:"12px"}}>Editors' Pick </h3>
+              <p>&nbsp; Stories from topics or people you follow</p>
+              
+              </Grid.Row>
               <DraftPreview data={ this.state.blog } imports={imports} />
 
               <Divider />
 
-              <Grid.Row>
-                <NotificationsPreview data={this.state.notifications} />
+              <Grid.Row  style={{paddingLeft:"12px"}}>
+              <h3>My Circle </h3>
               </Grid.Row>
+              <DraftPreview data={ this.state.blog } imports={imports} />
+
+              <Divider />
+
+              <Grid.Row ><h3 style={{marginLeft:"12px"}}>Popular Stories </h3></Grid.Row>
+              <DraftPreview data={ this.state.blog } imports={imports} />
+
+              <Divider />
+
+              {/* <Grid.Row>
+                <NotificationsPreview data={this.state.notifications} />
+              </Grid.Row> */}
 
             </Grid>
 

@@ -7,6 +7,7 @@ import { withRouter } from 'react-router';
 
 import { connect } from 'react-redux';
 import FetchArticles from '../../Controllers/article.controller'
+import FetchDrafts from "../../Controllers/draft.controller"
 import cat from '../Dashboard/categories';
 import QuillTestNew from './Components/QuillTestNew';
 import { Link } from "react-router-dom"
@@ -22,6 +23,8 @@ class AddPost extends React.Component {
 
     // COMPNENENT STATE
     this.state = {
+      editorHTML: "",
+      editorJSON: "",
       open_share: false,
       copyToClipboard: "Copy to clipboard",
       share_data: {},
@@ -32,7 +35,7 @@ class AddPost extends React.Component {
       success_message: '',
       privacy_value: true,
       enable_comments: true,
-      post_title: '',
+      post_title: 'Untitled',
       featured_image: '/images/preview_featured2.jpg',
       createdAt: Date.now(),
       tag_value: '',
@@ -42,7 +45,9 @@ class AddPost extends React.Component {
       tagMax: '',
       open_options: false,
       post_link: "",
-      network_error: ""
+      network_error: "",
+      dynamicSave: " ",
+      post_id: undefined
     }
 
     this.handleTags = this.handleTags.bind(this);
@@ -51,62 +56,141 @@ class AddPost extends React.Component {
 
   }
 
+//CopyTocLipboard Button
+copyToClipboard = () => {
+  var dummy = document.createElement("textarea")
+  document.body.appendChild(dummy)
+  dummy.setAttribute("id", 'dummy_id');
+  document.getElementById("dummy_id").value = `http://www.inwritten.com${this.state.share_data.post_link}`;
+  dummy.select()
+  document.execCommand("copy");
+  document.body.removeChild(dummy);
+  this.setState({ copyToClipboard: "Copied!" })
+}
+
+
+//Close Share Modal
+closeShare = () => {
+  this.setState({ open_share: false })
+}
+  // Share to Whatsapp Button
+  shareToWhatsApp = (e, data) => {
+
+    e.preventDefault()
+    let url = encodeURIComponent(`Hey, check out my new story on Inwritten. It's here: https://www.inwritten.com${data.post_link}`)
+    window.location.href = `https://wa.me/?text=${url}`
+  }
+
+
+  // Share to Facebook Button
+  shareToFacebook = (e, data) => {
+
+    e.preventDefault()
+    let url = encodeURIComponent(`https://www.inwritten.com${data.post_link}`)
+    window.open(
+      'https://www.facebook.com/dialog/share?app_id=508448136537979&display=popup&href=' + url + '&redirect_uri=https%3A%2F%2Fwww.inwritten.com/stories',
+      'facebook-share-dialog',
+      'width=400,height=300', false);
+
+  }
 
 
 
-  /*
+  // Open Share Modal
+  openShare = (share_data) => {
+
+    this.setState({ open_share: true, share_data: share_data, copyToClipboard: "Copy to clipboard" })
+  }
+
+ /*
   *           HANDLE CHANGE EVENTS ON INPUTS
   */
-  handleTags(e) {
-    this.setState({ tag_value: e.target.value });
+ handleTags(e) {
+  this.setState({ tag_value: e.target.value });
 
+}
+
+
+
+
+//Handle other Input fields
+handleInputs(e, prop = prop || '') {
+  e.preventDefault();
+  var { name, value } = e.target;
+
+  if (prop == "") {
+    switch (name) {
+
+      case 'title':
+        this.setState({ post_title: value });
+        break;
+
+      case 'time':
+        this.setState({ time_to_read: value });
+        break;
+
+      case 'description':
+        this.setState({ post_description: value });
+        break;
+      case 'tags':
+        this.handleTags();
+
+    }
+  }
+  else {
+
+    switch (prop.name) {
+
+      case 'category':
+        let category = prop.value;
+        this.setState({ post_category: category });
+        break;
+
+    }
+
+  }
+
+  return null;
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  manageEditorState = (html, json, plaintext) => {
+    this.state.editorHTML = html;
+    this.state.editorJSON = json;
+    //manage update
+    if(plaintext.length % 20 == 0 ){
+
+    this.AddPostAsDraft(html, json)
+    }
   }
 
 
 
 
-  //Handle other Input fields
-  handleInputs(e, prop = prop || '') {
-    e.preventDefault();
-    var { name, value } = e.target;
-
-    if (prop == "") {
-      switch (name) {
-
-        case 'title':
-          this.setState({ post_title: value });
-          break;
-
-        case 'time':
-          this.setState({ time_to_read: value });
-          break;
-
-        case 'description':
-          this.setState({ post_description: value });
-          break;
-        case 'tags':
-          this.handleTags();
-
-      }
-    }
-    else {
-
-      switch (prop.name) {
-
-        case 'category':
-          let category = prop.value;
-          this.setState({ post_category: category });
-          break;
-
-      }
-
-    }
-
-    return null;
 
 
-  }
-
+ 
 
 
   handlePostprivacy = (e, { value }) => this.setState({ privacy_value: !this.state.privacy_value }); //Privacy Input handler
@@ -141,7 +225,9 @@ class AddPost extends React.Component {
     //return true;
   }
 
-
+  componentWillMount(){
+    document.title ="New Story - Inwritten"
+  }
 
   //UNSAFE ComponentWillReceiveProps
   componentWillReceiveProps(nextProps) {
@@ -155,54 +241,84 @@ class AddPost extends React.Component {
 
 
 
-  // Share to Whatsapp Button
-  shareToWhatsApp = (e, data) => {
 
-    e.preventDefault()
-    let url = encodeURIComponent(`Hey, check out my new story on Inwritten. It's here: https://www.inwritten.com${data.post_link}`)
-    window.location.href = `https://wa.me/?text=${url}`
+
+  
+  
+
+
+
+  AddPostAsDraft(html, json) {
+
+
+    this.setState({ dynamicSave: "Saving..." });
+
+    let add = new FetchDrafts()
+    var post = {
+      _id: this.state.post_id,
+      title: this.state.post_title,
+      category: this.state.post_category,
+      description: this.state.post_description.trim(),
+      time_to_read: this.state.time_to_read,
+      comments_enabled: this.state.enable_comments,
+      public: false,
+      body_html: html,
+      body_schema: json,
+      featured_image: this.state.featured_image,
+      comments: [],
+      tags: this.state.tag_value,
+
+    }
+
+
+    add.create_draft(post).then(
+      (okay) => {
+
+        console.log(okay)
+        this.state.post_id = okay._id
+        this.state.post_link = okay.post_link;
+
+        let present = this.props.DraftReducer.filter(v=>v._id ==okay._id);
+        // this.props.DraftReducer.forEach(element => {
+        //   if(element._id == okay._id){
+        //     console.log("I RAN UPDATE")
+        //     this.props.dispatch({ type: 'UPDATE_DRAFT', payload: okay });
+
+        //   }
+        //   else{
+        //     console.log("I RAN INSERT")
+        //     this.props.dispatch({ type: 'INSERT_DRAFT', payload: okay });
+
+        //   }
+        // });
+        if(present.length ==0){
+          console.log("I RAN INSERT")
+          this.props.dispatch({ type: 'INSERT_DRAFT', payload: okay });
+        }
+        else{
+          console.log("I RAN UPDATE")
+
+          this.props.dispatch({ type: 'UPDATE_DRAFT', payload: okay });
+  
+
+        }
+
+
+        this.setState({
+          dynamicSave: "Saved"
+        })
+
+
+      })
+      .catch(err => {
+        this.setState({
+          dynamicSave: "Unable to save at the moment.." + err
+        })
+      })
+
+
+
   }
-
-
-  // Share to Facebook Button
-  shareToFacebook = (e, data) => {
-
-    e.preventDefault()
-    let url = encodeURIComponent(`https://www.inwritten.com${data.post_link}`)
-    window.open(
-      'https://www.facebook.com/dialog/share?app_id=508448136537979&display=popup&href=' + url + '&redirect_uri=https%3A%2F%2Fwww.inwritten.com/stories',
-      'facebook-share-dialog',
-      'width=400,height=300', false);
-
-  }
-
-
-
-  // Open Share Modal
-  openShare = (share_data) => {
-
-    this.setState({ open_share: true, share_data: share_data, copyToClipboard: "Copy to clipboard" })
-  }
-
-
-  //CopyTocLipboard Button
-  copyToClipboard = () => {
-    var dummy = document.createElement("textarea")
-    document.body.appendChild(dummy)
-    dummy.setAttribute("id", 'dummy_id');
-    document.getElementById("dummy_id").value = `http://www.inwritten.com${this.state.share_data.post_link}`;
-    dummy.select()
-    document.execCommand("copy");
-    document.body.removeChild(dummy);
-    this.setState({ copyToClipboard: "Copied!" })
-  }
-
-
-  //Close Share Modal
-  closeShare = () => {
-    this.setState({ open_share: false })
-  }
-
 
 
 
@@ -215,31 +331,34 @@ class AddPost extends React.Component {
     var panel = new QuillTestNew();
 
     this.setState({ buttonDisabled: true, dimmerLoad: true, network_error: `` });
-
     var post = {
-      title: this.state.post_title.trim(),
+      _id:this.state.post_id,
+      title: this.state.post_title,
       category: this.state.post_category,
       description: this.state.post_description.trim(),
       time_to_read: this.state.time_to_read,
       comments_enabled: this.state.enable_comments,
       public: this.state.privacy_value,
-      body_html: panel.exposedHTMLvalue,
-      body_schema: panel.exposedEditorValue,
+      body_html: this.state.editorHTML,//panel.exposedHTMLvalue,
+      body_schema: this.state.editorJSON,//panel.exposedEditorValue,
       featured_image: this.state.featured_image,
       comments: [],
-      tags: this.state.tag_value
+      tags: this.state.tag_value,
+      published:true
 
     }
+
+
 
     let val = this.postValidation();
     if (val === true) {
 
       add.create_article(post).then(
         (okay) => {
-
+          console.log("came back with this fromDB", okay)
           this.state.post_link = okay.post_link;
-          let with_id = Object.assign({}, post, { _id: okay._id, post_link: okay.post_link });
-          this.props.dispatch({ type: 'INSERT_ARTICLE', payload: with_id });
+          let with_status = Object.assign({}, post, { published:true });
+          this.props.dispatch({ type: 'INSERT_ARTICLE', payload: with_status });
 
           this.setState({
             success_message: ' ',
@@ -249,7 +368,7 @@ class AddPost extends React.Component {
             open_options: false
           })
 
-          this.openShare(with_id)
+          this.openShare(okay)
 
         })
         .catch(err => {
@@ -257,7 +376,7 @@ class AddPost extends React.Component {
             buttonDisabled: false,
             dimmerLoad: false,
             open_options: false,
-            network_error: `Hey, It seems you are offline. Try again`
+            network_error: `Hey, It seems you are offline. Try again${err}`
           })
         })
     }
@@ -305,9 +424,9 @@ class AddPost extends React.Component {
   handle_profile_photo(ev) {
 
     this.readFile(ev.target.files[0]).then(result => {
-
       this.setState({ featured_image: result });
     })
+
   }
 
 
@@ -315,8 +434,9 @@ class AddPost extends React.Component {
   leavePage = ({ id, post_link }) => {
     this.setState({ open_share: false })
 
-    window.history.replaceState("", "", "/app/edit-post/" + id);
+    window.history.replaceState("", "", "/app/edit/" + id);
     window.location = post_link
+
   }
 
 
@@ -324,7 +444,7 @@ class AddPost extends React.Component {
   //RENDER METHOD
   render() {
 
-    var privacy_value = (this.state.privacy_value == true) ? 'Publish to the World' : ' Save to draft';
+    var privacy_value = (this.state.privacy_value == true) ? 'Visible' : ' Not Visible';
     var comment_value = (this.state.enable_comments == true) ? 'Commenting is enabled' : 'Commenting is disabled';
 
     var categoryOptions = cat.categories;
@@ -333,14 +453,12 @@ class AddPost extends React.Component {
 
     return (
 
-
       <div className='add-post'>
 
         <Grid stackable>
           <Grid.Row  >
-
-            <Grid.Column mobile={16} tablet={16} computer={16} style={{ padding: '0px 5px' }}  >
-
+          <Grid.Column mobile={16} tablet={16} computer={13} style={{ padding: '0px 5px' }}  >
+            <p style={{ paddingLeft:"5%", color: "silver" }}><i> {this.state.dynamicSave}</i></p>
               {this.state.network_error === '' ?
                 ""
                 :
@@ -353,7 +471,6 @@ class AddPost extends React.Component {
                     <Icon name='unlink' size='big' />
                     <p style={{ padding: '5px', color: 'red', width: '90%', borderRadius: '0px' }}>  {this.state.network_error} </p>
                   </div>
-
                   </div>
                 </div>
               }
@@ -367,14 +484,13 @@ class AddPost extends React.Component {
 
               { /*EDITOR PANEL INITIAL */}
 
-              <QuillTestNew />
+              <QuillTestNew state={this.manageEditorState} />
 
-            </Grid.Column>
 
-            <Grid.Column mobile={16} tablet={2} computer={2}>
+
 
               <Modal size='mini' open={this.state.open_share} onClose={this.closeShare} closeOnDimmerClick={false} closeIcon={<Icon name="times" size="small" color="black" onClick={() => {
-                if (this.state.share_data.public == true) {
+                if (this.state.share_data.public == false) {
                   this.leavePage({ id: this.state.share_data._id, post_link: this.state.share_data.post_link })
 
                 }
@@ -385,7 +501,7 @@ class AddPost extends React.Component {
 
               }} />} >
 
-                {this.state.share_data.public == true ?
+                {/* {this.state.share_data.public == true ? */}
                   <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
                     <div style={{ textAlign: 'center' }}>
                       <Icon name="check circle" color="green" size="huge" />
@@ -405,22 +521,12 @@ class AddPost extends React.Component {
                       <Button onClick={(e) => this.shareToWhatsApp(e, this.state.share_data)} color="green" fluid icon="whatsapp" labelPosition='left' content='Share to WhatsApp' size='small' />
                     </div>
                   </Modal.Content>
-                  :
-                  <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
-                    <div style={{ textAlign: 'center' }}>
-                      <Icon name="check circle" color="green" size="huge" />
-                      <h4 >Your Draft has been Saved  </h4>
-                      <Button as={Link} to={{ pathname: "/app/edit-post/" + this.state.share_data._id }} size="small">Continue Editing</Button>
-
-                    </div>
-                  </Modal.Content>
-
-                }
+                 
               </Modal>
 
 
               <Modal size="small" basic style={{ color: "white !important" }} open={this.state.open_options} onClose={this.close}  >
-                <h3 style={{ margin: '1px 2%', color: "white" }}>Story Settings</h3>
+                <h3 style={{ margin: '1px 2%', color: "white" }}>Post Settings</h3>
                 <Modal.Content image >
 
                   <div className="featured-pix-block">
@@ -515,7 +621,15 @@ class AddPost extends React.Component {
                 </Modal.Actions>
               </Modal>
 
+
+              {/* mODAL ENDS HERE */}
             </Grid.Column>
+{/* 
+            <Grid.Column mobile={16} tablet={2} computer={2}>
+
+             
+
+            </Grid.Column> */}
 
           </Grid.Row>
 
@@ -525,7 +639,7 @@ class AddPost extends React.Component {
 
 
 
-      </div> )
+      </div>)
 
 
   }
@@ -536,6 +650,12 @@ var mapStatetoProps = (state) => {
   return state;
 }
 
-
+var mapDispatchtoProps = (dispatch) => {
+  return {
+    addPost: () => {
+      return dispatch({ type: " " })
+    }
+  }
+}
 
 export default withRouter(connect(mapStatetoProps)(AddPost));

@@ -1,109 +1,146 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <title>Inwritten ! Subscribe</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="Inwritten.com - Create unique contents">
-        <meta name="keywords" content="Inwritten, Stories, Online Editor">
+<head>
+    <title>Inwritten - A Theme based content hub </title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Inwritten.com - Create unique contents">
+    <meta name="keywords" content="Inwritten, Stories, Online Editor">
     <meta name="google-site-verification" content="MsrurMObUJdLEKb0o2s2lANj5l_ERBIixHEWRAzrXKk" />
-        <!-- Font -->
-        <link rel="dns-prefetch" href="//fonts.googleapis.com">
-        <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
-    
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <!-- Themify Icons -->
-        <link rel="stylesheet" href="css/themify-icons.css">
-        <!-- Owl carousel -->
-        <!-- Main css -->
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    
+    <!-- Font -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Themify Icons -->
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <!-- Owl carousel -->
+    <!-- Main css -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
 <body>
 
     <style>
-
-        body{
-            background-image:url('/images/subscribe.png');       
-            background-size:auto;
+        body {
+            background-size: auto;
             background-repeat: no-repeat;
-            background-position: left;
-            background-size: 40%;
-        
-        
+            background-position: left center;
+            background-size: 50%;
+
+
         }
-.btn-submit:hover{
-    background-color: rgb(10, 2, 44);
-    color: white;
-    cursor: pointer;
-}
 
-.unstyled-link{
+        .btn-submit:hover {
+            background-color: rgb(10, 2, 44);
+            color: white;
+            cursor: pointer;
+        }
+
+        .unstyled-link {
+            color: white;
+            font-size: 15px;
+            margin-right: 10px
+        }
+
+
+        .unstyled-link:hover {
+            color: gold;
+            text-decoration: none;
+        }
+
+        .socials-panel {
+            margin-top: 100px;
+        }
+
+        .container {
+            text-align: right;
+            color: black;
+            margin: 10% auto !important;
+            background-image: url('/images/undraw_convert_2gjv.svg');
+            background-repeat: no-repeat;
+            background-position: left left;
+            background-size: 70%;
+
+
+        }
+
+input[type="email"]{
+    background: rgba(0,0,0,0.5);
     color:white;
-    font-size: 15px;
-    margin-right: 10px
 }
+        .page-logo {
+            width: 100px;
+            height: 110px;
+
+        }
+
+        .unstyled-link {
+            color: black;
+        }
+
+        @media screen and (max-width: 490px) {
+
+            input {
+                width: 100% !important;
+                margin-bottom: 10px;
+            }
+
+            .container {
+
+                margin: 14% auto !important;
+                background-image: url('/images/undraw_convert_2gjv.svg');
+                background-position: bottom left;
+                    
+            }
+        }
 
 
-.unstyled-link:hover{
-    color:gold;
-    text-decoration: none;
-}
-
-.socials-panel{
-    margin-top:100px;
-}
-
-.container{
-text-align: center;
-color: black;
-margin:10% auto !important
-}
-
-.page-logo{
-    width:120px;
-    height:120px;
-
-}
-
-.unstyled-link{
-    color:black;
-}
-
+        .right-float{
+            /* float:right; */
+        }
     </style>
 
 
-   <div class="container"  >
-    <img src="images/inwritten-logo-black.png" class="page-logo"/>
-    <div class="divider" style="width:50%; margin:30px 25% 50px 25%; height:0px; "></div>
-   
-    <h3 style="color:black;"> A plug to share your <b id="change_of_words">thoughts</b> </h3>
-    <p style="margin-bottom:30px;color:black"> Be among the first 100 to get free <b>lifetime access</b> to our in-app store and receive regular updates.</p>
-<p>
-    <form action="" id="subscribeForm" method="POST">
-        <p id="error-box"></p>
-    <input type="email" name="email" placeholder="    Enter your email address" required aria-required="true" style="border:1px solid black;height:50px; border-radius:25px; width:50%"/>
-    <input type="submit" class=" btn btn-submit" value="Subscribe" style="height:50px; border:none; border-radius:25px; width:120px"/>
-</form>
+    <div class="container">
+        <div class="right-float">
+            <img src="images/inwritten-logo-black.png" class="page-logo" />
+            <div class="divider" style="width:50%; margin:30px 25% 50px 25%; height:0px; "></div>
+
+            <h3 style="color:black;"> A plug to share your <b id="change_of_words">thoughts</b> </h3>
+            <p style="margin-bottom:30px;color:black"> Be among the first 100 to get free <b>lifetime access</b> to our
+                in-app store and receive regular updates.</p>
+            <p>
+            <form action="" id="subscribeForm" method="POST">
+                <p id="error-box"></p>
+                <input type="email" name="email" placeholder="    Enter your email address" required
+                    aria-required="true" style="border:1px solid black;height:50px; border-radius:25px; width:50%" />
+                <input type="submit" class=" btn btn-submit" value="Subscribe"
+                    style="height:50px; border:none; border-radius:25px; width:120px" />
+            </form>
 
 
-    </p>
+            </p>
 
-    <div class="socials-panel">
-        <p style="color:black; font-size: 12px">Meanwhile, never miss our pages</p>
-        <a class="unstyled-link" href="http://www.inwritten.com/signup"><span class="ti ti-lg ti-world"></span></a>
-            <a class="unstyled-link" href="http://www.facebook.com/Inwritten"><span class="ti ti-lg ti-facebook"></span></a>
-            <a class="unstyled-link" href="http://www.instagram.com/inwritten_"><span class="ti ti-lg ti-instagram"></span> </a>
-            <a class="unstyled-link" href="https://www.linkedin.com/company/42405525/"><span class="ti ti-lg ti-linkedin"></span> </a>
+            <div class="socials-panel">
+                <p style="color:black; font-size: 12px">Meanwhile, never miss updates on our pages</p>
+                <a class="unstyled-link" href="http://www.inwritten.com/signup"><span
+                        class="ti ti-lg ti-world"></span></a>
+                <a class="unstyled-link" href="http://www.facebook.com/Inwritten"><span
+                        class="ti ti-lg ti-facebook"></span></a>
+                <a class="unstyled-link" href="http://www.instagram.com/inwritten_"><span
+                        class="ti ti-lg ti-instagram"></span> </a>
+                <a class="unstyled-link" href="https://www.linkedin.com/company/42405525/"><span
+                        class="ti ti-lg ti-linkedin"></span> </a>
+
+
+            </div>
 
 
         </div>
-
-
-
     </div>
 
 
@@ -113,4 +150,5 @@ margin:10% auto !important
     <!-- Custom JS -->
     <script src="js/launch.js"></script>
 </body>
+
 </html>
