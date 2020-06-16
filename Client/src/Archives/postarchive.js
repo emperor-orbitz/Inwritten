@@ -298,7 +298,7 @@ class PostArchive extends React.Component {
                             <p style={{ textAlign: 'center' }}> <Icon size='big' name='trash' />
                                 <h3 >{`Delete "${this.state.deleteArticleName}" ?`}  </h3>
                                 <br />
-                                <Button size="small" color='red' icon='trash alternate outline' labelPosition='right' content='Delete' size='tiny' onClick={this.deletePost.bind(this, [this.state.deleteArticleId])} disabled={this.state.deleteArticleId !=null}/>
+                                <Button size="small" color='red' icon='trash alternate outline' labelPosition='right' content='Delete' size='tiny' onClick={this.deletePost.bind(this, [this.state.deleteArticleId])} />
                             </p>
 
                         </Modal.Content>
