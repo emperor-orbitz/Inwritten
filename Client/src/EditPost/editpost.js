@@ -33,7 +33,7 @@ class EditPost extends React.Component {
       privacy_value: false,
       enable_comments: true,
       post_title: '',
-      featured_image: '',
+      featured_image: '/images/preview_featured2.jpg',
       createdAt: Date.now(),
       comments: [],
       post_category: 'all',
@@ -240,7 +240,7 @@ class EditPost extends React.Component {
 
       add.update_article(post).then(okay => {
         this.state.post_link = post.post_link
-
+        
         this.props.dispatch({ type: 'UPDATE_ARTICLE', payload: post });
 
         this.setState({
@@ -320,6 +320,7 @@ componentWillMount(){
           likes: x.likes,
           post_link: x.post_link,
           tag_value: x.tags,
+          featured_image: x.featured_image
         });
 
       }
@@ -519,7 +520,7 @@ componentWillMount(){
                   <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
                     <div style={{ textAlign: 'center' }}>
                       <Icon name="check circle" color="green" size="huge" />
-                      <h4 >Your Draft has been Saved  </h4>
+                      <h4 >Your update has successfully been published  </h4>
                       <Button onClick={this.closeShare}>Continue Editing</Button>
                     </div>
                   </Modal.Content>

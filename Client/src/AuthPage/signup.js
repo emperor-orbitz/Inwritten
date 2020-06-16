@@ -1,12 +1,12 @@
 import React from 'react';
 import '../../Resources/styles/style.scss';
-import { Button, Form, Message, Grid, Icon, Loader } from 'semantic-ui-react';
+import { Button, Form, Message, Grid, Loader } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
-
+import Connection from '../../Controllers/auth.controller';
 import {  connect } from 'react-redux';
 import Header from '../../src/AuthPage/header';
 import validateSignup from '../../Controllers/validators/signup.validator'
-
+import {Modal, Icon} from  "semantic-ui-react";
 
 function DimmerLoad(props) {
   return <Loader active={props.active} size={props.size} inline />
@@ -51,7 +51,8 @@ class Signup extends React.Component {
       usernameValue: '',
       emailValue: '',
       passwordValue: '',
-      loginError: []
+      loginError: [],
+      open_modal:false
 
     }
   }
@@ -116,9 +117,9 @@ class Signup extends React.Component {
           }
           
           else if (message.message == 'Account successfully created') {
-
-            alert('account created successfully. You can now login with Username')
-            this.props.history.replace('/app/login');
+            this.openModal()
+            // alert('account created successfully. You can now login with Username') test
+            // this.props.history.replace('/app/login');
 
           }
 
@@ -128,18 +129,47 @@ class Signup extends React.Component {
           console.log(`this ${err} occured`);
 
         })
-
-    }
-
-
-
-
-
-
-
-
+      }
 
   }
+
+
+
+
+  componentDidMount() {
+    let hs_token = localStorage.getItem("hs_token");
+    var connect = new Connection();
+
+    connect.isLoggedin(hs_token)
+      .then( _ => {
+
+        this.props.dispatch({ type: 'INJECT_PROFILE', payload: _ })
+        this.props.history.replace('/app/dashboard');
+
+      })
+      .catch(_ => {
+
+        console.log( _ + "I GOT THIS IN THIS PLACE");
+
+      })
+
+  }
+
+
+
+
+openModal(){
+this.setState({open_modal:true})
+}
+
+closeModal =()=>{
+  this.setState({open_modal:false})
+  this.props.history.replace('/app/login');
+}
+
+
+
+
 
   uChange = (e) => {
     this.setState({ usernameValue: e.target.value });
@@ -159,7 +189,7 @@ class Signup extends React.Component {
       <div className="bodyLogin">
 
 
-        <Header active="signup" />
+      <Header active="signup" />
 
         <div className="login">
           <Grid columns={2} stackable>
@@ -197,6 +227,39 @@ class Signup extends React.Component {
                 <Button size="large" disabled={this.state.button.disabled} type='submit' onClick={this.submit}>CREATE AN ACCOUNT<DimmerLoad size="small" active={this.state.button.dimmerLoad} /></Button>
               </Form>
             </Grid.Column>
+
+
+
+      
+            <Modal size='mini' open={this.state.open_modal} onClose={this.closeModal} closeOnDimmerClick={false}  >
+
+                {/* {this.state.share_data.public == true ? */}
+                  <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
+                    <div style={{ textAlign: 'center' }}>
+                      <Icon name="check circle" color="green" size="huge" />
+                      <h4 >Account successfully created!!  </h4>
+                      <p style={{ fontSize: "10px" }}> Continue to Log in </p>
+
+                      <Button icon="sign in" labelPosition='left' content="Log In" size='small' fluid onClick={this.closeModal} />
+                      <br />
+                      </div>
+                  </Modal.Content>
+                 
+              </Modal>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           </Grid>
         </div>

@@ -156,7 +156,7 @@ class Articles extends React.Component {
                         });
 
                     this.setState({ deleteArticleId: null, open: false, messageDismiss: true });
-                    var filter_privacy = this.props.ArticleReducer.filter(nor => nor.type == "PUBLISH");
+                    var filter_privacy = this.props.ArticleReducer.filter(nor => nor.type == "PUBLISH" );
                     this.setState({ filter_privacy });
 
                 }
@@ -277,10 +277,9 @@ class Articles extends React.Component {
 
                     <img src="/images/empty.png" className='empty-png' />
                     <br />
-                    <h4 style={{ textAlign: "center" }}>You don't have any published story. You can create one <Button size="tiny" as={Link} to="/app/add-post">here</Button></h4>
+                    <h4 style={{ textAlign: "center" }}>You don't have any published story yet. It all starts with a short <Button secondary as={Link} to="/app/add-post">draft</Button></h4>
 
-
-                </div>
+            </div>
 
 
 

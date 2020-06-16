@@ -83,9 +83,8 @@ height:70px;
 
 .nav{
  margin-bottom:0px;
-height:70px;
  //background: linear-gradient(to left, white, silver, rgb(4,68,8) ) !important;
-  // box-shadow:2px 2px 2px 1px silver !important;
+box-shadow:-10px 2px 15px 1px silver !important;
   
  
 }
@@ -158,9 +157,8 @@ color:white;
 
 
 .login{
-width:80%;
 color:white;
-margin: 10%;
+margin: 11% 5%;
 }
 
 
@@ -174,7 +172,7 @@ margin: 10%;
 
 }
 .note{
-  width:70%;
+  width:90%;
   min-height:200px;
   padding:4%;
   border-radius: 2px;
@@ -247,8 +245,8 @@ text-align: center;
 
 
 .splash{
-  width:80px;
-  height:80px;
+  width:50px;
+  height:50px;
   //animation:2s infinite  ease-in-out rotator  ;
   transform-origin: center ;
 }

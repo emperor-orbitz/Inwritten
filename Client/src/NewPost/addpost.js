@@ -274,7 +274,7 @@ handleInputs(e, prop = prop || '') {
     add.create_draft(post).then(
       (okay) => {
 
-        console.log(okay)
+        console.log(okay, "this WAS MOTOR JAM")
         this.state.post_id = okay._id
         this.state.post_link = okay.post_link;
 
@@ -357,8 +357,8 @@ handleInputs(e, prop = prop || '') {
         (okay) => {
           console.log("came back with this fromDB", okay)
           this.state.post_link = okay.post_link;
-          let with_status = Object.assign({}, post, { published:true });
-          this.props.dispatch({ type: 'INSERT_ARTICLE', payload: with_status });
+          //let with_status = Object.assign({}, post, { published:true });
+          this.props.dispatch({ type: 'INSERT_ARTICLE', payload: okay });
 
           this.setState({
             success_message: ' ',

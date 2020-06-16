@@ -127,7 +127,6 @@ try {
               <Divider />
 
               <Grid.Row ><h3 style={{marginLeft:"12px"}}>Editors' Pick </h3>
-              <p>&nbsp; Stories from topics or people you follow</p>
               
               </Grid.Row>
               <DraftPreview data={ this.state.blog } imports={imports} />

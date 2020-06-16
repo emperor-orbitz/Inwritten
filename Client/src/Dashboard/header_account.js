@@ -232,9 +232,9 @@ class HeaderAccount extends React.Component {
             <Sidebar.Pushable>
 
               <Responsive as={Menu} minWidth={300} className="nav" secondary style={{ fontSize: "12px" }}  >
-                <Menu.Item icon="sidebar" onClick={this.toggleSide} size="huge" color="green" />
+                <Menu.Item icon="sidebar" onClick={this.toggleSide} size="huge" color="green" style={{fontSize:"20px"}}/>
                 
-                <Menu.Item header ><img src="/images/double-u.png" style={{ width: "40px", height: "45px" }} /> </Menu.Item>
+                <Menu.Item header ><img src="/images/double-u.png" style={{ width: "40px", height: "48px" }} /> </Menu.Item>
 
 
                 <Menu.Menu position="right"  >
@@ -256,7 +256,7 @@ class HeaderAccount extends React.Component {
                       <DropdownDivider />
 
                       <Dropdown.Item icon='setting' text='Settings' as={Link} to='/app/settings/profile' />
-                      <Dropdown.Item icon='theme' text='My Templates' as={Link} to='/app/settings/templates' />
+                      <Dropdown.Item icon='theme' text='Theme Store' as={Link} to='/app/settings/templates' />
 
                       <DropdownDivider />
 
@@ -306,7 +306,7 @@ class HeaderAccount extends React.Component {
                 <div className="accordion-item">
                   <a href='/'> <Button fluid style={{ color: 'black', background: "white" }}>
                     <Icon name="home" />
-                    GO TO HOME
+                    Inwritten
                   </Button>
                   </a>
                 </div>
@@ -336,8 +336,8 @@ class HeaderAccount extends React.Component {
       return (<div className='splashscreen'>
 
         <img src={double_u} className='splash' />
-        <p>INWRITTEN</p>
-        <h5>Loading your contents in a bit... </h5>
+        <h2>Inwritten</h2>
+        <p>Fetching better content... </p>
       </div>)
     }
 

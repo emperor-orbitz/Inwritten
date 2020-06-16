@@ -49,10 +49,11 @@ class Templates extends React.Component {
         try {
             let mine = await templ.my_template(template_id)
             var result = await templ.get_templates(template_id)
-
+            console.log(mine, result, "THIS IS BOTH OF THEM")
             if (mine.message !== null) {
-                let templates = result.data.filter((v, i, a) => v._id !== this.props.ProfileReducer.template_id)
+                let templates = result.data.filter((v, i, a) => v._id != this.props.ProfileReducer.template_id)
                 this.setState({ templates, my_template: mine.message })
+                console.log(templates, "this one na gbege")
             }
 
         } catch (error) {

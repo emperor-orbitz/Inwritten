@@ -59,6 +59,7 @@ const_options ={
     }
 
 
+    
     my_template = (mytemplate_id) =>{
 
         this.const_options.method = "GET";

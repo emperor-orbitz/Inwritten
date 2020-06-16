@@ -136,13 +136,9 @@ class PostArchive extends React.Component {
             .then(fulfilled => {
                 if (fulfilled) {
 
-                    this.props.dispatch(
-                        {
-                            type: 'DELETE_DRAFT', payload: { _id: this.state.deleteArticleId }
-                        })
+                    this.props.dispatch({type: 'DELETE_DRAFT', payload: { _id: this.state.deleteArticleId }})
 
-                      var filter_privacy = this.props.DraftReducer.filter(nor => nor.type == "DRAFT");
-
+                    var filter_privacy = this.props.DraftReducer.filter(nor => nor.type == "DRAFT" && nor.published == false);
 
                     this.setState({ deleteArticleId: null, open: false, messageDismiss: true, filter_privacy: filter_privacy });
 
@@ -279,7 +275,7 @@ class PostArchive extends React.Component {
 
                     <img src="/images/empty.png" className='empty-png' />
                     <br />
-                    <h4 style={{ textAlign: "center" }}>No Drafts yet. You can create one <Button size="tiny" as={Link} to="/app/add-post">here</Button></h4>
+                    <h4 style={{ textAlign: "center" }}>No drafts yet. You can create one <Button basic as={Link} to="/app/add-post">here</Button></h4>
 
 
                 </div>
@@ -302,7 +298,7 @@ class PostArchive extends React.Component {
                             <p style={{ textAlign: 'center' }}> <Icon size='big' name='trash' />
                                 <h3 >{`Delete "${this.state.deleteArticleName}" ?`}  </h3>
                                 <br />
-                                <Button size="small" color='red' icon='trash alternate outline' labelPosition='right' content='Delete' size='tiny' onClick={this.deletePost.bind(this, [this.state.deleteArticleId])} />
+                                <Button size="small" color='red' icon='trash alternate outline' labelPosition='right' content='Delete' size='tiny' onClick={this.deletePost.bind(this, [this.state.deleteArticleId])} disabled={this.state.deleteArticleId !=null}/>
                             </p>
 
                         </Modal.Content>
