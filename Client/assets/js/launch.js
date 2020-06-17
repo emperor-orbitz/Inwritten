@@ -1,7 +1,7 @@
 
 
 $(document).ready(function(ev){
-var arr =["thoughts", "ideas" , "stories", "contents", "articles"];
+var arr =["THOUGHTS", "IDEAS" , "STORIES", "CONTENTS", "ARTICLES"];
 let i =0;
 
 setInterval(()=>{

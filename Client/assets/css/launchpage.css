@@ -1,0 +1,140 @@
+   /* body {
+            background-image: url('/images/laptop-image.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+
+        } */
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,400i&display=swap');
+
+        *{
+            font-family: 'Montserrat', sans-serif;
+            }
+        html, body{
+            overflow: auto;
+            margin:0;
+            height:100%;
+        
+        }
+        body{
+            background:url("../images//blogger-sit.jpg");
+            background-size: cover;
+            background-position:left left;
+        }
+        .btn-submit:hover {
+            background-color: rgb(10, 2, 44);
+            color: white;
+            cursor: pointer;
+        }
+
+        .unstyled-link {
+            color: white;
+            font-size: 15px;
+            margin-right: 10px
+        }
+
+
+        .unstyled-link:hover {
+            color: gold;
+            text-decoration: none;
+        }
+
+        .socials-panel {
+            margin-top: 100px;
+        }
+
+        .left{
+            float: left;
+            text-align: left;
+            color: white;
+            /* margin: 10% auto !important; */
+            position: relative;
+            background:rgba(0, 0, 0, 0.5);
+
+            height: 100%;
+            width:55%;            
+        }
+        .left-right {
+            text-align: left;
+            color: white;
+            /* margin: 10% auto !important; */
+            /* position: relative;*/
+            height: 100%;
+            width: 100%;
+            /* background-position: left; */
+            /* background-size: 70%; */
+             /* background:#1c243c */
+
+
+        }
+
+        .dark {
+            /* background:black; */
+            height:100%;
+            background:rgba(8, 4, 70, 0.3);
+        }
+
+        .white {
+            color: white;
+        }
+
+        input[type="email"] {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+
+        .page-logo {
+            width: 130px;
+            height: 45px;
+
+        }
+
+        .unstyled-link {
+            color: black;
+        }
+
+
+        .right{
+            height:100%;
+            width:100%;
+            background:yellow;
+            
+        }
+        .container{
+            text-align:center;
+            margin:10% auto;
+        }
+
+        nav li.nav-item{
+            display:inline;
+        }
+        .dark{
+            width:100%;
+            position: relative;
+            height:100%;
+        } 
+
+
+
+
+
+
+        @media screen and (max-width: 490px) {
+
+            input {
+                width: 100% !important;
+                margin-bottom: 10px;
+            }
+
+            /* .container {
+
+                margin: 14% auto !important;
+                background-image: url('/images/laptop-image.jpg');
+                background-position: bottom left;
+                    
+            } */
+        }
+
+
+        .right-float {
+            /* float:right; */
+        }
