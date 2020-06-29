@@ -1,36 +1,16 @@
 
 import React from 'react';
 import '../../Resources/styles/article.scss';
-//import   Button  from 'semantic-ui-react';
-let Button = require("semantic-ui-react").Button;
+import  {Button, Placeholder}  from 'semantic-ui-react';
+import ReactPlaceholder from 'react-placeholder';
+import "react-placeholder/lib/reactPlaceholder.scss";
+ 
 
-//   DATE CONVSERSION
 
-function date_to_string(date) {
-    var fulldate = new Date(date);
-    var month = getmonthName(fulldate.getMonth());
-    var year = fulldate.getFullYear();
-    var day = fulldate.getDate();
-    var convert = `${day}- ${month}`;
-    return convert;
+function image_transform(url, width, height){
+//Add height and width to image
+ return url.replace("/upload/", `/upload/h_${height},w_${width}/`)
 }
-
-//   MONTH DEDUCER FUNCTION
-
-
-function getmonthName(number) {
-    var months = [
-        '01', '02', '03', '04', '05', '06',
-        '07',
-        '08',
-        '09', '10', '11', '12'
-    ]
-    return months[number];
-
-}
-
-
-
 
 /*
 *
@@ -40,9 +20,9 @@ function getmonthName(number) {
 
 export default function DraftPreview(props) {
 
-    var { Grid, Item, Loader, Placeholder } = props.imports;
-    var test = [1,2,3,4, 5,6,7];
-    console.log(props.data, "component")
+    var { Grid, Item, } = props.imports;
+    var test = [1,2,3,4,5,6];
+
     if (props.data.length == 0) {
 
         return(
@@ -51,13 +31,9 @@ export default function DraftPreview(props) {
     {test.map(e=>{
     return(
         <Grid.Column key={e} style={{ margin: "10px auto" }} computer={5} mobile={16} tablet={4}  >
-        <Placeholder key={e}>
-            <Placeholder.Line />
-            <Placeholder.Line />
-            <Placeholder.Line />
-            <Placeholder.Line />
-            <Placeholder.Line />
-        </Placeholder> 
+    <ReactPlaceholder type='media' rows={2} ready={false}>
+      <div>Loading...</div>
+    </ReactPlaceholder>
         </Grid.Column>
     )
 })
@@ -85,13 +61,12 @@ export default function DraftPreview(props) {
 
                         <Grid.Column style={{ margin: "10px auto" }} computer={5} mobile={16} tablet={4}  >
                             <Item style={{ marginBottom: '12px' }} key={e._id} >
-                                <Item.Image floated="right" size="small" src={e.featured_image} />
+                                <Item.Image floated="right" size="small" src={image_transform( e.featured_image, 200, 91 )} className="item-image"/>
 
-                                <Item.Content verticalAlign="middle" >
+                                <Item.Content >
                                     <Item.Header><h4 ><a style={{ color: "black" }} href={e.post_link}>{e.title}</a></h4></Item.Header>
                                     <Item.Description>@{e.author.toLowerCase()}</Item.Description>
                                     <Item.Meta>{e.time_to_read} mins read</Item.Meta>
-
                                 </Item.Content>
                             </Item>
                         </Grid.Column>

@@ -133,12 +133,12 @@ try {
 
               <Divider />
 
-              <Grid.Row  style={{paddingLeft:"12px"}}>
+              {/* <Grid.Row  style={{paddingLeft:"12px"}}>
               <h3>My Circle </h3>
               </Grid.Row>
               <DraftPreview data={ this.state.blog } imports={imports} />
 
-              <Divider />
+              <Divider /> */}
 
               <Grid.Row ><h3 style={{marginLeft:"12px"}}>Popular Stories </h3></Grid.Row>
               <DraftPreview data={ this.state.blog } imports={imports} />

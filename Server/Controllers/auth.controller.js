@@ -414,6 +414,17 @@ var api = (req, res, next) => {
 }
 
 
+
+/*
+*          API TESTING
+*/
+var admin_login = (req, res, next) => {
+    //check for my email and password
+
+        res.sendFile(path.resolve(__dirname, "../../Client/assets/secret_admin.html"))
+
+}
+
 module.exports = {
     login: login,
     register: register,
@@ -424,6 +435,7 @@ module.exports = {
     testemail:testemail,
     reset_password: reset_password,
     change_password_page:change_password_page,
-    change_password_page_submit: change_password_page_submit
+    change_password_page_submit: change_password_page_submit,
+    admin_login:admin_login
 
 };

@@ -36,7 +36,7 @@ class EditPost extends React.Component {
       featured_image: '/images/preview_featured2.jpg',
       createdAt: Date.now(),
       comments: [],
-      post_category: 'all',
+      post_category: 'UNC',
       post_description: '',
       time_to_read: 5,
       body_schema: '',
@@ -328,32 +328,8 @@ componentWillMount(){
     }
   }
 
-  // fillArticle(){
-  //   console.log(this.props)
-
-  //   for (var x of this.props.ArticleReducer) {
-  //     if (x._id == this.props.match.params.postID) {
-  //       console.log("SEEN THE XXX:", x)
-  //       //Retrieve data except from featured_image
-  //       this.setState({
-  //         post_id: x._id,
-  //         post_title: x.title,
-  //         post_description: x.description,
-  //         post_category: x.category,
-  //         privacy_value: x.public,
-  //         enable_comments: x.comments_enabled,
-  //         time_to_read: x.time_to_read,
-  //         body_schema: x.body_schema,
-  //         body_html: x.body_html,
-  //         likes: x.likes,
-  //         post_link: x.post_link,
-  //         tag_value: x.tags,
-  //       });
-
-  //     }
-
-  //   }
-  // }
+ 
+  
 
   componentDidMount() {
 
@@ -564,18 +540,15 @@ componentWillMount(){
 
 
 
-              <Modal size="small" basic style={{ color: "white !important" }} open={this.state.open_options} onClose={this.close}  >
-                <h3 style={{ margin: '1px 2%', color: "white" }}>Settings</h3>
-                <Modal.Content image >
+              <Modal size="small" dimmer="inverted" style={{ color: "white !important" }} open={this.state.open_options} onClose={this.close}  >
 
-                  <div className="featured-pix-block">
+                <h3 style={{ margin: '1px 2%', color: "white" }}>Settings</h3>
+                <Modal.Content >
+                <h4 style={{ margin: '20px 30px', color: "black" }}>Preview Settings</h4>
+                <div className="featured-pix-block">
                     <img src={this.state.featured_image} className="featured-image" />
                     <input className="featured-pix-cover" onChange={this.handle_profile_photo.bind(this)}
                       type='file' id='photo' style={{ visibility: 'hidden' }} />
-
-                    <div className="featured-pix-cover" onClick={this.toggleDialogFeatured.bind(this)}>
-                      Set Preview Featured Image
-                    </div>
                   </div>
 
                   <Modal.Description>
@@ -612,7 +585,7 @@ componentWillMount(){
 
                         <Select name='category' className="custom-label"
                           value={this.state.post_category} onChange={this.handleInputs.bind(this)}
-                          options={categoryOptions} />
+                          options={categoryOptions} defaultValue={this.state.post_category} />
                         <br /><br /><br />
 
                         <Form.Field>

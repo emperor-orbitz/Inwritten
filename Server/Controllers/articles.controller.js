@@ -73,11 +73,11 @@ var loadImage = (req, res, next) => {
     posts.findById(story_id).select("featured_image")
     .then(doc =>{
         if(doc == null){
-            console.log("empty image place", doc)
+            // console.log("empty image place", doc)
         }
         else{
             res.send({ data: doc.featured_image, type: "success" })
-            console.log(doc)
+            // console.log(doc)
         }
     })                
                         
@@ -135,7 +135,7 @@ var updateDraftAndSave = (req, res)=>{
     draft.update_draft(req.body._id, body, true, function(err, ops){ //published TRUE
 
         if(err){
-            console.log("Unable to remove draft"+err)
+            // console.log("Unable to remove draft"+err)
         }
         else{
             console.log("i passed here just not quite long", ops)
@@ -167,12 +167,14 @@ var save = (req, res) =>{
  
  
          cloudinary.v2.uploader.upload(featured_image, {
+             secure:true,
+             quality: "auto", fetch_format: "auto",
              resource_type: "image",
              public_id: `featured_image/${req.user._id}-${Date.now()}`,
              overwrite: true
          })
          .then(result =>{
- 
+            console.log(result, "THIS IS RESULT OO")
              var post = new posts();
              let final = Object.assign({}, postDoc, { featured_image: result.url });
              post.insertPost(final, (err, success) => {

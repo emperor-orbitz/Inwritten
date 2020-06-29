@@ -39,7 +39,7 @@ $("#subscribeForm").submit(function (e) {
      // get comment again
      if(data.status == "error"){
 
-        document.getElementById("error-box").innerHTML =`<span style='color:red'>Email has already subscribed</span>`
+        document.getElementById("error-box").innerHTML =`<span style='color:red; font-size:14px'>Email has already subscribed!</span>`
      }
      else{
         document.getElementById("subscribeForm").innerHTML =`<span ><i>A very big thanks to you for subscribing. We hope to see you around soon.</i></span><br>`

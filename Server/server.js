@@ -45,8 +45,8 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
 
 
 app.use(function (req, res, next) {
-
-  res.header('Access-Control-Allow-Origin', '*');
+  
+  res.header('Access-Control-Allow-Origin', '*, https://www.inwritten.com');
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
   res.header('Access-Control-Allow-Headers', 'Authorization, Access-Control-Allow-Headers, Access-Control-Allow-Credentials, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Options');

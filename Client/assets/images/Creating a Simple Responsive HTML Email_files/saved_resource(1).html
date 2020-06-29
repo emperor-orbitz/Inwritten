@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<!-- saved from url=(0103)https://codepen.io/tutsplus/embed/BaBQgGZ/?height=600&theme-id=12451&default-tab=result&embed-version=2 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width">
+<title>CodePen Embed - Creating a Simple Responsive HTML Email</title>
+<meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="v5cAttT67GexLgp+40SruTm+ms61T5jIkvyKDlCjNGo19f7nB6Qj5I73n2BsYtjZAouQtlHtvZtpwRuj4iFUiA==">
+<link rel="stylesheet" media="all" href="./embed-e9af4a5b1b844a30527ae8cb861d180ac1ab94b693ef8c328e530e4930ec3564.css">
+<style>
+    .hide {
+      display: none !important;
+    }
+
+    .embed-footer,
+    .embed-nav {
+      background: #282828;
+      
+    }
+    .embed-nav .code-types a,
+    .embed-nav .result-button-list a,
+    .action-button {
+      color: #c4c4c4;
+      background-color: #414141;
+    }
+    .embed-nav .code-types a.active,
+    .embed-nav .result-button-list a.active,
+    .action-button.active {
+      background: #626262;
+      color: #ffffff;
+      box-shadow: inset 0px 3px #989898;
+    }
+    .embed-nav .logo-wrap a {
+      color: #989898;
+    }
+
+    .embed-nav svg {
+      stroke: #989898 !important;
+    }
+  </style>
+<link rel="stylesheet" media="all" href="./twilight-bbb3d58f8024c27567f788f3990f2dce8754c2b67246bf12ad766768fe51955b.css">
+</head>
+<body id="the-body" style="--borderWidth: 0;" class="codepen-embed-body results-active split-output static">
+<nav class="embed-nav group" id="embed-nav">
+<ul class="code-types">
+<li class="code-type">
+<a id="html-link" href="https://codepen.io/tutsplus/embed/BaBQgGZ/?height=600&amp;theme-id=12451&amp;default-tab=result&amp;embed-version=2#html-box" aria-pressed="true" role="button" class="active">
+HTML
+</a>
+</li>
+</ul>
+<ul class="result-button-list">
+<li class="results results-type">
+<a id="result-link" href="https://codepen.io/tutsplus/embed/BaBQgGZ/?height=600&amp;theme-id=12451&amp;default-tab=result&amp;embed-version=2#result-box" class="active" aria-pressed="true" role="button">
+Result
+</a>
+</li>
+</ul>
+<div class="logo-wrap" id="edit-area">
+<a class="large-logo edit-on-codepen" target="_blank" rel="noopener" href="https://codepen.io/tutsplus/pen/BaBQgGZ" title="Edit on CodePen">
+<span id="edit-on-text" class="open-on">EDIT ON</span>
+<svg id="embed-codepen-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 138 26" fill="none" stroke="#000" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M80 6h-9v14h9 M114 6h-9 v14h9 M111 13h-6 M77 13h-6 M122 20V6l11 14V6 M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24 M88 14h6c2.2 0 4-1.8 4-4s-1.8-4-4-4h-6v14 M15 8c-1.3-1.3-3-2-5-2c-4 0-7 3-7 7s3 7 7 7 c2 0 3.7-0.8 5-2 M64 13c0 4-3 7-7 7h-5V6h5C61 6 64 9 64 13z"></path>
+</svg>
+</a>
+<a class="box-logo edit-on-codepen" target="_blank" rel="noopener" href="https://codepen.io/tutsplus/pen/BaBQgGZ" title="Edit on CodePen">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 0 26 26" fill="none" stroke="#000" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+<path id="icon-codepen-box" d="M22 16.7L33 24l11-7.3V9.3L33 2L22 9.3V16.7z M44 16.7L33 9.3l-11 7.4 M22 9.3l11 7.3 l11-7.3 M33 2v7.3 M33 16.7V24"></path>
+</svg>
+</a>
+</div>
+</nav>
+<div id="output" data-border-style="none" data-header="true">
+<div id="html-box" class="code-wrap code-box box active" role="region" aria-label="HTML">
+<pre><code data-lang="htmlmixed" id="actual-html-code" class=" cm-s-default"><span class="cm-meta">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
+<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">html</span> <span class="cm-attribute">xmlns</span>=<span class="cm-string">"http://www.w3.org/1999/xhtml"</span><span class="cm-tag cm-bracket">&gt;</span>
+ 
+<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">head</span><span class="cm-tag cm-bracket">&gt;</span>
+  <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">meta</span> <span class="cm-attribute">http-equiv</span>=<span class="cm-string">"Content-Type"</span> <span class="cm-attribute">content</span>=<span class="cm-string">"text/html; charset=utf-8"</span> <span class="cm-tag cm-bracket">/&gt;</span>
+  <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">title</span><span class="cm-tag cm-bracket">&gt;</span>A Simple Responsive HTML Email<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">title</span><span class="cm-tag cm-bracket">&gt;</span>
+  <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">style</span> <span class="cm-attribute">type</span>=<span class="cm-string">"text/css"</span><span class="cm-tag cm-bracket">&gt;</span>
+  <span class="cm-tag">body</span> {<span class="cm-property">margin</span>: <span class="cm-number">0</span>; <span class="cm-property">padding</span>: <span class="cm-number">0</span>; <span class="cm-property">min-width</span>: <span class="cm-number">100%</span><span class="cm-keyword">!important</span>;}
+  <span class="cm-tag">img</span> {<span class="cm-property">height</span>: <span class="cm-atom">auto</span>;}
+  <span class="cm-qualifier">.content</span> {<span class="cm-property">width</span>: <span class="cm-number">100%</span>; <span class="cm-property">max-width</span>: <span class="cm-number">600px</span>;}
+  <span class="cm-qualifier">.header</span> {<span class="cm-property">padding</span>: <span class="cm-number">40px</span> <span class="cm-number">30px</span> <span class="cm-number">20px</span> <span class="cm-number">30px</span>;}
+  <span class="cm-qualifier">.innerpadding</span> {<span class="cm-property">padding</span>: <span class="cm-number">30px</span> <span class="cm-number">30px</span> <span class="cm-number">30px</span> <span class="cm-number">30px</span>;}
+  <span class="cm-qualifier">.borderbottom</span> {<span class="cm-property">border-bottom</span>: <span class="cm-number">1px</span> <span class="cm-atom">solid</span> <span class="cm-atom">#f2eeed</span>;}
+  <span class="cm-qualifier">.subhead</span> {<span class="cm-property">font-size</span>: <span class="cm-number">15px</span>; <span class="cm-property">color</span>: <span class="cm-atom">#ffffff</span>; <span class="cm-property">font-family</span>: <span class="cm-atom">sans-serif</span>; <span class="cm-property">letter-spacing</span>: <span class="cm-number">10px</span>;}
+  <span class="cm-qualifier">.h1</span>, <span class="cm-qualifier">.h2</span>, <span class="cm-qualifier">.bodycopy</span> {<span class="cm-property">color</span>: <span class="cm-atom">#153643</span>; <span class="cm-property">font-family</span>: <span class="cm-atom">sans-serif</span>;}
+  <span class="cm-qualifier">.h1</span> {<span class="cm-property">font-size</span>: <span class="cm-number">33px</span>; <span class="cm-property">line-height</span>: <span class="cm-number">38px</span>; <span class="cm-property">font-weight</span>: <span class="cm-atom">bold</span>;}
+  <span class="cm-qualifier">.h2</span> {<span class="cm-property">padding</span>: <span class="cm-number">0</span> <span class="cm-number">0</span> <span class="cm-number">15px</span> <span class="cm-number">0</span>; <span class="cm-property">font-size</span>: <span class="cm-number">24px</span>; <span class="cm-property">line-height</span>: <span class="cm-number">28px</span>; <span class="cm-property">font-weight</span>: <span class="cm-atom">bold</span>;}
+  <span class="cm-qualifier">.bodycopy</span> {<span class="cm-property">font-size</span>: <span class="cm-number">16px</span>; <span class="cm-property">line-height</span>: <span class="cm-number">22px</span>;}
+  <span class="cm-qualifier">.button</span> {<span class="cm-property">text-align</span>: <span class="cm-atom">center</span>; <span class="cm-property">font-size</span>: <span class="cm-number">18px</span>; <span class="cm-property">font-family</span>: <span class="cm-atom">sans-serif</span>; <span class="cm-property">font-weight</span>: <span class="cm-atom">bold</span>; <span class="cm-property">padding</span>: <span class="cm-number">0</span> <span class="cm-number">30px</span> <span class="cm-number">0</span> <span class="cm-number">30px</span>;}
+  <span class="cm-qualifier">.button</span> <span class="cm-tag">a</span> {<span class="cm-property">color</span>: <span class="cm-atom">#ffffff</span>; <span class="cm-property">text-decoration</span>: <span class="cm-atom">none</span>;}
+  <span class="cm-qualifier">.footer</span> {<span class="cm-property">padding</span>: <span class="cm-number">20px</span> <span class="cm-number">30px</span> <span class="cm-number">15px</span> <span class="cm-number">30px</span>;}
+  <span class="cm-qualifier">.footercopy</span> {<span class="cm-property">font-family</span>: <span class="cm-atom">sans-serif</span>; <span class="cm-property">font-size</span>: <span class="cm-number">14px</span>; <span class="cm-property">color</span>: <span class="cm-atom">#ffffff</span>;}
+  <span class="cm-qualifier">.footercopy</span> <span class="cm-tag">a</span> {<span class="cm-property">color</span>: <span class="cm-atom">#ffffff</span>; <span class="cm-property">text-decoration</span>: <span class="cm-atom">underline</span>;}
+
+  <span class="cm-def">@media</span> <span class="cm-keyword">only</span> <span class="cm-attribute">screen</span> <span class="cm-keyword">and</span> (<span class="cm-property">max-width</span>: <span class="cm-number">550px</span>), <span class="cm-attribute">screen</span> <span class="cm-keyword">and</span> (<span class="cm-property">max-device-width</span>: <span class="cm-number">550px</span>) {
+  <span class="cm-tag">body</span>[<span class="cm-tag">yahoo</span>] <span class="cm-qualifier">.hide</span> {<span class="cm-property">display</span>: <span class="cm-atom">none</span><span class="cm-keyword">!important</span>;}
+  <span class="cm-tag">body</span>[<span class="cm-tag">yahoo</span>] <span class="cm-qualifier">.buttonwrapper</span> {<span class="cm-property">background-color</span>: <span class="cm-atom">transparent</span><span class="cm-keyword">!important</span>;}
+  <span class="cm-tag">body</span>[<span class="cm-tag">yahoo</span>] <span class="cm-qualifier">.button</span> {<span class="cm-property">padding</span>: <span class="cm-number">0px</span><span class="cm-keyword">!important</span>;}
+  <span class="cm-tag">body</span>[<span class="cm-tag">yahoo</span>] <span class="cm-qualifier">.button</span> <span class="cm-tag">a</span> {<span class="cm-property">background-color</span>: <span class="cm-atom">#e05443</span>; <span class="cm-property">padding</span>: <span class="cm-number">15px</span> <span class="cm-number">15px</span> <span class="cm-number">13px</span><span class="cm-keyword">!important</span>;}
+  <span class="cm-tag">body</span>[<span class="cm-tag">yahoo</span>] <span class="cm-qualifier">.unsubscribe</span> {<span class="cm-property">display</span>: <span class="cm-atom">block</span>; <span class="cm-property">margin-top</span>: <span class="cm-number">20px</span>; <span class="cm-property">padding</span>: <span class="cm-number">10px</span> <span class="cm-number">50px</span>; <span class="cm-property">background</span>: <span class="cm-atom">#2f3942</span>; <span class="cm-property">border-radius</span>: <span class="cm-number">5px</span>; <span class="cm-property">text-decoration</span>: <span class="cm-atom">none</span><span class="cm-keyword">!important</span>; <span class="cm-property">font-weight</span>: <span class="cm-atom">bold</span>;}
+  }
+
+  <span class="cm-comment">/*@media only screen and (min-device-width: 601px) {</span>
+<span class="cm-comment">    .content {width: 600px !important;}</span>
+<span class="cm-comment">    .col425 {width: 425px!important;}</span>
+<span class="cm-comment">    .col380 {width: 380px!important;}</span>
+<span class="cm-comment">    }*/</span>
+
+  <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">style</span><span class="cm-tag cm-bracket">&gt;</span>
+<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">head</span><span class="cm-tag cm-bracket">&gt;</span>
+
+<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">body</span> <span class="cm-attribute">yahoo</span> <span class="cm-attribute">bgcolor</span>=<span class="cm-string">"#f6f8f1"</span><span class="cm-tag cm-bracket">&gt;</span>
+<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">table</span> <span class="cm-attribute">width</span>=<span class="cm-string">"100%"</span> <span class="cm-attribute">bgcolor</span>=<span class="cm-string">"#f6f8f1"</span> <span class="cm-attribute">border</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellpadding</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellspacing</span>=<span class="cm-string">"0"</span><span class="cm-tag cm-bracket">&gt;</span>
+<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+  <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+    <span class="cm-comment">&lt;!--[if (gte mso 9)|(IE)]&gt;</span>
+      <span class="cm-comment">&lt;table width="600" align="center" cellpadding="0" cellspacing="0" border="0"&gt;</span>
+        <span class="cm-comment">&lt;tr&gt;</span>
+          <span class="cm-comment">&lt;td&gt;</span>
+    <span class="cm-comment">&lt;![endif]--&gt;</span>     
+    <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">table</span> <span class="cm-attribute">bgcolor</span>=<span class="cm-string">"#ffffff"</span> <span class="cm-attribute">class</span>=<span class="cm-string">"content"</span> <span class="cm-attribute">align</span>=<span class="cm-string">"center"</span> <span class="cm-attribute">cellpadding</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellspacing</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">border</span>=<span class="cm-string">"0"</span><span class="cm-tag cm-bracket">&gt;</span>
+      <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+        <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">bgcolor</span>=<span class="cm-string">"#c7d8a7"</span> <span class="cm-attribute">class</span>=<span class="cm-string">"header"</span><span class="cm-tag cm-bracket">&gt;</span>
+          <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">table</span> <span class="cm-attribute">width</span>=<span class="cm-string">"70"</span> <span class="cm-attribute">align</span>=<span class="cm-string">"left"</span> <span class="cm-attribute">border</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellpadding</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellspacing</span>=<span class="cm-string">"0"</span><span class="cm-tag cm-bracket">&gt;</span>  
+            <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+              <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">height</span>=<span class="cm-string">"70"</span> <span class="cm-attribute">style</span>=<span class="cm-string">"padding: 0 20px 20px 0;"</span><span class="cm-tag cm-bracket">&gt;</span>
+                <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">img</span> <span class="cm-attribute">class</span>=<span class="cm-string">"fix"</span> <span class="cm-attribute">src</span>=<span class="cm-string">"https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/icon.gif"</span> <span class="cm-attribute">width</span>=<span class="cm-string">"70"</span> <span class="cm-attribute">height</span>=<span class="cm-string">"70"</span> <span class="cm-attribute">border</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">alt</span>=<span class="cm-string">""</span> <span class="cm-tag cm-bracket">/&gt;</span>
+              <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+            <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+          <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">table</span><span class="cm-tag cm-bracket">&gt;</span>
+          <span class="cm-comment">&lt;!--[if (gte mso 9)|(IE)]&gt;</span>
+            <span class="cm-comment">&lt;table width="425" align="left" cellpadding="0" cellspacing="0" border="0"&gt;</span>
+              <span class="cm-comment">&lt;tr&gt;</span>
+                <span class="cm-comment">&lt;td&gt;</span>
+          <span class="cm-comment">&lt;![endif]--&gt;</span>
+          <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">table</span> <span class="cm-attribute">class</span>=<span class="cm-string">"col425"</span> <span class="cm-attribute">align</span>=<span class="cm-string">"left"</span> <span class="cm-attribute">border</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellpadding</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellspacing</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">style</span>=<span class="cm-string">"width: 100%; max-width: 425px;"</span><span class="cm-tag cm-bracket">&gt;</span>  
+            <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+              <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">height</span>=<span class="cm-string">"70"</span><span class="cm-tag cm-bracket">&gt;</span>
+                <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">table</span> <span class="cm-attribute">width</span>=<span class="cm-string">"100%"</span> <span class="cm-attribute">border</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellspacing</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellpadding</span>=<span class="cm-string">"0"</span><span class="cm-tag cm-bracket">&gt;</span>
+                  <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+                    <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">class</span>=<span class="cm-string">"subhead"</span> <span class="cm-attribute">style</span>=<span class="cm-string">"padding: 0 0 0 3px;"</span><span class="cm-tag cm-bracket">&gt;</span>
+                      CREATING
+                    <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+                  <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+                  <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+                    <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">class</span>=<span class="cm-string">"h1"</span> <span class="cm-attribute">style</span>=<span class="cm-string">"padding: 5px 0 0 0;"</span><span class="cm-tag cm-bracket">&gt;</span>
+                      Responsive Email Magic
+                    <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+                  <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+                <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">table</span><span class="cm-tag cm-bracket">&gt;</span>
+              <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+            <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+          <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">table</span><span class="cm-tag cm-bracket">&gt;</span>
+          <span class="cm-comment">&lt;!--[if (gte mso 9)|(IE)]&gt;</span>
+                <span class="cm-comment">&lt;/td&gt;</span>
+              <span class="cm-comment">&lt;/tr&gt;</span>
+          <span class="cm-comment">&lt;/table&gt;</span>
+          <span class="cm-comment">&lt;![endif]--&gt;</span>
+        <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+      <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+      <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+        <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">class</span>=<span class="cm-string">"innerpadding borderbottom"</span><span class="cm-tag cm-bracket">&gt;</span>
+          <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">table</span> <span class="cm-attribute">width</span>=<span class="cm-string">"100%"</span> <span class="cm-attribute">border</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellspacing</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellpadding</span>=<span class="cm-string">"0"</span><span class="cm-tag cm-bracket">&gt;</span>
+            <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+              <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">class</span>=<span class="cm-string">"h2"</span><span class="cm-tag cm-bracket">&gt;</span>
+                Welcome to our responsive email!
+              <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+            <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+            <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+              <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">class</span>=<span class="cm-string">"bodycopy"</span><span class="cm-tag cm-bracket">&gt;</span>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tempus adipiscing felis, sit amet blandit ipsum volutpat sed. Morbi porttitor, eget accumsan dictum, nisi libero ultricies ipsum, in posuere mauris neque at erat.
+              <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+            <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+          <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">table</span><span class="cm-tag cm-bracket">&gt;</span>
+        <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+      <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+      <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+        <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">class</span>=<span class="cm-string">"innerpadding borderbottom"</span><span class="cm-tag cm-bracket">&gt;</span>
+          <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">table</span> <span class="cm-attribute">width</span>=<span class="cm-string">"115"</span> <span class="cm-attribute">align</span>=<span class="cm-string">"left"</span> <span class="cm-attribute">border</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellpadding</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellspacing</span>=<span class="cm-string">"0"</span><span class="cm-tag cm-bracket">&gt;</span>  
+            <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+              <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">height</span>=<span class="cm-string">"115"</span> <span class="cm-attribute">style</span>=<span class="cm-string">"padding: 0 20px 20px 0;"</span><span class="cm-tag cm-bracket">&gt;</span>
+                <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">img</span> <span class="cm-attribute">class</span>=<span class="cm-string">"fix"</span> <span class="cm-attribute">src</span>=<span class="cm-string">"https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/article1.png"</span> <span class="cm-attribute">width</span>=<span class="cm-string">"115"</span> <span class="cm-attribute">height</span>=<span class="cm-string">"115"</span> <span class="cm-attribute">border</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">alt</span>=<span class="cm-string">""</span> <span class="cm-tag cm-bracket">/&gt;</span>
+              <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+            <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+          <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">table</span><span class="cm-tag cm-bracket">&gt;</span>
+          <span class="cm-comment">&lt;!--[if (gte mso 9)|(IE)]&gt;</span>
+            <span class="cm-comment">&lt;table width="380" align="left" cellpadding="0" cellspacing="0" border="0"&gt;</span>
+              <span class="cm-comment">&lt;tr&gt;</span>
+                <span class="cm-comment">&lt;td&gt;</span>
+          <span class="cm-comment">&lt;![endif]--&gt;</span>
+          <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">table</span> <span class="cm-attribute">class</span>=<span class="cm-string">"col380"</span> <span class="cm-attribute">align</span>=<span class="cm-string">"left"</span> <span class="cm-attribute">border</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellpadding</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellspacing</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">style</span>=<span class="cm-string">"width: 100%; max-width: 380px;"</span><span class="cm-tag cm-bracket">&gt;</span>  
+            <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+              <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+                <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">table</span> <span class="cm-attribute">width</span>=<span class="cm-string">"100%"</span> <span class="cm-attribute">border</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellspacing</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellpadding</span>=<span class="cm-string">"0"</span><span class="cm-tag cm-bracket">&gt;</span>
+                  <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+                    <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">class</span>=<span class="cm-string">"bodycopy"</span><span class="cm-tag cm-bracket">&gt;</span>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tempus adipiscing felis, sit amet blandit ipsum volutpat sed. Morbi porttitor, eget accumsan dictum, nisi libero ultricies ipsum, in posuere mauris neque at erat.
+                    <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+                  <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+                  <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+                    <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">style</span>=<span class="cm-string">"padding: 20px 0 0 0;"</span><span class="cm-tag cm-bracket">&gt;</span>
+                      <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">table</span> <span class="cm-attribute">class</span>=<span class="cm-string">"buttonwrapper"</span> <span class="cm-attribute">bgcolor</span>=<span class="cm-string">"#e05443"</span> <span class="cm-attribute">border</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellspacing</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellpadding</span>=<span class="cm-string">"0"</span><span class="cm-tag cm-bracket">&gt;</span>
+                        <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+                          <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">class</span>=<span class="cm-string">"button"</span> <span class="cm-attribute">height</span>=<span class="cm-string">"45"</span><span class="cm-tag cm-bracket">&gt;</span>
+                            <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">a</span> <span class="cm-attribute">href</span>=<span class="cm-string">"#"</span><span class="cm-tag cm-bracket">&gt;</span>Claim yours!<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">a</span><span class="cm-tag cm-bracket">&gt;</span>
+                          <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+                        <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+                      <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">table</span><span class="cm-tag cm-bracket">&gt;</span>
+                    <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+                  <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+                <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">table</span><span class="cm-tag cm-bracket">&gt;</span>
+              <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+            <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+          <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">table</span><span class="cm-tag cm-bracket">&gt;</span>
+          <span class="cm-comment">&lt;!--[if (gte mso 9)|(IE)]&gt;</span>
+                <span class="cm-comment">&lt;/td&gt;</span>
+              <span class="cm-comment">&lt;/tr&gt;</span>
+          <span class="cm-comment">&lt;/table&gt;</span>
+          <span class="cm-comment">&lt;![endif]--&gt;</span>
+        <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+      <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+      <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+        <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">class</span>=<span class="cm-string">"innerpadding borderbottom"</span><span class="cm-tag cm-bracket">&gt;</span>
+          <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">img</span> <span class="cm-attribute">class</span>=<span class="cm-string">"fix"</span> <span class="cm-attribute">src</span>=<span class="cm-string">"https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/wide.png"</span> <span class="cm-attribute">width</span>=<span class="cm-string">"100%"</span> <span class="cm-attribute">border</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">alt</span>=<span class="cm-string">""</span> <span class="cm-tag cm-bracket">/&gt;</span>
+        <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+      <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+      <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+        <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">class</span>=<span class="cm-string">"innerpadding bodycopy"</span><span class="cm-tag cm-bracket">&gt;</span>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tempus adipiscing felis, sit amet blandit ipsum volutpat sed. Morbi porttitor, eget accumsan dictum, nisi libero ultricies ipsum, in posuere mauris neque at erat.
+        <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+      <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+      <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+        <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">class</span>=<span class="cm-string">"footer"</span> <span class="cm-attribute">bgcolor</span>=<span class="cm-string">"#44525f"</span><span class="cm-tag cm-bracket">&gt;</span>
+          <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">table</span> <span class="cm-attribute">width</span>=<span class="cm-string">"100%"</span> <span class="cm-attribute">border</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellspacing</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellpadding</span>=<span class="cm-string">"0"</span><span class="cm-tag cm-bracket">&gt;</span>
+            <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+              <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">align</span>=<span class="cm-string">"center"</span> <span class="cm-attribute">class</span>=<span class="cm-string">"footercopy"</span><span class="cm-tag cm-bracket">&gt;</span>
+                <span class="cm-atom">&amp;reg;</span> Someone, somewhere 20XX<span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">br</span><span class="cm-tag cm-bracket">/&gt;</span>
+                <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">a</span> <span class="cm-attribute">href</span>=<span class="cm-string">"#"</span> <span class="cm-attribute">class</span>=<span class="cm-string">"unsubscribe"</span><span class="cm-tag cm-bracket">&gt;</span><span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">font</span> <span class="cm-attribute">color</span>=<span class="cm-string">"#ffffff"</span><span class="cm-tag cm-bracket">&gt;</span>Unsubscribe<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">font</span><span class="cm-tag cm-bracket">&gt;</span><span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">a</span><span class="cm-tag cm-bracket">&gt;</span> 
+                <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">span</span> <span class="cm-attribute">class</span>=<span class="cm-string">"hide"</span><span class="cm-tag cm-bracket">&gt;</span>from this newsletter instantly<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">span</span><span class="cm-tag cm-bracket">&gt;</span>
+              <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+            <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+            <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+              <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">align</span>=<span class="cm-string">"center"</span> <span class="cm-attribute">style</span>=<span class="cm-string">"padding: 20px 0 0 0;"</span><span class="cm-tag cm-bracket">&gt;</span>
+                <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">table</span> <span class="cm-attribute">border</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellspacing</span>=<span class="cm-string">"0"</span> <span class="cm-attribute">cellpadding</span>=<span class="cm-string">"0"</span><span class="cm-tag cm-bracket">&gt;</span>
+                  <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+                    <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">width</span>=<span class="cm-string">"37"</span> <span class="cm-attribute">style</span>=<span class="cm-string">"text-align: center; padding: 0 10px 0 10px;"</span><span class="cm-tag cm-bracket">&gt;</span>
+                      <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">a</span> <span class="cm-attribute">href</span>=<span class="cm-string">"http://www.facebook.com/"</span><span class="cm-tag cm-bracket">&gt;</span>
+                        <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">img</span> <span class="cm-attribute">src</span>=<span class="cm-string">"https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/facebook.png"</span> <span class="cm-attribute">width</span>=<span class="cm-string">"37"</span> <span class="cm-attribute">height</span>=<span class="cm-string">"37"</span> <span class="cm-attribute">alt</span>=<span class="cm-string">"Facebook"</span> <span class="cm-attribute">border</span>=<span class="cm-string">"0"</span> <span class="cm-tag cm-bracket">/&gt;</span>
+                      <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">a</span><span class="cm-tag cm-bracket">&gt;</span>
+                    <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+                    <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">td</span> <span class="cm-attribute">width</span>=<span class="cm-string">"37"</span> <span class="cm-attribute">style</span>=<span class="cm-string">"text-align: center; padding: 0 10px 0 10px;"</span><span class="cm-tag cm-bracket">&gt;</span>
+                      <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">a</span> <span class="cm-attribute">href</span>=<span class="cm-string">"http://www.twitter.com/"</span><span class="cm-tag cm-bracket">&gt;</span>
+                        <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">img</span> <span class="cm-attribute">src</span>=<span class="cm-string">"https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/twitter.png"</span> <span class="cm-attribute">width</span>=<span class="cm-string">"37"</span> <span class="cm-attribute">height</span>=<span class="cm-string">"37"</span> <span class="cm-attribute">alt</span>=<span class="cm-string">"Twitter"</span> <span class="cm-attribute">border</span>=<span class="cm-string">"0"</span> <span class="cm-tag cm-bracket">/&gt;</span>
+                      <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">a</span><span class="cm-tag cm-bracket">&gt;</span>
+                    <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+                  <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+                <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">table</span><span class="cm-tag cm-bracket">&gt;</span>
+              <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+            <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+          <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">table</span><span class="cm-tag cm-bracket">&gt;</span>
+        <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+      <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+    <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">table</span><span class="cm-tag cm-bracket">&gt;</span>
+    <span class="cm-comment">&lt;!--[if (gte mso 9)|(IE)]&gt;</span>
+          <span class="cm-comment">&lt;/td&gt;</span>
+        <span class="cm-comment">&lt;/tr&gt;</span>
+    <span class="cm-comment">&lt;/table&gt;</span>
+    <span class="cm-comment">&lt;![endif]--&gt;</span>
+    <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">td</span><span class="cm-tag cm-bracket">&gt;</span>
+  <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">tr</span><span class="cm-tag cm-bracket">&gt;</span>
+<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">table</span><span class="cm-tag cm-bracket">&gt;</span>
+<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">body</span><span class="cm-tag cm-bracket">&gt;</span>
+<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">html</span><span class="cm-tag cm-bracket">&gt;</span></code></pre>
+</div>
+<div id="result-box" class="code-box active" role="region" aria-label="Result">
+<iframe id="result-iframe" class="result-iframe " sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; vr" tabindex="-1" data-src="https://cdpn.io/tutsplus/fullembedgrid/BaBQgGZ?type=embed&amp;animations=run" src="./BaBQgGZ.html" allowtransparency="true" frameborder="0" scrolling="yes" allowpaymentrequest="true" allowfullscreen="true" name="CodePen Preview for Creating a Simple Responsive HTML Email" title="CodePen Preview for Creating a Simple Responsive HTML Email">
+      </iframe>
+</div>
+<div id="about-box">
+<div class="about-container">
+<div class="about-user">
+<a href="https://codepen.io/tutsplus" target="_blank" rel="noopener" class="about-image" style="background-image: url(https://assets.codepen.io/210284/internal/avatars/users/default.png?format=auto&amp;height=512&amp;version=10&amp;width=512)"></a>
+<div class="about-user-info">
+<p>
+This Pen is owned by <a href="https://codepen.io/tutsplus" target="_blank" rel="noopener">Envato Tuts+</a> on <a href="https://codepen.io/" target="_blank" rel="noopener">CodePen</a>.
+</p>
+<p>
+<a href="https://codepen.io/tutsplus" target="_blank" rel="noopener" class="about-user-more">
+See more by @tutsplus on CodePen
+</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="resources-box" class="resources-box">
+<h3>External CSS</h3>
+<p>
+This Pen doesn't use any external CSS resources.
+</p>
+<h3>External JavaScript</h3>
+<p>
+This Pen doesn't use any external JavaScript resources.
+</p>
+</div>
+</div>
+<footer class="embed-footer" id="embed-footer">
+<button id="resources-link" class="resources-link action-button bottom left" href="#resources-box" aria-pressed="false" role="button">
+Resources
+</button>
+<ul class="scaling-choices bottom right">
+<li><button class="action-button active" id="zoom-button-1">1×</button></li><li><button class="action-button" id="zoom-button-05">0.5×</button></li><li><button class="action-button" id="zoom-button-025">0.25×</button></li>
+</ul>
+<button id="rerun-button" class="action-button rerun-button bottom right">
+Rerun
+</button>
+</footer>
+<script>
+    __editor_config = {"id":"classic","editors":[{"id":"html","type":"html","name":"HTML","showEditor":true,"showSettings":true,"showProcessors":true,"embeds":{"showViewCompiled":true},"settings":[{"id":"processor","name":"HTML Preprocessor","type":"select","visible":true,"values":[{"id":"none","name":"None","value":"none","default":true},{"id":"haml","name":"Haml","value":"haml"},{"id":"markdown","name":"Markdown","value":"markdown"},{"id":"slim","name":"Slim","value":"slim"},{"id":"pug","name":"Pug","value":"pug"}]},{"id":"html_classes","name":"Add Class(es) to \u003chtml\u003e","type":"input","placeholder":"e.g. single post post-1234","visible":true},{"id":"head","name":"Stuff for \u003chead\u003e","type":"textarea","placeholder":"e.g. \u003cmeta\u003e, \u003clink\u003e, \u003cscript\u003e","visible":true}],"actions":[{"id":"tidy_html","type":"tidy_code","name":"Format HTML","disabled_processors":["haml","slim"]},{"id":"view_compiled_html","type":"view_compiled","name":"View Compiled HTML","disabled_processors":["none"],"showInEmbeds":true},{"id":"analyze_html","type":"analyze","name":"Analyze HTML"},{"id":"maximize_html_editor","type":"maximize","name":"Maximize HTML Editor"},{"id":"minimize_html_editor","type":"minimize","name":"Minimize HTML Editor"},{"id":"fold_all_html","type":"fold_all","name":"Fold All"},{"id":"unfold_all_html","type":"unfold_all","name":"Unfold All"}],"processors":[{"id":"none","name":"None"},{"id":"haml","name":"Haml"},{"id":"markdown","name":"Markdown"},{"id":"slim","name":"Slim"},{"id":"pug","name":"Pug"}]},{"id":"css","type":"css","name":"CSS","showEditor":true,"showSettings":true,"showProcessors":true,"showVendorPrefixing":true,"embeds":{"showViewCompiled":true},"actions":[{"id":"tidy_css","type":"tidy_code","name":"Format CSS","disabled_processors":["sass","stylus"]},{"id":"view_compiled_css","type":"view_compiled","name":"View Compiled CSS","disabled_processors":["none"],"disabled_prefixes":["neither","prefixfree"]},{"id":"analyze_css","type":"analyze","name":"Analyze CSS"},{"id":"maximize_css_editor","type":"maximize","name":"Maximize CSS Editor"},{"id":"minimize_css_editor","type":"minimize","name":"Minimize CSS Editor"},{"id":"fold_all_css","type":"fold_all","name":"Fold All","disabled_processors":["sass"]},{"id":"unfold_all_css","type":"unfold_all","name":"Unfold All","disabled_processors":["sass"]}],"processors":[{"id":"none","name":"None"},{"id":"less","name":"Less"},{"id":"scss","name":"SCSS"},{"id":"sass","name":"Sass"},{"id":"stylus","name":"Stylus"},{"id":"postcss","name":"PostCSS"}],"parSuffixes":["less","scss","sass","styl"]},{"id":"js","type":"js","name":"JS","showEditor":true,"showSettings":true,"showProcessors":true,"externalResourcesHidden":false,"embeds":{"showViewCompiled":true},"actions":[{"id":"tidy_js","type":"tidy_code","name":"Format JavaScript","disabled_processors":["coffeescript, livescript"]},{"id":"view_compiled_js","type":"view_compiled","name":"View Compiled JavaScript","disabled_processors":["none"]},{"id":"analyze_js","type":"analyze","name":"Analyze JavaScript"},{"id":"maximize_js_editor","type":"maximize","name":"Maximize JavaScript Editor"},{"id":"minimize_js_editor","type":"minimize","name":"Minimize JavaScript Editor"},{"id":"fold_all_js","type":"fold_all","name":"Fold All"},{"id":"unfold_all_js","type":"unfold_all","name":"Unfold All"}],"processors":[{"id":"none","name":"None"},{"id":"babel","name":"Babel"},{"id":"typescript","name":"TypeScript"},{"id":"coffeescript","name":"CoffeeScript"},{"id":"livescript","name":"LiveScript"}]}],"formatters":[{"id":"classic","name":"Classic","runOn":[{"eventType":"demand"}],"url":"https://fi593g2v2a.execute-api.us-west-2.amazonaws.com/production/format"}],"layout":{"default":"top"},"linters":[{"id":"classic","name":"Classic","runOn":[{"eventType":"demand"}],"url":"https://fi593g2v2a.execute-api.us-west-2.amazonaws.com/production/lint"}],"preview":{"intervalMaxWaitMS":3500,"intervalMS":1200},"settings":[{"id":"details","name":"Pen Details","type":"setting"},{"id":"privacy","name":"Privacy","pro":true,"type":"setting"},{"id":"behavior","name":"Behavior","type":"setting"},{"id":"editor","name":"Editor","type":"setting"},{"id":"template","name":"Template","type":"setting"},{"id":"screenshot","name":"Screenshot","pro":true,"type":"setting"}]}
+    __processedPen = {"html":"&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;\n&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;\n \n&lt;head&gt;\n  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;\n  &lt;title&gt;A Simple Responsive HTML Email&lt;/title&gt;\n  &lt;style type=&quot;text/css&quot;&gt;\n  body {margin: 0; padding: 0; min-width: 100%!important;}\n  img {height: auto;}\n  .content {width: 100%; max-width: 600px;}\n  .header {padding: 40px 30px 20px 30px;}\n  .innerpadding {padding: 30px 30px 30px 30px;}\n  .borderbottom {border-bottom: 1px solid #f2eeed;}\n  .subhead {font-size: 15px; color: #ffffff; font-family: sans-serif; letter-spacing: 10px;}\n  .h1, .h2, .bodycopy {color: #153643; font-family: sans-serif;}\n  .h1 {font-size: 33px; line-height: 38px; font-weight: bold;}\n  .h2 {padding: 0 0 15px 0; font-size: 24px; line-height: 28px; font-weight: bold;}\n  .bodycopy {font-size: 16px; line-height: 22px;}\n  .button {text-align: center; font-size: 18px; font-family: sans-serif; font-weight: bold; padding: 0 30px 0 30px;}\n  .button a {color: #ffffff; text-decoration: none;}\n  .footer {padding: 20px 30px 15px 30px;}\n  .footercopy {font-family: sans-serif; font-size: 14px; color: #ffffff;}\n  .footercopy a {color: #ffffff; text-decoration: underline;}\n\n  @media only screen and (max-width: 550px), screen and (max-device-width: 550px) {\n  body[yahoo] .hide {display: none!important;}\n  body[yahoo] .buttonwrapper {background-color: transparent!important;}\n  body[yahoo] .button {padding: 0px!important;}\n  body[yahoo] .button a {background-color: #e05443; padding: 15px 15px 13px!important;}\n  body[yahoo] .unsubscribe {display: block; margin-top: 20px; padding: 10px 50px; background: #2f3942; border-radius: 5px; text-decoration: none!important; font-weight: bold;}\n  }\n\n  /*@media only screen and (min-device-width: 601px) {\n    .content {width: 600px !important;}\n    .col425 {width: 425px!important;}\n    .col380 {width: 380px!important;}\n    }*/\n\n  &lt;/style&gt;\n&lt;/head&gt;\n\n&lt;body yahoo bgcolor=&quot;#f6f8f1&quot;&gt;\n&lt;table width=&quot;100%&quot; bgcolor=&quot;#f6f8f1&quot; border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;\n&lt;tr&gt;\n  &lt;td&gt;\n    &lt;!--[if (gte mso 9)|(IE)]&gt;\n      &lt;table width=&quot;600&quot; align=&quot;center&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;\n        &lt;tr&gt;\n          &lt;td&gt;\n    &lt;![endif]--&gt;     \n    &lt;table bgcolor=&quot;#ffffff&quot; class=&quot;content&quot; align=&quot;center&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;\n      &lt;tr&gt;\n        &lt;td bgcolor=&quot;#c7d8a7&quot; class=&quot;header&quot;&gt;\n          &lt;table width=&quot;70&quot; align=&quot;left&quot; border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;  \n            &lt;tr&gt;\n              &lt;td height=&quot;70&quot; style=&quot;padding: 0 20px 20px 0;&quot;&gt;\n                &lt;img class=&quot;fix&quot; src=&quot;https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/icon.gif&quot; width=&quot;70&quot; height=&quot;70&quot; border=&quot;0&quot; alt=&quot;&quot; /&gt;\n              &lt;/td&gt;\n            &lt;/tr&gt;\n          &lt;/table&gt;\n          &lt;!--[if (gte mso 9)|(IE)]&gt;\n            &lt;table width=&quot;425&quot; align=&quot;left&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;\n              &lt;tr&gt;\n                &lt;td&gt;\n          &lt;![endif]--&gt;\n          &lt;table class=&quot;col425&quot; align=&quot;left&quot; border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width: 100%; max-width: 425px;&quot;&gt;  \n            &lt;tr&gt;\n              &lt;td height=&quot;70&quot;&gt;\n                &lt;table width=&quot;100%&quot; border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot;&gt;\n                  &lt;tr&gt;\n                    &lt;td class=&quot;subhead&quot; style=&quot;padding: 0 0 0 3px;&quot;&gt;\n                      CREATING\n                    &lt;/td&gt;\n                  &lt;/tr&gt;\n                  &lt;tr&gt;\n                    &lt;td class=&quot;h1&quot; style=&quot;padding: 5px 0 0 0;&quot;&gt;\n                      Responsive Email Magic\n                    &lt;/td&gt;\n                  &lt;/tr&gt;\n                &lt;/table&gt;\n              &lt;/td&gt;\n            &lt;/tr&gt;\n          &lt;/table&gt;\n          &lt;!--[if (gte mso 9)|(IE)]&gt;\n                &lt;/td&gt;\n              &lt;/tr&gt;\n          &lt;/table&gt;\n          &lt;![endif]--&gt;\n        &lt;/td&gt;\n      &lt;/tr&gt;\n      &lt;tr&gt;\n        &lt;td class=&quot;innerpadding borderbottom&quot;&gt;\n          &lt;table width=&quot;100%&quot; border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot;&gt;\n            &lt;tr&gt;\n              &lt;td class=&quot;h2&quot;&gt;\n                Welcome to our responsive email!\n              &lt;/td&gt;\n            &lt;/tr&gt;\n            &lt;tr&gt;\n              &lt;td class=&quot;bodycopy&quot;&gt;\n                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tempus adipiscing felis, sit amet blandit ipsum volutpat sed. Morbi porttitor, eget accumsan dictum, nisi libero ultricies ipsum, in posuere mauris neque at erat.\n              &lt;/td&gt;\n            &lt;/tr&gt;\n          &lt;/table&gt;\n        &lt;/td&gt;\n      &lt;/tr&gt;\n      &lt;tr&gt;\n        &lt;td class=&quot;innerpadding borderbottom&quot;&gt;\n          &lt;table width=&quot;115&quot; align=&quot;left&quot; border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;  \n            &lt;tr&gt;\n              &lt;td height=&quot;115&quot; style=&quot;padding: 0 20px 20px 0;&quot;&gt;\n                &lt;img class=&quot;fix&quot; src=&quot;https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/article1.png&quot; width=&quot;115&quot; height=&quot;115&quot; border=&quot;0&quot; alt=&quot;&quot; /&gt;\n              &lt;/td&gt;\n            &lt;/tr&gt;\n          &lt;/table&gt;\n          &lt;!--[if (gte mso 9)|(IE)]&gt;\n            &lt;table width=&quot;380&quot; align=&quot;left&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot;&gt;\n              &lt;tr&gt;\n                &lt;td&gt;\n          &lt;![endif]--&gt;\n          &lt;table class=&quot;col380&quot; align=&quot;left&quot; border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; style=&quot;width: 100%; max-width: 380px;&quot;&gt;  \n            &lt;tr&gt;\n              &lt;td&gt;\n                &lt;table width=&quot;100%&quot; border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot;&gt;\n                  &lt;tr&gt;\n                    &lt;td class=&quot;bodycopy&quot;&gt;\n                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tempus adipiscing felis, sit amet blandit ipsum volutpat sed. Morbi porttitor, eget accumsan dictum, nisi libero ultricies ipsum, in posuere mauris neque at erat.\n                    &lt;/td&gt;\n                  &lt;/tr&gt;\n                  &lt;tr&gt;\n                    &lt;td style=&quot;padding: 20px 0 0 0;&quot;&gt;\n                      &lt;table class=&quot;buttonwrapper&quot; bgcolor=&quot;#e05443&quot; border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot;&gt;\n                        &lt;tr&gt;\n                          &lt;td class=&quot;button&quot; height=&quot;45&quot;&gt;\n                            &lt;a href=&quot;#&quot;&gt;Claim yours!&lt;/a&gt;\n                          &lt;/td&gt;\n                        &lt;/tr&gt;\n                      &lt;/table&gt;\n                    &lt;/td&gt;\n                  &lt;/tr&gt;\n                &lt;/table&gt;\n              &lt;/td&gt;\n            &lt;/tr&gt;\n          &lt;/table&gt;\n          &lt;!--[if (gte mso 9)|(IE)]&gt;\n                &lt;/td&gt;\n              &lt;/tr&gt;\n          &lt;/table&gt;\n          &lt;![endif]--&gt;\n        &lt;/td&gt;\n      &lt;/tr&gt;\n      &lt;tr&gt;\n        &lt;td class=&quot;innerpadding borderbottom&quot;&gt;\n          &lt;img class=&quot;fix&quot; src=&quot;https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/wide.png&quot; width=&quot;100%&quot; border=&quot;0&quot; alt=&quot;&quot; /&gt;\n        &lt;/td&gt;\n      &lt;/tr&gt;\n      &lt;tr&gt;\n        &lt;td class=&quot;innerpadding bodycopy&quot;&gt;\n          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tempus adipiscing felis, sit amet blandit ipsum volutpat sed. Morbi porttitor, eget accumsan dictum, nisi libero ultricies ipsum, in posuere mauris neque at erat.\n        &lt;/td&gt;\n      &lt;/tr&gt;\n      &lt;tr&gt;\n        &lt;td class=&quot;footer&quot; bgcolor=&quot;#44525f&quot;&gt;\n          &lt;table width=&quot;100%&quot; border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot;&gt;\n            &lt;tr&gt;\n              &lt;td align=&quot;center&quot; class=&quot;footercopy&quot;&gt;\n                &amp;reg; Someone, somewhere 20XX&lt;br/&gt;\n                &lt;a href=&quot;#&quot; class=&quot;unsubscribe&quot;&gt;&lt;font color=&quot;#ffffff&quot;&gt;Unsubscribe&lt;/font&gt;&lt;/a&gt; \n                &lt;span class=&quot;hide&quot;&gt;from this newsletter instantly&lt;/span&gt;\n              &lt;/td&gt;\n            &lt;/tr&gt;\n            &lt;tr&gt;\n              &lt;td align=&quot;center&quot; style=&quot;padding: 20px 0 0 0;&quot;&gt;\n                &lt;table border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot;&gt;\n                  &lt;tr&gt;\n                    &lt;td width=&quot;37&quot; style=&quot;text-align: center; padding: 0 10px 0 10px;&quot;&gt;\n                      &lt;a href=&quot;http://www.facebook.com/&quot;&gt;\n                        &lt;img src=&quot;https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/facebook.png&quot; width=&quot;37&quot; height=&quot;37&quot; alt=&quot;Facebook&quot; border=&quot;0&quot; /&gt;\n                      &lt;/a&gt;\n                    &lt;/td&gt;\n                    &lt;td width=&quot;37&quot; style=&quot;text-align: center; padding: 0 10px 0 10px;&quot;&gt;\n                      &lt;a href=&quot;http://www.twitter.com/&quot;&gt;\n                        &lt;img src=&quot;https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/twitter.png&quot; width=&quot;37&quot; height=&quot;37&quot; alt=&quot;Twitter&quot; border=&quot;0&quot; /&gt;\n                      &lt;/a&gt;\n                    &lt;/td&gt;\n                  &lt;/tr&gt;\n                &lt;/table&gt;\n              &lt;/td&gt;\n            &lt;/tr&gt;\n          &lt;/table&gt;\n        &lt;/td&gt;\n      &lt;/tr&gt;\n    &lt;/table&gt;\n    &lt;!--[if (gte mso 9)|(IE)]&gt;\n          &lt;/td&gt;\n        &lt;/tr&gt;\n    &lt;/table&gt;\n    &lt;![endif]--&gt;\n    &lt;/td&gt;\n  &lt;/tr&gt;\n&lt;/table&gt;\n&lt;/body&gt;\n&lt;/html&gt;","css":"","js":""};
+    __preprocessors = {
+      "html": "none",
+      "css": "none",
+      "js": "none"
+    };
+    __preprocessorNames = {
+      "html": "HTML",
+      "css": "CSS",
+      "js": "JS"
+    };
+    __pageType = "embed";
+    __editable = false;
+    __embed_prefill = false;
+    __env = "production";
+  </script>
+<script src="./embed-fb8c64f531e690ee83cf3d674e32f7637aea7ece415019046004ad1df5a56fc7.js.download"></script>
+<script defer="" src="./beacon.min.js.download" data-cf-beacon="{&quot;rayId&quot;:&quot;5a60a27ac927c4ec&quot;,&quot;version&quot;:&quot;2020.5.1&quot;,&quot;si&quot;:10}"></script>
+
+
+</body></html>

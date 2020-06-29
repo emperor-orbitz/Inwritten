@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)https://cloudinary.com/cookbook/resize_an_image -->
+<html lang="en" xml:lang="en" xmlns="https://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Resize an image | Cloudinary Cookbook</title>
+<meta content="Resize an image on-the-fly, in the cloud. Resize either to specified dimensions or by percentage of the original width or height." name="description">
+<link href="./Resize an image _ Cloudinary Cookbook_files/css" rel="stylesheet">
+<link href="./Resize an image _ Cloudinary Cookbook_files/css(1)" rel="stylesheet">
+<link href="./Resize an image _ Cloudinary Cookbook_files/css(2)" rel="stylesheet">
+<link href="https://plus.google.com/+Cloudinary" rel="publisher">
+<link href="https://cloudinary-res.cloudinary.com/image/asset/apple-touch-icon-57x57-575a82d41acd15f36c22b17c861726f1.png" rel="apple-touch-icon" sizes="57x57">
+<link href="https://cloudinary-res.cloudinary.com/image/asset/apple-touch-icon-114x114-477119f5f706ca1f3586855cd38848b3.png" rel="apple-touch-icon" sizes="114x114">
+<link href="https://cloudinary-res.cloudinary.com/image/asset/apple-touch-icon-72x72-7d9b2a17ccfc6b73e1bbc3d15ce802cb.png" rel="apple-touch-icon" sizes="72x72">
+<link href="https://cloudinary-res.cloudinary.com/image/asset/apple-touch-icon-144x144-0c09028dc3cb3b53b1ceb49c3d42d8c2.png" rel="apple-touch-icon" sizes="144x144">
+<link href="https://cloudinary-res.cloudinary.com/image/asset/apple-touch-icon-60x60-774724d7f4369493925a6acdd2162989.png" rel="apple-touch-icon" sizes="60x60">
+<link href="https://cloudinary-res.cloudinary.com/image/asset/apple-touch-icon-120x120-611e15ee7659bd76258f33ac82e173f8.png" rel="apple-touch-icon" sizes="120x120">
+<link href="https://cloudinary-res.cloudinary.com/image/asset/apple-touch-icon-76x76-140d891c6e37583cb9c971e48fc86a9a.png" rel="apple-touch-icon" sizes="76x76">
+<link href="https://cloudinary-res.cloudinary.com/image/asset/apple-touch-icon-152x152-1bff15bdaa2af3f18695f37ae47b30ad.png" rel="apple-touch-icon" sizes="152x152">
+<link href="https://cloudinary-res.cloudinary.com/image/asset/apple-touch-icon-180x180-ebf2bd029c4ffcbe4c4c701d63bdb2b5.png" rel="apple-touch-icon" sizes="180x180">
+<link href="https://cloudinary-res.cloudinary.com/image/asset/favicon-192x192-d6a96e11dd5adfebbb717d154665ee80.png" rel="icon" sizes="192x192" type="image/png">
+<link href="https://cloudinary-res.cloudinary.com/image/asset/favicon-160x160-42709935d7f616bea6be7d1b5a617782.png" rel="icon" sizes="160x160" type="image/png">
+<link href="https://cloudinary-res.cloudinary.com/image/asset/favicon-96x96-844cfef383f46f48884b2daa491ac19b.png" rel="icon" sizes="96x96" type="image/png">
+<link href="https://cloudinary-res.cloudinary.com/image/asset/favicon-16x16-1976acd4f7b6bd9063e50911c3811043.png" rel="icon" sizes="16x16" type="image/png">
+<link href="https://cloudinary-res.cloudinary.com/image/asset/favicon-32x32-2991a47c2caa80211bf2dbf3f29317c8.png" rel="icon" sizes="32x32" type="image/png">
+<meta content="#2b5797" name="msapplication-TileColor">
+<meta content="https://cloudinary-res.cloudinary.com/image/asset/mstile-144x144-6e1faf287bc8b64144625e26c573c5f1.png" name="msapplication-TileImage">
+<meta content="DPR" http-equiv="Accept-CH">
+<link href="https://cloudinary.com/cookbook/resize_an_image" rel="canonical">
+<link href="./Resize an image _ Cloudinary Cookbook_files/cloudinary_public.css" media="screen" rel="stylesheet" type="text/css"><meta content="authenticity_token" name="csrf-param">
+<meta content="q/SzgefI1kWCW2SbEa9JuLzEFzvrF/GKOqzMCFcu3sk=" name="csrf-token"><meta content="https://cloudinary.com/cookbook/resize_an_image" property="og:url">
+<meta content="Resize an image" property="og:title">
+<meta content="Cloudinary" property="og:site_name">
+<meta content="Resize an image on-the-fly, in the cloud. Resize either to specified dimensions or by percentage of the original width or height." property="og:description">
+<meta content="article" property="og:type">
+<meta content="208064609261369" property="fb:app_id">
+<meta content="Resize an image" itemprop="name">
+<meta content="Resize an image on-the-fly, in the cloud. Resize either to specified dimensions or by percentage of the original width or height." itemprop="description">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@cloudinary" name="twitter:site">
+<meta content="Resize an image" name="twitter:title">
+<meta content="Resize an image on-the-fly, in the cloud. Resize either to specified dimensions or by percentage of the original width or height." name="twitter:description">
+<meta content="https://res.cloudinary.com/demo/image/upload/w_70,h_53,c_scale/turtles.jpg" property="og:image">
+<meta content="https://res.cloudinary.com/demo/image/upload/w_70,h_53,c_scale/turtles.jpg" itemprop="image">
+<meta content="https://res.cloudinary.com/demo/image/upload/w_70,h_53,c_scale/turtles.jpg" name="twitter:image"><script async="" src="./Resize an image _ Cloudinary Cookbook_files/saved_resource"></script><script type="text/javascript" async="" src="./Resize an image _ Cloudinary Cookbook_files/munchkin.js.download"></script><script type="text/javascript" async="" src="./Resize an image _ Cloudinary Cookbook_files/analytics.js.download"></script><script async="" src="./Resize an image _ Cloudinary Cookbook_files/async-ads.js.download"></script><script async="" src="./Resize an image _ Cloudinary Cookbook_files/async-ads.js.download"></script><script type="text/javascript" async="" src="./Resize an image _ Cloudinary Cookbook_files/js"></script><script type="text/javascript" async="" src="./Resize an image _ Cloudinary Cookbook_files/dc.js.download"></script><script type="text/javascript" async="" src="./Resize an image _ Cloudinary Cookbook_files/insight.min.js.download"></script><script type="text/javascript" async="" src="./Resize an image _ Cloudinary Cookbook_files/analytics.js.download"></script><script type="text/javascript" async="" src="./Resize an image _ Cloudinary Cookbook_files/f.txt"></script><script src="./Resize an image _ Cloudinary Cookbook_files/all.js.download" async="" crossorigin="anonymous"></script><script type="text/javascript" async="" src="./Resize an image _ Cloudinary Cookbook_files/f(1).txt"></script><script type="text/javascript" async="" src="./Resize an image _ Cloudinary Cookbook_files/in.js.download"></script><script id="twitter-wjs" src="./Resize an image _ Cloudinary Cookbook_files/widgets.js.download"></script><script id="facebook-jssdk" src="./Resize an image _ Cloudinary Cookbook_files/all.js(1).download"></script><script async="" src="./Resize an image _ Cloudinary Cookbook_files/gtm.js.download"></script><script type="text/javascript" async="" src="./Resize an image _ Cloudinary Cookbook_files/embed.js.download"></script><style type="text/css">.js-tab-hidden{position:absolute !important;left:-9999px !important;top:-9999px !important;display:block !important}</style><style type="text/css">.js-slide-hidden{position:absolute !important;left:-9999px !important;top:-9999px !important;display:block !important}</style><script type="text/javascript" async="" src="./Resize an image _ Cloudinary Cookbook_files/munchkin.js(1).download"></script><script src="./Resize an image _ Cloudinary Cookbook_files/cse_element__en.js.download" type="text/javascript"></script><link type="text/css" rel="stylesheet" href="./Resize an image _ Cloudinary Cookbook_files/default_v2+en.css"><link type="text/css" rel="stylesheet" href="./Resize an image _ Cloudinary Cookbook_files/default.css"><script src="./Resize an image _ Cloudinary Cookbook_files/f(2).txt"></script><style type="text/css">.gsc-control-cse{font-family:arial, sans-serif}.gsc-control-cse .gsc-table-result{font-family:arial, sans-serif}.gsc-refinementsGradient{background:linear-gradient(to left,rgba(255,255,255,1),rgba(255,255,255,0))}.gsc-control-cse{border-color:#FFFFFF;background-color:#FFFFFF}input.gsc-input,.gsc-input-box,.gsc-input-box-hover,.gsc-input-box-focus{border-color:#D9D9D9}.gsc-search-button-v2,.gsc-search-button-v2:hover,.gsc-search-button-v2:focus{border-color:#2F5BB7;background-color:#357AE8;background-image:none;filter:none}.gsc-search-button-v2 svg{fill:#FFFFFF}.gsc-tabHeader.gsc-tabhActive,.gsc-refinementHeader.gsc-refinementhActive{color:#CCCCCC;border-color:#CCCCCC;background-color:#FFFFFF}.gsc-tabHeader.gsc-tabhInactive,.gsc-refinementHeader.gsc-refinementhInactive{color:#CCCCCC;border-color:#CCCCCC;background-color:#FFFFFF}.gsc-webResult.gsc-result,.gsc-results .gsc-imageResult{border-color:#FFFFFF;background-color:#FFFFFF}.gsc-webResult.gsc-result:hover{border-color:#FFFFFF;background-color:#FFFFFF}.gs-webResult.gs-result a.gs-title:link,.gs-webResult.gs-result a.gs-title:link b,.gs-imageResult a.gs-title:link,.gs-imageResult a.gs-title:link b{color:#1155CC}.gs-webResult.gs-result a.gs-title:visited,.gs-webResult.gs-result a.gs-title:visited b,.gs-imageResult a.gs-title:visited,.gs-imageResult a.gs-title:visited b{color:#1155CC}.gs-webResult.gs-result a.gs-title:hover,.gs-webResult.gs-result a.gs-title:hover b,.gs-imageResult a.gs-title:hover,.gs-imageResult a.gs-title:hover b{color:#1155CC}.gs-webResult.gs-result a.gs-title:active,.gs-webResult.gs-result a.gs-title:active b,.gs-imageResult a.gs-title:active,.gs-imageResult a.gs-title:active b{color:#1155CC}.gsc-cursor-page{color:#1155CC}a.gsc-trailing-more-results:link{color:#1155CC}.gs-webResult .gs-snippet,.gs-fileFormatType{color:#333333}.gs-webResult div.gs-visibleUrl{color:#009933}.gs-webResult div.gs-visibleUrl-short{color:#009933}.gs-webResult div.gs-visibleUrl-short{display:none}.gs-webResult div.gs-visibleUrl-long{display:block}.gs-promotion div.gs-visibleUrl-short{display:none}.gs-promotion div.gs-visibleUrl-long{display:block}.gsc-cursor-box{border-color:#FFFFFF}.gsc-results .gsc-cursor-box .gsc-cursor-page{border-color:#CCCCCC;background-color:#FFFFFF;color:#CCCCCC}.gsc-results .gsc-cursor-box .gsc-cursor-current-page{border-color:#CCCCCC;background-color:#FFFFFF;color:#CCCCCC}.gsc-webResult.gsc-result.gsc-promotion{border-color:#F6F6F6;background-color:#F6F6F6}.gsc-completion-title{color:#1155CC}.gsc-completion-snippet{color:#333333}.gs-promotion a.gs-title:link,.gs-promotion a.gs-title:link *,.gs-promotion .gs-snippet a:link{color:#1155CC}.gs-promotion a.gs-title:visited,.gs-promotion a.gs-title:visited *,.gs-promotion .gs-snippet a:visited{color:#1155CC}.gs-promotion a.gs-title:hover,.gs-promotion a.gs-title:hover *,.gs-promotion .gs-snippet a:hover{color:#1155CC}.gs-promotion a.gs-title:active,.gs-promotion a.gs-title:active *,.gs-promotion .gs-snippet a:active{color:#1155CC}.gs-promotion .gs-snippet,.gs-promotion .gs-title .gs-promotion-title-right,.gs-promotion .gs-title .gs-promotion-title-right *{color:#333333}.gs-promotion .gs-visibleUrl,.gs-promotion .gs-visibleUrl-short{color:#009933}.gcsc-find-more-on-google{color:#1155CC}.gcsc-find-more-on-google-magnifier{fill:#1155CC}</style><style type="text/css">.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;position:relative;user-select:none;-webkit-user-select:none;white-space:nowrap}.gsst_e{vertical-align:middle;opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-webkit-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-webkit-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gsq_a{padding:0}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em;-webkit-appearance:button}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gssb_a{padding:0 9px}.gsib_a{padding:5px 9px 4px 9px}.gscb_a{line-height:27px}.gssb_e{border:0}.gssb_l{margin:5px 0}input.gsc-input::-webkit-input-placeholder{font-size:14px}input.gsc-input:-moz-placeholder{font-size:14px}input.gsc-input::-moz-placeholder{font-size:14px}input.gsc-input:-ms-input-placeholder{font-size:14px}input.gsc-input:focus::-webkit-input-placeholder{color:transparent}input.gsc-input:focus:-moz-placeholder{color:transparent}input.gsc-input:focus::-moz-placeholder{color:transparent}input.gsc-input:focus:-ms-input-placeholder{color:transparent}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style><style type="text/css">.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;position:relative;user-select:none;-webkit-user-select:none;white-space:nowrap}.gsst_e{vertical-align:middle;opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-webkit-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-webkit-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gsq_a{padding:0}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em;-webkit-appearance:button}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gssb_a{padding:0 9px}.gsib_a{padding:5px 9px 4px 9px}.gscb_a{line-height:27px}.gssb_e{border:0}.gssb_l{margin:5px 0}input.gsc-input::-webkit-input-placeholder{font-size:14px}input.gsc-input:-moz-placeholder{font-size:14px}input.gsc-input::-moz-placeholder{font-size:14px}input.gsc-input:-ms-input-placeholder{font-size:14px}input.gsc-input:focus::-webkit-input-placeholder{color:transparent}input.gsc-input:focus:-moz-placeholder{color:transparent}input.gsc-input:focus::-moz-placeholder{color:transparent}input.gsc-input:focus:-ms-input-placeholder{color:transparent}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style><script charset="utf-8" src="./Resize an image _ Cloudinary Cookbook_files/button.1378e6a69a23712ca26755ee3c4084b4.js.download"></script><style type="text/css">.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q{display:block!important;border:1px solid #cdcfd2!important;background-color:#fff!important;color:#373a3d!important;width:100vw!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-24GeGuJgk9LrMLp7qVvlyz{background:#6a7e89!important;color:#fff!important;padding:10px!important;font-size:18px!important;font-family:sans-serif!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-KVjdulkCFfUZps29EbgAC{background:#f3f6f8!important;border-bottom:1px solid #cdcfd2!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-KVjdulkCFfUZps29EbgAC>*{margin-right:10px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1OeZ2PQ98oAp6Vc5mMc6V5{list-style:none!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-vCwYmWF_l83ScZBrGnRoi,.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1OeZ2PQ98oAp6Vc5mMc6V5{margin:0!important;padding:0!important;width:100%!important;display:block!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-vCwYmWF_l83ScZBrGnRoi:not(:last-child){border-bottom:1px solid #cdcfd2!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1XQZkb-FlHWABUp4_uShaZ{color:inherit!important;cursor:pointer!important;width:100%!important;display:inline-block!important;margin:10px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1XTzMvb2XKitWz0mFLlyyp{margin:5px!important;display:block!important;width:auto!important;white-space:pre!important;overflow-x:scroll!important;background:inherit!important;color:inherit!important;font-family:monospace}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1XTzMvb2XKitWz0mFLlyyp:not(.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-39QUvFFn5B7GMcqMQkOXZ3){display:none!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-295DY3nO0DbJWMsOqmjCli{background:#f5f5f5!important;color:#5a5a5a!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1aQZwu6CUzAf2zUcI7tg0Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-295DY3nO0DbJWMsOqmjCli{display:none!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-38EPFyKXMtoP12rPlmrHxs{background:#e6f7ff!important;color:#006097!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3W4ZnQjhoGfT1gTNcqRXdi .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-38EPFyKXMtoP12rPlmrHxs{display:none!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-HGYnfzlmgOZ-l7eANhQe_{background:#fff3ea!important;color:#993a00!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-24e52A11B1UIErbKHtBmqc .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-HGYnfzlmgOZ-l7eANhQe_{display:none!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-jji74ZzulHScD0OAD_G7h{background:#fef2f1!important;color:#b10823!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3npS60y-EvfF7G_lioSx2Q.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-28jAOA7cDee-95LvwGsOP- .IN-2bc0215c-7188-4274-b598-1969e06d4d7c-jji74ZzulHScD0OAD_G7h{display:none!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu{background-color:#0073b1!important;border:0!important;border-radius:2px!important;box-sizing:border-box!important;color:#fff!important;cursor:pointer!important;display:inline-block!important;font-family:-apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Fira Sans,Ubuntu,Oxygen,Oxygen Sans,Cantarell,Droid Sans,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Lucida Grande,Helvetica,Arial,sans-serif!important;font-weight:600!important;overflow:hidden!important;outline-width:2px!important;position:relative!important;text-align:center!important;text-decoration:none!important;vertical-align:middle!important;white-space:nowrap!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu:disabled{cursor:not-allowed!important;opacity:.7!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu:not(:disabled):not(.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1zhzkayakwEXovVYUbq5Gy):hover{background-color:#006097!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu:not(:disabled):not(.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1zhzkayakwEXovVYUbq5Gy):active{background-color:#004b7c!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1zhzkayakwEXovVYUbq5Gy{background-color:#fff!important;color:#0073b1!important;box-shadow:inset 0 0 0 1px rgba(0,0,0,.3)!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1zhzkayakwEXovVYUbq5Gy:not(:disabled):hover{color:#006097!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1zhzkayakwEXovVYUbq5Gy:not(:disabled):active{color:#004b7c!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu>xdoor-icon{display:inline-block!important;height:100%!important;vertical-align:top!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu>xdoor-icon>svg{pointer-events:none!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-7inSbaAsvG5bf7w6lJTEr{font-size:10px!important;height:16px!important;line-height:16px!important;padding:0 6px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-7inSbaAsvG5bf7w6lJTEr>xdoor-icon{margin-left:-6px!important;margin-right:3px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-7inSbaAsvG5bf7w6lJTEr>xdoor-icon>svg{height:16px!important;width:16px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-7inSbaAsvG5bf7w6lJTEr.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-2lrEjt4SOTxqrYsv1piG4c>xdoor-icon{margin-right:-6px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu,.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3uCBSbQNVNf2QjqHe1rfb6{font-size:11px!important;height:20px!important;line-height:20px!important;padding:0 7px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3uCBSbQNVNf2QjqHe1rfb6>xdoor-icon,.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu>xdoor-icon{margin-left:-7px!important;margin-right:3.5px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3uCBSbQNVNf2QjqHe1rfb6>xdoor-icon>svg,.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu>xdoor-icon>svg{height:20px!important;width:20px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-3uCBSbQNVNf2QjqHe1rfb6.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-2lrEjt4SOTxqrYsv1piG4c>xdoor-icon,.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-2lrEjt4SOTxqrYsv1piG4c>xdoor-icon{margin-right:-7px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-21Smv9YG-5V6M6KP-5v2WG{font-size:14px!important;height:24px!important;line-height:24px!important;padding:0 12px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-21Smv9YG-5V6M6KP-5v2WG>xdoor-icon{margin-left:-12px!important;margin-right:6px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-21Smv9YG-5V6M6KP-5v2WG>xdoor-icon>svg{height:24px!important;width:24px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-21Smv9YG-5V6M6KP-5v2WG.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-2lrEjt4SOTxqrYsv1piG4c>xdoor-icon{margin-right:-12px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1TGdQUTLZdNG4R87OfAB-q{font-size:16px!important;height:32px!important;line-height:32px!important;padding:0 16px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1TGdQUTLZdNG4R87OfAB-q>xdoor-icon{margin-left:-16px!important;margin-right:8px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1TGdQUTLZdNG4R87OfAB-q>xdoor-icon>svg{height:32px!important;width:32px!important}.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1G9ISYhSF8XoOmdcl0yKDu.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-1TGdQUTLZdNG4R87OfAB-q.IN-2bc0215c-7188-4274-b598-1969e06d4d7c-2lrEjt4SOTxqrYsv1piG4c>xdoor-icon{margin-right:-16px!important}</style><link rel="prefetch" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.5c5dad4ae74bbb3422efd01116dc45e6.css"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.d1c2fbfd8acab46a487aabc1b327ec9e.js"><link rel="prefetch" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.709a3b581102d11076d80fe69632f896.js"><link rel="prefetch" as="script" href="https://disqus.com/next/config.js"><style type="text/css" id="CookieConsentStateDisplayStyles">.cookieconsent-optin,.cookieconsent-optin-preferences,.cookieconsent-optin-statistics,.cookieconsent-optin-marketing{display:block;display:initial;}.cookieconsent-optout-preferences,.cookieconsent-optout-statistics,.cookieconsent-optout-marketing,.cookieconsent-optout{display:none;}</style><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_dialog_advanced{border-radius:8px;padding:10px}.fb_dialog_content{background:#fff;color:#373737}.fb_dialog_close_icon{background:url(https://z-p3-static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{left:5px;right:auto;top:5px}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://z-p3-static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://z-p3-static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://z-p3-static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{height:100%;left:0;margin:0;overflow:visible;position:absolute;top:-10000px;transform:none;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://z-p3-static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{background:none;height:auto;min-height:initial;min-width:initial;width:auto}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{clear:both;color:#fff;display:block;font-size:18px;padding-top:20px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .4);bottom:0;left:0;min-height:100%;position:absolute;right:0;top:0;width:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_mobile .fb_dialog_iframe{position:sticky;top:0}.fb_dialog_content .dialog_header{background:linear-gradient(from(#738aba), to(#2c4987));border-bottom:1px solid;border-color:#043b87;box-shadow:white 0 1px 1px -1px inset;color:#fff;font:bold 14px Helvetica, sans-serif;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:linear-gradient(from(#4267B2), to(#2a4887));background-clip:padding-box;border:1px solid #29487d;border-radius:3px;display:inline-block;line-height:18px;margin-top:3px;max-width:85px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{background:none;border:none;color:#fff;font:bold 12px Helvetica, sans-serif;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://z-p3-static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #4a4a4a;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f5f6f7;border:1px solid #4a4a4a;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://z-p3-static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-position:50% 50%;background-repeat:no-repeat;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}</style><style data-olark="true" type="text/css">.olark-key,#hbl_code,#olark-data{display: none !important;}</style><style data-olark="true" type="text/css">@media print {#habla_beta_container_do_not_rely_on_div_classes_or_names {display: none !important}}</style><link data-olark="true" rel="stylesheet" href="./Resize an image _ Cloudinary Cookbook_files/theme.css" type="text/css"></head>
+<body><div id="olark" style="display: none;"><olark><iframe frameborder="0" id="olark-loader" src="./Resize an image _ Cloudinary Cookbook_files/saved_resource.html"></iframe></olark></div><div class="inner_user blog_page" id="wrapper"><header class="new-header" id="header">
+<div class="header-top hidden-custom">
+<div class="container-fluid">
+<nav class="header-nav">
+<ul>
+<li><a href="https://cloudinary.com/about">About</a></li>
+<li><a href="https://cloudinary.com/blog">Blog</a></li>
+<li><a href="https://cloudinary.com/contact">Contact</a></li>
+<li class="demo_item"><a href="https://cloudinary.com/demos">Demos</a></li>
+<li class="partners_item"><a href="https://cloudinary.com/partners">Partners</a></li>
+<li><a href="http://info.cloudinary.com/webinars.html" class="webinars">Webinars</a></li>
+<li class="careers_item"><a href="https://cloudinary.com/jobs">Careers</a></li>
+<li><a href="https://support.cloudinary.com/hc/en-us" data-popup="true">Support</a></li>
+<li><a href="https://cloudinary.com/console">Login</a></li>
+</ul>
+</nav>
+<div class="search-block new-search-block">
+<a class="search-opener" href="https://cloudinary.com/cookbook/resize_an_image#">
+<i aria-hidden="true" class="fa fa-search"></i>
+</a>
+<div class="search_box">
+<div id="___gcse_0"><div class="gsc-control-cse gsc-control-cse-en"><div class="gsc-control-wrapper-cse" dir="ltr"><form class="gsc-search-box gsc-search-box-tools" accept-charset="utf-8"><table cellspacing="0" cellpadding="0" class="gsc-search-box"><tbody><tr><td class="gsc-input"><div class="gsc-input-box" id="gsc-iw-id1"><table cellspacing="0" cellpadding="0" id="gs_id50" class="gstl_50 gsc-input" style="width: 100%; padding: 0px;"><tbody><tr><td id="gs_tti50" class="gsib_a"><input autocomplete="off" type="text" size="10" class="gsc-input" name="search" title="search" id="gsc-i-id1" style="width: 100%; padding: 0px; border: none; margin: 0px; height: auto; background: url(&quot;https://www.google.com/cse/static/images/1x/en/branding.png&quot;) left center no-repeat rgb(255, 255, 255); outline: none;" dir="ltr" spellcheck="false"></td><td class="gsib_b"><div class="gsst_b" id="gs_st50" dir="ltr"><a class="gsst_a" href="javascript:void(0)" style="display: none;" title="Clear search box" role="button"><span class="gscb_a" id="gs_cb50" aria-hidden="true">×</span></a></div></td></tr></tbody></table></div></td><td class="gsc-search-button"><button class="gsc-search-button gsc-search-button-v2"><svg width="13" height="13" viewBox="0 0 13 13"><title>search</title><path d="m4.8495 7.8226c0.82666 0 1.5262-0.29146 2.0985-0.87438 0.57232-0.58292 0.86378-1.2877 0.87438-2.1144 0.010599-0.82666-0.28086-1.5262-0.87438-2.0985-0.59352-0.57232-1.293-0.86378-2.0985-0.87438-0.8055-0.010599-1.5103 0.28086-2.1144 0.87438-0.60414 0.59352-0.8956 1.293-0.87438 2.0985 0.021197 0.8055 0.31266 1.5103 0.87438 2.1144 0.56172 0.60414 1.2665 0.8956 2.1144 0.87438zm4.4695 0.2115 3.681 3.6819-1.259 1.284-3.6817-3.7 0.0019784-0.69479-0.090043-0.098846c-0.87973 0.76087-1.92 1.1413-3.1207 1.1413-1.3553 0-2.5025-0.46363-3.4417-1.3909s-1.4088-2.0686-1.4088-3.4239c0-1.3553 0.4696-2.4966 1.4088-3.4239 0.9392-0.92727 2.0864-1.3969 3.4417-1.4088 1.3553-0.011889 2.4906 0.45771 3.406 1.4088 0.9154 0.95107 1.379 2.0924 1.3909 3.4239 0 1.2126-0.38043 2.2588-1.1413 3.1385l0.098834 0.090049z"></path></svg></button></td><td class="gsc-clear-button"><div class="gsc-clear-button" title="clear results">&nbsp;</div></td></tr></tbody></table></form><div class="gsc-results-wrapper-overlay"><div class="gsc-results-close-btn" tabindex="0"></div><div class="gsc-positioningWrapper"><div class="gsc-tabsAreaInvisible"><div aria-label="refinement" role="tab" class="gsc-tabHeader gsc-inline-block gsc-tabhActive">Custom Search</div><span class="gs-spacer"> </span></div></div><div class="gsc-positioningWrapper"><div class="gsc-tabsAreaInvisible"></div></div><div class="gsc-above-wrapper-area-invisible"><table cellspacing="0" cellpadding="0" class="gsc-above-wrapper-area-container"><tbody><tr><td class="gsc-result-info-container"><div class="gsc-result-info-invisible"></div></td><td class="gsc-orderby-container"><div class="gsc-orderby-invisible"><div class="gsc-orderby-label gsc-inline-block">Sort by:</div><div class="gsc-option-menu-container gsc-inline-block"><div class="gsc-selected-option-container gsc-inline-block"><div class="gsc-selected-option">Relevance</div><div class="gsc-option-selector"></div></div><div class="gsc-option-menu-invisible"><div class="gsc-option-menu-item gsc-option-menu-item-highlighted"><div class="gsc-option">Relevance</div></div><div class="gsc-option-menu-item"><div class="gsc-option">Date</div></div></div></div></div></td></tr></tbody></table></div><div class="gsc-adBlockInvisible"></div><div class="gsc-wrapper"><div class="gsc-adBlockInvisible"></div><div class="gsc-resultsbox-invisible"><div class="gsc-resultsRoot gsc-tabData gsc-tabdActive"><div><div class="gsc-expansionArea"></div></div></div></div></div></div><div class="gsc-modal-background-image" tabindex="0"></div></div></div></div></div>
+</div>
+<ul class="new-social-networks">
+<li>
+<a class="facebook" data-popup="true" href="https://www.facebook.com/Cloudinary">
+<i aria-hidden="true" class="fa fa-facebook"></i>
+</a>
+</li>
+<li>
+<a class="twitter" data-popup="true" href="https://twitter.com/cloudinary">
+<i aria-hidden="true" class="fa fa-twitter"></i>
+</a>
+</li>
+<li>
+<a class="linkedin" data-popup="true" href="https://www.linkedin.com/company/cloudinary">
+<i aria-hidden="true" class="fa fa-linkedin"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="header-frame">
+<nav class="navbar-default navbar navbar-default">
+<div class="container-fluid">
+<div class="navbar-header navbar-header">
+<button class="navbar-toggle navbar-toggle collapsed collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+<span class="icon-bar icon-bar"></span>
+<span class="icon-bar icon-bar"></span>
+<span class="icon-bar icon-bar"></span>
+</button>
+<div class="logo">
+<a href="https://cloudinary.com/">
+<img alt="Cloudinary Logo" class="dark-logo" src="./Resize an image _ Cloudinary Cookbook_files/cloudinary_logo_for_white_bg.svg" width="120"></a>
+</div>
+</div>
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<div class="header-section">
+<ul class="nav navbar-nav">
+<li class="dropdown dropdown">
+<a href="https://cloudinary.com/solutions" aria-expanded="false" class="dropdown-toggle" role="button">Solutions</a><div class="dropdown-menu new-solutions-menu dropdown-menu" id="solutions_drop_menu">
+<div class="drop-wrap drop-wrap">
+<div class="dropdown-holder dropdown-holder">
+<div class="drop-main drop-main">
+<div class="drop-holder drop-holder">
+<div class="cell-holder new_main_docs cell-holder new_main_docs container-fluid">
+<div class="drop-row drop-row">
+<div class="col">
+<strong class="title hidden-custom">
+<a href="https://cloudinary.com/solutions">Solutions Overview</a></strong>
+<ul class="drop-links">
+<li class="solution_image_management">
+<a href="https://cloudinary.com/solutions/image_management">Image Management for Developers</a>
+</li>
+<li class="solution_video_management">
+<a href="https://cloudinary.com/solutions/video_management">Video Management for Developers</a>
+</li>
+<li class="solution_digital_asset_management">
+<a href="https://cloudinary.com/solutions/digital_asset_management">Digital Asset Management</a>
+</li>
+<li class="solution_ecommerce">
+<a href="https://cloudinary.com/solutions/ecommerce">Media Management for E-Commerce</a>
+</li>
+</ul>
+</div>
+<div class="col">
+<strong class="title">Features</strong>
+<ul class="drop-links">
+<li class="solution_image_management">
+<a href="https://cloudinary.com/features/image_manipulation">Image Manipulation</a>
+</li>
+<li class="solution_video_management">
+<a href="https://cloudinary.com/features/video_transcoding">Video Transcoding</a>
+</li>
+<li class="solution_digital_asset_management">
+<a href="https://cloudinary.com/features/responsive_images">Responsive Images</a>
+</li>
+<li class="visible-custom">
+<a href="https://cloudinary.com/features/optimization_fast_delivery">Optimization and Fast Delivery</a>
+</li>
+<li class="visible-custom">
+<a href="https://cloudinary.com/features/file_upload_storage">File Upload and Storage</a>
+</li>
+<li class="visible-custom">
+<a href="https://cloudinary.com/features/presentation">Presentation</a>
+</li>
+<li class="solution-single-source">
+<a href="https://cloudinary.com/solutions/digital_asset_management/single-source-of-truth">Single Source of Truth</a>
+</li>
+<li class="solution-workflows">
+<a href="https://cloudinary.com/solutions/digital_asset_management/collaborate-and-streamline-asset-workflows">Collaborate and Streamline Workflows</a>
+</li>
+<li class="visible-custom">
+<a href="https://cloudinary.com/solutions/digital_asset_management/deliver-optimized-experiences">Deliver Optimized Experiences</a>
+</li>
+</ul>
+</div>
+<div class="col hidden-custom">
+<strong class="title">&nbsp;</strong>
+<ul class="drop-links">
+<li class="solution_image_management">
+<a href="https://cloudinary.com/features/optimization_fast_delivery">Optimization and Fast Delivery</a>
+</li>
+<li class="solution_video_management">
+<a href="https://cloudinary.com/features/file_upload_storage">File Upload and Storage</a>
+</li>
+<li class="solution_digital_asset_management">
+<a href="https://cloudinary.com/features/presentation">Presentation</a>
+</li>
+<li class="solution-deliver-optimized-experiences">
+<a href="https://cloudinary.com/solutions/digital_asset_management/deliver-optimized-experiences">Deliver Optimized Experiences</a>
+</li>
+</ul>
+</div>
+<div class="col">
+<strong class="title">By Industry</strong>
+<ul class="drop-links">
+<li>
+<a href="https://cloudinary.com/solutions/industries/retail">Retail</a>
+</li>
+<li>
+<a href="https://cloudinary.com/solutions/industries/media_entertainment">Media and Entertainment</a>
+</li>
+<li>
+<a href="https://cloudinary.com/solutions/industries/travel_hospitality">Travel and Hospitality</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li class="hidden-custom"><a href="https://cloudinary.com/pricing">Pricing</a></li>
+<li class="hidden-custom"><a href="https://cloudinary.com/customers">Customers</a></li>
+<li class="dropdown hidden-custom">
+<a aria-expanded="false" class="dropdown-toggle" href="https://cloudinary.com/documentation" role="button">Documentation</a>
+<div class="dropdown-menu cld-dropdown-menu" id="documentation_drop_menu">
+  <div class="drop-wrap cld-drop-wrap">
+    <div class="dropdown-holder cld-dropdown-holder">
+      <div class="drop-main cld-drop-main">
+        <div class="drop-holder cld-drop-holder">
+          <div class="cell-holder main_docs container cld-cell-holder cld-main_docs cld-container">
+            <div class="drop-row cld-drop-row">
+              <div class="col">
+                <strong class="title cld-title">
+                  Get Started
+                </strong>
+                <ul class="drop-links get_started cld-drop-links cld-get_started">
+                  <li><a href="https://cloudinary.com/documentation/solution_overview"><img src="./Resize an image _ Cloudinary Cookbook_files/developer-overview.svg" alt="Developer Overview Icon">Developer Overview</a></li>
+                  <li><a href="https://cloudinary.com/documentation/digital_asset_management_overview"><img src="./Resize an image _ Cloudinary Cookbook_files/DAM-icon.svg" alt="DAM Overview Icon" style="width: 24px;">DAM Overview</a></li>
+                  <li><a href="https://cloudinary.com/documentation/tutorial_screencasts"><img src="./Resize an image _ Cloudinary Cookbook_files/tutorials.svg" alt="Tutorials Icon">Tutorials</a></li>
+                </ul>
+                <hr>
+                <div class="drop-row cld-drop-row">
+                  <div class="col">
+                    <strong class="title cld-title">
+                      Guides
+                    </strong>
+                    <ul class="drop-links cld-drop-links">
+                      <li><a href="https://cloudinary.com/documentation/image_video_and_file_upload">Image and Video Upload</a></li>
+                      <li><a href="https://cloudinary.com/documentation/image_transformations">Image Transformations</a></li>
+                      <li><a href="https://cloudinary.com/documentation/video_manipulation_and_delivery">Video Transformations</a></li>
+                      <li><a href="https://cloudinary.com/documentation/image_optimization">Image Optimization</a></li>
+                      <li><a href="https://cloudinary.com/documentation/responsive_images">Responsive Images</a></li>
+                      <li><a href="https://cloudinary.com/documentation/embed_widgets_players">Widgets and Players</a></li>
+                    </ul>
+                    <a href="https://cloudinary.com/documentation/cloudinary_guides">More Guides &gt;</a>
+                  </div>
+                  <div class="col">
+                    <strong class="title cld-title">
+                      API Reference
+                    </strong>
+                    <ul class="drop-links cld-drop-links">
+                      <li><a href="https://cloudinary.com/documentation/image_upload_api_reference">Upload API</a></li>
+                      <li><a href="https://cloudinary.com/documentation/image_transformation_reference">Transformation Reference</a></li>
+                      <li><a href="https://cloudinary.com/documentation/admin_api">Admin API</a></li>
+                      <li><a href="https://cloudinary.com/documentation/search_api">Search API</a></li>
+                      <li><a href="https://cloudinary.com/documentation/video_player_api_reference">Video Player API</a></li>
+                    </ul>
+                    <a href="https://cloudinary.com/documentation/cloudinary_references">More References &gt;</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <strong class="title cld-title">
+                  Integrations
+                </strong>
+                <ul class="drop-links integrations cld-drop-links cld-integrations">
+                  <li><a href="https://cloudinary.com/documentation/node_integration"><span><img src="./Resize an image _ Cloudinary Cookbook_files/node.svg" alt="Node.js Icon"></span>Node.js</a></li>
+                  <li><a href="https://cloudinary.com/documentation/react_integration"><span><img src="./Resize an image _ Cloudinary Cookbook_files/react.svg" alt="React Icon"></span>React</a></li>
+                  <li><a href="https://cloudinary.com/documentation/javascript_integration"><span><img src="./Resize an image _ Cloudinary Cookbook_files/javascript.svg" alt="Javascript Icon"></span>Javascript</a></li>
+                  <li><a href="https://cloudinary.com/documentation/angular_integration"><span><img src="./Resize an image _ Cloudinary Cookbook_files/angular.svg" alt="Angular Icon"></span>Angular</a></li>
+                  <li><a href="https://cloudinary.com/documentation/rails_integration"><span><img src="./Resize an image _ Cloudinary Cookbook_files/ruby.svg" alt="Ruby Icon"></span>Ruby on Rails</a></li>
+                  <li><a href="https://cloudinary.com/documentation/android_integration"><span><img src="./Resize an image _ Cloudinary Cookbook_files/android.svg" alt="Android Icon"></span>Android</a></li>
+                  <li><a href="https://cloudinary.com/documentation/php_integration"><span><img src="./Resize an image _ Cloudinary Cookbook_files/php.svg" alt="PHP Icon"></span>PHP</a></li>
+                  <li><a href="https://cloudinary.com/documentation/ios_integration"><span><img src="./Resize an image _ Cloudinary Cookbook_files/ios.svg" alt="iOS Icon"></span>iOS</a></li>
+                </ul>
+                <a href="https://cloudinary.com/documentation/framework_integration#sdks">More SDKs &gt;</a>
+                <hr>
+                <ul class="drop-links integrations integrations_extended cld-drop-links cld-integrations cld-integrations_extended">
+                  <li><a href="https://cloudinary.com/documentation/cloudinary_add_ons"><span><img src="./Resize an image _ Cloudinary Cookbook_files/addons.svg" alt="Add-ons Icon"></span>Add-ons</a></li>
+                  <li><a href="https://cloudinary.com/documentation/cms_ecommerce_integrations"><span><img src="./Resize an image _ Cloudinary Cookbook_files/cms.svg" alt="CMS/E-commerce Integrations Icon"></span>CMS/E-commerce Integrations</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></li>
+<li class="hidden-custom"><a href="https://cloudinary.com/addons">Add-ons</a></li>
+</ul>
+<ul class="nav navbar-nav visible-custom">
+<li><a href="https://cloudinary.com/pricing">Pricing</a></li>
+<li><a href="https://cloudinary.com/contact">Contact Us</a></li>
+<li><a href="https://cloudinary.com/blog">Blog</a></li>
+<li><a href="https://support.cloudinary.com/hc/en-us" data-popup="true">Support</a></li>
+<li><a href="https://cloudinary.com/documentation">Documentation</a></li>
+<li><a href="https://cloudinary.com/jobs">Careers</a></li>
+<li><a href="https://cloudinary.com/customers">Customers</a></li>
+<li><a href="https://cloudinary.com/partners">Partners</a></li>
+<li><a href="https://cloudinary.com/console">Login</a></li>
+<li><a href="https://cloudinary.com/about">About Us</a></li>
+</ul>
+<div class="signup-block signup-block">
+<a class="btn btn-default btn btn-sm btn-default" href="https://cloudinary.com/signup">sign up for free</a>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</div>
+</header>
+<main id="main" role="main"><div class="recipe_page">
+<div class="recipes_header_holder with_back">
+<section class="cookbook-banner">
+<div class="image-holder">
+<img alt="Cloudinary cookbook background" height="218" src="./Resize an image _ Cloudinary Cookbook_files/cookbook_header_bg.jpg" width="1600">
+</div>
+<div class="caption-holder">
+<div class="container">
+<div class="row">
+<div class="col-xs-12">
+<div class="caption">
+<span class="title">Cloudinary Cookbook</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="tags-holder">
+<div class="container">
+<div class="row">
+<div class="col-xs-12">
+<div class="tags-frame">
+<form action="https://cloudinary.com/cookbook/resize_an_image#" class="search-form">
+<fieldset>
+<button class="btn-search" type="submit">
+<span class="icon-search"></span>
+</button>
+<div class="input-hold">
+<div class="search_box">
+<div id="___gcse_1"><div class="gsc-control-cse gsc-control-cse-en"><div class="gsc-control-wrapper-cse" dir="ltr"><form class="gsc-search-box gsc-search-box-tools" accept-charset="utf-8"><table cellspacing="0" cellpadding="0" class="gsc-search-box"><tbody><tr><td class="gsc-input"><div class="gsc-input-box" id="gsc-iw-id2"><table cellspacing="0" cellpadding="0" id="gs_id51" class="gstl_51 gsc-input" style="width: 100%; padding: 0px;"><tbody><tr><td id="gs_tti51" class="gsib_a"><input autocomplete="off" type="text" size="10" class="gsc-input" name="search" title="search" id="gsc-i-id2" style="width: 100%; padding: 0px; border: none; margin: 0px; height: auto; background: url(&quot;https://www.google.com/cse/static/images/1x/en/branding.png&quot;) left center no-repeat rgb(255, 255, 255); outline: none;" dir="ltr" spellcheck="false"></td><td class="gsib_b"><div class="gsst_b" id="gs_st51" dir="ltr"><a class="gsst_a" href="javascript:void(0)" style="display: none;" title="Clear search box" role="button"><span class="gscb_a" id="gs_cb51" aria-hidden="true">×</span></a></div></td></tr></tbody></table></div></td><td class="gsc-search-button"><button class="gsc-search-button gsc-search-button-v2"><svg width="13" height="13" viewBox="0 0 13 13"><title>search</title><path d="m4.8495 7.8226c0.82666 0 1.5262-0.29146 2.0985-0.87438 0.57232-0.58292 0.86378-1.2877 0.87438-2.1144 0.010599-0.82666-0.28086-1.5262-0.87438-2.0985-0.59352-0.57232-1.293-0.86378-2.0985-0.87438-0.8055-0.010599-1.5103 0.28086-2.1144 0.87438-0.60414 0.59352-0.8956 1.293-0.87438 2.0985 0.021197 0.8055 0.31266 1.5103 0.87438 2.1144 0.56172 0.60414 1.2665 0.8956 2.1144 0.87438zm4.4695 0.2115 3.681 3.6819-1.259 1.284-3.6817-3.7 0.0019784-0.69479-0.090043-0.098846c-0.87973 0.76087-1.92 1.1413-3.1207 1.1413-1.3553 0-2.5025-0.46363-3.4417-1.3909s-1.4088-2.0686-1.4088-3.4239c0-1.3553 0.4696-2.4966 1.4088-3.4239 0.9392-0.92727 2.0864-1.3969 3.4417-1.4088 1.3553-0.011889 2.4906 0.45771 3.406 1.4088 0.9154 0.95107 1.379 2.0924 1.3909 3.4239 0 1.2126-0.38043 2.2588-1.1413 3.1385l0.098834 0.090049z"></path></svg></button></td><td class="gsc-clear-button"><div class="gsc-clear-button" title="clear results">&nbsp;</div></td></tr></tbody></table></form><div class="gsc-results-wrapper-overlay"><div class="gsc-results-close-btn" tabindex="0"></div><div class="gsc-positioningWrapper"><div class="gsc-tabsAreaInvisible"><div aria-label="refinement" role="tab" class="gsc-tabHeader gsc-inline-block gsc-tabhActive">Custom Search</div><span class="gs-spacer"> </span></div></div><div class="gsc-positioningWrapper"><div class="gsc-tabsAreaInvisible"></div></div><div class="gsc-above-wrapper-area-invisible"><table cellspacing="0" cellpadding="0" class="gsc-above-wrapper-area-container"><tbody><tr><td class="gsc-result-info-container"><div class="gsc-result-info-invisible"></div></td><td class="gsc-orderby-container"><div class="gsc-orderby-invisible"><div class="gsc-orderby-label gsc-inline-block">Sort by:</div><div class="gsc-option-menu-container gsc-inline-block"><div class="gsc-selected-option-container gsc-inline-block"><div class="gsc-selected-option">Relevance</div><div class="gsc-option-selector"></div></div><div class="gsc-option-menu-invisible"><div class="gsc-option-menu-item gsc-option-menu-item-highlighted"><div class="gsc-option">Relevance</div></div><div class="gsc-option-menu-item"><div class="gsc-option">Date</div></div></div></div></div></td></tr></tbody></table></div><div class="gsc-adBlockInvisible"></div><div class="gsc-wrapper"><div class="gsc-adBlockInvisible"></div><div class="gsc-resultsbox-invisible"><div class="gsc-resultsRoot gsc-tabData gsc-tabdActive"><div><div class="gsc-expansionArea"></div></div></div></div></div></div><div class="gsc-modal-background-image" tabindex="0"></div></div></div></div>
+</div>
+</div>
+</fieldset>
+</form>
+<div class="tags-block">
+<a href="https://cloudinary.com/cookbook" class="go-back">← View popular recipes</a>
+<div class="tags-content">
+<strong class="title">Find recipes by tags:</strong>
+<div class="tag-area1">
+<div class="btn-area">
+<a class="opener" href="https://cloudinary.com/cookbook/resize_an_image#">View all tags</a>
+</div>
+<div class="add-widgets">
+<ul class="tags inner-tags">
+<li class="categories"><a href="https://cloudinary.com/cookbook/tag/manipulation">Manipulation</a></li>
+<li class="manipulation"><a href="https://cloudinary.com/cookbook/tag/crop">Crop</a></li>
+<li class="manipulation"><a href="https://cloudinary.com/cookbook/tag/effect">Effect</a></li>
+<li class="manipulation"><a href="https://cloudinary.com/cookbook/tag/text">Text</a></li>
+<li class="manipulation"><a href="https://cloudinary.com/cookbook/tag/shape">Shape</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="slide js-slide-hidden">
+<div class="tags_row">
+<ul class="tags inner-tags">
+<li class="categories tag"><a href="https://cloudinary.com/cookbook/tag/manipulation">Manipulation</a></li>
+<li class="categories tag"><a href="https://cloudinary.com/cookbook/tag/upload">Upload</a></li>
+<li class="categories tag"><a href="https://cloudinary.com/cookbook/tag/optimization">Optimization</a></li>
+</ul>
+</div>
+<div class="tags_row">
+<ul class="tags inner-tags">
+</ul>
+</div>
+<div class="tags_row">
+<ul class="tags inner-tags">
+<li class="manipulation tag"><a href="https://cloudinary.com/cookbook/tag/crop">Crop</a></li>
+<li class="manipulation tag"><a href="https://cloudinary.com/cookbook/tag/resize">Resize</a></li>
+<li class="manipulation tag"><a href="https://cloudinary.com/cookbook/tag/effect">Effect</a></li>
+<li class="manipulation tag"><a href="https://cloudinary.com/cookbook/tag/filter">Filter</a></li>
+<li class="manipulation tag"><a href="https://cloudinary.com/cookbook/tag/shape">Shape</a></li>
+<li class="manipulation tag"><a href="https://cloudinary.com/cookbook/tag/face-detection">Face-detection</a></li>
+<li class="manipulation tag"><a href="https://cloudinary.com/cookbook/tag/overlay">Overlay</a></li>
+<li class="manipulation tag"><a href="https://cloudinary.com/cookbook/tag/text">Text</a></li>
+<li class="manipulation tag"><a href="https://cloudinary.com/cookbook/tag/watermark">Watermark</a></li>
+<li class="manipulation tag"><a href="https://cloudinary.com/cookbook/tag/convert">Convert</a></li>
+</ul>
+</div>
+<div class="tags_row">
+<ul class="tags inner-tags">
+<li class="formats tag"><a href="https://cloudinary.com/cookbook/tag/gif">GIF</a></li>
+<li class="formats tag"><a href="https://cloudinary.com/cookbook/tag/pdf">PDF</a></li>
+</ul>
+</div>
+<div class="tags_row">
+<ul class="tags inner-tags">
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/angle">Angle</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/animated">Animated</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/api">api</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/blur">Blur</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/border">Border</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/brightness">Brightness</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/center">Center</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/color">color</a></li>
+</ul>
+</div>
+<div class="tags_row">
+<ul class="tags inner-tags">
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/colorize">colorize</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/cut_out">cut_out</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/fill">Fill</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/fill-light">Fill-light</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/fit">Fit</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/flip-video">Flip-Video</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/format">Format</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/gravity">Gravity</a></li>
+</ul>
+</div>
+<div class="tags_row">
+<ul class="tags inner-tags">
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/grayscale">Grayscale</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/hue">Hue</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/improve">Improve</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/layer_apply">layer_apply</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/limit">Limit</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/metadata">Metadata</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/opacity">Opacity</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/pad">Pad</a></li>
+</ul>
+</div>
+<div class="tags_row">
+<ul class="tags inner-tags">
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/pixelate">Pixelate</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/poster-images">poster-images</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/radius">Radius</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/relative">Relative</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/saturation">Saturation</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/scale">Scale</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/sepia">Sepia</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/shadow">Shadow</a></li>
+</ul>
+</div>
+<div class="tags_row">
+<ul class="tags inner-tags">
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/sharpen">Sharpen</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/thumb">Thumb</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/trim">Trim</a></li>
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/video">Video</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<section class="single-holder">
+<div class="container">
+<div class="row">
+<div class="col-xs-12">
+<div class="single-posts">
+<h1>Resize an image</h1>
+<article class="post dynamic_content">
+<div class="recipe_content"><p>Resize your images by setting the <code>width</code> and/or <code>height</code> parameters (<code>w</code> and <code>h</code> in URLs). When resizing using Cloudinary's URL-based transformations, Cloudinary will automatically apply the <code>scale</code> crop mode. Alternatively, you can use any one of our many supported <a href="https://cloudinary.com/documentation/image_transformations#crop_modes" data-popup="true">crop modes</a>. </p><p>Resizing an image can be easily done on-the-fly in the cloud. Resize an image by setting the <code>width</code> and <code>height</code> parameter, or by setting the percentage of the scaling ratio.</p><p>Here's an original image:
+</p><div class="example multi_code"><div class="framework_links"><a href="https://cloudinary.com/cookbook/resize_an_image#original" class="active" data-framework="url">URL</a><a href="https://cloudinary.com/cookbook/resize_an_image#original" class="" data-framework="ruby">Ruby</a><a href="https://cloudinary.com/cookbook/resize_an_image#original" class="" data-framework="php">PHP</a><a href="https://cloudinary.com/cookbook/resize_an_image#original" class="" data-framework="python">Python</a><a href="https://cloudinary.com/cookbook/resize_an_image#original" class="" data-framework="nodejs">Node.js</a><a href="https://cloudinary.com/cookbook/resize_an_image#original" class="" data-framework="java">Java</a><a href="https://cloudinary.com/cookbook/resize_an_image#original" class="" data-framework="js">JS</a><a href="https://cloudinary.com/cookbook/resize_an_image#original" class="" data-framework="jquery">jQuery</a><a href="https://cloudinary.com/cookbook/resize_an_image#original" class="" data-framework="react">React</a><a href="https://cloudinary.com/cookbook/resize_an_image#original" class="" data-framework="vue">Vue.js</a><a href="https://cloudinary.com/cookbook/resize_an_image#original" class="" data-framework="angular">Angular</a><a href="https://cloudinary.com/cookbook/resize_an_image#original" class="" data-framework="csharp">.Net</a><a href="https://cloudinary.com/cookbook/resize_an_image#original" class="" data-framework="android">Android</a><a href="https://cloudinary.com/cookbook/resize_an_image#original" class="" data-framework="swift">iOS</a><a href="https://cloudinary.com/cookbook/resize_an_image#original" class="sample_all" data-framework="all">All</a></div><a class="anchor" name="original"></a><div class="code_sample framework_sample active" data-framework="url"><div class="framework_name">URL:</div><div class="code-holder"><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><span class="url"><a href="https://res.cloudinary.com/demo/image/upload/turtles.jpg" data-popup="true"><span class="prefix">https://res.cloudinary.com/demo/</span><span class="kind">image/upload/</span><span class="signature"></span><span class="trans"></span><span class="public_id">turtles.jpg</span></a></span></div></div></div><div class="code_sample framework_sample" data-framework="ruby"><div class="framework_name">Ruby:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cl_image_tag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="php"><div class="framework_name">PHP:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cl_image_tag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="python"><div class="framework_name">Python:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>CloudinaryImage(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>).image()</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="nodejs"><div class="framework_name">Node.js:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.image(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="java"><div class="framework_name">Java:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.url().imageTag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>);</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="js"><div class="framework_name">JS:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.imageTag(<span class="string"><span class="delimiter">'</span><span class="content">turtles.jpg</span><span class="delimiter">'</span></span>).toHtml();</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="jquery"><div class="framework_name">jQuery:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>.cloudinary.image(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="react"><div class="framework_name">React:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;Image</span> <span class="attribute-name">publicId</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+
+<span class="tag">&lt;/Image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="vue"><div class="framework_name">Vue.js:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;cld-image</span> <span class="attribute-name">publicId</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+
+<span class="tag">&lt;/cld-image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="angular"><div class="framework_name">Angular:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;cl-image</span> <span class="attribute-name">public-id</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+
+<span class="tag">&lt;/cl-image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="csharp"><div class="framework_name">.Net:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.Api.UrlImgUp.BuildImageTag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="android"><div class="framework_name">Android:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>MediaManager.get().url().generate(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>);</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="swift"><div class="framework_name">iOS:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>imageView.cldSetImage(cloudinary.createUrl().generate(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)!, cloudinary: cloudinary)</pre></div>
+</div>
+</div></div></div></div><a href="https://res.cloudinary.com/demo/image/upload/turtles.jpg" data-popup="true"><div class="content-img-outer-wrapper" style="max-width:600px;"><div class="content-img-inner-wrapper" style="padding-top: 66.83%;"><img alt="Original" src="./Resize an image _ Cloudinary Cookbook_files/turtles.jpg" style="margin: 0 auto;display: block" title="Original"></div></div></a><p></p><p>To resize your image. specify the <code>width</code> and the <code>height</code> parameters (<code>w</code> and <code>h</code> in URLs):
+</p><div class="example multi_code"><div class="framework_links"><a href="https://cloudinary.com/cookbook/resize_an_image#scaled" class="active" data-framework="url">URL</a><a href="https://cloudinary.com/cookbook/resize_an_image#scaled" class="" data-framework="ruby">Ruby</a><a href="https://cloudinary.com/cookbook/resize_an_image#scaled" class="" data-framework="php">PHP</a><a href="https://cloudinary.com/cookbook/resize_an_image#scaled" class="" data-framework="python">Python</a><a href="https://cloudinary.com/cookbook/resize_an_image#scaled" class="" data-framework="nodejs">Node.js</a><a href="https://cloudinary.com/cookbook/resize_an_image#scaled" class="" data-framework="java">Java</a><a href="https://cloudinary.com/cookbook/resize_an_image#scaled" class="" data-framework="js">JS</a><a href="https://cloudinary.com/cookbook/resize_an_image#scaled" class="" data-framework="jquery">jQuery</a><a href="https://cloudinary.com/cookbook/resize_an_image#scaled" class="" data-framework="react">React</a><a href="https://cloudinary.com/cookbook/resize_an_image#scaled" class="" data-framework="vue">Vue.js</a><a href="https://cloudinary.com/cookbook/resize_an_image#scaled" class="" data-framework="angular">Angular</a><a href="https://cloudinary.com/cookbook/resize_an_image#scaled" class="" data-framework="csharp">.Net</a><a href="https://cloudinary.com/cookbook/resize_an_image#scaled" class="" data-framework="android">Android</a><a href="https://cloudinary.com/cookbook/resize_an_image#scaled" class="" data-framework="swift">iOS</a><a href="https://cloudinary.com/cookbook/resize_an_image#scaled" class="sample_all" data-framework="all">All</a></div><a class="anchor" name="scaled"></a><div class="code_sample framework_sample active" data-framework="url"><div class="framework_name">URL:</div><div class="code-holder"><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><span class="url"><a href="./Resize an image _ Cloudinary Cookbook_files/turtles(1).jpg" data-popup="true"><span class="prefix">https://res.cloudinary.com/demo/</span><span class="kind">image/upload/</span><span class="signature"></span><span class="trans">w_70,h_53,c_scale/</span><span class="public_id">turtles.jpg</span></a></span></div></div></div><div class="code_sample framework_sample" data-framework="ruby"><div class="framework_name">Ruby:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cl_image_tag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, <span class="symbol">:width</span>=&gt;<span class="integer">70</span>, <span class="symbol">:height</span>=&gt;<span class="integer">53</span>, <span class="symbol">:crop</span>=&gt;<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="php"><div class="framework_name">PHP:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cl_image_tag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, <span class="predefined">array</span>(<span class="string"><span class="delimiter">"</span><span class="content">width</span><span class="delimiter">"</span></span>=&gt;<span class="integer">70</span>, <span class="string"><span class="delimiter">"</span><span class="content">height</span><span class="delimiter">"</span></span>=&gt;<span class="integer">53</span>, <span class="string"><span class="delimiter">"</span><span class="content">crop</span><span class="delimiter">"</span></span>=&gt;<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>))</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="python"><div class="framework_name">Python:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>CloudinaryImage(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>).image(width=<span class="integer">70</span>, height=<span class="integer">53</span>, crop=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="nodejs"><div class="framework_name">Node.js:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.image(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, {<span class="key">width</span>: <span class="integer">70</span>, <span class="key">height</span>: <span class="integer">53</span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>})</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="java"><div class="framework_name">Java:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.url().transformation(<span class="keyword">new</span> Transformation().width(<span class="integer">70</span>).height(<span class="integer">53</span>).crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).imageTag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>);</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="js"><div class="framework_name">JS:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.imageTag(<span class="string"><span class="delimiter">'</span><span class="content">turtles.jpg</span><span class="delimiter">'</span></span>, {<span class="key">width</span>: <span class="integer">70</span>, <span class="key">height</span>: <span class="integer">53</span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>}).toHtml();</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="jquery"><div class="framework_name">jQuery:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>.cloudinary.image(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, {<span class="key">width</span>: <span class="integer">70</span>, <span class="key">height</span>: <span class="integer">53</span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>})</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="react"><div class="framework_name">React:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;Image</span> <span class="attribute-name">publicId</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;Transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">70</span><span class="delimiter">"</span></span> <span class="attribute-name">height</span>=<span class="string"><span class="delimiter">"</span><span class="content">53</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/Image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="vue"><div class="framework_name">Vue.js:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;cld-image</span> <span class="attribute-name">publicId</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;cld-transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">70</span><span class="delimiter">"</span></span> <span class="attribute-name">height</span>=<span class="string"><span class="delimiter">"</span><span class="content">53</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/cld-image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="angular"><div class="framework_name">Angular:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;cl-image</span> <span class="attribute-name">public-id</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;cl-transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">70</span><span class="delimiter">"</span></span> <span class="attribute-name">height</span>=<span class="string"><span class="delimiter">"</span><span class="content">53</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>
+  <span class="tag">&lt;/cl-transformation&gt;</span>
+<span class="tag">&lt;/cl-image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="csharp"><div class="framework_name">.Net:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.Api.UrlImgUp.Transform(<span class="keyword">new</span> Transformation().Width(<span class="integer">70</span>).Height(<span class="integer">53</span>).Crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).BuildImageTag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="android"><div class="framework_name">Android:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>MediaManager.get().url().transformation(<span class="keyword">new</span> Transformation().width(<span class="integer">70</span>).height(<span class="integer">53</span>).crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).generate(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>);</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="swift"><div class="framework_name">iOS:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>imageView.cldSetImage(cloudinary.createUrl().setTransformation(CLDTransformation().setWidth(<span class="integer">70</span>).setHeight(<span class="integer">53</span>).setCrop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).generate(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)!, cloudinary: cloudinary)</pre></div>
+</div>
+</div></div></div></div><a href="./Resize an image _ Cloudinary Cookbook_files/turtles(1).jpg" data-popup="true"><div class="content-img-outer-wrapper" style="max-width:70px;"><div class="content-img-inner-wrapper" style="padding-top: 75.71%;"><img alt="Scaled" src="./Resize an image _ Cloudinary Cookbook_files/turtles(1).jpg" style="margin: 0 auto;display: block" title="Scaled"></div></div></a><p></p><p>The <code>scale</code> crop mode keeps all parts of the image visible. In this case, specifying 'width' and 'height' values which do not match the original image's ratio may result a stretched / shrunken image:
+</p><div class="example multi_code"><div class="framework_links"><a href="https://cloudinary.com/cookbook/resize_an_image#stretched" class="active" data-framework="url">URL</a><a href="https://cloudinary.com/cookbook/resize_an_image#stretched" class="" data-framework="ruby">Ruby</a><a href="https://cloudinary.com/cookbook/resize_an_image#stretched" class="" data-framework="php">PHP</a><a href="https://cloudinary.com/cookbook/resize_an_image#stretched" class="" data-framework="python">Python</a><a href="https://cloudinary.com/cookbook/resize_an_image#stretched" class="" data-framework="nodejs">Node.js</a><a href="https://cloudinary.com/cookbook/resize_an_image#stretched" class="" data-framework="java">Java</a><a href="https://cloudinary.com/cookbook/resize_an_image#stretched" class="" data-framework="js">JS</a><a href="https://cloudinary.com/cookbook/resize_an_image#stretched" class="" data-framework="jquery">jQuery</a><a href="https://cloudinary.com/cookbook/resize_an_image#stretched" class="" data-framework="react">React</a><a href="https://cloudinary.com/cookbook/resize_an_image#stretched" class="" data-framework="vue">Vue.js</a><a href="https://cloudinary.com/cookbook/resize_an_image#stretched" class="" data-framework="angular">Angular</a><a href="https://cloudinary.com/cookbook/resize_an_image#stretched" class="" data-framework="csharp">.Net</a><a href="https://cloudinary.com/cookbook/resize_an_image#stretched" class="" data-framework="android">Android</a><a href="https://cloudinary.com/cookbook/resize_an_image#stretched" class="" data-framework="swift">iOS</a><a href="https://cloudinary.com/cookbook/resize_an_image#stretched" class="sample_all" data-framework="all">All</a></div><a class="anchor" name="stretched"></a><div class="code_sample framework_sample active" data-framework="url"><div class="framework_name">URL:</div><div class="code-holder"><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><span class="url"><a href="./Resize an image _ Cloudinary Cookbook_files/turtles(2).jpg" data-popup="true"><span class="prefix">https://res.cloudinary.com/demo/</span><span class="kind">image/upload/</span><span class="signature"></span><span class="trans">w_400,h_120,c_scale/</span><span class="public_id">turtles.jpg</span></a></span></div></div></div><div class="code_sample framework_sample" data-framework="ruby"><div class="framework_name">Ruby:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cl_image_tag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, <span class="symbol">:width</span>=&gt;<span class="integer">400</span>, <span class="symbol">:height</span>=&gt;<span class="integer">120</span>, <span class="symbol">:crop</span>=&gt;<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="php"><div class="framework_name">PHP:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cl_image_tag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, <span class="predefined">array</span>(<span class="string"><span class="delimiter">"</span><span class="content">width</span><span class="delimiter">"</span></span>=&gt;<span class="integer">400</span>, <span class="string"><span class="delimiter">"</span><span class="content">height</span><span class="delimiter">"</span></span>=&gt;<span class="integer">120</span>, <span class="string"><span class="delimiter">"</span><span class="content">crop</span><span class="delimiter">"</span></span>=&gt;<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>))</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="python"><div class="framework_name">Python:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>CloudinaryImage(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>).image(width=<span class="integer">400</span>, height=<span class="integer">120</span>, crop=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="nodejs"><div class="framework_name">Node.js:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.image(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, {<span class="key">width</span>: <span class="integer">400</span>, <span class="key">height</span>: <span class="integer">120</span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>})</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="java"><div class="framework_name">Java:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.url().transformation(<span class="keyword">new</span> Transformation().width(<span class="integer">400</span>).height(<span class="integer">120</span>).crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).imageTag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>);</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="js"><div class="framework_name">JS:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.imageTag(<span class="string"><span class="delimiter">'</span><span class="content">turtles.jpg</span><span class="delimiter">'</span></span>, {<span class="key">width</span>: <span class="integer">400</span>, <span class="key">height</span>: <span class="integer">120</span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>}).toHtml();</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="jquery"><div class="framework_name">jQuery:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>.cloudinary.image(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, {<span class="key">width</span>: <span class="integer">400</span>, <span class="key">height</span>: <span class="integer">120</span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>})</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="react"><div class="framework_name">React:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;Image</span> <span class="attribute-name">publicId</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;Transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">400</span><span class="delimiter">"</span></span> <span class="attribute-name">height</span>=<span class="string"><span class="delimiter">"</span><span class="content">120</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/Image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="vue"><div class="framework_name">Vue.js:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;cld-image</span> <span class="attribute-name">publicId</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;cld-transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">400</span><span class="delimiter">"</span></span> <span class="attribute-name">height</span>=<span class="string"><span class="delimiter">"</span><span class="content">120</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/cld-image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="angular"><div class="framework_name">Angular:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;cl-image</span> <span class="attribute-name">public-id</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;cl-transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">400</span><span class="delimiter">"</span></span> <span class="attribute-name">height</span>=<span class="string"><span class="delimiter">"</span><span class="content">120</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>
+  <span class="tag">&lt;/cl-transformation&gt;</span>
+<span class="tag">&lt;/cl-image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="csharp"><div class="framework_name">.Net:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.Api.UrlImgUp.Transform(<span class="keyword">new</span> Transformation().Width(<span class="integer">400</span>).Height(<span class="integer">120</span>).Crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).BuildImageTag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="android"><div class="framework_name">Android:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>MediaManager.get().url().transformation(<span class="keyword">new</span> Transformation().width(<span class="integer">400</span>).height(<span class="integer">120</span>).crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).generate(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>);</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="swift"><div class="framework_name">iOS:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>imageView.cldSetImage(cloudinary.createUrl().setTransformation(CLDTransformation().setWidth(<span class="integer">400</span>).setHeight(<span class="integer">120</span>).setCrop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).generate(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)!, cloudinary: cloudinary)</pre></div>
+</div>
+</div></div></div></div><a href="./Resize an image _ Cloudinary Cookbook_files/turtles(2).jpg" data-popup="true"><div class="content-img-outer-wrapper" style="max-width:400px;"><div class="content-img-inner-wrapper" style="padding-top: 30.0%;"><img alt="Stretched" src="./Resize an image _ Cloudinary Cookbook_files/turtles(2).jpg" style="margin: 0 auto;display: block" title="Stretched"></div></div></a><p></p><p>Cloudinary supports specifying just the 'width' <strong>or</strong> 'height' parameter, instead of both. This will ensure that the original aspect ratio is maintained:
+</p><div class="example multi_code"><div class="framework_links"><a href="https://cloudinary.com/cookbook/resize_an_image#specifying_width_only" class="active" data-framework="url">URL</a><a href="https://cloudinary.com/cookbook/resize_an_image#specifying_width_only" class="" data-framework="ruby">Ruby</a><a href="https://cloudinary.com/cookbook/resize_an_image#specifying_width_only" class="" data-framework="php">PHP</a><a href="https://cloudinary.com/cookbook/resize_an_image#specifying_width_only" class="" data-framework="python">Python</a><a href="https://cloudinary.com/cookbook/resize_an_image#specifying_width_only" class="" data-framework="nodejs">Node.js</a><a href="https://cloudinary.com/cookbook/resize_an_image#specifying_width_only" class="" data-framework="java">Java</a><a href="https://cloudinary.com/cookbook/resize_an_image#specifying_width_only" class="" data-framework="js">JS</a><a href="https://cloudinary.com/cookbook/resize_an_image#specifying_width_only" class="" data-framework="jquery">jQuery</a><a href="https://cloudinary.com/cookbook/resize_an_image#specifying_width_only" class="" data-framework="react">React</a><a href="https://cloudinary.com/cookbook/resize_an_image#specifying_width_only" class="" data-framework="vue">Vue.js</a><a href="https://cloudinary.com/cookbook/resize_an_image#specifying_width_only" class="" data-framework="angular">Angular</a><a href="https://cloudinary.com/cookbook/resize_an_image#specifying_width_only" class="" data-framework="csharp">.Net</a><a href="https://cloudinary.com/cookbook/resize_an_image#specifying_width_only" class="" data-framework="android">Android</a><a href="https://cloudinary.com/cookbook/resize_an_image#specifying_width_only" class="" data-framework="swift">iOS</a><a href="https://cloudinary.com/cookbook/resize_an_image#specifying_width_only" class="sample_all" data-framework="all">All</a></div><a class="anchor" name="specifying_width_only"></a><div class="code_sample framework_sample active" data-framework="url"><div class="framework_name">URL:</div><div class="code-holder"><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><span class="url"><a href="./Resize an image _ Cloudinary Cookbook_files/turtles(3).jpg" data-popup="true"><span class="prefix">https://res.cloudinary.com/demo/</span><span class="kind">image/upload/</span><span class="signature"></span><span class="trans">w_200,c_scale/</span><span class="public_id">turtles.jpg</span></a></span></div></div></div><div class="code_sample framework_sample" data-framework="ruby"><div class="framework_name">Ruby:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cl_image_tag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, <span class="symbol">:width</span>=&gt;<span class="integer">200</span>, <span class="symbol">:crop</span>=&gt;<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="php"><div class="framework_name">PHP:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cl_image_tag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, <span class="predefined">array</span>(<span class="string"><span class="delimiter">"</span><span class="content">width</span><span class="delimiter">"</span></span>=&gt;<span class="integer">200</span>, <span class="string"><span class="delimiter">"</span><span class="content">crop</span><span class="delimiter">"</span></span>=&gt;<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>))</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="python"><div class="framework_name">Python:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>CloudinaryImage(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>).image(width=<span class="integer">200</span>, crop=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="nodejs"><div class="framework_name">Node.js:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.image(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, {<span class="key">width</span>: <span class="integer">200</span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>})</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="java"><div class="framework_name">Java:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.url().transformation(<span class="keyword">new</span> Transformation().width(<span class="integer">200</span>).crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).imageTag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>);</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="js"><div class="framework_name">JS:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.imageTag(<span class="string"><span class="delimiter">'</span><span class="content">turtles.jpg</span><span class="delimiter">'</span></span>, {<span class="key">width</span>: <span class="integer">200</span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>}).toHtml();</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="jquery"><div class="framework_name">jQuery:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>.cloudinary.image(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, {<span class="key">width</span>: <span class="integer">200</span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>})</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="react"><div class="framework_name">React:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;Image</span> <span class="attribute-name">publicId</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;Transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">200</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/Image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="vue"><div class="framework_name">Vue.js:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;cld-image</span> <span class="attribute-name">publicId</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;cld-transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">200</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/cld-image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="angular"><div class="framework_name">Angular:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;cl-image</span> <span class="attribute-name">public-id</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;cl-transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">200</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>
+  <span class="tag">&lt;/cl-transformation&gt;</span>
+<span class="tag">&lt;/cl-image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="csharp"><div class="framework_name">.Net:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.Api.UrlImgUp.Transform(<span class="keyword">new</span> Transformation().Width(<span class="integer">200</span>).Crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).BuildImageTag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="android"><div class="framework_name">Android:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>MediaManager.get().url().transformation(<span class="keyword">new</span> Transformation().width(<span class="integer">200</span>).crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).generate(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>);</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="swift"><div class="framework_name">iOS:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>imageView.cldSetImage(cloudinary.createUrl().setTransformation(CLDTransformation().setWidth(<span class="integer">200</span>).setCrop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).generate(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)!, cloudinary: cloudinary)</pre></div>
+</div>
+</div></div></div></div><a href="./Resize an image _ Cloudinary Cookbook_files/turtles(3).jpg" data-popup="true"><div class="content-img-outer-wrapper" style="max-width:200px;"><div class="content-img-inner-wrapper" style="padding-top: 67.0%;"><img alt="Specifying width only" src="./Resize an image _ Cloudinary Cookbook_files/turtles(3).jpg" style="margin: 0 auto;display: block" title="Specifying width only"></div></div></a><p></p><p>You can change the dimensions of an image by a specified multiplier. Simply use a decimal value to define your required size. Here as well, you can provide only the width or height parameters instead of both of them:
+</p><div class="example multi_code"><div class="framework_links"><a href="https://cloudinary.com/cookbook/resize_an_image#resize2" class="active" data-framework="url">URL</a><a href="https://cloudinary.com/cookbook/resize_an_image#resize2" class="" data-framework="ruby">Ruby</a><a href="https://cloudinary.com/cookbook/resize_an_image#resize2" class="" data-framework="php">PHP</a><a href="https://cloudinary.com/cookbook/resize_an_image#resize2" class="" data-framework="python">Python</a><a href="https://cloudinary.com/cookbook/resize_an_image#resize2" class="" data-framework="nodejs">Node.js</a><a href="https://cloudinary.com/cookbook/resize_an_image#resize2" class="" data-framework="java">Java</a><a href="https://cloudinary.com/cookbook/resize_an_image#resize2" class="" data-framework="js">JS</a><a href="https://cloudinary.com/cookbook/resize_an_image#resize2" class="" data-framework="jquery">jQuery</a><a href="https://cloudinary.com/cookbook/resize_an_image#resize2" class="" data-framework="react">React</a><a href="https://cloudinary.com/cookbook/resize_an_image#resize2" class="" data-framework="vue">Vue.js</a><a href="https://cloudinary.com/cookbook/resize_an_image#resize2" class="" data-framework="angular">Angular</a><a href="https://cloudinary.com/cookbook/resize_an_image#resize2" class="" data-framework="csharp">.Net</a><a href="https://cloudinary.com/cookbook/resize_an_image#resize2" class="" data-framework="android">Android</a><a href="https://cloudinary.com/cookbook/resize_an_image#resize2" class="" data-framework="swift">iOS</a><a href="https://cloudinary.com/cookbook/resize_an_image#resize2" class="sample_all" data-framework="all">All</a></div><a class="anchor" name="resize2"></a><div class="code_sample framework_sample active" data-framework="url"><div class="framework_name">URL:</div><div class="code-holder"><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><span class="url"><a href="https://res.cloudinary.com/demo/image/upload/w_0.4,c_scale/turtles.jpg" data-popup="true"><span class="prefix">https://res.cloudinary.com/demo/</span><span class="kind">image/upload/</span><span class="signature"></span><span class="trans">w_0.4,c_scale/</span><span class="public_id">turtles.jpg</span></a></span></div></div></div><div class="code_sample framework_sample" data-framework="ruby"><div class="framework_name">Ruby:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cl_image_tag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, <span class="symbol">:width</span>=&gt;<span class="float">0.4</span>, <span class="symbol">:crop</span>=&gt;<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="php"><div class="framework_name">PHP:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cl_image_tag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, <span class="predefined">array</span>(<span class="string"><span class="delimiter">"</span><span class="content">width</span><span class="delimiter">"</span></span>=&gt;<span class="float">0.4</span>, <span class="string"><span class="delimiter">"</span><span class="content">crop</span><span class="delimiter">"</span></span>=&gt;<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>))</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="python"><div class="framework_name">Python:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>CloudinaryImage(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>).image(width=<span class="float">0.4</span>, crop=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="nodejs"><div class="framework_name">Node.js:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.image(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, {<span class="key">width</span>: <span class="string"><span class="delimiter">"</span><span class="content">0.4</span><span class="delimiter">"</span></span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>})</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="java"><div class="framework_name">Java:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.url().transformation(<span class="keyword">new</span> Transformation().width(<span class="float">0.4</span>).crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).imageTag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>);</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="js"><div class="framework_name">JS:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.imageTag(<span class="string"><span class="delimiter">'</span><span class="content">turtles.jpg</span><span class="delimiter">'</span></span>, {<span class="key">width</span>: <span class="string"><span class="delimiter">"</span><span class="content">0.4</span><span class="delimiter">"</span></span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>}).toHtml();</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="jquery"><div class="framework_name">jQuery:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>.cloudinary.image(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, {<span class="key">width</span>: <span class="string"><span class="delimiter">"</span><span class="content">0.4</span><span class="delimiter">"</span></span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>})</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="react"><div class="framework_name">React:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;Image</span> <span class="attribute-name">publicId</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;Transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">0.4</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/Image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="vue"><div class="framework_name">Vue.js:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;cld-image</span> <span class="attribute-name">publicId</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;cld-transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">0.4</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/cld-image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="angular"><div class="framework_name">Angular:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;cl-image</span> <span class="attribute-name">public-id</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;cl-transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">0.4</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>
+  <span class="tag">&lt;/cl-transformation&gt;</span>
+<span class="tag">&lt;/cl-image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="csharp"><div class="framework_name">.Net:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.Api.UrlImgUp.Transform(<span class="keyword">new</span> Transformation().Width(<span class="float">0.4</span>).Crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).BuildImageTag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="android"><div class="framework_name">Android:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>MediaManager.get().url().transformation(<span class="keyword">new</span> Transformation().width(<span class="float">0.4</span>).crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).generate(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>);</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="swift"><div class="framework_name">iOS:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>imageView.cldSetImage(cloudinary.createUrl().setTransformation(CLDTransformation().setWidth(<span class="float">0.4</span>).setCrop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).generate(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)!, cloudinary: cloudinary)</pre></div>
+</div>
+</div></div></div></div><a href="https://res.cloudinary.com/demo/image/upload/w_0.4,c_scale/turtles.jpg" data-popup="true"><div class="content-img-outer-wrapper" style="max-width:240px;"><div class="content-img-inner-wrapper" style="padding-top: 66.25%;"><img alt="Resize2" src="./Resize an image _ Cloudinary Cookbook_files/turtles(4).jpg" style="margin: 0 auto;display: block" title="Resize2"></div></div></a><p></p><p>Scaling can also be used to enlarge an image.
+For example by setting the <code>width</code> parameter to a value higher than the original width:
+</p><div class="example multi_code"><div class="framework_links"><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_dimension" class="active" data-framework="url">URL</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_dimension" class="" data-framework="ruby">Ruby</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_dimension" class="" data-framework="php">PHP</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_dimension" class="" data-framework="python">Python</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_dimension" class="" data-framework="nodejs">Node.js</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_dimension" class="" data-framework="java">Java</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_dimension" class="" data-framework="js">JS</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_dimension" class="" data-framework="jquery">jQuery</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_dimension" class="" data-framework="react">React</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_dimension" class="" data-framework="vue">Vue.js</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_dimension" class="" data-framework="angular">Angular</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_dimension" class="" data-framework="csharp">.Net</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_dimension" class="" data-framework="android">Android</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_dimension" class="" data-framework="swift">iOS</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_dimension" class="sample_all" data-framework="all">All</a></div><a class="anchor" name="scale_up_by_dimension"></a><div class="code_sample framework_sample active" data-framework="url"><div class="framework_name">URL:</div><div class="code-holder"><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><span class="url"><a href="./Resize an image _ Cloudinary Cookbook_files/turtles(5).jpg" data-popup="true"><span class="prefix">https://res.cloudinary.com/demo/</span><span class="kind">image/upload/</span><span class="signature"></span><span class="trans">w_450,c_scale/</span><span class="public_id">turtles.jpg</span></a></span></div></div></div><div class="code_sample framework_sample" data-framework="ruby"><div class="framework_name">Ruby:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cl_image_tag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, <span class="symbol">:width</span>=&gt;<span class="integer">450</span>, <span class="symbol">:crop</span>=&gt;<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="php"><div class="framework_name">PHP:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cl_image_tag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, <span class="predefined">array</span>(<span class="string"><span class="delimiter">"</span><span class="content">width</span><span class="delimiter">"</span></span>=&gt;<span class="integer">450</span>, <span class="string"><span class="delimiter">"</span><span class="content">crop</span><span class="delimiter">"</span></span>=&gt;<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>))</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="python"><div class="framework_name">Python:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>CloudinaryImage(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>).image(width=<span class="integer">450</span>, crop=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="nodejs"><div class="framework_name">Node.js:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.image(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, {<span class="key">width</span>: <span class="integer">450</span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>})</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="java"><div class="framework_name">Java:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.url().transformation(<span class="keyword">new</span> Transformation().width(<span class="integer">450</span>).crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).imageTag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>);</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="js"><div class="framework_name">JS:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.imageTag(<span class="string"><span class="delimiter">'</span><span class="content">turtles.jpg</span><span class="delimiter">'</span></span>, {<span class="key">width</span>: <span class="integer">450</span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>}).toHtml();</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="jquery"><div class="framework_name">jQuery:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>.cloudinary.image(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, {<span class="key">width</span>: <span class="integer">450</span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>})</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="react"><div class="framework_name">React:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;Image</span> <span class="attribute-name">publicId</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;Transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">450</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/Image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="vue"><div class="framework_name">Vue.js:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;cld-image</span> <span class="attribute-name">publicId</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;cld-transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">450</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/cld-image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="angular"><div class="framework_name">Angular:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;cl-image</span> <span class="attribute-name">public-id</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;cl-transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">450</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>
+  <span class="tag">&lt;/cl-transformation&gt;</span>
+<span class="tag">&lt;/cl-image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="csharp"><div class="framework_name">.Net:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.Api.UrlImgUp.Transform(<span class="keyword">new</span> Transformation().Width(<span class="integer">450</span>).Crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).BuildImageTag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="android"><div class="framework_name">Android:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>MediaManager.get().url().transformation(<span class="keyword">new</span> Transformation().width(<span class="integer">450</span>).crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).generate(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>);</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="swift"><div class="framework_name">iOS:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>imageView.cldSetImage(cloudinary.createUrl().setTransformation(CLDTransformation().setWidth(<span class="integer">450</span>).setCrop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).generate(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)!, cloudinary: cloudinary)</pre></div>
+</div>
+</div></div></div></div><a href="./Resize an image _ Cloudinary Cookbook_files/turtles(5).jpg" data-popup="true"><div class="content-img-outer-wrapper" style="max-width:450px;"><div class="content-img-inner-wrapper" style="padding-top: 66.67%;"><img alt="Scale-up by dimension" src="./Resize an image _ Cloudinary Cookbook_files/turtles(5).jpg" style="margin: 0 auto;display: block" title="Scale-up by dimension"></div></div></a><p></p><p>You can also enlarge the image by setting the percentage to a higher value than '1.0':
+</p><div class="example multi_code"><div class="framework_links"><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_percentage" class="active" data-framework="url">URL</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_percentage" class="" data-framework="ruby">Ruby</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_percentage" class="" data-framework="php">PHP</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_percentage" class="" data-framework="python">Python</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_percentage" class="" data-framework="nodejs">Node.js</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_percentage" class="" data-framework="java">Java</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_percentage" class="" data-framework="js">JS</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_percentage" class="" data-framework="jquery">jQuery</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_percentage" class="" data-framework="react">React</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_percentage" class="" data-framework="vue">Vue.js</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_percentage" class="" data-framework="angular">Angular</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_percentage" class="" data-framework="csharp">.Net</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_percentage" class="" data-framework="android">Android</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_percentage" class="" data-framework="swift">iOS</a><a href="https://cloudinary.com/cookbook/resize_an_image#scale_up_by_percentage" class="sample_all" data-framework="all">All</a></div><a class="anchor" name="scale_up_by_percentage"></a><div class="code_sample framework_sample active" data-framework="url"><div class="framework_name">URL:</div><div class="code-holder"><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><span class="url"><a href="https://res.cloudinary.com/demo/image/upload/w_1.4,c_scale/turtles.jpg" data-popup="true"><span class="prefix">https://res.cloudinary.com/demo/</span><span class="kind">image/upload/</span><span class="signature"></span><span class="trans">w_1.4,c_scale/</span><span class="public_id">turtles.jpg</span></a></span></div></div></div><div class="code_sample framework_sample" data-framework="ruby"><div class="framework_name">Ruby:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cl_image_tag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, <span class="symbol">:width</span>=&gt;<span class="float">1.4</span>, <span class="symbol">:crop</span>=&gt;<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="php"><div class="framework_name">PHP:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cl_image_tag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, <span class="predefined">array</span>(<span class="string"><span class="delimiter">"</span><span class="content">width</span><span class="delimiter">"</span></span>=&gt;<span class="float">1.4</span>, <span class="string"><span class="delimiter">"</span><span class="content">crop</span><span class="delimiter">"</span></span>=&gt;<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>))</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="python"><div class="framework_name">Python:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>CloudinaryImage(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>).image(width=<span class="float">1.4</span>, crop=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="nodejs"><div class="framework_name">Node.js:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.image(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, {<span class="key">width</span>: <span class="string"><span class="delimiter">"</span><span class="content">1.4</span><span class="delimiter">"</span></span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>})</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="java"><div class="framework_name">Java:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.url().transformation(<span class="keyword">new</span> Transformation().width(<span class="float">1.4</span>).crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).imageTag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>);</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="js"><div class="framework_name">JS:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.imageTag(<span class="string"><span class="delimiter">'</span><span class="content">turtles.jpg</span><span class="delimiter">'</span></span>, {<span class="key">width</span>: <span class="string"><span class="delimiter">"</span><span class="content">1.4</span><span class="delimiter">"</span></span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>}).toHtml();</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="jquery"><div class="framework_name">jQuery:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="predefined">$</span>.cloudinary.image(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>, {<span class="key">width</span>: <span class="string"><span class="delimiter">"</span><span class="content">1.4</span><span class="delimiter">"</span></span>, <span class="key">crop</span>: <span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>})</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="react"><div class="framework_name">React:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;Image</span> <span class="attribute-name">publicId</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;Transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">1.4</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/Image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="vue"><div class="framework_name">Vue.js:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;cld-image</span> <span class="attribute-name">publicId</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;cld-transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">1.4</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/cld-image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="angular"><div class="framework_name">Angular:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre><span class="tag">&lt;cl-image</span> <span class="attribute-name">public-id</span>=<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span> <span class="tag">&gt;</span>
+  <span class="tag">&lt;cl-transformation</span> <span class="attribute-name">width</span>=<span class="string"><span class="delimiter">"</span><span class="content">1.4</span><span class="delimiter">"</span></span> <span class="attribute-name">crop</span>=<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>
+  <span class="tag">&lt;/cl-transformation&gt;</span>
+<span class="tag">&lt;/cl-image&gt;</span></pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="csharp"><div class="framework_name">.Net:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>cloudinary.Api.UrlImgUp.Transform(<span class="keyword">new</span> Transformation().Width(<span class="float">1.4</span>).Crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).BuildImageTag(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="android"><div class="framework_name">Android:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>MediaManager.get().url().transformation(<span class="keyword">new</span> Transformation().width(<span class="float">1.4</span>).crop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).generate(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>);</pre></div>
+</div>
+</div></div></div><div class="code_sample framework_sample" data-framework="swift"><div class="framework_name">iOS:</div><div class="code-holder "><div class="copy_container tooltip"><a class="copy_icon"></a><span class="tooltiptext">Copy to clipboard</span></div><div class="code_inner"><div class="CodeRay">
+  <div class="code"><pre>imageView.cldSetImage(cloudinary.createUrl().setTransformation(CLDTransformation().setWidth(<span class="float">1.4</span>).setCrop(<span class="string"><span class="delimiter">"</span><span class="content">scale</span><span class="delimiter">"</span></span>)).generate(<span class="string"><span class="delimiter">"</span><span class="content">turtles.jpg</span><span class="delimiter">"</span></span>)!, cloudinary: cloudinary)</pre></div>
+</div>
+</div></div></div></div><a href="https://res.cloudinary.com/demo/image/upload/w_1.4,c_scale/turtles.jpg" data-popup="true"><div class="content-img-outer-wrapper" style="max-width:840px;"><div class="content-img-inner-wrapper" style="padding-top: 66.67%;"><img alt="Scale-up by percentage" src="./Resize an image _ Cloudinary Cookbook_files/turtles(6).jpg" style="margin: 0 auto;display: block" title="Scale-up by percentage"></div></div></a><p></p></div>
+</article>
+<div class="single-panel">
+<div class="meta-area">
+<div class="meta">
+<span class="by">
+by
+Itay Taragano
+</span>
+<time datetime="2014-06-11">Jun 11, 2014</time>
+</div>
+<div class="social-block1">
+<div class="social_buttons horizontal">
+<ul>
+<li class="fb_like_item item">
+<div class="fb-like fb_iframe_widget" data-href="https://cloudinary.com/cookbook/resize_an_image" data-layout="button_count" data-show-faces="false" data-width="100" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;container_width=100&amp;href=https%3A%2F%2Fcloudinary.com%2Fcookbook%2Fresize_an_image&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;show_faces=false&amp;width=100"><span style="vertical-align: bottom; width: 69px; height: 20px;"><iframe name="fa6b8886429c" width="100px" height="1000px" data-testid="fb:like Facebook Social Plugin" title="fb:like Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="./Resize an image _ Cloudinary Cookbook_files/like.html" style="border: none; visibility: visible; width: 69px; height: 20px;" class=""></iframe></span></div>
+</li>
+<li class="twitter_item item">
+<iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" style="position: static; visibility: visible; width: 60px; height: 20px;" title="Twitter Tweet Button" src="./Resize an image _ Cloudinary Cookbook_files/tweet_button.ab8181ab71962248b884f9c66f377f87.en.html" data-url="https://cloudinary.com/cookbook/resize_an_image"></iframe>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="tags-frame2">
+<strong class="tag-title">Tags:</strong>
+<ul class="inner-tags tags">
+<li class="tag"><a href="https://cloudinary.com/cookbook/tag/scale">Scale</a></li>
+<li class="manipulation tag"><a href="https://cloudinary.com/cookbook/tag/resize">Resize</a></li>
+<li class="categories tag"><a href="https://cloudinary.com/cookbook/tag/manipulation">Manipulation</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="container">
+<div id="disqus_thread"><iframe id="dsq-app386" name="dsq-app386" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Resize an image _ Cloudinary Cookbook_files/saved_resource(1).html" horizontalscrolling="no" verticalscrolling="no" style="height: 1359px !important;"></iframe></div>
+<script type="text/javascript">
+    var disqus_shortname = 'cloudinarycookbook';
+    var disqus_identifier = "resize_an_image";
+    var disqus_url = "https://cloudinary.com/cookbook/resize_an_image";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</div>
+</section>
+
+</div></main>
+<footer class="new-footer site-footer" id="new-footer">
+<div class="container container">
+<div class="row footer-holder footer-holder">
+<div class="col-sm-12 col-md-3 col-lg-4">
+<div class="footer-logo footer-logo">
+<a href="https://cloudinary.com/">
+<img alt="Cloudinary Logo - White" src="./Resize an image _ Cloudinary Cookbook_files/cloudinary_logo_for_black_bg.svg" width="200"></a>
+</div>
+</div>
+<div class="col-sm-12 col-md-9 col-lg-8 widgets widgets">
+<div class="row">
+<div class="col-sm-3 col-xs-6">
+<nav class="footer-nav footer-nav">
+<strong class="title title">Service</strong>
+<div class="textwidget text-widget">
+<ul>
+<li><a href="https://cloudinary.com/solutions">Solutions</a></li>
+<li><a href="https://cloudinary.com/pricing">Pricing</a></li>
+<li><a href="https://cloudinary.com/customers">Customers</a></li>
+<li><a href="https://cloudinary.com/faq">FAQ</a></li>
+</ul>
+</div>
+</nav>
+</div>
+<div class="col-sm-3 col-xs-6">
+<nav class="footer-nav footer-nav">
+<strong class="title title">Resources</strong>
+<div class="textwidget text-widget">
+<ul>
+<li><a href="https://cloudinary.com/documentation">Documentation</a></li>
+<li><a href="https://cloudinary.com/blog">Blog</a></li>
+<li><a href="http://info.cloudinary.com/webinars.html">Webinars</a></li>
+<li><a href="https://cloudinary.com/cookbook">Cookbook</a></li>
+<li><a href="https://cloudinary.com/visualweb" data-popup="true">Visual Web</a></li>
+<li><a href="https://demo.cloudinary.com/">Demos</a></li>
+<li><a href="https://support.cloudinary.com/hc/en-us" data-popup="true">Support</a></li>
+<li><a href="https://status.cloudinary.com/" data-popup="true">Service status</a></li>
+</ul>
+</div>
+</nav>
+</div>
+<div class="col-sm-3 col-xs-6">
+<nav class="footer-nav footer-nav">
+<strong class="title title">Company</strong>
+<div class="textwidget text-widget">
+<ul>
+<li><a href="https://cloudinary.com/about">About us</a></li>
+<li><a href="https://cloudinary.com/team">Team</a></li>
+<li><a href="https://cloudinary.com/contact">Contact us</a></li>
+<li><a href="https://cloudinary.com/partners">Partners</a></li>
+<li><a href="https://cloudinary.com/newsroom">Newsroom</a></li>
+<li><a href="https://cloudinary.com/jobs">Careers</a></li>
+<li><a href="https://cloudinary.com/assets">Brand assets</a></li>
+<li><a href="https://cloudinary.com/trust">Trust</a></li>
+</ul>
+</div>
+</nav>
+</div>
+<div class="col-sm-3 hidden-xs social-block">
+<ul class="widget_text new-social-networks new-social-networks">
+<div class="textwidget text-widget custom-html-widget custom-html-widget">
+<div>
+<strong class="title title">Connect</strong>
+</div>
+<ul class="new-social-networks">
+<li>
+<a class="facebook" data-popup="true" href="https://www.facebook.com/Cloudinary">
+<i aria-hidden="true" class="fa fa-facebook"></i>
+</a>
+</li>
+<li>
+<a class="twitter" data-popup="true" href="https://twitter.com/cloudinary">
+<i aria-hidden="true" class="fa fa-twitter"></i>
+</a>
+</li>
+<li>
+<a class="linkedin" data-popup="true" href="https://www.linkedin.com/company/cloudinary">
+<i aria-hidden="true" class="fa fa-linkedin"></i>
+</a>
+</li>
+</ul>
+</div>
+<ul class="widget_text new-social-networks">
+<div class="textwidget custom-html-widget">
+<div class="footer-seals">
+<ul>
+<li>
+<img alt="Institute of Quality &amp; Control" class="dark-logo" fetch_formant="auto" src="./Resize an image _ Cloudinary Cookbook_files/L_ISO_27001_2013_E.png" width="90"></li>
+<li>
+<img alt="GDPR" class="dark-logo" fetch_formant="auto" src="./Resize an image _ Cloudinary Cookbook_files/GDPR.png" width="90"></li>
+<li>
+<img alt="SOC" class="dark-logo" fetch_formant="auto" src="./Resize an image _ Cloudinary Cookbook_files/21972-312_SOC_NonCPA.png" width="90"></li>
+</ul>
+</div>
+</div>
+</ul>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="footer-bot">
+<div class="container-fluid">
+<div class="row new-footer-frame">
+<div class="col-xs-12 visible-xs social-block social-block">
+<ul class="widget_text new-social-networks widget_text new-social-networks">
+<div class="textwidget text-widget custom-html-widget custom-html-widget">
+<div>
+<strong class="title title">Connect</strong>
+</div>
+<ul class="new-social-networks">
+<li>
+<a class="facebook" data-popup="true" href="https://www.facebook.com/Cloudinary">
+<i aria-hidden="true" class="fa fa-facebook"></i>
+</a>
+</li>
+<li>
+<a class="twitter" data-popup="true" href="https://twitter.com/cloudinary">
+<i aria-hidden="true" class="fa fa-twitter"></i>
+</a>
+</li>
+<li>
+<a class="linkedin" data-popup="true" href="https://www.linkedin.com/company/cloudinary">
+<i aria-hidden="true" class="fa fa-linkedin"></i>
+</a>
+</li>
+</ul>
+</div>
+</ul>
+<ul class="widget_text new-social-networks widget_text new-social-networks">
+<div class="textwidget text-widget custom-html-widget custom-html-widget">
+<div class="footer-seals">
+<ul>
+<li>
+<img alt="Institute of Quality &amp; Control" class="dark-logo" fetch_formant="auto" src="./Resize an image _ Cloudinary Cookbook_files/L_ISO_27001_2013_E.png" width="90"></li>
+<li>
+<img alt="GDPR" class="dark-logo" fetch_formant="auto" src="./Resize an image _ Cloudinary Cookbook_files/GDPR.png" width="90"></li>
+<li>
+<img alt="SOC" class="dark-logo" fetch_formant="auto" src="./Resize an image _ Cloudinary Cookbook_files/21972-312_SOC_NonCPA.png" width="90"></li>
+</ul>
+</div>
+</div>
+</ul>
+</div>
+<div class="col-sm-6">
+<p>© 2020 Cloudinary. All rights reserved.</p>
+</div>
+<div class="col-sm-6">
+<ul class="footer-links">
+<li><a href="https://cloudinary.com/tos">Terms of Use</a></li>
+<li><a href="https://cloudinary.com/privacy">Privacy Policy</a></li>
+<li><a href="https://cloudinary.com/dmca">DMCA Notice</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</footer></div>
+<script src="./Resize an image _ Cloudinary Cookbook_files/cloudinary_public.js.download" type="text/javascript"></script><!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5BS5ZV"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5BS5ZV');</script>
+<!-- End Google Tag Manager --><div id="fb_liked_event" data-url="https://cloudinary.com/console/facebook_liked"></div>
+<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div></div></div>
+<script>
+    function getCookie(key) {
+        var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+        return keyValue ? keyValue[2] : null;
+    }
+
+    function marketing_cookie_dissent() {
+        var consent = getCookie('CookieConsent');
+        return consent !== null && (consent === "0" || consent.includes("marketing:false"));
+    }
+
+    if (!marketing_cookie_dissent()) {
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/all.js#xfbml=1";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    }
+</script>
+
+<script>
+    function getCookie(key) {
+        var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+        return keyValue ? keyValue[2] : null;
+    }
+
+    function marketing_cookie_dissent() {
+        var consent = getCookie('CookieConsent');
+        return consent !== null && (consent === "0" || consent.includes("marketing:false"));
+    }
+
+    if (!marketing_cookie_dissent()) {
+        window.twttr = (function (d,s,id) {
+            var t, js, fjs = d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+            if (d.getElementById(id)) return window.twttr; js=d.createElement(s); js.id=id;
+            js.src=p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+            return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+        }(document, "script", "twitter-wjs"));
+    }
+</script>
+
+<script>
+  load_social_scripts();
+</script>
+<script type="text/javascript" id="gtm-scroll-tracking">(function(h,l,a){function q(){if(!h.querySelector||!h.body.getBoundingClientRect)return!1;a.dataLayerName=a.dataLayerName||"dataLayer";a.distances=a.distances||{};u();r(l,"scroll",y(u,500))}function v(k,a,f,b,d){var e;for(e=0;e<a.length;e++){var c=parseInt(a[e],10),g="%"!==f?c+d:c/100*b+d;c+=f;g<=b+d&&(k[c]=g)}return k}function w(a,g){var k=parseInt(a,10),b=g/k,d=[],e;for(e=1;e<b+1;e++)d.push(e*k);return d}function u(){var k=x(a.bottom),g=x(a.top);var f=h.body;var b=h.documentElement;f=Math.max(f.scrollHeight,
+f.offsetHeight,b.clientHeight,b.scrollHeight,b.offsetHeight);g&&(f-=g);k&&(f=k-(g||0));f-=5;b=g||0;var d=z()||{},e=[],c=[],m;if(a.distances.percentages&&(a.distances.percentages.each&&(e=e.concat(a.distances.percentages.each)),a.distances.percentages.every))for(m=0;m<a.distances.percentages.every.length;m++)e=w(a.distances.percentages.every[m],100),e=c.concat(e);if(a.distances.pixels&&(a.distances.pixels.each&&(c=c.concat(a.distances.pixels.each)),a.distances.pixels.every))for(m=0;m<a.distances.pixels.every.length;m++){var A=
+w(a.distances.pixels.every[m],f);c=c.concat(A)}d=v(d,e,"%",f,b);f=d=v(d,c,"px",f,b);b=void 0!==l.pageXOffset;d="CSS1Compat"===(h.compatMode||"");b=b?l.pageYOffset:d?h.documentElement.scrollTop:h.body.scrollTop;b=parseInt(b,10);d=parseInt;c="CSS1Compat"===h.compatMode?h.documentElement:h.body;c=c.clientHeight;b+=d(c,10);for(var p in f)if(d=f[p],b>d&&!n[p]&&d<(k||Infinity)&&d>(g||0))if(n[p]=!0,d=p,c=l.GoogleAnalyticsObject,"undefined"===typeof l[a.dataLayerName]||a.forceSyntax)if("function"===typeof l[c]&&
+"function"===typeof l[c].getAll&&2!==a.forceSyntax)l[c]("send","event",a.category,d,a.label,{nonInteraction:1});else"undefined"!==typeof l._gaq&&1!==a.forceSyntax&&l._gaq.push(["_trackEvent",a.category,d,a.label,0,!0]);else l[a.dataLayerName].push({event:"scrollTracking",attributes:{distance:d,label:a.label}})}function x(a){if("number"===typeof a||parseInt(a,10))return parseInt(a,10);try{var k=1===a.nodeType?a:h.querySelector(a);return t(k)}catch(f){}}function y(a,g){var k,b,d,e=null,c=0,h=function(){c=
+new Date;e=null;d=a.apply(k,b)};return function(){var f=new Date;c||(c=f);var m=g-(f-c);k=this;b=arguments;0>=m?(clearTimeout(e),e=null,c=f,d=a.apply(k,b)):e||(e=setTimeout(h,m));return d}}function r(a,g,f){if(a.addEventListener)a.addEventListener(g,f);else if(a.attachEvent)a.attachEvent("on"+g,function(b){f.call(a,b)});else if("undefined"===typeof a["on"+g]||null===a["on"+g])a["on"+g]=function(b){f.call(a,b)}}function t(a){a=a.getBoundingClientRect().top;var k=void 0!==l.pageYOffset?l.pageYOffset:
+(h.documentElement||h.body.parentNode||h.body).scrollTop;return a+k}var n={};!a.distances.percentages||!a.distances.percentages.every||a.distances.percentages.every instanceof Array||(a.distances.percentages.every=[a.distances.percentages.every]);!a.distances.pixels||!a.distances.pixels.every||a.distances.pixels.every instanceof Array||(a.distances.pixels.every=[a.distances.pixels.every]);var z=function(a){function g(){var d,e,c;f={};if(a.each)for(c=0;c<a.each.length;c++){var b=a.each[c];n[b]||(d=
+h.querySelector(b))&&(f[b]=t(d))}if(a.every)for(c=0;c<a.every.length;c++){b=a.every[c];var g=h.querySelectorAll(b);if(g.length&&!n[b+":"+(g.length-1)])for(e=0;e<g.length;e++){var k=b+":"+e;n[k]||(d=g[e],f[k]=t(d))}}}if(a){var f={},b=0;g();return function(){var a={},e;b++;10<b&&(g(),b=0);for(e in f)a[e]=f[e];return a}}}(a.distances.elements);"loading"!==h.readyState?q():h.addEventListener?r(h,"DOMContentLoaded",q):r(l,"load",q)})(document,window,{forceSyntax:!1,dataLayerName:!1,distances:{percentages:{each:[10,
+90],every:[25]},pixels:{each:[],every:[]},elements:{each:[],every:[]}},top:null,bottom:null,category:"Scroll Tracking",label:document.location.pathname});</script><script type="text/javascript" id="">var _gaq=_gaq||[];_gaq.push(["_setAccount","UA-25966579-1"]);_gaq.push(["_setDomainName","cloudinary.com"]);_gaq.push(["_trackPageview"]);(function(){var a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"==document.location.protocol?"https://":"http://")+"stats.g.doubleclick.net/dc.js";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();</script>
+<script type="text/javascript" id="">(function(a,b,c,d,e){function f(){var a=b.createElement("script");a.async=!0;a.src="//radar.cedexis.com/1/22815/radar.js";b.body.appendChild(a)}/\bMSIE 6/i.test(a.navigator.userAgent)||(a[c]?a[c](e,f,!1):a[d]&&a[d]("on"+e,f))})(window,document,"addEventListener","attachEvent","load");</script>
+<script type="text/javascript" id="">window.olark||function(g){var a=window,f=document,w="https:"==a.location.protocol?"https:":"http:",d=g.name,e="load",k=function(){function l(){b.P(e);a[d](e)}a[d]=function(){(b.s=b.s||[]).push(arguments)};for(var b=a[d]._={},h=g.methods.length;h--;)(function(b){a[d][b]=function(){a[d]("call",b,arguments)}})(g.methods[h]);b.l=g.loader;b.i=k;b.p={0:+new Date};b.P=function(a){b.p[a]=new Date-b.p[0]};a.addEventListener?a.addEventListener(e,l,!1):a.attachEvent("on"+e,l);var u=function(){function a(a){a=
+"head";return["\x3c",a,"\x3e\x3c/",a,"\x3e\x3c",e,' onload\x3d"var d\x3d',m,";d.getElementsByTagName('head')[0].",p,"(d.",n,"('script')).",q,"\x3d'",w,"//",b.l,"'\"\x3e\x3c/",e,"\x3e"].join("")}var e="body",r=f[e];if(!r)return setTimeout(u,100);b.P(1);var p="appendChild",n="createElement",q="src",t=f[n]("div"),l=t[p](f[n](d)),c=f[n]("iframe"),m="document",h="domain";t.style.display="none";r.insertBefore(t,r.firstChild).id=d;c.frameBorder="0";c.id=d+"-loader";/MSIE[ ]+6/.test(navigator.userAgent)&&
+(c.src="javascript:false");c.allowTransparency="true";l[p](c);try{c.contentWindow[m].open()}catch(x){g[h]=f[h];var k="javascript:var d\x3d"+m+".open();d.domain\x3d'"+f.domain+"';";c[q]=k+"void(0);"}try{var v=c.contentWindow[m];v.write(a());v.close()}catch(x){c[q]=k+'d.write("'+a().replace(/"/g,String.fromCharCode(92)+'"')+'");d.close();'}b.P(2)};u()};k()}({loader:"static.olark.com/jsclient/loader0.js",name:"olark",methods:["configure","extend","declare","identify"]});olark.identify("8189-625-10-7088");
+olark.configure("box.left_margin",0);olark.configure("box.corner_position","BR");</script>
+
+<script type="text/javascript" id="">(function(){function b(){!1===c&&(c=!0,Munchkin.init("396-LRB-524"))}var c=!1,a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src="//munchkin.marketo.net/munchkin.js";a.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||b()};a.onload=b;document.getElementsByTagName("head")[0].appendChild(a)})();</script>
+<script type="text/javascript" id="Cookiebot" src="./Resize an image _ Cloudinary Cookbook_files/uc.js.download"></script><script type="text/javascript" id="">LUX=window.LUX||{};LUX.samplerate=100;</script>
+<script type="text/javascript" id="" src="./Resize an image _ Cloudinary Cookbook_files/lux.js.download"></script><div style="display: none; visibility: hidden;"><img id="RRbUJ62CVxF2mfvjKRcV" style="display:none" src="./Resize an image _ Cloudinary Cookbook_files/t.gif"><script id="term-e7e5d07437489" src="./Resize an image _ Cloudinary Cookbook_files/t.js.download"></script></div><iframe scrolling="no" frameborder="0" allowtransparency="true" src="./Resize an image _ Cloudinary Cookbook_files/widget_iframe.ab8181ab71962248b884f9c66f377f87.html" title="Twitter settings iframe" style="display: none;"></iframe><table cellspacing="0" cellpadding="0" class="gstl_50 gssb_c" style="width: 2px; display: none; top: 3px; position: absolute; left: -1px;"><tbody><tr><td class="gssb_f"></td><td class="gssb_e" style="width: 100%;"></td></tr></tbody></table><table cellspacing="0" cellpadding="0" class="gstl_51 gssb_c" style="width: 271px; display: none; top: 422px; position: absolute; left: 906px;"><tbody><tr><td class="gssb_f"></td><td class="gssb_e" style="width: 100%;"></td></tr></tbody></table><iframe style="display: none;" src="./Resize an image _ Cloudinary Cookbook_files/saved_resource(2).html"></iframe><iframe data-olark="true" aria-hidden="true" style="width: 0px; height: 0px; position: absolute; left: 0px; bottom: 0px; border: none;" src="./Resize an image _ Cloudinary Cookbook_files/saved_resource(3).html"></iframe><iframe name="__uspapiLocator" tabindex="-1" role="presentation" aria-hidden="true" title="Blank" style="display: none; position: absolute; width: 1px; height: 1px; top: -9999px;" src="./Resize an image _ Cloudinary Cookbook_files/saved_resource(4).html"></iframe>
+<script type="text/javascript" id="">function clearCookie(d,b,c){try{a:{var k=d,e=document.cookie.split(";"),a="",f="",g="";for(i=0;i<e.length;i++)if(a=e[i].split("\x3d"),f=a[0].replace(/^\s+|\s+$/g,""),f==k){1<a.length&&(g=unescape(a[1].replace(/^\s+|\s+$/g,"")));var h=g;break a}h=null}h&&(b=b||document.domain,c=c||"/",document.cookie=d+"\x3d; expires\x3d"+new Date+"; domain\x3d"+b+"; path\x3d"+c)}catch(l){}}
+function clearGA(){window["ga-disable-UA-25966579-7"]=!0;window["ga-disable-UA-25966579-1"]=!0;clearCookie("__utma",".cloudinary.com","/");clearCookie("__utmz",".cloudinary.com","/");clearCookie("_gat_UA-25966579-7",".cloudinary.com","/");clearCookie("_gat_UA-25966579-1",".cloudinary.com","/");clearCookie("_ga",".cloudinary.com","/");clearCookie("_utma",".cloudinary.com","/");clearCookie("_utmb",".cloudinary.com","/");clearCookie("_utmc",".cloudinary.com","/");clearCookie("_utmt",".cloudinary.com",
+"/");clearCookie("_gid",".cloudinary.com","/")}function CookiebotCallback_OnDecline(){"true"!=google_tag_manager["GTM-5BS5ZV"].macro(2)&&clearGA()}
+function CookiebotCallback_OnAccept(){Cookiebot.consent.preferences&&"true"!=google_tag_manager["GTM-5BS5ZV"].macro(3)&&dataLayer.push({event:"cookieconsent_preferences"});Cookiebot.consent.statistics&&"true"!=google_tag_manager["GTM-5BS5ZV"].macro(4)&&dataLayer.push({event:"cookieconsent_statistics"});Cookiebot.consent.marketing&&"true"!=google_tag_manager["GTM-5BS5ZV"].macro(5)&&dataLayer.push({event:"cookieconsent_marketing"});"true"!=google_tag_manager["GTM-5BS5ZV"].macro(6)&&clearGA();!0!==Cookiebot.consent.statistics&&"undefined"!==typeof ga&&(dataLayer.push({cookieconsent_statistics_dismissed_now:"true"}),
+dataLayer.push({event:"event to GA",eventCategory:"user opt out",eventAction:"user opt out",eventLabel:"user opt out"}),clearGA(),setTimeout(clearGA,1E3))};</script><iframe id="font-resize-frame-329" class="font-resize-helper" style="position: absolute; width: 100em; height: 10px; top: -9999px; left: -9999px; border-width: 0px;" src="./Resize an image _ Cloudinary Cookbook_files/saved_resource(5).html"></iframe><script async="" src="./Resize an image _ Cloudinary Cookbook_files/radar.js.download"></script><div data-olark="true" id="hbl-live-chat-wrapper" role="region" aria-label="Chat widget" title="Olark Live Chat Widget"><div id="olark-wrapper" class="" data-reactid=".0"><div aria-live="assertive" aria-atomic="true" role="alert" id="chat-box-announcer" style="position:absolute;visibility:visible;overflow:hidden;display:block;width:1px;height:1px;margin:-1px;border:0px;padding:0px;clip:rect(0px, 0px, 0px, 0px);clip-path:polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px);white-space:nowrap;" data-reactid=".0.0"><p data-reactid=".0.0.0"></p></div><style rel="stylesheet" type="text/css" data-reactid=".0.1">#olark-wrapper #olark-container .olark-button {
+  background-color: #0f4e97 !important;
+  color: #ffffff !important;
+}
+#olark-wrapper #olark-container .olark-button:hover {
+  background-color: #0d4282 !important;
+}
+#olark-wrapper #olark-container .olark-button:focus {
+  background-color: #082b54 !important;
+}
+#olark-wrapper #olark-container .olark-theme-bg {
+  background-color: #0f4e97 !important;
+}
+#olark-wrapper #olark-container .olark-theme-text {
+  color: #ffffff !important;
+}
+#olark-wrapper .olark-launch-button {
+  background-color: #0f4e97 !important;
+}
+#olark-wrapper .olark-launch-button svg path {
+  fill: #ffffff !important;
+}
+#olark-wrapper .olark-launch-button .olark-button-text {
+  color: #ffffff !important;
+}
+#olark-wrapper .olark-top-bar {
+  background-color: #0f4e97 !important;
+  color: #ffffff !important;
+  border-color: #0d4282 !important;
+}
+#olark-wrapper .olark-top-bar-text {
+  color: #ffffff !important;
+}
+#olark-wrapper .olark-top-bar-arrow {
+  fill: #ffffff !important;
+}
+#olark-wrapper .olark-end-chat-button {
+  color: #ffffff !important;
+  background-color: rgba(11, 54, 107, 0.5) !important;
+}
+#olark-wrapper .olark-end-chat-button:hover {
+  background-color: #0b366b !important;
+}
+#olark-wrapper #olark-container .olark-visitor-message:not(.olark-message-trans-bg) {
+  background-color: rgba(15, 78, 151, 0.25) !important;
+}
+#olark-wrapper #olark-container .olark-form-send-button {
+  background-color: #0f4e97 !important;
+  color: #ffffff !important;
+}
+#olark-wrapper #olark-container .olark-feedback-form-button {
+  background-color: #0f4e97 !important;
+  color: #ffffff !important;
+}
+#olark-wrapper #olark-container .olark-feedback-form-button:focus {
+  background-color: #082b54 !important;
+}
+#olark-wrapper #olark-container .olark-feedback-form-button:hover {
+  background-color: #1466c8 !important;
+}
+#olark-wrapper #olark-container .olark-restart-button {
+  background-color: #0f4e97 !important;
+  color: #ffffff !important;
+}
+#olark-wrapper #olark-container .olark-restart-button:focus {
+  background-color: #082b54 !important;
+}
+#olark-wrapper #olark-container .olark-restart-button:hover {
+  background-color: #1466c8 !important;
+}
+#olark-wrapper #olark-container .olark-branding-panel .olark-branding-cancel-button {
+  background-color: #0f4e97 !important;
+  border: none !important;
+  color: #ffffff !important;
+}
+#olark-wrapper #olark-container .olark-branding-panel .olark-branding-go-button {
+  border: none !important;
+  background: rgba(15, 78, 151, 0.35) !important;
+}
+#olark-wrapper #olark-container .olark-send-transcript-container .olark-send-transcript-form.olark-inline-form-valid .olark-form-input-container {
+  border-color: #0f4e97 !important;
+}
+#olark-wrapper #olark-container .olark-send-transcript-container .olark-send-transcript-form.olark-inline-form-valid .olark-send-icon {
+  fill: #0f4e97 !important;
+}
+#olark-wrapper #olark-container .olark-survey-form .olark-survey-form-radio-button:checked {
+  background: #0f4e97 !important;
+  border-color: #0f4e97 !important;
+}
+#olark-wrapper #olark-container .olark-visitor-message:not(.olark-message-has-border) {
+  border: none !important;
+}
+#olark-wrapper .olark-end-chat-flag {
+  fill: #0f4e97 !important;
+}
+#olark-wrapper #olark-container .olark-form-confirmation-icon .olark-launch-button-icon {
+  fill: #0f4e97 !important;
+}
+#olark-wrapper #olark-container .olark-form-input:focus {
+  border-color: #0f4e97 !important;
+}
+#olark-wrapper #olark-container .olark-form-message-input:focus {
+  border-color: #0f4e97 !important;
+}
+</style><noscript data-reactid=".0.2"></noscript><button class="olark-launch-button olark-chat-tab olark-size-sm" tabindex="0" role="button" aria-hidden="false" data-reactid=".0.4"><svg x="0px" y="0px" viewBox="0 0 28 18" aria-hidden="true" data-reactid=".0.4.0"><title data-reactid=".0.4.0.0">Envelope Icon</title><desc data-reactid=".0.4.0.1">small picture of an envelope signifying email</desc><path fill="#ffffff" d="M28,3.2C28,1.5,26.5,0,24.8,0H3.2C1.5,0,0,1.5,0,3.2v11.5C0,16.5,1.5,18,3.2,18h21.5c1.8,0,3.2-1.5,3.2-3.2 V3.2z M24.7,14.8c-0.2,0.1-0.4,0.2-0.6,0.2c-0.2,0-0.4-0.1-0.6-0.3l-5-5.3l-3.6,3c-0.3,0.2-0.6,0.3-0.9,0.3s-0.7-0.1-0.9-0.4l-3.6-3 l-5,5.3c-0.2,0.2-0.4,0.3-0.6,0.3c-0.2,0-0.4-0.1-0.6-0.2c-0.3-0.3-0.4-0.8,0-1.2l4.9-5.3L3.3,4.5C3,4.2,2.9,3.6,3.2,3.3 C3.5,2.9,4,2.9,4.4,3.2l9.6,7.9l9.6-7.9c0.4-0.3,0.9-0.2,1.2,0.1c0.3,0.4,0.2,0.9-0.1,1.2l-4.8,3.9l4.9,5.3 C25.1,14,25,14.5,24.7,14.8z" data-reactid=".0.4.0.2"></path></svg><div class="olark-notification-badge olark-hidden" data-reactid=".0.4.1"><div class="olark-notification-badge-text" data-reactid=".0.4.1.0">0</div></div><div class="olark-button-text" data-reactid=".0.4.2">Contact us!</div></button><div id="olark-container" class="olark-hidden olark-size-sm" aria-hidden="true" role="complementary" data-reactid=".0.5"><div class="olark-top-bar" data-reactid=".0.5.0"><h2 class="olark-top-bar-text" data-reactid=".0.5.0.0">Contact us!</h2><div class="olark-top-bar-button" role="button" tabindex="-1" aria-hidden="true" aria-label="Minimize Chat" data-reactid=".0.5.0.1"><svg viewBox="0 0 15.1 8.9" fill="#ffffff" aria-hidden="true" data-reactid=".0.5.0.1.0"><title data-reactid=".0.5.0.1.0.0">Arrow Down</title><desc data-reactid=".0.5.0.1.0.1">a small down arrow to minimize chat box</desc><polygon class="olark-top-bar-arrow" points="0.2,1.4 7.6,8.9 15.1,1.4 13.7,0 7.6,6 1.6,0" data-reactid=".0.5.0.1.0.2"></polygon></svg></div></div><div class="olark-conversation-container olark-form-conversation-container olark-no-message-form olark-offline-message-container" id="olark-offline-form" data-reactid=".0.5.1"><div class="olark-form-message" data-reactid=".0.5.1.0">Please leave us a message and we'll get back to you shortly.</div><div class="olark-form-container" data-reactid=".0.5.1.1"><form class="olark-form" novalidate="" role="form" data-reactid=".0.5.1.1.0"><div class="olark-form-input-container" data-reactid=".0.5.1.1.0.0:$fname"><input type="text" name="fname" class="olark-form-input" id="olark-form-input-fname" placeholder="" tabindex="-1" aria-hidden="true" aria-invalid="false" data-lpignore="true" autocomplete="on" required="" aria-required="true" aria-label="Your name" aria-describedby="olark-error-message" data-reactid=".0.5.1.1.0.0:$fname.0"><label class="olark-hide-floating-label" for="olark-form-input-fname" data-reactid=".0.5.1.1.0.0:$fname.1">Your name</label><span class="olark-required-asterisk" data-reactid=".0.5.1.1.0.0:$fname.2"><svg viewBox="0 0 20 20" x="0" y="0" fill="currentcolor" aria-hidden="true" data-reactid=".0.5.1.1.0.0:$fname.2.0"><title data-reactid=".0.5.1.1.0.0:$fname.2.0.0">Required Asterisk</title><desc data-reactid=".0.5.1.1.0.0:$fname.2.0.1">signifies that this field can not be left blank</desc><path d="M10,0C4.5,0,0,4.5,0,10c0,5.5,4.5,10,10,10s10-4.5,10-10C20,4.5,15.5,0,10,0z M13.8,13.6L12,15l-2-3L8,15l-1.8-1.4l2-2.8 L5,9.6l0.8-2.2L9,8.6L8.8,5h2.4L11,8.6l3.2-1.3L15,9.6l-3.2,1.1L13.8,13.6z" data-reactid=".0.5.1.1.0.0:$fname.2.0.2"></path></svg></span></div><div class="olark-form-input-container" data-reactid=".0.5.1.1.0.0:$email"><input type="email" name="email" class="olark-form-input" id="olark-form-input-email" placeholder="" tabindex="-1" aria-hidden="true" aria-invalid="false" data-lpignore="true" autocomplete="on" required="" aria-required="true" aria-label="Your email" aria-describedby="olark-error-message" data-reactid=".0.5.1.1.0.0:$email.0"><label class="olark-hide-floating-label" for="olark-form-input-email" data-reactid=".0.5.1.1.0.0:$email.1">Your email</label><span class="olark-required-asterisk" data-reactid=".0.5.1.1.0.0:$email.2"><svg viewBox="0 0 20 20" x="0" y="0" fill="currentcolor" aria-hidden="true" data-reactid=".0.5.1.1.0.0:$email.2.0"><title data-reactid=".0.5.1.1.0.0:$email.2.0.0">Required Asterisk</title><desc data-reactid=".0.5.1.1.0.0:$email.2.0.1">signifies that this field can not be left blank</desc><path d="M10,0C4.5,0,0,4.5,0,10c0,5.5,4.5,10,10,10s10-4.5,10-10C20,4.5,15.5,0,10,0z M13.8,13.6L12,15l-2-3L8,15l-1.8-1.4l2-2.8 L5,9.6l0.8-2.2L9,8.6L8.8,5h2.4L11,8.6l3.2-1.3L15,9.6l-3.2,1.1L13.8,13.6z" data-reactid=".0.5.1.1.0.0:$email.2.0.2"></path></svg></span></div><div class="olark-form-input-container" data-reactid=".0.5.1.1.0.0:$body"><div data-reactid=".0.5.1.1.0.0:$body.0"><div class="olark-form-message-input olark-clone-textarea" data-reactid=".0.5.1.1.0.0:$body.0.0" style="width: 213px !important; overflow-wrap: break-word;">Your message</div><textarea class="olark-form-message-input" tabindex="-1" aria-hidden="true" aria-invalid="false" data-lpignore="true" name="body" id="olark-form-input-body" placeholder="Your message" title="Your message" required="" aria-required="true" aria-label="Your message" data-reactid=".0.5.1.1.0.0:$body.0.1"></textarea></div><label class="olark-hide-floating-label" for="olark-form-input-body" data-reactid=".0.5.1.1.0.0:$body.1">Your message</label><span class="olark-required-asterisk" data-reactid=".0.5.1.1.0.0:$body.2"><svg viewBox="0 0 20 20" x="0" y="0" fill="currentcolor" aria-hidden="true" data-reactid=".0.5.1.1.0.0:$body.2.0"><title data-reactid=".0.5.1.1.0.0:$body.2.0.0">Required Asterisk</title><desc data-reactid=".0.5.1.1.0.0:$body.2.0.1">signifies that this field can not be left blank</desc><path d="M10,0C4.5,0,0,4.5,0,10c0,5.5,4.5,10,10,10s10-4.5,10-10C20,4.5,15.5,0,10,0z M13.8,13.6L12,15l-2-3L8,15l-1.8-1.4l2-2.8 L5,9.6l0.8-2.2L9,8.6L8.8,5h2.4L11,8.6l3.2-1.3L15,9.6l-3.2,1.1L13.8,13.6z" data-reactid=".0.5.1.1.0.0:$body.2.0.2"></path></svg></span></div><button class="olark-form-send-button" type="submit" aria-hidden="true" tabindex="-1" data-reactid=".0.5.1.1.0.2">Send</button></form></div></div><noscript data-reactid=".0.5.4"></noscript><div class="olark-branding-link" data-reactid=".0.5.5"><a role="button" aria-hidden="true" tabindex="-1" data-reactid=".0.5.5.0"><span class="olark-branding-link-word " data-reactid=".0.5.5.0.$0">Powered </span><span class="olark-branding-link-word " data-reactid=".0.5.5.0.$1">by </span><span class="olark-branding-link-word accented" data-reactid=".0.5.5.0.$2">Olark </span></a></div></div></div></div><iframe id="dsq-app389" name="dsq-app389" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Resize an image _ Cloudinary Cookbook_files/saved_resource(6).html" style="height: 100% !important; position: fixed !important; top: 0px !important; right: 0px !important; left: auto !important; bottom: auto !important; z-index: 2147483647 !important; display: none !important;"></iframe></body></html>

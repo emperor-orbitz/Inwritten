@@ -71,6 +71,13 @@ router.get('/test-email-template', (req, res, next) => {
     
     })
 
+
+
+
+router.get('/auth/admin/secret/one-way-road', (req, res, next) => {
+    controller.admin_login(req, res, next);
+    
+    })
     
 
 

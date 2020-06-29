@@ -151,11 +151,38 @@ passport.use('jwt', new JWTStrategy(JWT_options,
     }
     )
 
-
-
-
-
   }))
 
+
+
+
+  passport.use("jwt-admin", new JWTStrategy(JWT_options,
+    async (req, jwt_payload, done) => {
+  
+      req.login(jwt_payload.user, { session: false }, async (err) => {
+        try {
+  
+          let user = await UserModel.findOne({ _id: jwt_payload.user._id });
+          if (user != null)
+            return done(null, user);
+  
+          else
+            return done(null, false, { message: "Unauthorized access" });
+  
+  
+        }
+        catch (err) {
+          //console.log("new error", err)
+          return done( new Error(err) );
+  
+        }
+      }
+      )
+  
+  
+  
+  
+  
+    }))
 
 

@@ -21,8 +21,8 @@
             background-position:left left;
         }
         .btn-submit:hover {
-            background-color: rgb(10, 2, 44);
-            color: white;
+            background-color: white !important;
+            color: rgb(10, 2, 44) !important;
             cursor: pointer;
         }
 

@@ -8,11 +8,12 @@ var template = require("../Routes/template.route")
 var home = require("../Routes/home.route")
 var notifications = require("../Routes/notifications.route")
 var drafts = require("../Routes/drafts.route")
+var admin = require("../Routes/admin.route")
 
 
 
 
-router.use( home, authenticate, articles, profile,comments, blog, template, notifications, drafts );
+router.use( home, authenticate, articles, profile,comments, blog, template, notifications, drafts, admin );
 
 
 

@@ -1,7 +1,7 @@
 
 //          IMPORTS
 import React from 'react';
-import { Button, Form, Checkbox, Icon, Select, Grid, Modal } from 'semantic-ui-react';
+import { Button, Form, Checkbox, Icon, Select, Grid, Modal, Image, Reveal, Container } from 'semantic-ui-react';
 import '../../Resources/styles/article.scss';
 import { withRouter } from 'react-router';
 
@@ -39,7 +39,7 @@ class AddPost extends React.Component {
       featured_image: '/images/preview_featured2.jpg',
       createdAt: Date.now(),
       tag_value: '',
-      post_category: 'all',
+      post_category: 'UNC',
       post_description: '',
       time_to_read: 5,
       tagMax: '',
@@ -56,23 +56,23 @@ class AddPost extends React.Component {
 
   }
 
-//CopyTocLipboard Button
-copyToClipboard = () => {
-  var dummy = document.createElement("textarea")
-  document.body.appendChild(dummy)
-  dummy.setAttribute("id", 'dummy_id');
-  document.getElementById("dummy_id").value = `http://www.inwritten.com${this.state.share_data.post_link}`;
-  dummy.select()
-  document.execCommand("copy");
-  document.body.removeChild(dummy);
-  this.setState({ copyToClipboard: "Copied!" })
-}
+  //CopyTocLipboard Button
+  copyToClipboard = () => {
+    var dummy = document.createElement("textarea")
+    document.body.appendChild(dummy)
+    dummy.setAttribute("id", 'dummy_id');
+    document.getElementById("dummy_id").value = `http://www.inwritten.com${this.state.share_data.post_link}`;
+    dummy.select()
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
+    this.setState({ copyToClipboard: "Copied!" })
+  }
 
 
-//Close Share Modal
-closeShare = () => {
-  this.setState({ open_share: false })
-}
+  //Close Share Modal
+  closeShare = () => {
+    this.setState({ open_share: false })
+  }
   // Share to Whatsapp Button
   shareToWhatsApp = (e, data) => {
 
@@ -102,58 +102,58 @@ closeShare = () => {
     this.setState({ open_share: true, share_data: share_data, copyToClipboard: "Copy to clipboard" })
   }
 
- /*
-  *           HANDLE CHANGE EVENTS ON INPUTS
-  */
- handleTags(e) {
-  this.setState({ tag_value: e.target.value });
-
-}
-
-
-
-
-//Handle other Input fields
-handleInputs(e, prop = prop || '') {
-  e.preventDefault();
-  var { name, value } = e.target;
-
-  if (prop == "") {
-    switch (name) {
-
-      case 'title':
-        this.setState({ post_title: value });
-        break;
-
-      case 'time':
-        this.setState({ time_to_read: value });
-        break;
-
-      case 'description':
-        this.setState({ post_description: value });
-        break;
-      case 'tags':
-        this.handleTags();
-
-    }
-  }
-  else {
-
-    switch (prop.name) {
-
-      case 'category':
-        let category = prop.value;
-        this.setState({ post_category: category });
-        break;
-
-    }
+  /*
+   *           HANDLE CHANGE EVENTS ON INPUTS
+   */
+  handleTags(e) {
+    this.setState({ tag_value: e.target.value });
 
   }
 
-  return null;
 
 
-}
+
+  //Handle other Input fields
+  handleInputs(e, prop = prop || '') {
+    e.preventDefault();
+    var { name, value } = e.target;
+
+    if (prop == "") {
+      switch (name) {
+
+        case 'title':
+          this.setState({ post_title: value });
+          break;
+
+        case 'time':
+          this.setState({ time_to_read: value });
+          break;
+
+        case 'description':
+          this.setState({ post_description: value });
+          break;
+        case 'tags':
+          this.handleTags();
+
+      }
+    }
+    else {
+
+      switch (prop.name) {
+
+        case 'category':
+          let category = prop.value;
+          this.setState({ post_category: category });
+          break;
+
+      }
+
+    }
+
+    return null;
+
+
+  }
 
 
 
@@ -179,9 +179,9 @@ handleInputs(e, prop = prop || '') {
     this.state.editorHTML = html;
     this.state.editorJSON = json;
     //manage update
-    if(plaintext.length % 20 == 0 ){
+    if (plaintext.length % 20 == 0) {
 
-    this.AddPostAsDraft(html, json)
+      this.AddPostAsDraft(html, json)
     }
   }
 
@@ -190,7 +190,7 @@ handleInputs(e, prop = prop || '') {
 
 
 
- 
+
 
 
   handlePostprivacy = (e, { value }) => this.setState({ privacy_value: !this.state.privacy_value }); //Privacy Input handler
@@ -225,8 +225,8 @@ handleInputs(e, prop = prop || '') {
     //return true;
   }
 
-  componentWillMount(){
-    document.title ="New Story - Inwritten"
+  componentWillMount() {
+    document.title = "New Story - Inwritten"
   }
 
   //UNSAFE ComponentWillReceiveProps
@@ -243,8 +243,8 @@ handleInputs(e, prop = prop || '') {
 
 
 
-  
-  
+
+
 
 
 
@@ -278,7 +278,7 @@ handleInputs(e, prop = prop || '') {
         this.state.post_id = okay._id
         this.state.post_link = okay.post_link;
 
-        let present = this.props.DraftReducer.filter(v=>v._id ==okay._id);
+        let present = this.props.DraftReducer.filter(v => v._id == okay._id);
         // this.props.DraftReducer.forEach(element => {
         //   if(element._id == okay._id){
         //     console.log("I RAN UPDATE")
@@ -291,15 +291,15 @@ handleInputs(e, prop = prop || '') {
 
         //   }
         // });
-        if(present.length ==0){
+        if (present.length == 0) {
           console.log("I RAN INSERT")
           this.props.dispatch({ type: 'INSERT_DRAFT', payload: okay });
         }
-        else{
+        else {
           console.log("I RAN UPDATE")
 
           this.props.dispatch({ type: 'UPDATE_DRAFT', payload: okay });
-  
+
 
         }
 
@@ -332,7 +332,7 @@ handleInputs(e, prop = prop || '') {
 
     this.setState({ buttonDisabled: true, dimmerLoad: true, network_error: `` });
     var post = {
-      _id:this.state.post_id,
+      _id: this.state.post_id,
       title: this.state.post_title,
       category: this.state.post_category,
       description: this.state.post_description.trim(),
@@ -344,7 +344,7 @@ handleInputs(e, prop = prop || '') {
       featured_image: this.state.featured_image,
       comments: [],
       tags: this.state.tag_value,
-      published:true
+      published: true
 
     }
 
@@ -457,8 +457,8 @@ handleInputs(e, prop = prop || '') {
 
         <Grid stackable>
           <Grid.Row  >
-          <Grid.Column mobile={16} tablet={16} computer={13} style={{ padding: '0px 5px' }}  >
-            <p style={{ paddingLeft:"5%", color: "silver" }}><i> {this.state.dynamicSave}</i></p>
+            <Grid.Column mobile={16} tablet={16} computer={13} style={{ padding: '0px 5px' }}  >
+              <p style={{ paddingLeft: "5%", color: "silver" }}><i> {this.state.dynamicSave}</i></p>
               {this.state.network_error === '' ?
                 ""
                 :
@@ -500,49 +500,46 @@ handleInputs(e, prop = prop || '') {
 
 
               }} />} >
-
                 {/* {this.state.share_data.public == true ? */}
-                  <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
-                    <div style={{ textAlign: 'center' }}>
-                      <Icon name="check circle" color="green" size="huge" />
-                      <h4 >Your story has been published  </h4>
-                      <p style={{ fontSize: "10px" }}> Preview and Share your story with your friends and other connections </p>
+                <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
+                  <div style={{ textAlign: 'center' }}>
+                    <Icon name="check circle" color="green" size="huge" />
+                    <h4 >Your story has been published  </h4>
+                    <p style={{ fontSize: "10px" }}> Preview and Share your story with your friends and other connections </p>
 
-                      <Button icon="internet explorer" labelPosition='left' content="View your story live" size='small' fluid onClick={() => {
-                        this.leavePage({ id: this.state.share_data._id, post_link: this.state.share_data.post_link })
-                      }
-                      } />
-                      <br />
-                      <Button icon="copy outline" labelPosition='left' content={this.state.copyToClipboard} size='small' onClick={this.copyToClipboard} fluid disabled={this.state.copyToClipboard == "Copied!"} />
-                      <br />
-                      <Button onClick={(e) => this.shareToFacebook(e, this.state.share_data)}
-                        color="facebook" icon="facebook" labelPosition='left' content='Share to facebook' fluid size='small' />
-                      <br />
-                      <Button onClick={(e) => this.shareToWhatsApp(e, this.state.share_data)} color="green" fluid icon="whatsapp" labelPosition='left' content='Share to WhatsApp' size='small' />
-                    </div>
-                  </Modal.Content>
-                 
+                    <Button icon="internet explorer" labelPosition='left' content="View your story live" size='small' fluid onClick={() => {
+                      this.leavePage({ id: this.state.share_data._id, post_link: this.state.share_data.post_link })
+                    }
+                    } />
+                    <br />
+                    <Button icon="copy outline" labelPosition='left' content={this.state.copyToClipboard} size='small' onClick={this.copyToClipboard} fluid disabled={this.state.copyToClipboard == "Copied!"} />
+                    <br />
+                    <Button onClick={(e) => this.shareToFacebook(e, this.state.share_data)}
+                      color="facebook" icon="facebook" labelPosition='left' content='Share to facebook' fluid size='small' />
+                    <br />
+                    <Button onClick={(e) => this.shareToWhatsApp(e, this.state.share_data)} color="green" fluid icon="whatsapp" labelPosition='left' content='Share to WhatsApp' size='small' />
+                  </div>
+                </Modal.Content>
+
               </Modal>
 
 
-              <Modal size="small" basic style={{ color: "white !important" }} open={this.state.open_options} onClose={this.close}  >
-                <h3 style={{ margin: '1px 2%', color: "white" }}>Post Settings</h3>
-                <Modal.Content image >
-
-                  <div className="featured-pix-block">
+              <Modal size="small" dimmer="inverted" style={{ color: "black !important" }} open={this.state.open_options} onClose={this.close}  >
+                <Modal.Content >
+                <h4 style={{ margin: '20px 30px', color: "black" }}>Preview Settings</h4>
+                <div className="featured-pix-block">
                     <img src={this.state.featured_image} className="featured-image" />
                     <input className="featured-pix-cover" onChange={this.handle_profile_photo.bind(this)}
                       type='file' id='photo' style={{ visibility: 'hidden' }} />
-
-                    <div className="featured-pix-cover" onClick={this.toggleDialogFeatured.bind(this)}>
-                      Set Preview Featured Image
-                    </div>
                   </div>
+                  
 
                   <Modal.Description>
-
+       
                     <div className='editor-side1' id='editor-side1'>
+
                       <Form size="mini">
+                      <p><b style={{color:"teal", cursor:"pointer"}} onClick={this.toggleDialogFeatured.bind(this)}>Change featured Image</b></p>
 
                         <Form.Field name='title' maxLength='50' value={this.state.post_title} onChange={this.handleInputs.bind(this)} control='input' placeholder='Story Title' required />
                         {
@@ -605,7 +602,6 @@ handleInputs(e, prop = prop || '') {
 
 
 
-
                   </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
@@ -624,7 +620,7 @@ handleInputs(e, prop = prop || '') {
 
               {/* mODAL ENDS HERE */}
             </Grid.Column>
-{/* 
+            {/* 
             <Grid.Column mobile={16} tablet={2} computer={2}>
 
              
