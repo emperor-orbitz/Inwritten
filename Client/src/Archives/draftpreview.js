@@ -3,7 +3,7 @@ import React from 'react';
 import '../../Resources/styles/article.scss';
 import  {Button, Placeholder}  from 'semantic-ui-react';
 import ReactPlaceholder from 'react-placeholder';
-import "./reactPlaceholder.scss";
+import "./Placeholder.scss";
  
 
 
