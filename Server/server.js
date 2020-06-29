@@ -70,7 +70,7 @@ app.set("views", path.resolve(__dirname, "../Client/assets/views"));
 //ROUTE CONFIGURATION IN PRODUCTION
 
 if (process.env.NODE_ENV == "production") {
-  app.use(sslRedirect());
+    app.use(sslRedirect());
   app.get('/index_bundle.js', function (req, res, next) {
     req.url = req.url + '.gz';
     res.set('Content-Encoding', 'gzip');
