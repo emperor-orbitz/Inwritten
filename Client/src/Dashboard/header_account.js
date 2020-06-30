@@ -336,8 +336,8 @@ class HeaderAccount extends React.Component {
       return (<div className='splashscreen'>
 
         <img src={double_u} className='splash' />
-        <h2>Inwritten</h2>
-        <p>Fetching better content... </p>
+        <h2 style={{marginTop:"10px"}}>Inwritten</h2>
+        <p>Fetching something interesting... </p>
       </div>)
     }
 

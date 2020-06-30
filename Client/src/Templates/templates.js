@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../Resources/styles/comment.scss';
 import '../../Resources/styles/template.scss';
-import { Icon, Button, Message, Divider, Container, Grid, Item, Input } from 'semantic-ui-react';
+import { Icon, Button, Message, Divider, Container, Grid, Item, Input, Modal, Image } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import '../../Resources/styles/react-carousel.scss';
@@ -32,7 +32,7 @@ class Templates extends React.Component {
     //Show Modal
     showModal = (event, a) => {
         console.log(a)
-        this.setState({ open_options: true, selected: a.data })
+        this.setState({ open_options: true, selected: a })
 
     }
 
@@ -101,14 +101,49 @@ class Templates extends React.Component {
             return (
                 <div className="comment-div" style={{ marginTop: "0px !important" }}>
                     <h3 style={{ color: "black" }}>Templates</h3>
-                    <p>Loading...</p>
+                    <p>Loading Templates. Hang on!...</p>
                 </div>
             )
         }
         else
             return (
                 <Container fluid>
+                    <Modal open={this.state.open_options}
+                    closeOnDimmerClick={true}
+                    onClose={this.close}>
 
+                        <Modal.Header>
+                        {this.state.selected.template_name}
+                        </Modal.Header>
+                        <Modal.Content >
+                        <h4 style={{marginBottom:"12px"}}>Details</h4>
+                        <Image size="medium" src={this.state.selected.featured_image}></Image>
+
+                        <div style={{color:"black !important",marginTop:"20px"}}>
+                        <span ><b>Description</b></span>
+                        <p>{this.state.selected.template_description}</p>
+                        <span><b>Designed By</b></span>
+                        <p>Inwritten.com</p>
+                        <span><b>Best Categories</b></span>
+                        <p>Business, Lifestyle, Food, Technology</p>
+                        </div>
+                        <Divider></Divider>
+                        <div style={{color:"black !important"}}>
+                        <h4>Out-of-the-box Support</h4>
+                        <span><b>SEO</b></span>
+                        <p>Template is designed to comply with SEO (Search Engine Optimisation) Standards</p>
+                        <span><b>Pages</b></span>
+                        <p>2 (Index Page, Author Space)</p>
+                        <span><b>Access</b></span>
+                        <p>Free</p>
+                        <span><b>View Demo</b></span>
+                        <p><a href="https://www.inwritten.com">https://www.inwritten.com</a></p>
+                        </div>       
+                     </Modal.Content>
+                     <Modal.Actions>
+                         <Button onClick={this.close}>close</Button>
+                     </Modal.Actions>
+                    </Modal>
                     <div className="comment-div" style={{ marginTop: "0px !important" }}>
 
                         <Grid>
@@ -166,8 +201,8 @@ class Templates extends React.Component {
                                                     </Item.Description>
                                                     <Item.Extra style={{ marginTop: "10px" }}>
 
-                                                        <Button size="tiny" disabled={this.state.save_disabled} onClick={(evt) => { this.save_template(evt, e) }} icon='angle right' >Activate <Icon name="angle right" /></Button>
-                                                        <span>&nbsp;&nbsp;<a href="#">More Details</a></span>
+                                                        <Button size="tiny" secondary disabled={this.state.save_disabled} onClick={(evt) => { this.save_template(evt, e) }} icon='angle right' >Activate <Icon name="angle right" /></Button>
+                                                        <span>&nbsp;&nbsp;<Button size="tiny"  onClick={(evt)=> this.showModal(evt,e )}>More Details</Button></span>
                                                     </Item.Extra>
                                                 </Item.Content>
                                             </Item>

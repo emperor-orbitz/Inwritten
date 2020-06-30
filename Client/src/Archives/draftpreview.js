@@ -9,7 +9,7 @@ import "react-placeholder/lib/reactPlaceholder.scss";
 
 function image_transform(url, width, height){
 //Add height and width to image
- return url.replace("/upload/", `/upload/h_${height},w_${width}/`)
+ return url.replace("/upload/", `/upload/h_${height},w_${width},c_crop/`)
 }
 
 /*
@@ -61,11 +61,13 @@ export default function DraftPreview(props) {
 
                         <Grid.Column style={{ margin: "10px auto" }} computer={5} mobile={16} tablet={4}  >
                             <Item style={{ marginBottom: '12px' }} key={e._id} >
-                                <Item.Image floated="right" size="small" src={image_transform( e.featured_image, 200, 91 )} className="item-image"/>
+                                <Item.Image floated="right" size="small" src={image_transform( e.featured_image, 200, 92 )} className="item-image"/>
 
                                 <Item.Content >
                                     <Item.Header><h4 ><a style={{ color: "black" }} href={e.post_link}>{e.title}</a></h4></Item.Header>
-                                    <Item.Description>@{e.author.toLowerCase()}</Item.Description>
+                                    <Item.Description>
+                                        <span>{e.description.toLowerCase()}</span><br/>
+                                        <span style={{color:"silver"}}>-{e.author.toLowerCase()}</span></Item.Description>
                                     <Item.Meta>{e.time_to_read} mins read</Item.Meta>
                                 </Item.Content>
                             </Item>

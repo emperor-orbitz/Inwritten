@@ -16,32 +16,14 @@ import Moment from "react-moment";
 
 
 
-
-function date_to_string(date) {
-    var fulldate = new Date(date);
-    var month = getmonthName(fulldate.getMonth());
-    var year = fulldate.getFullYear();
-    var day = fulldate.getDate();
-    var convert = `${day}- ${month}`;
-    return convert;
-}
+function image_transform(url, width, height){
+    //Add height and width to image
+     return url.replace("/upload/", `/upload/h_${height},w_${width},c_crop/`)
+    }
 
 
-/*
-*
-*                             GET MONTH NAME
-*
-*/
-function getmonthName(number) {
-    var months = [
-        '01', '02', '03', '04', '05', '06',
-        '07',
-        '08',
-        '09', '10', '11', '12'
-    ]
-    return months[number];
 
-}
+
 
 class PostArchive extends React.Component {
 
@@ -353,7 +335,7 @@ class PostArchive extends React.Component {
 
                                         <Grid.Column computer={5} mobile={16} tablet={4} >
                                             <Item style={{ marginBottom: '12px' }} key={e._id} >
-                                                <Item.Image floated="right" size="small" src={e.featured_image} />
+                                                <Item.Image floated="right" size="small" src={image_transform(e.featured_image, 200, 92)} />
 
                                                 <Item.Content verticalAlign="middle" >
                                                     <Item.Header as={Link} to={{ pathname: '/app/edit/' + e._id + '/'+ e.type }}><h4 style={{ color: "black" }}>{e.title}</h4></Item.Header>
