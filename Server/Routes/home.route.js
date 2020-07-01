@@ -38,5 +38,11 @@ router.post('/subscribeToPreLaunch', (req, res, next) => {
     
 });
 
+router.get('/404', (req, res, next) => {  
+
+    controller.four_oh_four(req, res, next);
+    
+});
+
 
 module.exports = router;

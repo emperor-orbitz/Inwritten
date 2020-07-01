@@ -163,7 +163,7 @@ margin: 11% 5%;
 
 
 .color-hover:hover{ 
-  background-color:gold;
+  background-color:teal;
 
 }
 
@@ -205,7 +205,7 @@ margin:1px 2%;
   .section-header{
 margin: 3% 8%;
 margin-left:50px;
-color:gold;
+color:teal;
    }
 
    .card{
@@ -230,10 +230,10 @@ margin-bottom:10px;
     margin: 0px;
    }
 
-//    .active{
-// color:blue;
+   .active{
+color:black;
 
-//    }
+   }
 
 
 .splashscreen{
@@ -246,7 +246,7 @@ text-align: center;
 
 .splash{
   width:50px;
-  height:60px;
+  height:50px;
   //animation:2s infinite  ease-in-out rotator  ;
   transform-origin: center ;
 }

@@ -60,7 +60,9 @@ var subscribe =(req, res) =>{
 
 
 
-
+var four_oh_four =(req, res, next)=>{
+    res.render("404")
+}
 
 
   
@@ -69,5 +71,6 @@ var subscribe =(req, res) =>{
 module.exports = {
     index:index,
     terms_and_conditions: terms_and_conditions,
-    subscribe:subscribe
+    subscribe:subscribe,
+    four_oh_four: four_oh_four
 };

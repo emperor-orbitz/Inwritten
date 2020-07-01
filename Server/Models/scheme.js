@@ -16,7 +16,7 @@ const SCHEME = {
         showcase_url: { type: String },
         category: { type: String, default: 'all' },
         profile_url: { type: String, required: true },
-        blogs_url: { type: String, required: true },
+        blogs_url: { type: String, required: true, lowercase:true },
         index: { type: String, required: true }
 
 

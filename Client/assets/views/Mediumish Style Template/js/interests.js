@@ -29,7 +29,7 @@ function interests(category) {
                 <div class="col-md-4">
 				<div class="card">
 					<a href="${element.post_link}">
-					<img class="img-fluid img-thumb" src="${element.featured_image}" alt="${element.title}">
+					<img class="img-fluid img-thumb"  src="${element.featured_image}" alt="${element.title}">
 					</a>
 					<div class="card-block">
 						<h2 class="card-title"><a href="${element.post_link}">${element.title}</a></h2>

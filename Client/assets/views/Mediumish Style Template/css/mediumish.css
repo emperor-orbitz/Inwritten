@@ -16,8 +16,14 @@ License: https://www.wowthemes.net/freebies-license/\\
 
 
 
+*{
+	font-family: 'Source Sans Pro', sans-serif;
 
+}
+.container{
+	font-family: 'Source Sans Pro', sans-serif;
 
+}
 
 
 
@@ -214,11 +220,11 @@ span.post-name a,span.post-read-more a:hover {
 	cursor:pointer;
 }
 .mediumnavigation .navbar-brand img {
-	max-height:30px;
+	max-height:50px;
 	margin-right:5px;
 }
 .mainheading h1.sitetitle {
-	font-family:Righteous;
+	font-family:Source Sans Pro;
 }
 .mainheading h1.posttitle {
 	font-weight:700;
@@ -236,7 +242,7 @@ span.post-name a,span.post-read-more a:hover {
 	color:rgba(0,0,0,.8);
 }
 .article-post {
-	font-family:Merriweather;
+	font-family:Source Sans Pro;
 	font-size:1.2rem;
 	line-height:1.8;
 	color:rgba(0,0,0,.8);
@@ -459,4 +465,8 @@ ul.tags li a:hover {
 	line-height:22px;
 	border-radius:50%;
 	font-size:12px;
+}
+.nav-item{
+	float:left;
+	padding: 3px 7px;
 }

@@ -164,3 +164,8 @@ border:none;
 
 
 }
+
+.navbar-nav{
+    display: inline;
+    min-width: 100px;
+}

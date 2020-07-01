@@ -103,7 +103,8 @@ var index = async (req, res) => {
             res.send("Could not load article successfully")
 
     } catch (error) {
-        res.send("An error occured" + error)
+        res.render("404")
+        //res.send("An error occured" + error)
 
     }
 
