@@ -150,7 +150,7 @@ class Templates extends React.Component {
                             <Grid.Row >
                                 <Grid.Column computer={16} mobile={16} tablet={15} >
 
-                                    <h3 style={{ color: "black" }}>My Templates</h3>
+                                    <h3 style={{ color: "black" }}>My Templates (2)</h3>
                                     <p>Preset templates help define structures to publish your stories. Worry less of design, promote a good content</p>
 
                                     <div className="template-container" style={{ backgroundImage: `url('${my_template.featured_image}')` }}>

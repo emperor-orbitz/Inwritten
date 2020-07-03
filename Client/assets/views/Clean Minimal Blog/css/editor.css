@@ -48,3 +48,7 @@ width:90%;
     padding-left: 10px;
     color:silver
  }   
+
+ .card-text{
+     font-size:15px !important;
+ }

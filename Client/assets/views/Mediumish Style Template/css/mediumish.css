@@ -16,7 +16,7 @@ License: https://www.wowthemes.net/freebies-license/\\
 
 
 
-*{
+*, button{
 	font-family: 'Source Sans Pro', sans-serif;
 
 }
@@ -375,8 +375,8 @@ ul.tags li a:hover {
 	margin-bottom:1.2rem;
 }
 .btn.follow {
-	border-color:#02B875;
-	color:#1C9963;
+	color:#1c243c ;
+	border: 1px solid#1c243c;
 	padding:3px 10px;
 	text-align:center;
 	border-radius:999em;
@@ -384,7 +384,7 @@ ul.tags li a:hover {
 	display:inline-block;
 }
 .btn.subscribe {
-	background-color:rgb(30, 28, 153);
+	background-color:#1c243c;
 	border-color:rgb(7, 6, 56);
 	color:rgba(255,255,255,1);
 	fill:rgba(255,255,255,1);

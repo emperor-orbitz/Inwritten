@@ -25,7 +25,7 @@ function comments(post_id) {
         success: function (result) {
             var interests ="";
         if(result.data.length ==0){
-           interests=  "<div class='comment'><h5>No comments</h5></div>"
+           interests=  "<div class='comment'><span>No comments</span></div>"
            $(".comment-space")[0].innerHTML = interests
 
         }

@@ -4,10 +4,19 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-clean-blog/blob/master/LICENSE)
  */
 
+ *, button{
+	font-family: 'Source Sans Pro', sans-serif;
+
+}
+.container{
+	font-family: 'Source Sans Pro', sans-serif;
+
+}
+
 body {
   font-size: 20px;
   color: #212529;
-  font-family: 'Lora', 'Times New Roman', serif;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 p {
@@ -26,7 +35,7 @@ h4,
 h5,
 h6 {
   font-weight: 800;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 a {
@@ -91,7 +100,7 @@ img::-moz-selection {
   position: absolute;
   border-bottom: 1px solid #e9ecef;
   background-color: white;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 #mainNav .navbar-brand {
@@ -220,7 +229,7 @@ header.masthead .site-heading .subheading {
   line-height: 1.1;
   display: block;
   margin: 10px 0 0;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 @media only screen and (min-width: 768px) {
@@ -231,7 +240,7 @@ header.masthead .site-heading .subheading {
 }
 
 header.masthead .post-heading h1 {
-  font-size: 35px;
+  font-size: 30px;
 }
 
 header.masthead .post-heading .meta,
@@ -241,17 +250,17 @@ header.masthead .post-heading .subheading {
 }
 
 header.masthead .post-heading .subheading {
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 300;
   margin: 10px 0 30px;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 header.masthead .post-heading .meta {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 300;
   font-style: italic;
-  font-family: 'Lora', 'Times New Roman', serif;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 header.masthead .post-heading .meta a {
@@ -329,13 +338,13 @@ header.masthead .post-heading .meta a {
   border-radius: 0;
   background: none;
   box-shadow: none !important;
-  font-family: 'Lora', 'Times New Roman', serif;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 .floating-label-form-group input::-webkit-input-placeholder,
 .floating-label-form-group textarea::-webkit-input-placeholder {
   color: #868e96;
-  font-family: 'Lora', 'Times New Roman', serif;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 .floating-label-form-group label {
@@ -347,8 +356,7 @@ header.masthead .post-heading .meta a {
   display: block;
   margin: 0;
   transition: top 0.3s ease, opacity 0.3s ease;
-  vertical-align: middle;
-  vertical-align: baseline;
+ 
   opacity: 0;
 }
 
@@ -387,11 +395,13 @@ footer .copyright {
 .btn {
   font-size: 14px;
   font-weight: 800;
-  padding: 15px 25px;
+  padding: 8px 10px;
   letter-spacing: 1px;
   text-transform: uppercase;
   border-radius: 0;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
+  border-radius: 5px;
+  
 }
 
 .btn-primary {
@@ -423,3 +433,14 @@ textarea, button[type="submit"]{
   color: white;
 }
 
+.btn{
+  padding:3px 5px;
+}
+
+.comment{
+  padding:5px 0px;
+}
+
+.card a{
+  text-decoration: none;
+}

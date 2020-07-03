@@ -123,7 +123,8 @@ this.search_with_criteria()
 
         if ( this.state.bookmarks.length == 0) {
             return (<div className="comment-div" style={{ marginTop: "0px !important" }}>
-                <h3>No bookmark yet. Try reading more</h3>
+                <h4>No bookmark yet. Try reading more</h4>
+                <p>Check the latest stories at the sidebar</p>
             </div>)
         }
 

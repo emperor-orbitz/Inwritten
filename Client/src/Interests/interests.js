@@ -10,6 +10,7 @@ import ListExampleSelection from "./card"
 
 
 
+
 class Interests extends React.Component {
 
     constructor(props) {
@@ -155,8 +156,9 @@ this.search_with_criteria()
 
         else if (this.state.posts.length > 0) {
             return (
-            <div className="comment-div" style={{ marginTop: "10px !important" }}>
+            <div className="comment-div" style={{ marginTop: "20px !important" }}>
             <h3>Most Recent on {item} </h3>
+            <Button secondary>Follow {item} </Button>
 
                 <Form size="small" >
 
@@ -185,7 +187,8 @@ this.search_with_criteria()
 
             <div className="comment-div" style={{ marginTop: "0px !important" }}>
 
-                <h3>Nothing here yet....</h3>
+                <h4>Oops! Nothing here yet.</h4>
+                <p>Click New Story to be the first</p>
             </div>
         )
 

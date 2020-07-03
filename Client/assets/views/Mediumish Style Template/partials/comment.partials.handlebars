@@ -3,9 +3,9 @@
 <div class="container">
 <div class="ui threaded comments"  style="width:100%; color:white !important;">
 
-  <h2 class="ui dividing  my-3" style="color:black" >Comments</h2>
+<h4 class="ui dividing  my-3" style="color:black" >Comments</h4>
 <div class="comment-space" id={{ data._id }}>
-<button id='load_comments' class="btn btn-sm  btn-dark">Load Comments</button>
+<button id='load_comments' class="btn btn-sm btn-dark">See Comments</button>
 <br></br>
 </div>
 
@@ -25,8 +25,8 @@
          <input name="author_id" id="author_id" hidden value={{author_data._id}} />
 
       <div id="textarea">
-      <textarea style="width:80%" name="comment" id='comment' required minlength="10" ></textarea><br>
-      <button class="btn btn-sm " type='submit'>Submit</button>
+      <textarea style="width:99%; min-height:300px" name="comment" id='comment' required minlength="10" placeholder="What do you have to say?"></textarea><br>
+      <button class="btn btn-sm btn-secondary" type='submit'>Submit</button>
 
       </div>
     </div>

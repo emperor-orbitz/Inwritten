@@ -126,10 +126,11 @@ var user = async (req, res) => {
         console.log(data, "NA ME BE THIS")
         let found_template = await templ.findOne({ _id:data.template_id })
         let socials = await social_model.findOne({user_id: data._id}) || {}
-
+        let blog_data = await posts.find({ author: req.params.username, public: true })
+       
         if (found_template != null) {
 
-            res.render(`${found_template.template_name}/profile`, {user_data: data, social_data: socials,
+            res.render(`${found_template.template_name}/profile`, {user_data: data, blog_data, social_data: socials,
                 template_data: found_template.template_name,
 
             })

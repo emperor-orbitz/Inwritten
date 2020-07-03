@@ -5,14 +5,16 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="{{data.description}}">
+  <meta name="author" content="{{data.author}}">
 
   <title>{{ data.title}}</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="/views/{{template_data}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="/views/{{template_data}}/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/comment.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" class="href">
 
   <!-- Custom fonts for this template -->
   <link href="/views/{{template_data}}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -20,8 +22,7 @@
   <!-- Custom styles for this template -->
   <link href="/views/{{template_data}}/css/clean-blog.css" rel="stylesheet">
 
-  <link href="/views/{{template_data}}/editor.css" rel="stylesheet">
-  <link href="/views/{{template_data}}/article.css" rel="stylesheet">
+
 
 
 </head>
@@ -31,11 +32,15 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="/">Inwritten</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand" href="/">
+        <h6>Inwritten</h6>
+      </a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <img src="/fonts/Favorites/icons8-menu.svg" width="20px">
+
         Menu
-        <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
@@ -46,17 +51,17 @@
             <a class="nav-link" href="{{ data.post_link}}">Refresh</a>
           </li>
           <li class="nav-item">
-			    <a class="nav-link" href="/stories" target="_blank">Stories</a>
+            <a class="nav-link" href="/stories" target="_blank">Stories</a>
           </li>
           <li class="nav-item">
-			    <a class="nav-link" href="/user/blog/{{data.authorId.username}}">Blog</a>
+            <a class="nav-link" href="/user/blog/{{data.authorId.username}}">Blog</a>
           </li>
 
-          <li class="nav-item">
+          {{!-- <li class="nav-item">
             <a class="nav-link" href="/user/profile/{{data.author}}">About</a>
-          </li>
+          </li> --}}
           <li class="nav-item">
-            <button class="btn btn-sm btn-success" href="#" id='bookmark_button' >Bookmark this</button>
+            <button class="btn btn-sm btn-outline-success" href="#" id='bookmark_button'>Bookmark this</button>
           </li>
         </ul>
       </div>
@@ -71,8 +76,10 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
             <h1>{{ data.title }}</h1>
-            <h5 class="subheading"> {{ data.description }}</h5>
+            <h6 class="subheading"> {{ data.description }}</h6>
             <span class="meta">Posted by {{ data.author }} on {{ data.createdAt }}</span>
+            <span class="meta">Category > {{data.category}}</span>
+
           </div>
         </div>
       </div>
@@ -93,23 +100,24 @@
       </div>
     </div>
     <div class="author-box container">
-<hr>
+      <hr>
       {{>author }}
-<hr>
+      
     </div>
     <div class="interest-box container">
 
       {{>interests }}
+
     </div>
-    <div class=" comment-box" style='background:rgb(46, 45, 70);  padding:4% 10%'>
+    <div class=" comment-box" style='background:rgb(46, 45, 70);  padding:4% 5%'>
 
       {{>comments }}
 
     </div>
 
-   
 
-<!-- sample card -->
+
+    <!-- sample card -->
 
 
 
@@ -130,24 +138,24 @@
 
 
   <!-- Footer -->
-  <footer style="width: 100%; height:70px; background:black; color:white; bottom:0px;padding:10px 30px">
-    &copy;2020 INWRITTEN.COM 
-    <p style="float:right"></p>
+  <footer style="width: 100%; height:70px; font-size:16px; border-top:1px solid white; background:rgb(46, 45, 70); color:white; bottom:0px;padding:10px 30px">
+   <span class="pull-left"> &copy;2020 Inwritten.com</span>
+    <span style="float:right; color:white !important"><a  style="color:white !important" href="/terms-and-conditions">Terms and Conditions</a></span>
 
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="/views/{{template_data}}/vendor/jquery/jquery.min.js"></script>
-  <script src="/views/{{template_data}}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/views/{{template_data}}/js/jquery.min.js"></script>
+  <script src="/views/{{template_data}}/js/bootstrap.bundle.min.js"></script>
 
   <!-- Custom scripts for this template -->
   <script src="/views/{{template_data}}/js/clean-blog.min.js"></script>
-  <script src="/views/{{template_data}}/js/auth.js"  ></script>
-    <script src="/views/{{template_data}}/js/follow.js"  ></script>
+  <script src="/views/{{template_data}}/js/auth.js"></script>
+  <script src="/views/{{template_data}}/js/follow.js"></script>
 
-    <script src="/views/{{template_data}}/js/bookmark.js" ></script>
-    <script src="/views/{{template_data}}/js/interests.js" ></script>
-    <script src="/views/{{template_data}}/js/comments.js" ></script>
+  <script src="/views/{{template_data}}/js/bookmark.js"></script>
+  <script src="/views/{{template_data}}/js/interests.js"></script>
+  <script src="/views/{{template_data}}/js/comments.js"></script>
 
 
 </body>

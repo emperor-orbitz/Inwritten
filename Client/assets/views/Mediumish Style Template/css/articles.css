@@ -169,3 +169,14 @@ border:none;
     display: inline;
     min-width: 100px;
 }
+
+.nav-item{
+    padding:7px 12px;
+}
+
+
+.follow-btn{
+    background:#1c243c ;
+    color:white
+
+}

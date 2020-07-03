@@ -1,138 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" href="/images/double-u.png">
-<title>{{user_data.username}} | Profile</title>
-<!-- Bootstrap core CSS -->
-<link href="/views/{{template_data}}/css/bootstrap.min.css" rel="stylesheet">
-<!-- Fonts -->
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
-<!-- Custom styles for this template -->
-<link href="/views/{{template_data}}/css/mediumish.css" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="{{data.description}}">
+	<meta name="author" content="{{data.author}}">
+
+	<link rel="icon" href="/images/double-u.png">
+	<title>Inwritten - {{user_data.username}}</title>
+	<!-- Bootstrap core CSS -->
+	<link href="/views/{{template_data}}/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Fonts -->
+
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" class="href">
+
+	<!-- Custom styles for this template -->
+	<link href="/views/{{template_data}}/css/mediumish.css" rel="stylesheet">
+	<link href="/views/{{template_data}}/css/articles.css" rel="stylesheet">
+
 </head>
+
 <body>
 
-<!-- Begin Nav
-================================================== -->
-<nav class="navbar navbar-toggleable-md navbar-light bg-white fixed-top mediumnavigation">
-<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-<span class="navbar-toggler-icon"></span>
-</button>
-<div class="container">
-	<!-- Begin Logo -->
-	<a class="navbar-brand" href="/">
-	<img src="/images/inwritten-logo.png" alt="logo" >
-	</a>
-	<!-- End Logo -->
-	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-		<!-- Begin Menu -->
-		<ul class="navbar-nav ml-auto">
-			<li class="nav-item">
-			<a class="nav-link" href="#">Refresh </a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" href="/user/blog/{{user_data.username}}">Blog</a>
-			</li>
-			<li class="nav-item active">
-			<a class="nav-link" href="/user/profile/{{user_data.username}}">Author<span class="sr-only">(current)</span></a>
-			</li>
-		</ul>
-		<!-- End Menu -->
-		<!-- Begin Search -->
-
-		<!-- End Search -->
-	</div>
-</div>
-</nav>
-<!-- End Nav
+	<!-- Begin Nav
 ================================================== -->
 
-<!-- Begin Top Author Page
+
+
+
+	<nav class="navbar  navbar-light bg-white fixed-top mediumnavigation">
+
+		<div class="">
+			<!-- Begin Logo -->
+			<a class="navbar-brand" href="/">
+				<img src="/images/inwritten-logo.png" alt="logo">
+			</a>
+			<!-- End Logo -->
+			<div class=" pull-right" id="navbarsExampleDefault">
+				<!-- Begin Menu -->
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item active">
+						<a class="nav-link" href="/"><img width="25px" src="/fonts/Favorites/icons8-search.svg" /><span
+								class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="/user/{{user_data.username}}"><img width="25px" src="/fonts/Favorites/icons8-refresh.svg" /><span
+								class="sr-only">(current)</span></a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="/stories"><img width="25px" src="/fonts/Favorites/icons8-book-stack-96.png" /></a>
+					</li>
+				</ul>
+				<!-- End Menu -->
+				<!-- Begin Search -->
+
+				<!-- End Search -->
+			</div>
+		</div>
+	</nav>
+
+
+	<!-- Begin Article
 ================================================== -->
-<div class="container">
-	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8 col-md-offset-2">
-			<div class="mainheading">
-				<div class="row post-top-meta authorpage">
-					<div class="col-md-10 col-xs-12">
-						<h1>@{{user_data.username}}</h1>
-						<span class="author-description">{{user_data.bio}}</span>
-						<span>{{user_data.email}}</span>
 
-						<div class="sociallinks">
-						<a  target="_blank" href="//{{social_data.facebook_link}}"><i class="fa fa-facebook"></i></a> <span class="dot"></span>
-						 <a  href="//{{social_data.whatsapp_link}}"><i class="fa fa-whatsapp"></i></a><span class="dot"></span>
-						 <a  href="//{{social_data.linkedin_link}}"><i class="fa fa-linkedin"></i></a><span class="dot"></span>
-						<a  href="//{{social_data.instagram_link}}"><i class="fa fa-instagram"></i></a>
-
-						 </div>
-
-
-
-						<button class="btn follow btn-sm" id="follow-btn" value="{{user_data._id}}">Follow</button>
-					</div>
-					<div class="col-md-2 col-xs-12">
-						<img class="author-thumb" src="{{user_data.display_picture}}" alt="{{user_data.username}}">
-					</div>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h6 class="modal-title" id="exampleModalLongTitle">Subscribe </h6>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
+				<div class="modal-body">
+
+					<h3 style="color:white;"> A place to share your <b id="change_of_words">thoughts</b> </h3>
+					<p style="margin-bottom:20px;color:white"> Be the first to get updates on our beta version and
+						receive exclusive access to our in-app store.</p>
+					<p>
+					<form action="" id="subscribeForm" method="POST">
+						<p id="error-box"></p>
+						<input type="email" name="email" placeholder="    Enter your email address" required
+							aria-required="true" style="border:none;height:40px; border-radius:25px; width:100%" />
+						<input type="submit" class=" btn btn-submit" value="Subscribe"
+							style="height:40px; border:none; margin-top:5px; border-radius: 25px ;width:120px" />
+					</form>
+				</div>
+
 			</div>
 		</div>
 	</div>
-</div>
-<!-- End Top Author Meta
-================================================== -->
+	<!-- Modal End-->
 
-<!-- Begin Author Posts
-================================================== -->
-<div class="graybg authorpage">
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<div class="container">
-		<div class="listrecent listrelated">
+		<div class="row">
 
-			
+
+
+			<!-- Begin Post -->
+			<div class="col-md-12  col-xs-12">
+
+				<div class="mainheading">
+					<div class="row post-top-meta authorpage">
+						<div class="col-md-10 col-xs-12">
+							<h1>@{{user_data.username}}</h1>
+							<span class="author-description">{{user_data.bio}}</span>
+							<span>{{user_data.email}}</span>
+							<span>{{user_data.firstName}} {{user_data.lastName}}</span>
+
+							<div class="sociallinks">
+								<a target="_blank" href="//{{social_data.facebook_link}}"><i
+										class="fa fa-facebook"></i></a> <span class="dot"></span>
+								<a href="//{{social_data.whatsapp_link}}"><i class="fa fa-whatsapp"></i></a><span
+									class="dot"></span>
+								<a href="//{{social_data.linkedin_link}}"><i class="fa fa-linkedin"></i></a><span
+									class="dot"></span>
+								<a href="//{{social_data.instagram_link}}"><i class="fa fa-instagram"></i></a>
+
+							</div>
+
+
+
+							<button class="btn follow btn-sm" id="follow-btn" value="{{user_data._id}}">Follow</button>
+						</div>
+						<div class="col-md-2 col-xs-12">
+							<img class="author-thumb" src="{{user_data.display_picture}}" alt="{{user_data.username}}">
+						</div>
+					</div>
+
+				</div>
+				<!-- End Post -->
+
+				<h5>Stories from {{user_data.username}}</h5><br>
+
+				<div class="card-columns listfeaturedtag">
+
+
+					<!-- end post -->
+					{{#each blog_data}}
+					<!-- begin post -->
+					<div class="card">
+						<div class="row">
+							<div class="col-md-5 wrapthumbnail">
+								<a href="{{post_link}}">
+									<div class="thumbnail" style="background-image:url({{featured_image}});">
+									</div>
+								</a>
+							</div>
+							<div class="col-md-7">
+								<div class="card-block">
+									<h2 class="card-title"><a href="{{post_link}}">{{ title}}</a></h2>
+									<h4 class="card-text">{{ description }}</h4>
+									<div class="metafooter">
+										<div class="wrapfooter">
+											<span class="meta-footer-thumb">
+												<a href="/user/{{../user_data.username}}"><img class="author-thumb"
+														src="{{../user_data.display_picture}}" alt="Sal"></a>
+											</span>
+											<span class="author-meta">
+												<span class="post-name"><a
+														href="/user/profile/{{../user_data.username}}">{{../user_data.username}}</a></span><br />
+												<span class="post-date"></span><span class="dot"></span><span
+													class="post-read"> {{time_to_read}} mins read </span>
+											</span>
+											<span class="post-read-more"><a href="{{post_link}}" title="Read Story"><svg
+														class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25">
+														<path
+															d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z"
+															fill-rule="evenodd"></path>
+													</svg></a></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- end post -->
+
+					{{/each}}
+
+
+				</div>
+			</div>
+
+
+
 
 		</div>
-	</div>
-</div>
-<!-- End Author Posts
+		<!-- End Article
 ================================================== -->
 
 
 
-<!-- Begin Footer
+
+
+
+
+
+
+		<!-- Begin Footer
 ================================================== -->
-<div class="container">
-	<div class="footer">
-		<p class="pull-left" style="color: black">
-			 Copyright &copy; 2020 INWRITTEN.COM
-		</p>
-		
-		<div class="clearfix">
+		<div class="container">
+			<div class="footer">
+				<p class="text-center" style="color: black">
+					Copyright &copy; 2020 Inwritten.com
+				</p>
+
+				<div class="clearfix">
+				</div>
+			</div>
 		</div>
-	</div>
-</div>
-<!-- End Footer
+		<!-- End Footer
 ================================================== -->
 
-<!-- Bootstrap core JavaScript
+		<!-- Bootstrap core JavaScript
 ================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="/views/{{template_data}}/js/jquery.min.js"></script>
+		<script src="/views/{{template_data}}/js/interests.js"></script>
+		<script src="/views/{{template_data}}/js/comments.js"></script>
+		<script src="/views/{{template_data}}/js/auth.js"></script>
+		<script src="/views/{{template_data}}/js/follow.js"></script>
+		<!--<script src="/views/{{template_data}}/js/launch.js"></script>-->
 
-<script src="/views/template-medium-03/js/jquery.min.js"></script>
-<script src="/views/template-medium-03/js/interests.js"></script>
-<script src="/views/template-medium-03/js/comments.js"></script>
-<script src="/views/template-medium-03/js/auth.js"></script>
-<script src="/views/template-medium-03/js/follow.js"></script>
 
 
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+			integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+			crossorigin="anonymous"></script>
+		<script src="/views/{{template_data}}/js/bootstrap.min.js"></script>
+		<script src="/views/{{template_data}}/js/ie10-viewport-bug-workaround.js"></script>
+		<script src="/views/{{template_data}}/js/mediumish.js"></script>
+		<script src="/views/{{template_data}}/js/launch.js"></script>
+
 </body>
+
 </html>

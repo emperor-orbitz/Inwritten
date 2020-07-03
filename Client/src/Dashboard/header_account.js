@@ -200,7 +200,7 @@ class HeaderAccount extends React.Component {
 
   render() {
     var side = new SideBar();
-    var { categorySubmenu } = side.subMenu;
+    var { categorySubmenu, settingsSubmenu } = side.subMenu;
     const { visible } = this.state;
 
     //PAGE NAME   
@@ -291,6 +291,16 @@ class HeaderAccount extends React.Component {
                   <Accordion.Content style={{ padding: '1px 20px' }} className="accordion-content" active={true} content={categorySubmenu} />
                 </div>
 
+
+                <div className="accordion-item">
+                  <Accordion.Title active={true} style={{ padding: '5px 20px' }} index={3} onClick={this.handleClick}>
+                    <h5 style={{ fontSize: "14px", color: "black" }}>ACCOUNT SETTINGS</h5>
+                    <Divider />
+                  </Accordion.Title>
+                  <Accordion.Content style={{ padding: '1px 20px' }} className="accordion-content" active={true} content={settingsSubmenu} />
+                </div>
+
+
                 {/* UNTIL SECOND VERSION RELEASE
                 <div className="accordion-item">
                   <Accordion.Title active={true} style={{ padding: '5px 20px' }} index={4} onClick={this.handleClick}>
@@ -305,8 +315,7 @@ class HeaderAccount extends React.Component {
 
                 <div className="accordion-item">
                   <a href='/'> <Button fluid style={{ color: 'black', background: "white" }}>
-                    <Icon name="home" />
-                    Inwritten
+                    The App
                   </Button>
                   </a>
                 </div>

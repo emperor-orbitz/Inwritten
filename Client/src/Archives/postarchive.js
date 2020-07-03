@@ -257,7 +257,7 @@ class PostArchive extends React.Component {
 
                     <img src="/images/empty.png" className='empty-png' />
                     <br />
-                    <h4 style={{ textAlign: "center" }}>No drafts yet. You can create one <Button basic as={Link} to="/app/add-post">here</Button></h4>
+                    <h4 style={{ textAlign: "center", color:"black !important" }}>Its been a while you've written. Start off with a short <Button style={{ color: 'black', background: "white" }} as={Link} to="/app/add-post">draft</Button></h4>
 
 
                 </div>

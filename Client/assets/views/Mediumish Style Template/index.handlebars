@@ -1,68 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="{{data.description}}">
-<meta name="author" content="{{data.author}}">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="{{data.description}}">
+	<meta name="author" content="{{data.author}}">
 
-<link rel="icon" href="/images/double-u.png">
-<title>{{data.title}}</title>
-<!-- Bootstrap core CSS -->
-<link href="/views/{{template_data}}/css/bootstrap.min.css" rel="stylesheet">
-<!-- Fonts -->
+	<link rel="icon" href="/images/double-u.png">
+	<title>{{data.title}}</title>
+	<!-- Bootstrap core CSS -->
+	<link href="/views/{{template_data}}/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Fonts -->
 
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" class="href">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" class="href">
 
-<!-- Custom styles for this template -->
-<link href="/views/{{template_data}}/css/mediumish.css" rel="stylesheet">
-<link href="/views/{{template_data}}/css/articles.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="/views/{{template_data}}/css/mediumish.css" rel="stylesheet">
+	<link href="/views/{{template_data}}/css/articles.css" rel="stylesheet">
 
 </head>
+
 <body>
 
-<!-- Begin Nav
+	<!-- Begin Nav
 ================================================== -->
 
 
 
 
-<nav class="navbar  navbar-light bg-white fixed-top mediumnavigation">
+	<nav class="navbar  navbar-light bg-white fixed-top mediumnavigation">
 
-<div class="">
-	<!-- Begin Logo -->
-	<a class="navbar-brand" href="/">
-	<img src="/images/inwritten-logo.png" alt="logo" >
-	</a>
-	<!-- End Logo -->
-	<div class=" pull-right" id="navbarsExampleDefault">
-		<!-- Begin Menu -->
-			<ul class="navbar-nav ml-auto">
-			<li class="nav-item active">
-			<a class="nav-link" id="" href="/app/edit/{{data._id}}"> <span class="sr-only">(current)</span></a>
-			</li>
-	<li class="nav-item active">
-			<a class="nav-link" href="/"><img width="25px" src="/fonts/Favorites/icons8-search.svg"/><span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item active">
-			<a class="nav-link" href="/"><img width="25px" src="/fonts/Favorites/icons8-synchronize-50.png"/><span class="sr-only">(current)</span></a>
-			</li>
-			
-			<li class="nav-item">
-			<a class="nav-link" href="/user/{{data.authorId.username}}"><img width="25px" src="/fonts/Favorites/icons8-journal-50.png"/></a>
-			</li>
-		</ul>
-		<!-- End Menu -->
-		<!-- Begin Search -->
+		<div class="">
+			<!-- Begin Logo -->
+			<a class="navbar-brand" href="/">
+				<img src="/images/inwritten-logo.png" alt="logo">
+			</a>
+			<!-- End Logo -->
+			<div class=" pull-right" id="navbarsExampleDefault">
+				<!-- Begin Menu -->
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active">
+						<a class="nav-link" id="" href="/app/edit/{{data._id}}"> <span
+								class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="/"><img width="25px" src="/fonts/Favorites/icons8-search.svg" /><span
+								class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="#"><img width="25px" src="/fonts/Favorites/icons8-refresh.svg" /><span
+								class="sr-only">(current)</span></a>
+					</li>
 
-		<!-- End Search -->
-	</div>
-</div>
-</nav>
+					<li class="nav-item">
+						<a class="nav-link" href="/user/{{data.authorId.username}}"><img width="25px"
+								src="/fonts/Favorites/icons8-book-stack-96.png" /></a>
+					</li>
+				</ul>
+				<!-- End Menu -->
+				<!-- Begin Search -->
+
+				<!-- End Search -->
+			</div>
+		</div>
+	</nav>
 
 
-{{!-- <nav class="navbar navbar-expand-lg navbar-light bg-light mediumnavigation">
+	{{!-- <nav class="navbar navbar-expand-lg navbar-light bg-light mediumnavigation">
   <a class="navbar-brand" href="#">Navbar w/ text</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -85,44 +91,42 @@
   </div>
 </nav> --}}
 
-<!-- End Nav
+	<!-- End Nav
 ================================================== -->
 
-<!-- Begin Article
+	<!-- Begin Article
 ================================================== -->
 
-		    <!-- Modal -->
-{{!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-   <div class="modal-header">
-              <h6 class="modal-title" id="exampleModalLongTitle">Subscribe </h6>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div> 
-            <div class="modal-body" >
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h6 class="modal-title" id="exampleModalLongTitle">Subscribe </h6>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
 
-                <h3 style="color:white;"> A place to share your <b id="change_of_words">thoughts</b> </h3>
-                <p style="margin-bottom:20px;color:white"> Be the first to get updates on our beta version and receive exclusive access to our in-app store.</p>
-            <p>
-                <form action="" id="subscribeForm" method="POST">
-                    <p id="error-box"></p>
-                <input type="email" name="email" placeholder="    Enter your email address" required aria-required="true" style="border:none;height:40px; border-radius:25px; width:100%"/>
-                <input type="submit" class=" btn btn-submit" value="Subscribe" style="height:40px; border:none; margin-top:5px; border-radius: 25px ;width:120px"/>
-            </form>     
-               </div>
-      
-          </div>
-        </div>
-      </div> --}}
-    <!-- Modal End-->
+					<h3 style="color:white;"> A place to share your <b id="change_of_words">thoughts</b> </h3>
+					<p style="margin-bottom:20px;color:white"> Be the first to get updates on our beta version and
+						receive exclusive access to our in-app store.</p>
+					<p>
+					<form action="" id="subscribeForm" method="POST">
+						<p id="error-box"></p>
+						<input type="email" name="email" placeholder="    Enter your email address" required
+							aria-required="true" style="border:none;height:40px; border-radius:25px; width:100%" />
+						<input type="submit" class=" btn btn-submit" value="Subscribe"
+							style="height:40px; border:none; margin-top:5px; border-radius: 25px ;width:120px" />
+					</form>
+				</div>
 
-
-
-
-
-
+			</div>
+		</div>
+	</div>
+	<!-- Modal End-->
 
 
 
@@ -131,164 +135,174 @@
 
 
 
-<div class="container">
-	<div class="row">
 
-		<!-- Begin Fixed Left Share -->
-		<div class="col-md-2 col-xs-12">
-			<div class="share">
-				
-				<ul>
-					<li>
-					<span>Share</span>
-					</li>
-					<li>
-					<a class="nav-link" target="_blank" href="#">
-						<img width="20px" src="/fonts/Favorites/icons8-twitter.svg"/>			
-					</a>
-					</li>
-					<li>
-					<a class="nav-link" target="_blank" href="#">
-						<img width="20px" src="/fonts/Favorites/icons8-facebook.svg"/>			
-					</a>
-					</li>
-					<li>
-					<a class="nav-link" href="/">
-					<img width="20px" src="/fonts/Favorites/icons8-settings-50.png"/><span class="sr-only">(current)</span></a>
 
-					</li>
-					
-					<ul id="loggedininfo">
-						<li><b><a href="/app/login">Get Started </a></b></li>
-						<li><b><a href="/app/login">Log in </a></b></li>
 
+
+
+
+	<div class="container">
+		<div class="row">
+
+			<!-- Begin Fixed Left Share -->
+			<div class="col-md-2 col-xs-12">
+				<div class="share">
+
+					<ul>
+						<li>
+							<span>Share</span>
+						</li>
+						<li>
+							<a class="nav-link" target="_blank" href="#">
+								<img width="20px" src="/fonts/Favorites/icons8-twitter.svg" />
+							</a>
+						</li>
+						<li>
+							<a class="nav-link" target="_blank" href="#">
+								<img width="20px" src="/fonts/Favorites/icons8-facebook.svg" />
+							</a>
+						</li>
+						<li>
+
+
+							<ul id="loggedininfo">
+								<li><b><a href="/app/login">Get Started </a></b></li>
+								<li><b><a href="/app/login">Log in </a></b></li>
+
+							</ul>
 					</ul>
-				</ul>
-			
-				
+
+
+				</div>
 			</div>
-		</div>
-		<!-- End Fixed Left Share -->
+			<!-- End Fixed Left Share -->
 
-		<!-- Begin Post -->
-		<div class="col-md-8 col-md-offset-2 col-xs-12">
-			<div class="mainheading">
+			<!-- Begin Post -->
+			<div class="col-md-8 col-md-offset-2 col-xs-12">
+				<div class="mainheading">
 
-				<!-- Begin Top Meta -->
-				{{!-- <div class="row post-top-meta">
-					<div class="col-md-2">
-						<a href="/user/{{data.authorId.username}}"><img class="author-thumb" src="{{author_data.display_picture}}" alt="Sal"></a>
-					</div>
-					<div class="col-md-10">
-						<a class="link-dark" href="/user/profile/{{data.authorId.username}}"><b>@{{data.author}}</b></a><button class="btn btn-sm" id="follow-btn" value="{{author_data._id}}" >follow</button>
-						<span class="author-description">{{ author_data.bio }}</span>
-						<span class="post-date">{{data.createdAt}}</span><span class="dot"></span><span class="post-read">6 min read</span>
-					</div>
-				</div> --}}
-				<!-- End Top Menta -->
+					<h1 class="posttitle">{{ data.title }}</h1>
+					<h6>{{data.description}}</h6>
+				</div>
 
-				<h1 class="posttitle">{{ data.title }}</h1>
+				<!-- Begin Featured Image -->
+				<img class="featured-image img-fluid" src="{{data.featured_image}}" alt="">
+				<!-- End Featured Image -->
+
+				<!-- Begin Post Content -->
+				<div class="article-post">
+					{{{ data.body_html }}}
+				</div>
+				<!-- End Post Content -->
+
+				<!-- Begin Tags -->
+				<div class="after-post-tags">
+					<ul class="tags">
+						{{#each tag_data}}
+						<li><a href="#">{{this}}</a></li>
+						{{/each}}
+					</ul>
+				</div>
+				<!-- End Tags -->
 
 			</div>
-
-			<!-- Begin Featured Image -->
-			<img class="featured-image img-fluid" src="{{data.featured_image}}" alt="">
-			<!-- End Featured Image -->
-
-			<!-- Begin Post Content -->
-			<div class="article-post">
-			{{{ data.body_html }}}
-			</div>
-			<!-- End Post Content -->
-
-			<!-- Begin Tags -->
-			<div class="after-post-tags">
-				<ul class="tags">
-				{{#each tag_data}}
-					<li><a href="#">{{this}}</a></li>
-				{{/each}}
-				</ul>
-			</div>
-			<!-- End Tags -->
+			<!-- End Post -->
 
 		</div>
-		<!-- End Post -->
+
+
+		<!-- Begin Top Meta -->
+		<div class="row post-top-meta">
+			<div class="col-md-2 col-sm-2 pull-left">
+				<a href="/user/{{data.authorId.username}}"><img class="author-thumb"
+						src="{{author_data.display_picture}}" alt="Sal"></a>
+			</div>
+			<div class="col-md-9 col-sm-9 pull-right">
+				Author: <a class="link-dark" href="/user/{{data.authorId.username}}"><b>@{{data.author}}</b></a><button
+					class="btn btn-sm" id="follow-btn" value="{{author_data._id}}">follow</button>
+				<span class="author-description">{{ author_data.bio }}</span>
+			</div>
+		</div>
+		<!-- End Top Menta -->
+
 
 	</div>
-</div>
-<!-- End Article
+	<!-- End Article
 ================================================== -->
 
-<div class="hideshare"></div>
+	<div class="hideshare"></div>
 
-<!-- Begin Related
+	<!-- Begin Related
 ================================================== -->
-<div class="graybg">
-	<div class="container">
-		    <h4>More on Inwritten</h4>
-		<div class="row listrecent listrelated py-3">
-		{{>interests}}
+	<div class="graybg">
+		<div class="container">
+			<h4>More on Inwritten</h4>
+			<div class="row listrecent listrelated py-3">
+				{{>interests}}
 
+			</div>
 		</div>
 	</div>
-</div>
 
-<section class="featured-posts">
-	<div class="container">
-	{{>comments}}
-	</div>
+	<section class="featured-posts">
+		<div class="container">
+			{{>comments}}
+		</div>
 
-	
 
-	</div>
+
+		</div>
 	</section>
 
 
 
-<!-- Begin AlertBar
+	<!-- Begin AlertBar
 ================================================== -->
-<div class="alertbar" id="alertbar">
-	<div class="container text-center">
-
-		<img src="/images/double-u.png" alt="" style="height:50px"> &nbsp; Never miss a <b>story</b> from us. <button data-toggle="modal" data-target="#myModal" class="btn subscribe">Get Updates</button>
-		<i class="fa fa-close" id="close-alertbar" style="float:right"></i>
-	</div>
-</div>
-<!-- End AlertBar
-================================================== -->
-
-<!-- Begin Footer
-================================================== -->
-<div class="container">
-	<div class="footer">
-		<p class="pull-left" style="color: black">
-			 Copyright &copy; 2020 Inwritten.com
-		</p>
-		
-		<div class="clearfix">
+	<div class="alertbar" id="alertbar">
+		<div class="container">
+			<p><i class="fa fa-close" id="close-alertbar" style="float:right"></i></p>
+			<p> Let's notify you of contents like this when they are out. <button data-toggle="modal"
+					data-target="#myModal" class="btn btn-lg subscribe pull-right">Yes! I'm in.</button></p>
 		</div>
 	</div>
-</div>
-<!-- End Footer
+	<!-- End AlertBar
 ================================================== -->
 
-<!-- Bootstrap core JavaScript
+	<!-- Begin Footer
 ================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="/views/{{template_data}}/js/jquery.min.js"></script>
-<script src="/views/{{template_data}}/js/interests.js"></script>
-<script src="/views/{{template_data}}/js/comments.js"></script>
-<script src="/views/{{template_data}}/js/auth.js"></script>
-<script src="/views/{{template_data}}/js/follow.js"></script>
-<!--<script src="/views/{{template_data}}/js/launch.js"></script>-->
+	<div class="container">
+		<div class="footer">
+			<p class="text-center" style="color: black">
+				Copyright &copy; 2020 Inwritten.com
+			</p>
+
+			<div class="clearfix">
+			</div>
+		</div>
+	</div>
+	<!-- End Footer
+================================================== -->
+
+	<!-- Bootstrap core JavaScript
+================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="/views/{{template_data}}/js/jquery.min.js"></script>
+	<script src="/views/{{template_data}}/js/interests.js"></script>
+	<script src="/views/{{template_data}}/js/comments.js"></script>
+	<script src="/views/{{template_data}}/js/auth.js"></script>
+	<script src="/views/{{template_data}}/js/follow.js"></script>
+	<!--<script src="/views/{{template_data}}/js/launch.js"></script>-->
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="/views/{{template_data}}/js/bootstrap.min.js"></script>
-<script src="/views/{{template_data}}/js/ie10-viewport-bug-workaround.js"></script>
-<script src="/views/{{template_data}}/js/mediumish.js"></script>
-{{!-- <script src="/views/{{template_data}}/js/launch.js"></script> --}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+		integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+		crossorigin="anonymous"></script>
+	<script src="/views/{{template_data}}/js/bootstrap.min.js"></script>
+	<script src="/views/{{template_data}}/js/ie10-viewport-bug-workaround.js"></script>
+	<script src="/views/{{template_data}}/js/mediumish.js"></script>
+	{{!-- <script src="/views/{{template_data}}/js/launch.js"></script> --}}
 
 </body>
+
 </html>

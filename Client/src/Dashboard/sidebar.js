@@ -43,6 +43,14 @@ class SideBar {
                 {/*<Menu.Item as={Link} to="/settings/preferences" disabled={true}><Icon name="user" />Preferences</Menu.Item>)*/}
 
             </Menu>
+        ),
+        helpSubmenu: (
+            <Menu secondary vertical  >
+                <Menu.Item as={Link} to=""><Icon name="address card" />Ad settings</Menu.Item>
+                <Menu.Item as={Link} to=""><Icon name="money bill alternate" />My Balance</Menu.Item>
+                {/*<Menu.Item as={Link} to="/settings/preferences" disabled={true}><Icon name="user" />Preferences</Menu.Item>)*/}
+
+            </Menu>
         )
 
 

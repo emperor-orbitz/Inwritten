@@ -1,7 +1,8 @@
 
 @import 'https:maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css';
 
-*{
+*, button{
+	font-family: 'Source Sans Pro', sans-serif;
 
 }
 
