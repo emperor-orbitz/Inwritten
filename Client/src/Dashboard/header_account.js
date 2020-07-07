@@ -6,7 +6,7 @@ import { withRouter } from 'react-router';
 import Link from 'react-router-dom/Link';
 var FetchArticles = require('../../Controllers/article.controller').default;
 import Connection from '../../Controllers/auth.controller';
-import socketIOClient from 'socket.io-client';
+// import socketIOClient from 'socket.io-client';
 
 import SideBar from '../../src/Dashboard/sidebar';
 import double_u from '../../Resources/images/double-u.png';
@@ -81,12 +81,12 @@ class HeaderAccount extends React.Component {
         .then( _ => {
 
           //SUBSCRIBE TO SOCKET
-          let socket = socketIOClient("https://www.inwritten.com", { query: `userid=${_._id}` })
-          socket.on("new_notification", _ => {
-            this.setState({ new_notification: "You have a new notification" })
-            alert("You have a new notification! Check notifications")
+          // let socket = socketIOClient("https://www.inwritten.com", { query: `userid=${_._id}` })
+          // socket.on("new_notification", _ => {
+          //   this.setState({ new_notification: "You have a new notification" })
+          //   alert("You have a new notification! Check notifications")
 
-          })
+          // })
 
 
           //POPULATE PROFILE REDUCER & ARTICLE REDUCER

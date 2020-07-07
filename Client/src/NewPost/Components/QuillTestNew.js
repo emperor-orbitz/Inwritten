@@ -6,8 +6,9 @@ import { withRouter } from 'react-router';
 import ReactQuill, { Quill } from 'react-quill'; // ES6
 import "./quillcore.scss";
 import "quill/dist/quill.core.js";
+import ImageUploader from "quill-image-uploader"
 import "../../../Resources/styles/editor.scss";
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 import "quill/dist/quill.min.js";
 import "quill/dist/quill.js";
@@ -29,6 +30,7 @@ class BoldBlot extends Inline { }
 BoldBlot.blotName = 'bold';
 BoldBlot.tagName = 'strong';
 Quill.register('formats/bold', BoldBlot);
+Quill.register("modules/imageUploader", ImageUploader)
 
 
 
@@ -87,7 +89,6 @@ class QuillTestNew extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.quillRef = null;
         this.reactQuillRef = null;
-
         this.handleClickEmbed = this.handleClickEmbed.bind(this)
         this.handleClickFormat = this.handleClickFormat.bind(this)
         this.registerFormats = this.registerFormats.bind(this)
@@ -205,13 +206,9 @@ class QuillTestNew extends React.Component {
 
 
 
-  
 
       
     handleChange(html) {
-
-
-
         //Dynamically save to DB after 5 seconds
             this.setState({ text: html });    
             window.editorParsed = this.quillRef.getContents();
@@ -223,7 +220,6 @@ class QuillTestNew extends React.Component {
                 
              
     }
-
 
 
 
@@ -241,6 +237,33 @@ class QuillTestNew extends React.Component {
 
 
         ],
+        clipboard: {
+            matchVisual: false
+        },
+        imageUploader:{
+            upload: file =>{
+                return new Promise((resolve, reject)=>{
+                    const formData = new FormData();
+                    formData.append("image",file);
+
+                    fetch("https://api.imgbb.com/1/upload?key=d36eb6591370ae7f9089d85875e56b22",
+                    {
+                        method:"POST",
+                        body:formData
+                    }
+                    )
+                    .then(response => response.json())
+                    .then(result=>{
+                        console.log(result);
+                        resolve(result.data.url)
+                    })
+                    .catch(error =>{
+                        reject("Upload failed")
+                        console.error("Error:", error)
+                    })
+                })
+            }
+        }
     }
 
 

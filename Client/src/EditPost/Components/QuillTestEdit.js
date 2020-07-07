@@ -246,6 +246,9 @@ class QuillTest extends React.Component {
 
 
         ],
+        clipboard: {
+            matchVisual: false
+        },
     }
 
 

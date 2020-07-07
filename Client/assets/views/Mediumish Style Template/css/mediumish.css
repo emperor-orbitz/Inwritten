@@ -247,6 +247,10 @@ span.post-name a,span.post-read-more a:hover {
 	line-height:1.8;
 	color:rgba(0,0,0,.8);
 }
+.article-post img{
+	width: 103%;
+    /* margin: auto 3%; */
+}
 blockquote {
 	border-left:4px solid #00ab6b;
 	padding:0 20px;

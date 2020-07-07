@@ -18,8 +18,9 @@ var path = require("path")
 var five_posts = async (req, res) => {
 
     try {
-        var list = await posts.find({public:true}).limit(5);
+        var list = await posts.find({public:true}).select("-body_schema -body_html").limit(5);
   //console.log(data.tags.length)
+        console.log(list)
       res.send({data:list, message:'success', status:200})
 
     }

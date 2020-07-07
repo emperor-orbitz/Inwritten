@@ -47,13 +47,13 @@ class FetchArticles {
                         resolve(result);
                     }
                     else {
-                        console.log(result + "UNCATWSA")
+                        // console.log(result + "UNCATWSA")
                         reject(result)
                     }
 
                 })
                 .catch(err => {
-                    console.log(err + "UNCATWSA")
+                    // console.log(err + "UNCATWSA")
                     reject(err)
                 });
         })

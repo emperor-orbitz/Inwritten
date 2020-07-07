@@ -336,7 +336,7 @@ var update = (req, res) => {
     var post = new posts();
     //update the draft and update the post
     let draft = new drafts()
-    let body = Object.assign({}, req.body, {author: req.user.username, authorId: req.user._id, published:true})
+    let body = Object.assign({}, req.body, { author: req.user.username, authorId: req.user._id, published:true })
 
     draft.update_draft(req.body._id, body, true, (err1, result)=>{
 
@@ -344,8 +344,6 @@ var update = (req, res) => {
             //do nothing
         }
         else{
-
-
 
             post.update_article(req.body._id, req.body, (err2, success) => {
                 if (err2) {

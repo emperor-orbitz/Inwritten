@@ -525,8 +525,10 @@ class AddPost extends React.Component {
 
 
               <Modal size="small" dimmer="inverted" style={{ color: "black !important" }} open={this.state.open_options} onClose={this.close}  >
-                <Modal.Content >
-                <h4 style={{ margin: '20px 30px', color: "black" }}>Preview Settings</h4>
+              <Modal.Header><h3 style={{ margin: '1px 2%', color: "black" }}>Settings</h3></Modal.Header>
+
+                <Modal.Content scrolling >
+                <p style={{ margin: '10px 30px', color: "black" }}>Preview story descriptions, tags and featured image which makes your story unique</p>
                 <div className="featured-pix-block">
                     <img src={this.state.featured_image} className="featured-image" />
                     <input className="featured-pix-cover" onChange={this.handle_profile_photo.bind(this)}

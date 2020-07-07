@@ -11,7 +11,7 @@ var server = require('http').Server(app)
 var handleBar = require('consolidate').handlebars;
 var passport = require("passport");
 var path = require("path");
-var io = require("socket.io")(server)
+// var io = require("socket.io")(server)
 var sslRedirect = require("heroku-ssl-redirect")
 
 
@@ -24,11 +24,11 @@ require("./Database/db");
 var users_socket={}
 
 
-  io.on("connection", function(socket){
-   users_socket[socket.handshake.query.userid] = socket;
-   app.locals.users_socket = users_socket
+  // io.on("connection", function(socket){
+  //  users_socket[socket.handshake.query.userid] = socket;
+  //  app.locals.users_socket = users_socket
 
-   })
+  //  })
 
 
 

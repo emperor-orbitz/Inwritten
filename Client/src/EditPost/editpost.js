@@ -239,6 +239,7 @@ class EditPost extends React.Component {
     if (val === true) {
 
       add.update_article(post).then(okay => {
+        console.log(post, okay, "POST AND OKAY")
         this.state.post_link = post.post_link
         
         this.props.dispatch({ type: 'UPDATE_ARTICLE', payload: post });
@@ -362,7 +363,7 @@ componentWillMount(){
   shareToFacebook = (e, data) => {
 
     e.preventDefault()
-    let url = encodeURIComponent(`https://www.inwritten.com${data.post_link}`)
+    let url = encodeURIComponent(`https://www.inwritten.com${this.state.post_link}`)
     window.open(
       'https://www.facebook.com/dialog/share?app_id=508448136537979&display=popup&href=' + url + '&redirect_uri=https%3A%2F%2Fwww.inwritten.com/stories',
       'facebook-share-dialog',
@@ -388,7 +389,7 @@ componentWillMount(){
     // dummy.style.display="none";
     document.body.appendChild(dummy)
     dummy.setAttribute("id", 'dummy_id');
-    document.getElementById("dummy_id").value = `http://www.inwritten.com${this.state.share_data.post_link}`;
+    document.getElementById("dummy_id").value = `http://www.inwritten.com${this.state.post_link}`;
     dummy.select()
     document.execCommand("copy");
     document.body.removeChild(dummy);
@@ -466,7 +467,7 @@ componentWillMount(){
           <Grid.Row  >
             <Grid.Column mobile={16} tablet={16} computer={13} style={{ padding: '0px 5px' }}  >
             <p style={{ paddingLeft:"5%", color: "silver" }}><i> {this.state.dynamicSave}</i></p>
-              <Modal size='mini' open={this.state.open_share} onClose={this.closeShare} closeOnDimmerClick={false} closeIcon={<Icon name="times" size="small" color="black" onClick={() => {
+              <Modal  size='mini' open={this.state.open_share} onClose={this.closeShare} closeOnDimmerClick={false} closeIcon={<Icon name="times" size="small" color="black" onClick={() => {
                 if (this.state.share_data.public == true)
                   this.leavePage({ id: this.state.share_data._id, post_link: this.state.share_data.post_link })
                 else
@@ -475,7 +476,7 @@ componentWillMount(){
               }} />} >
 
                 {this.state.share_data.public == true ?
-                 <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
+                 <Modal.Content scrolling style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
                   <div style={{ textAlign: 'center' }}>
                     <Icon name="check circle" color="green" size="huge" />
                     <h4 >Your story has been published  </h4>
@@ -493,7 +494,7 @@ componentWillMount(){
                   </div>
                 </Modal.Content>
                   :
-                  <Modal.Content style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
+                  <Modal.Content scrolling style={{ minHeight: '200px', background: "", color: 'black', padding: '5%' }}  >
                     <div style={{ textAlign: 'center' }}>
                       <Icon name="check circle" color="green" size="huge" />
                       <h4 >Your update has successfully been published  </h4>
@@ -542,9 +543,9 @@ componentWillMount(){
 
               <Modal size="small" dimmer="inverted" style={{ color: "white !important" }} open={this.state.open_options} onClose={this.close}  >
 
-                <h3 style={{ margin: '1px 2%', color: "white" }}>Settings</h3>
-                <Modal.Content >
-                <h4 style={{ margin: '20px 30px', color: "black" }}>Preview Settings</h4>
+                <Modal.Header><h3 style={{ margin: '1px 2%', color: "black" }}>Settings</h3></Modal.Header>
+                <Modal.Content scrolling >
+                <p style={{ margin: '10px 30px', color: "black" }}>Preview story descriptions, tags and featured image which makes your story unique</p>
                 <div className="featured-pix-block">
                     <img src={this.state.featured_image} className="featured-image" />
                     <input className="featured-pix-cover" onChange={this.handle_profile_photo.bind(this)}
@@ -555,6 +556,7 @@ componentWillMount(){
 
                     <div className='editor-side1' id='editor-side1'>
                       <Form size="mini">
+                      <p><b style={{color:"teal", cursor:"pointer"}} onClick={this.toggleDialogFeatured.bind(this)}>Change featured Image</b></p>
 
                         <Form.Field name='title' maxLength='50' value={this.state.post_title} onChange={this.handleInputs.bind(this)} control='input' placeholder='Story Title' required />
                         {
