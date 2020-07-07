@@ -1,6 +1,6 @@
 import React from 'react'
 import { Item, Grid, Link } from 'semantic-ui-react'
-
+import { Link } from "react-router-dom"
 function image_transform(url, width, height){
   //Add height and width to image
    return url.replace("/upload/", `/upload/h_${height},w_${width},c_crop/`)
