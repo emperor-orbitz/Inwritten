@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../Resources/styles/style.scss';
-import { Menu, Icon, Sidebar, Modal, Button, Responsive, Accordion, Dropdown, Divider, DropdownDivider  } from 'semantic-ui-react';
+import { Menu, Sidebar, Modal, Button, Responsive, Accordion, Dropdown, Divider, DropdownDivider  } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Link from 'react-router-dom/Link';
@@ -9,10 +9,10 @@ import Connection from '../../Controllers/auth.controller';
 // import socketIOClient from 'socket.io-client';
 
 import SideBar from '../../src/Dashboard/sidebar';
-import double_u from '../../Resources/images/double-u.png';
+// import double_u from '../../Resources/images/double-u.png';
 import logo from "../../Resources/images/logo-page.png";
-
-
+import Loader from "react-loader-spinner"
+import toggle from "../../Resources/images/icons8-menu-100.png"
 
 
 class HeaderAccount extends React.Component {
@@ -232,7 +232,7 @@ class HeaderAccount extends React.Component {
             <Sidebar.Pushable>
 
               <Responsive as={Menu} minWidth={300} className="nav" secondary style={{ fontSize: "12px" }}  >
-                <Menu.Item icon="sidebar" onClick={this.toggleSide} size="huge" color="green" style={{fontSize:"20px"}}/>
+                <Menu.Item onClick={this.toggleSide} size="huge" color="green" style={{fontSize:"20px"}}><img src={toggle} width="30px"/></Menu.Item>
                 
                 <Menu.Item header ><img src="/images/double-u.png" style={{ width: "40px", height: "48px" }} /> </Menu.Item>
 
@@ -344,8 +344,16 @@ class HeaderAccount extends React.Component {
 
       return (<div className='splashscreen'>
 
-        <img src={double_u} className='splash' />
-        <h2 style={{marginTop:"10px"}}>Inwritten</h2>
+        {/* <img src={double_u} className='splash' /> */}
+        <Loader
+         type="tailspin"
+         color="#1c243c"
+         height={100}
+         width={100}
+        //  timeout={3000} //3 secs
+ 
+      />
+        <h2 style={{marginTop:"10px", color:"#1c243c"}}>Inwritten</h2>
         <p>Fetching something interesting... </p>
       </div>)
     }

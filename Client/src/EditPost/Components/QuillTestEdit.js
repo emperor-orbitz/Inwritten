@@ -234,6 +234,17 @@ class QuillTest extends React.Component {
            }
         
     }
+    readFile(doc) {
+        return new Promise((resolve, reject) => {
+          var reader = new FileReader();
+    
+          reader.readAsDataURL(doc);
+          reader.onloadend = function () {
+            resolve(reader.result);
+          }
+        })
+    
+      }
 
 
 
@@ -249,6 +260,39 @@ class QuillTest extends React.Component {
         clipboard: {
             matchVisual: false
         },
+        imageUploader:{
+            upload: async file =>{
+                let blob_image = await this.readFile(file) 
+
+                return await new Promise((resolve, reject)=>{
+
+                    fetch("/drafts/save_image",
+                    {
+                        method:"POST",
+                        body:JSON.stringify({ image: blob_image}),
+                    
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': localStorage.getItem("hs_token")
+                        },
+                            credentials: 'include',
+                            withCredentials: true,
+                         
+                    
+                    }
+                    )
+                    .then(response => response.json())
+                    .then(result=>{
+                        console.log(result);
+                        resolve(result.data.url)
+                    })
+                    .catch(error =>{
+                        reject("Upload failed")
+                        console.error("Error:", error)
+                    })
+                })
+            }
+        }
     }
 
 

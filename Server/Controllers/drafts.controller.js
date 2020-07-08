@@ -264,6 +264,31 @@ var update = (req, res) =>{
 }
 
 
+var saveImage = (req, res) =>{
+
+//    Take Image Blob and return URL
+cloudinary.v2.uploader.upload(req.body.image, {
+    resource_type: "image",
+    public_id: `post_images/@${req.user.username}/${req.user._id}-${Date.now()}`,
+    overwrite: true
+})
+.then(result =>{
+    console.log(result)
+    res.send({ data:{url: result.url} })
+},
+fail=>{
+    console.log(fail, ":failed for this reacon")
+    res.send({url:null,
+        status: http_status.INTERNAL_SERVER_ERROR.code 
+     })
+})
+.catch(err => console.log(err))
+// console.log("seen image", req.body)
+
+}
+
+
+
 module.exports = {
     loadAllList: loadAllList,
     create: create,
@@ -272,5 +297,6 @@ module.exports = {
     draft: draft,
     loadImage: loadImage,
     delete_all: delete_all,
-    update:update
+    update:update,
+    saveImage:saveImage
 };

@@ -1,7 +1,7 @@
 
 //          IMPORTS
 import React from 'react';
-import { Button, Form, Checkbox, Icon, Select, Grid, Modal, Image, Reveal, Container } from 'semantic-ui-react';
+import { Button, Form, Checkbox, Icon, Select, Grid, Modal, Divider } from 'semantic-ui-react';
 import '../../Resources/styles/article.scss';
 import { withRouter } from 'react-router';
 
@@ -10,7 +10,6 @@ import FetchArticles from '../../Controllers/article.controller'
 import FetchDrafts from "../../Controllers/draft.controller"
 import cat from '../Dashboard/categories';
 import QuillTestNew from './Components/QuillTestNew';
-import { Link } from "react-router-dom"
 
 
 
@@ -454,16 +453,16 @@ class AddPost extends React.Component {
     return (
 
       <div className='add-post'>
-
-        <Grid stackable>
-          <Grid.Row  >
-            <Grid.Column mobile={16} tablet={16} computer={13} style={{ padding: '0px 5px' }}  >
-              <p style={{ paddingLeft: "5%", color: "silver" }}><i> {this.state.dynamicSave}</i></p>
+      {/* <Container > */}
+        <Grid stackable style={{marginTop:'10px'}}>
+          <Grid.Row centered >
+            <Grid.Column mobile={16} tablet={16} computer={11} style={{ margin: '5px 5px' }} >
+            <p style={{ color: "silver" }}><i> {this.state.dynamicSave}</i></p>
               {this.state.network_error === '' ?
                 ""
                 :
                 <div className='notification-background'>
-                  <div style={{ width: '90%', color: 'red', background: '', padding: '3px 5%' }} ><div>
+                  <div style={{ width: '90%', color: 'red', background: ''}} ><div>
                     <span style={{ float: 'right', cursor: 'pointer' }} onClick={function () {
                       var note = document.getElementsByClassName('notification-background');
                       note[0].style.display = 'none';
@@ -478,10 +477,15 @@ class AddPost extends React.Component {
 
               {
                 this.state.error_message == 'editor-error' ?
-                  <p style={{ padding: '5px 5%', color: 'red', width: '90%', borderRadius: '0px' }}><Icon name="close" color="yellow" size='big' /> You've not written anything yet! </p>
+                  <p style={{  color: 'red', width: '90%', borderRadius: '0px' }}><Icon name="close" color="yellow" size='big' /> You've not written anything yet! </p>
                   : ''
               }
 
+            </Grid.Column>
+
+            
+            <Grid.Column mobile={16} tablet={16} computer={11} style={{ padding: '0px 5px' }}  >
+              
               { /*EDITOR PANEL INITIAL */}
 
               <QuillTestNew state={this.manageEditorState} />
@@ -528,21 +532,23 @@ class AddPost extends React.Component {
               <Modal.Header><h3 style={{ margin: '1px 2%', color: "black" }}>Settings</h3></Modal.Header>
 
                 <Modal.Content scrolling >
-                <p style={{ margin: '10px 30px', color: "black" }}>Preview story descriptions, tags and featured image which makes your story unique</p>
-                <div className="featured-pix-block">
-                    <img src={this.state.featured_image} className="featured-image" />
-                    <input className="featured-pix-cover" onChange={this.handle_profile_photo.bind(this)}
-                      type='file' id='photo' style={{ visibility: 'hidden' }} />
-                  </div>
+               
                   
 
                   <Modal.Description>
        
                     <div className='editor-side1' id='editor-side1'>
 
-                      <Form size="mini">
-                      <p><b style={{color:"teal", cursor:"pointer"}} onClick={this.toggleDialogFeatured.bind(this)}>Change featured Image</b></p>
+                    <p style={{ color: "silver" }}>Preview story descriptions, tags and featured image which makes your story unique.</p>
+                <div className="featured-pix-block">
+                    <img src={this.state.featured_image} className="featured-image" />
+                    <input className="featured-pix-cover" onChange={this.handle_profile_photo.bind(this)}
+                      type='file' id='photo' style={{ visibility: 'hidden' }} />
+                  </div>
 
+                      <Form size="small">
+                      <p><b style={{color:"#1c243c", cursor:"pointer"}} onClick={this.toggleDialogFeatured.bind(this)}>Set featured Image</b></p>
+                        <Divider/>
                         <Form.Field name='title' maxLength='50' value={this.state.post_title} onChange={this.handleInputs.bind(this)} control='input' placeholder='Story Title' required />
                         {
                           this.state.error_message == 'title-error' ?
@@ -572,7 +578,7 @@ class AddPost extends React.Component {
 
                         <Select name='category' className="custom-label"
                           value={this.state.post_category} onChange={this.handleInputs.bind(this)}
-                          options={categoryOptions} />
+                          options={categoryOptions} style={{width:"100%"}}/>
                         <br /><br /><br />
 
                         <Form.Field>
@@ -635,7 +641,7 @@ class AddPost extends React.Component {
 
         </Grid>
 
-
+{/* </Container> */}
 
       </div>)
 

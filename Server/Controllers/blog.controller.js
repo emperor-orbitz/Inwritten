@@ -123,12 +123,13 @@ var user = async (req, res) => {
 
     try {
         console.log("CANT U HEAT MEEE")
-        let data = await userModel.findOne({ username: req.params.username });
+        let data = await  userModel.findOne({ username: req.params.username });
+        
         console.log(data, "NA ME BE THIS")
         let found_template = await templ.findOne({ _id:data.template_id })
         let socials = await social_model.findOne({user_id: data._id}) || {}
-        let blog_data = await posts.find({ author: req.params.username, public: true })
-       
+        let blog_data = await posts.find({ author: req.params.username, public: true }).toJSON()
+        
         if (found_template != null) {
 
             res.render(`${found_template.template_name}/profile`, {user_data: data, blog_data, social_data: socials,
@@ -157,11 +158,15 @@ var user = async (req, res) => {
 var blog = async (req, res, next) => {
 
     try {
-        let data = await posts.find({ author: req.params.username, public: true })
+        let data = await posts.find({ author: req.params.username, public: true }).select("-body_html -body_schema").lean()
         let user_data = await userModel.findOne({ username:req.params.username })
                                         .populate('template_id')
+        user_data = user_data.toJSON()
+        
+
 
         if (data != null) {
+            console.log(data, "THIS IS USER DATA")
             res.render(`${user_data.template_id.template_name}/blog`, { data, user_data, template_data: user_data.template_id.template_name })
         }
         else res.send("Seems there is no story yet")
@@ -169,7 +174,7 @@ var blog = async (req, res, next) => {
     }
 
     catch (error) {
-        res.send("Ooops, there was an error")
+        res.send("Ooops, there was an error"+error)
         console.log(error)
     }
 

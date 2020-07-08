@@ -444,3 +444,8 @@ textarea, button[type="submit"]{
 .card a{
   text-decoration: none;
 }
+
+
+.postbody img{
+width:100%;
+}

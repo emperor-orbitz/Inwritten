@@ -223,7 +223,17 @@ class QuillTestNew extends React.Component {
 
 
 
-
+    readFile(doc) {
+        return new Promise((resolve, reject) => {
+          var reader = new FileReader();
+    
+          reader.readAsDataURL(doc);
+          reader.onloadend = function () {
+            resolve(reader.result);
+          }
+        })
+    
+      }
 
     
 
@@ -238,18 +248,27 @@ class QuillTestNew extends React.Component {
 
         ],
         clipboard: {
-            matchVisual: false
+            // matchVisual: false
         },
         imageUploader:{
-            upload: file =>{
-                return new Promise((resolve, reject)=>{
-                    const formData = new FormData();
-                    formData.append("image",file);
+            upload: async file =>{
+                let blob_image = await this.readFile(file) 
 
-                    fetch("https://api.imgbb.com/1/upload?key=d36eb6591370ae7f9089d85875e56b22",
+                return await new Promise((resolve, reject)=>{
+
+                    fetch("/drafts/save_image",
                     {
                         method:"POST",
-                        body:formData
+                        body:JSON.stringify({ image: blob_image}),
+                    
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': localStorage.getItem("hs_token")
+                        },
+                            credentials: 'include',
+                            withCredentials: true,
+                         
+                    
                     }
                     )
                     .then(response => response.json())
