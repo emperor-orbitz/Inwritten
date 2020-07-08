@@ -232,7 +232,7 @@ class HeaderAccount extends React.Component {
             <Sidebar.Pushable>
 
               <Responsive as={Menu} minWidth={300} className="nav" secondary style={{ fontSize: "12px" }}  >
-                <Menu.Item onClick={this.toggleSide} size="huge" color="green" style={{fontSize:"20px"}}><img src={toggle} width="30px"/></Menu.Item>
+                <Menu.Item onClick={this.toggleSide} size="huge" color="green" style={{fontSize:"20px"}}><img src={toggle} width="30px" style={{width:"30px"}}/></Menu.Item>
                 
                 <Menu.Item header ><img src="/images/double-u.png" style={{ width: "40px", height: "48px" }} /> </Menu.Item>
 
