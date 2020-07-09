@@ -354,7 +354,9 @@ var stories = async (req, res, next) => {
 
   //  res.sendFile(path.resolve(__dirname, "../../Client/assets/storypage.html"));
  try{
-    var stories = await posts.find({ public:true }).populate("authorId", "username email display_picture").sort({createdAt:-1});
+    var stories = await posts.find({ public:true }).select("-body_html -body_schema")
+                             .populate("authorId", "username email display_picture")
+                             .sort({createdAt:-1}).lean();
     if(stories.length == 0){
         res.render('../storypage', { stories: null })
 
