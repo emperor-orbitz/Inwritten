@@ -18,7 +18,7 @@ var path = require("path")
 var five_posts = async (req, res) => {
 
     try {
-        var list = await posts.find({public:true}).select("-body_schema -body_html").limit(5);
+        var list = await posts.find({public:true}).sort({updatedAt:-1}).select("-body_schema -body_html").limit(5);
   //console.log(data.tags.length)
         console.log(list)
       res.send({data:list, message:'success', status:200})
@@ -59,13 +59,13 @@ var index = async (req, res) => {
     // let { originalUrl } = req;
     var link = req.params.link
     let username = req.params.username
-    let chunk = req.params.chunk
-    let username_slice = username.slice(1)
+    let chunk = req.params.chunk.toLowerCase()
+    let username_slice = username.slice(1).toLowerCase()
 
     try {
         
-        var user_data = await userModel.findOne({ username: username_slice });
-        let template_data = await templ.findById(user_data.template_id)
+        var user_data = await userModel.findOne({ username: username_slice }).lean();
+        let template_data =  await templ.findById(user_data.template_id).lean()
 
         let data = await posts.findOne({ post_link: `/user/${username}/${chunk}`, public: true })
                               .populate({path:"comments",
@@ -123,12 +123,12 @@ var user = async (req, res) => {
 
     try {
         console.log("CANT U HEAT MEEE")
-        let data = await  userModel.findOne({ username: req.params.username });
+        let data = await  userModel.findOne({ username: req.params.username }).lean();
         
         console.log(data, "NA ME BE THIS")
-        let found_template = await templ.findOne({ _id:data.template_id })
-        let socials = await social_model.findOne({user_id: data._id}) || {}
-        let blog_data = await posts.find({ author: req.params.username, public: true }).toJSON()
+        let found_template = await templ.findOne({ _id:data.template_id }).lean()
+        let socials = await social_model.findOne({user_id: data._id}).lean() || {}
+        let blog_data = await posts.find({ author: req.params.username, public: true }).lean()
         
         if (found_template != null) {
 

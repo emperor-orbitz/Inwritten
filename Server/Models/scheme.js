@@ -75,7 +75,7 @@ const SCHEME = {
 
     posts: new Schema({
  
-        title: { type: String, default:"Untitled" },
+        title: { type: String, default:"Untitled", lowercase:true },
         body_html: { type: mongoose.Schema.Types.Mixed, required:true },
         body_schema: { type: mongoose.Schema.Types.Mixed, default:null },
         featured_image: { type: String, default:"https://www.inwritten.com/images/preview_featured2.jpg" },
@@ -112,7 +112,7 @@ const SCHEME = {
 
    drafts: new Schema({
  
-    title: { type: String, default:"Untitled" },
+    title: { type: String, default:"Untitled", lowercase:true, },
     body_html: { type: mongoose.Schema.Types.Mixed, required:true },
     body_schema: { type: mongoose.Schema.Types.Mixed, default:null },
     featured_image: { type: String, default:"https://www.inwritten.com/images/preview_featured2.jpg" },
