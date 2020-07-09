@@ -336,3 +336,11 @@ text-align: center;
   //Apply all transitions 
   transition: all 800ms ease-in-out;
 }
+
+
+@media only screen and (max-width:500px){
+
+.nav-logo{
+  display: none !important;
+}
+}

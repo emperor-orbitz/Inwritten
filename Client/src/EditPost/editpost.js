@@ -360,7 +360,7 @@ class EditPost extends React.Component {
   //Leave Page
   leavePage = ({ id, post_link }) => {
     this.setState({ open_share: false });
-    window.history.pushState("", "", "/app/edit-post/" + id);
+    window.history.pushState("", "", "/app/edit/" + id);
     window.location = post_link;
   };
 
@@ -387,12 +387,7 @@ class EditPost extends React.Component {
       <div className="add-post">
         <Grid stackable>
           <Grid.Row centered>
-            <Grid.Column
-              mobile={16}
-              tablet={16}
-              computer={11}
-              style={{ margin: "5px 5px" }}
-            >
+            
               {this.state.success_message === "" ? (
                 ""
               ) : (
@@ -453,7 +448,6 @@ class EditPost extends React.Component {
               ) : (
                 ""
               )}
-            </Grid.Column>
 
             <Grid.Column
               mobile={16}
