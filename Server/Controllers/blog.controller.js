@@ -60,11 +60,13 @@ var index = async (req, res) => {
     var link = req.params.link
     let username = req.params.username
     let chunk = req.params.chunk.toLowerCase()
-    let username_slice = username.slice(1).toLowerCase()
+    let username_slice = username.slice(1)
+    console.log(username, username_slice, chunk)
 
     try {
         
         var user_data = await userModel.findOne({ username: username_slice }).lean();
+        console.log(user_data)
         let template_data =  await templ.findById(user_data.template_id).lean()
 
         let data = await posts.findOne({ post_link: `/user/${username}/${chunk}`, public: true })
@@ -75,10 +77,12 @@ var index = async (req, res) => {
                                 }
                             })
                             .populate("authorId", "username email display_picture bio")
-                            data = data.toJSON()
+                            .lean()
+
                              // .select("")
         let social_data = await social_model.findOne({user_id: data.authorId}) ;             
- 
+        console.log(username, username_slice, data)
+
         if (data != null) {
             var scripts = [{script:`${template_data.template_name}/js/auth.js`}];
             console.log(data, "THIS IS UR DATATA")
@@ -104,6 +108,7 @@ var index = async (req, res) => {
             res.send("Could not load article successfully")
 
     } catch (error) {
+        console.log("error", error)
         res.render("404")
         //res.send("An error occured" + error)
 
