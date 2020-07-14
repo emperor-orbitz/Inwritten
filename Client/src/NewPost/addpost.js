@@ -474,11 +474,14 @@ class AddPost extends React.Component {
           {
                 screen.width < 500 ?
                 <div id="toolbar-container">
+                 <button className="ql-header" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">H1</button>
+
                 <button className="ql-bold" data-toggle="tooltip" data-placement="bottom" title="Bold">BOLD</button>
                 <button className="ql-italic" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">ITALIC</button>
                 <button className="ql-underline" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">ITALIC</button>
                 <button className="ql-image" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">ITALIC</button>
-            
+                <button className="ql-link" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">ITALIC</button>
+
               </div>:" "
               }
       

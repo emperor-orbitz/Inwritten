@@ -3,7 +3,6 @@ import {
   Button,
   Form,
   Checkbox,
-  Loader,
   Icon,
   Select,
   Grid,
@@ -18,6 +17,103 @@ import FetchArticles from "../../Controllers/article.controller";
 import cat from "../Dashboard/categories";
 import QuillTestEdit from "./Components/QuillTestEdit";
 import FetchDrafts from "../../Controllers/draft.controller";
+import QuillTestEditDesktop from "./Components/QuillTestEditDesktop";
+
+
+
+
+
+const desktopmodules ={
+  toolbar:[
+
+    ['bold', 'italic', 'blockquote'],
+    ['link', 'image'],
+    [{ 'header': "1" }, { "header": "2" }],
+
+],
+   //theme:"snow",
+  clipboard: {
+      // matchVisual: false
+  },
+  imageUploader:{
+      upload: async file =>{
+          let blob_image = await this.readFile(file) 
+
+          return await new Promise((resolve, reject)=>{
+
+              fetch("/drafts/save_image",
+              {
+                  method:"POST",
+                  body:JSON.stringify({ image: blob_image}),
+              
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': localStorage.getItem("hs_token")
+                  },
+                      credentials: 'include',
+                      withCredentials: true,
+                   
+              
+              }
+              )
+              .then(response => response.json())
+              .then(result=>{
+                  console.log(result);
+                  resolve(result.data.url)
+              })
+              .catch(error =>{
+                  reject("Upload failed")
+                  console.error("Error:", error)
+              })
+          })
+      }
+  }
+}
+
+
+
+
+const modules = {
+  toolbar:"#toolbar-container",
+  // theme:"snow",
+  clipboard: {
+      // matchVisual: false
+  },
+  imageUploader:{
+      upload: async file =>{
+          let blob_image = await this.readFile(file) 
+
+          return await new Promise((resolve, reject)=>{
+
+              fetch("/drafts/save_image",
+              {
+                  method:"POST",
+                  body:JSON.stringify({ image: blob_image}),
+              
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': localStorage.getItem("hs_token")
+                  },
+                      credentials: 'include',
+                      withCredentials: true,
+                   
+              
+              }
+              )
+              .then(response => response.json())
+              .then(result=>{
+                  console.log(result);
+                  resolve(result.data.url)
+              })
+              .catch(error =>{
+                  reject("Upload failed")
+                  console.error("Error:", error)
+              })
+          })
+      }
+  }
+}
+
 
 class EditPost extends React.Component {
   constructor(props) {
@@ -385,9 +481,19 @@ class EditPost extends React.Component {
 
     return (
       <div className="add-post">
-        <Grid stackable>
+        <Grid stackable style={{ marginTop: "10px", height:"100%" }}>
           <Grid.Row centered>
-            
+          {
+                screen.width < 500 ?
+                <div id="toolbar-container">
+                <button className="ql-header" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">H1</button>
+                <button className="ql-bold" data-toggle="tooltip" data-placement="bottom" title="Bold">BOLD</button>
+                <button className="ql-italic" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">ITALIC</button>
+                <button className="ql-underline" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">ITALIC</button>
+                <button className="ql-image" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">ITALIC</button>
+                <button className="ql-link" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">ITALIC</button>
+              </div>:" "
+              }
               {this.state.success_message === "" ? (
                 ""
               ) : (
@@ -453,7 +559,7 @@ class EditPost extends React.Component {
               mobile={16}
               tablet={16}
               computer={11}
-              style={{ padding: "0px 5px" }}
+              style={{ padding: "0px 5px", overflowY:"auto" }}
             >
               <p style={{ color: "silver" }}>
                 <i> {this.state.dynamicSave}</i>
@@ -567,10 +673,19 @@ class EditPost extends React.Component {
 
               {/*EDITOR PANEL INITIALIZED HERE */}
 
-              <QuillTestEdit
-                state={this.manageEditorState}
-                initialValue={this.state.body_schema}
-              />
+             {
+               screen.width < 500?
+               <QuillTestEdit
+               state={this.manageEditorState}
+               initialValue={this.state.body_schema}
+               modules={modules}
+             /> :
+             <QuillTestEditDesktop
+             state={this.manageEditorState}
+             initialValue={this.state.body_schema}
+             modules={desktopmodules}
+           /> 
+             } 
 
               <Modal
                 size="small"

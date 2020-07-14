@@ -52,6 +52,7 @@
   "dependencies": {
     "@hapi/joi": "^16.1.4",
     "@sendgrid/mail": "^6.4.0",
+    "apicache": "^1.5.3",
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
