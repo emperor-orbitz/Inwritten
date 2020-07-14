@@ -3,6 +3,9 @@
 
 <head>
   <title>Inwritten Stories</title>
+    <meta name="keywords" content="inwritten stories smartblog smart-blog">
+  <meta name="description" content="Create and follow-up contents that matter to you on Inwritten">
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="images/double-u.png" rel="icon">
@@ -48,27 +51,40 @@
             </form>
           </div>
 
-          <div class="col-4 site-logo">
+          <div class="col-2 site-logo">
             <a href="/" class="text-black h2 mb-0"><img src="images/inwritten-logo.png"
                 style="height: 50px; width:120px; position: relative;" class="my-2" /></a>
           </div>
 
-          <div class="col-8 text-right">
+          <div class="col-10 text-right">
             <nav class="site-navigation" role="navigation">
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
 
-                <li><a href="/stories/tech">Tech</a></li>
                 <li><a href="/stories/lifestyle">Lifestyle</a></li>
                 <li><a href="/stories/news">News</a></li>
                 <li><a href="/stories/business">Business</a></li>
-                <li><a href="/stories/business">Story</a></li>
-                <li><a href="/stories/business">Health</a></li>
+                <li><a href="/stories/business">Poetry</a></li>
+                <li class="nav-item dropdown">
+                  <a href="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria_haspopup="true" aria-expanded="false">More&nbsp; &dArr;</a>
+                  <ul class="dropdown-menu" style="border:3px solid #1c243c">
+                    <li class="px-3"><a href="/stories/business">Health</a></li>
 
-{{!-- 
-                <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span
+                    <li class="px-3 py-1"><a href="" style="color:black">Fashion</a></li>
+                    <li class="px-3 py-1"><a href="" style="color:black">Travel</a></li>
+                    <li class="px-3 py-1"><a href="" style="color:black">Food</a></li>
+                    <li class="px-3 py-1"><a href="" style="color:black">Music</a></li>
+                  </ul>
+                </li>
+            
+
+
+
+
+
+                {{!-- <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span
                       class="icon-search"></span></a></li> --}}
 
-                <li class="d-none d-lg-inline-block"><a href="/login"><button style="background: black; color:white" class="btn btn-sm"> Log in</button></a></li>
+                <li ><a href="/app/login"><button style="background: black; color:white" class="btn btn-md"> Log in</button></a></li>
 
               </ul>
             </nav>
@@ -88,30 +104,9 @@
         <div class="row mb-1">
           <div class="col-12">
             <h5 style="color:black">Spotlight based on Editor's Picks</h5>
-   {{!-- <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(45).jpg"
-        alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" style="height: 300px;" src="http://res.cloudinary.com/hashstackio/image/upload/v1588769905/featured_image/5eb2b3965e5c650022de1f5b-1588769905063.gif"
-        alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(47).jpg"
-        alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div> --}}
+
+
+   
 
 
 
@@ -122,7 +117,6 @@
           {{#each stories}}
 
           <div class="col-lg-4 mb-2">
-
             <div class="pan">
               <div class="image-holder">
                <a href="{{post_link}}"> <img src="{{featured_image}}" /></a>
@@ -130,8 +124,8 @@
               <div class="pan-body">
                 <h6><a href="{{post_link}}" style="color:black">
                     {{title}}</a></h6>
-                <p class="description card-text">By<a href="/user/profile/{{author}}"> {{author}}</a></p>
-                <p>Category: <b>{{category}}</b>, {{time_to_read}} mins read</p>
+                <p class="description card-text">By<a href="/user/{{author}}"> {{author}}</a> in {{category}}</p>
+                <p>{{time_to_read}} mins read</p>
               </div>
             </div>
             </a>
@@ -208,7 +202,7 @@
         {{/if}}
  --}}
     <h5>Your Interests</h5>
-    <p>Keep reading, following and sharing. We'll get to learn the contents you love.</p>
+    <p>Keep reading, following and sharing. We'll get to learn the contents that matter to you.</p>
       </div>
     </div>
 
@@ -263,8 +257,8 @@
               <h3 class="footer-heading mb-4">Connect With Us</h3>
               <p>
                 <a href="http://www.facebook.com/inwritten"><span class="icon-facebook pt-2 pr-2 pb-2 pl-0"></span></a>
-                <a href="http://www.instagram/inwritten_"><span class="icon-instagram p-2"></span></a>
-                <a href="malorbit360@gmail.com"><span class="icon-envelope p-2"></span></a>
+                <a href="http://www.instagram.com/inwritten_"><span class="icon-instagram p-2"></span></a>
+                <a href="mailto:malorbit360@gmail.com"><span class="icon-envelope p-2"></span></a>
               </p>
             </div>
           </div>

@@ -18,6 +18,100 @@ import FetchArticles from "../../Controllers/article.controller";
 import FetchDrafts from "../../Controllers/draft.controller";
 import cat from "../Dashboard/categories";
 import QuillTestNew from "./Components/QuillTestNew";
+import QuillTestNewDesktop from "./Components/QuillTestNewDesktop";
+
+  
+const desktopmodules ={
+  toolbar:[
+
+    ['bold', 'italic', 'blockquote'],
+    ['link', 'image'],
+    [{ 'header': "1" }, { "header": "2" }],
+
+],
+   //theme:"snow",
+  clipboard: {
+      // matchVisual: false
+  },
+  imageUploader:{
+      upload: async file =>{
+          let blob_image = await this.readFile(file) 
+
+          return await new Promise((resolve, reject)=>{
+
+              fetch("/drafts/save_image",
+              {
+                  method:"POST",
+                  body:JSON.stringify({ image: blob_image}),
+              
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': localStorage.getItem("hs_token")
+                  },
+                      credentials: 'include',
+                      withCredentials: true,
+                   
+              
+              }
+              )
+              .then(response => response.json())
+              .then(result=>{
+                  console.log(result);
+                  resolve(result.data.url)
+              })
+              .catch(error =>{
+                  reject("Upload failed")
+                  console.error("Error:", error)
+              })
+          })
+      }
+  }
+}
+
+
+
+
+const modules = {
+  toolbar:"#toolbar-container",
+  // theme:"snow",
+  clipboard: {
+      // matchVisual: false
+  },
+  imageUploader:{
+      upload: async file =>{
+          let blob_image = await this.readFile(file) 
+
+          return await new Promise((resolve, reject)=>{
+
+              fetch("/drafts/save_image",
+              {
+                  method:"POST",
+                  body:JSON.stringify({ image: blob_image}),
+              
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': localStorage.getItem("hs_token")
+                  },
+                      credentials: 'include',
+                      withCredentials: true,
+                   
+              
+              }
+              )
+              .then(response => response.json())
+              .then(result=>{
+                  console.log(result);
+                  resolve(result.data.url)
+              })
+              .catch(error =>{
+                  reject("Upload failed")
+                  console.error("Error:", error)
+              })
+          })
+      }
+  }
+}
+
 
 class AddPost extends React.Component {
   constructor(props) {
@@ -375,9 +469,19 @@ class AddPost extends React.Component {
     return (
       <div className="add-post">
         {/* <Container > */}
-        <Grid stackable style={{ marginTop: "10px" }}>
+        <Grid stackable style={{ marginTop: "10px", height:"100%" }}>
           <Grid.Row centered>
+          {
+                screen.width < 500 ?
+                <div id="toolbar-container">
+                <button className="ql-bold" data-toggle="tooltip" data-placement="bottom" title="Bold">BOLD</button>
+                <button className="ql-italic" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">ITALIC</button>
+                <button className="ql-underline" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">ITALIC</button>
+                <button className="ql-image" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">ITALIC</button>
             
+              </div>:" "
+              }
+      
             {this.state.network_error === "" ? (
               ""
             ) : (
@@ -399,14 +503,17 @@ class AddPost extends React.Component {
               mobile={16}
               tablet={16}
               computer={11}
-              style={{ padding: "0px 5px" }}
+              style={{ padding: "0px 5px", overflowY:"auto" }}
             >
               <p style={{ color: "silver" }}>
               <i> {this.state.dynamicSave}</i>
             </p>
               {/*EDITOR PANEL INITIAL */}
-
-              <QuillTestNew state={this.manageEditorState} />
+              {
+                screen.width < 500 ? <QuillTestNew state={this.manageEditorState} modules={modules}/>:
+                <QuillTestNewDesktop state={this.manageEditorState} modules={desktopmodules}/>
+              }
+              
 
               <Modal
                 size="mini"

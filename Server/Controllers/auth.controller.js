@@ -92,13 +92,13 @@ var send_mail = async (req, res) => {
 var verify_mail = async (req, res) => {
     //check if user with ID
 
-    let userid = req.params.userid;
+    let userid = req.query.token;
     var finduser = new signup;
     try {
         var result = await finduser.findUserById(userid);
 
         if (result === null) {
-                            res.sendFile(path.resolve(__dirname, "../../Client/assets/broken_email.html"))
+            res.sendFile(path.resolve(__dirname, "../../Client/assets/broken_email.html"))
 
         }
         else if (result != null) {

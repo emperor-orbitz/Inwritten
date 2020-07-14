@@ -76,7 +76,7 @@ ReactQuill.Quill.register({
 });
 
 
-class QuillTestNew extends React.Component {
+class QuillTestNewDesktop extends React.Component {
 
     constructor(props) {
         super(props);
@@ -299,7 +299,7 @@ class QuillTestNew extends React.Component {
 
                 <ReactQuill value={this.state.text}
                     ref={(el) => { this.reactQuillRef = el }}
-                    theme="snow"
+                    theme="bubble"
                     onChange={this.handleChange}
                     modules={this.props.modules}
                     formats={this.formats}
@@ -321,7 +321,7 @@ var mapStatetoProps = (state) => {
     return state;
   }
 
-  export default QuillTestNew;
+  export default QuillTestNewDesktop;
 
 
 

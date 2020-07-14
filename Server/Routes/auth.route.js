@@ -28,7 +28,7 @@ router.post('/auth/register',  (req, res, next) => {
 controller.register(req, res);
 })
 
-router.get('/auth/verify_mail/:userid', (req, res, next) => {
+router.get('/auth/verify_mail', (req, res, next) => {
 
 controller.verify_mail(req, res, next);
 })
