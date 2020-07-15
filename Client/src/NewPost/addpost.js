@@ -487,14 +487,23 @@ class AddPost extends React.Component {
           {
                 screen.width < 500 ?
                 <div id="toolbar-container">
-                 <button className="ql-header" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">H1</button>
+                  <div style={{float:"left"}}>
+                 <button className="ql-header" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">H</button>
 
                 <button className="ql-bold" data-toggle="tooltip" data-placement="bottom" title="Bold">BOLD</button>
                 <button className="ql-italic" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">ITALIC</button>
-                <button className="ql-underline" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">ITALIC</button>
-                <button className="ql-image" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">ITALIC</button>
-                <button className="ql-link" data-toggle="tooltip" data-placement="bottom" title="Add italic text <cmd+i>">ITALIC</button>
+                <button className="ql-underline" data-toggle="tooltip" data-placement="bottom" title="Underline a text">ITALIC</button>
+                <button className="ql-link" data-toggle="tooltip" data-placement="bottom" title="Add link to your post<cmd+i>">ITALIC</button>
 
+                </div>
+                
+
+                <div style={{float:"right"}}>
+
+                <button className="ql-image" data-toggle="tooltip" data-placement="bottom" title="Add images">ITALIC</button>
+                <button className="ql-blockquote" data-toggle="tooltip" data-placement="bottom" title="Add images">ITALIC</button>
+
+                </div>
               </div>:" "
               }
       
