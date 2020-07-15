@@ -56,7 +56,7 @@ class HeaderAccount extends React.Component {
 
     let bool = /\/app\/edit\/[a-zA-Z0-9]+/.test(nextProps.location.pathname)
 
-    if (nextProps.location.pathname == "/app/add-post") {
+    if (nextProps.location.pathname == "/app/create") {
       this.setState({ switch_story_option: "Publish" })
 
     }
@@ -109,7 +109,7 @@ class HeaderAccount extends React.Component {
           }).catch(e => this.setState({ loadFinish: true }))
 
         })
-        .catch(err => this.props.history.replace('/app/login'))
+        .catch(err => this.props.history.replace('/login'))
 
     }
 
@@ -126,7 +126,7 @@ class HeaderAccount extends React.Component {
           this.setState({ loadFinish: true })
 
         })
-        .catch(err => this.props.history.replace('/app/login'))
+        .catch(err => this.props.history.replace('/login'))
 
 
     }
@@ -181,7 +181,7 @@ class HeaderAccount extends React.Component {
     }
     else
      { 
-       this.props.history.push("/app/add-post")
+       this.props.history.push("/app/create")
      }
     
   }
@@ -191,7 +191,7 @@ class HeaderAccount extends React.Component {
 
 
     localStorage.removeItem("hs_token");
-    this.props.history.replace('/app/login');
+    this.props.history.replace('/login');
     this.props = null;
 
   }
@@ -243,15 +243,15 @@ class HeaderAccount extends React.Component {
                   <Menu.Item text={`@${this.props.ProfileReducer.username}`} as={Dropdown}  >
 
                     <Dropdown.Menu>
-                    <Dropdown.Item icon='hourglass start' text='New Story' as={Link} to='/app/add-post' />
+                    <Dropdown.Item icon='hourglass start' text='New Story' as={Link} to='/app/create' />
 
-                      <Dropdown.Item icon='dashboard' text='Dashboard' as={Link} to='/app/dashboard' />
+                      <Dropdown.Item icon='dashboard' text='Dashboard' as={Link} to='/app/read' />
                       <Dropdown.Item icon='bell' text='Notifications' as={Link} to='/app/notification' style={{ color: 'green' }} />
 
                       <DropdownDivider />
 
                       <Dropdown.Item icon='bookmark outline' text='Saved Bookmarks' as={Link} to='/app/bookmark' />
-                      <Dropdown.Item icon='folder outline' text='Published Stories' as={Link} to='/app/articles' />
+                      <Dropdown.Item icon='folder outline' text='Published Stories' as={Link} to='/app/posts' />
                       <Dropdown.Item icon='boxes' text='Saved Drafts' as={Link} to='/app/drafts' />
                       <DropdownDivider />
 

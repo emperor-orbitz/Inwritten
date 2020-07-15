@@ -15,8 +15,6 @@ var path = require("path");
 var sslRedirect = require("heroku-ssl-redirect")
 const apicache = require('apicache');
 let cache = apicache.middleware;
-app.use(cache('5 minutes'));
-
 //easily attach io to server
 
 require("dotenv").config({ path: __dirname + "/.env" });
@@ -71,8 +69,10 @@ app.set("views", path.resolve(__dirname, "../Client/assets/views"));
 //ROUTE CONFIGURATION IN PRODUCTION
 
 if (process.env.NODE_ENV == "production") {
+  // app.use(cache('10 minutes'));
+
     app.use(sslRedirect());
-  app.get('/index_bundle.js', function (req, res, next) {
+    app.get('/index_bundle.js', function (req, res, next) {
     req.url = req.url + '.gz';
     res.set('Content-Encoding', 'gzip');
     next();
@@ -85,7 +85,7 @@ if (process.env.NODE_ENV == "production") {
     res.sendFile(path.resolve(__dirname, "../Client/assets/launchpage.html"));
     
   });
-  app.get("*", (req, res) => {
+  app.get(["/app/*","/login", "/signup"], (req, res) => {
 
     res.sendFile(path.resolve(__dirname, "../Client/assets/index.html"));
   });
@@ -97,11 +97,13 @@ if (process.env.NODE_ENV == "production") {
 
 if (process.env.NODE_ENV == "test") {
   //app.use(sslRedirect());
-
+  app.use(["/blog/fivestories", "/profile/fetch_stats"], route_config)
   app.use(express.static(path.resolve(__dirname, "../Client/assets/"), {index:"launchpage.html"}))
   app.use("/", route_config);
-  app.get("*", (req, res) => {
+  
+  // app.use(["/auth, /profile"], auth)
 
+  app.get(["/app/*", "/login", "/signup"] ,(req, res) => {
     res.sendFile(path.resolve(__dirname, "../Client/assets/index.html"));
   });
 

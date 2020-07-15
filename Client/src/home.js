@@ -14,11 +14,11 @@ function App() {
 
 
     <Switch>
-      <Route exact path='/app/signup' component={Signup} />
-      <Route path='/app/forgot_password' component={ForgotPassword} />
+      <Route exact path='/signup' component={Signup} />
+      <Route path='/forgot_password' component={ForgotPassword} />
 
 
-      <Route exact path='/app/login' component={Login} />
+      <Route exact path='/login' component={Login} />
 
 
       <HeaderAccount>
@@ -33,11 +33,11 @@ timeout={300}
           <Route path='/app/comments/:postID' component={Comments}  />
           <Route path='/app/interests' component={Interests} />
           <Route path='/app/edit/:postID' component={ArticlesCategory.EditPost} />
-          <Route path='/app/dashboard' component={Account} />
+          <Route path='/app/read' component={Account} />
           <Route path='/app/settings/profile' component={Profile} />
-          <Route path='/app/articles' component={ArticlesCategory.Articles}  />
+          <Route path='/app/posts' component={ArticlesCategory.Articles}  />
           <Route path='/app/drafts' component={ArticlesCategory.Drafts} />
-          <Route path='/app/add-post' component={ArticlesCategory.AddPost} />
+          <Route path='/app/create' component={ArticlesCategory.AddPost} />
           <Route path='/app/bookmark' component={Bookmark} />
           <Route path='/app/settings/templates' component={Templates} />
           <Route path='/app/settings/preferences' component={Preferences} />

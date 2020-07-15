@@ -9,12 +9,12 @@ var passport = require("passport");
 */
 
 
-router.post('/auth/isloggedin',
-passport.authenticate("jwt", {session:false}),
- (req, res, next) => {   
-    controller.isloggedin(req, res, next);
+// router.post('/auth/isloggedin',
+// passport.authenticate("jwt", {session:false}),
+//  (req, res, next) => {   
+//     controller.isloggedin(req, res, next);
     
-})
+// })
 
 
 

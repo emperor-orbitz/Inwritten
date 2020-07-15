@@ -39,8 +39,8 @@ class Header extends React.Component {
           <Menu.Item style={{ 'width': '50%' , color:'black'}} header ><a href='/'><img src={logo} style={{ width:"150px", height:"60px" }}/></a></Menu.Item>
 
           <Menu.Menu  position="right">
-            <Menu.Item name="login" style={{color:'black'}}  as={Link} to="/app/login" active={activeBar === 'login'} />
-            <Menu.Item name="Signup" style={{color:'black'}}  as={Link} to="/app/signup" active={activeBar === 'signup'} />
+            <Menu.Item name="login" style={{color:'black'}}  as={Link} to="/login" active={activeBar === 'login'} />
+            <Menu.Item name="Signup" style={{color:'black'}}  as={Link} to="/signup" active={activeBar === 'signup'} />
           </Menu.Menu>
         </Responsive>
 

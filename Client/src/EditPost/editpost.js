@@ -20,7 +20,17 @@ import FetchDrafts from "../../Controllers/draft.controller";
 import QuillTestEditDesktop from "./Components/QuillTestEditDesktop";
 
 
+function readFile(doc) {
+  return new Promise((resolve, reject) => {
+    var reader = new FileReader();
 
+    reader.readAsDataURL(doc);
+    reader.onloadend = function () {
+      resolve(reader.result);
+    }
+  })
+
+}
 
 
 const desktopmodules ={
@@ -37,7 +47,7 @@ const desktopmodules ={
   },
   imageUploader:{
       upload: async file =>{
-          let blob_image = await this.readFile(file) 
+          let blob_image = await readFile(file) 
 
           return await new Promise((resolve, reject)=>{
 
@@ -81,7 +91,7 @@ const modules = {
   },
   imageUploader:{
       upload: async file =>{
-          let blob_image = await this.readFile(file) 
+          let blob_image = await readFile(file) 
 
           return await new Promise((resolve, reject)=>{
 
@@ -538,22 +548,7 @@ class EditPost extends React.Component {
                 </div>
               )}
 
-              {this.state.network_error !== "" ? (
-                <p style={{ color: "red", width: "90%", borderRadius: "0px" }}>
-                  {" "}
-                  {this.state.network_error}{" "}
-                </p>
-              ) : (
-                ""
-              )}
-              {this.state.error_message == "editor-error" ? (
-                <p style={{ color: "red", width: "90%", borderRadius: "0px" }}>
-                  <Icon name="close" color="yellow" size="big" /> You've not
-                  written anything yet!{" "}
-                </p>
-              ) : (
-                ""
-              )}
+            
 
             <Grid.Column
               mobile={16}

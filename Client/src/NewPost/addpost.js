@@ -20,6 +20,19 @@ import cat from "../Dashboard/categories";
 import QuillTestNew from "./Components/QuillTestNew";
 import QuillTestNewDesktop from "./Components/QuillTestNewDesktop";
 
+
+
+function readFile(doc) {
+  return new Promise((resolve, reject) => {
+    var reader = new FileReader();
+
+    reader.readAsDataURL(doc);
+    reader.onloadend = function () {
+      resolve(reader.result);
+    }
+  })
+
+}
   
 const desktopmodules ={
   toolbar:[
@@ -35,7 +48,7 @@ const desktopmodules ={
   },
   imageUploader:{
       upload: async file =>{
-          let blob_image = await this.readFile(file) 
+          let blob_image = await readFile(file) 
 
           return await new Promise((resolve, reject)=>{
 
@@ -79,7 +92,7 @@ const modules = {
   },
   imageUploader:{
       upload: async file =>{
-          let blob_image = await this.readFile(file) 
+          let blob_image = await readFile(file) 
 
           return await new Promise((resolve, reject)=>{
 

@@ -144,7 +144,7 @@ class Signup extends React.Component {
       .then( _ => {
 
         this.props.dispatch({ type: 'INJECT_PROFILE', payload: _ })
-        this.props.history.replace('/app/dashboard');
+        this.props.history.replace('/app/read');
 
       })
       .catch(_ => {
@@ -164,7 +164,7 @@ this.setState({open_modal:true})
 
 closeModal =()=>{
   this.setState({open_modal:false})
-  this.props.history.replace('/app/login');
+  this.props.history.replace('/login');
 }
 
 
