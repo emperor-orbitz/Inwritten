@@ -1,91 +1,596 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Inwritten</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Inwritten - A Theme based content hub to start your blog">
-    <meta name="keywords" content="Inwritten, Stories, Online Editor, smartblog, creative, content">
-    <meta name="google-site-verification" content="MsrurMObUJdLEKb0o2s2lANj5l_ERBIixHEWRAzrXKk" />
-    <!-- Font -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- Themify Icons -->
-    <link rel="stylesheet" href="css/themify-icons.css">
-    <!-- Owl carousel -->
-    <!-- Main css -->
-    <link href="css/launchpage.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Inwritten - A Theme based content hub to start your blog">
+  <meta name="keywords" content="Inwritten, Stories, Online Editor, smartblog, creative, content">
+  <meta name="google-site-verification" content="MsrurMObUJdLEKb0o2s2lANj5l_ERBIixHEWRAzrXKk" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Inwritten</title>
+  <!-- Plugins CSS -->
+  <link rel="stylesheet" href="./indexpage/plugins/bootstrap-4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./indexpage/plugins/fancybox-master/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="./plugins/aos-animation/aos.css">
+  <!-- fonts -->
+  <link rel="stylesheet" href="./indexpage/fonts/ep-icon-fonts/css/style.css">
+  <link rel="stylesheet" href="./indexpage/fonts/fontawesome-5/css/all.min.css">
+  <!-- <link rel="stylesheet" href="./fonts/typography-font/typo-fonts.css"> -->
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="./indexpage/css/settings.css">
+  <link rel="stylesheet" href="./indexpage/css/style.css">
 </head>
 
 <body>
+<div class="site-wrapper">
+    <!-- <div class="preloader-wrap">
+        <div class="berlin-cube-grid">
+            <div class="berlin-cube berlin-cube1"></div>
+            <div class="berlin-cube berlin-cube2"></div>
+            <div class="berlin-cube berlin-cube3"></div>
+            <div class="berlin-cube berlin-cube4"></div>
+            <div class="berlin-cube berlin-cube5"></div>
+            <div class="berlin-cube berlin-cube6"></div>
+            <div class="berlin-cube berlin-cube7"></div>
+            <div class="berlin-cube berlin-cube8"></div>
+            <div class="berlin-cube berlin-cube9"></div>
+        </div>
+    </div> -->
+    <!-- Header Starts -->
+    <header class="site-header d-none d-lg-block">
+        <div class="container-fluid pl-lg--35 pr-lg--35">
+            <div class="row justify-content-between align-items-center position-relative">
+                <div class="col">
+                    <!-- Brand Logo -->
+                    <div class="brand-logo">
+                        <a href=""><img src="https://www.inwritten.com/images/inwritten-logo-white.png" alt="" width="140px" height="40px"/></a>
+                    </div>
+                </div>
+                <!-- Menu Block -->
+                <div class="col">
+                    <div class="main-navigation ">
+                        <ul class="main-menu">
+                            <li class="menu-item has-dropdown">
+                                <a href="#features">Your one-stop tool for a modern blog</a>
+                                <!-- <ul class="menu-dropdown">
+                                    <li class="single-item">
+                                        <a href="../s01/index.html">
+                                        <h3>Mobile Application</h3> 
+                                        <p>Best for Mobile App Presentation</p>
+                                        </a>
+                                    </li>
+                                    <li class="single-item">
+                                        <a href="../s02/index.html">
+                                            <h3>Web Application</h3>
+                                            <p>Best for Web Application</p>
+                                        </a> 
+                                    </li>
+                                    <li class="single-item">
+                                        <a href="../s03/index.html">
+                                        <h3>SaaS Application</h3>
+                                        <p>Best for SaaS Application</p>
+                                    </a> 
+                                    </li>
+                                    <li class="single-item">
+                                        <a href="../s04/index.html">
+                                                <h3>SaaS Subscription</h3>
+                                            <p>Best for SaaS Subscription</p>
+                                        </a> 
+                                    </li>
+                                    <li class="single-item">
+                                        <a href="../s05/index.html">
+                                            <h3>Digital Service</h3>
+                                            <p>Best for Digital Services</p>
+                                        </a>
+                                    </li>
+                                    <li class="single-item">
+                                        <a href="../s06/index.html">
+                                            <h3>Online Course</h3>
+                                            <p>Best for Online Course</p>
+                                        </a>
+                                    </li>
+                                    <li class="single-item">
+                                        <a href="../s07/index.html">
+                                            <h3>Software</h3>
+                                            <p>Best for Software & Application</p>
+                                        </a>
+                                    </li>
+                                </ul> -->
+                            </li>
+                            <!-- <li class="menu-item"><a href="#">Pricing</a></li>
 
-   
+                            <li class="menu-item"><a href="#">Support</a></li> -->
+                        </ul>
+                    </div>
+                    <div class="mobile-menu"></div>
+                </div>
 
-    <div class="dark">
-       
-
-    
-
-    <div class="left-right">
-        
-            <nav class="navbar navbar-light" style="background-color: white;color:black">
-                <img src="images/inwritten-logo.png" class="page-logo navbar-brand" />
-                <a href="/login" style="font-size:14px;color:rgb(10, 2, 44)">log in</a>
-            </nav>
-
-
-            <div class="container">
-            <div class="divider" style="width:50%; margin:40px 25% 0px 25%; height:0px;font-size: 10px !important; "></div>
-
-            <h5> A HUB TO SHARE CREATIVE <b id="change_of_words">CONTENTS</b> </h5>
-                <br/>
-            <span style="font-size: 14px;">Just Write And Publish. We'll take it further.</span>
-   
-            <p style="margin-bottom:30px;color:white; font-size: 14px;"> Be the first to join the early access list and earn a chance to get <b>a free one year premium theme access</b> </p>
-            
-            <p> <form action="" id="subscribeForm" method="POST">
-                <p id="error-box"></p>
-                <input type="email" name="email" placeholder="    Enter your email address" required
-                    aria-required="true" style="border:1px solid white;height:50px; border-radius:25px; width:50%" />
-                <input type="submit" class=" btn btn-submit" value="Get Early Access"
-                    style="height:50px; border:none; border-radius:25px; width:20%; background:rgb(10, 2, 44); color:white" />
-            </form>
-            <div class="divider" style="width:50%; margin:10px 25% 0px 25%; height:0px; "><p>-&nbsp;OR&nbsp;-</p>
-            
-                <p><a href="/signup"><button class="btn btn-sm btn-dark" style=" border-radius:8px;padding:10px">Try out a beta version!</button></a></p>
-
-            </div>
-
-
-
-            </p>
-
-            <div class="socials-panel">
-                <p style="color:white; font-size: 12px">Meanwhile, never miss out on our pages</p>
-                <a class="unstyled-link" href="https://www.inwritten.com/signup"><span
-                        class="ti ti-sm ti-world white"></span></a>
-                <a class="unstyled-link" href="https://www.facebook.com/inwritten"><span
-                        class="ti ti-sm ti-facebook white"></span></a>
-                <a class="unstyled-link" href="https://www.instagram.com/inwritten_"><span
-                        class="ti ti-sm ti-instagram white"></span> </a>
-                <a class="unstyled-link" href="https://www.linkedin.com/company/42405525/"><span
-                        class="ti ti-sm ti-linkedin white"></span> </a>
-
-</div>
-            </div>
+                <!-- Button Block -->
+                <div class="col">
+                    <div class="header-btns">
+                        <a href="/login" class="btn btn--transparent ">Sign in</a>
+                        <a href="/signup" class="btn btn--primary hvr-shine">Create an account</a>
+                    </div>
+                </div>
             </div>
         </div>
+    </header>
 
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <!-- Plugins JS -->
-    <!-- Custom JS -->
-    <script src="js/launch.js"></script>
+    <!-- Mobile menu Header Starts -->
+    <header class="mobile-header d-lg-none">
+    <div class="container">
+        <div class="row align-items-center">
+        <div class="col-md-4 col-7">
+            <a href="index.html" class="site-brand">
+                <img src="https://www.inwritten.com/images/inwritten-logo-white.png" alt="" width="140px" height="40px">
+            </a>
+        </div>
+        <div class="col-md-8 col-5 text-right">
+            <div class="header-top-widget">
+                <ul class="header-links">
+                    <li class="single-link">
+                    <a href="#" class="link-icon hamburger-icon off-canvas-btn"><i class="icon icon-menu-34"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </div>
+    </header>
+    <!--Off Canvas Navigation Start-->
+    <aside class="off-canvas-wrapper">
+        <div class="btn-close-off-canvas" >
+            <i class="icon icon-simple-remove"></i>
+        </div>
+        <div class="off-canvas-inner">
+            <!-- mobile menu start -->
+            <div class="mobile-navigation">
+                <!-- mobile menu navigation start -->
+                <nav class="off-canvas-nav">
+                    <ul class="mobile-menu">
+                        <li class="menu-item-has-children">
+                            <a href="">Your one-stop tool for a modern blog <i class="icon icon-minimal-down"></i></a>
+                            <!-- <ul class="sub-menu">
+                                <li class="single-item">
+                                    <a href="">
+                                        <h3>Mobile Application</h3>
+                                        <p>Best for Mobile App Presentation</p>
+                                    </a>
+                                </li>
+                                <li class="single-item">
+                                    <a href="">
+                                        <h3>Web Application</h3>
+                                        <p>Best for Mobile App Presentation</p>
+                                    </a>
+                                </li>
+                                <li class="single-item">
+                                    <a href="">
+                                        <h3>SaaS Application</h3>
+                                        <p>Best for Mobile App Presentation</p>
+                                    </a>
+                                </li>
+                                <li class="single-item">
+                                    <a href="">
+                                        <h3>SaaS Subsciption</h3>
+                                        <p>Best for Mobile App Presentation</p>
+                                    </a>
+                                </li>
+                            </ul> -->
+                        </li>
+                        <li><a href="#">Pages</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <!-- mobile menu navigation end -->
+            </div>
+            <!-- mobile menu end -->
+
+            <!-- Header buttons start -->
+            <div class="header-btns offcanvas">
+                <div class="header-btns">
+                    <a href="#" class="btn btn-primary--opacity hvr-bounce-to-right">Sign in</a>
+                    <a href="#" class="btn btn--primary hvr-shine">Start free trial</a>
+                </div>
+            </div>
+            <!-- Header buttons end -->
+        </div>
+    </aside>
+    <!--Off Canvas Navigation End-->
+
+    <!-- Banner Section -->
+    <section class="hero-area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-7 col-lg-8 col-md-10">
+                    <div class="hero-content">
+                        <h1 class="title h2">Write and follow contents that matter to you, faster!</h1>
+                        <p>Start a blog. Share your experience. Follow a bigger community that knows you best.</p>
+                        <div class="hero-btn">
+                            <a href="#" class="btn btn--primary hvr-shine">Get on the early bird list</a>
+                            <span class="text--info">Receive Specialized updates and info</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="dashboard-img" data-aos="fade-up" data-aos-duration='1500' data-aos-once="true">
+                        <img src="./indexpage/image/Capture3.PNG" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="hero-shape"><img src="image/hero-shape.png" alt=""></div> -->
+    </section>
+
+    <!-- Feature Section -->
+    <div class="feature-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-9 col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration='1500' data-aos-once="true" data-aos-delay="300">
+                    <div class="widget01 feature--widget">
+                        <div class="widget__icon">
+                            <span class="inner-circle circle-bg-1"></span>
+                            <span class="outer-circle circle-bg-1"></span>
+                        </div>
+                        <div class="widget__body divider--right">
+                            <h3 class="widget__heading h6">No annoying pop-ups and ads on articles</h3>
+                            <p><b>We are not Medium!</b> We are a community that believes in sharing brilliant ideas and knowledge absolutely free.  </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-sm-9 col-md-6 col-lg-4"  data-aos="fade-up" data-aos-duration='1500' data-aos-once="true" data-aos-delay='800'>
+                    <div class="widget01 feature--widget">
+                        <div class="widget__icon">
+                            <span class="inner-circle circle-bg-2"></span>
+                            <span class="outer-circle circle-bg-2"></span>
+                        </div>
+                        <div class="widget__body divider--right">
+                            <h3 class="widget__heading h6">Get the right kickstart </h3>
+                            <p>You push your contents to the feeds of Inwritten users to give your contents the visibility it needs from a large audience.</p>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-sm-9 col-md-6 col-lg-4"  data-aos="fade-up" data-aos-duration='1500' data-aos-once="true" data-aos-delay='800'>
+                    <div class="widget01 feature--widget">
+                        <div class="widget__icon">
+                            <span class="inner-circle circle-bg-2"></span>
+                            <span class="outer-circle circle-bg-2"></span>
+                        </div>
+                        <div class="widget__body divider--right">
+                            <h3 class="widget__heading h6">Special weekly emails to audience </h3>
+                            <p>Grow your audience with free newsletter services with the click of a button and let your readers subscribe to your blog easily.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9 col-md-6 col-lg-4"  data-aos="fade-up" data-aos-duration='1500' data-aos-once="true" data-aos-delay='800'>
+                    <div class="widget01 feature--widget">
+                        <div class="widget__icon">
+                            <span class="inner-circle circle-bg-2"></span>
+                            <span class="outer-circle circle-bg-2"></span>
+                        </div>
+                        <div class="widget__body divider--right">
+                            <h3 class="widget__heading h6">Search Engine Optimization </h3>
+                            <p>Get free preset template designs which support popular search engines on the web.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9 col-md-6 col-lg-4"  data-aos="fade-up" data-aos-duration='1500' data-aos-once="true" data-aos-delay='800'>
+                    <div class="widget01 feature--widget">
+                        <div class="widget__icon">
+                            <span class="inner-circle circle-bg-2"></span>
+                            <span class="outer-circle circle-bg-2"></span>
+                        </div>
+                        <div class="widget__body divider--right">
+                            <h3 class="widget__heading h6">Get the right kickstart </h3>
+                            <p>You push your contents to the feeds of Inwritten users to give your contents the visibility it needs from a large audience.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9 col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration='1500' data-aos-once="true" data-aos-delay='1300'>
+                    <div class="widget01 feature--widget">
+                        <div class="widget__icon">
+                            <span class="inner-circle circle-bg-3"></span>
+                            <span class="outer-circle circle-bg-3"></span>
+                        </div>
+                        <div class="widget__body">
+                            <h3 class="widget__heading h6">Render in various preset themes</h3>
+                            <p>Showoff your contents in multiple preset colors and designs the easy way without coding. In-built template support with no zero-installments.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Content Section -->
+    <div class="content-section bg-light-white section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="content-img content-img-group-1">
+                        <div class="image-1 d-none d-md-block " data-aos="fade-left" data-aos-duration='1500' data-aos-once="true">
+                             <img src="./indexpage/image/output-onlinepngtools.png" alt="" >
+                        </div>
+                        <div class="image-2 image-overlay d-none d-md-block" style="width:60%" data-aos="fade-right" dat data-aos-duration="1500" data-aos-once="true">
+                             <img src="./indexpage/image/cheatsheet.png" alt="">
+                        </div>
+                        <div class="image-mobile d-md-none">
+                            <img src="./indexpage/image/cheatsheet.png" alt="" >
+                        </div>
+                     </div>
+                </div>
+                <div class="col-xl-5 offset-xl-1 col-lg-6 col-md-6">
+                    <div class="content-section-text" style="margin-top:20px">
+                        <h2 class="title">Blog with the easiest tools <br class="d-none d-xs-block"> on the go.</h2>
+                        <p>Create your contents within minutes contents with a responsive WYSIWYG editor right on the web and get extended features right when you publish. </p>
+                        <a href="/signup" class="btn btn-primary--opacity hvr-bounce-to-right">Start Writing</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Content Section 2 -->
+    <div class="content-section section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-7 col-lg-6 col-md-6 order-md-2">
+                    <div class="content-img content-img-group-2">
+                       <div class="image-1 d-none d-md-block" data-aos="fade-right" data-aos-duration='1500' data-aos-once="true">
+                            <img src="./indexpage/image/T2-COPY.png" alt="">
+                       </div>
+                       <div class="image-2 d-none d-md-block" data-aos="fade-left" data-aos-duration='1500' data-aos-once="true">
+                            <img src="./indexpage/image/T1-COPY.png" alt="">
+                       </div>
+                    
+                    </div>
+                </div>
+                <div class="col-xl-5 col-lg-6 col-md-6 order-md-1">
+                    <div class="content-section-text">
+                        <h2 class="title">Render your stories in different preset designs <br class="d-none d-xs-block"></h2>
+                        <p>Publish your story with lots of unique preset themes, you can easily design your space without coding.</p>
+                        <a href="/app/settings/templates" class="btn btn-primary--opacity hvr-bounce-to-right">Explore our store</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Video Section -->
+    <div class="section-padding video-bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-10">
+                    <div class="video-content">
+                        <a data-fancybox href="#" class="video-btn" data-aos="zoom-in" data-aos-duration='1000' data-aos-once="true"><i class="icon icon-triangle-right-17-2"></i></a>
+                        <h2 class="title">We promote in-built newsletter campaigns</h2>
+                        <p>Inwritten helps you build an audience around your stories with specialized weekly newsletters through emails.</p>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+    <!-- Pricing Section -->
+    <div id="price-section" class="pricing-section section-padding-top mb--60 mb-md--80">
+        <div class="pricing-section-bg">
+            <div class="pricing-shape">
+                <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 72" version="1.1">
+                    <path d="M0 9.21563C0 9.21563 486.438 -2.64935 790.035 31.8207C1093.63 66.2908 1343.93 92.2333 1600 44.5336L1600 0L0 0L0 9.21563Z" transform="translate(0 0.5)" id="Path-4" fill="#D8D8D8" stroke="none" class="pricing-shape-color"/>
+                </svg>
+            </div>
+        </div>
+       
+    </div>
+
+    <!-- Brand Section -->
+    <div class="brand-section pb--60 pb-md--100">
+        <h2 class="title text-center">Why we write on Inwritten</h2>
+
+
+        <!-- <h2 class="title">We help you to be successful</h2>
+
+        <div class="brand-top-text">
+            <h2>We are proud to have some big brands as our customer</h2>
+        </div> -->
+        <!-- <div class="container">
+            <div class="brand-top-text">
+                <P>We are proud to have some big brands as our customer</P>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-10">
+                    <div class="brand-wrapper">
+                        <div class="single-brand">
+                            <img src="./image/client-1.png" alt="">
+                        </div>
+                        <div class="single-brand">
+                            <img src="./image/client-2.png" alt="">
+                        </div>
+                        <div class="single-brand">
+                            <img src="./image/client-3.png" alt="">
+                        </div>
+                        <div class="single-brand">
+                            <img src="./image/client-4.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    <!-- Testimonial Section -->
+    <div class="pb--60 pb-md--70">
+        <div class="container">
+            <div class="card-group berlin-card-group">
+                <div class="card testimonial-card-1">
+                    <div class="card-body">
+                    <span class="quote-icon">”</span>
+                    <p class="card-text">“You made it so simple. My new site is so much faster and easier to work with than my old site. I just choose the page, make the change and click save.”</p>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <div class="client-card">
+                            <div class="image">
+                                <img src="./indexpage/image/testimonial1.png" alt="">
+                            </div>
+                            <div class="content">
+                                <h5 class="title">Atotileto Sulyman</h5>
+                            <span>From RealtyBox.Ng</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card testimonial-card-1">
+                    <div class="card-body">
+                    <span class="quote-icon">”</span>
+                    <p class="card-text">“Simply the best. Better than all the rest. I’d recommend this product to beginners and advanced users.”</p>
+                </div>
+                <div class="card-footer">
+                    <div class="client-card">
+                        <div class="image">
+                            <img src="./indexpage/image/testimonial2.png" alt="">
+                        </div>
+                        <div class="content"> 
+                            <h5 class="title">Abimbola Sururoh</h5>
+                            <span>From FeetMe</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="card testimonial-card-1">
+                    <div class="card-body">
+                        <span class="quote-icon">”</span>
+                        <p class="card-text">“This is a top quality product. No need to think twice before purchasing, you simply could not go wrong”</p>
+                    </div>
+                    <div class="card-footer">
+                            <div class="client-card">
+                                <div class="image">
+                                    <img src="./indexpage/image/testimonial3.png" alt="">
+                                </div>
+                                <div class="content">
+                                    <h5 class="title">Abdulgaffar Maleeq</h5>
+                                    <span>From Inwritten</span>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="pb--60 pb-md--165">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-10 col-md-12">
+                    <div class="cta-wrapper">
+                        <h5 class="title mt--20" data-aos="fade-right" data-aos-duration='1500' data-aos-once="true">Get free access to in-app premium themes</h5>
+                        <div class="button" data-aos="fade-left" data-aos-duration='1500' data-aos-once="true">
+                            <a href="" class="btn btn--primary mt--20  hvr-shine">I'm interested!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="section-padding-top footer-bg shape-holder">
+        <div class="container">
+            <div class="row justify-content-md-center justify-content-lg-left space-db--40">
+                <div class="col-lg-1 col-md-2 col-sm-3 col-4 mb--40">
+                    <h3 class="footer-title">Stories</h3>
+                    <ul class="footer-list">
+                        <li><a href="/stories">Explore</a></li>
+                        <li><a href="/stories">Popular</a></li>
+                        <li><a href="">Editor's Pick</a></li>
+                        <li><a href="">F.a.q.</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 offset-lg-1 col-md-2 col-sm-3 col-4 mb--40">
+                    <div class="pl-lg--40">
+                        <h3 class="footer-title">Site Map</h3>
+                        <ul class="footer-list">
+                            <li><a href="/login">log In</a></li>
+                            <li><a href="/signup">Signup</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-2 col-md-2 col-sm-3 col-4 mb--40">
+                    <div class="pl-lg--80">
+                            <h3 class="footer-title">Store</h3>
+                            <ul class="footer-list">
+                                <li><a href="">Catalog</a></li>
+                                <li><a href="">Popular</a></li>
+                                <li><a href="">Features</a></li>
+                            </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 offset-lg-1 col-md-2 col-sm-3 col-4 mb--40">
+                    <div class="pl-lg--25">
+                            <h3 class="footer-title">Store</h3>
+                            <ul class="footer-list">
+                                <li><a href="">Catalog</a></li>
+                                <li><a href="">Popular</a></li>
+                                <li><a href="">Features</a></li>
+                            </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-3 col-4 mb--40">
+                    <div class="pl-lg--60">
+                            <h3 class="footer-title">Store</h3>
+                            <ul class="footer-list">
+                                <li><a href="">Catalog</a></li>
+                                <li><a href="">Popular</a></li>
+                                <li><a href="">Features</a></li>
+                            </ul>
+                    </div>
+                </div> -->
+            </div>
+
+            <div class="copyright-area pt--60 pt-md--80 pb--40">
+                <div class="row align-items-center space-db--10">
+                        <div class="col-lg-2 offset-lg-2 col-md-3 order-md-3 mb--10">
+                        <ul class="footer-list social-list">
+                            <li><a href=""><i class="icon icon-logo-twitter"></i></a></li>
+                            <li><a href="https://www.facebook.com/inwritten"><i class="icon icon-logo-fb-simple"></i></a></li>
+                            <li><a href=""><i class="icon icon-google"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 offset-lg-1 col-md-5 col-sm-7 order-md-2 mb--10">
+                        <ul class="footer-list list-inline">
+                            <li><a href="/terms-and-conditions">Privacy Policy</a></li>
+                            <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+                            <li><a href="">Site map</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-5 order-md-1  mb--10">
+                        <p class="mb-0">© 2020 Inwritten. All rights reserved</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="footer-shapes">
+                <!-- <div class="shape-1">
+                    <img src="./image/footer-shape.svg" alt="">
+                </div> -->
+                <div class="shape-2">
+                    <!-- <img src="./image/footer-shape-white.svg" alt=""> -->
+                </div>
+        </div>
+    </footer>
+</div>
+  <!-- Vendor JS-->
+  <script src="./indexpage/plugins/jquery/jquery.min.js"></script>
+  <script src="./indexpage/plugins/jquery/jquery-migrate.min.js"></script>
+  <script src="./indexpage/plugins/bootstrap-4.3.1/js/bootstrap.bundle.js"></script>
+
+  <!-- Plugins JS -->
+  <script src="./indexpage/plugins/fancybox-master/jquery.fancybox.min.js"></script>
+  <script src="./indexpage/plugins/aos-animation/aos.js"></script>
+
+  <!-- Custom JS -->
+  <script src="./indexpage/js/active.js"></script>
 </body>
 
 </html>
