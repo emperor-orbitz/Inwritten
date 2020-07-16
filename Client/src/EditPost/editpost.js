@@ -699,15 +699,16 @@ class EditPost extends React.Component {
                 style={{ color: "white !important" }}
                 open={this.state.open_options}
                 onClose={this.close}
+                basic
               >
                 <Modal.Header>
                   <h3 style={{ margin: "1px 2%", color: "black" }}>Settings</h3>
                 </Modal.Header>
-                <Modal.Content scrolling>
+                <Modal.Content style={{padding:"0px !important"}} >
 
                   <Modal.Description>
                     <div className="editor-side1" id="editor-side1">
-                      <p style={{ color: "silver" }}>
+                      <p style={{ fontSize:"11px" }}>
                         Preview story descriptions, tags and featured image
                         which makes your story unique.
                       </p>

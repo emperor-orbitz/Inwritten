@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import '../../Resources/styles/article.scss';
-import {Table, Grid, Button, Icon } from 'semantic-ui-react'
+import {Table, Grid, Button } from 'semantic-ui-react'
 
 //   DATE CONVSERSION
 

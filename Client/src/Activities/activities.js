@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../Resources/styles/comment.scss';
-import { Icon, Button } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 

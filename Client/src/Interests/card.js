@@ -1,6 +1,5 @@
 import React from 'react'
 import { Item, Grid } from 'semantic-ui-react'
-import { Link } from "react-router-dom"
 function image_transform(url, width, height){
   //Add height and width to image
    return url.replace("/upload/", `/upload/h_${height},w_${width},c_crop/`)
@@ -17,11 +16,9 @@ const ListExampleSelection = (props) =>{
               <Item.Image floated="right" size="small" src={image_transform(x.featured_image, 200, 92 )} />
         
               <Item.Content verticalAlign="middle" >
-                <Item.Header as={Link} to={x.post_link } ><a target="_blank" href={x.post_link}><h4 style={{color:"black"}}>{x.title}</h4></a></Item.Header>
+                <a target="_blank" href={x.post_link}><h4 style={{color:"black"}}>{x.title}</h4></a>
                 <Item.Description>{x.description}</Item.Description>     
                    <Item.Meta style={{marginTop:'12px'}}>By {x.author} </Item.Meta>
-
-                    
                     
               </Item.Content>
             </Item>

@@ -3,7 +3,7 @@
 
 <head>
   <title>Inwritten Stories</title>
-    <meta name="keywords" content="inwritten stories smartblog smart-blog">
+  <meta name="keywords" content="inwritten stories smartblog smart-blog">
   <meta name="description" content="Create and follow-up contents that matter to you on Inwritten">
 
   <meta charset="utf-8">
@@ -65,7 +65,7 @@
                 <li><a href="/stories/business">Business</a></li>
                 <li><a href="/stories/business">Poetry</a></li>
                 <li class="nav-item dropdown">
-                  <a href="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria_haspopup="true" aria-expanded="false">More&nbsp; &dArr;</a>
+                  <a href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria_haspopup="true" aria-expanded="false">More&nbsp; &dArr;</a>
                   <ul class="dropdown-menu" style="border:3px solid #1c243c">
                     <li class="px-3"><a href="/stories/business">Health</a></li>
 
@@ -84,7 +84,7 @@
                 {{!-- <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span
                       class="icon-search"></span></a></li> --}}
 
-                <li ><a href="/app/login"><button style="background: black; color:white" class="btn btn-md"> Log in</button></a></li>
+                <li ><a href="/login"><button style="background: black; color:white" class="btn btn-md"> Log in</button></a></li>
 
               </ul>
             </nav>
@@ -119,13 +119,13 @@
           <div class="col-lg-4 mb-2">
             <div class="pan">
               <div class="image-holder">
-               <a href="{{post_link}}"> <img src="{{featured_image}}" /></a>
+               <a href="{{post_link}}"> <img src="{{featured_image}}" alt="{{title}}" /></a>
               </div>
               <div class="pan-body">
-                <h6><a href="{{post_link}}" style="color:black">
-                    {{title}}</a></h6>
-                <p class="description card-text">By<a href="/user/{{author}}"> {{author}}</a> in {{category}}</p>
-                <p>{{time_to_read}} mins read</p>
+                <h6><a href="{{post_link}}" style="color:black">{{title}}</a></h6>
+                <p class="description card-text" style="font-size: 12px; margin-bottom:0px;color:rgba(0, 0, 0, 0.54)">{{description}} <br>By<a href="/user/{{author}}"> {{author}}</a> in {{category}}</p>
+                 <p style="font-size:11px; ">{{time_to_read}} mins read</p>
+                
               </div>
             </div>
             </a>

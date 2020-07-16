@@ -5,7 +5,7 @@ import { Switch, Route } from 'react-router';
 import HeaderAccount from '../src/Dashboard/header_account';
 //import RichTextExample from '../src/NewPost/Components/test-editor';
 import {CSSTransition, TransitionGroup } from "react-transition-group"
-import {  useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 
 function App() {

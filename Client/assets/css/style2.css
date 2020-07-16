@@ -1248,7 +1248,7 @@ h1, h2, h3, h4, h5,
     .image-holder img{
       width:100px;
       height:100px;
-      border-radius: 5px;
+      border-radius: 0px;
     }
 
     .image-holder{

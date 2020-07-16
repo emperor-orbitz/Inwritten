@@ -1,10 +1,8 @@
 import React from 'react';
 import '../../Resources/styles/comment.scss';
-import { Table } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import FetchNotifications from "../../Controllers/notifications.controller"
-import ListExampleSelection from "./table"
+
 
 
 

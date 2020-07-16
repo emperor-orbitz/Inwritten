@@ -2,7 +2,6 @@ import React from 'react';
 import '../../Resources/styles/comment.scss';
 
 import ReactQuill, { Quill } from 'react-quill'; // ES6
-import { Button } from "semantic-ui-react";
 import "./quillcore.scss";
 import "quill/dist/quill.core.js";
 import "../../Resources/styles/editor.scss";

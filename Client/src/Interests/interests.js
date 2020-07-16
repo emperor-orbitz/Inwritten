@@ -1,9 +1,8 @@
 import React from 'react';
 import '../../Resources/styles/comment.scss';
-import { Button, Form, Input, Icon, Select, List, Image, Grid } from 'semantic-ui-react';
+import { Button, Form, Input, Grid } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { Link } from "react-router-dom"
 import FetchArticles from '../../Controllers/article.controller';
 import ListExampleSelection from "./card"
 

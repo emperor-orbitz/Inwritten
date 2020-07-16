@@ -20,14 +20,15 @@ var send_bulk_email = (req, res, next) => {
     const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, 
         domain: "mg.inwritten.com",
         host: "api.mailgun.net"
-        /* -> Add this line for EU region domains*/ });
+        /* -> Add this line for EU region domains*/ 
+        });
       
       
       const data = {
       from: "Inwritten <support@inwritten.com>",
       to: req.body.alias,
       bcc:"9jaexclusive@gmail.com, malorbit360@gmail.com",
-      subject: 'Daily Inwritten newsletter',
+      subject: 'Inwritten\'s new Smartblog ',
       text: 'Testing some Inwritten awesomness!',
       template: req.body.template, //template name
    
