@@ -157,7 +157,7 @@ this.search_with_criteria()
             return (
             <div className="comment-div" style={{ marginTop: "20px !important" }}>
             <h3>Most Recent on {item} </h3>
-            <Button secondary>Follow {item} </Button>
+            <Button secondary size="small" icon="add">Follow {item} </Button>
 
                 <Form size="small" >
 

@@ -140,7 +140,7 @@ try {
 
               <Divider /> */}
 
-              <Grid.Row ><h3 style={{marginLeft:"12px"}}>Popular Stories </h3></Grid.Row>
+              <Grid.Row ><h3 style={{marginLeft:"12px"}}>Trending Stories </h3></Grid.Row>
               <DraftPreview data={ this.state.blog } imports={imports} />
 
               <Divider />

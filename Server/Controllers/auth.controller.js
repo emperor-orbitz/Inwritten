@@ -51,7 +51,7 @@ var send_mail = async (req, res) => {
                     else {
                         try {
                             var send = await sgMail.send(msg);
-                            console.log('SENT THE MESSAGE');
+                            // console.log('SENT THE MESSAGE');
                             res.status(http_status.OK.code)
                                 .send({ data: send });
                         }

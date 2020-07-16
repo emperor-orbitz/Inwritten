@@ -243,7 +243,7 @@ class HeaderAccount extends React.Component {
                   <Menu.Item text={`@${this.props.ProfileReducer.username}`} as={Dropdown}  >
 
                     <Dropdown.Menu>
-                    <Dropdown.Item icon='hourglass start' text='New Story' as={Link} to='/app/create' />
+                    <Dropdown.Item icon='hourglass start' text='Create new story' as={Link} to='/app/create' />
 
                       <Dropdown.Item icon='dashboard' text='Dashboard' as={Link} to='/app/read' />
                       <Dropdown.Item icon='bell' text='Notifications' as={Link} to='/app/notification' style={{ color: 'green' }} />
@@ -277,7 +277,7 @@ class HeaderAccount extends React.Component {
                 className='sidebar'>
 
                 <div style={{ textAlign: 'center', padding: '10px auto', color: 'rgb(3, 68, 94)', background: 'white' }} >
-                  <a target="__blank" href="/" style={{ color: "black" }}> <img src={logo} style={{ width: "160px", height: "68px", margin:"20px auto" }} /></a>
+                  <a target="__blank" href="/stories" style={{ color: "black" }}> <img src={logo} style={{ width: "160px", height: "68px", margin:"20px auto" }} /></a>
                   <br />
 
                 </div>
@@ -346,10 +346,11 @@ class HeaderAccount extends React.Component {
 
         {/* <img src={double_u} className='splash' /> */}
         <Loader
-         type="tailspin"
+         type="TailSpin"
          color="#1c243c"
-         height={100}
-         width={100}
+         height={70}
+         width={70}
+         
         //  timeout={3000} //3 secs
  
       />

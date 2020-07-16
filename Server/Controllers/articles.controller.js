@@ -138,7 +138,7 @@ var updateDraftAndSave = (req, res)=>{
             // console.log("Unable to remove draft"+err)
         }
         else{
-            console.log("i passed here just not quite long", ops)
+            // console.log("i passed here just not quite long", ops)
             //save as an Article Now.
             save(req,res)
         }
@@ -174,7 +174,7 @@ var save = (req, res) =>{
              overwrite: true
          })
          .then(result =>{
-            console.log(result, "THIS IS RESULT OO")
+            // console.log(result, "THIS IS RESULT OO")
              var post = new posts();
              let final = Object.assign({}, postDoc, { featured_image: result.url });
              post.insertPost(final, (err, success) => {
