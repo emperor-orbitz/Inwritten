@@ -18,6 +18,7 @@ draftSchema.methods.loadUserDraft = (_id, limit, callback) => {
         .populate('comments')
         .select('-featured_image')
         
+        
         ;
 };
 

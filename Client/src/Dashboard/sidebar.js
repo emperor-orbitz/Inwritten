@@ -39,7 +39,7 @@ class SideBar {
         settingsSubmenu: (
             <Menu secondary vertical  >
                 <Menu.Item as={Link} to="/app/settings/adverts"><Icon name="address card" />Ad settings</Menu.Item>
-                <Menu.Item as={Link} to="/app/settings/withdrawals"><Icon name="money bill alternate" />My Balance</Menu.Item>
+                <Menu.Item as={Link} to="/app/settings/withdrawals"><Icon name="money bill alternate" />Subscribers List</Menu.Item>
                 {/*<Menu.Item as={Link} to="/settings/preferences" disabled={true}><Icon name="user" />Preferences</Menu.Item>)*/}
 
             </Menu>

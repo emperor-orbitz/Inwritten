@@ -1,14 +1,14 @@
 import React from 'react';
 
 import '../../Resources/styles/account.scss';
-import { Button,  Grid, Card, Image, Label, Item, Divider, Dropdown, Loader, Placeholder } from 'semantic-ui-react';
+import { Button,  Grid, Card, Image, Label, Item, Divider, Dropdown, Loader, Placeholder, Container } from 'semantic-ui-react';
 import {  Icon,  Progress } from 'semantic-ui-react';
 import Connection from '../../Controllers/auth.controller';
 import {  withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import FetchArticles from '../../Controllers/article.controller';
 import DraftPreview from '../Archives/draftpreview';
-import NotificationsPreview from '../Notifications/notifications_preview';
+// import NotificationsPreview from '../Notifications/notifications_preview';
 import profileController from "../../Controllers/profile.controller"
 import FetchNotifications from "../../Controllers/notifications.controller"
 import FetchBlog from "../../Controllers/blog.controller"
@@ -106,14 +106,14 @@ try {
       <div >
 
           <div className="bodyArticle">
+            <Container>
             <Grid >
-            <Grid.Row ><h3 style={{marginLeft:"12px"}}>My Activity </h3></Grid.Row>
+            <Grid.Row ><h5 style={{marginLeft:"12px"}}>My Activity </h5></Grid.Row>
 
-              <Grid.Row textAlign="center" columns="3" style={{marginBottom:"20px"}}>
-              
+              <Grid.Row textAlign="center" columns="3" style={{marginBottom:"20px"}}> 
                 <Grid.Column>
                   <p style={{fontSize:"25px"}}>{this.state.follower_count}</p>
-                  <p>Followers</p>
+                  <p>Follower(s)</p>
                 </Grid.Column>
                 <Grid.Column >
                   <p style={{fontSize:"25px"}}>{this.state.story_count}</p>
@@ -126,7 +126,7 @@ try {
               </Grid.Row>
               <Divider />
 
-              <Grid.Row ><h3 style={{marginLeft:"12px"}}>Editors' Pick </h3>
+              <Grid.Row ><h5 style={{marginLeft:"12px"}}>Editors' Pick </h5>
               
               </Grid.Row>
               <DraftPreview data={ this.state.blog } imports={imports} />
@@ -148,10 +148,10 @@ try {
               {/* <Grid.Row>
                 <NotificationsPreview data={this.state.notifications} />
               </Grid.Row> */}
-
+            
             </Grid>
-
-
+              
+</Container>
           </div>
 
       </div>

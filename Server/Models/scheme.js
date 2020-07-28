@@ -42,12 +42,15 @@ const SCHEME = {
         lastName: { type: String, trim: true },
         firstName: { type: String, trim: true },
         display_picture: { type: String, default: "/user-icon.png" },
+
         bio: { type: String },
         verified: { type: Boolean, required: true, default: false },
         lastVerified: { type: Date, default: Date.now() },
         profile_link: { type: String, default: "", lowercase: true },
         country: { type: String, default: "[]" },
         gender: { type: String, default: "" },
+        followed_topics:{type:mongoose.Schema.Types.Array, default:[]},
+
         template_id: {
             type: mongoose.Schema.Types.ObjectId, default: "5e01d951f47d3806c0aa6996",
             ref: "Template"
@@ -80,9 +83,9 @@ const SCHEME = {
         body_schema: { type: mongoose.Schema.Types.Mixed, default:null },
         featured_image: { type: String, default:"https://www.inwritten.com/images/preview_featured2.jpg" },
         category: { type: String, lowercase: true, default:"unc" },
-       // Not needed createdAt: { type: Date, default: Date.now() },
-       like_count: { type: Number, default:0 },
-       read_count:{type:Number, default:0},
+        // Not needed createdAt: { type: Date, default: Date.now() },
+        like_count: { type: Number, default:0 },
+        read_count:{type:Number, default:0},
         time_to_read: { type: Number, default:5 },
         comments_enabled: { type: Boolean },
         public: { type: Boolean, default:true },
@@ -121,7 +124,6 @@ const SCHEME = {
     like_count: { type: Number, default:0 },
     read_count:{type:Number, default:0},
     time_to_read: { type: Number, default:5 },
-    
     comments_enabled: { type: Boolean },
     public: { type: Boolean, default:true },
     author: String, //author email
@@ -218,6 +220,10 @@ const SCHEME = {
    follow: new Schema({
     follower_id: { type: mongoose.Schema.Types.ObjectId, ref:"User" },
     followee_id: { type: mongoose.Schema.Types.ObjectId, ref:"User" },
+    feeds:{
+        type:mongoose.Schema.Types.Array, default:[],
+        
+    }
     
 
 },
@@ -227,6 +233,8 @@ const SCHEME = {
         strict: false
     }
 ),
+
+
 
 
 
@@ -247,6 +255,9 @@ const SCHEME = {
             strict: false
         }
     ),
+
+
+
     subscribers: new Schema({
         email: { type: String, maxlength:255, required:true, ref:"User", unique:true },
         ip_address: {type: String,  default:"" },
@@ -260,7 +271,34 @@ const SCHEME = {
             versionKey: false,
             strict: false
         }
-    )
+    ),
+
+
+    //EDITOR'S PICK
+    editors_pick: new Schema({
+ 
+        title: { type: String, default:"Untitled", lowercase:true },
+        body_schema: { type: mongoose.Schema.Types.Mixed, default:null },
+        featured_image: { type: String, default:"https://www.inwritten.com/images/preview_featured2.jpg" },
+        category: { type: String, lowercase: true, default:"unc" },
+        // Not needed createdAt: { type: Date, default: Date.now() },
+        like_count: { type: Number, default:0 },
+        read_count:{type:Number, default:0},
+        time_to_read: { type: Number, default:5 },
+        author: String, //author email
+        description: { type: String, default:"No Description"},
+        likes: { Type: mongoose.Schema.Types.Number, default: 0 },
+        post_link: { type: String, default: "", lowercase:true },
+        authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+
+
+    },
+        {
+            timestamps: true,
+            versionKey: false,
+            strict: false
+        }
+    ),
 
 }
 

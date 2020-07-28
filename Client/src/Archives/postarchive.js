@@ -1,7 +1,7 @@
 
 import React from 'react';
 import '../../Resources/styles/article.scss';
-import { Button, Icon, Form, Modal, Grid, Select, Item, Input, Dropdown } from 'semantic-ui-react';
+import { Button, Icon, Form, Modal, Grid, Container, Item, Input, Dropdown } from 'semantic-ui-react';
 import Connection from '../../Controllers/auth.controller';
 
 import { withRouter } from 'react-router';
@@ -302,7 +302,7 @@ class PostArchive extends React.Component {
                     </Modal>
 
                     <div className='bodyArticle'>
-
+                        <Container>
                         <Grid >
                             <Grid.Row >
                                 <Grid.Column floated="right" computer={16} mobile={16} tablet={15}   >
@@ -335,11 +335,11 @@ class PostArchive extends React.Component {
 
                                         <Grid.Column computer={5} mobile={16} tablet={4} >
                                             <Item style={{ marginBottom: '12px' }} key={e._id} >
-                                                <Item.Image floated="right" size="small" src={image_transform(e.featured_image, 200, 92)} />
+                                                <Item.Image floated="right" size="small" style={{width:"100px", height:"100px"}} src={image_transform(e.featured_image, 200, 92)} />
 
                                                 <Item.Content verticalAlign="middle" >
-                                                    <Item.Header as={Link} to={{ pathname: '/app/edit/' + e._id + '/'+ e.type }}><h4 style={{ color: "black" }}>{e.title}</h4></Item.Header>
-                                                    <Item.Description>Draft</Item.Description>
+                                                    <Item.Header as={Link} to={{ pathname: '/app/edit/' + e._id + '/'+ e.type }} style={{ color: "black", fontSize:"14px" }}><h4 style={{ color: "black" }}>{e.title}</h4></Item.Header>
+                                                    <Item.Description style={{fontSize:"12px"}}>Draft</Item.Description>
                                                     <Item.Meta> <span style={{color:"silver"}}>
                                                        Updated <Moment fromNow>{e.updatedAt}</Moment>
                                                         
@@ -376,6 +376,7 @@ class PostArchive extends React.Component {
 
                             </Grid.Row>
                         </Grid>
+                        </Container>
                     </div>
 
 

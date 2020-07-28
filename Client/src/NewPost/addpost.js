@@ -9,6 +9,7 @@ import {
   Grid,
   Modal,
   Divider,
+  Message
 } from "semantic-ui-react";
 import "../../Resources/styles/article.scss";
 import { withRouter } from "react-router";

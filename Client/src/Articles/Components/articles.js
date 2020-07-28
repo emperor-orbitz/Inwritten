@@ -1,7 +1,7 @@
 
 import React from 'react';
 import '../../../Resources/styles/article.scss';
-import { Button, Icon, Form, Modal, Grid, Item, Input, Dropdown } from 'semantic-ui-react';
+import { Button, Icon, Form, Modal, Grid, Item, Input, Dropdown, Container } from 'semantic-ui-react';
 import Connection from '../../../Controllers/auth.controller';
 
 import { withRouter } from 'react-router';
@@ -325,7 +325,7 @@ class Articles extends React.Component {
                         </Modal.Content>
                     </Modal>
                     <div className='bodyArticle'>
-
+                        <Container>
                         <Grid >
                             <Grid.Row>
                                 <Grid.Column floated="right" computer={16} mobile={16} tablet={15}   >
@@ -353,12 +353,12 @@ class Articles extends React.Component {
                                 return (
                                     <Grid.Column computer={5} mobile={16} tablet={4} >
                                         <Item style={{ marginBottom: '4px' }} key={e._id} >
-                                            <Item.Image floated="right" size="small" src={image_transform(e.featured_image, 200, 92)} />
+                                            <Item.Image floated="right" size="small" style={{width:"100px", height:"100px"}} src={image_transform(e.featured_image, 200, 92)} />
 
                                             <Item.Content verticalAlign="middle" >
-                                                <Item.Header ><a href={e.post_link}><h4 style={{ color: "black" }}>{e.title}</h4></a></Item.Header>
-                                                <Item.Description>{e.category.toUpperCase()}</Item.Description>
-                                                <Item.Meta>{e.time_to_read} mins read</Item.Meta>
+                                                <Item.Header ><a href={e.post_link} style={{ color: "black", fontSize:"14px" }}><h5>{e.title}</h5></a></Item.Header>
+                                                <Item.Description style={{ color: "black", fontSize:"12px" }}>{e.category.toUpperCase()}</Item.Description>
+                                                <Item.Meta style={{ color: "black", fontSize:"12px" }}>{e.time_to_read} mins read</Item.Meta>
 
 
                                                 <Item.Extra >
@@ -386,6 +386,7 @@ class Articles extends React.Component {
                             })}
                         </Grid.Row>
                         </Grid>
+                        </Container>
                     </div>
 
 
