@@ -5,9 +5,55 @@
 //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
+
 export default class ProfileUpdate {
 
+    addToFavorites = (topic) => {
+        const get_options = {
+            url: '/profile',
+            options: {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json',
+                           'Authorization': localStorage.getItem("hs_token")       
+                         },
+                body: JSON.stringify({followed_topic: topic}),
+                credentials: 'include',
+                withCredentials: true,
+                //mode: 'cors'
 
+            }
+        }
+
+        return new Promise((resolved, rejected) => {
+            fetch(`${get_options.url}/add_to_favorites`,
+                get_options.options)
+                .then((res) => res.json())
+                .then( ({code, data}) => {
+                    if (code == 200) {
+
+                        resolved({ message:"Nice, you have successfully updated favorites", code:200, data: data })
+                    }
+                    else if (code == 400||500 ) {
+
+                        rejected({ message:"Please correct your details to the acceptable format", code: code });
+                    }
+                    else {
+                        //rejected(updated);
+                    }
+                })
+                .catch( e =>{
+                    rejected({message:"Something just happened. We'll fix it soon", code:500 })
+                } )
+
+
+        })
+
+
+
+
+
+
+    }
 
     update_password = function (updateDetails) {
         const get_options = {

@@ -49,7 +49,7 @@ const SCHEME = {
         profile_link: { type: String, default: "", lowercase: true },
         country: { type: String, default: "[]" },
         gender: { type: String, default: "" },
-        followed_topics:{type:mongoose.Schema.Types.Array, default:[]},
+        followed_topics: {type:mongoose.Schema.Types.Array, default:[]},
 
         template_id: {
             type: mongoose.Schema.Types.ObjectId, default: "5e01d951f47d3806c0aa6996",
@@ -82,7 +82,7 @@ const SCHEME = {
         body_html: { type: mongoose.Schema.Types.Mixed, required:true },
         body_schema: { type: mongoose.Schema.Types.Mixed, default:null },
         featured_image: { type: String, default:"https://www.inwritten.com/images/preview_featured2.jpg" },
-        category: { type: String, lowercase: true, default:"unc" },
+        category: { type: String, default:"unc" },
         // Not needed createdAt: { type: Date, default: Date.now() },
         like_count: { type: Number, default:0 },
         read_count:{type:Number, default:0},

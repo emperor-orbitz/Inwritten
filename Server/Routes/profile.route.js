@@ -25,6 +25,12 @@ router.post('/profile/update_profile', isAuth, (req, res, next) => {
 })
 
 
+router.post('/profile/add_to_favorites', isAuth, (req, res, next) => {
+    controller.add_to_favorites(req, res, next)
+
+})
+
+
 
 router.post('/profile/update_password', isAuth, (req, res, next) => {
     controller.update_password(req, res);

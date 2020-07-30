@@ -107,7 +107,7 @@ class Templates extends React.Component {
         }
         else
             return (
-                <Container fluid>
+                <Container>
                     <Modal open={this.state.open_options}
                     closeOnDimmerClick={true}
                     onClose={this.close}>

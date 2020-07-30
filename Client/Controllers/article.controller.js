@@ -182,14 +182,13 @@ class FetchArticles {
     }
 
 
+  
 
 
     //INTERESTS
     interest(topic) {
 
         this.const_options.method = "GET";
-
-
         var get_options = {
             url: this.const_url + '/interests?topic=' + topic,
             options: this.const_options

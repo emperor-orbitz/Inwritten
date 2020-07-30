@@ -331,17 +331,22 @@ var like = (req, res) => {
 };
 
 var interests = (req, res) => {
+  console.log(req.query.topic)
+  let { topic } = req.query
   posts
-    .find(
-      { category: req.query.topic, public: true },
-      "-body_html -body_schema -comments",
-      (err, resolve) => {
-        if (err) res.send({ message: `An error Occured ${err}`, status: 500 });
-        else res.send({ data: resolve, status: 200 });
-      }
-    )
-    .populate("authorId", "email username featured_image");
+    .find({ 'category':topic }, "-body_html -body_schema -comments")
+    .populate("authorId", "email username featured_image")
+    .then(
+      (resolve, err) => {
+        if(resolve){ console.log(resolve); res.send({ data: resolve, status: 200 })}
+
+        else  {
+           res.send({ message: `An error Occured ${err}`, status: 500 })
+        }
+      });
 };
+
+
 
 //DELETE AL THE ARTICLES
 var delete_all = (req, res, next) => {

@@ -163,7 +163,7 @@ class Login extends React.Component {
             <Grid.Column width="9">
               <div className="note">
                 <h1>SHARE AN ARTICLE</h1>
-                <p>Create contents that matters to what you love. Intrigue the world from your perspectives
+                <p style={{color:"black !important"}}>Create contents that matters to what you. Intrigue the world from your perspectives. Be part of a bigger community!
 </p>
        
               </div>

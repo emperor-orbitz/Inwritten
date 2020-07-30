@@ -195,8 +195,8 @@ closeModal =()=>{
           <Grid columns={2} stackable>
             <Grid.Column width="9">
               <div className="note">
-                <h2>LEARN SOMETHING NEW</h2>
-                <p>Create an account, share knowledge, learn something different.
+                <h2>Reach the right audience better</h2>
+                <p style={{color:"black !important"}}>Create an account, share knowledge, learn something different, explore a new topic. Start writing today!
 </p>
               </div>
 

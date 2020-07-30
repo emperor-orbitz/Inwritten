@@ -253,11 +253,55 @@ catch(error){
 
 }
 
+
+
+
+//fetch preview dashboard stats
+var add_to_favorites = async (req, res) =>{
+    //fetch total count of stories,bookmarks and followers
+    try{
+       signup.findByIdAndUpdate(req.user._id, {
+           $addToSet:{
+            followed_topics : req.body.followed_topic
+           }, 
+       },{useFindAndModify:false}, (err, result) =>{
+            if (err) {
+                console.log("ERROR OCCURED", err)
+                res.status(http_status.INTERNAL_SERVER_ERROR.code)
+                .send({  code: http_status.INTERNAL_SERVER_ERROR.code,
+                         message: http_status.INTERNAL_SERVER_ERROR.message
+                     })
+                
+            }
+            else {
+                res.status(http_status.OK.code)
+                .send({ code: http_status.OK.code,
+                        data: result.followed_topics //Array
+             })
+            }
+
+       })
+    
+    }
+    catch(error){
+            //server error
+    
+            res.status(http_status.INTERNAL_SERVER_ERROR.code)
+            .send({  code: http_status.INTERNAL_SERVER_ERROR.code,
+                     message: http_status.INTERNAL_SERVER_ERROR.message })
+    }
+    
+        
+    
+    }
+
+
 module.exports = {
     update_profile: update_profile,
     update_password: update_password,
     update_social: update_social,
     fetch_social:fetch_social,
-    fetch_stats: fetch_stats
+    fetch_stats: fetch_stats,
+    add_to_favorites: add_to_favorites
 
 };

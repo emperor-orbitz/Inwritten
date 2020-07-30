@@ -2,14 +2,14 @@
     "categories": [
         {
             "key":1,
-            "value":"UNC",
+            "value":"Uncategorised",
             "icon":"random",
             "name":"Uncategorised",
             "text":"Uncategorised"
         },
         {
             "key":2,
-            "value":"BUS",
+            "value":"Business",
             "icon":"building outline",
             "name":"Business",
             "text":"Business"
@@ -17,7 +17,7 @@
         },
         { 
             "key":3,
-            "value":"LFS",
+            "value":"Lifestyle",
             "icon":"glass martini",
             "name":"Lifestyle",
             "text":"Lifestyle"
@@ -26,7 +26,7 @@
      
         {
             "key":5,
-            "value":"POE",
+            "value":"Poetry",
             "icon":"paint brush",
             "name":"Poetry",
             "text":"Poetry"
@@ -34,7 +34,7 @@
         },
         {
             "key":6,
-            "value":"MUS",
+            "value":"Music",
             "icon":"headphones",
             "name":"Music",
             "text":"Music"
@@ -42,7 +42,7 @@
         },
         {
             "key":7,
-            "value":"FAS",
+            "value":"Fashion",
             "icon":"shopping bag",
             "name":"Fashion",
             "text":"Fashion"
@@ -51,7 +51,7 @@
     
         {
             "key":8,
-            "value":"FOD",
+            "value":"Food and Nutrition",
             "icon":"food",
             "name":"Food",
             "text":"Food"
@@ -59,7 +59,7 @@
         },
         {
             "key":9,
-            "value":"TRA",
+            "value":"Travel",
             "icon":"map outline",
             "name":"Travel",
             "text":"Travel"
@@ -67,7 +67,7 @@
         },
         {
             "key":10,
-            "value":"NEW",
+            "value":"News",
             "icon":"newspaper outline",
             "name":"News",
             "text":"News"
@@ -75,7 +75,7 @@
         },
         {
             "key":9,
-            "value":"COD",
+            "value":"Programming/ Tech",
             "icon":"code branch",
             "name":"Programming/ Tech",
             "text":"Programming/ Tech"

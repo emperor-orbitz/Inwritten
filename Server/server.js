@@ -103,7 +103,7 @@ if (process.env.NODE_ENV == "test") {
   
   // app.use(["/auth, /profile"], auth)
 
-  app.get(["/app/*", "/login", "/signup"] ,(req, res) => {
+  app.get(["/app/*", "/login", "/signup","/forgot_password"] ,(req, res) => {
     res.sendFile(path.resolve(__dirname, "../Client/assets/index.html"));
   });
 

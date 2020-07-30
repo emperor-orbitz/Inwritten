@@ -1,9 +1,11 @@
 import React from 'react';
 import '../../Resources/styles/comment.scss';
-import { Button, Form, Input, Grid } from 'semantic-ui-react';
+import { Button, Form, Input, Grid, Container, Icon } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import FetchArticles from '../../Controllers/article.controller';
+import ProfileUpdate from '../../Controllers/profile.controller';
+
 import ListExampleSelection from "./card"
 
 
@@ -119,11 +121,46 @@ class Interests extends React.Component {
     handleEnter =(e)=>{
 
         if (e.key ==="Enter"){
-this.search_with_criteria()
+            this.search_with_criteria()
         }
     }
 
 
+isFollowing(category){
+    var item = this.parseMatch(this.props.location.search);
+    let isreturn;
+
+    category.forEach(element => {
+        if(element == ["Poetry"]){
+            isreturn = true
+        }
+    });
+
+    let res = category.some(x => x[0] == "Poetry")
+    return res
+
+
+
+    
+    //  let isreturn = category.includes(["Poetry"]);
+    //  console.log(this.props.ProfileReducer, isreturn)
+
+    
+}
+
+clickFollow = (e) =>{
+    var item = this.parseMatch(this.props.location.search);
+    let add = new ProfileUpdate;
+    console.log(item, "THESE ARE ITEMS")
+    add.addToFavorites(item)
+    .then(resolved => alert("added "+resolved))
+    .catch(e =>{
+        alert("failed")
+        console.log(e)
+    } 
+    )
+    
+}
 
 
 
@@ -155,12 +192,13 @@ this.search_with_criteria()
 
         else if (this.state.posts.length > 0) {
             return (
-            <div className="comment-div" style={{ marginTop: "20px !important" }}>
-            <h3>Most Recent on {item} </h3>
-            <Button secondary size="small" icon="add">Follow {item} </Button>
-
-                <Form size="small" >
-
+            <Container>
+            <div className="comment-div" style={{ marginTop: "50px !important" }}>
+            <div style={{margin:"35px auto"}}>
+            <h1> {item} </h1>
+            {this.isFollowing(this.props.ProfileReducer.followed_topics) == true ? <b style={{color:"silver"}}>Following</b>: <b onClick={this.clickFollow } style={{cursor:"pointer" }}>Follow #{item} &nbsp;&nbsp;&nbsp;&nbsp;<Icon name="plus circle" size="big" color="black" /> </b>}
+            </div>
+                <Form size="small" style={{marginVertical:"50px"}}>
                     <Input id='search' className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch}  onKeyDown={this.handleEnter} placeholder='Search by title and hit enter. e.g The angry bird fight/category'  />
                     {/*<Select name='category' style={{ border: "none" }} value={this.state.search_criteria} onChange={this.handleSearchCriteria} options={this.categoryOptions} />
                     <Button primary icon="search" onClick={this.search_with_criteria} hidden />*/}
@@ -170,7 +208,7 @@ this.search_with_criteria()
 
 
                  
-                <Grid >
+                <Grid>
                     <Grid.Row stretched style={{margin:"15px auto"}}>
                     {this.state.posts.map((x, index) => {
                         return (  <ListExampleSelection index={index} x={x} />  )
@@ -180,7 +218,8 @@ this.search_with_criteria()
                     </Grid.Row>
                 </Grid>
 
-            </div>)
+            </div>
+            </Container>)
         }
         return (
 

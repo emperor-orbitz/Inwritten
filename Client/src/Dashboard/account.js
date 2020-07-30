@@ -140,10 +140,17 @@ try {
 
               <Divider /> */}
 
-              <Grid.Row ><h3 style={{marginLeft:"12px"}}>Trending Stories </h3></Grid.Row>
+              <Grid.Row ><h5 style={{marginLeft:"12px"}}>Trending Stories </h5></Grid.Row>
               <DraftPreview data={ this.state.blog } imports={imports} />
 
               <Divider />
+
+              <Grid.Row ><h5 style={{marginLeft:"12px"}}>Following based on Topics </h5></Grid.Row>
+              <DraftPreview data={ this.state.blog } imports={imports} />
+
+              <Grid.Row ><h5 style={{marginLeft:"12px"}}>Writer's you follow </h5></Grid.Row>
+              <DraftPreview data={ this.state.blog } imports={imports} />
+
 
               {/* <Grid.Row>
                 <NotificationsPreview data={this.state.notifications} />

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../Resources/styles/style.scss';
-import { Menu, Sidebar, Modal, Button, Responsive, Accordion, Dropdown, Divider, DropdownDivider  } from 'semantic-ui-react';
+import { Menu, Sidebar, Modal, Button, Responsive, Accordion, Dropdown, Divider, DropdownDivider, Icon  } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import Link from 'react-router-dom/Link';
@@ -277,9 +277,34 @@ class HeaderAccount extends React.Component {
                 className='sidebar'>
 
                 <div style={{ textAlign: 'center', padding: '10px auto', color: 'rgb(3, 68, 94)', background: 'white' }} >
-                  <a target="__blank" href="/stories" style={{ color: "black" }}> <img src={logo} style={{ width: "160px", height: "68px", margin:"20px auto" }} /></a>
+                  <a target="__blank" href="/stories" style={{ color: "black" }}>
+                     <img src={logo} style={{ width: "140px", height: "60px", margin:"20px auto" }} />
+                  </a>
                   <br />
 
+                </div>
+
+
+                <div className="accordion-item">
+                  <Accordion.Title active={true} style={{ padding: '5px 20px' }} index={3} onClick={this.handleClick}>
+                    <h5 style={{ fontSize: "14px", color: "black" }}>INTERESTS</h5>
+                    <Divider />
+                  </Accordion.Title>
+                  <Accordion.Content style={{ padding: '1px 20px' }} className="accordion-content" active={true} content={
+                     <Menu secondary vertical  >
+                     {
+                         this.props.ProfileReducer.followed_topics.map(
+                             (category) => {
+                                 return (
+                                     <Menu.Item as={Link} key={category[0]} to={`/app/interests?topic=${category[0]}`}><Icon name="hashtag" />{category[0]}</Menu.Item>
+ 
+                                 )
+                             }
+                         )
+                     }
+                 </Menu>
+
+                  } />
                 </div>
 
 
