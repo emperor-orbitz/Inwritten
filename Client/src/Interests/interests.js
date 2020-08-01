@@ -182,9 +182,13 @@ clickFollow = (e) =>{
 
 
         else if (this.state.loading == true) {
-            return (<div className="comment-div" style={{ marginTop: "0px !important" }}>
+            return (
+            <Container>
+            <div className="comment-div" style={{ marginTop: "0px !important" }}>
                 <p>Loading....</p>
-            </div>)
+            </div>
+            </Container>
+            )
         }
 
 
@@ -196,7 +200,8 @@ clickFollow = (e) =>{
             <div className="comment-div" style={{ marginTop: "50px !important" }}>
             <div style={{margin:"35px auto"}}>
             <h1> {item} </h1>
-            {this.isFollowing(this.props.ProfileReducer.followed_topics) == true ? <b style={{color:"silver"}}>Following</b>: <b onClick={this.clickFollow } style={{cursor:"pointer" }}>Follow #{item} &nbsp;&nbsp;&nbsp;&nbsp;<Icon name="plus circle" size="big" color="black" /> </b>}
+            {this.isFollowing(this.props.ProfileReducer.followed_topics) == true ?  <b onClick={this.clickFollow } style={{cursor:"pointer" }}>Unfollow #{item} &nbsp;&nbsp;&nbsp;&nbsp;<Icon name="minus circle" size="big" color="black" /> </b>
+            : <b onClick={this.clickFollow } style={{cursor:"pointer" }}>Follow #{item} &nbsp;&nbsp;&nbsp;&nbsp;<Icon name="plus circle" size="big" color="black" /> </b>}
             </div>
                 <Form size="small" style={{marginVertical:"50px"}}>
                     <Input id='search' className='custom-input' maxLength='50' value={this.state.search} onChange={this.onChangeSearch}  onKeyDown={this.handleEnter} placeholder='Search by title and hit enter. e.g The angry bird fight/category'  />

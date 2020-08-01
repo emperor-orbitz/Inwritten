@@ -84,8 +84,12 @@ const SCHEME = {
         featured_image: { type: String, default:"https://www.inwritten.com/images/preview_featured2.jpg" },
         category: { type: String, default:"unc" },
         // Not needed createdAt: { type: Date, default: Date.now() },
-        like_count: { type: Number, default:0 },
-        read_count:{type:Number, default:0},
+
+
+        like_count: { type: Number, default:0 }, //x1.0
+        read_count:{type:Number, default:0}, //x0.5
+        trend_score:{type:Number, default:0, required:true },
+
         time_to_read: { type: Number, default:5 },
         comments_enabled: { type: Boolean },
         public: { type: Boolean, default:true },
@@ -123,6 +127,10 @@ const SCHEME = {
    // Not needed createdAt: { type: Date, default: Date.now() },
     like_count: { type: Number, default:0 },
     read_count:{type:Number, default:0},
+    trend_score:{type:Number, default:0, required:true },
+
+
+
     time_to_read: { type: Number, default:5 },
     comments_enabled: { type: Boolean },
     public: { type: Boolean, default:true },

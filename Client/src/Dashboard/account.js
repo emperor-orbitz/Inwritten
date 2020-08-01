@@ -58,7 +58,7 @@ try {
   let notifications = new FetchNotifications();
   let stats = new profileController()
   let counts = await stats.fetchStats();
-  let blogs = await this.fetchBlog.get_five_stories();
+  let blogs = await this.fetchBlog.trending();
   let notif = await notifications.get_notifications(this.props.ProfileReducer._id);
 
 

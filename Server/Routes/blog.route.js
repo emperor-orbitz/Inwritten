@@ -30,7 +30,11 @@ var isAuth = (req, res, next)=> {
     
     })
 
+    Router.post('/blog/trending', isAuth, function (req, res, next) {
 
+        blogController.trending(req,res, next)
+    
+    })
 
 
 
@@ -88,6 +92,20 @@ Router.get('/user/:username/:chunk', function (req, res, next) {
     blogController.index(req, res)
 
 })
+
+
+
+
+
+
+
+Router.post('/user/blog/editorspick', isAuth, function (req, res, next) {
+
+    blogController.editorspick(req,res, next)
+
+})
+
+
 
 module.exports = Router;
 

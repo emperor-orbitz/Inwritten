@@ -99,10 +99,12 @@ class Templates extends React.Component {
 
         if (templates.length == 0) {
             return (
-                <div className="comment-div" style={{ marginTop: "0px !important" }}>
+               <Container>
+               <div className="comment-div" style={{ marginTop: "0px !important" }}>
                     <h3 style={{ color: "black" }}>Templates</h3>
                     <p>Loading Templates. Hang on!...</p>
                 </div>
+                </Container>
             )
         }
         else

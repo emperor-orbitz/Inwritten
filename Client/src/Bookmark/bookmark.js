@@ -122,22 +122,31 @@ this.search_with_criteria()
     render() {
 
         if ( this.state.bookmarks.length == 0) {
-            return (<div className="comment-div" style={{ marginTop: "0px !important" }}>
+            return (
+            <Container>
+            <div className="comment-div" style={{ marginTop: "0px !important" }}>
                 <h4>No bookmark yet. Try reading more</h4>
                 <p>Check the latest stories at the sidebar</p>
-            </div>)
+            </div>
+            </Container>
+            )
         }
 
 
 
         else if (this.state.loading == true) {
-            return (<div className="comment-div" style={{ marginTop: "0px !important" }}>
+            return (
+            <Container>
+            <div className="comment-div" style={{ marginTop: "0px !important" }}>
                 <p>Loading....</p>
-            </div>)
+            </div>
+            </Container>
+            )
         }
 
         else
         return (
+            <Container>
             <div className="comment-div" style={{ marginTop: "10px !important" }}>
                 <Form size="small" >
 
@@ -171,7 +180,9 @@ this.search_with_criteria()
                     }
                 </List>
 
-            </div>)
+            </div>
+            </Container>
+            )
 
     }
 

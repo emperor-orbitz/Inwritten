@@ -162,8 +162,8 @@ class Login extends React.Component {
           <Grid columns={2}  stackable>
             <Grid.Column width="9">
               <div className="note">
-                <h1>SHARE AN ARTICLE</h1>
-                <p style={{color:"black !important"}}>Create contents that matters to what you. Intrigue the world from your perspectives. Be part of a bigger community!
+                <h1>Share Authenticity</h1>
+                <p style={{color:"black !important"}}>Create contents that matters to you. Intrigue the world from your perspectives. Be part of a bigger community!
 </p>
        
               </div>

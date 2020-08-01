@@ -97,7 +97,33 @@ return new Promise((resolve, reject) => {
 
 
 
+trending () {
+    this.const_options.method = "POST";
+    var get_options = {
+        url:  `${this.const_url}/trending`,
+        options: this.const_options,
+        
+    }
 
+let send = get_options.options;
+
+return new Promise((resolve, reject) => {
+        fetch(get_options.url, send)
+            .then( user => user.json())
+            .then( result => {
+                if (result.status == 200) {
+                    resolve(result);
+                }
+                else {
+                    reject(result)
+                 }
+
+            }).catch(err => { 
+                reject(err)
+             })
+    })
+
+}
 
 
 

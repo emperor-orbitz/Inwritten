@@ -124,6 +124,7 @@ var updateDraftAndSave = (req, res) => {
 //Used to replace Actions between data with/without clodibary images
 var insertAction = (data,request, response) => {
   var post = new posts();
+  
 
   post.insertPost(data, (err, success) => {
     if (err) {
@@ -320,14 +321,21 @@ var update = (req, res) => {
 
 
 var like = (req, res) => {
-  posts.updateOne(
-    { _id: req.body.id },
-    { $inc: { likes: req.body.like } },
-    (err, resolve) => {
-      if (err) res.send({ message: `An error Occured ${err}` });
-      else res.send({ data: resolve, status: 200 });
-    }
-  );
+  posts.findById(req.body._id)
+  .then(prev =>{
+
+    let trend_score = prev.like_count*1 + prev.read_count*0.5
+    posts.updateOne(
+      { _id: req.body.id },
+      { $inc: { likes: req.body.like }, trend_score:trend_score },
+      (err, resolve) => {
+        if (err) res.send({ message: `An error Occured ${err}` });
+        else res.send({ data: resolve, status: 200 });
+      });
+
+  })
+
+ 
 };
 
 var interests = (req, res) => {

@@ -24,7 +24,7 @@ var five_posts = async (req, res) => {
       res.send({data:list, message:'success', status:200})
 
     }
-    catch(e){
+    catch(error){
         res.send({ message:"An error occured" + error , status:500 })
 
     }
@@ -387,6 +387,41 @@ var stories = async (req, res, next) => {
 }
 
 
+let editorspick = (req, res, next) =>{
+
+
+}
+
+let writersyoufollow =(req, res, next) =>{
+
+
+
+}
+
+
+
+
+let trending = (req, res, next) =>{
+// TRENDING METRIC
+// READ TIMES x0.5
+// LIKES x1
+    try{
+      posts
+     .find({ type:"PUBLISH" })
+     .sort("-trend_score")
+     .limit(5)
+     .then( doc => {
+                    console.log("This is result", doc)
+                    res.send({ data:doc, message:'success', status:200 })
+              })
+        }
+        catch(error){
+
+            res.send({ message:"An error occured" + error , status:500 })
+
+        }
+
+}
 
 
 
@@ -403,5 +438,8 @@ module.exports = {
     follow_status: follow_status,
     other_interests: other_interests,
     stories: stories,
-    five_posts: five_posts
+    five_posts: five_posts,
+    editorspick:editorspick,
+    trending: trending
+
 };
