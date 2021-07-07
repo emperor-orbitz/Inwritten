@@ -1,4 +1,5 @@
-# hashstack.io
-A text editor that offers you templates for your simple blogs. This is the birth place of innovation.
-This is where ideas are stacked.
+# inwritten.io
+A text editor that offers you templates for your simple blogs. 
+This is similar to medium.com, but with predefined template libraries.
+
 
