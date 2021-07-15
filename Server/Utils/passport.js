@@ -123,7 +123,7 @@ passport.use('signup', new LocalStrategy(
 //JWT STRATEGY
 const JWT_options = {
   jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.JWT_SECRET,
+  secretOrKey: "SDFGEJKR30842736E73RJFMNDSBAD_-rNMMCX",
   passReqToCallback: true
 }
 

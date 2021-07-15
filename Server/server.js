@@ -1,7 +1,8 @@
 
 //server.js
 // Abdulmalik 02-12-18
-
+require("dotenv").config()
+// .config({ path: __dirname + "./.env" });
 var process = require('process');
 var express = require('express')
 var app = express();
@@ -17,7 +18,7 @@ const apicache = require('apicache');
 let cache = apicache.middleware;
 //easily attach io to server
 
-require("dotenv").config({ path: __dirname + "/.env" });
+
 require('./Utils/passport');
 require("./Database/db");
 //require("./Utils/notifications")(server)
@@ -65,7 +66,7 @@ app.set("views", path.resolve(__dirname, "../Client/assets/views"));
 
 
 
-
+console.log(process.env.NODE_ENV)
 //ROUTE CONFIGURATION IN PRODUCTION
 
 if (process.env.NODE_ENV == "production") {
@@ -95,7 +96,7 @@ if (process.env.NODE_ENV == "production") {
 }
 
 
-if (process.env.NODE_ENV == "test") {
+if (process.env.NODE_ENV == "development") {
   //app.use(sslRedirect());
   app.use(["/blog/fivestories", "/profile/fetch_stats"], route_config)
   app.use(express.static(path.resolve(__dirname, "../Client/assets/"), {index:"launchpage.html"}))
